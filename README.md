@@ -21,7 +21,7 @@ And inside of that create a file named `pubspec.yaml` and another folder called 
 Open the pubspec.yaml file and add 
 ```yaml
 dependencies:  
-	date_format: ^0.0.3
+    objd: ^0.0.3
 ```
 And run 
 ```
