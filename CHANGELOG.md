@@ -1,3 +1,11 @@
+
+## 0.0.4
+* added Summon command wrapper
+* added TextComponents
+* added Title and Tellraw
+* added Color class
+* added TextClickEvent class
+* added TextHoverEvent class
 ## 0.0.3
 * added Block
 * added Location

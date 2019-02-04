@@ -21,7 +21,7 @@ And inside of that create a file named `pubspec.yaml` and another folder called 
 Open the pubspec.yaml file and add 
 ```yaml
 dependencies:  
-    objd: ^0.0.3
+	objd: ^0.0.4
 ```
 And run 
 ```
@@ -32,7 +32,7 @@ with the console in the new folder(VS code does this automatically)
 Let's get started and create our first dart file with `lib/main.dart` file. 
 Then we import the framework with:
 ```dart
-import 'package:objectiveD';
+import 'package:objd/code.dart';
 ```
 Then we need to create a new datapack project:
 ```dart
@@ -523,10 +523,12 @@ SetBlock(
 ```
 ## Say
 The Say Class writes a simple message or an entity in the chat.
+
 |constructor| |
 |--|--|
 |msg|Message as String|
 |entity| enity of type Entity|
+
 **You can't put both parameters in Say!**
 
 Example:
@@ -536,7 +538,227 @@ Say(
 )
 ⇒ say Hello
 Say(
-	entity: Entity.player()
+	entity: Entity.Player()
 )
 ⇒ say @p
+```
+## Summon
+The summon class creates a new entity at a given location.
+
+|constructor| |
+|--|--|
+|EntityType|the type of entity(required)|
+|location| the location as type Location(default Location.here())|
+|name|a TextComponent respresenting the name of the entity|
+|nbt|additional nbt as Map(key-value pairs)|
+> This version is not final, there will be more properties in the future!
+
+**Example:**
+```dart
+Summon(
+	EntityType.armor_stand,
+	location: Location.rel(x: 0,y:1,z:0),
+	name: TextComponent("this is my name",color: Color.DarkBlue),
+	nbt: {"Invisible":1}
+)
+⇒ summon armor_stand ~ ~1 ~ {"Invisible":1,"CustomName":"{\"text\":\"this is my name\",\"color\":\"dark_blue\"}"}
+```
+
+
+# Texts and Strings
+
+In Minecraft text in the chat or as title is defined with JSON-data. objD makes the JSON part of it easier by utilizing a few classes:
+|TextComponent| |
+|--|--|
+|String|the text displayed (required)|
+|color|a the color of the type Color|
+|bold|bool whether it is bold|
+|italic|bool whether it is italic|
+|underlined|bool whether it is underlined|
+|strikethrough|bool whether it is strikethrough|
+|obfuscated|bool whether it is obfuscated|
+|clickEvent|A TextClickEvent to handle left clicks|
+|hoverEvent|A TextHoverEvent to handle mouse overs|
+|insertion| a String witch is inserted into the input if shift left clicked|
+
+Puuh, that are a lot of properties, we'll come to Color, TextClickEvent  and TextHoverEvent  in a bit.
+
+**Example**
+```dart
+Title(
+	Entity.Player(),
+	show: [
+		TextComponent("Hello",
+			color: Color.White,
+			bold: true,
+			italic:true,
+			underlined: true,
+			strikethrough: false,
+			obfuscated: false,
+			clickEvent: TextClickEvent.open_url("https://stevertus.com"),
+			hoverEvent: TextHoverEvent.text([TextComponent("hover me")]),
+			insertion: "panic"
+		)
+	]
+)
+⇒ title @p title [{"text":"Hello","color":"white","bold":true,"italic":true,"underlined":true,"clickEvent":{"action":"open_url","value":"https://stevertus.com"},"hoverEvent":{"action":"text","value":[{text:"hover me"}]}}]
+```
+Now, its up to you to decide which is easier to read.
+There are also some other data sources: TODO: new 1.14 types!
+
+|TextComponent.translate| |
+|--|--|
+|String|the translate key (required)|
+|conversionFlags|a List of strings that replace placeholder values(e.g $s)|
+|...same properties...|from TextComponent|
+
+|TextComponent.score| |
+|--|--|
+|Entity|the entity with the score(required)|
+|objective|Name of the Scoreboard Objective(required)|
+|...same properties...|from TextComponent|
+
+```dart
+TextComponent.score(
+	Entity.Self(),
+	objective: "myscores",
+	color:Color.Black
+)
+⇒ {"score":{"name": "@s","objective":"myscores"},"color":"black"}
+```
+
+|TextComponent.selector| |
+|--|--|
+|Entity|the entity whose name you want to display(required)|
+|...same properties...|from TextComponent|
+
+```dart
+TextComponent.selector(
+	Entity(name:"hello"),
+	color:Color.Black
+)
+⇒ {"selector":"@e[name=hello]","color":"black"}
+```
+## Colors
+
+|Color([color_name]) |or |
+|--|--|
+|Color.[color_name]|Uppercase!|
+
+See all available colors: https://minecraft.gamepedia.com/Formatting_codes#Color_codes
+
+**Examples:**
+```dart
+Color.Black,
+Color.DarkPurple
+Color("gold")
+Color('dark_green')
+```
+## TextClickEvent
+Fires on left click, Part of TextComponent.
+
+|constructors||
+|--|--|
+|TextClickEvent.open_url(String)|Opens the specified web url|
+|TextClickEvent.run_command(Command)|runs the command|
+|TextClickEvent.suggest(Command)|puts the command in the chat input|
+|TextClickEvent.change_page(int)|turns a books page to the value(just Books!)|
+
+## TextHoverEvent
+Fires on mouse over, Part of TextComponent.
+
+|constructors||
+|--|--|
+|TextClickEvent.text(List\<TextComponent>)|Accepts a new List of TextComponents to display|
+|TextClickEvent.achievement(String)|shows achievement|
+|TextClickEvent.item(String)|shows item(Warning!: Not final)|
+|TextClickEvent.entity(String,String,String)|displays a dummy entity with name, type and UUID(in this order))|
+
+## Title
+To display our TextComponent, we need the `/title` command and the Title class wrapper.
+
+|constructor||
+|--|--|
+|selector|the Entity for the title to show|
+|show|A List of TextComponents to show|
+
+**Example**
+```dart
+Title(
+	Entity.Player(),
+	show: List<TextComponent>[
+		TextComponent(
+			"hey",
+			color: Color.Black
+		)
+	]
+)
+⇒ title @p title [{"text":"hey","color":"black"}]
+```
+The same goes also for subtitle and actionbar:
+
+|Title.subtitle or Title.actionbar||
+|--|--|
+|selector|the Entity for the title to show|
+|show|A List of TextComponents to show|
+
+Title.clear clears all titles again:
+
+|Title.clear||
+|--|--|
+|selector|clears title for the selector|
+
+Title.times sets the times
+
+|Title.times||
+|--|--|
+|selector|edit the durations for this selector|
+|fadein|the fadein time in ticks(default 20)|
+|display|the time the title stays in ticks(default 60)|
+|fadeout|the fadeout time in ticks(default 20)|
+
+And also a resetter for that:
+
+|Title.resetTimes||
+|--|--|
+|selector|resets times for this selector|
+
+**Examples:**
+```dart
+Title.actionbar(
+	Entity.All(),
+	show: [
+		TextComponent("hey")
+	]
+)
+⇒ title @a actionbar [{"text":"hey"}]
+Title.clear(Entity())
+⇒ title @e clear
+
+Title.times(Entity.All(),fadein:30,display:40,fadeout:20)
+⇒ title @a times 30 40 20
+
+Title.resetTimes(Entity.All())
+⇒ title @a reset
+```
+## Tellraw 
+The Tellraw class is very similar to the Title class, but shows its texts in the chat:
+
+|constructor||
+|--|--|
+|selector|the Entity for the text to show|
+|show|A List of TextComponents to show|
+
+**Example**
+```dart
+Tellraw(
+	Entity.Player(),
+	show: List<TextComponent>[
+		TextComponent(
+			"hey",
+			color: Color.Black
+		)
+	]
+)
+⇒ tellraw @p [{"text":"hey","color":"black"}]
 ```

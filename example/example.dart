@@ -12,7 +12,12 @@ class mainWidget extends Widget {
       name: 'example',
       main: File(
         path: 'main',
-        child: Command('say test' + context.packId),
+        child: Summon(
+	EntityType.armor_stand,
+	location: Location.rel(x: 0,y:1,z:0),
+	name: TextComponent("this is my name",color: Color.DarkBlue),
+	nbt: {"Invisible":1}
+),
       ),
       files: [
         File(

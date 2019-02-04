@@ -2,6 +2,7 @@ import 'package:objd/basic/command.dart';
 import 'package:meta/meta.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/basic/block.dart';
+import 'package:objd/basic/location.dart';
 import 'package:objd/build/build.dart';
 
 class SetBlock extends Widget {
