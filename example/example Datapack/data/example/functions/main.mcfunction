@@ -1,1 +1,1 @@
-summon armor_stand ~ ~1 ~ {"Invisible":1,"CustomName":"{\"text\":\"this is my name\",\"color\":\"dark_blue\"}"}
+replaceitem entity @p hotbar.0 minecraft:iron_axe{"test":1,"Damage":5} 

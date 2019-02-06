@@ -683,4 +683,17 @@ static Block sweet_berry_bush = Block('minecraft:sweet_berry_bush');
 static Block structure_block = Block('minecraft:structure_block');
 static Block jigsaw = Block('minecraft:jigsaw');
 static Block composter = Block('minecraft:composter');
+static Block kelp_top = Block('minecraft:kelp_top');
+
+static Block oak_bark = Block('minecraft:oak_bark');
+static Block spruce_bark = Block('minecraft:spruce_bark');
+static Block birch_bark = Block('minecraft:birch_bark');
+static Block jungle_bark = Block('minecraft:jungle_bark');
+static Block acacia_bark = Block('minecraft:acacia_bark');
+static Block dark_oak_bark = Block('minecraft:dark_oak_bark');
+
+static Block sea_grass = Block('minecraft:sea_grass');
+static Block prismarine_bricks_slab = Block('minecraft:prismarine_bricks_slab');
+static Block mob_spawner = Block('minecraft:mob_spawner');
+static Block melon_block = Block('minecraft:melon_block');
 }

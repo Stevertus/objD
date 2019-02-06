@@ -1,4 +1,5 @@
 
+
 ObjectiveD is a framework for developing Datapacks for Minecraft. It uses the [Dart](https://www.dartlang.org/guides/language/language-tour) programming language.
 
 ## Why a framework?
@@ -11,17 +12,19 @@ By building a custom frame around it you get the **reliability** and the **exten
 The generation of Datapacks is **easy**,**fast** and aims to be **less repetitive** and **modular** by utilizing the concept of Widgets as one of the main features.
 ## Installation
 [Temporary]
+
 You need the Dart SDK for this framework. Download and install it from https://www.dartlang.org/tools/sdk
 
 I would also recommend Visual Studio Code along with the dart plugin to edit dart files very conveniently.
 
 Make a new folder that will house your project wherever you want(I would recommend datapacks folder).
+
 And inside of that create a file named `pubspec.yaml` and another folder called `lib`.
 
 Open the pubspec.yaml file and add 
 ```yaml
 dependencies:  
-	objd: ^0.0.4
+	objd: ^0.0.5
 ```
 And run 
 ```
@@ -30,6 +33,7 @@ $  pub get
 with the console in the new folder(VS code does this automatically)
 ## Getting started
 Let's get started and create our first dart file with `lib/main.dart` file. 
+
 Then we import the framework with:
 ```dart
 import 'package:objd/code.dart';
@@ -69,6 +73,7 @@ Widget generate(Context context){
 }
 ```
 What we are doing right now is to generate a new subpack with a name(This will be the namespace of your functions later) and a main file(runs every tick) with the name "main.mcfunction".
+
 You can run the project already and the result should be a pack with an empty main.mcfunction file.
 
 So lets add some functionality to our project in our main file.
@@ -151,10 +156,12 @@ Pack(
 )
 ```
 The Pack class can be used as often as you want and where you want, so you can also define a new pack in some file.
+
 > Notice: The namespace of the pack is accessible in these files by using the context variable. e.g:
 > `Command("function" + context.packId + ":run")`
 ## File
 The [Pack]() class already required some files, therefore this is the definition.
+
 The File constructor has two required arguments:
 
 |constructor | |
@@ -197,6 +204,7 @@ say hey
 ```
 ## For
 The For class enables you to add multiple endpoints to one Widget.
+
 There is always a List of Widgets involved.
 
 |constructor | |
@@ -255,7 +263,7 @@ But there is a more efficient way to list raw Minecraft commands. The CommandLis
 | List| a list of commands or strings |
 
 This has basically the same function as For.of just for commands.
-##  
+  
 ```dart
 CommandList(List<Command>[
 		Command('say 1'),
@@ -276,7 +284,7 @@ CommandList.str("""
 	/say 3
 """),
 ```
-The tabs are automatically filtered.
+The slashes are automatically filtered out.
 ## Group
 The group groups actions similar to for but has an option to prefix each action and encapsulate the content in a new file.
 
@@ -300,6 +308,173 @@ Group(
 	groupMin: 2
 ),
 ```
+## Entity
+
+|constructor | arguments are optional |
+|--|--|
+|selector|the entity selector(e.g p,s,e or r)|
+|limit|number of matched entities|
+|type|[EntityType](), id of the entity|
+|distance| [Range]() to the entity|
+|level|Range of experience levels|
+|gamemode|Gamemode type(e.g Gamemode.creative, Gamemode.survival)|
+|horizontalRotation|Range of the horizontal facing direction|
+|verticalRotation|Range of the vertical facing direction|
+|**Methods** |  |
+|sort|adds a sort attribute of type [Sort]()|
+
+|Sort|
+|--|
+|Sort.random|
+|Sort.furthest|
+|Sort.nearest|
+|Sort.albitrary|
+
+The Range class defines a range of values(e.g 3..10 in vanilla)
+
+|Range |  |
+|--|--|
+|[to]|Number for the maximum range|
+|[from]|Number for the minimal range|
+
+|EntityType |  |
+|--|--|
+|String|String representation of the type|
+
+There is also an EntityType for every type_id in minecraft with `EntityType.[type_id]`
+
+```dart
+Say(
+	entity: Entity(
+		selector: "e",
+		limit: 1,
+		type: EntityType.armor_stand,
+		distance: Range(to:2),
+		level: Range(from: 1),
+		gamemode: Gamemode.creative,
+		horizontalRotation: Range(from:1),
+		verticalRotation: Range(from: 20, to: 80),
+	).sort(Sort.random)
+)
+
+⇒ say @e[limit=1,type=armor_stand,distance=..2,level=1..,gamemode=creative,y_rotation=1..,x_rotation=20..80,sort=random]
+```
+
+## Block
+There is also a util class called Block which provides a wrapper for all available blocks in Minecraft.
+**Usage:**
+```dart
+Block([minecraft_block_id]) // as string or
+Block.[minecraft_block_id]
+```
+All ids can be found [here](https://minecraft.gamepedia.com/Block#List_of_blocks).
+But you can also insert a block by its string:
+
+|constructor | |
+|--|--|
+|String|the minecraft block id|
+
+
+Example:
+```dart
+SetBlock(
+	Block.stone,
+	location: Location.here()
+)
+```
+## Location
+In the block example we already used a class called Location. This translates into Minecraft Coordinates.
+
+|constructor | |
+|--|--|
+|String|the minecraft coordinate string(e.g "~ ~ ~")|
+
+```dart
+SetBlock(Block.stone,location: Location("~ 5 ~"))
+```
+There is also a shortcut for " ~ ~ ~ ":
+
+|Location.here| Selects the current Position |
+|--|--|
+
+```dart
+Location.here()
+⇒ ~ ~ ~
+```
+
+But the Location class also provides a wrapper for global coordinates:
+
+|Location.glob| |
+|--|--|
+|x|a double defining the absolute x coordinate|
+|y|a double defining the absolute y coordinate|
+|z|a double defining the absolute z coordinate|
+
+```dart
+Location.glob(x: 5,y: 51.5,z: 784.20) 
+⇒ 5 51.5 784.2
+```
+And also for relative coordinates:
+
+|Location.rel| |
+|--|--|
+|x|a double defining the relative x coordinate|
+|y|a double defining the relative y coordinate|
+|z|a double defining the relative z coordinate|
+
+```dart
+Location.rel(x: 5,y: 1.5,z: 0)
+⇒ ~5 ~1.5 ~
+```
+And local coordinates(depends on the rotation of the head):
+
+|Location.local| |
+|--|--|
+|x|a double defining the local x coordinate|
+|y|a double defining the local y coordinate|
+|z|a double defining the local z coordinate|
+
+```dart
+Location.local(x: 0,y: 1,z: 2.5)
+⇒ ^ ^1 ^2.5
+```
+## Item
+The Item class represents an item in an inventory in Minecraft. It is used in the [Give]() or Nbt Commands.
+
+> This Class is incomplete, more functionality soon...
+
+|constructor | |
+|--|--|
+|ItemType \| Block \| String|the type of item(required, see example)|
+|count|Integer value for the amount of stacked items|
+|slot|The current slot of the item(does not work for give)|
+|damage|the used durability of the item|
+|model|int describing which model varient should be used|
+|nbt|addional NBT as Dart Map|
+
+**Example:**
+```dart
+Give(Entity.Self(),
+	item: Item(
+		ItemType.iron_axe, // OR Block.stone OR "whatever id"
+		count: 5,
+		damage: 40,
+		model: 3390001,
+		nbt: {
+			"customNBT":1
+		}
+	)
+)
+
+⇒ give @s minecraft:iron_axe{"customNBT":1,"Damage":40,"CustomModelData":3390001} 5
+```
+ItemType is like EntityType or Block a utility class to provide a list of all available blocks.
+|ItemType([minecraft_item_id])| creates a ItemType from a String |
+|--|--|
+|ItemType.[minecraft_item_id]|there is also an value for each item in Minecraft|
+
+# Command Wrappers
+In this section are a few classes that build commands with inputs(Entities, Texts, Blocks, Locations).
 ## Execute
 One of the most used commands has a widget too. The execute command has multiple syntaxes that allow to manipulate the position, executer or condition.
 
@@ -376,131 +551,7 @@ Execute.asat(
 
 ⇒ execute as @p at @s run say I get executed
 ```
-## Entity
 
-|constructor | arguments are optional |
-|--|--|
-|selector|the entity selector(e.g p,s,e or r)|
-|limit|number of matched entities|
-|type|[EntityType](), id of the entity|
-|distance| [Range]() to the entity|
-|level|Range of experience levels|
-|gamemode|Gamemode type(e.g Gamemode.creative, Gamemode.survival)|
-|horizontalRotation|Range of the horizontal facing direction|
-|verticalRotation|Range of the vertical facing direction|
-|**Methods** |  |
-|sort|adds a sort attribute of type [Sort]()|
-
-|Sort|
-|--|
-|Sort.random|
-|Sort.furthest|
-|Sort.nearest|
-|Sort.albitrary|
-
-The Range class defines a range of values(e.g 3..10 in vanilla)
-
-|Range |  |
-|--|--|
-|[to]|Number for the maximum range|
-|[from]|Number for the minimal range|
-
-|EntityType |  |
-|--|--|
-|String|String representation of the type|
-
-There is also an EntityType for every type_id in minecraft with `EntityType.[type_id]`
-
-```dart
-Say(
-	entity: Entity(
-		selector: "e",
-		limit: 1,
-		type: EntityType.armor_stand,
-		distance: Range(to:2),
-		level: Range(from: 1),
-		gamemode: Gamemode.creative,
-		horizontalRotation: Range(from:1),
-		verticalRotation: Range(from: 20, to: 80),
-	).sort(Sort.random)
-)
-
-⇒ say @e[limit=1,type=armor_stand,distance=..2,level=1..,gamemode=creative,y_rotation=1..,x_rotation=20..80,sort=random]
-```
-
-## Block
-There is also a util class called Block which provides a wrapper for all available blocks in Minecraft.
-**Usage:**
-```dart
-Block.[minecraft_block_id]
-```
-All ids can be found [here](https://minecraft.gamepedia.com/Block#List_of_blocks).
-But you can also insert a block by its string;
-|constructor | |
-|--|--|
-|String|the minecraft block id|
-
-
-Example:
-```dart
-SetBlock(
-	Block.stone,
-	location: Location.here()
-)
-```
-## Location
-In the block example we already used a class called Location. This translates into Minecraft Coordinates.
-
-|constructor | |
-|--|--|
-|String|the minecraft coordinate string(e.g "~ ~ ~")|
-
-```dart
-SetBlock(Block.stone,location: Location("~ 5 ~"))
-```
-There is also a shortcut for " ~ ~ ~ ":
-|Location.here| Selects the current Position |
-|--|--|
-
-
-But the Location class also provides a wrapper for global coordinates:
-
-|Location.glob| |
-|--|--|
-|x|a double defining the absolute x coordinate|
-|y|a double defining the absolute y coordinate|
-|z|a double defining the absolute z coordinate|
-
-```dart
-Location.glob(x: 5,y: 51.5,z: 784.20) 
-⇒ 5 51.5 784.2
-```
-And also for relative coordinates:
-
-|Location.rel| |
-|--|--|
-|x|a double defining the relative x coordinate|
-|y|a double defining the relative y coordinate|
-|z|a double defining the relative z coordinate|
-
-```dart
-Location.rel(x: 5,y: 1.5,z: 0)
-⇒ ~5 ~1.5 ~
-```
-And local coordinates(depends on the rotation of the head):
-
-|Location.rel| |
-|--|--|
-|x|a double defining the local x coordinate|
-|y|a double defining the local y coordinate|
-|z|a double defining the local z coordinate|
-
-```dart
-Location.local(x: 0,y: 1,z: 2.5)
-⇒ ^ ^1 ^2.5
-```
-# Command Wrappers
-In this section are a few classes that build commands with inputs(Entities, Texts, Blocks, Locations).
 ## SetBlock
 The SetBlock Command Class sets a Block at the specified location:
 
@@ -542,6 +593,51 @@ Say(
 )
 ⇒ say @p
 ```
+## Give
+Give a item to a player.
+|constructor| |
+|--|--|
+|Entity|The player|
+|item|the Item you want to give(required) |
+
+**Example:**
+```dart
+Give(Entity.Player(),
+	item: Item(
+		ItemType.apple,
+		count: 5
+	)
+)
+
+⇒ give @s minecraft:apple 5
+```
+
+## Replaceitem
+Sets a specific container slot to a item.
+* for Entities:
+
+|constructor| |
+|--|--|
+|Entity|The entity|
+|item|the Item you want to set(required) |
+|slot|a String representation of the slot(required)|
+
+**Example:**
+```dart
+Replaceitem(Entity.Player(),
+	slot: "hotbar.5"
+	item: Item(
+		ItemType.apple,
+		count: 5,
+		model: 339001
+	)
+)
+
+⇒ replaceitem entity @p hotbar.5 minecraft:apple{"CustomModelData":339001} 5 
+```
+> replaceitem block will follow
+
+
 ## Summon
 The summon class creates a new entity at a given location.
 

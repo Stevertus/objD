@@ -13,5 +13,6 @@ export 'basic/file.dart';
 export 'basic/for_list.dart';
 export 'objD/widgets.dart';
 export 'basic/entity.dart';
+export 'basic/item.dart';
 export 'basic/block.dart';
 export 'basic/location.dart';
