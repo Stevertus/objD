@@ -1,4 +1,3 @@
-import 'package:objd/basic/widget.dart';
 abstract class EntityClass {
   String selector;
   String getString();

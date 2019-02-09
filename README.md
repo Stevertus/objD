@@ -1,6 +1,9 @@
 
+[//]: # (main)
 
 ObjectiveD is a framework for developing Datapacks for Minecraft. It uses the [Dart](https://www.dartlang.org/guides/language/language-tour) programming language.
+
+[//]: # (why)
 
 ## Why a framework?
 A framework is a set of utilities to reduce the amount of repetitive work.
@@ -10,6 +13,8 @@ Instead of developing a language, why not using the tools and parser an other la
 By building a custom frame around it you get the **reliability** and the **extensive** debugging tools in Editors.
 
 The generation of Datapacks is **easy**,**fast** and aims to be **less repetitive** and **modular** by utilizing the concept of Widgets as one of the main features.
+
+[//]: # (installation)
 ## Installation
 [Temporary]
 
@@ -24,13 +29,15 @@ And inside of that create a file named `pubspec.yaml` and another folder called 
 Open the pubspec.yaml file and add 
 ```yaml
 dependencies:  
-	objd: ^0.0.5
+	objd: ^0.0.4
 ```
 And run 
 ```
 $  pub get
 ```
 with the console in the new folder(VS code does this automatically)
+
+[//]: # (getting_started)
 ## Getting started
 Let's get started and create our first dart file with `lib/main.dart` file. 
 
@@ -93,6 +100,7 @@ child: For.of(List<Widget>[
 ```
 So now we have a [List](https://www.dartlang.org/guides/language/language-tour#lists) of Widget, so we can use as many as we want
 
+[//]: # (basics/widget)
 ## Widget
 A widget is the base element for basically everything in objectiveD.
 
@@ -113,6 +121,8 @@ class CustomCommand extends Widget {
 	}
 }
 ```
+
+[//]: # (basics/project)
 ## Project
 The project is a special Widget which is just defined once. It contains some built options, like description or name, but also the entire underlying tree of packs, files and actions.
 
@@ -133,6 +143,8 @@ createProject(
 	));
 }
 ```
+
+[//]: # (basics/pack)
 ## Pack
 A pack is logically the next step. This defines a sub-pack with an name again that will be our namespace afterwards.
 Here we can also define included files as well as the main and load function:
@@ -159,6 +171,8 @@ The Pack class can be used as often as you want and where you want, so you can a
 
 > Notice: The namespace of the pack is accessible in these files by using the context variable. e.g:
 > `Command("function" + context.packId + ":run")`
+
+[//]: # (basics/file)
 ## File
 The [Pack]() class already required some files, therefore this is the definition.
 
@@ -185,6 +199,29 @@ Pack(
 	),
 )
 ```
+
+[//]: # (basics/extend)
+## Extend
+Extend is very similar to File, but instead of creating a new file it adds content to an existing file.
+
+|constructor | |
+|--|--|
+| String | the desired file path going from `/data/:packId:/functions/` on |
+| child| the additional content|
+| [first] | Boolean if the content should be added in front of the original(def. false) |
+
+So lets say we already have some files in our pack, but want to add something to the main file somewhere entirely else in our project:
+
+```dart
+Extend(
+	"main",
+	child: Command("say okay"),
+	first: true
+)
+``` 
+This would add the command `say okay` in front of our main.mcfunction. 
+
+[//]: # (basics/command)
 ## Command
 A Command is a raw action, that is executed by Minecraft directly.
 
@@ -202,6 +239,8 @@ File(
 // uses the say command in command.mcfunction:
 say hey
 ```
+
+[//]: # (basics/for)
 ## For
 The For class enables you to add multiple endpoints to one Widget.
 
@@ -255,6 +294,8 @@ say 1
 say 2
 say 3
 ```
+
+[//]: # (basics/commandlist)
 ## CommandList
 But there is a more efficient way to list raw Minecraft commands. The CommandList Widget allows you to input a List of Commands, a List of Strings representing a command or a multiline string.
 
@@ -285,6 +326,8 @@ CommandList.str("""
 """),
 ```
 The slashes are automatically filtered out.
+
+[//]: # (basics/group)
 ## Group
 The group groups actions similar to for but has an option to prefix each action and encapsulate the content in a new file.
 
@@ -308,6 +351,8 @@ Group(
 	groupMin: 2
 ),
 ```
+
+[//]: # (basics/entity)
 ## Entity
 
 |constructor | arguments are optional |
@@ -359,7 +404,7 @@ Say(
 
 ⇒ say @e[limit=1,type=armor_stand,distance=..2,level=1..,gamemode=creative,y_rotation=1..,x_rotation=20..80,sort=random]
 ```
-
+[//]: # (basics/block)
 ## Block
 There is also a util class called Block which provides a wrapper for all available blocks in Minecraft.
 **Usage:**
@@ -382,6 +427,8 @@ SetBlock(
 	location: Location.here()
 )
 ```
+
+[//]: # (basics/location)
 ## Location
 In the block example we already used a class called Location. This translates into Minecraft Coordinates.
 
@@ -438,6 +485,8 @@ And local coordinates(depends on the rotation of the head):
 Location.local(x: 0,y: 1,z: 2.5)
 ⇒ ^ ^1 ^2.5
 ```
+
+[//]: # (basics/item)
 ## Item
 The Item class represents an item in an inventory in Minecraft. It is used in the [Give]() or Nbt Commands.
 
@@ -469,12 +518,16 @@ Give(Entity.Self(),
 ⇒ give @s minecraft:iron_axe{"customNBT":1,"Damage":40,"CustomModelData":3390001} 5
 ```
 ItemType is like EntityType or Block a utility class to provide a list of all available blocks.
+
 |ItemType([minecraft_item_id])| creates a ItemType from a String |
 |--|--|
 |ItemType.[minecraft_item_id]|there is also an value for each item in Minecraft|
 
+[//]: # (wrappers/main)
 # Command Wrappers
 In this section are a few classes that build commands with inputs(Entities, Texts, Blocks, Locations).
+
+[//]: # (wrappers/execute)
 ## Execute
 One of the most used commands has a widget too. The execute command has multiple syntaxes that allow to manipulate the position, executer or condition.
 
@@ -551,7 +604,7 @@ Execute.asat(
 
 ⇒ execute as @p at @s run say I get executed
 ```
-
+[//]: # (wrappers/setblock)
 ## SetBlock
 The SetBlock Command Class sets a Block at the specified location:
 
@@ -572,6 +625,8 @@ SetBlock(
 )
 ⇒ setblock 5 0 20 minecraft:stone
 ```
+
+[//]: # (wrappers/say)
 ## Say
 The Say Class writes a simple message or an entity in the chat.
 
@@ -593,8 +648,11 @@ Say(
 )
 ⇒ say @p
 ```
+
+[//]: # (wrappers/give)
 ## Give
 Give a item to a player.
+
 |constructor| |
 |--|--|
 |Entity|The player|
@@ -612,6 +670,7 @@ Give(Entity.Player(),
 ⇒ give @s minecraft:apple 5
 ```
 
+[//]: # (wrappers/replaceitem)
 ## Replaceitem
 Sets a specific container slot to a item.
 * for Entities:
@@ -637,7 +696,7 @@ Replaceitem(Entity.Player(),
 ```
 > replaceitem block will follow
 
-
+[//]: # (wrappers/summon)
 ## Summon
 The summon class creates a new entity at a given location.
 
@@ -660,10 +719,11 @@ Summon(
 ⇒ summon armor_stand ~ ~1 ~ {"Invisible":1,"CustomName":"{\"text\":\"this is my name\",\"color\":\"dark_blue\"}"}
 ```
 
-
+[//]: # (text/main)
 # Texts and Strings
 
 In Minecraft text in the chat or as title is defined with JSON-data. objD makes the JSON part of it easier by utilizing a few classes:
+
 |TextComponent| |
 |--|--|
 |String|the text displayed (required)|
@@ -735,6 +795,8 @@ TextComponent.selector(
 )
 ⇒ {"selector":"@e[name=hello]","color":"black"}
 ```
+
+[//]: # (text/colors)
 ## Colors
 
 |Color([color_name]) |or |
@@ -750,6 +812,8 @@ Color.DarkPurple
 Color("gold")
 Color('dark_green')
 ```
+
+[//]: # (text/click)
 ## TextClickEvent
 Fires on left click, Part of TextComponent.
 
@@ -760,6 +824,8 @@ Fires on left click, Part of TextComponent.
 |TextClickEvent.suggest(Command)|puts the command in the chat input|
 |TextClickEvent.change_page(int)|turns a books page to the value(just Books!)|
 
+
+[//]: # (text/hover)
 ## TextHoverEvent
 Fires on mouse over, Part of TextComponent.
 
@@ -770,6 +836,8 @@ Fires on mouse over, Part of TextComponent.
 |TextClickEvent.item(String)|shows item(Warning!: Not final)|
 |TextClickEvent.entity(String,String,String)|displays a dummy entity with name, type and UUID(in this order))|
 
+
+[//]: # (text/title)
 ## Title
 To display our TextComponent, we need the `/title` command and the Title class wrapper.
 
@@ -837,6 +905,8 @@ Title.times(Entity.All(),fadein:30,display:40,fadeout:20)
 Title.resetTimes(Entity.All())
 ⇒ title @a reset
 ```
+
+[//]: # (text/tellraw)
 ## Tellraw 
 The Tellraw class is very similar to the Title class, but shows its texts in the chat:
 

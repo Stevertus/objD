@@ -1,7 +1,6 @@
 import 'package:objd/basic/group.dart';
 import 'package:meta/meta.dart';
 import 'package:objd/basic/widget.dart';
-import 'package:objd/basic/group.dart';
 import 'package:objd/basic/entity.dart';
 import 'package:objd/build/build.dart';
 

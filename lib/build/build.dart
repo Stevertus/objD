@@ -5,13 +5,14 @@ import 'package:objd/basic/for_list.dart';
 import 'package:objd/basic/pack.dart';
 import 'package:objd/basic/group.dart';
 import 'package:objd/basic/file.dart';
+import 'package:objd/basic/extend.dart';
 
 class Context {
   List<String> prefixes;
   String packId;
   String file;
-  Context({this.prefixes, this.packId = "", this.file = ""}){
-    if(prefixes == null) prefixes = [];
+  Context({this.prefixes, this.packId = "", this.file = ""}) {
+    if (prefixes == null) prefixes = [];
   }
 
   Context addPrefix(String prev) {
@@ -30,6 +31,9 @@ class BuildFile {
   Widget _child;
   BuildFile(this._path, [this._child]);
 
+  String get path => _path;
+  Widget get child => _child;
+
   String generate(String packID) {
     if (_child == null) return "";
     List<String> ret =
@@ -37,19 +41,25 @@ class BuildFile {
     // return the final string after going through each child
     return ret.join('\n');
   }
-  String get path => _path;
+
   List<String> _generateRek(Widget wid, Context context, List<String> ret) {
     if (ret == null) ret = List();
     // recursivly step through each child and add all generated commands in ret
     if (wid is File) {
-      if (wid.execute) _generateRek(wid.execution,context,ret);
+      if (wid.execute) _generateRek(wid.execution, context, ret);
       return ret;
     }
     if (wid is Pack) return ret;
 
     if (wid is Group) context.addPrefix(wid.prefix);
 
-    if (wid is Text) return addAndReturn(ret, (context.prefixes.length > 0 ? (context.prefixes.join(' ') + ' '):'') + wid.generate(context));
+    if (wid is Text)
+      return addAndReturn(
+          ret,
+          (context.prefixes.length > 0
+                  ? (context.prefixes.join(' ') + ' ')
+                  : '') +
+              wid.generate(context));
 
     if (wid is Widget) {
       dynamic child = wid.generate(context);
@@ -67,29 +77,76 @@ class BuildFile {
 
     return ret;
   }
+
   @override
-    String toString() {
-      return "File: " + _path + (_child == null ? '' : ' with child\n' + this.generate('test')) + '\n';
-    }
+  String toString() {
+    return "File: " +
+        _path +
+        (_child == null ? '' : ' with child\n' + this.generate('test')) +
+        '\n';
+  }
 }
 
 Map build(Project prj) {
   var ret = _getFiles(prj.generate, {'packs': []}, -1);
-  ret.addAll({'path':prj.target,'name':prj.name,'description':prj.description});
+  ret.addAll(
+      {'path': prj.target, 'name': prj.name, 'description': prj.description});
   return ret;
   //return _rekBuild(prj.generate,ret: {"test": "test"}, context: Context(prefixes: [], packId: ""));
 }
 
 Map _getFiles(dynamic wid, Map ret, int currentPackIndex) {
-  if (wid is File) {
+  if (wid is File || wid is Extend) {
+    // does the current pack exist?
     assert(ret['packs'][currentPackIndex] != null);
 
-    ret['packs'][currentPackIndex]['files'].add(BuildFile(wid.path, wid.child));
+    // is there already a file with this path?
+    var fileIndex = ret['packs'][currentPackIndex]['files']
+        .indexWhere((file) => file.path == wid.path);
+
+    if (fileIndex >= 0) {
+
+      List<Widget> children = [
+            ret['packs'][currentPackIndex]['files'][fileIndex].child,
+            wid.child
+      ];
+
+      if(wid is File || wid.first == true ){
+        children = children.reversed.toList();
+      }
+
+      ret['packs'][currentPackIndex]['files'][fileIndex] = new BuildFile(
+          wid.path,
+          For.of(children));
+    } else {
+      ret['packs'][currentPackIndex]['files']
+          .add(new BuildFile(wid.path, wid.child));
+    }
+
     if (wid.child != null && wid.child is Widget) {
-      return ret = _getFiles(wid.child, ret, currentPackIndex);
+      ret = _getFiles(wid.child, ret, currentPackIndex);
+      wid.child = Text("");
+      return ret;
     }
     return ret;
   }
+  // if (wid is Extend) {
+  //   var fileIndex = ret['packs'][currentPackIndex]['files']
+  //       .indexWhere((file) => file.path == wid.path);
+  //   if (fileIndex >= 0) {
+  //     ret['packs'][currentPackIndex]['files'][fileIndex] = new BuildFile(
+  //         wid.path,
+  //         For.of([
+  //           ret['packs'][currentPackIndex]['files'][fileIndex].child,
+  //           wid.child
+  //         ]));
+  //   } else {
+  //     ret['packs'][currentPackIndex]['files']
+  //         .add(new BuildFile(wid.path, wid.child));
+  //   }
+  //   wid.child = Text("");
+  //   return ret;
+  // }
   if (wid is Pack) {
     List files = [];
     Map result = {'files': [], 'name': wid.name};
@@ -124,65 +181,4 @@ Map _getFiles(dynamic wid, Map ret, int currentPackIndex) {
   }
   return ret;
   // throw('Tree ends unexpectedly at' + wid.toString() + '\n Could not build Project!');
-}
-
-dynamic _rekBuild(dynamic wid, {Map ret, Context context}) {
-  if (wid is File) {
-    Map result = {};
-    if (wid.child != null && wid.child is Widget) {
-      result['generation'] = _rekBuild(wid.child, ret: ret, context: context);
-    }
-    result.addAll({'type': 'file', 'path': wid.path});
-    return result;
-  }
-
-  dynamic widBuild = wid.generate(context);
-  try {
-    if (widBuild is Text) {
-      return ret;
-    }
-
-    if (widBuild is Pack) {
-      List files = [];
-      Map result = {};
-      if (widBuild.files != null) files = widBuild.files;
-      if (widBuild.load != null) {
-        result['load'] = widBuild.load.path;
-        files.insert(0, widBuild.load);
-      }
-      if (widBuild.main != null) {
-        result['main'] = widBuild.main.path;
-        files.insert(0, widBuild.main);
-      }
-      result.addAll({
-        'type': 'pack',
-        'files': files.map((x) =>
-            _rekBuild(x, ret: ret, context: Context(packId: widBuild.name)))
-      });
-      return result;
-    }
-
-    // if (widBuild.child != null && widBuild.child is Widget) {
-    //   return _rekBuild(widBuild.child, ret: ret,context: context);
-    // }
-
-    // if (widBuild.children != null && widBuild.children is List<Widget>) {
-    //   return widBuild.children.map((x) {
-    //     return _rekBuild(x, ret: ret,context: context);
-    //   }).join('\n');
-    // }
-    if (widBuild is List<Widget>) {
-      return widBuild.map((x) => _rekBuild(x, ret: ret, context: context));
-    }
-    if (widBuild is Widget) {
-      // dynamic child = widBuild.generate(context);
-      // print(child);
-      // if (child is Widget || child is List<Widget>) {
-      return _rekBuild(widBuild, ret: ret, context: context);
-      //}
-    }
-  } catch (e) {
-    print(e);
-  }
-  throw "Cannot build Widget: " + widBuild.toString();
 }

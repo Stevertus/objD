@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-import 'package:objd/basic/location.dart';
 
 class Block {
   String _block;

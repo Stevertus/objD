@@ -1,4 +1,11 @@
 
+## 0.0.5
+* added Extend
+* added Item utils
+* added Give
+* added Replaceitem
+* added online documentation at https://stevertus.com/objD/documentation
+
 ## 0.0.4
 * added Summon command wrapper
 * added TextComponents

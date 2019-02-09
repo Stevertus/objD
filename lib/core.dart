@@ -10,6 +10,7 @@ export 'basic/pack.dart';
 export 'basic/group.dart';
 export 'basic/text_components.dart';
 export 'basic/file.dart';
+export 'basic/extend.dart';
 export 'basic/for_list.dart';
 export 'objD/widgets.dart';
 export 'basic/entity.dart';

@@ -12,16 +12,30 @@ class mainWidget extends Widget {
       name: 'example',
       main: File(
         path: 'main',
-        child: ReplaceItem(
-          Entity.Player(),
-          slot:"hotbar.0",
-          item: Item(
-            ItemType.iron_axe,
-            damage: 5,
-            nbt: {"test":1}
-            )),
+        child: For.of([
+          ReplaceItem(Entity.Player(),
+              slot: "hotbar.0",
+              item: Item(
+                ItemType.iron_axe,
+                damage: 5,
+                nbt: {"test": 1},
+              )),
+        ]),
       ),
       files: [
+        File(
+          path: "tes",
+          child: For.of(
+            [
+              Say(msg: "fgf"),
+              Extend(
+                "main",
+                first: true,
+                child: Say(msg: "hey"),
+              ),
+            ],
+          ),
+        ),
         File(
             execute: true,
             path: 'test',

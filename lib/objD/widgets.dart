@@ -1,3 +1,4 @@
+export './comment.dart';
 export './execute.dart';
 export './summon.dart';
 export './give.dart';
