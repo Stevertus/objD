@@ -16,6 +16,6 @@ class ReplaceItem extends Widget {
   
   @override
   Widget generate(Context context){
-    if(replaceType == "entity") return new Command('replaceitem entity ' + entity.getString() + ' ' + slot + " " + item.getGiveNotation());
+    if(replaceType == "entity") return new Command('replaceitem entity ' + entity.toString() + ' ' + slot + " " + item.getGiveNotation());
   }
 }

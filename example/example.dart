@@ -13,13 +13,26 @@ class mainWidget extends Widget {
       main: File(
         path: 'main',
         child: For.of([
-          ReplaceItem(Entity.Player(),
+          ReplaceItem(
+              Entity.Player(area: [
+                Location.here(),
+                Location.glob(x: null, y: 10, z: 100)
+              ]),
               slot: "hotbar.0",
               item: Item(
                 ItemType.iron_axe,
                 damage: 5,
                 nbt: {"test": 1},
               )),
+          Data.modify(
+            Entity.Selected(),
+            path: "test",
+            modify: DataModify.insert(
+              Location("~ ~5 ~"),
+              fromPath: "Items[0].id",
+              index: 2,
+            ),
+          )
         ]),
       ),
       files: [

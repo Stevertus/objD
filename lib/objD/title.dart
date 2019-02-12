@@ -11,32 +11,32 @@ class Title extends Widget {
   String entity;
   Title(Entity selector, {@required List<TextComponent> show}){
     type = "title";
-    entity = selector.getString();
+    entity = selector.toString();
     jsonText = json.encode(show.map((text) => text.toMap()).toList());
   }
   Title.subtitle(Entity selector, {@required List<TextComponent> show}){
     type = "subtitle";
-    entity = selector.getString();
+    entity = selector.toString();
     jsonText = json.encode(show.map((text) => text.toMap()).toList());
   }
   Title.actionbar(Entity selector, {@required List<TextComponent> show}){
     type = "actionbar";
-    entity = selector.getString();
+    entity = selector.toString();
     jsonText = json.encode(show.map((text) => text.toMap()).toList());
   }
   Title.clear(Entity selector){
     type = "clear";
-    entity = selector.getString();
+    entity = selector.toString();
     jsonText = "";
   }
   Title.times(Entity selector,{int fadein = 20, int display = 60, int fadeout = 20}){
     type = "times";
-    entity = selector.getString();
+    entity = selector.toString();
     jsonText = fadein.toString() + " " + display.toString() + " " + fadeout.toString();
   }
   Title.resetTimes(Entity selector){
     type = "reset";
-    entity = selector.getString();
+    entity = selector.toString();
     jsonText = "";
   }
   @override

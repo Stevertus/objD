@@ -8,7 +8,7 @@ class Tellraw extends Widget {
   String jsonText;
   String entity;
   Tellraw(Entity selector, {List<TextComponent> show}){
-    entity = selector.getString();
+    entity = selector.toString();
     jsonText = json.encode(show.map((text) => text.toMap()).toList());
   }
   @override

@@ -1,26 +1,28 @@
+import 'package:objd/basic/location.dart';
 abstract class EntityClass {
   String selector;
-  String getString();
+  String toString();
 }
 class Entity implements EntityClass{
   String selector;
-  static Function Player = ({Range distance,Range level, Gamemode gamemode, String name, Range horizontalRotation, Range verticalRotation}){
-    return Entity(selector: 'p',distance:distance,level: level,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
+  static Function Player = ({Range distance,Range level, Gamemode gamemode, List<Location> area, String name, Range horizontalRotation, Range verticalRotation}){
+    return Entity(selector: 'p',distance:distance,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
   };
-  static Function All = ({Range distance,int limit,Range level, Gamemode gamemode, String name, Range horizontalRotation, Range verticalRotation}){
-    return Entity(selector: 'a',limit:limit,distance:distance,level: level,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
+  static Function All = ({Range distance,int limit,Range level, Gamemode gamemode, List<Location> area, String name, Range horizontalRotation, Range verticalRotation}){
+    return Entity(selector: 'a',limit:limit,distance:distance,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
   };
-  static Function Random = ({EntityType type,Range distance,int limit,Range level, Gamemode gamemode, String name, Range horizontalRotation, Range verticalRotation}){
-    return Entity(selector: 'r',type:type,limit:limit,distance:distance,level: level,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
+  static Function Random = ({EntityType type,Range distance,int limit,Range level, Gamemode gamemode, List<Location> area, String name, Range horizontalRotation, Range verticalRotation}){
+    return Entity(selector: 'r',type:type,limit:limit,distance:distance,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
   };
-  static Function Selected = ({EntityType type, Range distance,Range level, Gamemode gamemode, String name, Range horizontalRotation, Range verticalRotation}){
-    return Entity(selector: 's',type:type,distance:distance,level: level,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
+  static Function Selected = ({EntityType type, Range distance,Range level, Gamemode gamemode, List<Location> area, String name, Range horizontalRotation, Range verticalRotation}){
+    return Entity(selector: 's',type:type,distance:distance,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
   };
   // Todo: implement Scores, Tags, Area, Nbt
   Entity({
       this.selector = 'e',
       int limit,
       EntityType type,
+      List<Location> area,
       Range distance,
       Range level,
       Gamemode gamemode, 
@@ -36,6 +38,16 @@ class Entity implements EntityClass{
     if(name != null) arguments['name'] = name;
     if(horizontalRotation != null) arguments['horizontalRotation'] = horizontalRotation.toString();
     if(verticalRotation != null) arguments['verticalRotation'] = verticalRotation.toString();
+    if(area != null && area.length > 1){
+      var from = area[0];
+      var to = area[1];
+      arguments['x'] = min(from.x, to.x).toString();
+      arguments['y'] = min(from.y, to.y).toString();
+      arguments['z'] = min(from.y, to.y).toString();
+      if(from.x != null && to.x != null && abs(from.x - to.x) > 0) arguments['dx'] = abs(from.x - to.x).toString();
+      if(from.y != null && to.y != null && abs(from.y - to.y) > 0) arguments['dy'] = abs(from.y - to.y).toString();
+      if(from.z != null && to.z != null && abs(from.z - to.z) > 0) arguments['dz'] = abs(from.z - to.z).toString();
+    }
   }
   Map arguments = {
     
@@ -44,7 +56,8 @@ class Entity implements EntityClass{
     arguments['sort'] = sort.toString().split('.').last;
     return this;
   }
-  String getString(){
+  @override
+  String toString(){
     String ret = "@" + selector;
     if(arguments.length > 0){
       ret += '[';
@@ -59,15 +72,28 @@ class Entity implements EntityClass{
   }
 }
 
+abs(num val){
+  if(val != null && val.isNegative) return - val;
+  return val;
+}
+min(num one,num two){
+  if(one == null) return two;
+  if(two == null) return one;
+  if(one > two) return two;
+  return one;
+}
+
 class Range {
   num from,to;
-  Range({this.from = 0, this.to});
+  Range({this.from, this.to});
 
-  String getString(){
-    if(from > 0 && to == null) return "$from..";
-    if(from == 0 && to > 0) return "..$to";
-    if(from > 0 && to > 0) return "$from..$to";
-    return "0";
+  @override
+  String toString(){
+    String ret = "0";
+    if(from != null && to == null) ret = "$from..";
+    if(from == null && to != null) ret = "..$to";
+    if(from != null && to != null) ret = "$from..$to";
+    return ret.replaceAll('.0', '');
   }
 }
 enum Gamemode{

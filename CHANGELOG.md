@@ -1,4 +1,8 @@
-
+## 0.0.6
+* added teleport
+* added fill
+* added data widget and DataModify to edit nbt data
+* updated entity with area parameter
 ## 0.0.5
 * added Extend
 * added Item utils

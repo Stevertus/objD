@@ -1,6 +1,5 @@
 import 'package:objd/basic/widget.dart';
 import 'package:objd/build/build.dart';
-import 'package:meta/meta.dart';
 
 class Extend extends Widget {
   Widget child;

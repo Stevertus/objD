@@ -8,16 +8,16 @@ class Execute extends Widget {
 
   Widget build; 
   Execute.as(Entity entity,{@required List<Widget> children, bool encapsulate = true}){
-    build = Group(children: children,prefix: 'execute as ' + entity.getString() + ' run',groupMin: encapsulate ? 3 : -1,filename: 'as');
+    build = Group(children: children,prefix: 'execute as ' + entity.toString() + ' run',groupMin: encapsulate ? 3 : -1,filename: 'as');
   }
   Execute.asat(Entity entity,{@required List children, bool encapsulate = true}){
-    build = Group(children: children,prefix: 'execute as ' + entity.getString() + ' at @s run',groupMin: encapsulate ? 3 : -1,filename: 'asat');
+    build = Group(children: children,prefix: 'execute as ' + entity.toString() + ' at @s run',groupMin: encapsulate ? 3 : -1,filename: 'asat');
   }
   //Todo: Position, Scores, Rotation
   Execute({@required List<Widget> children, Entity as, Entity at, bool encapsulate = true}){
     String prefix = "execute";
-    if(as != null) prefix += ' as ' + as.getString();
-    if(at != null) prefix += ' at ' + at.getString();
+    if(as != null) prefix += ' as ' + as.toString();
+    if(at != null) prefix += ' at ' + at.toString();
     build = Group(children: children,prefix: prefix + ' run',groupMin: encapsulate ? 3 : -1,filename: 'execute');
   }
   @override

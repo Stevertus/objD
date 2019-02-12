@@ -1,4 +1,5 @@
 
+
 [//]: # (main)
 
 ObjectiveD is a framework for developing Datapacks for Minecraft. It uses the [Dart](https://www.dartlang.org/guides/language/language-tour) programming language.
@@ -29,7 +30,7 @@ And inside of that create a file named `pubspec.yaml` and another folder called 
 Open the pubspec.yaml file and add 
 ```yaml
 dependencies:  
-	objd: ^0.0.4
+	objd: ^0.0.6
 ```
 And run 
 ```
@@ -360,6 +361,7 @@ Group(
 |selector|the entity selector(e.g p,s,e or r)|
 |limit|number of matched entities|
 |type|[EntityType](), id of the entity|
+|area|A List of two Locations marking an area where the entity should be|
 |distance| [Range]() to the entity|
 |level|Range of experience levels|
 |gamemode|Gamemode type(e.g Gamemode.creative, Gamemode.survival)|
@@ -395,6 +397,12 @@ Say(
 		limit: 1,
 		type: EntityType.armor_stand,
 		distance: Range(to:2),
+		area: [
+			// use null for a unlimited selection
+			Location.glob(x: -10,y: null,z: -10), 
+			Location.glob(x: 10, y: null, z: 10)
+			// it also automatically calcs the distance between these
+		]
 		level: Range(from: 1),
 		gamemode: Gamemode.creative,
 		horizontalRotation: Range(from:1),
@@ -402,8 +410,9 @@ Say(
 	).sort(Sort.random)
 )
 
-⇒ say @e[limit=1,type=armor_stand,distance=..2,level=1..,gamemode=creative,y_rotation=1..,x_rotation=20..80,sort=random]
+⇒ say @e[limit=1,type=armor_stand,distance=..2,x=-10,z=-10,dx=20,dz=20,level=1..,gamemode=creative,y_rotation=1..,x_rotation=20..80,sort=random]
 ```
+
 [//]: # (basics/block)
 ## Block
 There is also a util class called Block which provides a wrapper for all available blocks in Minecraft.
@@ -486,6 +495,93 @@ Location.local(x: 0,y: 1,z: 2.5)
 ⇒ ^ ^1 ^2.5
 ```
 
+[//]: # (basics/data)
+## Data
+The Data Widgets allows you to edit nbt data of Entities or Blocks.
+
+|constructor| |
+|--|--|
+|dynamic|The target Entity OR Block which you want to modify|
+|nbt|A Dart Map containing new nbt data|
+|type|A String defining the operation type(default=merge)|
+
+**Example:**
+```dart
+Data(
+	Entity.Selected(),
+	nbt: {
+		"Invisible":1,
+		"NoGravity":1
+	}
+)
+⇒ data merge entity @s {"Invisible":1,"NoGravity":1}
+```
+> There are also subconstructors for each operation type(Data.merge, Data.get, Data.remove)
+
+And the modify operation is also available, yet a bit more complex:
+
+|Data.modify| |
+|--|--|
+|dynamic|The target Entity OR Location which you want to modify|
+|path|the nbt path you want to modify|
+|modify|A DataModify object defining which parameters you want to modify|
+
+So this is split up into a seperate class: 
+**DataModify**
+There are five sub operations again: set, merge, prepend, append and insert.
+All follow this constructor rules:
+
+|DataModify| |
+|--|--|
+|dynamic|The source of the modification. Can be a Map, String, Number, Entity or Location|
+|fromPath|optional path for the Entity or Location source from where to read the data|
+
+So we can for Example use
+```dart
+Data.modify(
+	Entity.Selected(),
+	path: "my_Custom_Path",
+	modify: DataModify.set(
+		"hey" // or {"nbt":"here"} or 56
+	),
+)
+⇒ data modify @s my_Custom_Path set value "hey"
+```
+Or
+So we can for Example use
+```dart
+Data.modify(
+	Entity.Selected(),
+	path: "my_Custom_Path2",
+	modify: DataModify.insert(
+		Entity.Selected(), // or Location... to get data from a block
+		index: 2, // insert also needs an additional index
+		fromPath: "my_Custom_Path"
+	),
+)
+// this just copies one property to another
+⇒ data modify @s my_Custom_Path2 insert from entity @s my_Custom_Path
+```
+
+A handy shortcut for that is the Data.copy constructor, which just copies a property from one path to another:
+
+|Data.copy| |
+|--|--|
+|dynamic|The target Entity OR Location which you want to modify|
+|path|the nbt path you want to copy to|
+|from|The source Entity OR Block|
+|fromPath|The source nbt path|
+
+```dart
+Data.copy(
+	Entity.Selected(),
+	path: "my_Custom_Path2",
+	from: Location("~ ~-1 ~"),
+	fromPath: "Items[0].tag.display.name"
+)
+⇒ data modify @s my_Custom_Path2 set from block ~ ~-1 ~ Items[0].tag.display.name
+```
+
 [//]: # (basics/item)
 ## Item
 The Item class represents an item in an inventory in Minecraft. It is used in the [Give]() or Nbt Commands.
@@ -503,7 +599,7 @@ The Item class represents an item in an inventory in Minecraft. It is used in th
 
 **Example:**
 ```dart
-Give(Entity.Self(),
+Give(Entity.Selected(),
 	item: Item(
 		ItemType.iron_axe, // OR Block.stone OR "whatever id"
 		count: 5,
@@ -543,7 +639,7 @@ Example:
 ```dart
 Execute(
 	as: Entity.player(),
-	at: Entity.self(),
+	at: Entity.Selected(),
 	children: List<Widget> [
 		Command("/say I get executed")
 	]
@@ -625,6 +721,45 @@ SetBlock(
 )
 ⇒ setblock 5 0 20 minecraft:stone
 ```
+[//]: # (wrappers/fill)
+## Fill
+Fill acts similar to setblock, but fills a whole area instead.
+
+|constructor| |
+|--|--|
+|Block|the fill material|
+|from|one corner Location|
+|to|the other corner Location|
+
+> Tip: There are also constructors for Fill.destroy, Fill.hollow, Fill.outline and Fill.keep
+
+**Example:**
+```dart
+Fill(
+	Block.dirt,
+	from: Location.glob(x: 0, y: 0, z: 0),
+	to: Location.glob(x: 10, y: 20, z: 10)
+)
+⇒ fill 0 0 0 10 20 10 minecraft:dirt
+```
+You can also just replace specific other blocks:
+
+|Fill.replace| |
+|--|--|
+|...|Everything the same|
+|replace| the Block type you want to replace |
+
+**Example:**
+```dart
+Fill.replace(
+	Block.dirt,
+	from: Location.glob(x: 0, y: 0, z: 0),
+	to: Location.glob(x: 10, y: 20, z: 10),
+	replace: Block.stone
+)
+⇒ fill 0 0 0 10 20 10 minecraft:dirt replace minecraft:stone
+```
+
 
 [//]: # (wrappers/say)
 ## Say
@@ -719,6 +854,41 @@ Summon(
 ⇒ summon armor_stand ~ ~1 ~ {"Invisible":1,"CustomName":"{\"text\":\"this is my name\",\"color\":\"dark_blue\"}"}
 ```
 
+[//]: # (wrappers/teleport)
+## Teleport
+Sets the location of an Entity to a new Location.
+
+|constructor| |
+|--|--|
+|Entity|the entity you want to teleport(required)|
+|to|the target Location(required)|
+|facing| a Location or Entity to face|
+
+**Example:**
+```dart
+Teleport(
+	Entity.Player(),
+	to: Location.glob(x: 5, y: 10, z: 5),
+	facing: Location.here()
+)
+⇒ tp @p 5 10 5 facing ~ ~ ~
+```
+And you can also teleport to another entity:
+
+|Teleport.entity| |
+|--|--|
+|Entity|the entity you want to teleport(required)|
+|to|the target entity(required)|
+|facing| a Location or Entity to face|
+
+```dart
+Teleport(
+	Entity.Player(),
+	to: Entity(name: "target", limit: 1)
+)
+⇒ tp @p @e[name="target",limit=1]
+```
+
 [//]: # (text/main)
 # Texts and Strings
 
@@ -776,7 +946,7 @@ There are also some other data sources: TODO: new 1.14 types!
 
 ```dart
 TextComponent.score(
-	Entity.Self(),
+	Entity.Selected(),
 	objective: "myscores",
 	color:Color.Black
 )

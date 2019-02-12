@@ -12,6 +12,6 @@ class Give extends Widget {
   
   @override
   Widget generate(Context context){
-    return new Command('give ' + entity.getString() + ' ' + item.getGiveNotation());
+    return new Command('give ' + entity.toString() + ' ' + item.getGiveNotation());
   }
 }

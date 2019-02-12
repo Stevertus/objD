@@ -7,3 +7,5 @@ export './setblock.dart';
 export './say.dart';
 export './title.dart';
 export './tellraw.dart';
+export './teleport.dart';
+export './data.dart';

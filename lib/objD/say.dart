@@ -8,7 +8,7 @@ class Say extends Widget {
   Say({Entity entity, String msg}){
     if(entity != null && msg != null) throw("Please insert either an entity or a message!");
 
-    if(entity != null) message = entity.getString();
+    if(entity != null) message = entity.toString();
     if(msg != null) message = msg;
   }
   
