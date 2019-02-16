@@ -5,13 +5,16 @@ import 'package:objd/basic/for_list.dart';
 import 'package:objd/basic/pack.dart';
 import 'package:objd/basic/group.dart';
 import 'package:objd/basic/file.dart';
+import 'package:objd/basic/scoreboard.dart';
 import 'package:objd/basic/extend.dart';
 
 class Context {
   List<String> prefixes;
   String packId;
   String file;
-  Context({this.prefixes, this.packId = "", this.file = ""}) {
+  String loadFile;
+  String mainFile;
+  Context({this.prefixes, this.packId = "", this.file = "",this.loadFile = "load",this.mainFile="main"}) {
     if (prefixes == null) prefixes = [];
   }
 
@@ -29,15 +32,15 @@ List addAndReturn(List list, dynamic item) {
 class BuildFile {
   String _path;
   Widget _child;
-  BuildFile(this._path, [this._child]);
+  BuildFile(this._path, this._child);
 
   String get path => _path;
   Widget get child => _child;
 
-  String generate(String packID) {
+  String generate(Map pack) {
     if (_child == null) return "";
     List<String> ret =
-        _generateRek(_child, Context(packId: packID, file: _path), []);
+        _generateRek(_child, Context(packId: pack['name'], file: _path, loadFile: pack['load'] ?? 'load',mainFile: pack['main'] ?? 'main'), []);
     // return the final string after going through each child
     return ret.join('\n');
   }
@@ -49,7 +52,7 @@ class BuildFile {
       if (wid.execute) _generateRek(wid.execution, context, ret);
       return ret;
     }
-    if (wid is Pack) return ret;
+    if (wid is Pack || wid is Extend) return ret;
 
     if (wid is Group) context.addPrefix(wid.prefix);
 
@@ -82,7 +85,7 @@ class BuildFile {
   String toString() {
     return "File: " +
         _path +
-        (_child == null ? '' : ' with child\n' + this.generate('test')) +
+        (_child == null ? '' : ' with child\n' + this.generate({"name":'test'})) +
         '\n';
   }
 }
@@ -172,9 +175,18 @@ Map _getFiles(dynamic wid, Map ret, int currentPackIndex) {
     });
     return ret;
   }
-
+  if (wid is Scoreboard && wid.subcommand == "add") {
+      if(ret['scoreboards'] == null) ret['scoreboards'] = [];
+      if(ret['scoreboards'].contains(wid.name)) return ret;
+      ret['scoreboards'].add(wid.name);
+  };
   if (wid is Widget) {
-    dynamic child = wid.generate(Context());
+    Map pack = {}; 
+    if(currentPackIndex >= 0) pack = ret['packs'][currentPackIndex];
+    dynamic child = wid.generate(
+      pack != null ?
+      Context(packId: pack['name'] ?? '',loadFile: pack['load'] ?? 'load',mainFile: pack['main'] ?? 'main') : Context()
+      );
     if (child is Widget) {
       return ret = _getFiles(child, ret, currentPackIndex);
     }

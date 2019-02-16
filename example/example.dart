@@ -6,6 +6,7 @@ main() {
 }
 
 class mainWidget extends Widget {
+  Score hey2 = Score(Entity.Selected(),"hey2");
   @override
   Widget generate(Context context) {
     return Pack(
@@ -13,6 +14,11 @@ class mainWidget extends Widget {
       main: File(
         path: 'main',
         child: For.of([
+          Scoreboard.add("hey"),
+          hey2.set(10),
+          Score(Entity.Selected(),"hey").subtractScore(Score(Entity.Selected(),"hey2")),
+          hey2.setToResult(Command("say hjey")),
+          Scoreboard.setdisplay("hey2"),
           ReplaceItem(
               Entity.Player(area: [
                 Location.here(),
@@ -34,6 +40,10 @@ class mainWidget extends Widget {
             ),
           )
         ]),
+      ),
+      load:File(
+        path: "load2",
+        child: Scoreboard.add("hey5"),
       ),
       files: [
         File(

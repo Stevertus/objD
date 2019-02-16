@@ -1,3 +1,8 @@
+## 0.0.7
+* added score generation
+* added Scoreboard
+* added Score with calculation and condition methods
+* fixed that main and load functions were not executed
 ## 0.0.6
 * added teleport
 * added fill

@@ -1,8 +1,11 @@
 
 
 [//]: # (main)
+# objD
 
-ObjectiveD is a framework for developing Datapacks for Minecraft. It uses the [Dart](https://www.dartlang.org/guides/language/language-tour) programming language.
+### **O**bjective **B**uilder **J**ust for **D**atapacks
+
+objD is a framework for developing Datapacks for Minecraft. It uses the [Dart](https://www.dartlang.org/guides/language/language-tour) programming language.
 
 [//]: # (why)
 
@@ -30,7 +33,7 @@ And inside of that create a file named `pubspec.yaml` and another folder called 
 Open the pubspec.yaml file and add 
 ```yaml
 dependencies:  
-	objd: ^0.0.6
+	objd: ^0.0.7
 ```
 And run 
 ```
@@ -119,6 +122,32 @@ class CustomCommand extends Widget {
 	Widget generate(Context context){
 		// using an existing widget
 		return Command('custom')
+	}
+}
+```
+[//]: # (basics/context)
+## Context
+Maybe you already wondered what this context argument here is:
+```dart
+Widget generate(Context context){
+```
+The Context is a way to get certain important information from the parents.
+|properties|  |
+|--|--|
+| packId | String of the current pack's name |
+| file | the current file name|
+| loadFile | the filename of your load  file|
+| mainFile | the filename of your main file |
+|prefixes| a List of Strings that should be added in front of actions(mainly used by Groups)|
+
+You can use this context to build more modular Widgets and don't need to hardcode certain files and the pack id:
+
+```dart
+class LoadWidget extends Widget {
+	@override
+	Widget generate(Context context){
+		// using an existing widget
+		return Command('function ' + context.packId + ":" + context.loadFile)
 	}
 }
 ```
@@ -412,6 +441,121 @@ Say(
 
 ⇒ say @e[limit=1,type=armor_stand,distance=..2,x=-10,z=-10,dx=20,dz=20,level=1..,gamemode=creative,y_rotation=1..,x_rotation=20..80,sort=random]
 ```
+[//]: # (basics/scoreboard)
+## Scoreboard
+A scoreboard objective holds values, kind a like a Variable inside Minecraft. The Scoreboard class just handles adding or removing objectives. The value assignment is handled by the Score class.
+
+|constructor|  |
+|--|--|
+|String|name of the objective(required)|
+|type|the objective type (default = dummy)|
+|display|TextComponent that displays the name|
+|addIntoLoad|bool whether the scoreboard should be added into your load file(default = true)|
+
+objD automatically keeps a list of all scoreboards and inserts them into the given load file, ignoring doubled names.
+**Example:**
+```dart
+Scoreboard(
+"death_count",
+type: "deathCount",
+display: TextComponent("This is how many deaths you have:"),
+addIntoLoad: true
+)
+Scoreboard("death_count")
+
+// load.mcfunction:
+/scoreboard objectives add death_count deathCount [{"text":"This is how many deaths you have:"}]
+```
+So the second scoreboard was not added because one "death_count" already existed.
+
+The `Scoreboard.add` constructor does exactly the same but puts the result without checking in the current file.
+
+`Scoreboard.remove` removes an objective by its name again.
+
+With `Scoreboard.setdisplay` you can display the values:
+
+|Scoreboard.setdisplay|  |
+|--|--|
+|String|name of the objective(required)|
+|display|String for display location (default = sidebar)|
+
+[//]: # (basics/score)
+## Score
+The score class is the basis for setting values, calculating with scores and checking the values.
+It implements one base class with no functionality and several methods to do actions:
+
+|constructor|  |
+|--|--|
+|Entity| the entity within the scoreboard |
+|String| the name of the objective |
+|addNew| bool whether it should add the scoreboard itself if it does not exist(default = true)|
+
+> With the addNew property it is not required to add a scoreboard before!
+### Calculations
+These methods can be used to set or calculate the value:
+| name | arguments |
+|--|--|
+| set | int |
+| reset ||
+| add | int |
+| subtract|int|
+||**The following compare another Score**|
+|setEqual|Score|
+|swapWith|Score|
+|setToSmallest|Score|
+|setToBiggest|Score|
+|addScore|Score|
+|subtractScore|Score|
+|multiplyByScore|Score|
+|divideByScore|Score|
+|modulo|Score|
+|setToData|Data|
+|setToResult|Command|
+
+> All of these methods return a new instance of Score with the calculations applied.
+> So you can also chain single calculations or use multiple on one base Score.
+
+**Examples:**
+```dart
+// defining scores variables inside the widget
+Score base = Score(Entity.Selected(),"score",addNew: true)
+Score another = Score(Entity.Selected(),"score2")
+// ... in the generate method:
+base.set(5).add(3).subtract(10).reset()
+⇒ scoreboard players set @s score 5
+⇒ scoreboard players add @s score 3
+⇒ scoreboard players remove @s score 10
+⇒ scoreboard players reset @s score
+
+base.setEqual(another).swapWith(another).setToBiggest(another)
+⇒ scoreboard players operation @s score = @s score2
+⇒ scoreboard players operation @s score >< @s score2
+⇒ scoreboard players operation @s score > @s score2
+
+another.addScore(base).divideByScore(base).modulo(base)
+⇒ scoreboard players operation @s score2 += @s score
+⇒ scoreboard players operation @s score2 /= @s score
+⇒ scoreboard players operation @s score2 %= @s score
+
+// setToData must take in Data.get 
+base.setToData(Data.get(Location("~ ~ ~"),"Items[0].Count"))
+⇒ execute store result score @s score run data get block ~ ~ ~ Items[0].Count 1
+
+base.setToResult(Command("say hi"))
+⇒ execute store success score @s score run say hi
+```
+## Conditions
+These methods can be used for example with if to match values:
+| name | arguments |example Result|
+|--|--|--|
+|matches|int|@s score matches 5|
+|matchesRange|Range|@s score matches 0..20|
+|isEqual|Score|@s score = @s score2|
+|isSmaller|Score|@s score < @s score2|
+|isSmallerOrEqual|Score|@s score <= @s score2|
+|isBigger|Score|@s score > @s score2|
+|isBiggerOrEqual|Score|@s score >= @s score2|
+
 
 [//]: # (basics/block)
 ## Block

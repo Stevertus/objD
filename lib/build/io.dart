@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:convert';
 import 'package:colorize/colorize.dart';
 void generateIO(Map prj) {;
   if(Directory(prj['path']).existsSync() == false) throw('Please ensure that the project path is a existing directory!');
@@ -6,20 +7,25 @@ void generateIO(Map prj) {;
   _ensureDirExists(path);
   _createFile(path + 'pack.mcmeta', prj['description']);
   _ensureDirExists(path + 'data/minecraft/tags/functions');
-  _createFile(path + 'data/minecraft/tags/functions/tick.json', 'test');
-  _createFile(path + 'data/minecraft/tags/functions/load.json', 'test');
+
+  Map<String,dynamic> tickJson = {"values":[]};
+  Map<String,dynamic> loadJson = {"values":[]};
 
   if(prj['packs'] != null && prj['packs'].length > 0){
     prj['packs'].forEach((pack) {
+      if(pack['load'] != null && pack['load'].length >= 0) loadJson["values"].add(pack['name'] + ":" + pack['load']);
+      if(pack['main'] != null && pack['main'].length >= 0) tickJson["values"].add(pack['name'] + ":" + pack['main']);
         _createPack(path + 'data/', pack);
     });
   }
+  _createFile(path + 'data/minecraft/tags/functions/tick.json', json.encode(tickJson));
+  _createFile(path + 'data/minecraft/tags/functions/load.json', json.encode(loadJson));
 }
 void _createPack(path,Map pack){
   _ensureDirExists(path + pack['name'] + '/functions');
   if(pack['files'] != null && pack['files'].length > 0){
     pack['files'].forEach((file) {
-        _createFile(path + pack['name'] + '/functions/' + file.path + '.mcfunction', file.generate(pack['name']));
+        _createFile(path + pack['name'] + '/functions/' + file.path + '.mcfunction', file.generate(pack));
     });
   }
   color('Creating Datapack ' + pack['name'] + ' and its files...',front: Styles.BLUE);

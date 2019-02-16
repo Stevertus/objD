@@ -10,7 +10,8 @@ class Data extends Widget {
   String _type;
   String _typeValue;
   String _subcommand;
-  String path;
+  get subcommand => _subcommand;
+  String path = "";
   num scale;
   DataModify modify;
 
@@ -52,13 +53,18 @@ class Data extends Widget {
       _type = "block";
     } else throw("Please insert either an entity or location into data");
   }
+
+  String getTarget(){
+    return _type + ' ' + _typeValue;
+  }
+
   @override
   Widget generate(Context context){
     switch (_subcommand) {
-      case "merge": return new Command('data merge ' + _type + ' ' + _typeValue + ' ' + json.encode(nbt));
-      case "get": return new Command('data get ' + _type + ' ' + _typeValue + ' ' + path + ' ' + scale.toString());
-      case "remove": return new Command('data remove ' + _type + ' ' + _typeValue + ' ' + path);
-      case "modify": return new Command('data modify ' + _type + ' ' + _typeValue + ' ' + modify.toString());
+      case "merge": return new Command('data merge ' + getTarget() + ' ' + json.encode(nbt));
+      case "get": return new Command('data get ' + getTarget() + ' ' + path + ' ' + scale.toString());
+      case "remove": return new Command('data remove ' + getTarget() + ' ' + path);
+      case "modify": return new Command('data modify ' + getTarget() + ' ' + modify.toString());
     }
     return new Command("");
   }
