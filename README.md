@@ -132,6 +132,7 @@ Maybe you already wondered what this context argument here is:
 Widget generate(Context context){
 ```
 The Context is a way to get certain important information from the parents.
+
 |properties|  |
 |--|--|
 | packId | String of the current pack's name |
@@ -493,6 +494,7 @@ It implements one base class with no functionality and several methods to do act
 > With the addNew property it is not required to add a scoreboard before!
 ### Calculations
 These methods can be used to set or calculate the value:
+
 | name | arguments |
 |--|--|
 | set | int |
@@ -546,6 +548,7 @@ base.setToResult(Command("say hi"))
 ```
 ## Conditions
 These methods can be used for example with if to match values:
+
 | name | arguments |example Result|
 |--|--|--|
 |matches|int|@s score matches 5|
