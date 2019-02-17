@@ -1,6 +1,7 @@
 
 
 [//]: # (main)
+!](https://i.imgur.com/DsWyhR9.png)
 # objD
 
 ### **O**bjective **B**uilder **J**ust for **D**atapacks
@@ -147,7 +148,6 @@ You can use this context to build more modular Widgets and don't need to hardcod
 class LoadWidget extends Widget {
 	@override
 	Widget generate(Context context){
-		// using an existing widget
 		return Command('function ' + context.packId + ":" + context.loadFile)
 	}
 }
