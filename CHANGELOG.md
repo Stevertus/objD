@@ -1,3 +1,9 @@
+## 0.0.8
+* added Entity.PlayerName()
+* fixed readme
+* modified score.setToResult
+* made Block, EntityType and ItemType constants to use them in defaults
+
 ## 0.0.7
 * added score generation
 * added Scoreboard

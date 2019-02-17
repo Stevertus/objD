@@ -161,9 +161,9 @@ class Score extends Widget {
   }
 
   /// sets the score to the success of the given command
-  Score setToResult(Command command){
+  Score setToResult(Command command, {bool useSuccess = false}){
     return addCommandRet(Command(
-      "execute store success score " + _getESStr() + " run " + command.toMap()['command']
+      "execute store "+(useSuccess ? "success" : "result")+" score " + _getESStr() + " run " + command.toMap()['command']
     ));
     
   }

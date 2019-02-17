@@ -48,7 +48,7 @@ Let's get started and create our first dart file with `lib/main.dart` file.
 
 Then we import the framework with:
 ```dart
-import 'package:objd/code.dart';
+import 'package:objd/core.dart';b
 ```
 Then we need to create a new datapack project:
 ```dart
@@ -512,7 +512,7 @@ These methods can be used to set or calculate the value:
 |divideByScore|Score|
 |modulo|Score|
 |setToData|Data|
-|setToResult|Command|
+|setToResult|Command,useSuccess(bool)|
 
 > All of these methods return a new instance of Score with the calculations applied.
 > So you can also chain single calculations or use multiple on one base Score.
@@ -543,7 +543,8 @@ another.addScore(base).divideByScore(base).modulo(base)
 base.setToData(Data.get(Location("~ ~ ~"),"Items[0].Count"))
 ⇒ execute store result score @s score run data get block ~ ~ ~ Items[0].Count 1
 
-base.setToResult(Command("say hi"))
+// using success instead of result
+base.setToResult(Command("say hi"),useSuccess:true) 
 ⇒ execute store success score @s score run say hi
 ```
 ## Conditions
