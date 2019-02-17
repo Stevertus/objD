@@ -34,7 +34,7 @@ And inside of that create a file named `pubspec.yaml` and another folder called 
 Open the pubspec.yaml file and add 
 ```yaml
 dependencies:  
-	objd: ^0.0.7
+	objd: ^0.0.8
 ```
 And run 
 ```
@@ -397,6 +397,7 @@ Group(
 |gamemode|Gamemode type(e.g Gamemode.creative, Gamemode.survival)|
 |horizontalRotation|Range of the horizontal facing direction|
 |verticalRotation|Range of the vertical facing direction|
+|playerName|a String if you prefer to use a playername instead of arguments |
 |**Methods** |  |
 |sort|adds a sort attribute of type [Sort]()|
 
@@ -442,6 +443,15 @@ Say(
 
 ⇒ say @e[limit=1,type=armor_stand,distance=..2,x=-10,z=-10,dx=20,dz=20,level=1..,gamemode=creative,y_rotation=1..,x_rotation=20..80,sort=random]
 ```
+
+|specific constructors|  |
+|--|--|
+|Entity.Selected(...)| creates an entity with @s|
+| Entity.Player(...) | creates an entity with @p |
+| Entity.PlayerName(String) | creates an entity with an implicit name |
+|Entity.All(...)| creates an entity with @a|
+|Entity.Random(...)| creates an entity with @r|
+
 [//]: # (basics/scoreboard)
 ## Scoreboard
 A scoreboard objective holds values, kind a like a Variable inside Minecraft. The Scoreboard class just handles adding or removing objectives. The value assignment is handled by the Score class.
