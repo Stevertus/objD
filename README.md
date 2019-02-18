@@ -34,7 +34,7 @@ And inside of that create a file named `pubspec.yaml` and another folder called 
 Open the pubspec.yaml file and add 
 ```yaml
 dependencies:  
-	objd: ^0.0.9
+   objd: ^0.0.9
 ```
 And run 
 ```
@@ -968,6 +968,7 @@ Sets the execution position(^ ^ ^) to the eyes or the feet.
 |Entity or Location|the target to face(required) |
 |facing| either face the Facing.eyes(default) or Facing.feet |
 |...||
+
 Sets the execution rotation so that it faces a location or an entity's feet or eyes.
 **Example:**
 ```dart
@@ -986,12 +987,14 @@ Execute.facing(
 |--|--|
 |Rotation|the rotation object |
 |...||
+
 Sets the execution rotation to the given rotation.
 
 |Execute.dimension| |
 |--|--|
 |Dimension|the given dimension type |
 |...||
+
 Sets the execution dimension(execute in) to either `Dimension.overworld`, `Dimension.the_end` or `Dimension.the_nether`.
 
 ### Methods
