@@ -1,4 +1,8 @@
 import 'package:objd/basic/location.dart';
+import 'package:objd/basic/command.dart';
+import 'package:objd/objD/execute.dart';
+import 'package:meta/meta.dart';
+
 abstract class EntityClass {
   String selector;
   String toString();
@@ -61,6 +65,20 @@ class Entity implements EntityClass{
     arguments['sort'] = sort.toString().split('.').last;
     return this;
   }
+
+  /// stores the result or success of a [command] in a nbt [path] in your entity
+  Execute storeResult(Command command,
+      {@required String path, bool useSuccess = false}) {
+    assert(path == null && path.isEmpty);
+    return new Execute(
+      children: [command],
+      encapsulate: false,
+      args: [
+        'store ' + (useSuccess ? 'success' : 'result') + ' entity ' + this.toString() + ' ' + path,
+      ],
+    );
+  }
+
   @override
   String toString(){
     if(playerName != null && playerName.isNotEmpty) return playerName;

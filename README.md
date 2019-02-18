@@ -34,7 +34,7 @@ And inside of that create a file named `pubspec.yaml` and another folder called 
 Open the pubspec.yaml file and add 
 ```yaml
 dependencies:  
-	objd: ^0.0.8
+	objd: ^0.0.9
 ```
 And run 
 ```
@@ -400,6 +400,19 @@ Group(
 |playerName|a String if you prefer to use a playername instead of arguments |
 |**Methods** |  |
 |sort|adds a sort attribute of type [Sort]()|
+| storeResult | Command, path, useSuccess |
+
+storeResult stores a result or success of a command in the nbt path of an entity.
+**Example:**
+```dart
+Entity.Selected().storeResult(
+	Command('say hello'),
+	path: "Invisisble",
+	useSuccess:true
+)
+
+⇒ execute store success entity @s Invisisble run say hello
+```
 
 |Sort|
 |--|
@@ -451,6 +464,8 @@ Say(
 | Entity.PlayerName(String) | creates an entity with an implicit name |
 |Entity.All(...)| creates an entity with @a|
 |Entity.Random(...)| creates an entity with @r|
+
+
 
 [//]: # (basics/scoreboard)
 ## Scoreboard
@@ -653,6 +668,48 @@ Location.local(x: 0,y: 1,z: 2.5)
 ⇒ ^ ^1 ^2.5
 ```
 
+There is also a method for a location:
+
+|methods|  |
+|--|--|
+| storeResult | Command, path, useSuccess |
+This stores a result or success of a command in the nbt path of a location.
+**Example:**
+```dart
+Location.here().storeResult(Command('say hello'),path: "Items[0].tag.command",useSuccess:true)
+
+⇒ execute store success block ~ ~ ~ Items[0].tag.command run say hello
+```
+
+[//]: # (basics/rotation)
+## Rotation
+The Rotation Widget is very similar to Location but takes in just two directions for an entities rotation:
+
+|constructor | |
+|--|--|
+|String|the minecraft coordinate string(e.g "~ ~")|
+
+|Rotation.glob| |
+|--|--|
+|x|int representing global x orientation|
+|y|int representing global y orientation|
+
+|Rotation.rel| |
+|--|--|
+|x|int representing rotation relative to the current x orientation|
+|y|int representing rotation relative to the current y orientation|
+
+**Example:**
+```dart
+Rotation.rel(x: 90,y: 180)
+⇒ ~90 ~180
+
+Execute.rotated(Rotation.glob(x:0,y:90),children:[
+	Command("tp @s ^ ^ ^10")
+])
+⇒ execute rotated 0 90 run command tp @s ^ ^ ^10
+```
+
 [//]: # (basics/data)
 ## Data
 The Data Widgets allows you to edit nbt data of Entities or Blocks.
@@ -787,10 +844,16 @@ One of the most used commands has a widget too. The execute command has multiple
 
 |constructor | |
 |--|--|
-|children|a List of children that should be executed|
-|[encapsulate]|weither the children should be in an extra file for a certain length |
-| [as] | an [Entity](#entity) that runs the command|
-|[at]|an [Entity](#entity) from where the command should run|
+|children|a List of children that should be executed(required)|
+|encapsulate|weither the children should be in an extra file for a certain length |
+| as | an [Entity](#entity) that runs the command|
+|at|an [Entity](#entity) from where the command should run|
+|location| a Location or Entity from where to run the command |
+|align| String with align statements e.g: "xyz" |
+|anchor|either Facing.eyes or Facing.feet|
+|facing| A Location or Entity to rotate to |
+|rotation| A rotation of type [Rotation](#rotation)|
+|dimension|Dimension of overworld, the_end or the_nether|
 
 All Execute classes are also an Group, so they will group commands in seperate files and allow multiple children.
 Example:
@@ -798,12 +861,20 @@ Example:
 Execute(
 	as: Entity.player(),
 	at: Entity.Selected(),
+	location: Location.here(),
+	align: "yz",
+	anchor: Facing.eyes,
+	facing: Location().glob(x:0,y:0,z:0)
+	rotation: Rotation.rel(x:10,y:20),
+	dimension: Dimension.the_nether
 	children: List<Widget> [
 		Command("/say I get executed")
+		Say(msg:"Me too")
 	]
 ),
 
-⇒ execute as @p at @s run say I get executed
+⇒ execute as @p at @s positioned ~ ~ ~ align yz anchored eyes facing 0 0 0 rotated ~10 ~20 in the_nether run say I get executed
+  execute as @p at @s positioned ~ ~ ~ align yz anchored eyes facing 0 0 0 rotated ~10 ~20 in the_nether run say Me too
 ```
 
 |Execute. as | |
@@ -858,6 +929,98 @@ Execute.asat(
 
 ⇒ execute as @p at @s run say I get executed
 ```
+
+|Execute.positioned| |
+|--|--|
+|Entity\|Location|the new position |
+|...||
+
+Positioned sets the execution point of the command to a new Location or Entity.
+```dart
+Execute.positioned(
+	Entity.player(), // Location...
+	children: List<Widget> [
+		Command("/say I get executed")
+	]
+),
+
+⇒ execute positioned as @p run say I get executed
+```
+
+
+|Execute.align| |
+|--|--|
+|String|representation of the alignment |
+|...||
+
+Aligns the position to the corners of the block grid.
+
+|Execute.anchored| |
+|--|--|
+|Facing|Facing.eyes or Facing.feet |
+|...||
+
+Sets the execution position(^ ^ ^) to the eyes or the feet.
+
+
+|Execute.facing| |
+|--|--|
+|Entity or Location|the target to face(required) |
+|facing| either face the Facing.eyes(default) or Facing.feet |
+|...||
+Sets the execution rotation so that it faces a location or an entity's feet or eyes.
+**Example:**
+```dart
+Execute.facing(
+	Entity.player(), // or Location...
+	facing: Facing.feet // optional
+	children: List<Widget> [
+		Command("/say I get executed")
+	]
+)
+⇒ execute facing entity @p feet run say I get executed
+```
+
+
+|Execute.rotated| |
+|--|--|
+|Rotation|the rotation object |
+|...||
+Sets the execution rotation to the given rotation.
+
+|Execute.dimension| |
+|--|--|
+|Dimension|the given dimension type |
+|...||
+Sets the execution dimension(execute in) to either `Dimension.overworld`, `Dimension.the_end` or `Dimension.the_nether`.
+
+### Methods
+All of these constructors are also available as methods with some additional utils:
+
+|Methods|  |
+|--|--|
+| center | centeres the alignment(middle of the block) |
+
+That means you can chain the actions, like with score, and use multiple actions at once:
+
+```dart
+// declaring the base
+Execute ex = Execute(
+	children:[
+		Say(msg:"Hello"),
+		Command("say e")
+	]
+)
+// in the generate method:
+ex.asat(
+Entity.All())
+	.center()
+	.positioned(Location.rel(x:0,y:20,z:0))
+⇒ execute as @a at @s align xyz positioned ~0.5 ~0.5 ~0.5 positioned ~ ~20 ~ run say Hello
+   execute as @a at @s align xyz positioned ~0.5 ~0.5 ~0.5 positioned ~ ~20 ~ run say e
+```
+
+
 [//]: # (wrappers/setblock)
 ## SetBlock
 The SetBlock Command Class sets a Block at the specified location:

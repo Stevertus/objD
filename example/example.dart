@@ -6,7 +6,7 @@ main() {
 }
 
 class mainWidget extends Widget {
-  Score hey2 = Score(Entity.Selected(),"hey2");
+  Score hey2 = Score(Entity.PlayerName("hi"),"hey2");
   @override
   Widget generate(Context context) {
     return Pack(
@@ -14,6 +14,7 @@ class mainWidget extends Widget {
       main: File(
         path: 'main',
         child: For.of([
+          Execute.asat(Entity.All(),children: [hey2.get()]).anchored(Facing.feet).positioned(Location("~ ~10 ~")).dimension(Dimension.the_end),
           Scoreboard.add("hey"),
           hey2.set(10),
           Score(Entity.Selected(),"hey").subtractScore(Score(Entity.Selected(),"hey2")),

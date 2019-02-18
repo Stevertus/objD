@@ -18,6 +18,14 @@ class Context {
     if (prefixes == null) prefixes = [];
   }
 
+  Context.clone(Context context): this(
+    prefixes: new List<String>.from(context.prefixes),
+    packId:context.packId,
+    file:context.file,
+    loadFile:context.loadFile,
+    mainFile:context.mainFile
+    );
+
   Context addPrefix(String prev) {
     prefixes.insert(0, prev);
     return this;
@@ -54,7 +62,7 @@ class BuildFile {
     }
     if (wid is Pack || wid is Extend) return ret;
 
-    if (wid is Group) context.addPrefix(wid.prefix);
+    if (wid is Group) return this._generateRek(wid.generate(context), Context.clone(context).addPrefix(wid.prefix), ret) ;
 
     if (wid is Text)
       return addAndReturn(

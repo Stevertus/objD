@@ -1,3 +1,10 @@
+## 0.0.9
+* added subcommands for execute
+* added methods for execute
+* added storeResult to Location and Entity
+* added Rotation
+* fixed reference issue for groups(they prefixed everything :o)
+
 ## 0.0.8
 * added Entity.PlayerName()
 * fixed readme
