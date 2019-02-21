@@ -9,6 +9,20 @@ class Pack extends Widget {
   File main;
   File load;
   List<File> files;
+
+  /// A pack is logically the next step after a Project. This defines a sub-pack with an name again that will be our namespace afterwards.
+/// 
+/// Here we can also define included files as well as the main and load function:
+/// ```dart
+/// Pack(
+/// 	name:"tpcraft",
+/// 	main: File(...),
+/// 	load: File(...),
+/// 	files: List<File> [
+/// 		File(...)
+/// 	]
+/// )
+/// ```
   Pack({@required this.name, this.main, this.load, this.files}){
     if(name != name.toLowerCase()) throw('Please not that the name of a pack must be lowercase! for pack:' + name);
   }

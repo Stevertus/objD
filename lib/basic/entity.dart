@@ -9,22 +9,28 @@ abstract class EntityClass {
 }
 class Entity implements EntityClass{
   String selector;
+  /// creates an entity with @p
   static Function Player = ({Range distance,Range level, Gamemode gamemode, List<Location> area, String name, Range horizontalRotation, Range verticalRotation}){
     return Entity(selector: 'p',distance:distance,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
   };
+  /// creates an entity with an implicit name
   static Function PlayerName = (String name){
     return Entity(playerName: name);
   };
+  /// creates an entity with @a
   static Function All = ({Range distance,int limit,Range level, Gamemode gamemode, List<Location> area, String name, Range horizontalRotation, Range verticalRotation}){
     return Entity(selector: 'a',limit:limit,distance:distance,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
   };
+  /// creates an entity with @r
   static Function Random = ({EntityType type,Range distance,int limit,Range level, Gamemode gamemode, List<Location> area, String name, Range horizontalRotation, Range verticalRotation}){
     return Entity(selector: 'r',type:type,limit:limit,distance:distance,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
   };
+  /// creates an entity with @s
   static Function Selected = ({EntityType type, Range distance,Range level, Gamemode gamemode, List<Location> area, String name, Range horizontalRotation, Range verticalRotation}){
     return Entity(selector: 's',type:type,distance:distance,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
   };
   // Todo: implement Scores, Tags, Area, Nbt
+  /// Entity is an util class to convert an argument list into the Minecraft Entity format(@p...)
   Entity({
       this.selector = 'e',
       int limit,
@@ -110,6 +116,7 @@ min(num one,num two){
 
 class Range {
   num from,to;
+  /// The Range class defines a range of values(e.g 3..10 in vanilla)
   Range({this.from, this.to});
 
   @override
@@ -133,6 +140,7 @@ enum Sort{
   nearest,
   arbitrary
 }
+/// There is an EntityType for every type_id in minecraft with `EntityType.[type_id]`
 class EntityType {
   // throwable
   static const EntityType armor_stand = const EntityType('armor_stand');

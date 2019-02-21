@@ -34,7 +34,7 @@ And inside of that create a file named `pubspec.yaml` and another folder called 
 Open the pubspec.yaml file and add 
 ```yaml
 dependencies:  
-   objd: ^0.0.9
+	objd: ^0.0.10
 ```
 And run 
 ```
@@ -107,7 +107,7 @@ So now we have a [List](https://www.dartlang.org/guides/language/language-tour#l
 
 [//]: # (basics/widget)
 ## Widget
-A widget is the base element for basically everything in objectiveD.
+A widget is the base element for basically everything in objD.
 
 |property | |
 |--|--|
@@ -205,7 +205,7 @@ The Pack class can be used as often as you want and where you want, so you can a
 
 [//]: # (basics/file)
 ## File
-The [Pack]() class already required some files, therefore this is the definition.
+The [Pack]() class already required some files. The file class simply generates a new mcfunction file with content and a path.
 
 The File constructor has two required arguments:
 
@@ -828,7 +828,7 @@ Give(Entity.Selected(),
 
 ⇒ give @s minecraft:iron_axe{"customNBT":1,"Damage":40,"CustomModelData":3390001} 5
 ```
-ItemType is like EntityType or Block a utility class to provide a list of all available blocks.
+ItemType is like EntityType or Block a utility class to provide a list of all available items.
 
 |ItemType([minecraft_item_id])| creates a ItemType from a String |
 |--|--|
@@ -1110,7 +1110,7 @@ Say(
 
 [//]: # (wrappers/give)
 ## Give
-Give a item to a player.
+Gives a item to a player.
 
 |constructor| |
 |--|--|
@@ -1180,13 +1180,14 @@ Summon(
 
 [//]: # (wrappers/teleport)
 ## Teleport
-Sets the location of an Entity to a new Location.
+Sets the location of an Entity to a new Location and Rotation(optional).
 
 |constructor| |
 |--|--|
 |Entity|the entity you want to teleport(required)|
 |to|the target Location(required)|
 |facing| a Location or Entity to face|
+|rotation|a Rotation object defining the new rotation|
 
 **Example:**
 ```dart
@@ -1327,7 +1328,7 @@ Fires on mouse over, Part of TextComponent.
 |--|--|
 |TextClickEvent.text(List\<TextComponent>)|Accepts a new List of TextComponents to display|
 |TextClickEvent.achievement(String)|shows achievement|
-|TextClickEvent.item(String)|shows item(Warning!: Not final)|
+|TextClickEvent.item(Item)|shows item|
 |TextClickEvent.entity(String,String,String)|displays a dummy entity with name, type and UUID(in this order))|
 
 
@@ -1366,7 +1367,7 @@ Title.clear clears all titles again:
 |--|--|
 |selector|clears title for the selector|
 
-Title.times sets the times
+Title.times sets the timings
 
 |Title.times||
 |--|--|

@@ -7,6 +7,7 @@ import 'dart:convert';
 class Tellraw extends Widget {
   String jsonText;
   String entity;
+  /// The Tellraw class is very similar to the Title class, but shows its texts in the chat.
   Tellraw(Entity selector, {List<TextComponent> show}){
     entity = selector.toString();
     jsonText = json.encode(show.map((text) => text.toMap()).toList());

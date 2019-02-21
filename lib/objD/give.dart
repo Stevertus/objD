@@ -8,6 +8,7 @@ import 'package:objd/build/build.dart';
 class Give extends Widget {
   Entity entity;
   Item item;
+  /// Gives a item to a player.
   Give(this.entity, {@required this.item}):assert(item != null);
   
   @override

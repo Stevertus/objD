@@ -12,6 +12,21 @@ class Group extends Widget {
   String path;
   List<Widget> children;
   int groupMin;
+  /// The group groups actions similar to for but has an option to prefix each action and encapsulate the content in a new file.
+  /// 
+  /// If the children length is larger or equal groupMin a new file is created in `/objD/`(the working directory for objectiveD) and executed.
+/// ```dart
+/// Group(
+/// 	prefix: "execute as @e run "
+/// 	children: List<Widget>[
+/// 		Command('say 1'),
+/// 		Command('say 2'),
+/// 		Command('say 3')
+/// 	],
+/// 	filename: "asgroup",
+/// 	groupMin: 2
+/// ),
+/// ``` 
   Group(
       {@required this.prefix,
       @required this.children,

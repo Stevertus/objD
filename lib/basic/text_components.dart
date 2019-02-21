@@ -3,6 +3,8 @@ import 'package:objd/basic/command.dart';
 import 'package:objd/basic/entity.dart';
 import 'dart:convert';
 
+import 'package:objd/basic/item.dart';
+
 class TextComponent {
   Map<String,dynamic> value;
   Color color;
@@ -12,6 +14,7 @@ class TextComponent {
   String insertion;
   // ToDo: new 1.14 types!!!
   // default text display
+  /// In Minecraft text in the chat or as title is defined with JSON-data. objD makes the JSON part of it easier by utilizing the TextComponent Class:
   TextComponent(String text, {this.color,this.bold, this.underlined,this.italic, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){
     value = {"text":text};
   }
@@ -47,26 +50,28 @@ class TextComponent {
     return json.encode(this.toMap());
   }
 }
+/// Fires on left click, Part of TextComponent.
 class TextClickEvent {
   String action;
   String value;
+  /// Fires on left click, Part of TextComponent.
   TextClickEvent({@required this.action, @required this.value}): assert(value != null),assert(action != null);
-  // opens remote url
+  /// Opens the specified web url
   TextClickEvent.open_url (String url){
     action = "open_url";
     value = url;
   }
-  // runs given command
+  /// runs given command
   TextClickEvent.run_command (Command command){
     action = "run_command";
     value = command.toMap()["command"] ?? "";
   }
-  // copies command in chat
+  /// copies command in chat
   TextClickEvent.suggest (String text){
     action = "suggest_command";
     value = text;
   }
-  // changes book page
+  /// changes book page
   TextClickEvent.change_page (int to){
     action = "change_page";
     value = to.toString();
@@ -77,27 +82,29 @@ class TextClickEvent {
   }
   
 }
+/// Fires on mouse over, Part of TextComponent.
 class TextHoverEvent {
   String action;
   dynamic value;
+  /// Fires on mouse over, Part of TextComponent.
   TextHoverEvent({@required this.action, @required this.value}): assert(value != null),assert(action != null);
 
-  // sets the hover dialog to text
+  /// Accepts a new List of TextComponents to display
   TextHoverEvent.text(List<TextComponent> texts){
     action = "show_text";
     // ToDo: catch if score, selector or event listener
     value = texts.map((item) => item.toMap());
   }
-  // shows a achievement
+  /// shows an achievement
   TextHoverEvent.achievement(String name){
     action = "show_achievement";
     value = name;
   }
   // displays item 
   // Todo: add item model
-  TextHoverEvent.item(String item){
+  TextHoverEvent.item(Item item){
     action = "show_item";
-    value = item;
+    value = item.toString();
   }
   // shows a dummy entity presentation in chat
   TextHoverEvent.entity(String name, String type, String id){
@@ -112,7 +119,9 @@ class TextHoverEvent {
 }
 
 
-
+/// Lists all availavle colors
+/// 
+/// See all available colors: https://minecraft.gamepedia.com/Formatting_codes#Color_codes
 class Color {
   String color;
   Color(this.color);

@@ -17,6 +17,17 @@ class Data extends Widget {
 
   Map<String,dynamic> nbt;
 
+  /// The Data Widgets allows you to edit nbt data of Entities or Blocks.
+/// ```dart
+/// Data(
+/// 	Entity.Selected(),
+/// 	nbt: {
+/// 		"Invisible":1,
+/// 		"NoGravity":1
+/// 	}
+/// )
+/// ⇒ data merge entity @s {"Invisible":1,"NoGravity":1}
+/// ```
   Data(dynamic target,{this.nbt = const {}, String type = "merge"}){
     handleTarget(target);
     _subcommand = type;
@@ -33,10 +44,24 @@ class Data extends Widget {
     handleTarget(target);
     _subcommand = "remove";
   }
+  /// The modify operation is also available, yet a bit more complex.
+  /// 
+  /// So this is split up into a seperate class: DataModify
+/// ```dart
+/// Data.modify(
+/// 	Entity.Selected(),
+/// 	path: "my_Custom_Path",
+/// 	modify: DataModify.set(
+/// 		"hey" // or {"nbt":"here"} or 56
+/// 	),
+/// )
+/// ⇒ data modify @s my_Custom_Path set value "hey"
+/// ```
   Data.modify(dynamic target,{@required this.path,@required this.modify}){
     handleTarget(target);
     _subcommand = "modify";
   }
+  /// A handy shortcut to copy data quickly is the Data.copy constructor, which just copies a property from one path to another.
   Data.copy(dynamic target,{@required this.path, @required dynamic from, @required String fromPath}){
     handleTarget(target);
      _subcommand = "modify";
@@ -69,6 +94,7 @@ class Data extends Widget {
     return new Command("");
   }
 }
+/// There are five sub operations again: set, merge, prepend, append and insert.
 class DataModify {
   String type;
   String value;

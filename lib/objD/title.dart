@@ -9,6 +9,7 @@ class Title extends Widget {
   String type;
   String jsonText;
   String entity;
+  /// To display our TextComponent, we need the `/title` command and the Title class wrapper.
   Title(Entity selector, {@required List<TextComponent> show}){
     type = "title";
     entity = selector.toString();
@@ -24,16 +25,19 @@ class Title extends Widget {
     entity = selector.toString();
     jsonText = json.encode(show.map((text) => text.toMap()).toList());
   }
+  /// Title.clear clears all titles again:
   Title.clear(Entity selector){
     type = "clear";
     entity = selector.toString();
     jsonText = "";
   }
+  /// Title.times sets the timings
   Title.times(Entity selector,{int fadein = 20, int display = 60, int fadeout = 20}){
     type = "times";
     entity = selector.toString();
     jsonText = fadein.toString() + " " + display.toString() + " " + fadeout.toString();
   }
+  /// resets times for one selector
   Title.resetTimes(Entity selector){
     type = "reset";
     entity = selector.toString();

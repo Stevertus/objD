@@ -10,6 +10,7 @@ class ReplaceItem extends Widget {
   String replaceType;
   String slot;
   Item item;
+  /// Sets a specific container slot to a item for Entities.
   ReplaceItem(this.entity, {@required this.item,@required this.slot}):assert(item != null){
     replaceType = "entity";
   }

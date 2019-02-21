@@ -8,6 +8,7 @@ import 'package:objd/build/build.dart';
 class SetBlock extends Widget {
   Location location;
   Block block;
+  /// The SetBlock Command Class sets a Block at the specified location.
   SetBlock(this.block,{@required this.location});
   
   @override

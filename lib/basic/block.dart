@@ -1,10 +1,20 @@
 
+/// This is an util class which provides a wrapper for all available blocks in Minecraft.
+/// ```dart
+/// Block([minecraft_block_id]) // as string or
+/// Block.[minecraft_block_id]
+/// ```
 class Block {
   final String _block;
   @override
   String toString() {
     return _block;
   }
+  /// **Usage:**
+  /// ```dart
+  /// Block([minecraft_block_id]) // as string or
+  /// Block.[minecraft_block_id]
+  /// ```
   const Block(this._block);
 
 static const Block air = const Block('minecraft:air');

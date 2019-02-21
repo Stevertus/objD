@@ -25,6 +25,7 @@ class Score extends Widget {
 ///```dart
 /// Score(Entity.Selected(),"score",addNew: true)
 ///```
+
   Score(this.entity, this.score, {bool addNew = true, List<Widget> commands}){
     if(commands != null) _commands = commands; 
     if(addNew) _commands.add(Scoreboard(score));

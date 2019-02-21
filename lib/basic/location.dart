@@ -2,13 +2,17 @@ import 'package:meta/meta.dart';
 import 'package:objd/objD/execute.dart';
 import 'package:objd/basic/command.dart';
 
+/// This translates into Minecraft Coordinates.
 class Location {
   double x, y, z = 0;
   String _location;
+  /// takes in a string and translates it into coordinates
   Location(this._location);
+  /// The Location class provides a wrapper for global(9 9 9) coordinates:
   Location.glob({@required this.x, @required this.y, @required this.z}) {
     _location = x.toString() + " " + y.toString() + " " + z.toString();
   }
+  /// The Location class provides a wrapper for relative(~ ~ ~) coordinates:
   Location.rel({@required this.x, @required this.y, @required this.z}) {
     _location = "~" +
         (x == 0 ? "" : x.toString()) +
@@ -17,6 +21,7 @@ class Location {
         " ~" +
         (z == 0 ? "" : z.toString());
   }
+  /// The Location class provides a wrapper for local(^ ^ ^) coordinates:
   Location.local({@required this.x, @required this.y, @required this.z}) {
     _location = "^" +
         (x == 0 ? "" : x.toString()) +
@@ -25,6 +30,9 @@ class Location {
         " ^" +
         (z == 0 ? "" : z.toString());
   }
+  /// Selects the current Position
+  /// 
+  /// This is a shortcut for `~ ~ ~`
   Location.here() {
     _location = "~ ~ ~";
     x = y = z = 0;

@@ -10,6 +10,7 @@ class Fill extends Widget {
   Location to;
   Block block;
   String type = "";
+  /// Fill acts similar to setblock, but fills a whole area instead.
   Fill(this.block,{@required this.from, @required this.to});
   Fill.destroy(this.block,{@required this.from, @required this.to}){
     type = "destroy";

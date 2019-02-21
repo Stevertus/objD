@@ -17,7 +17,7 @@ class Execute extends Widget {
   List<Widget> children;
   bool encapsulate; 
 
-
+  /// All Execute classes are also an Group, so they will group commands in seperate files and allow multiple children.
   Execute({
     @required this.children,
       Entity as,

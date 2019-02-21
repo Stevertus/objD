@@ -84,8 +84,7 @@ class mainWidget extends Widget {
             ],
           ),
         ),
-        File(
-            execute: true,
+        File.execute(
             path: 'test',
             child: Execute(
               as: Entity.Player(),

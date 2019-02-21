@@ -2,8 +2,10 @@
 * added experimental if else statements(may be changed later on)
 * fixed group
 * fixed requirement for slot and count for items
+* updated teleport to use rotation
 * updated to dart 2.1.1
 * added inline documentation for many widgets
+* split the build process into multiple files
 
 ## 0.0.9
 * added subcommands for execute

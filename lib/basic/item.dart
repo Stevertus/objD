@@ -5,6 +5,7 @@ class Item {
   int count;
   int slot;
   Map<String,dynamic> tag = {};
+  /// The Item class represents an item in an inventory in Minecraft. It is used in the [Give] or Nbt Commands.
   Item(dynamic type,{this.count,this.slot,int damage, int model, Map<String,dynamic> nbt}){
     // check item type
     if(type is ItemType ) this.type = type;
@@ -36,7 +37,7 @@ class Item {
     return json.encode(this.getMap());
   }
 }
-
+/// ItemType is like EntityType or Block a utility class to provide a list of all available items.
 class ItemType {
   final String _type;
   const ItemType(this._type);

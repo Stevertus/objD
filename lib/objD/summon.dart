@@ -10,6 +10,7 @@ class Summon extends Widget {
   Map<String,dynamic> nbt;
   Location location;
   EntityType type;
+  /// The summon class creates a new entity at a given location.
   Summon(this.type,{TextComponent name, this.nbt, this.location}){
         if(location == null) location = Location.here();
         if(nbt == null) nbt = {};
