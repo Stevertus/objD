@@ -57,7 +57,7 @@ class BuildFile {
     if (ret == null) ret = List();
     // recursivly step through each child and add all generated commands in ret
     if (wid is File) {
-      if (wid.execute) _generateRek(wid.execution, context, ret);
+      if (wid.execute) _generateRek(wid.generate(context), context, ret);
       return ret;
     }
     if (wid is Pack || wid is Extend) return ret;

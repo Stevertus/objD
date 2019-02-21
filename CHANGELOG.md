@@ -1,3 +1,7 @@
+## 0.0.10
+* added experimental if else statements(may be changed later on)
+* fixed group
+
 ## 0.0.9
 * added subcommands for execute
 * added methods for execute

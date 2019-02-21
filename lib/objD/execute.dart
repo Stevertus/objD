@@ -10,8 +10,6 @@ import 'package:objd/build/build.dart';
 // TODO: Concerns of unsolid structure, too many calls?
 
 /// The execute command has multiple syntaxes that allow to manipulate the position, executer or condition.
-/// 
-
 class Execute extends Widget {
 
   List<String> _args = [];
@@ -41,7 +39,7 @@ class Execute extends Widget {
     if(align != null)  _args = this.align(align).args;
     if(anchor != null)  _args = this.anchored(anchor).args;
     if(facing != null)  _args = this.facing(facing).args;
-    if(rotated != null)  _args = this.rotated(rotated).args;
+    if(rotation != null)  _args = this.rotated(rotation).args;
     if(dimension != null)  _args = this.dimension(dimension).args;
 
 
@@ -214,7 +212,7 @@ class Execute extends Widget {
      if(rot is Entity){
        return _addArgumentRet( 'rotated as ' + rot.toString());
      }
-     throw("Please insert either a Location or an Entity into Execute.facing");
+     throw("Please insert either a Rotation or an Entity into Execute.rotated");
   }
 
   ///Sets the execution dimension(execute in) to either `Dimension.overworld`, `Dimension.the_end` or `Dimension.the_nether`.

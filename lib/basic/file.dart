@@ -17,11 +17,9 @@ class File extends Widget {
     execute = true;
   }
 
-  Command get execution => Command('function test:' + path);
-
     @override
   Widget generate(Context context) {
-      return child;
+      return Command('function '+context.packId+':' + path);;
   }
 
   @override

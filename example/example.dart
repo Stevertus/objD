@@ -6,7 +6,7 @@ main() {
 }
 
 class mainWidget extends Widget {
-  Score hey2 = Score(Entity.PlayerName("hi"),"hey2");
+  Score hey2 = Score(Entity.PlayerName("hi"), "hey2");
   @override
   Widget generate(Context context) {
     return Pack(
@@ -14,10 +14,34 @@ class mainWidget extends Widget {
       main: File(
         path: 'main',
         child: For.of([
-          Execute.asat(Entity.All(),children: [hey2.get()]).anchored(Facing.feet).positioned(Location("~ ~10 ~")).dimension(Dimension.the_end),
+          If(
+              Condition.or([
+                Condition(Entity.Selected()),
+                Condition.not(Entity.Player())
+              ]),
+              Then: [
+                Say(msg: "hello"),
+                Say(entity: Entity()),
+                Say(msg: "Hello")
+              ]),
+          If(
+              Condition.and([
+                Condition(Entity.Selected()),
+                Condition.not(Entity.Player())
+              ]),
+              Then: [
+                Say(msg: "hey"),
+                Say(entity: Entity()),
+                Say(msg: "Hello")
+              ]),
+          Execute.asat(Entity.All(), children: [hey2.get()])
+              .anchored(Facing.feet)
+              .positioned(Location("~ ~10 ~"))
+              .dimension(Dimension.the_end),
           Scoreboard.add("hey"),
           hey2.set(10),
-          Score(Entity.Selected(),"hey").subtractScore(Score(Entity.Selected(),"hey2")),
+          Score(Entity.Selected(), "hey")
+              .subtractScore(Score(Entity.Selected(), "hey2")),
           hey2.setToResult(Command("say hjey")),
           Scoreboard.setdisplay("hey2"),
           ReplaceItem(
@@ -42,7 +66,7 @@ class mainWidget extends Widget {
           )
         ]),
       ),
-      load:File(
+      load: File(
         path: "load2",
         child: Scoreboard.add("hey5"),
       ),

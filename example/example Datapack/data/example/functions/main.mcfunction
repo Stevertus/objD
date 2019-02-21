@@ -1,4 +1,7 @@
 say hey
+execute if entity @s run function example:objd/if3
+execute unless entity @p run function example:objd/if3
+execute if entity @s unless entity @p run function example:objd/if4
 execute as @a at @s anchored feet positioned ~ ~10 ~ in the_end run scoreboard players get hi hey2
 scoreboard objectives add hey dummy
 scoreboard players set hi hey2 10
