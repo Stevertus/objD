@@ -27,7 +27,10 @@ class Item {
     return result;
   }
   Map<String,dynamic> getMap(){
-    return {"id":type.toString(), "tag":tag, "Count":count,"Slot":slot};
+    var map = {"id":type.toString(), "tag":tag};
+    if(count != null) map["Count"] = count;
+    if(slot != null) map["Slot"] = slot;
+    return map;
   }
   String getNbt(){
     return json.encode(this.getMap());

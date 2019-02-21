@@ -1,6 +1,9 @@
 ## 0.0.10
 * added experimental if else statements(may be changed later on)
 * fixed group
+* fixed requirement for slot and count for items
+* updated to dart 2.1.1
+* added inline documentation for many widgets
 
 ## 0.0.9
 * added subcommands for execute
