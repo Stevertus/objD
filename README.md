@@ -701,6 +701,7 @@ Area(x1: 100, y1: -15.75, z1: 0, x2: 2, y1: 10, z2: -10)
 ⇒ 2 -15.75 -10 100 10 0
 ```
 But if you would also like local or relative coordinates, you can always pass the locations directly:
+
 |Area.fromLocations| |
 |--|--|
 |Location|location 1|

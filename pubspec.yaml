@@ -3,6 +3,8 @@ version: 0.0.10
 
 author: Stevertus <stevertusyt@gmail.com>
 homepage: https://stevertus.com/objD
+repository: https://github.com/Stevertus/objD
+issue_tracker: https://github.com/Stevertus/objD/issues
 documentation: https://stevertus.com/objD/documentation
 description: objd is a Object Oriented framework for Building Minecraft Datapacks with ease
 environment:
