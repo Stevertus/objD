@@ -3,7 +3,6 @@ import 'package:objd/basic/command.dart';
 import 'package:objd/basic/text_components.dart';
 import 'package:objd/basic/extend.dart';
 import 'package:objd/build/build.dart';
-import 'package:meta/meta.dart';
 
 class Scoreboard extends Widget {
   String subcommand;

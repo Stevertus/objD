@@ -12,4 +12,5 @@ export 'entity.dart';
 export 'item.dart';
 export 'block.dart';
 export 'location.dart';
-export 'if.dart';
+export 'area.dart';
+export 'condition.dart';

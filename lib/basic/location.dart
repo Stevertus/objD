@@ -7,7 +7,9 @@ class Location {
   double x, y, z = 0;
   String _location;
   /// takes in a string and translates it into coordinates
-  Location(this._location);
+  Location(this._location){
+    x = y = z = 0;
+  }
   /// The Location class provides a wrapper for global(9 9 9) coordinates:
   Location.glob({@required this.x, @required this.y, @required this.z}) {
     _location = x.toString() + " " + y.toString() + " " + z.toString();

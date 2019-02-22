@@ -4,7 +4,9 @@ import 'package:objd/build/build.dart';
 
 class Comment extends Widget {
   String text;
+  /// The Comment widget generates a simple line with some annotations(# ...).
   Comment(this.text);
+  /// The Comment features a simple line break.
   Comment.LineBreak() {
     text = "";
   }

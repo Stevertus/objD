@@ -5,7 +5,6 @@ import 'package:objd/basic/for_list.dart';
 import 'package:objd/basic/entity.dart';
 import 'package:objd/basic/scoreboard.dart';
 import 'package:objd/build/build.dart';
-import 'package:meta/meta.dart';
 
 
 class Score extends Widget {

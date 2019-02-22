@@ -1,7 +1,11 @@
 ## 0.0.10
 * added experimental if else statements(may be changed later on)
+* added an if option for execute as well
+* added the area class
 * fixed group
 * fixed requirement for slot and count for items
+* changed entity static functions to named constructors(for Entity.Selected...)
+* updated fill to use area instead
 * updated teleport to use rotation
 * updated to dart 2.1.1
 * added inline documentation for many widgets

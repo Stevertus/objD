@@ -15,20 +15,38 @@ class mainWidget extends Widget {
         path: 'main',
         child: For.of([
           If(
+              Condition.and([
+                Condition.not(Entity.Player()),
+                Condition.or([
+                  Entity.Random(),
+                  Condition.blocks(
+                    Area(x1: 0, y1: 0, z1: 0, x2: 10, y2: 10, z2: 10),
+                    compare: Location('~ ~ ~'),
+                  ),
+                  Condition.not(
+                    Condition.score(Score(Entity.Selected(), "test")
+                        .matchesRange(Range(from: 0, to: 5))),
+                  ),
+                ]),
+              ]),
+              Then: [Say(msg: "I'm done")]),
+          Comment.LineBreak(),
+          If(
               Condition.or([
-                Condition(Entity.Selected()),
-                Condition.not(Entity.Player())
+                Condition.blocks(
+                    Area.fromLocations(
+                        Location.rel(x: 1, y: 10, z: 5), Location.here()),
+                    compare: Location("~ ~10 ~")),
+                Condition.not(Entity(
+                    area: Area.fromLocations(
+                        Location.rel(x: 1, y: 10, z: 5), Location.here())))
               ]),
               Then: [
                 Say(msg: "hello"),
                 Say(entity: Entity()),
                 Say(msg: "Hello")
               ]),
-          If(
-              Condition.and([
-                Condition(Entity.Selected()),
-                Condition.not(Entity.Player())
-              ]),
+          If(Condition.and([Entity.Selected(), Condition.not(Entity.Player())]),
               Then: [
                 Say(msg: "hey"),
                 Say(entity: Entity()),
@@ -44,11 +62,7 @@ class mainWidget extends Widget {
               .subtractScore(Score(Entity.Selected(), "hey2")),
           hey2.setToResult(Command("say hjey")),
           Scoreboard.setdisplay("hey2"),
-          ReplaceItem(
-              Entity.Player(area: [
-                Location.here(),
-                Location.glob(x: null, y: 10, z: 100)
-              ]),
+          ReplaceItem(Entity.Player(),
               slot: "hotbar.0",
               item: Item(
                 ItemType.iron_axe,

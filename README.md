@@ -34,7 +34,7 @@ And inside of that create a file named `pubspec.yaml` and another folder called 
 Open the pubspec.yaml file and add 
 ```yaml
 dependencies:  
-	objd: ^0.0.10
+   objd: ^0.0.10
 ```
 And run 
 ```
@@ -680,10 +680,35 @@ Location.here().storeResult(Command('say hello'),path: "Items[0].tag.command",us
 
 ⇒ execute store success block ~ ~ ~ Items[0].tag.command run say hello
 ```
+[//]: # (basics/area)
+## Area
+The Area class provides a way to select a three dimensional space between some locations.
+Therefore it automatically builds the lowest and highest coordinates and calculates the distances.
+
+|constructor | doubles |
+|--|--|
+|x1|one x corner|
+|y1|one y corner|
+|z1|one z corner|
+|x2|second x corner|
+|y2|second x corner|
+|z2|second x corner|
+This is especially useful for `if blocks`, Fill and Clone. 
+
+**Example:**
+```dart
+Area(x1: 100, y1: -15.75, z1: 0, x2: 2, y1: 10, z2: -10)
+⇒ 2 -15.75 -10 100 10 0
+```
+But if you would also like local or relative coordinates, you can always pass the locations directly:
+|Area.fromLocations| |
+|--|--|
+|Location|location 1|
+|Location|location 2|
 
 [//]: # (basics/rotation)
 ## Rotation
-The Rotation Widget is very similar to Location but takes in just two directions for an entities rotation:
+The Rotation class is very similar to Location but takes in just two directions for an entities rotation:
 
 |constructor | |
 |--|--|
@@ -838,6 +863,19 @@ ItemType is like EntityType or Block a utility class to provide a list of all av
 # Command Wrappers
 In this section are a few classes that build commands with inputs(Entities, Texts, Blocks, Locations).
 
+[//]: # (wrappers/comment)
+## Comment
+The Comment widget generates a simple line with some annotations(# ...).
+It also features a simple line break:
+**Example:**
+```dart
+Comment("hello world")
+⇒ # hello world
+Comment.LineBreak()
+⇒ 
+
+```
+
 [//]: # (wrappers/execute)
 ## Execute
 One of the most used commands has a widget too. The execute command has multiple syntaxes that allow to manipulate the position, executer or condition.
@@ -846,9 +884,10 @@ One of the most used commands has a widget too. The execute command has multiple
 |--|--|
 |children|a List of children that should be executed(required)|
 |encapsulate|weither the children should be in an extra file for a certain length |
-| as | an [Entity](#entity) that runs the command|
+| as | an [Entity](#entity) that runs the commands|
 |at|an [Entity](#entity) from where the command should run|
-|location| a Location or Entity from where to run the command |
+|If| a Condition that must be true to execute the commands|
+|location| a Location or Entity from where to run the commands |
 |align| String with align statements e.g: "xyz" |
 |anchor|either Facing.eyes or Facing.feet|
 |facing| A Location or Entity to rotate to |
@@ -861,6 +900,7 @@ Example:
 Execute(
 	as: Entity.player(),
 	at: Entity.Selected(),
+	If: Condition.entity(Entity())
 	location: Location.here(),
 	align: "yz",
 	anchor: Facing.eyes,
@@ -873,8 +913,8 @@ Execute(
 	]
 ),
 
-⇒ execute as @p at @s positioned ~ ~ ~ align yz anchored eyes facing 0 0 0 rotated ~10 ~20 in the_nether run say I get executed
-  execute as @p at @s positioned ~ ~ ~ align yz anchored eyes facing 0 0 0 rotated ~10 ~20 in the_nether run say Me too
+⇒ execute as @p at @s if entity @e positioned ~ ~ ~ align yz anchored eyes facing 0 0 0 rotated ~10 ~20 in the_nether run say I get executed
+  execute as @p at @s if entity @e positioned ~ ~ ~ align yz anchored eyes facing 0 0 0 rotated ~10 ~20 in the_nether run say Me too
 ```
 
 |Execute. as | |
@@ -1021,6 +1061,164 @@ Entity.All())
 	.positioned(Location.rel(x:0,y:20,z:0))
 ⇒ execute as @a at @s align xyz positioned ~0.5 ~0.5 ~0.5 positioned ~ ~20 ~ run say Hello
    execute as @a at @s align xyz positioned ~0.5 ~0.5 ~0.5 positioned ~ ~20 ~ run say e
+```
+
+[//]: # (wrappers/if)
+## If
+The if widget accepts a Condition and runs the children if the condition is true.
+If just gives you an execute wrapper with if and else statements. The conditions have their own class.
+
+|constructor| |
+|--|--|
+|Condition| the condition |
+|Then|a List of Wigets that runs on match|
+|Else|a List of Widget that runs if it does not match(optional)|
+
+**Example:**
+```dart
+If(
+	Condition(Entity.Player()),
+	Then: [
+		Say(msg:"true")
+	],
+	Else: [
+		Say(msg:"false")
+	]
+)
+⇒ execute if entity @p run say true
+⇒ execute unless entity @p run say false
+```
+> Not Final! Will be done with tags later on.
+
+You can also negate the Condition with `If.not`:
+```dart
+If.not(
+	Condition(Entity.Player()),
+	Then: [
+		Say(msg:"true")
+	]
+)
+⇒ execute unless entity @p run say true
+```
+
+[//]: # (wrappers/condition)
+## Condition
+The Condition class defines conditions for the if widget and more. It can also combines conditions and generates an argument list.
+
+|constructor| |
+|--|--|
+|dynamic|the thing you want to test|
+Well it is not as easy as it looks. A condition can accept many values and this makes the Condition very complex. 
+
+| The argument can be a... | and generates e.g ||
+|--|--|--|
+| Entity | if entity @s |
+| Score | if score @s objective matches 5| Attention! This needs a score condition method!
+| Location | unless block ~ ~2 ~ air | Just checks whether a block is present
+| Condition | if entity @s if block ~ ~ ~ stone | Yes, you can nest Conditions like Widgets and combine them.
+
+**Examples:**
+```dart
+If(
+	Condition(
+		Entity.Selected()
+	)
+	,Then:[Say(msg:'entity')],
+)
+⇒ execute if entity @s run say entity
+If(
+	Condition(
+		Location.here()
+	),
+	Then:[Say(msg:'block')],
+)
+⇒ execute unless block ~ ~ ~ minecraft:air run say block
+If.not(
+	Condition(
+		Score(
+			Entity.PlayerName("Stevertus"),
+			"objective"
+		).matches(10)
+	),
+	Then:[Say(msg:'score')],
+)
+⇒ execute unless score Stevertus objective matches 10 run say score
+```
+
+For Score, Block and Entity there is also a named constructor along with:
+
+|Condition.blocks| |
+|--|--|
+|Area| the Area of blocks that you want to compare |
+|compare| the lowest comparison Location of the area of the same size |
+
+**Condition.block**: also requires a block type:
+```dart
+If(
+	Condition.block(
+		Location.here(),
+		block: Block.stone
+	),
+	Then:[Say(msg:'stone')],
+)
+⇒ execute if block ~ ~ ~ minecraft:stone run say stone
+```
+
+**Condition.not**: accepts same dynamic condition types as above but negates them
+(if ⇒ unless, unless ⇒  if)
+
+**Condition.and**: accepts a list of dynamic condition types, that all have to be true to trigger:
+```dart
+If(
+	Condition.and([
+		Location.here(),
+		Entity(),
+		Condition(...)
+	]),
+	Then:[Say(msg:'true')],
+)
+⇒ execute unless block ~ ~ ~ minecraft:air if entity @e if ... run say true
+```
+**Condition.or**: accepts a list of dynamic condition types, but just one has to be true to trigger:
+```dart
+If(
+	Condition.or([
+		Location.here(),
+		Entity(),
+		Condition(...)
+	]),
+	Then:[Say(msg:'true')],
+)
+⇒ execute unless block ~ ~ ~ minecraft:air run say true
+⇒ execute if entity @e run say true
+⇒ execute if ... run say true
+```
+> Just temporary, will be done with tags later...
+
+With this knowledge we can build pretty complex logical conditions:
+```dart
+If.not(
+	Condition.and([
+		Condition.not(Entity.Player()),
+		Condition.or([
+			Entity.Random(),
+			Condition.blocks(
+				Area(x1: 0, y1: 0, z1: 0, x2: 10, y2: 10, z2: 10),
+				compare: Location('~ ~ ~'),
+			),
+			Condition.not(
+				Condition.score(
+					Score(Entity.Selected(),"test")
+					  .matchesRange(Range(from:0,to:5))	
+				),
+			),
+		]),
+	]),
+	Then: [Say(msg:"I'm done")]
+)
+⇒ execute unless entity @p if entity @r run say I'm done
+⇒ execute unless entity @p if blocks 0 0 0 10 10 10 ~ ~ ~ run say I'm done
+⇒ execute unless entity @p unless score @s test matches 0..5 run say I'm done
 ```
 
 

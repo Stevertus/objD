@@ -32,7 +32,7 @@ class File extends Widget {
 
     @override
   Widget generate(Context context) {
-      return Command('function '+context.packId+':' + path);;
+      return Command('function '+context.packId+':' + path);
   }
 
   @override
