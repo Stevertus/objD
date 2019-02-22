@@ -517,7 +517,7 @@ It implements one base class with no functionality and several methods to do act
 |addNew| bool whether it should add the scoreboard itself if it does not exist(default = true)|
 
 > With the addNew property it is not required to add a scoreboard before!
-### Calculations
+#### Calculations
 These methods can be used to set or calculate the value:
 
 | name | arguments |
@@ -572,7 +572,7 @@ base.setToData(Data.get(Location("~ ~ ~"),"Items[0].Count"))
 base.setToResult(Command("say hi"),useSuccess:true) 
 ⇒ execute store success score @s score run say hi
 ```
-## Conditions
+#### Conditions
 These methods can be used for example with if to match values:
 
 | name | arguments |example Result|
