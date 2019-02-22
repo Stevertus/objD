@@ -1250,8 +1250,7 @@ Fill acts similar to setblock, but fills a whole area instead.
 |constructor| |
 |--|--|
 |Block|the fill material|
-|from|one corner Location|
-|to|the other corner Location|
+|area|the Area to fill|
 
 > Tip: There are also constructors for Fill.destroy, Fill.hollow, Fill.outline and Fill.keep
 
@@ -1259,8 +1258,10 @@ Fill acts similar to setblock, but fills a whole area instead.
 ```dart
 Fill(
 	Block.dirt,
-	from: Location.glob(x: 0, y: 0, z: 0),
-	to: Location.glob(x: 10, y: 20, z: 10)
+	area: Area.fromLocations(
+		Location.glob(x: 0, y: 0, z: 0),
+		Location.glob(x: 10, y: 20, z: 10)
+	),
 )
 ⇒ fill 0 0 0 10 20 10 minecraft:dirt
 ```
@@ -1275,9 +1276,11 @@ You can also just replace specific other blocks:
 ```dart
 Fill.replace(
 	Block.dirt,
-	from: Location.glob(x: 0, y: 0, z: 0),
-	to: Location.glob(x: 10, y: 20, z: 10),
-	replace: Block.stone
+	area: Area.fromLocations(
+		Location.glob(x: 0, y: 0, z: 0),
+		Location.glob(x: 10, y: 20, z: 10)
+	),
+	replace: Block.stone,
 )
 ⇒ fill 0 0 0 10 20 10 minecraft:dirt replace minecraft:stone
 ```
