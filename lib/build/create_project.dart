@@ -39,6 +39,6 @@ class Project {
   Project({@required this.name, @required this.generate, this.target = './',this.description = "This is a datapack generated with objd by Stevertus"});
 
   Map toMap() {
-    return {"Project":{"name": name,"generate": generate.generate(Context(prefixes: [],packId: "")).toMap()}};
+    return {"Project":{"name": name,"generate": generate.generate(Context(prefixes: [],suffixes: [],packId: "")).toMap()}};
   }
 }

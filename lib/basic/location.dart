@@ -1,5 +1,5 @@
 import 'package:meta/meta.dart';
-import 'package:objd/objD/execute.dart';
+import 'package:objd/wrappers/execute.dart';
 import 'package:objd/basic/command.dart';
 
 /// This translates into Minecraft Coordinates.

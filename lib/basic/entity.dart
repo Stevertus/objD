@@ -1,6 +1,9 @@
 import 'package:objd/basic/area.dart';
 import 'package:objd/basic/command.dart';
-import 'package:objd/objD/execute.dart';
+import 'package:objd/basic/for_list.dart';
+import 'package:objd/basic/score.dart';
+import 'package:objd/basic/tag.dart';
+import 'package:objd/wrappers/execute.dart';
 import 'package:meta/meta.dart';
 
 abstract class EntityClass {
@@ -10,26 +13,28 @@ abstract class EntityClass {
 class Entity implements EntityClass{
   String selector;
   /// creates an entity with @p
-  Entity.Player ({Range distance,Range level, Gamemode gamemode, Area area, String name, Range horizontalRotation, Range verticalRotation}) :
-    this(selector: 'p',distance:distance,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
+  Entity.Player ({Range distance,List<dynamic> tags,List<Score> scores,Range level, Gamemode gamemode, Area area, String name, Range horizontalRotation, Range verticalRotation}) :
+    this(selector: 'p',distance:distance,tags:tags,scores:scores,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
   /// creates an entity with an implicit name
   Entity.PlayerName (String name): this(playerName:name);
   /// creates an entity with @a
-  Entity.All ({Range distance,int limit,Range level, Gamemode gamemode, Area area, String name, Range horizontalRotation, Range verticalRotation}): 
-    this(selector: 'a',limit:limit,distance:distance,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
+  Entity.All ({Range distance,List<dynamic> tags,int limit,List<Score> scores,Range level, Gamemode gamemode, Area area, String name, Range horizontalRotation, Range verticalRotation}): 
+    this(selector: 'a',limit:limit,distance:distance,tags:tags,scores:scores,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
 
   /// creates an entity with @r
-  Entity.Random({EntityType type,Range distance,int limit,Range level, Gamemode gamemode, Area area, String name, Range horizontalRotation, Range verticalRotation}): 
-    this(selector: 'r',type:type,limit:limit,distance:distance,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
+  Entity.Random({EntityType type,Range distance,List<dynamic> tags,int limit,List<Score> scores,Range level, Gamemode gamemode, Area area, String name, Range horizontalRotation, Range verticalRotation}): 
+    this(selector: 'r',type:type,limit:limit,distance:distance,tags:tags,scores:scores,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
 
   /// creates an entity with @s
-  Entity.Selected ({EntityType type, Range distance,Range level, Gamemode gamemode, Area area, String name, Range horizontalRotation, Range verticalRotation}):
-    this(selector: 's',type:type,distance:distance,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
+  Entity.Selected ({EntityType type, Range distance,List<dynamic> tags,List<Score> scores,Range level, Gamemode gamemode, Area area, String name, Range horizontalRotation, Range verticalRotation}):
+    this(selector: 's',type:type,distance:distance,tags:tags,scores:scores,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
   // Todo: implement Scores, Tags, Area, Nbt
   /// Entity is an util class to convert an argument list into the Minecraft Entity format(@p...)
   Entity({
       this.selector = 'e',
       int limit,
+      List<dynamic> tags,
+      List<Score> scores,
       EntityType type,
       Area area,
       Range distance,
@@ -49,6 +54,21 @@ class Entity implements EntityClass{
     if(horizontalRotation != null) arguments['horizontalRotation'] = horizontalRotation.toString();
     if(verticalRotation != null) arguments['verticalRotation'] = verticalRotation.toString();
     if(area != null) arguments.addAll(area.getRanges());
+    if(tags != null){
+      arguments['tag'] = [];
+      tags.forEach((tag){
+        if(tag is Tag) arguments['tag'].add(tag.tag);
+        else if(tag is String) arguments['tag'].add(tag);
+        else throw("Please insert a Tag or String as tag into Entity!");
+      });
+    }
+    if(scores != null){
+      String ret = "{";
+      scores.forEach((score){
+        ret += score.score + "=" + score.getMatch();
+      });
+      arguments['scores'] = ret + "}";
+    }
   }
   Map arguments = {
     
@@ -72,20 +92,47 @@ class Entity implements EntityClass{
     );
   }
 
+  Tag addTag(String tag){
+    return Tag(tag,entity: this,value: true);
+  }
+  For addTags(List<String> tags){
+    return For.of(tags.map((tag) => Tag(tag,entity: this,value: true)).toList());
+  }
+  Tag removeTag(String tag){
+    return Tag(tag,entity: this,value: false);
+  }
+
   @override
-  String toString(){
+  String toString([Map arguments]){
+    if(arguments == null) arguments = this.arguments;
     if(playerName != null && playerName.isNotEmpty) return playerName;
     String ret = "@" + selector;
     
     if(arguments.length > 0){
       ret += '[';
       arguments.keys.forEach((key){
-        String arg = arguments[key].toString().replaceAll(".0", "");
-        if(arg != null) ret += key + '=' + arg;
-        if(arguments.keys.toList().indexOf(key) < arguments.keys.length -1) ret += ',';
+        if(arguments[key] is List){
+          arguments[key].forEach((item){
+            ret += _addArg(item,key);
+            if(item != arguments[key].last) ret += ',';
+          });
+          if(key != arguments.keys.last) ret += ',';
+        } else {
+         ret += _addArg(arguments[key],key);
+         if(key != arguments.keys.last) ret += ',';
+        }
       });
       ret += ']';
     }
+    return ret;
+  }
+  String _addArg(arg,key) {
+    String ret = "";
+    
+    if(arg != null){
+      arg = arg.toString().replaceAll(r"[0-9].0", "");
+      ret += key + '=' + arg;
+    } 
     return ret;
   }
 }
@@ -101,7 +148,7 @@ class Range {
     if(from != null && to == null) ret = "$from..";
     if(from == null && to != null) ret = "..$to";
     if(from != null && to != null) ret = "$from..$to";
-    return ret.replaceAll('.0', '');
+    return ret.replaceAll(r'[0-9].0', '');
   }
 }
 enum Gamemode{

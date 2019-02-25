@@ -4,6 +4,7 @@ export 'pack.dart';
 export 'group.dart';
 export 'scoreboard.dart';
 export 'score.dart';
+export 'tag.dart';
 export 'text_components.dart';
 export 'file.dart';
 export 'extend.dart';

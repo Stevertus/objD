@@ -1,5 +1,5 @@
 import 'package:objd/basic/widget.dart';
-import 'package:objd/objD/data.dart';
+import 'package:objd/wrappers/data.dart';
 import 'package:objd/basic/command.dart';
 import 'package:objd/basic/for_list.dart';
 import 'package:objd/basic/entity.dart';
@@ -29,7 +29,9 @@ class Score extends Widget {
     if(commands != null) _commands = commands; 
     if(addNew) _commands.add(Scoreboard(score));
   }
-  Score.str(this._strGen);
+  Score.str(this._strGen,{this.score = "",String match = "0"}){
+    _match =match;
+  }
 
   String _getESStr({Entity entity,String score}){
     if(entity == null) entity = this.entity;
@@ -185,11 +187,15 @@ class Score extends Widget {
   Score isBigger(Score score){
     return Score.str(_getESStr() + " > " + _getESStr(entity: score.entity,score: score.score));
   }
+  String _match = "0";
+  getMatch() => _match;
   Score matches(int value){
-    return Score.str(_getESStr() + " matches " + value.toString());
+    _match =value.toString();
+    return Score.str(_getESStr() + " matches " + _match,score:score,match: _match);
   }
   Score matchesRange(Range range){
-    return Score.str(_getESStr() + " matches " + range.toString());
+    _match =range.toString();
+    return Score.str(_getESStr() + " matches " + _match,score:score,match: _match);
   }
 
   @override

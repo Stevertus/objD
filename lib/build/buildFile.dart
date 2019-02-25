@@ -22,7 +22,7 @@ class BuildFile {
   String generate(Map pack) {
     if (_child == null) return "";
     List<String> ret =
-        _generateRek(_child, Context(packId: pack['name'], file: _path, loadFile: pack['load'] ?? 'load',mainFile: pack['main'] ?? 'main'), []);
+        _generateRek(_child, Context(packId: pack['name'],prod:true, file: _path, loadFile: pack['load'] ?? 'load',mainFile: pack['main'] ?? 'main'), []);
     // return the final string after going through each child
     return ret.join('\n');
   }
@@ -36,7 +36,7 @@ class BuildFile {
     }
     if (wid is Pack || wid is Extend) return ret;
 
-    if (wid is Group) return this._generateRek(wid.generate(context), Context.clone(context).addPrefix(wid.prefix), ret) ;
+    if (wid is Group) return this._generateRek(wid.generate(context), Context.clone(context).addPrefix(wid.prefix).addSuffix(wid.suffix), ret) ;
 
     if (wid is Text)
       return addAndReturn(
@@ -44,7 +44,12 @@ class BuildFile {
           (context.prefixes.length > 0
                   ? (context.prefixes.join(' ') + ' ')
                   : '') +
-              wid.generate(context));
+              wid.generate(context) 
+              + (context.suffixes.length > 0
+                  ? (context.suffixes.join(' ') + ' ')
+                  : '')
+                  
+                  );
 
     if (wid is Widget) {
       dynamic child = wid.generate(context);

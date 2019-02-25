@@ -8,6 +8,7 @@ class Group extends Widget {
   static int fileId = 1;
   bool _isFile = false;
   String prefix;
+  String suffix;
   String filename;
   String path;
   List<Widget> children;
@@ -30,6 +31,7 @@ class Group extends Widget {
   Group(
       {@required this.prefix,
       @required this.children,
+      this.suffix,
       this.path = "objd",
       this.groupMin = 3,
       this.filename = "group",generateIDs=true}) {

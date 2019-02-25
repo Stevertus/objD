@@ -16,6 +16,9 @@ class Execute extends Widget {
   List<Widget> children;
   bool encapsulate;
 
+  String targetFilePath;
+  String targetFileName;
+
   /// All Execute classes are also an Group, so they will group commands in seperate files and allow multiple children.
   Execute(
       {@required this.children,
@@ -23,6 +26,8 @@ class Execute extends Widget {
       Entity at,
       dynamic location,
       String align,
+      this.targetFilePath = "objd",
+      this.targetFileName,
       Facing anchor,
       Condition If,
       dynamic facing,
@@ -137,7 +142,9 @@ class Execute extends Widget {
         children: children,
         prefix: 'execute ' + _args.join(" ") + ' run',
         groupMin: encapsulate ? 3 : -1,
-        filename: 'execute');
+        generateIDs: targetFileName == null,
+        path:targetFilePath,
+        filename: targetFileName ?? 'execute');
   }
 
   Execute _addArgumentRet(String arg) {

@@ -10,3 +10,4 @@ export './tellraw.dart';
 export './teleport.dart';
 export './data.dart';
 export 'if.dart';
+export 'schedule.dart';

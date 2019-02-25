@@ -1,3 +1,4 @@
+import 'package:objd/basic/group.dart';
 import 'package:objd/build/create_project.dart';
 import 'package:objd/basic/text.dart';
 import 'package:objd/basic/widget.dart';
@@ -17,6 +18,7 @@ Map build(Project prj) {
   var ret = _getFiles(prj.generate, {'packs': []}, -1);
   ret.addAll(
       {'path': prj.target, 'name': prj.name, 'description': prj.description});
+  Group.fileId = 1;
   return ret;
   //return _rekBuild(prj.generate,ret: {"test": "test"}, context: Context(prefixes: [], packId: ""));
 }

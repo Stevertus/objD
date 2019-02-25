@@ -13,89 +13,52 @@ class mainWidget extends Widget {
       name: 'example',
       main: File(
         path: 'main',
-        child: For.of([
-          If(
-              Condition.and([
-                Condition.not(Entity.Player()),
-                Condition.or([
-                  Entity.Random(),
-                  Condition.blocks(
-                    Area(x1: 0, y1: 0, z1: 0, x2: 10, y2: 10, z2: 10),
-                    compare: Location('~ ~ ~'),
-                  ),
-                  Condition.not(
-                    Condition.score(Score(Entity.Selected(), "test")
-                        .matchesRange(Range(from: 0, to: 5))),
-                  ),
-                ]),
-              ]),
-              Then: [Say(msg: "I'm done")]),
-          Comment.LineBreak(),
-          If(
-              Condition.or([
-                Condition.blocks(
-                    Area.fromLocations(
-                        Location.rel(x: 1, y: 10, z: 5), Location.here()),
-                    compare: Location("~ ~10 ~")),
-                Condition.not(Entity(
-                    area: Area.fromLocations(
-                        Location.rel(x: 1, y: 10, z: 5), Location.here())))
-              ]),
-              Then: [
-                Say(msg: "hello"),
-                Say(entity: Entity()),
-                Say(msg: "Hello")
-              ]),
-          If(Condition.and([Entity.Selected(), Condition.not(Entity.Player())]),
-              Then: [
-                Say(msg: "hey"),
-                Say(entity: Entity()),
-                Say(msg: "Hello")
-              ]),
-          Execute.asat(Entity.All(), children: [hey2.get()])
-              .anchored(Facing.feet)
-              .positioned(Location("~ ~10 ~"))
-              .dimension(Dimension.the_end),
-          Scoreboard.add("hey"),
-          hey2.set(10),
-          Score(Entity.Selected(), "hey")
-              .subtractScore(Score(Entity.Selected(), "hey2")),
-          hey2.setToResult(Command("say hjey")),
-          Scoreboard.setdisplay("hey2"),
-          ReplaceItem(Entity.Player(),
-              slot: "hotbar.0",
-              item: Item(
-                ItemType.iron_axe,
-                damage: 5,
-                nbt: {"test": 1},
-              )),
-          Data.modify(
-            Entity.Selected(),
-            path: "test",
-            modify: DataModify.insert(
-              Location("~ ~5 ~"),
-              fromPath: "Items[0].id",
-              index: 2,
-            ),
-          )
-        ]),
+        child: For.of(
+          [
+            Execute.asat(
+              Entity.All(),
+              children: [
+                If(
+                  Condition.or([
+                    Condition.block(Location.rel(x: 0, y: -1, z: 0),
+                        block: Block.redstone_block),
+                    Condition.block(Location.rel(x: 0, y: 2, z: 0),
+                        block: Block.redstone_block)
+                  ]),
+                  Then: [
+                    Command("execute if block ~ ~ ~ stone run say hey")
+                    // Title(Entity.All(),
+                    //     show: [TextComponent("standing on block")])
+                  ],
+                  Else: [
+                    // Title(Entity.All(),
+                    //     show: [TextComponent("not standing on block")])
+                  ],
+                )
+              ],
+            )
+          ],
+        ),
       ),
       load: File(
-        path: "load2",
-        child: Scoreboard.add("hey5"),
+        path: "load",
+        child: For.of([
+          Title.times(Entity.All(), fadein: 0, fadeout: 0),
+          Tellraw(Entity.All(), show: [TextComponent("Example Loaded")]),
+
+          Timer("timer1",ticks:100,children: [
+              Say(msg:"timer")
+           ]),
+          Timeout("timerout1",ticks:100,children: [
+              Say(msg:"timeout")
+          ]),
+        ]),
       ),
       files: [
         File(
           path: "tes",
           child: For.of(
-            [
-              Say(msg: "fgf"),
-              Extend(
-                "main",
-                first: true,
-                child: Say(msg: "hey"),
-              ),
-            ],
+            [Say(msg: "fgf")],
           ),
         ),
         File.execute(

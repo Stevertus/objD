@@ -5,7 +5,10 @@ void generateIO(Map prj) {;
   if(Directory(prj['path']).existsSync() == false) throw('Please ensure that the project path is a existing directory!');
   String path = prj['path'] + prj['name'] + '/';
   _ensureDirExists(path);
-  _createFile(path + 'pack.mcmeta', prj['description']);
+
+  Map<String,dynamic> mcmeta = {"pack":{"pack_format":1,"description":prj['description']}};
+
+  _createFile(path + 'pack.mcmeta', json.encode(mcmeta));
   _ensureDirExists(path + 'data/minecraft/tags/functions');
 
   Map<String,dynamic> tickJson = {"values":[]};

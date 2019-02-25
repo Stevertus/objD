@@ -1,3 +1,16 @@
+## 0.0.11
+* added Tag widget
+* added Schedule widget
+* added Timeout and Timer widgets for delays and clocks
+* added scores and tags parameters in any entity constructor
+* added addTag, addTags and removeTag Methods on entity
+* added targetFilePath and targetFileName parameters for the execute and if constructors to force a folder or filename 
+* added suffix option for groups
+* changed if behaviour to use a Tag instead with or conditions, else statement or multiple then children
+* fixed: nested groups generated in the wrong order
+* fixed entity Range generating unvalid results for `-10..0`
+* fixed groups that generated a different file than execution name
+
 ## 0.0.10
 * added experimental if else statements(may be changed later on)
 * added an if option for execute as well

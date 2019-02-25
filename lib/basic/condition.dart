@@ -119,10 +119,8 @@ class Condition {
               list.forEach((inner2) {
                 inner.insertAll(0,inner2);
               });
-              print(inner);
               return inner;
             }).toList();
-            print(list);
           }
           else {
            // is or

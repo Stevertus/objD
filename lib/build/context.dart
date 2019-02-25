@@ -18,6 +18,8 @@
   /// ```
 class Context {
   List<String> prefixes;
+  List<String> suffixes;
+  bool prod;
   String packId;
   String file;
   String loadFile;
@@ -37,23 +39,34 @@ class Context {
   /// ```
   Context(
       {this.prefixes,
+      this.prod = false,
+      this.suffixes,
       this.packId = "",
       this.file = "",
       this.loadFile = "load",
       this.mainFile = "main"}) {
     if (prefixes == null) prefixes = [];
+    if (suffixes == null) suffixes = [];
   }
 
   Context.clone(Context context)
       : this(
             prefixes: new List<String>.from(context.prefixes),
+            suffixes: new List<String>.from(context.suffixes),
+            prod: context.prod,
             packId: context.packId,
             file: context.file,
             loadFile: context.loadFile,
             mainFile: context.mainFile);
 
   Context addPrefix(String prev) {
-    prefixes.insert(0, prev);
+    if(prev == null) return this;
+    prefixes.add(prev);
+    return this;
+  }
+  Context addSuffix(String suf) {
+    if(suf == null) return this;
+    suffixes.add(suf);
     return this;
   }
 }
