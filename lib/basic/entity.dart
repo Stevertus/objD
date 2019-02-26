@@ -65,6 +65,7 @@ class Entity implements EntityClass{
     if(scores != null){
       String ret = "{";
       scores.forEach((score){
+        if(score.getMatch().isEmpty) throw("Please insert a match method in the scores value for an entity!");
         ret += score.score + "=" + score.getMatch();
       });
       arguments['scores'] = ret + "}";

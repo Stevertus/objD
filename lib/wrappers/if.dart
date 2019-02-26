@@ -124,6 +124,7 @@ class If extends Widget {
         ),
       );
     });
+    if(id == Group.fileId) Group.fileId++;
     children.add(Group(
         prefix: "execute as "+assignTag.toString()+" if entity @s[tag=objd_isTrue"+ id.toString() + "] run",
         path:targetFilePath,

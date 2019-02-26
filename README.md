@@ -34,7 +34,7 @@ And inside of that create a file named `pubspec.yaml` and another folder called 
 Open the pubspec.yaml file and add 
 ```yaml
 dependencies:  
-   objd: ^0.0.10
+   objd: ^0.1.0
 ```
 And run 
 ```
@@ -48,7 +48,7 @@ Let's get started and create our first dart file with `lib/main.dart` file.
 
 Then we import the framework with:
 ```dart
-import 'package:objd/core.dart';b
+import 'package:objd/core.dart';
 ```
 Then we need to create a new datapack project:
 ```dart
@@ -366,6 +366,7 @@ The group groups actions similar to for but has an option to prefix each action 
 |--|--|
 | prefix| a prefix type of String |
 |children|the underlying widgets|
+|[suffix]| a String that should be added at the end |
 |[filename]| the targeted filename(will be combined with an unique id) |
 |[groupMin]|the minimum amount of children to encapsulate(default = 3, set to -1 to disable) |
 
@@ -390,6 +391,8 @@ Group(
 |--|--|
 |selector|the entity selector(e.g p,s,e or r)|
 |limit|number of matched entities|
+|tags|a List of Strings or Tags that the entity should have|
+|scores|a List of Score matches that the entity should match|
 |type|[EntityType](), id of the entity|
 |area|A List of two Locations marking an area where the entity should be|
 |distance| [Range]() to the entity|
@@ -401,6 +404,9 @@ Group(
 |**Methods** |  |
 |sort|adds a sort attribute of type [Sort]()|
 | storeResult | Command, path, useSuccess |
+|addTag|adds a new tag to the entity|
+|addTags|adds multiple tags|
+|removeTag| removes tag again|
 
 storeResult stores a result or success of a command in the nbt path of an entity.
 **Example:**
@@ -439,6 +445,8 @@ Say(
 	entity: Entity(
 		selector: "e",
 		limit: 1,
+		tags:["first","second"],
+		scores:[Score(score1).matches(10)]
 		type: EntityType.armor_stand,
 		distance: Range(to:2),
 		area: [
@@ -454,7 +462,7 @@ Say(
 	).sort(Sort.random)
 )
 
-⇒ say @e[limit=1,type=armor_stand,distance=..2,x=-10,z=-10,dx=20,dz=20,level=1..,gamemode=creative,y_rotation=1..,x_rotation=20..80,sort=random]
+⇒ say @e[limit=1,tag=first,tag=second,scores:{test=10},type=armor_stand,distance=..2,x=-10,z=-10,dx=20,dz=20,level=1..,gamemode=creative,y_rotation=1..,x_rotation=20..80,sort=random]
 ```
 
 |specific constructors|  |
@@ -465,7 +473,32 @@ Say(
 |Entity.All(...)| creates an entity with @a|
 |Entity.Random(...)| creates an entity with @r|
 
+[//]: # (basics/tag)
+## Tag
+A tag saves a boolean value with an entity inside the game.
 
+|constructor|  |
+|--|--|
+|String|the name of the tag|
+| entity| the entity you that want to assign a tag to |
+| value | the boolean value(default true) |
+
+**Example:**
+```dart
+Tag("firstTag",entity:Entity.Player(),value: true)
+⇒ tag @p add firstTag
+```
+There is also the add or remove method for changing a variable:
+```dart
+Tag mytag = Tag("firstTag",entity:Entity.Player())
+// in generate
+mytag.add(),
+mytag.remove()
+
+⇒ tag @p add firstTag
+⇒ tag @p remove firstTag
+```
+Also consider the addTag method on an entity.
 
 [//]: # (basics/scoreboard)
 ## Scoreboard
@@ -894,6 +927,8 @@ One of the most used commands has a widget too. The execute command has multiple
 |facing| A Location or Entity to rotate to |
 |rotation| A rotation of type [Rotation](#rotation)|
 |dimension|Dimension of overworld, the_end or the_nether|
+|targetFilePath|force the group to use this path instead of `/objd/`|
+|targetFileName|force the group to use this name instead of automatic generated names|
 
 All Execute classes are also an Group, so they will group commands in seperate files and allow multiple children.
 Example:
@@ -1074,6 +1109,8 @@ If just gives you an execute wrapper with if and else statements. The conditions
 |Condition| the condition |
 |Then|a List of Wigets that runs on match|
 |Else|a List of Widget that runs if it does not match(optional)|
+|targetFilePath|force the group to use this path instead of `/objd/`|
+|targetFileName|force the group to use this name instead of automatic generated names|
 
 **Example:**
 ```dart
@@ -1115,6 +1152,7 @@ Well it is not as easy as it looks. A condition can accept many values and this 
 |--|--|--|
 | Entity | if entity @s |
 | Score | if score @s objective matches 5| Attention! This needs a score condition method!
+| Tag | if entity @s[tag=test] | turns a tag into an entity |
 | Location | unless block ~ ~2 ~ air | Just checks whether a block is present
 | Condition | if entity @s if block ~ ~ ~ stone | Yes, you can nest Conditions like Widgets and combine them.
 
@@ -1190,9 +1228,11 @@ If(
 	]),
 	Then:[Say(msg:'true')],
 )
-⇒ execute unless block ~ ~ ~ minecraft:air run say true
-⇒ execute if entity @e run say true
-⇒ execute if ... run say true
+⇒ execute unless block ~ ~ ~ minecraft:air run tag @p add objd_isTrue1
+⇒ execute if entity @e run tag @p add objd_isTrue1
+⇒ execute if ... run tag @p add objd_isTrue1
+⇒ execute as @p if entity @s[tag=objd_isTrue1] run say true
+⇒ tag @p remove objd_isTrue1
 ```
 > Just temporary, will be done with tags later...
 
@@ -1217,9 +1257,12 @@ If.not(
 	]),
 	Then: [Say(msg:"I'm done")]
 )
-⇒ execute unless entity @p if entity @r run say I'm done
-⇒ execute unless entity @p if blocks 0 0 0 10 10 10 ~ ~ ~ run say I'm done
-⇒ execute unless entity @p unless score @s test matches 0..5 run say I'm done
+⇒ 
+execute if entity @p unless entity @r run tag @p add objd_isTrue1
+execute if entity @p unless blocks 0 0 0 10 10 10 ~ ~ ~ run tag @p add objd_isTrue1
+execute if entity @p if score @s test matches 0..5 run tag @p add objd_isTrue1
+execute as @p if entity @s[tag=objd_isTrue1] run say I'm done
+tag @p remove objd_isTrue1
 ```
 
 
@@ -1378,6 +1421,22 @@ Summon(
 	nbt: {"Invisible":1}
 )
 ⇒ summon armor_stand ~ ~1 ~ {"Invisible":1,"CustomName":"{\"text\":\"this is my name\",\"color\":\"dark_blue\"}"}
+```
+[//]: # (wrappers/schedule)
+## Schedule
+Schedule schedules a file for the future. It delays its execution by the given ticks.
+
+|constructor| |
+|--|--|
+|String|name of a function(without namespace)|
+|ticks| the delay |
+
+You can also use Schedule.file that requires a file instead to define both in one statement.
+
+**Example:**
+```dart
+Schedule("timer",ticks:20)
+⇒ schedule function example:timer 20t
 ```
 
 [//]: # (wrappers/teleport)
@@ -1625,3 +1684,68 @@ Tellraw(
 )
 ⇒ tellraw @p [{"text":"hey","color":"black"}]
 ```
+[//]: # (utils/main)
+# Utils
+Util Widgets provide a complete solution that Minecraft does not support that easily out of the box and make your workflow easier and faster.
+They are often generating packs, scoreboards and files themselves.
+
+[//]: # (utils/timeout)
+## Timeout
+A Timeout is a simple delay in your code. It is done with the Schedule Command and generates a File under the hood.
+
+| constructor |  |
+|--|--|
+| String | the name of the timeout(used as filename) |
+| children | the content that should be delayed |
+| ticks | the delay as integer ticks |
+| path |the folder path(optional, default = "timers")|
+
+**Example:**
+```dart
+Timeout(
+	"timeout1",
+	children: [Say(msg:"Timeout reached")],
+	ticks: 100
+)
+⇒ schedule function example:timers/timeout1 100t
+// timers/timeout1:
+⇒ say Timeout reached
+```
+[//]: # (utils/timer)
+## Timer
+A Timer is very similar to a Timeout, but instead of delaying the code it is run over and over again always delayed by the ticks. In the end it creates a loop with slower tick speed as 20t/s to perform some operations more performant.
+
+| constructor |  |
+|--|--|
+| String | the name of the timeout(used as filename) |
+| children | the content that should be delayed |
+| ticks | the delay as integer ticks |
+|infinite| should it run infinitely? (default = true) |
+| path |the folder path(optional, default = "timers")|
+
+**Example:**
+```dart
+Timer(
+	"timer1",
+	children: [Say(msg:"Timer reached")],
+	ticks: 100
+)
+⇒ function example:timers/timer1
+// timers/timer1:
+⇒ say Timer reached
+⇒ schedule function example:timers/timer1 100t
+```
+It is recommended to start these timers in your load function. 
+
+With a finite timer, you can also stop the timer with `Timer.stop`:
+
+```dart
+Timer(
+	"timer2",
+	infinite:false,
+	children: [Say(msg:"Timer reached")],
+	ticks: 10
+)
+Timer.stop("timer2")
+```
+This uses a tag internally to stop scheduling the next timeout if the tag is existing.

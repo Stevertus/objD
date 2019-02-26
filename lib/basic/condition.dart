@@ -4,6 +4,7 @@ import 'package:objd/basic/block.dart';
 import 'package:objd/basic/entity.dart';
 import 'package:objd/basic/location.dart';
 import 'package:objd/basic/score.dart';
+import 'package:objd/basic/tag.dart';
 
 /// The Condition class defines conditions for the if widget and more. It can also combines conditions and generates an argument list.
 class Condition {
@@ -42,7 +43,10 @@ class Condition {
   Condition.entity(Entity cond) {
     _setCond(cond);
   }
-  // TODO: Condition.Tag
+  // checks if the tag exists
+  Condition.tag(Tag cond) {
+    _setCond(cond);
+  }
   /// accepts same dynamic condition types as Condition but negates them
   ///(if ⇒ unless, unless ⇒  if)
   Condition.not(dynamic cond) {
@@ -81,6 +85,10 @@ class Condition {
         _generated =
             new _ConditionUtil("score " + cond.getString(), invert: invert);
         break;
+      case "Tag":
+        _generated =
+            new _ConditionUtil("entity " + cond.getEntity(), invert: invert);
+        break;
       case "Location":
         if(block == null) _generated = new _ConditionUtil("block " + cond.toString() + " minecraft:air", invert: !invert);
         else _generated = new _ConditionUtil("block " + cond.toString() + " " + block.toString(), invert: invert);
@@ -105,6 +113,7 @@ class Condition {
     if (cond is Location) return "Location";
     if (cond is Area) return "Area";
     if (cond is Score) return "Score";
+    if (cond is Tag) return "Tag";
     return null;
   }
 

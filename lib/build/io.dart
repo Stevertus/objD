@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
 import 'package:colorize/colorize.dart';
@@ -25,18 +26,29 @@ void generateIO(Map prj) {;
   _createFile(path + 'data/minecraft/tags/functions/load.json', json.encode(loadJson));
 }
 void _createPack(path,Map pack){
+  Stopwatch stopwatch = new Stopwatch()..start();
+  List<Future> futures = [];
+
   _ensureDirExists(path + pack['name'] + '/functions');
+
   if(pack['files'] != null && pack['files'].length > 0){
     pack['files'].forEach((file) {
-        _createFile(path + pack['name'] + '/functions/' + file.path + '.mcfunction', file.generate(pack));
+        futures.add(_createFile(path + pack['name'] + '/functions/' + file.path + '.mcfunction', file.generate(pack)));
+    }); 
+
+
+    Future.wait(futures).then((res){
+      print("Generated Files in ${stopwatch.elapsedMilliseconds}ms");
     });
+
   }
   color('Creating Datapack ' + pack['name'] + ' and its files...',front: Styles.BLUE);
 }
 void _ensureDirExists(path){
   if(Directory(path).existsSync() == false) Directory(path).createSync(recursive: true);
 }
-void _createFile(name,content) async {
+
+Future _createFile(String name,content) async {
     dynamic path = name.split('/');
     path = path.sublist(0,path.length - 1).join('/');
     _ensureDirExists(path);
@@ -45,5 +57,6 @@ void _createFile(name,content) async {
     sink.write(content);
     await sink.flush();
     await sink.close();
-    color("Generated: " + name,front: Styles.YELLOW);
+    color("Generated: " + name,front: Styles.LIGHT_YELLOW);
+    return "";
 }

@@ -13,8 +13,10 @@ import './io.dart';
 ///}
 ///```
 void createProject(Project prj) {
+  Stopwatch stopwatch = new Stopwatch()..start();
   // print(prj.toMap());
   generateIO(build(prj));
+  print("Analized Structure in ${stopwatch.elapsedMilliseconds}ms");
 }
 
 class Project {

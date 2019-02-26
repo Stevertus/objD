@@ -9,10 +9,11 @@ class Tag extends Widget {
   Entity entity;
   String tag;
   
+  ///A tag saves a boolean value with an entity inside the game.
   Tag(this.tag, {@required this.entity,this.value = true}){
     if(this.entity == null) this.entity = Entity.Selected();
   }
-  setValue(bool status) => Tag(tag,entity: entity,value: status);
+
   add() => Tag(tag,entity: entity,value: true);
   remove() => Tag(tag,entity: entity,value: false);
 

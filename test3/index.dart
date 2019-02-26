@@ -3,7 +3,7 @@ import 'package:objd/core.dart';
 void main() {
   createProject(
     Project(
-      name: "folder name",
+      name: 'test3',
       target: "./",             // path for where to generate the project
       generate: ExamplePack(),  // The starting point of generation
     ),
@@ -14,7 +14,7 @@ class ExamplePack extends Widget {
   @override
   Widget generate(Context context) {
     return Pack(
-      name: "mypack",
+      name: 'test3',
       main: File(
         path: 'main',
         child: For.of([
@@ -33,3 +33,4 @@ class ExamplePack extends Widget {
     );
   }
 }
+  

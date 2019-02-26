@@ -1,8 +1,11 @@
+import 'package:objd/basic/condition.dart';
+import 'package:objd/basic/entity.dart';
 import 'package:objd/basic/file.dart';
 import 'package:objd/basic/for_list.dart';
 import 'package:meta/meta.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/build/build.dart';
+import 'package:objd/wrappers/if.dart';
 import 'package:objd/wrappers/schedule.dart';
 
 class Timeout extends Widget {
@@ -28,19 +31,38 @@ class Timeout extends Widget {
 }
 
 class Timer extends Widget {
-    String name;
+
+  bool _stop;
+
+  String name;
   String path;
   List<Widget> children;
   int ticks;
+  bool infinite;
 
-  Timer(this.name,{@required this.children,@required this.ticks,this.path = "timers"}):assert(ticks != null);
+  Timer(this.name,{@required this.children,@required this.ticks,this.path = "timers",this.infinite = true}):assert(ticks != null);
 
+  Timer.stop(this.name){
+    _stop = true;
+  }
   @override
   generate(Context context) {
-    if(context.prod) children.add(
-      Schedule(path + "/" + name,ticks:ticks)
-    );
-    print(children);
+
+    if(_stop == true) return Entity.All().addTag("objd_" + name);
+
+
+    if(context.prod){
+      if(infinite) children.add(Schedule(path + "/" + name,ticks:ticks));
+
+      else children.addAll([
+      If(Condition.not(Entity.All(tags:["objd_" + name])),Then:[
+        Schedule(path + "/" + name,ticks:ticks)
+      ]),
+      Entity.All().removeTag("objd_" + name)
+      ]);
+
+    } 
+    
     return File.execute(
         path: path + "/" + name,
         child:For.of(children)
