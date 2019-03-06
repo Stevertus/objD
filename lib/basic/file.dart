@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 class File extends Widget {
   Widget child;
   String path;
+  String pack;
   bool execute;
   /// The file class simply generates a new mcfunction file with content and a path.
   /// 
@@ -19,12 +20,12 @@ class File extends Widget {
 	/// 	)
 	/// )
   /// ```
-  File({@required this.path, this.child, this.execute = false}){
+  File({@required this.path, this.child, this.execute = false,this.pack}){
     this.path.replaceAll('.mcfunction', '');
     if(this.path.substring(0,1) == '/') this.path = this.path.substring(1);
   }
   /// the execute subconstructor adds an execution statement forwarding to the new file into the original
-  File.execute({@required this.path, this.child}){
+  File.execute({@required this.path, this.child,this.pack}){
     this.path.replaceAll('.mcfunction', '');
     if(this.path.substring(0,1) == '/') this.path = this.path.substring(1);
     execute = true;
@@ -32,7 +33,8 @@ class File extends Widget {
 
     @override
   Widget generate(Context context) {
-      return Command('function '+context.packId+':' + path);
+    if(pack == null) pack = context.packId;
+      return Command('function ${pack}:' + path);
   }
 
   @override

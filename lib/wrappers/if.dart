@@ -78,7 +78,7 @@ class If extends Widget {
 
     List<Widget> children = [];
     // group into seperate file(and get if id)
-    if (Then.length > 2 || Else != null || prefixes.length >= 2 || this.assignTag != null) {
+    if (Else != null || prefixes.length >= 2 || this.assignTag != null) {
       if(this.assignTag == null) this.assignTag =Entity.Player();
       if(Then.length > 2 && context.file.isNotEmpty) Then.insert(0, Comment("If statement from file: " + context.file));
       if(Else != null && Else.length > 2 && context.file.isNotEmpty) Else.insert(0, Comment("Else statement from file: " + context.file));
@@ -104,7 +104,7 @@ class If extends Widget {
             prefix: "execute " + prefix + " run",
             path:targetFilePath,
             generateIDs: targetFileName == null,
-            filename: targetFileName ??"if",
+            filename: targetFileName ?? "if",
             children: Then));
       });
     }

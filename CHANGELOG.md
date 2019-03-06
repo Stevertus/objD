@@ -1,3 +1,17 @@
+## 0.1.1
+* added AroundLocation widget
+* added Trigger wrapper
+* added Effect wrapper
+* added Particle wrapper
+* added clone wrapper
+* added nbt option for entities
+* added score.con for constants
+* added display name and lore for items
+* fixed execute align
+* fixed execute bug if targetPath was null
+* fixed timer not generating schedule
+
+
 ## 0.1
 with the first proper release there are the first util classes:
 * added Timeout and Timer widgets for delays and clocks

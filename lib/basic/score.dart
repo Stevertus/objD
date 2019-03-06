@@ -33,6 +33,15 @@ class Score extends Widget {
     _match =match;
   }
 
+  Score.con(int number, {bool addNew = true}){
+    score = "objd_consts";
+    entity = Entity.PlayerName('#' + number.toString());
+    
+    if(addNew) _commands.add(Scoreboard(score));
+
+    _commands.add(set(number));
+  }
+
   String _getESStr({Entity entity,String score}){
     if(entity == null) entity = this.entity;
     if(score == null) score = this.score;

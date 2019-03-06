@@ -4,6 +4,7 @@ import 'package:objd/basic/entity.dart';
 import 'dart:convert';
 
 import 'package:objd/basic/item.dart';
+import 'package:objd/basic/score.dart';
 
 class TextComponent {
   Map<String,dynamic> value;
@@ -23,9 +24,8 @@ class TextComponent {
     value = {"translate":key};
     if(conversionFlags != null && conversionFlags.length > 0) value['with'] = conversionFlags;
   }
-  TextComponent.score(Entity entity, {@required String objective, this.color,this.bold,this.italic, this.underlined, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){
-    assert(objective != null);
-    value = {"score":{"name":entity.toString(),"objective":objective}};
+  TextComponent.score(Score score, { this.color,this.bold,this.italic, this.underlined, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){
+    value = {"score":{"name":score.entity.toString(),"objective":score.score}};
   }
   // shows entity
   TextComponent.selector(Entity entity, {this.color,this.bold, this.underlined,this.italic, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){

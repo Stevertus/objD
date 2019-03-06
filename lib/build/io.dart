@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
 import 'package:colorize/colorize.dart';
-void generateIO(Map prj) {;
+void generateIO(Map prj,{fullBuild = true}) {;
   if(Directory(prj['path']).existsSync() == false) throw('Please ensure that the project path is a existing directory!');
   String path = prj['path'] + prj['name'] + '/';
   _ensureDirExists(path);
-
+  if(fullBuild){
   Map<String,dynamic> mcmeta = {"pack":{"pack_format":1,"description":prj['description']}};
 
   _createFile(path + 'pack.mcmeta', json.encode(mcmeta));
@@ -24,6 +24,7 @@ void generateIO(Map prj) {;
   }
   _createFile(path + 'data/minecraft/tags/functions/tick.json', json.encode(tickJson));
   _createFile(path + 'data/minecraft/tags/functions/load.json', json.encode(loadJson));
+  }
 }
 void _createPack(path,Map pack){
   Stopwatch stopwatch = new Stopwatch()..start();
@@ -38,7 +39,7 @@ void _createPack(path,Map pack){
 
 
     Future.wait(futures).then((res){
-      print("Generated Files in ${stopwatch.elapsedMilliseconds}ms");
+      print("Generated Files for ${pack["name"]} in ${stopwatch.elapsedMilliseconds}ms");
     });
 
   }

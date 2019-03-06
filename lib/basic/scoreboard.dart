@@ -17,9 +17,15 @@ class Scoreboard extends Widget {
     subcommand = addIntoLoad ? "add": "addHere";
     if (display != null) type += " " + display.toJson();
   }
-  /// The `Scoreboard.add` constructor does exactly the same as Scoreboard but puts the result without checking in the current file.
+  /// The `Scoreboard.click` constructor adds a carrot on a stick click event objective 
   Scoreboard.click(this.name, {TextComponent display, addIntoLoad = true}) {
     this.type = "minecraft.used:minecraft.carrot_on_a_stick";
+    subcommand = addIntoLoad ? "add": "addHere";
+    if (display != null) type += " " + display.toJson();
+  }
+  /// The `Scoreboard.trigger` constructor adds a trigger objective 
+  Scoreboard.trigger(this.name, {TextComponent display, addIntoLoad = true}) {
+    this.type = "trigger";
     subcommand = addIntoLoad ? "add": "addHere";
     if (display != null) type += " " + display.toJson();
   }

@@ -51,7 +51,7 @@ class Timer extends Widget {
     if(_stop == true) return Entity.All().addTag("objd_" + name);
 
 
-    if(context.prod){
+    //if(context.prod){
       if(infinite) children.add(Schedule(path + "/" + name,ticks:ticks));
 
       else children.addAll([
@@ -61,7 +61,7 @@ class Timer extends Widget {
       Entity.All().removeTag("objd_" + name)
       ]);
 
-    } 
+    //} 
     
     return File.execute(
         path: path + "/" + name,

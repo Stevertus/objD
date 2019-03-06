@@ -1,22 +1,33 @@
 import 'package:objd/basic/block.dart';
 import 'dart:convert';
+
+import 'package:objd/basic/text_components.dart';
 class Item {
   ItemType type;
   int count;
   int slot;
   Map<String,dynamic> tag = {};
   /// The Item class represents an item in an inventory in Minecraft. It is used in the [Give] or Nbt Commands.
-  Item(dynamic type,{this.count,this.slot,int damage, int model, Map<String,dynamic> nbt}){
+  Item(dynamic type,{this.count,this.slot,int damage, int model,int hideFlags, TextComponent name, List<TextComponent> lore, Map<String,dynamic> nbt}){
     // check item type
     if(type is ItemType ) this.type = type;
     else if(type is Block ) this.type = new ItemType(type.toString());
     else if(type is String ) this.type = new ItemType(type);
-    else throw("Please insert either an ItemType, a Block or a string representing a item type into Item");
+    else throw("Please insert either an ItemType, a Block or a string representing an item type into Item");
 
     // check tags
     if(nbt != null && nbt.length > 0) tag.addAll(nbt);
     if(damage != null) tag["Damage"] = damage;
     if(model != null) tag["CustomModelData"] = model;
+    if(hideFlags != null) tag["HideFlags"] = hideFlags;
+    if(name != null){
+      tag["display"] = tag["display"] ?? {};
+      tag["display"]['Name'] = name.toJson();
+    }  
+    if(lore != null){
+      tag["display"] = tag["display"] ?? {};
+      tag["display"]['Lore'] = lore.map((lor) => lor.toJson()).toList();
+    }  
   }
   String getGiveNotation(){
     String result = type.toString();
@@ -28,7 +39,8 @@ class Item {
     return result;
   }
   Map<String,dynamic> getMap(){
-    var map = {"id":type.toString(), "tag":tag};
+    Map<String,dynamic> map = {"id":type.toString()};
+    if(tag.isNotEmpty) map["tag"] = tag;
     if(count != null) map["Count"] = count;
     if(slot != null) map["Slot"] = slot;
     return map;

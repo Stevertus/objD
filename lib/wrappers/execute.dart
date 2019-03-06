@@ -143,7 +143,7 @@ class Execute extends Widget {
         prefix: 'execute ' + _args.join(" ") + ' run',
         groupMin: encapsulate ? 3 : -1,
         generateIDs: targetFileName == null,
-        path:targetFilePath,
+        path:targetFilePath ?? "objd",
         filename: targetFileName ?? 'execute');
   }
 
@@ -199,7 +199,7 @@ class Execute extends Widget {
 
   /// Aligns the position to the corners of the block grid.
   Execute align(String axis) {
-    assert(axis.isEmpty);
+    assert(axis.isNotEmpty);
     return _addArgumentRet('align ' + axis);
   }
 

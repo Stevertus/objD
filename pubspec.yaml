@@ -16,3 +16,5 @@ dependencies:
   watcher: ^0.9.7+10
 executables:
   run:
+  watch:
+  new:
