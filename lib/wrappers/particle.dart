@@ -1,6 +1,7 @@
 
 
 
+import 'package:meta/meta.dart';
 import 'package:objd/basic/block.dart';
 import 'package:objd/basic/command.dart';
 import 'package:objd/basic/item.dart';
@@ -8,42 +9,57 @@ import 'package:objd/basic/location.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/build/context.dart';
 
+/// The particle command spawns particles in the world to enhance certain graphics.
 class Particle extends Widget {
 
   String _gen;
 
-  Particle(ParticleType particle,{Location location,Location delta, int speed = 1, int count = 1, bool force}){
+  /// The particle command spawns particles in the world to enhance certain graphics.
+  /// 
+/// |constructor| |
+/// |--|--|
+/// |ParticleType| the type of the particle( ParticleType.[particle_id] ) |
+/// |location| where to show the particle(required) |
+/// | delta | the directions in which the particle expands(Location.glob, optional) |
+/// | speed | the speed of the expanding particle(optional, but delta required) |
+/// | count| the amount of particles(optional, but delta required) |
+/// | force | bool if the particle should be visible from far away(optional)|
+/// 
+/// ```dart
+/// Particle(
+/// 	ParticleType.flame,
+/// 	location: Location.here(),
+/// )
+/// ⇒ particle minecraft:flame ~ ~ ~
+/// ```
+  Particle(ParticleType particle,{@required Location location,Location delta, int speed = 1, int count = 1, bool force}){
     _gen = "minecraft:" + particle.toString().split(".")[1];
     if(location != null) _gen += " " + location.toString();
     if(delta != null){
-      if(speed == null || speed == null || count == null) throw("If you decide to use the full particle command add a delta, speed and count property!");
-      _gen += " " + delta.toString();
-      _gen += " " + speed.toString();
-      _gen += " " + count.toString();
+      if(speed == null || count == null) throw("If you decide to use the full particle command add a delta, speed and count property!");
+      _gen += " ${delta} ${speed} ${count}";
       if(force != null) _gen += force ? "force" : "normal";
     } 
   }
-  Particle.block(Block block,{Location location,Location delta, int speed = 1, int count = 1, bool force}){
+  /// For the Block particle(shows block break) there is a named constructor
+  Particle.block(Block block,{@required Location location,Location delta, int speed = 1, int count = 1, bool force}){
     _gen = "minecraft:block ";
     _gen += block.toString();
     if(location != null) _gen += " " + location.toString();
     if(delta != null){
-      if(speed == null || speed == null || count == null) throw("If you decide to use the full particle command add a delta, speed and count property!");
-      _gen += " " + delta.toString();
-      _gen += " " + speed.toString();
-      _gen += " " + count.toString();
+      if(speed == null || count == null) throw("If you decide to use the full particle command add a delta, speed and count property!");
+       _gen += " ${delta} ${speed} ${count}";
       if(force != null) _gen += force ? "force" : "normal";
     } 
   }
-  Particle.item(Item item,{Location location,Location delta, int speed = 1, int count = 1, bool force}){
+  /// For the Item particle(shows item break) there is a named constructor
+  Particle.item(Item item,{@required Location location,Location delta, int speed = 1, int count = 1, bool force}){
     _gen = "minecraft:item ";
     _gen += item.toString();
     if(location != null) _gen += " " + location.toString();
     if(delta != null){
-      if(speed == null || speed == null || count == null) throw("If you decide to use the full particle command add a delta, speed and count property!");
-      _gen += " " + delta.toString();
-      _gen += " " + speed.toString();
-      _gen += " " + count.toString();
+      if(speed == null || count == null) throw("If you decide to use the full particle command add a delta, speed and count property!");
+       _gen += " ${delta} ${speed} ${count}";
       if(force != null) _gen += force ? "force" : "normal";
     } 
   }

@@ -1,11 +1,10 @@
-import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'package:watcher/watcher.dart';
 import './run.dart' as run;
 main(List args){
 
   if (args.length < 2) {
-    print("Usage: watch <directory path> <root file>");
+    print("Usage: serve <directory path> <root file>");
     return;
   }
 

@@ -16,7 +16,10 @@ dependencies:
   """);
   
   _createFile(path + "/index.dart","""
+// import the core of the framework:
 import 'package:objd/core.dart';
+// import the custom pack:
+import './packs/examplePack.dart';
 
 void main() {
   createProject(
@@ -27,23 +30,30 @@ void main() {
     ),
   );
 }
+""");
+  _createFile(path + "/packs/examplePack.dart","""
+import 'package:objd/core.dart';
+// import all the files:
+import '../files/load.dart';
+import '../files/main.dart';
 
 class ExamplePack extends Widget {
+  
+  /// There is a folder for all packs inside a project, I recommend to give each pack an own widget
+  ExamplePack();
+
+
   @override
   Widget generate(Context context) {
     return Pack(
-      name: '"""+args[0]+"""',
-      main: File(
+      name: '"""+args[0]+"""', // name of the subpack
+      main: File(     // definining a file that runs every tick
         path: 'main',
-        child: For.of([
-          
-        ])
+        child: MainFile()
       ),
-      load: File(
+      load: File(     // definining a file that runs on reload
         path: 'load',
-        child: For.of([
-
-        ])
+        child: LoadFile()
       ),
       files: [
         
@@ -51,7 +61,54 @@ class ExamplePack extends Widget {
     );
   }
 }
-  
+""");
+
+  _createFile(path + "/files/main.dart","""
+import 'package:objd/core.dart';
+
+class MainFile extends Widget {
+  /// The main file is put in a seperate widget to split the code in several files
+  MainFile();
+
+  @override
+  Widget generate(Context context) {
+    return For.of([
+      // put your tick widgets here
+    ]);
+  }
+}
+""");
+
+  _createFile(path + "/files/load.dart","""
+import 'package:objd/core.dart';
+
+class LoadFile extends Widget {
+  /// The load file is put in a seperate widget to split the code in several files
+  LoadFile();
+
+  @override
+  Widget generate(Context context) {
+    return For.of([
+      // put your load widgets here
+    ]);
+  }
+}
+""");
+
+
+// create vs code launch
+  _createFile(path + "/.vscode/launch.json","""
+{
+    "version": "0.2.0",
+    "configurations": [ 
+        {
+            "name": "Dart",
+            "program": "\${workspaceFolder}/index.dart",
+            "request": "launch",
+            "type": "dart"
+        }
+    ]
+}
 """);
 
 }

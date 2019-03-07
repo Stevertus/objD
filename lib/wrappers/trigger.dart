@@ -9,13 +9,13 @@ class Trigger extends Widget {
   bool addNew;
 
   Trigger(this.objective,{this.addNew = true});
-  Trigger.set(this.objective,{@required int to,this.addNew = true}){
-    _mode = "set " + to.toString();
+  Trigger.set(this.objective,{@required int value,this.addNew = true}){
+    _mode = "set " + value.toString();
   }
   Trigger.add(this.objective,{@required int value,this.addNew = true}){
     _mode = "add " + value.toString();
   }
-  Trigger.enable(this.enableScore,{this.addNew = true}){
+  Trigger.enable(this.enableScore){
     _mode = "enable";
   }
 

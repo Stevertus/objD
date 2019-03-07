@@ -10,19 +10,35 @@ class AroundLocation extends Widget {
 
   double rel;
   Function build;
+  bool top, bottom, left, right, front, back;
 
-
-  AroundLocation(this.rel,{@required this.build});
+/// Often times you need to check blocks or entities around one Location. AroundLocation utilizes this by using just one build method for all sides:
+/// **Example:**
+/// ```dart
+/// AroundLocation(
+/// 	1,
+/// 	build: (Location loc){
+/// 		return Setblock(Block.stone,location:loc)
+/// 	}
+/// )
+/// ⇒ setblock ~1 ~ ~ stone
+/// ⇒ setblock ~-1 ~ ~ stone
+/// ⇒ setblock ~ ~1 ~ stone
+/// ⇒ setblock ~ ~-1 ~ stone
+/// ⇒ setblock ~ ~ ~1 stone
+/// ⇒ setblock ~ ~ ~-1 stone
+/// ```
+  AroundLocation(this.rel,{@required this.build,this.top = true, this.bottom = true, this.left = true, this.right = true, this.front =true ,this.back = true});
 
   @override
   Widget generate(Context context) {
-    return For.of([
-      build(Location.rel(x:rel,y:0,z:0)),
-      build(Location.rel(x:-rel,y:0,z:0)),
-      build(Location.rel(x:0,y:rel,z:0)),
-      build(Location.rel(x:0,y:-rel,z:0)),
-      build(Location.rel(x:0,y:0,z:rel)),
-      build(Location.rel(x:0,y:0,z:-rel)),
-    ]);
+    List<Widget> builds = [];
+    if(left) builds.add(build(Location.rel(x:rel,y:0,z:0)));
+    if(right) builds.add(build(Location.rel(x:-rel,y:0,z:0)));
+    if(top) builds.add(build(Location.rel(x:0,y:rel,z:0)));
+    if(bottom) builds.add(build(Location.rel(x:0,y:-rel,z:0)));
+    if(front) builds.add(build(Location.rel(x:0,y:0,z:rel)));
+    if(back) builds.add(build(Location.rel(x:0,y:0,z:-rel)));
+    return For.of(builds);
   }
 }

@@ -1,4 +1,7 @@
+// import the core of the framework:
 import 'package:objd/core.dart';
+// import the custom pack:
+import './packs/examplePack.dart';
 
 void main() {
   createProject(
@@ -8,28 +11,4 @@ void main() {
       generate: ExamplePack(),  // The starting point of generation
     ),
   );
-}
-
-class ExamplePack extends Widget {
-  @override
-  Widget generate(Context context) {
-    return Pack(
-      name: "mypack",
-      main: File(
-        path: 'main',
-        child: For.of([
-          
-        ])
-      ),
-      load: File(
-        path: 'load',
-        child: For.of([
-
-        ])
-      ),
-      files: [
-        
-      ]
-    );
-  }
 }

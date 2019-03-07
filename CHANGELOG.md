@@ -7,6 +7,7 @@
 * added nbt option for entities
 * added score.con for constants
 * added display name and lore for items
+* changed global commands and boilerplate project
 * fixed execute align
 * fixed execute bug if targetPath was null
 * fixed timer not generating schedule

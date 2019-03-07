@@ -10,8 +10,16 @@ class Clone extends Widget {
   Area area;
   Location to;
   String type = "";
-  
-  Clone(this.area,{this.to});
+/// The clone command clones an Area to another Location with different modes.
+/// **Example:**
+/// ```dart
+/// Clone(
+/// 	Area(x1:0,y1:0,z1:0,x2:10,y2:10,z2:10),
+/// 	to: Location.here()
+/// )
+/// ⇒ clone 0 0 0 10 10 10 ~ ~ ~
+/// ```
+  Clone(this.area,{@required this.to});
 
   Clone.filtered(this.area,{@required this.to,Block block = Block.air,String mode}){
     type = "filtered " + block.toString();
