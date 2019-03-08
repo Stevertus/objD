@@ -1,7 +1,6 @@
 
 
 [//]: # (main)
-![](https://i.imgur.com/DsWyhR9.png)
 # objD
 
 ### **O**bjective **B**uilder **J**ust for **D**atapacks
@@ -394,6 +393,7 @@ Group(
 |tags|a List of Strings or Tags that the entity should have|
 |scores|a List of Score matches that the entity should match|
 |type|[EntityType](), id of the entity|
+|nbt|a Map of required nbt properties|
 |area|A List of two Locations marking an area where the entity should be|
 |distance| [Range]() to the entity|
 |level|Range of experience levels|
@@ -618,6 +618,20 @@ These methods can be used for example with if to match values:
 |isBigger|Score|@s score > @s score2|
 |isBiggerOrEqual|Score|@s score >= @s score2|
 
+### Constant Score
+Do you need constant values with scores? objD got you covered with `Score.con`:
+
+|Score.con| |
+|--|--|
+|int| a constant number |
+|addNew|bool whether it should add objd_consts itself if it does not exist(default = true)|
+
+This will automatically create a scoreboard called `objd_consts` and set the value to the fake entity `#[value]`
+**Example:**
+```dart
+Score.con(5)
+⇒ scoreboard players set #5 objd_consts 5
+```
 
 [//]: # (basics/block)
 ## Block
@@ -866,6 +880,8 @@ The Item class represents an item in an inventory in Minecraft. It is used in th
 |--|--|
 |ItemType \| Block \| String|the type of item(required, see example)|
 |count|Integer value for the amount of stacked items|
+|name|a TextComponent showing a name|
+|lore| a  List of TextComponents giving extra information|
 |slot|The current slot of the item(does not work for give)|
 |damage|the used durability of the item|
 |model|int describing which model varient should be used|
@@ -877,6 +893,10 @@ Give(Entity.Selected(),
 	item: Item(
 		ItemType.iron_axe, // OR Block.stone OR "whatever id"
 		count: 5,
+		name: TextComponent("My Item",color:Color.Black),
+		lore: [
+			TextComponent("My Description",color:Color.Blue),
+		],
 		damage: 40,
 		model: 3390001,
 		nbt: {
@@ -885,7 +905,7 @@ Give(Entity.Selected(),
 	)
 )
 
-⇒ give @s minecraft:iron_axe{"customNBT":1,"Damage":40,"CustomModelData":3390001} 5
+⇒ give  @s minecraft:iron_axe{"customNBT":1,"Damage":40,"CustomModelData":3390001,"display":{"Name":"{\"text\":\"My Item\",\"color\":\"black\"}","Lore":["{\"text\":\"My Description\",\"color\":\"blue\"}"]}} 5
 ```
 ItemType is like EntityType or Block a utility class to provide a list of all available items.
 
@@ -1264,7 +1284,42 @@ execute if entity @p if score @s test matches 0..5 run tag @p add objd_isTrue1
 execute as @p if entity @s[tag=objd_isTrue1] run say I'm done
 tag @p remove objd_isTrue1
 ```
+[//]: # (wrappers/effect)
+## Effect
+This command is used to give an entity a specific effect and affect their gameplay.
 
+|constructor| |
+|--|--|
+|EffectType| the kind of effect - usage: EffectType.[effect_id] |
+| entity | the Entity you want to give the effect to(required) |
+|duration| the amount of seconds the effect should last(default = 30) |
+|amplifier| the strength of the effect(default = 1) |
+|showParticles| bool if effect particles should be visible(default = true) |
+
+**Example:**
+```dart
+Effect(
+	EffectType.jump_boost,
+	entity: Entity.Player(),
+	duration: 20,
+	amplifier: 3,
+	showParticles: false
+)
+⇒ effect give @p minecraft:jump_boost 20 3 true
+```
+
+Of course you can clear an effect again:
+
+|constructor| |
+|--|--|
+|Entity| the entity that you want to clear |
+|EffectType| the type of effect you want to clear(optional) |
+
+**Example:**
+```dart
+Effect.clear(Entity.Player(),EffectType.jump_boost)
+⇒ effect clear @p minecraft:jump_boost
+```
 
 [//]: # (wrappers/setblock)
 ## SetBlock

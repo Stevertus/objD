@@ -8,7 +8,7 @@ class MainFile extends Widget {
   Widget generate(Context context) {
     return For.of([
       // put your tick widgets here
-      Particle()
+      Effect.clear(Entity(),EffectType.absorption)
     ]);
   }
 }

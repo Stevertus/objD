@@ -33,6 +33,20 @@ class Score extends Widget {
     _match =match;
   }
 
+/// Do you need constant values with scores? objD got you covered with `Score.con`:
+///
+/// |Score.con| |
+/// |--|--|
+/// |int| a constant number |
+/// |addNew|bool whether it should add objd_consts itself if it does not exist(default = true)|
+
+/// This will automatically create a scoreboard called `objd_consts` and set the value to the fake entity `#[value]`
+/// 
+/// **Example:**
+/// ```dart
+/// Score.con(5)
+/// ⇒ scoreboard players set #5 objd_consts 5
+/// ```
   Score.con(int number, {bool addNew = true}){
     score = "objd_consts";
     entity = Entity.PlayerName('#' + number.toString());

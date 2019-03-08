@@ -4,7 +4,6 @@
 
 objD is a framework for developing Datapacks for Minecraft. It uses the [Dart](https://www.dartlang.org/guides/language/language-tour) programming language.
 
-[//]: # (why)
 
 ## Why a framework?
 A framework is a set of utilities to reduce the amount of repetitive work.
@@ -15,7 +14,6 @@ By building a custom frame around it you get the **reliability** and the **exten
 
 The generation of Datapacks is **easy**,**fast** and aims to be **less repetitive** and **modular** by utilizing the concept of Widgets as one of the main features.
 
-[//]: # (installation)
 ## Installation
 [Temporary]
 
@@ -106,4 +104,4 @@ The example folder contains a boilerplate to start off.
 
 There are many more widgets for objD including basic Widgeds, Command Wrappers, Text and Util Widgets. 
 So check out the documentation at https://stevertus.com/objD/documentation
-or my youtube channel
+or my youtube channel https://www.youtube.com/stevertus

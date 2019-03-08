@@ -14,10 +14,25 @@ class Effect extends Widget {
   int amplifier;
   bool showParticles;
   String _type;
-  
+  /// This command is used to give an entity a specific effect and affect their gameplay.
+  /// ```dart
+/// Effect(
+/// 	EffectType.jump_boost,
+/// 	entity: Entity.Player(),
+/// 	duration: 20,
+/// 	amplifier: 3,
+/// 	showParticles: false
+/// )
+/// ⇒ effect give @p minecraft:jump_boost 20 3 true
+/// ```
   Effect(this.effect,{@required this.entity,this.duration = 30,this.amplifier = 1,this.showParticles = true}){
     _type = "give";
   }
+/// You can clear an effect again.
+/// ```dart
+/// Effect.clear(Entity.Player(),EffectType.jump_boost)
+/// ⇒ effect clear @p minecraft:jump_boost
+/// ```
   Effect.clear(this.entity,[this.effect]){
     _type = "clear";
   }
@@ -25,9 +40,9 @@ class Effect extends Widget {
   @override
   Widget generate(Context context) {
     if(_type == "clear"){
-      return Command("effect clear ${entity.toString()}" + (effect != null ? " " + effect.toString().split(".")[1] : ""));
+      return Command("effect clear ${entity}" + (effect != null ? " minecraft:" + effect.toString().split(".")[1] : ""));
     } else {
-      return Command("effect give ${entity.toString()} " + effect.toString().split(".")[1] + " ${duration} ${amplifier} ${!showParticles}");
+      return Command("effect give ${entity} minecraft:" + effect.toString().split(".")[1] + " ${duration} ${amplifier} ${!showParticles}");
     }
   }
 }
