@@ -29,7 +29,7 @@ class Group extends Widget {
 /// ),
 /// ``` 
   Group(
-      {@required this.prefix,
+      {this.prefix,
       @required this.children,
       this.suffix,
       this.path = "objd",

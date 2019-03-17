@@ -33,7 +33,7 @@ And inside of that create a file named `pubspec.yaml` and another folder called 
 Open the pubspec.yaml file and add 
 ```yaml
 dependencies:  
-   objd: ^0.1.1
+   objd: ^0.1.2
 ```
 And run 
 ```
@@ -88,6 +88,7 @@ What we are doing right now is to generate a new subpack with a name(This will b
 You can run the project already and the result should be a pack with an empty main.mcfunction file.
 
 So lets add some functionality to our project in our main file.
+We can use the Log Widget to display a message to the player.
 ```dart
 main: File(
 	path: 'main',
@@ -95,7 +96,7 @@ main: File(
 )
 ```
 But how to add a list of Actions then? Well there's also an Widget for that:
-[For.of]()
+`For.of`
 ```dart
 child: For.of(List<Widget>[
 	Log('Hello World'),
@@ -212,7 +213,8 @@ The File constructor has two required arguments:
 |--|--|
 | path | the desired file path going from `/data/:packId:/functions/` on |
 | child| the content of the file |
-| [execute] | Boolean if the function should be executed directly |
+| execute | bool if the function should be executed directly(optional) |
+| create | bool if the file should be created or just interpreted with execute(optional, default = true)|
 
 The File class can be used as often as you want and where you want, so you can also define a new file in a For container for example.
 **Example:**
@@ -392,9 +394,10 @@ Group(
 |limit|number of matched entities|
 |tags|a List of Strings or Tags that the entity should have|
 |scores|a List of Score matches that the entity should match|
+|team|a Team the entity has to be part of|
 |type|[EntityType](), id of the entity|
 |nbt|a Map of required nbt properties|
-|area|A List of two Locations marking an area where the entity should be|
+|area|A Area where the entity should be|
 |distance| [Range]() to the entity|
 |level|Range of experience levels|
 |gamemode|Gamemode type(e.g Gamemode.creative, Gamemode.survival)|
@@ -404,6 +407,8 @@ Group(
 |**Methods** |  |
 |sort|adds a sort attribute of type [Sort]()|
 | storeResult | Command, path, useSuccess |
+|joinTeam|entity joins the given team|
+|leaveTeam|entity leaves the current team|
 |addTag|adds a new tag to the entity|
 |addTags|adds multiple tags|
 |removeTag| removes tag again|
@@ -446,15 +451,15 @@ Say(
 		selector: "e",
 		limit: 1,
 		tags:["first","second"],
-		scores:[Score(score1).matches(10)]
+		scores:[Score(score1).matches(10)],
+		team: Team("my_team"),
 		type: EntityType.armor_stand,
 		distance: Range(to:2),
-		area: [
+		area: Area.fromLocations(
 			// use null for a unlimited selection
 			Location.glob(x: -10,y: null,z: -10), 
 			Location.glob(x: 10, y: null, z: 10)
-			// it also automatically calcs the distance between these
-		]
+		),
 		level: Range(from: 1),
 		gamemode: Gamemode.creative,
 		horizontalRotation: Range(from:1),
@@ -462,7 +467,7 @@ Say(
 	).sort(Sort.random)
 )
 
-⇒ say @e[limit=1,tag=first,tag=second,scores:{test=10},type=armor_stand,distance=..2,x=-10,z=-10,dx=20,dz=20,level=1..,gamemode=creative,y_rotation=1..,x_rotation=20..80,sort=random]
+⇒ say @e[limit=1,tag=first,tag=second,scores:{test=10},team=my_team,type=armor_stand,distance=..2,x=-10,z=-10,dx=20,dz=20,level=1..,gamemode=creative,y_rotation=1..,x_rotation=20..80,sort=random]
 ```
 
 |specific constructors|  |
@@ -499,6 +504,24 @@ mytag.remove()
 ⇒ tag @p remove firstTag
 ```
 Also consider the addTag method on an entity.
+### toggle
+With the toggle method you can toggle the value(invert the tag). This is done with a temporary tag:
+```dart
+Tag("mytag",entity:Entity.Selected()).toggle()
+⇒ execute if entity @s[tag=mytag] run tag @s add objd_temp
+⇒ execute if entity @s[tag=objd_temp] run tag @s remove mytag
+⇒ execute if entity @s[tag=!objd_temp] run tag @s add mytag
+⇒ tag @s remove objd_temp
+```
+### removeIfExists
+The `removeIfExists` method removes the tag and may execute some action before if the tag exists.
+```dart
+Tag("mytag",entity:Entity.Selected()).removeIfExists(
+	then: Say(msg:"removed")
+) // optional argument
+⇒ execute if entity @s[tag=mytag] run say removed
+⇒ execute if entity @s[tag=mytag] run tag @s remove mytag
+```
 
 [//]: # (basics/scoreboard)
 ## Scoreboard
@@ -631,6 +654,13 @@ This will automatically create a scoreboard called `objd_consts` and set the val
 ```dart
 Score.con(5)
 ⇒ scoreboard players set #5 objd_consts 5
+```
+### Selected Score
+Often times you want the score of a selected Entity(@s). Score.fromSelected is the same as Score but has a predefined entity.
+**Example:**
+```dart
+Score.fromSelected("objective").set(3)
+⇒ scoreboard players set @s objective 3
 ```
 
 [//]: # (basics/block)
@@ -1284,6 +1314,51 @@ execute if entity @p if score @s test matches 0..5 run tag @p add objd_isTrue1
 execute as @p if entity @s[tag=objd_isTrue1] run say I'm done
 tag @p remove objd_isTrue1
 ```
+[//]: # (wrappers/team)
+## Team
+The team Wiget is a wrapper for the team command and allows you to group entities together and apply group rules.
+
+There are a few constructors:
+
+**Team(String)** - just adds a new team
+**Team.add(String,[options])** - adds the team and also applies some modifiers to it(take a look at Team.modify)
+**Team.empty(String)** - clears the team and removes all entities in it
+**Team.join(String, Entity)** - adds the entity to the team(an entity can only be in one team at a time)
+**Team.leave(Entity)** - the entity is removed from their current team
+
+|Team.modify or Team.add| |
+|--|--|
+|String|name of the team|
+|display|TextComponent showing the team name in chat or scoreboard|
+|color| the teams Color |
+|nametag| Either ModifyTeam.[always,never,hideForOtherTeam,hideForOwnTeam] |
+|collision| Either ModifyTeam.[always,never,pushOtherTeams,pushOwnTeam] |
+|deathMessage|Either ModifyTeam.[always,never,hideForOtherTeam,hideForOwnTeam] |
+|friendlyFire|Should a member be able to hit a team mate?(bool)|
+|seeInvisisble|Should a member be able to see an invisible team mate?(bool)|
+|prefix| a String showing in front of a player name |
+|suffix| a String showing after a player name |
+
+**Example:**
+```dart
+Team.add(
+	"test",
+	collision:ModifyTeam.always,
+	color:Color.Red,
+	display:  TextComponent("Hello"),
+	friendlyFire:  true,
+	suffix:  "Test",
+	deathMessage:  ModifyTeam.hideForOwnTeam
+)
+⇒ team add test
+⇒ team modify test displayName {"text":"Hello"}
+⇒ team modify test color red
+⇒ team modify test deathMessageVisibility hideForOwnTeam
+⇒ team modify test friendlyFire true
+⇒ team modify test collisionRule always
+⇒ team modify test suffix Test
+```
+
 [//]: # (wrappers/effect)
 ## Effect
 This command is used to give an entity a specific effect and affect their gameplay.
@@ -1329,6 +1404,7 @@ The SetBlock Command Class sets a Block at the specified location:
 |--|--|
 |Block|the Block type you want to set|
 |location| where you want to set the block|
+|nbt|nbt as Map for the block|
 
 Example:
 ```dart
@@ -1544,8 +1620,21 @@ The summon class creates a new entity at a given location.
 |EntityType|the type of entity(required)|
 |location| the location as type Location(default Location.here())|
 |name|a TextComponent respresenting the name of the entity|
+|nameVisible|bool if name is shown|
+|invulnerable|bool|
+|persistent|bool|
+|noAI|bool|
+|silent|bool|
+|small|bool|
+|gravity|bool (put negated value in NoGravity)|
+|glowing|bool|
+|passengers|List of Summon Widgets that ride the entity|
+|effects|List of Effects|
+|tags|List of tags as String|
+|fire|ticks(int) the entity should be on fire|
+|age|int|
+|rotation|initial Rotation|
 |nbt|additional nbt as Map(key-value pairs)|
-> This version is not final, there will be more properties in the future!
 
 **Example:**
 ```dart
@@ -1553,10 +1642,17 @@ Summon(
 	EntityType.armor_stand,
 	location: Location.rel(x: 0,y:1,z:0),
 	name: TextComponent("this is my name",color: Color.DarkBlue),
-	nbt: {"Invisible":1}
+	invulnerable:true,
+	small: true,
+	gravity: false,
+	fire: 100,
+	effects:[Effect(EffectType.glowing,duration: 10,showParticles:false)],
+	rotation: Rotation.abs(x: 10,y:100),
+	nbt: {"Invisible":1},
 )
-⇒ summon armor_stand ~ ~1 ~ {"Invisible":1,"CustomName":"{\"text\":\"this is my name\",\"color\":\"dark_blue\"}"}
+⇒ summon armor_stand ~  ~1  ~  {"Invisible":1,"CustomName":"{\"text\":\"this is my name\",\"color\":\"dark_blue\"}","Invulnerable":1,"Small":1,"NoGravity":1,"ActiveEffects":[{"Id":24,"Amplifier":0,"Duration":200,"ShowParticles":0}],"Fire":100,"Rotation":[10.0,100.0]}
 ```
+
 [//]: # (wrappers/schedule)
 ## Schedule
 Schedule schedules a file for the future. It delays its execution by the given ticks.
@@ -1610,7 +1706,7 @@ Teleport(
 ⇒ tp @p @e[name="target",limit=1]
 ```
 
-[//]: # (text/trigger)
+[//]: # (wrappers/trigger)
 ## Trigger
 Trigger is a way to give the player(without op) permission to change his score in a scoreboard.
 The permission must be granted with `Trigger.enable`:
@@ -1761,6 +1857,23 @@ Fires on mouse over, Part of TextComponent.
 |TextClickEvent.item(Item)|shows item|
 |TextClickEvent.entity(String,String,String)|displays a dummy entity with name, type and UUID(in this order))|
 
+[//]: # (text/log)
+## Log
+The log widgets displays a console logging in the players chat. That way you can quickly check execution times, score values and entities.
+
+|constructor||
+|--|--|
+|String, Score or Entity| message to display |
+|to|which player you want to send the log(default = `Entity.All()`) |
+|color|the color of the console indicator(default = Color.DarkAqua)|
+
+**Example:**
+```dart
+Log("Hello there!",color:Color.White),
+⇒ tellraw @a [{"text":"Console > ","color":"white"},{"text":"Hello there!"}]
+Log(Score(Entity.Selected(),"objective"),to: Entity.Selected())
+⇒ tellraw @s [{"text":"Console > ","color":"dark_aqua"},{"score":{"name":"@s","objective":"objective"}}]
+```
 
 [//]: # (text/title)
 ## Title
@@ -1920,6 +2033,186 @@ Timer.stop("timer2")
 ```
 This uses a tag internally to stop scheduling the next timeout if the tag is existing.
 
+[//]: # (utils/repeat)
+## Repeat
+The Repeat Widget repeats a given action multiple times with a tick delay.
+
+|constructor| |
+|--|--|
+|String|name of the Repeat|
+|child|the action to perform(required)|
+|to| times to repeat(required) |
+|ticks| ticks between repetitions(default = 1 tick)  |
+|path|where to generate a new repeat file(default = timers)|
+|counter|the objective used to hold the current iteration(default = objd_repeat)|
+
+**Example:**
+```dart
+Repeat("repeat1",
+	to:  10,
+	child:  Log("test"),
+	ticks:  20
+)
+⇒ scoreboard players set repeat1 objd_repeat 0
+⇒ function mypack:timers/repeat1
+```
+This would save the current iteration in a fake player repeat1 in objd_repeat and generate a schedule function:
+```mcfunction
+# timers/repeat1
+tellraw @a [{"text":"Console > ","color":"dark_aqua"},{"text":"test"}]
+scoreboard players add repeat1 objd_repeat 1
+execute if score repeat1 objd_repeat matches ..10 run schedule function mypack:timers/repeat1  20t
+```
+This function is executed until the score becomes 11.
+
+[//]: # (utils/armorstand)
+## ArmorStand
+An armorstand can be created with the Summon Widget, but there is also a specific Widget with special properties for an ArmorStand.
+
+|constructor| |
+|--|--|
+|Location| the location as type Location(default Location.here())|
+|name|a TextComponent respresenting the name of the entity|
+|nameVisible|bool if name is shown|
+|invulnerable|bool|
+|invisible|bool|
+|marker|bool|
+|basePlate|bool|
+|hasArms|bool|
+|small|bool|
+|gravity|bool|
+|glowing|bool|
+|tags|List of tags as String|
+|fire|ticks(int) the entity should be on fire|
+|rotation|initial Rotation|
+|mainHand| An Item placed in the main hand|
+|offHand| An Item placed in the offhand|
+|head| An Item placed in the head slot|
+|chest| An Item placed in the chest slot|
+|legs| An Item placed in the legs slot|
+|boots| An Item placed in the boots slot|
+|nbt|additional nbt as Map(key-value pairs)|
+
+> Pose is coming soon
+
+This generates a summon command: 
+```dart
+ArmorStand(
+Location.here(),
+name:  TextComponent("Test", color:  Color.DarkPurple),
+nameVisible:  true,
+marker:  true,
+mainHand:  Item(ItemType.clock),
+)
+⇒ summon armor_stand ~  ~  ~  {"Marker":1,"HandItems":[{"id":"minecraft:clock"},{}],"CustomName":"{\"text\":\"Test\",\"color\":\"dark_purple\"}","CustomNameVisible":1}
+```
+Often times you need a static armorstand that just acts as a marker for a location, there is ArmorStand.staticMarker that sets properties automatically.
+```dart
+ArmorStand.staticMarker(Location.glob(),tags:["experimental"])
+⇒ summon armor_stand 0  0  0  {"Marker":1,"Invisible":1,"Invulnerable":1,"NoGravity":1,"Tags":["experimental"]}
+```
+[//]: # (utils/areaeffectcloud)
+## AreaEffectCloud
+An areaeffectcloud can be created with the Summon Widget, but there is also a specific Widget with special properties for an AreaEffectCloud.
+
+| constructor |  |
+|--|--|
+|Location| the location as type Location(default Location.here())|
+|name|a TextComponent respresenting the name of the entity|
+|age|int|
+|radius|the radius an effect applies|
+|applicationDelay|int|
+|tags|List of tags|
+|duration|int|
+|waitTime|int|
+|nbt|additional nbt as Map|
+
+This would create an Areaeffectcloud that only lasts the current tick: 
+```dart
+AreaEffectCloud(
+	Location.here(),
+	name: TextComponent("myname"),
+	waitTime: 10,
+)
+⇒ summon area_effect_cloud ~  ~  ~  {"WaitTime":10,"CustomName":"{\"text\":\"myname\"}"}
+```
+To keep the entity alive there is`AreaEffectCloud.persistent` that sets the age to multiple years.
+
+| AreaEffectCloud.persistent|  |
+|--|--|
+|Location| the location as type Location(default Location.here())|
+|name|a TextComponent respresenting the name of the entity|
+|radius|the radius an effect applies|
+|applicationDelay|int|
+|tags|List of tags|
+|nbt|additional nbt as Map|
+
+**Example:**
+```dart
+AreaEffectCloud.persistent(Location.here(),tags:["new_tag"])
+⇒ summon area_effect_cloud ~  ~  ~  {"Duration":-1,"WaitTime":-2147483648,"Tags":["new_tag"],"Age":-2147483648}
+```
+[//]: # (utils/hologram)
+A Hologram shows a floating text at a specific Location using Armorstands.
+
+| constructor |  |
+|--|--|
+|String|the text to display(can also be multiline string)|
+|location|the position(required)|
+|color|a Color|
+|tags|additional tags for the armorstands|
+|space|the space in between the lines(default = 0.25)|
+
+**Example:**
+```dart
+Hologram("""
+Hello,
+World!
+""",
+	location:  Location.here(),
+	color:Color.Aqua,
+)
+⇒ summon armor_stand ~  ~0.25  ~  {"Marker":1,"Invisible":1,"CustomName":"{\"text\":\"Hello,\",\"color\":\"aqua\"}","Invulnerable":1,"CustomNameVisible":1,"NoGravity":1,"Tags":["objd_hologram"]}
+
+⇒ summon armor_stand ~  ~  ~  {"Marker":1,"Invisible":1,"CustomName":"{\"text\":\"World!\",\"color\":\"aqua\"}","Invulnerable":1,"CustomNameVisible":1,"NoGravity":1,"Tags":["objd_hologram"]}
+```
+If you wish you can also assign each line a seperate TextComponent with `Hologram.multiple`
+
+| Hologram.multiple|  |
+|--|--|
+|List of TextComponents|Component for each line|
+|...| same as Hologram|
+[//]: # (utils/randomscore)
+## RandomScore
+The RandomScore Widget assigns a random value to a score using the UUID of an areaeffectcloud.
+
+| constructor |  |
+|--|--|
+|Entity| the entity to save the result to |
+|to|the max value(required)|
+|from|the minimum value(default = 0)|
+|objective|The scoreboard objective to save the values(default = objd_random)|
+|targetFileName|force a specific file|
+|targetFilePath|force a specific folder(other than objd)|
+
+**Example:**
+```dart
+RandomScore(
+	Entity.Selected(),
+	from: 5
+	to:  100,
+	targetFileName:  "random"
+)
+⇒ scoreboard players set #max objd_random 96
+⇒ function mypack:objd/random
+⇒ scoreboard players add @s objd_random 5
+```
+```mcfunction
+# objd/random1
+summon area_effect_cloud ~ ~ ~ {"Tags":["objd_random"]}
+execute store result score @s objd_random run data get entity @e[tag=objd_random,sort=nearest,limit=1] UUIDMost 0.0000000001
+scoreboard players operation @s objd_random %= #max objd_random
+```
 [//]: # (utils/aroundlocation)
 ## AroundLocation
 Often times you need to check blocks or entities around one Location. AroundLocation utilizes this by using just one build method for all sides:

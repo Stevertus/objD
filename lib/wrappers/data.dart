@@ -87,7 +87,7 @@ class Data extends Widget {
   Widget generate(Context context){
     switch (_subcommand) {
       case "merge": return new Command('data merge ' + getTarget() + ' ' + json.encode(nbt));
-      case "get": return new Command('data get ' + getTarget() + ' ' + path + ' ' + scale.toString());
+      case "get": return new Command('data get ' + getTarget() + ' ' + path + ' ' + (scale < 0.000001 ? scale.toStringAsFixed(10): scale.toString()));
       case "remove": return new Command('data remove ' + getTarget() + ' ' + path);
       case "modify": return new Command('data modify ' + getTarget() + ' ' + modify.toString());
     }

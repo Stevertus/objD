@@ -11,11 +11,11 @@ class Location {
     x = y = z = 0;
   }
   /// The Location class provides a wrapper for global(9 9 9) coordinates:
-  Location.glob({@required this.x, @required this.y, @required this.z}) {
+  Location.glob({this.x = 0, this.y = 0, this.z = 0}) {
     _location = x.toString() + " " + y.toString() + " " + z.toString();
   }
   /// The Location class provides a wrapper for relative(~ ~ ~) coordinates:
-  Location.rel({@required this.x, @required this.y, @required this.z}) {
+  Location.rel({this.x = 0, this.y = 0, this.z = 0}) {
     _location = "~" +
         (x == 0 ? "" : x.toString()) +
         " ~" +
@@ -24,7 +24,7 @@ class Location {
         (z == 0 ? "" : z.toString());
   }
   /// The Location class provides a wrapper for local(^ ^ ^) coordinates:
-  Location.local({@required this.x, @required this.y, @required this.z}) {
+  Location.local({this.x = 0, this.y = 0, this.z = 0}) {
     _location = "^" +
         (x == 0 ? "" : x.toString()) +
         " ^" +

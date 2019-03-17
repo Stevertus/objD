@@ -17,8 +17,9 @@ class For extends Widget {
 /// )
 /// ```
   For({@required Function create, @required int to, int from = 0,int step =1}){
-    for (var i = from; i <= to; i+= step) {
-      _list[i] = create(i);
+    _list = [];
+    for (var i = from; i <= to; i += step) {
+      _list.add(create(i));
     }
   }
 /// There is an Constructor for looping through a given list of widgets:

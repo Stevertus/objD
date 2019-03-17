@@ -1,4 +1,3 @@
-import 'package:objd/basic/command.dart';
 import 'package:objd/basic/condition.dart';
 import 'package:objd/basic/entity.dart';
 import 'package:objd/wrappers/comment.dart';

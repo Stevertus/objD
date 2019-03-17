@@ -13,16 +13,17 @@ class Teleport extends Widget {
   Teleport(this.entity,{@required Location to, dynamic facing, Rotation rot}){
     this.to = to.toString();
     if(rot != null) this.to += " " + rot.toString();
-    if(facing != null){
-      if(facing is Entity || facing is Location) this.to += " facing " + facing.toString();
-      else throw("Please set the facing part either to a entity or location");
-    }
+    _setFacing(facing);
   }
 
   Teleport.entity(this.entity,{Entity to, dynamic facing}){
     this.to = to.toString();
-    if(facing != null){
-      if(facing is Entity || facing is Location) this.to += " facing " + facing.toString();
+    _setFacing(facing);
+  }
+  _setFacing(facing){
+      if(facing != null){
+      if(facing is Location) this.to += " facing " + facing.toString();
+      else if(facing is Entity) this.to += " facing entity " + facing.toString();
       else throw("Please set the facing part either to a entity or location");
     }
   }

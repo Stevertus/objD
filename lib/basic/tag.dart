@@ -1,8 +1,10 @@
 import 'package:meta/meta.dart';
+import 'package:objd/basic/for_list.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/basic/command.dart';
 import 'package:objd/basic/entity.dart';
 import 'package:objd/build/build.dart';
+import 'package:objd/wrappers/if.dart';
 
 class Tag extends Widget {
   bool value;
@@ -16,6 +18,37 @@ class Tag extends Widget {
 
   add() => Tag(tag,entity: entity,value: true);
   remove() => Tag(tag,entity: entity,value: false);
+/// With the toggle method you can toggle the value(invert the tag). This is done with a temporary tag:
+/// ```dart
+/// Tag("mytag",entity:Entity.Selected()).toggle()
+/// ⇒ execute if entity @s[tag=mytag] run tag @s add objd_temp
+/// ⇒ execute if entity @s[tag=objd_temp] run tag @s remove mytag
+/// ⇒ execute if entity @s[tag=!objd_temp] run tag @s add mytag
+/// ⇒ tag @s remove objd_temp
+/// ```
+  toggle({String temp = "objd_temp"}) {
+    var tempTag = Tag(temp,entity: entity);
+    return For.of([
+      If(this,Then:[tempTag]),
+      If(tempTag,Then:[Tag(tag,entity: entity,value: false)]),
+      If(Tag("!"+temp,entity: entity),Then:[Tag(tag,entity: entity,value: true)]),
+      tempTag.remove()
+    ]);
+  }
+/// The `removeIfExists` method removes the tag and may execute some action before if the tag exists.
+/// ```dart
+/// Tag("mytag",entity:Entity.Selected()).removeIfExists(
+/// 	then: Say(msg:"removed")
+/// ) // optional argument
+/// ⇒ execute if entity @s[tag=mytag] run say removed
+/// ⇒ execute if entity @s[tag=mytag] run tag @s remove mytag
+/// ```
+  removeIfExists({Widget then}){
+    return If(this,Then:[
+      then,
+      this.remove()
+    ]);
+  }
 
   String getEntity(){
     var args = new Map.from(entity.arguments);

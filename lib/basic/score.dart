@@ -29,6 +29,15 @@ class Score extends Widget {
     if(commands != null) _commands = commands; 
     if(addNew) _commands.add(Scoreboard(score));
   }
+  /// same as Score() but with a predefined entity(Entity.Selected())
+  /// ```dart
+/// Score.fromSelected("objective").set(3)
+/// ⇒ scoreboard players set @s objective 3
+/// ```
+  Score.fromSelected(this.score,{bool addNew = true}){
+    entity =Entity.Selected();
+    if(addNew) _commands.add(Scoreboard(score));
+  }
   Score.str(this._strGen,{this.score = "",String match = "0"}){
     _match =match;
   }

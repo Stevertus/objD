@@ -1,5 +1,5 @@
 name: objd
-version: 0.1.0
+version: 0.1.2
 
 author: Stevertus <stevertusyt@gmail.com>
 homepage: https://stevertus.com/objD
@@ -18,3 +18,4 @@ executables:
   run:
   watch:
   new:
+  objd:

@@ -7,6 +7,7 @@ import 'package:objd/basic/score.dart';
 import 'package:objd/basic/tag.dart';
 import 'package:objd/wrappers/execute.dart';
 import 'package:meta/meta.dart';
+import 'package:objd/wrappers/team.dart';
 
 abstract class EntityClass {
   String selector;
@@ -15,27 +16,28 @@ abstract class EntityClass {
 class Entity implements EntityClass{
   String selector;
   /// creates an entity with @p
-  Entity.Player ({Range distance,List<dynamic> tags,Map<String,dynamic> nbt,List<Score> scores,Range level, Gamemode gamemode, Area area, String name, Range horizontalRotation, Range verticalRotation}) :
-    this(selector: 'p',distance:distance,tags:tags,scores:scores,nbt:nbt,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
+  Entity.Player ({Range distance,List<dynamic> tags,Team team,Map<String,dynamic> nbt,List<Score> scores,Range level, Gamemode gamemode, Area area, String name, Range horizontalRotation, Range verticalRotation}) :
+    this(selector: 'p',distance:distance,tags:tags,team:team,scores:scores,nbt:nbt,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
   /// creates an entity with an implicit name
   Entity.PlayerName (String name): this(playerName:name);
   /// creates an entity with @a
-  Entity.All ({Range distance,List<dynamic> tags,Map<String,dynamic> nbt,int limit,List<Score> scores,Range level, Gamemode gamemode, Area area, String name, Range horizontalRotation, Range verticalRotation}): 
-    this(selector: 'a',limit:limit,distance:distance,tags:tags,nbt:nbt,scores:scores,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
+  Entity.All ({Range distance,List<dynamic> tags,Team team,Map<String,dynamic> nbt,int limit,List<Score> scores,Range level, Gamemode gamemode, Area area, String name, Range horizontalRotation, Range verticalRotation}): 
+    this(selector: 'a',limit:limit,distance:distance,tags:tags,team:team,nbt:nbt,scores:scores,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
 
   /// creates an entity with @r
-  Entity.Random({EntityType type,Range distance,List<dynamic> tags,Map<String,dynamic> nbt,int limit,List<Score> scores,Range level, Gamemode gamemode, Area area, String name, Range horizontalRotation, Range verticalRotation}): 
-    this(selector: 'r',type:type,limit:limit,distance:distance,tags:tags,nbt:nbt,scores:scores,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
+  Entity.Random({EntityType type,Range distance,List<dynamic> tags,Team team,Map<String,dynamic> nbt,int limit,List<Score> scores,Range level, Gamemode gamemode, Area area, String name, Range horizontalRotation, Range verticalRotation}): 
+    this(selector: 'r',type:type,limit:limit,distance:distance,tags:tags,team:team,nbt:nbt,scores:scores,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
 
   /// creates an entity with @s
-  Entity.Selected ({EntityType type, Range distance,List<dynamic> tags,Map<String,dynamic> nbt,List<Score> scores,Range level, Gamemode gamemode, Area area, String name, Range horizontalRotation, Range verticalRotation}):
-    this(selector: 's',type:type,distance:distance,tags:tags,nbt:nbt,scores:scores,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
+  Entity.Selected ({EntityType type, Range distance,List<dynamic> tags,Team team,Map<String,dynamic> nbt,List<Score> scores,Range level, Gamemode gamemode, Area area, String name, Range horizontalRotation, Range verticalRotation}):
+    this(selector: 's',type:type,distance:distance,tags:tags,team:team,nbt:nbt,scores:scores,level: level,area: area,gamemode: gamemode,name: name,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
   // Todo: implement Scores, Tags, Area, Nbt
   /// Entity is an util class to convert an argument list into the Minecraft Entity format(@p...)
   Entity({
       this.selector = 'e',
       int limit,
       List<dynamic> tags,
+      Team team,
       List<Score> scores,
       Map<String,dynamic> nbt,
       EntityType type,
@@ -54,10 +56,11 @@ class Entity implements EntityClass{
     if(type != null) arguments['type'] = type.toString();
     if(gamemode != null) arguments['gamemode'] = gamemode.toString().split('.').last;
     if(name != null) arguments['name'] = name;
-    if(horizontalRotation != null) arguments['horizontalRotation'] = horizontalRotation.toString();
-    if(verticalRotation != null) arguments['verticalRotation'] = verticalRotation.toString();
+    if(horizontalRotation != null) arguments['y_rotation'] = horizontalRotation.toString();
+    if(verticalRotation != null) arguments['x_rotation'] = verticalRotation.toString();
     if(area != null) arguments.addAll(area.getRanges());
     if(nbt != null) arguments['nbt'] = json.encode(nbt);
+    if(team != null) arguments['team'] = team.name;
     if(tags != null){
       arguments['tag'] = [];
       tags.forEach((tag){
@@ -99,6 +102,12 @@ class Entity implements EntityClass{
 
   Tag addTag(String tag){
     return Tag(tag,entity: this,value: true);
+  }
+  Team joinTeam(String team){
+    return Team.join(team, this);
+  }
+  Team leaveTeam(){
+    return Team.leave(this);
   }
   For addTags(List<String> tags){
     return For.of(tags.map((tag) => Tag(tag,entity: this,value: true)).toList());

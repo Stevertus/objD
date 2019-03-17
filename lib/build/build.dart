@@ -28,18 +28,21 @@ Map _getFiles(dynamic wid, Map ret, int currentPackIndex) {
     // does the current pack exist?
     assert(ret['packs'][currentPackIndex] != null);
 
+    // do we need to create this file?
+    if(wid is File && wid.create == false) return ret;
+
     // is there already a file with this path?
     var fileIndex = ret['packs'][currentPackIndex]['files']
         .indexWhere((file) => file.path == wid.path);
 
-    if (fileIndex >= 0) {
+    if (fileIndex >= 0 && wid is Extend) {
 
       List<Widget> children = [
             ret['packs'][currentPackIndex]['files'][fileIndex].child,
             wid.child
       ];
 
-      if(wid is File || wid.first == true ){
+      if(wid.first == true ){
         children = children.reversed.toList();
       }
 

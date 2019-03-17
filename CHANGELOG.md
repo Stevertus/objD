@@ -1,3 +1,21 @@
+## 0.1.2
+* added RandomScore
+* added a Team wrapper
+* added a team option for entities as well as joinTeam and leaveTeam methods
+* added Repeat to repeat code with delay
+* added Log Widget to quickly print Messages, Scores or Entities in the chat
+* added ArmorStand Widget to create an armorstand
+* added Hologram to display text
+* added AreaEffectCloud
+* added Tag.toggle
+* added a create option to File
+* added a nbt option for Setblock
+* added Score.fromSelected to avoid annoying Entity.Selected
+* changed summon arguments
+* changed effect to also support nbt effects
+* changed Location to optional arguments
+* fixed when there are two identical files that they would extend
+
 ## 0.1.1
 * added AroundLocation widget
 * added Trigger wrapper
