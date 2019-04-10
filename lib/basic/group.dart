@@ -34,7 +34,7 @@ class Group extends Widget {
       this.suffix,
       this.path = "objd",
       this.groupMin = 3,
-      this.filename = "group",generateIDs=true}) {
+      this.filename = "group",bool generateIDs=true}) {
     assert(children != null);
     if (groupMin > -1 && children.length > 0 && children.length >= groupMin) {
       if(generateIDs){

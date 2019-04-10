@@ -95,6 +95,9 @@ Map _getFiles(dynamic wid, Map ret, int currentPackIndex) {
     files.forEach((file) {
       ret = _getFiles(file, ret, currentPackIndex);
     });
+
+    Group.fileId = 1;
+
     return ret;
   }
   if (wid is For) {

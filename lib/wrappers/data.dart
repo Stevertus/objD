@@ -16,6 +16,7 @@ class Data extends Widget {
   DataModify modify;
 
   Map<String,dynamic> nbt;
+  String strNbt;
 
   /// The Data Widgets allows you to edit nbt data of Entities or Blocks.
 /// ```dart
@@ -32,7 +33,7 @@ class Data extends Widget {
     handleTarget(target);
     _subcommand = type;
   }
-  Data.merge(dynamic target,{this.nbt = const {}}){
+  Data.merge(dynamic target,{this.nbt = const {},this.strNbt}){
     handleTarget(target);
     _subcommand = "merge";
   }
@@ -86,12 +87,17 @@ class Data extends Widget {
   @override
   Widget generate(Context context){
     switch (_subcommand) {
-      case "merge": return new Command('data merge ' + getTarget() + ' ' + json.encode(nbt));
+      case "merge": return new Command('data merge ' + getTarget() + ' ' + _getNbt());
       case "get": return new Command('data get ' + getTarget() + ' ' + path + ' ' + (scale < 0.000001 ? scale.toStringAsFixed(10): scale.toString()));
       case "remove": return new Command('data remove ' + getTarget() + ' ' + path);
-      case "modify": return new Command('data modify ' + getTarget() + ' ' + modify.toString());
+      case "modify": return new Command('data modify ' + getTarget() + ' ${path} ${modify}');
     }
     return new Command("");
+  }
+
+  _getNbt(){
+    if(strNbt != null && strNbt.isNotEmpty) return strNbt;
+    return json.encode(nbt);
   }
 }
 /// There are five sub operations again: set, merge, prepend, append and insert.

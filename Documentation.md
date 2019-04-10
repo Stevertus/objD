@@ -33,7 +33,7 @@ And inside of that create a file named `pubspec.yaml` and another folder called 
 Open the pubspec.yaml file and add 
 ```yaml
 dependencies:  
-   objd: ^0.1.2
+   objd: ^0.1.3
 ```
 And run 
 ```
@@ -397,6 +397,7 @@ Group(
 |team|a Team the entity has to be part of|
 |type|[EntityType](), id of the entity|
 |nbt|a Map of required nbt properties|
+|strNbt| option to override the nbt map with a String to support expressions like `1b` |
 |area|A Area where the entity should be|
 |distance| [Range]() to the entity|
 |level|Range of experience levels|
@@ -419,10 +420,12 @@ storeResult stores a result or success of a command in the nbt path of an entity
 Entity.Selected().storeResult(
 	Command('say hello'),
 	path: "Invisisble",
+	scale: 1,
+	datatype: "byte"
 	useSuccess:true
 )
 
-⇒ execute store success entity @s Invisisble run say hello
+⇒ execute store success entity @s Invisisble byte 1 run say hello
 ```
 
 |Sort|
@@ -821,6 +824,7 @@ The Data Widgets allows you to edit nbt data of Entities or Blocks.
 |--|--|
 |dynamic|The target Entity OR Block which you want to modify|
 |nbt|A Dart Map containing new nbt data|
+|strNbt| option to override the nbt map with a String to support expressions like `1b` |
 |type|A String defining the operation type(default=merge)|
 
 **Example:**
@@ -1161,6 +1165,7 @@ If just gives you an execute wrapper with if and else statements. The conditions
 |Else|a List of Widget that runs if it does not match(optional)|
 |targetFilePath|force the group to use this path instead of `/objd/`|
 |targetFileName|force the group to use this name instead of automatic generated names|
+|encapsulate| bool whether it should create a new file |
 
 **Example:**
 ```dart
@@ -1739,7 +1744,6 @@ Trigger.set(
 ⇒ trigger test_objective set 5
 ```
 
-
 [//]: # (text/main)
 # Texts and Strings
 
@@ -1816,6 +1820,39 @@ TextComponent.selector(
 )
 ⇒ {"selector":"@e[name=hello]","color":"black"}
 ```
+
+|TextComponent.entityNbt| |
+|--|--|
+|Entity|the entity which has nbt to display|
+|path| the path as a String |
+|interpret|bool if nbt should be interpreted as TextComponent(optional)|
+|...same properties...|from TextComponent|
+
+```dart
+TextComponent.entityNbt(
+	Entity.Selected(),
+	path: "CustomName"
+	underlined: true
+)
+⇒ {"entity":"@s","nbt":"CustomName","underlined":true}
+```
+
+|TextComponent.blockNbt| |
+|--|--|
+|Location|a location of a block|
+|path| the path as a String |
+|interpret|bool if nbt should be interpreted as TextComponent(optional)|
+|...same properties...|from TextComponent|
+
+```dart
+TextComponent.blockNbt(
+	Location.glob(x:5,y:10,z:100),
+	path: "Items[0].tag.display.Name"
+	interpret: true
+)
+⇒ {"block":"5 10 100","nbt":"Items[0].tag.display.Name","interpret":true}
+```
+
 
 [//]: # (text/colors)
 ## Colors
@@ -1965,6 +2002,55 @@ Tellraw(
 	]
 )
 ⇒ tellraw @p [{"text":"hey","color":"black"}]
+```
+[//]: # (text/bossbar)
+## Bossbar
+The Bossbar shows up on the top of a specific player screen and displays a text with a value bar.
+
+|constructor||
+|--|--|
+|String|id of the bossbar(tip: use [namespace]:id to avoid interference)|
+|name| a String for the displayed text(optional) |
+
+This alone would add a new bossbar to the game:
+```dart
+Bossbar("test:mybar","This is my bar")
+⇒ bossbar add test:mybar {"text":"This is my bar"}
+```
+To modifiy some properties, there are some methods on the Bossbar to change the output:
+### Methods
+
+**remove** - removes the selected bossbar in the game
+**show** - takes in an entity and shows the bossbar for the selected players
+**get** - gets an BossbarOption of the specified Bossbar
+
+> BossbarOption.max, BossbarOption.value, BossbarOption.visible or BossbarOption.players
+
+|set| sets an option of the bossbar |
+|--|--|
+|name| displayed String |
+|nameTexts| a List of TextComponents that override the name with more control |
+|color| the Color of the Bossbar |
+|style| a Style Mode |
+|value| the displayed value |
+|max| the maximum amount of the displayed value |
+|visible| bool if the bossbar is visible|
+|players| the Entityselector to which the bossbar is displayed |
+
+The set method generates multiple commands: 
+```dart
+Bossbar("test:mybar").set(
+	name:"My name",
+	value: 5,
+	max: 10,
+	color: Color.Red,
+	players: Entity.All()
+)
+⇒ bossbar set test:mybar name {"text":"My name"}
+⇒ bossbar set test:mybar color red
+⇒ bossbar set test:mybar value 5
+⇒ bossbar set test:mybar max 10
+⇒ bossbar set test:mybar players @a 
 ```
 
 [//]: # (utils/main)
@@ -2182,6 +2268,7 @@ If you wish you can also assign each line a seperate TextComponent with `Hologra
 |--|--|
 |List of TextComponents|Component for each line|
 |...| same as Hologram|
+
 [//]: # (utils/randomscore)
 ## RandomScore
 The RandomScore Widget assigns a random value to a score using the UUID of an areaeffectcloud.
@@ -2255,13 +2342,16 @@ To run a command run:
 ```
 objd [command] [args]
 ```
-OR (does not always work)
+OR
 ```
 pub global run objd:[command] [args]
 ```
+> If the objd command is not available, you have to add the pub cache to your system path. Follow this tutorial: [https://www.dartlang.org/tools/pub/cmd/pub-global#running-a-script-from-your-path](https://www.dartlang.org/tools/pub/cmd/pub-global#running-a-script-from-your-path)
+
+
 
 ### Commands
-* **objd** - opens a help menu with all commands
+* **help** - opens a help menu with all commands
 * **new** [project_name] - generates a new project from a boilerplate
 * **run** [project_root] - builds one project
 * **serve** [directory] [project_root] - watches the directory to change and builds the project on change

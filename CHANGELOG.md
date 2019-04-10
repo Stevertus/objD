@@ -1,3 +1,13 @@
+## 0.1.3
+
+* added Bossbar
+* added nbt TextComponents
+* added encapsulate to If
+* added strNbt to Data and Entity to support unvalid json chars
+* reworked the global console commands and binaries
+* fixed data modify
+* fixed missing datatype and scale with entity.storeResult
+
 ## 0.1.2
 * added RandomScore
 * added a Team wrapper

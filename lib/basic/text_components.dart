@@ -4,6 +4,7 @@ import 'package:objd/basic/entity.dart';
 import 'dart:convert';
 
 import 'package:objd/basic/item.dart';
+import 'package:objd/basic/location.dart';
 import 'package:objd/basic/score.dart';
 
 class TextComponent {
@@ -26,6 +27,14 @@ class TextComponent {
   }
   TextComponent.score(Score score, { this.color,this.bold,this.italic, this.underlined, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){
     value = {"score":{"name":score.entity.toString(),"objective":score.score}};
+  }
+  TextComponent.entityNbt(Entity entity, { @required String path,bool interpret,this.color,this.bold, this.underlined,this.italic, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){
+    value = {"nbt":path,"entity":entity.toString()};
+    if(interpret != null) value["interpret"] = interpret;
+  }
+  TextComponent.blockNbt(Location location, { @required String path,bool interpret,this.color,this.bold, this.underlined,this.italic, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){
+    value = {"nbt":path,"block":location.toString()};
+    if(interpret != null) value["interpret"] = interpret;
   }
   // shows entity
   TextComponent.selector(Entity entity, {this.color,this.bold, this.underlined,this.italic, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){

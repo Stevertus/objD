@@ -8,6 +8,13 @@ class MainFile extends Widget {
   Widget generate(Context context) {
     return For.of([
       // put your tick widgets here
+      Bossbar("test:mybar").set(
+	name:"My name",
+	value: 5,
+	max: 10,
+	color: Color.Red,
+	players: Entity.All()
+)
     ]);
   }
 }

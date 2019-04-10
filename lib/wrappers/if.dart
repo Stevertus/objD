@@ -14,6 +14,7 @@ class If extends Widget {
   If elseWidget;
   bool invert = false;
   Entity assignTag;
+  bool encapsulate;
 
   String targetFilePath;
   String targetFileName;
@@ -38,6 +39,7 @@ class If extends Widget {
       this.Else,
       this.targetFilePath = "objd",
       this.targetFileName,
+      this.encapsulate = true,
       this.assignTag}) {
     assert(Then != null);
     assert(Then.isNotEmpty);
@@ -104,6 +106,7 @@ class If extends Widget {
             path:targetFilePath,
             generateIDs: targetFileName == null,
             filename: targetFileName ?? "if",
+            groupMin: encapsulate ? 3 : -1,
             children: Then));
       });
     }
