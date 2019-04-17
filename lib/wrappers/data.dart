@@ -92,7 +92,7 @@ class Data extends Widget {
       case "remove": return new Command('data remove ' + getTarget() + ' ' + path);
       case "modify": return new Command('data modify ' + getTarget() + ' ${path} ${modify}');
     }
-    return new Command("");
+    throw("Invalid subcommand!");
   }
 
   _getNbt(){

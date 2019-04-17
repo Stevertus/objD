@@ -53,8 +53,8 @@ class Group extends Widget {
   Widget generate(Context context) {
     if (_isFile) {
       return File(
+        getPath(),
         execute: true,
-        path: getPath(),
         child: For.of(children),
       );
     }

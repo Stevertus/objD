@@ -2,7 +2,8 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
 import 'package:colorize/colorize.dart';
-void generateIO(Map prj,{fullBuild = true}) {;
+void generateIO(Map prj,{fullBuild = true}) {
+  print(prj);
   if(Directory(prj['path']).existsSync() == false) throw('Please ensure that the project path is a existing directory!');
   String path = prj['path'] + prj['name'] + '/';
   _ensureDirExists(path);

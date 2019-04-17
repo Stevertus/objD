@@ -22,12 +22,12 @@ class File extends Widget {
 	/// 	)
 	/// )
   /// ```
-  File({@required this.path, this.child, this.execute = false,this.pack,this.create = true}){
+  File(this.path,{this.child, this.execute = false,this.pack,this.create = true}){
     this.path.replaceAll('.mcfunction', '');
     if(this.path.substring(0,1) == '/') this.path = this.path.substring(1);
   }
   /// the execute subconstructor adds an execution statement forwarding to the new file into the original
-  File.execute({@required this.path, this.child,this.pack,this.create = true}){
+  File.execute(this.path,{this.child,this.pack,this.create = true}){
     this.path.replaceAll('.mcfunction', '');
     if(this.path.substring(0,1) == '/') this.path = this.path.substring(1);
     execute = true;
