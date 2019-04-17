@@ -14,7 +14,10 @@ class MainFile extends Widget {
 	max: 10,
 	color: Color.Red,
 	players: Entity.All()
-)
+),
+File("test"),
+Extend("test",child: Say(msg:"my mes")),
+Pack(name: "hello",main:File("main",child:For.of([File("test"),Execute.as(Entity.All(),children: [Say(msg: "Hello"),Say(msg: "Hello"),Say(msg: "Hello")]),Execute.as(Entity.All(),children: [Say(msg: "Hello"),Say(msg: "Hello"),Say(msg: "Hello")]),Schedule("myname",ticks:5)])))
     ]);
   }
 }

@@ -2,7 +2,7 @@
 
 import 'package:objd/basic/pack.dart';
 import 'package:objd/build/buildPack.dart';
-import 'package:objd/build/create_project.dart';
+import 'package:objd/build/project.dart';
 import 'package:objd/build/findPack.dart';
 
 class BuildProject {
@@ -18,12 +18,13 @@ class BuildProject {
       packs = [
         BuildPack(findPack(prj.generate))
       ];
+      packs.first.generate(prj:this);
     }
 
     addPack(Pack pack){
       if(packs.any((pac) => pack.name == pac.name)) throw("You specified two packs with the same name!");
       packs.add(BuildPack(pack));
-      // TODO: Generate Pack
+      packs.last.generate(prj:this);
     }
 
         @override

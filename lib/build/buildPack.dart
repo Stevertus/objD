@@ -4,6 +4,8 @@ import 'package:objd/basic/extend.dart';
 import 'package:objd/basic/file.dart';
 import 'package:objd/basic/pack.dart';
 import 'package:objd/build/buildFile.dart';
+import 'package:objd/build/buildProject.dart';
+import 'package:objd/build/context.dart';
 
 class BuildPack {
     String name;
@@ -11,8 +13,10 @@ class BuildPack {
     List<String> scoreboards;
     String main;
     String load;
+    Context context;
 
     BuildPack(Pack pack){
+      Stopwatch stopwatch = new Stopwatch()..start();
       name = pack.name;
       scoreboards = [];
 
@@ -25,20 +29,38 @@ class BuildPack {
         files[load] = BuildFile(pack.load);
       }
 
-      pack.files.forEach((file) => files[file.path] = BuildFile(file));
+      if(pack.files != null) pack.files.forEach((file) => files[file.path] = BuildFile(file));
+
+      context = new Context(packId: name,loadFile: load,mainFile: main);
+      print("Compiled Pack ${name} in ${stopwatch.elapsedMilliseconds}ms");
     }
 
     addScoreboard(String name){
       if(!scoreboards.contains(name)) scoreboards.add(name);
     }
 
-    addFile(File file){
+    addFile(File file, BuildProject prj){
       files[file.path] = new BuildFile(file);
-      // TODO: Build file
+      files[file.path].generate(context: context,pack: this,prj: prj);
     }
 
-    extendFile(Extend file,{bool front}){
+    extendFile(Extend file,{bool front, BuildProject prj}){
+      BuildFile myfile = new BuildFile.extended(file);
+      myfile.generate(context: context,pack: this,prj: prj);
+      if(files[file.path] == null){
+        files[file.path] = myfile;
+      } else if(front) {
+        files[file.path].commands.insertAll(0, myfile.commands);
+      } else {
+        files[file.path].commands.addAll(myfile.commands);
+      }
+    }
 
+    generate({BuildProject prj}){
+      
+      for (var i = 0; i < files.length; i++) {
+        files.values.toList()[i].generate(context: context,pack: this,prj: prj);
+      }
     }
 
     @override

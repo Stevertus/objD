@@ -12,6 +12,7 @@ import 'package:objd/build/context.dart';
 scan(Widget wid,
     {BuildFile file, BuildPack pack, BuildProject project, Context context}) {
   file.add(_findText(wid, context));
+  if(findFile(wid,context: context,pack: pack,project: project)) return;
 
   if (wid is Group) {
     scan(
@@ -30,7 +31,7 @@ scan(Widget wid,
     // is single widget
     if (child is Widget)
       scan(
-        wid.generate(context),
+        child,
         file: file,
         pack: pack,
         project: project,
@@ -40,7 +41,7 @@ scan(Widget wid,
     if (child is List<Widget>) {
       child.forEach((x) {
         scan(
-          x.generate(context),
+          x,
           file: file,
           pack: pack,
           project: project,
@@ -48,7 +49,7 @@ scan(Widget wid,
         );
       });
     }
-    throw "Cannot build Widget: " + wid.toString();
+    //throw "Cannot build Widget: " + wid.toString();
   }
 }
 
@@ -66,19 +67,20 @@ String _findText(Widget wid, Context context) {
 }
 
 bool findFile(Widget wid,{BuildPack pack, BuildProject project, Context context}){
-
   if( wid is File){
-    if(wid.create) pack.addFile(wid);
+    if(wid.create) pack.addFile(wid,project);
     return !wid.execute;
   }
   if( wid is Extend){
     pack.extendFile(wid,front: wid.first);
+    return true;
   }
 
   if( wid is Pack){
     project.addPack(wid);
+    return true;
   }
 
   // return value true sets end of branch
-  return true;
+  return false;
 }
