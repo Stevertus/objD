@@ -10,6 +10,9 @@ main(List args){
 
   var watcher = DirectoryWatcher(p.absolute(args[0]));
 
+    print("objD will now watch all your files in ${args[0]} and generate the datapack itself");
+    run.main(args.sublist(1));
+
   watcher.events.listen((event) {
     if(event.path.split('.').last == "dart") run.main(args.sublist(1));
   });

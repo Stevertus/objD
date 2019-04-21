@@ -27,13 +27,12 @@ class BuildProject {
       packs.last.generate(prj:this);
     }
 
-        @override
-  String toString() {
+  Map toMap() {
     return {
       "name": name,
       "path": path,
-      "packs": packs.map((pack) => pack.toString()).toList(),
+      "packs": packs.map((pack) => pack.toMap()).toList(),
       "description":description
-    }.toString();
+    };
   }
 }

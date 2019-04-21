@@ -32,12 +32,13 @@ class BuildFile {
   }
 
   add(String str){
-    if(str != null && str.isNotEmpty) commands.add(str);
+    if(str != null && str.isNotEmpty){
+      commands.add(str);
+    } 
   }
 
-  @override
-  String toString() {
-    return commands.toString();
+  List toMap() {
+    return commands;
   }
 
   generate({Context context, BuildPack pack, BuildProject prj}){

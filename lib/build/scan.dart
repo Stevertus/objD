@@ -29,7 +29,7 @@ scan(Widget wid,
   if (wid is Widget) {
     dynamic child = wid.generate(context);
     // is single widget
-    if (child is Widget)
+    if (child is Widget){
       scan(
         child,
         file: file,
@@ -37,6 +37,9 @@ scan(Widget wid,
         project: project,
         context: context,
       );
+      return;
+    }      
+
     // is list widget
     if (child is List<Widget>) {
       child.forEach((x) {

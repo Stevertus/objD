@@ -15,7 +15,6 @@ import './io.dart';
 ///```
 void createProject(Project prj) {
   Stopwatch stopwatch = new Stopwatch()..start();
-  // print(prj.toMap());
   generateIO(BuildProject(prj));
   print("Total Generation Time: ${stopwatch.elapsedMilliseconds}ms");
 }

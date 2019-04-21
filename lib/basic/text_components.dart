@@ -73,7 +73,7 @@ class TextClickEvent {
   /// runs given command
   TextClickEvent.run_command (Command command){
     action = "run_command";
-    value = command.toMap()["command"] ?? "";
+    value = "/" + ( command.toMap()["command"] ?? "");
   }
   /// copies command in chat
   TextClickEvent.suggest (String text){

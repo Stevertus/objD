@@ -8,16 +8,13 @@ class MainFile extends Widget {
   Widget generate(Context context) {
     return For.of([
       // put your tick widgets here
-      Bossbar("test:mybar").set(
-	name:"My name",
-	value: 5,
-	max: 10,
-	color: Color.Red,
-	players: Entity.All()
-),
-File("test"),
-Extend("test",child: Say(msg:"my mes")),
-Pack(name: "hello",main:File("main",child:For.of([File("test"),Execute.as(Entity.All(),children: [Say(msg: "Hello"),Say(msg: "Hello"),Say(msg: "Hello")]),Execute.as(Entity.All(),children: [Say(msg: "Hello"),Say(msg: "Hello"),Say(msg: "Hello")]),Schedule("myname",ticks:5)])))
+      If(Entity(),Then: [
+        Log("1"),
+        Log("2"),
+        Log("2"),
+        Log("2"),
+        Log("2"),
+      ])
     ]);
   }
 }

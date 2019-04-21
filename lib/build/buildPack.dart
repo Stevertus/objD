@@ -41,7 +41,7 @@ class BuildPack {
 
     addFile(File file, BuildProject prj){
       files[file.path] = new BuildFile(file);
-      files[file.path].generate(context: context,pack: this,prj: prj);
+      //files[file.path].generate(context: context,pack: this,prj: prj);
     }
 
     extendFile(Extend file,{bool front, BuildProject prj}){
@@ -63,13 +63,12 @@ class BuildPack {
       }
     }
 
-    @override
-  String toString() {
+  Map toMap() {
     return {
       "name": name,
-      "files": files.map((key,file) => MapEntry(key,file.toString())),
+      "files": files.map((key,file) => MapEntry(key,file.toMap())),
       "main":main,
       "load":load
-    }.toString();
+    };
   }
 }
