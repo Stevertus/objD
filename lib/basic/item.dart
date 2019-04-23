@@ -29,6 +29,11 @@ class Item {
       tag["display"]['Lore'] = lore.map((lor) => lor.toJson()).toList();
     }  
   }
+
+  Item.Book(List<BookPage> pages, ){
+
+  }
+
   String getGiveNotation(){
     String result = type.toString();
     if(tag != null && tag.length > 0){
@@ -49,6 +54,20 @@ class Item {
     return json.encode(this.getMap());
   }
 }
+
+class BookPage {
+  List<TextComponent> list;
+  BookPage(dynamic content){
+    if(content is TextComponent) list = [content];
+    if(content is String) list = [TextComponent(content)];
+    if(content is List<TextComponent> ) list = content;
+  }
+
+  BookPage.customFont(String char){
+    list = [TextComponent.customFont(char)];
+  }
+}
+
 /// ItemType is like EntityType or Block a utility class to provide a list of all available items.
 class ItemType {
   final String _type;

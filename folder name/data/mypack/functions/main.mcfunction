@@ -1,1 +1,0 @@
-execute if entity @e run function mypack:objd/if1

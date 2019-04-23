@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 import 'package:objd/build/buildProject.dart';
 import 'package:objd/build/project.dart';
 export 'package:objd/build/project.dart';
@@ -13,8 +15,10 @@ import './io.dart';
 /// createProject()
 ///}
 ///```
-void createProject(Project prj) {
+void createProject(Project prj,[List<String> args = const []]) {
   Stopwatch stopwatch = new Stopwatch()..start();
-  generateIO(BuildProject(prj));
+  GenOptions opt = GenOptions(args);
+  generateIO(BuildProject(prj,prod: opt.prod),opt);
   print("Total Generation Time: ${stopwatch.elapsedMilliseconds}ms");
 }
+

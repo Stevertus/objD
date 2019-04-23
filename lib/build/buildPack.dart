@@ -46,10 +46,14 @@ class BuildPack {
 
     extendFile(Extend file,{bool front, BuildProject prj}){
       BuildFile myfile = new BuildFile.extended(file);
-      myfile.generate(context: context,pack: this,prj: prj);
       if(files[file.path] == null){
         files[file.path] = myfile;
-      } else if(front) {
+        return;
+      }
+      
+      myfile.generate(context: context,pack: this,prj: prj);
+
+      if(front) {
         files[file.path].commands.insertAll(0, myfile.commands);
       } else {
         files[file.path].commands.addAll(myfile.commands);
@@ -57,8 +61,9 @@ class BuildPack {
     }
 
     generate({BuildProject prj}){
-      
+      if(prj.prod) context.prod = true;
       for (var i = 0; i < files.length; i++) {
+        context.file = files.values.toList()[i].path;
         files.values.toList()[i].generate(context: context,pack: this,prj: prj);
       }
     }

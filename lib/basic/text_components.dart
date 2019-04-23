@@ -20,6 +20,46 @@ class TextComponent {
   TextComponent(String text, {this.color,this.bold, this.underlined,this.italic, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){
     value = {"text":text};
   }
+  TextComponent.customFont(String char, {this.color,this.bold, this.underlined,this.italic, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){
+    if(char.length > 1 && char.substring(0,1) == "\\") char = "\\[repl]" + char;
+    value = {"text":char};
+  }
+  TextComponent.space(int pixels, {this.color,this.bold, this.underlined,this.italic, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){
+    Map nums = {
+      1024: "F",
+      512: "E",
+      256: "D",
+      128: "C",
+      64: "B",
+      32: "A",
+      16: "9",
+      8: "8",
+      7: "7",
+      6: "6",
+      5: "5",
+      4: "4",
+      3: "3",
+      2: "2",
+      1: "1",
+    };
+    bool isNeg = pixels < 0;
+    if(isNeg) pixels * -1;
+    if(pixels == 0) throw("Please insert a pixel amount on how much you want to move characters");
+    List<String> amounts = [];
+    for (var value in nums.keys) {
+      if(pixels >= value) {
+        amounts.add(nums[value]);
+        pixels -= value;
+      }
+    }
+    String res = "";
+    amounts.forEach((am){
+      if(isNeg) res = "\u005CuF82";
+      else res = "\u005CuF80";
+      res+= am;
+    });
+    value = {"text":res};
+  }
   // translates from a key in the translations
   TextComponent.translate(String key, {List<String> conversionFlags,this.color,this.bold,this.italic, this.underlined, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){
     value = {"translate":key};
@@ -56,7 +96,7 @@ class TextComponent {
     return ret;
   }
   String toJson(){
-    return json.encode(this.toMap());
+    return json.encode(this.toMap()).replaceAll("\\[repl]\\", "\\");
   }
 }
 /// Fires on left click, Part of TextComponent.

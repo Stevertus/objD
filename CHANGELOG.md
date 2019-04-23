@@ -1,3 +1,15 @@
+## 0.2
+* Completly reworked build algorithms that run the generate method just once.
+* improved performace
+* added new build arguments in createProject
+* new build arguments -min -prod and -debug
+* access to the prod property on context to change widget behaviour in productive build
+* comments and line breaks get automatically removed in productive build
+* added number and boolean arguments for Log
+* fixed double and unmatching group ids with multiple packs and widgets
+* fixed TextClickEvent.runCommand to include a / (Thanks Dommi)
+* fixed data modify command generator (Thanks Vinicius Rangel for pull)
+
 ## 0.1.3
 
 * added Bossbar

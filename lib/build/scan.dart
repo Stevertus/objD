@@ -8,6 +8,7 @@ import 'package:objd/build/buildFile.dart';
 import 'package:objd/build/buildPack.dart';
 import 'package:objd/build/buildProject.dart';
 import 'package:objd/build/context.dart';
+import 'package:objd/wrappers/comment.dart';
 
 scan(Widget wid,
     {BuildFile file, BuildPack pack, BuildProject project, Context context}) {
@@ -25,6 +26,7 @@ scan(Widget wid,
     );
     return;
   }
+  if(wid is Comment && !wid.force && (wid.text == "[null]" || context.prod)) return;
 
   if (wid is Widget) {
     dynamic child = wid.generate(context);

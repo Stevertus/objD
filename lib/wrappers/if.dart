@@ -75,7 +75,6 @@ class If extends Widget {
 
   @override
   generate(Context context) {
-    print(Then);
     List<String> prefixes = Condition.getPrefixes(conds, this.invert);
 
     List<Widget> children = [];

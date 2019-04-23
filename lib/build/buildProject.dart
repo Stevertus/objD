@@ -10,8 +10,9 @@ class BuildProject {
     String path;
     String name;
     String description;
+    bool prod;
 
-    BuildProject(Project prj){
+    BuildProject(Project prj,{this.prod = false}){
       path = prj.target;
       name = prj.name;
       description = prj.description;

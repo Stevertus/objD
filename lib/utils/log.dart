@@ -20,6 +20,7 @@ class Log extends Widget {
   Widget generate(Context context) {
 
     TextComponent text =TextComponent("undefined");
+    if(msg is num || msg is bool) text =TextComponent(msg.toString());
     if(msg is String) text =TextComponent(msg);
     if(msg is Score) text =TextComponent.score(msg);
     if(msg is Entity) text =TextComponent.selector(msg);

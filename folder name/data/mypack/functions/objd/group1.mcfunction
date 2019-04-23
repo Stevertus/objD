@@ -1,5 +1,0 @@
-tellraw @a [{"text":"Console > ","color":"dark_aqua"},{"text":"1"}]
-tellraw @a [{"text":"Console > ","color":"dark_aqua"},{"text":"2"}]
-tellraw @a [{"text":"Console > ","color":"dark_aqua"},{"text":"2"}]
-tellraw @a [{"text":"Console > ","color":"dark_aqua"},{"text":"2"}]
-tellraw @a [{"text":"Console > ","color":"dark_aqua"},{"text":"2"}]

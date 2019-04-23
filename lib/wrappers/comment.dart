@@ -4,11 +4,15 @@ import 'package:objd/build/build.dart';
 
 class Comment extends Widget {
   String text;
+  bool force = false;
   /// The Comment widget generates a simple line with some annotations(# ...).
-  Comment(this.text);
+  Comment(this.text,{this.force = false});
   /// The Comment features a simple line break.
   Comment.LineBreak() {
     text = "";
+  }
+  Comment.Null() {
+    text = "[null]";
   }
 
   @override
