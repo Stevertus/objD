@@ -1,5 +1,7 @@
 import 'package:objd/core.dart';
 
+/// The Raycast Widget is one of the most powerful widgets by giving you many options to configure raytracing in Minecraft.
+/// Internally it uses local coordinates, a distance counter and recursion.
 class Raycast extends Widget {
   int id;
   Entity entity;
@@ -13,9 +15,38 @@ class Raycast extends Widget {
   Score _maxScore;
   Tag _isHit = Tag("objd_ray_hit",entity: Entity.Selected());
   Tag _isStopped = Tag("objd_ray_stop",entity: Entity.Selected());
+/// The Raycast Widget is one of the most powerful widgets by giving you many options to configure raytracing in Minecraft.
+/// Internally it uses local coordinates, a distance counter and recursion.
+///
+/// |constructor|  |
+/// |--|--|
+/// | Entity | from which entity to go from |
+/// |onhit|a List of Widgets that execute on a hit|
+/// |max| maximum block distance(optional)|
+/// |step| how many steps to go forward each iteration(default = 1) |
+/// |through| a Block or Blocktag with passable Blocks(default = air) |
+/// |ray|a Function with an interface for each iteration(optional)|
+/// |scoreName|option to specify counter score(default = objd_count)|
+/// 
+/// **Example:**
+/// ```dart
+/// Raycast(
+/// 	Entity.All(),
+/// 	onhit: [
+/// 		SetBlock(Block.sandstone,location:Location.here())
+/// 	],
+/// 	ray: (stop, hit) => If(...,Then:[stop()]),
+/// 	max: 10, // set maximum distance to 10 blocks
+/// 	step: 0.1,
+/// 	through: Block("#minecraft:transparent"),
+/// )
+/// ```
 
   Raycast(this.entity,{this.max,this.step = 1, this.through = Block.air, this.ray, this.onhit, String scoreName = "objd_count"}){
-    if(max != null && max > 0) _maxScore = Score(entity,scoreName);
+    if(max != null && max > 0){
+      _maxScore = Score(entity,scoreName);
+      max = max ~/ step;
+    } 
     if(onhit == null) onhit = [];
   }
 
@@ -41,7 +72,7 @@ class Raycast extends Widget {
       children.add(_maxScore.add());
     } ;
 
-    // all and conditions
+    /// all and conditions
     List<Condition> conds = [
       Condition.not(_isHit)
     ];

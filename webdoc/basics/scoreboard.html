@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/basics/scoreboard</title>
+<xmp theme="spacelab" style="display:none;">
+## Scoreboard
+A scoreboard objective holds values, kind a like a Variable inside Minecraft. The Scoreboard class just handles adding or removing objectives. The value assignment is handled by the Score class.
+
+|constructor|  |
+|--|--|
+|String|name of the objective(required)|
+|type|the objective type (default = dummy)|
+|display|TextComponent that displays the name|
+|addIntoLoad|bool whether the scoreboard should be added into your load file(default = true)|
+
+objD automatically keeps a list of all scoreboards and inserts them into the given load file, ignoring doubled names.
+**Example:**
+```dart
+Scoreboard(
+"death_count",
+type: "deathCount",
+display: TextComponent("This is how many deaths you have:"),
+addIntoLoad: true
+)
+Scoreboard("death_count")
+
+// load.mcfunction:
+/scoreboard objectives add death_count deathCount [{"text":"This is how many deaths you have:"}]
+```
+So the second scoreboard was not added because one "death_count" already existed.
+
+The `Scoreboard.add` constructor does exactly the same but puts the result without checking in the current file.
+
+`Scoreboard.remove` removes an objective by its name again.
+
+With `Scoreboard.setdisplay` you can display the values:
+
+|Scoreboard.setdisplay|  |
+|--|--|
+|String|name of the objective(required)|
+|display|String for display location (default = sidebar)|
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

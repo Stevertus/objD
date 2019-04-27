@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/basics/area</title>
+<xmp theme="spacelab" style="display:none;">
+## Area
+The Area class provides a way to select a three dimensional space between some locations.
+Therefore it automatically builds the lowest and highest coordinates and calculates the distances.
+
+|constructor | doubles |
+|--|--|
+|x1|one x corner|
+|y1|one y corner|
+|z1|one z corner|
+|x2|second x corner|
+|y2|second x corner|
+|z2|second x corner|
+This is especially useful for `if blocks`, Fill and Clone. 
+
+**Example:**
+```dart
+Area(x1: 100, y1: -15.75, z1: 0, x2: 2, y1: 10, z2: -10)
+⇒ 2 -15.75 -10 100 10 0
+```
+But if you would also like local or relative coordinates, you can always pass the locations directly:
+
+|Area.fromLocations| |
+|--|--|
+|Location|location 1|
+|Location|location 2|
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

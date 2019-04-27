@@ -11,8 +11,10 @@
 * added a Book Generator with Item.Book that allows to use BookPages and TextComponents to fill a book
 * added a TextComponent for the negative Spaces Font by AmberW. This automatically calculates the customs chars for a specified pixel value.
 * added a TextComponent for Custom Fonts
+* added a TextComponent for Linebreaks
 * added number and boolean arguments for Log
 * added new Block Condition which tests the current Position after the block
+* updated Say Wrapper to either use a String or Entity in one argument
 * fixed missing encapsulate property on If.not
 * fixed double and unmatching group ids with multiple packs and widgets
 * fixed multiple scoreboard related bugs. All declared Scoreboards from all packs should  generate in the load functions now

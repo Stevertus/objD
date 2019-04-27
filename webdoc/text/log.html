@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/text/log</title>
+<xmp theme="spacelab" style="display:none;">
+## Log
+The log widgets displays a console logging in the players chat. That way you can quickly check execution times, score values and entities.
+
+|constructor||
+|--|--|
+|String, Score or Entity| message to display |
+|to|which player you want to send the log(default = `Entity.All()`) |
+|color|the color of the console indicator(default = Color.DarkAqua)|
+
+**Example:**
+```dart
+Log("Hello there!",color:Color.White),
+⇒ tellraw @a [{"text":"Console > ","color":"white"},{"text":"Hello there!"}]
+Log(Score(Entity.Selected(),"objective"),to: Entity.Selected())
+⇒ tellraw @s [{"text":"Console > ","color":"dark_aqua"},{"score":{"name":"@s","objective":"objective"}}]
+```
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

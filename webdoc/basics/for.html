@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/basics/for</title>
+<xmp theme="spacelab" style="display:none;">
+## For
+The For class enables you to add multiple endpoints to one Widget.
+
+There is always a List of Widgets involved.
+
+|constructor | |
+|--|--|
+| to | the ending index including itself |
+| create | a function returning a Widget based on the index argument |
+| [from] | the starting index(default 0) |
+| [step ]| the value used in each iteration to increases the index(default 1) |
+
+So the basic for class utilizes a loop from a value to another value:
+```dart
+File(
+	path:"for",
+	child: For(
+		from: 0,
+		to: 5,
+		create: (index){
+			return Command('/say ' + index.toString())
+		}
+	)
+)
+// results in:
+say 0
+say 1
+say 2
+say 3
+say 4
+say 5
+```
+There is also an other Constructor for looping through a given list of widgets:
+
+|For.of| |
+|--|--|
+| List of Widgets| loops through each of these Widgets |
+
+**Example:**
+```dart
+File(
+	path:"for_of",
+	child: For.of(List<Widget>[
+		Command('say 1'),
+		Command('say 2'),
+		Command('say 3')
+	]),
+)
+// results in:
+say 1
+say 2
+say 3
+```
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

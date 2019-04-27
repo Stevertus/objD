@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/basics/data</title>
+<xmp theme="spacelab" style="display:none;">
+## Data
+The Data Widgets allows you to edit nbt data of Entities or Blocks.
+
+|constructor| |
+|--|--|
+|dynamic|The target Entity OR Block which you want to modify|
+|nbt|A Dart Map containing new nbt data|
+|strNbt| option to override the nbt map with a String to support expressions like `1b` |
+|type|A String defining the operation type(default=merge)|
+
+**Example:**
+```dart
+Data(
+	Entity.Selected(),
+	nbt: {
+		"Invisible":1,
+		"NoGravity":1
+	}
+)
+⇒ data merge entity @s {"Invisible":1,"NoGravity":1}
+```
+> There are also subconstructors for each operation type(Data.merge, Data.get, Data.remove)
+
+And the modify operation is also available, yet a bit more complex:
+
+|Data.modify| |
+|--|--|
+|dynamic|The target Entity OR Location which you want to modify|
+|path|the nbt path you want to modify|
+|modify|A DataModify object defining which parameters you want to modify|
+
+So this is split up into a seperate class: 
+**DataModify**
+There are five sub operations again: set, merge, prepend, append and insert.
+All follow this constructor rules:
+
+|DataModify| |
+|--|--|
+|dynamic|The source of the modification. Can be a Map, String, Number, Entity or Location|
+|fromPath|optional path for the Entity or Location source from where to read the data|
+
+So we can for Example use
+```dart
+Data.modify(
+	Entity.Selected(),
+	path: "my_Custom_Path",
+	modify: DataModify.set(
+		"hey" // or {"nbt":"here"} or 56
+	),
+)
+⇒ data modify @s my_Custom_Path set value "hey"
+```
+Or
+So we can for Example use
+```dart
+Data.modify(
+	Entity.Selected(),
+	path: "my_Custom_Path2",
+	modify: DataModify.insert(
+		Entity.Selected(), // or Location... to get data from a block
+		index: 2, // insert also needs an additional index
+		fromPath: "my_Custom_Path"
+	),
+)
+// this just copies one property to another
+⇒ data modify @s my_Custom_Path2 insert from entity @s my_Custom_Path
+```
+
+A handy shortcut for that is the Data.copy constructor, which just copies a property from one path to another:
+
+|Data.copy| |
+|--|--|
+|dynamic|The target Entity OR Location which you want to modify|
+|path|the nbt path you want to copy to|
+|from|The source Entity OR Block|
+|fromPath|The source nbt path|
+
+```dart
+Data.copy(
+	Entity.Selected(),
+	path: "my_Custom_Path2",
+	from: Location("~ ~-1 ~"),
+	fromPath: "Items[0].tag.display.name"
+)
+⇒ data modify @s my_Custom_Path2 set from block ~ ~-1 ~ Items[0].tag.display.name
+```
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

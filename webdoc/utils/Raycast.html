@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/utils/Raycast</title>
+<xmp theme="spacelab" style="display:none;">
+## Raycast
+The Raycast Widget is one of the most powerful widgets by giving you many options to configure raytracing in Minecraft.
+Internally it uses local coordinates, a distance counter and recursion.
+
+|constructor|  |
+|--|--|
+| Entity | from which entity to go from |
+|onhit|a List of Widgets that execute on a hit|
+|max| maximum block distance(optional)|
+|step| how many steps to go forward each iteration(default = 1) |
+|through| a Block or Blocktag with passable Blocks(default = air) |
+|ray|a Function with an interface for each iteration(optional)|
+|scoreName|option to specify counter score(default = objd_count)|
+
+There are a lot of values to play around, but this here would make a fully functioning raycast function:
+```dart
+Raycast(
+	Entity.All(),
+	onhit: [
+		SetBlock(Block.sandstone,location:Location.here())
+	]
+)
+⇒ execute as @a at @s anchored eyes positioned ^  ^  ^ anchored feet run function mypack:objd/ray1
+```
+```mcfunction
+# objd/ray1 file
+execute unless block ~ ~ ~ minecraft:air run tag @s add objd_ray_hit
+execute unless entity @s[tag=objd_ray_hit] positioned ^ ^ ^1 run function mypack:objd/ray1
+execute if entity @s[tag=objd_ray_hit] run function mypack:objd/rayhit1
+execute if entity @s[tag=objd_ray_hit] run tag @s remove objd_ray_hit
+
+# objd/rayhit1 file
+setblock  ~  ~  ~  minecraft:sandstone
+```
+
+objD takes the hard work and generates the commands based on your inputs.
+### Customization
+There is the ray argument to give you more control over the ray.
+Here you can execute Widgets for each step and optionally stop or let the ray hit an obstacle.
+In Dart this is done with a Function:
+```dart
+Raycast(
+	Entity.All(),
+	onhit: [
+		SetBlock(Block.sandstone,location:Location.here())
+	],
+	ray: (stop, hit){
+		return If(...,Then:[stop()]); 
+		// stop and hit are functions as well 
+		//that can be executed to perform actions
+	}
+)
+```
+Let's also change other inputs:
+```dart
+Raycast(
+	Entity.All(),
+	onhit: [
+		SetBlock(Block.sandstone,location:Location.here())
+	],
+	ray: (stop, hit) => If(...,Then:[stop()]),
+	max: 10, // set maximum distance to 10 blocks
+	step: 0.1,
+	through: Block("#minecraft:transparent"),
+)
+⇒ scoreboard players set @s objd_count 0
+⇒ execute as @a at @s anchored eyes positioned ^ ^ ^ anchored feet run function mypack:objd/ray1
+```
+```mcfunction
+# objd/ray1 file
+# our blocktag:
+execute unless block ~ ~ ~ #minecraft:transparent run tag @s add objd_ray_hit
+# the result of the ray function:
+execute if ... run tag @s add objd_ray_stop
+# our distance increases:
+scoreboard players add @s objd_count 1
+# command changed depending on our inputs:
+execute unless entity @s[tag=objd_ray_hit] unless entity @s[tag=objd_ray_stop] if score @s objd_count matches ..100 positioned ^ ^ ^0.1 run function mypack:objd/ray1
+execute if entity @s[tag=objd_ray_hit] run function mypack:objd/rayhit1
+execute if entity @s[tag=objd_ray_hit] run tag @s remove objd_ray_hit
+tag @s remove objd_ray_stop
+```
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

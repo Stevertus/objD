@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/basics/pack</title>
+<xmp theme="spacelab" style="display:none;">
+## Pack
+A pack is logically the next step. This defines a sub-pack with an name again that will be our namespace afterwards.
+Here we can also define included files as well as the main and load function:
+
+|constructor | |
+|--|--|
+| name | the name of the sub-pack|
+| [main]| the main file that is ran every tick |
+| [load] | the load file that is ran on reload |
+| [files] | A List of type File witch includes other needed files |
+
+**Example:**
+```dart
+Pack(
+	name:"tpcraft",
+	main: File(...),
+	load: File(...),
+	files: List<File> [
+		File(...)
+	]
+)
+```
+The Pack class can be used as often as you want and where you want, so you can also define a new pack in some file.
+
+> Notice: The namespace of the pack is accessible in these files by using the context variable. e.g:
+> `Command("function" + context.packId + ":run")`
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

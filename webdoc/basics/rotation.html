@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/basics/rotation</title>
+<xmp theme="spacelab" style="display:none;">
+## Rotation
+The Rotation class is very similar to Location but takes in just two directions for an entities rotation:
+
+|constructor | |
+|--|--|
+|String|the minecraft coordinate string(e.g "~ ~")|
+
+|Rotation.glob| |
+|--|--|
+|x|int representing global x orientation|
+|y|int representing global y orientation|
+
+|Rotation.rel| |
+|--|--|
+|x|int representing rotation relative to the current x orientation|
+|y|int representing rotation relative to the current y orientation|
+
+**Example:**
+```dart
+Rotation.rel(x: 90,y: 180)
+⇒ ~90 ~180
+
+Execute.rotated(Rotation.glob(x:0,y:90),children:[
+	Command("tp @s ^ ^ ^10")
+])
+⇒ execute rotated 0 90 run command tp @s ^ ^ ^10
+```
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

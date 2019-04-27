@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/wrappers/execute</title>
+<xmp theme="spacelab" style="display:none;">
+## Execute
+One of the most used commands has a widget too. The execute command has multiple syntaxes that allow to manipulate the position, executer or condition.
+
+|constructor | |
+|--|--|
+|children|a List of children that should be executed(required)|
+|encapsulate|weither the children should be in an extra file for a certain length |
+| as | an [Entity](#entity) that runs the commands|
+|at|an [Entity](#entity) from where the command should run|
+|If| a Condition that must be true to execute the commands|
+|location| a Location or Entity from where to run the commands |
+|align| String with align statements e.g: "xyz" |
+|anchor|either Facing.eyes or Facing.feet|
+|facing| A Location or Entity to rotate to |
+|rotation| A rotation of type [Rotation](#rotation)|
+|dimension|Dimension of overworld, the_end or the_nether|
+|targetFilePath|force the group to use this path instead of `/objd/`|
+|targetFileName|force the group to use this name instead of automatic generated names|
+
+All Execute classes are also an Group, so they will group commands in seperate files and allow multiple children.
+Example:
+```dart
+Execute(
+	as: Entity.player(),
+	at: Entity.Selected(),
+	If: Condition.entity(Entity())
+	location: Location.here(),
+	align: "yz",
+	anchor: Facing.eyes,
+	facing: Location().glob(x:0,y:0,z:0)
+	rotation: Rotation.rel(x:10,y:20),
+	dimension: Dimension.the_nether
+	children: List<Widget> [
+		Command("/say I get executed")
+		Say("Me too")
+	]
+),
+
+⇒ execute as @p at @s if entity @e positioned ~ ~ ~ align yz anchored eyes facing 0 0 0 rotated ~10 ~20 in the_nether run say I get executed
+  execute as @p at @s if entity @e positioned ~ ~ ~ align yz anchored eyes facing 0 0 0 rotated ~10 ~20 in the_nether run say Me too
+```
+
+|Execute. as | |
+|--|--|
+|Entity|the entity from which the children should run|
+|children|a List of children that should be executed|
+|[encapsulate]|same as base |
+
+This is just a different notation for Execute.
+```dart
+Execute.as(
+	Entity.player(),
+	children: List<Widget> [
+		Command("/say I get executed")
+	]
+),
+
+⇒ execute as @p run say I get executed
+```
+
+|Execute. at | |
+|--|--|
+|Entity|the entity from where the children should run|
+|children|a List of children that should be executed|
+|[encapsulate]|same as base |
+
+```dart
+Execute.at(
+	Entity.player(),
+	children: List<Widget> [
+		Command("/say I get executed")
+	]
+),
+
+⇒ execute at @p run say I get executed
+```
+
+|Execute.asat | |
+|--|--|
+|Entity|the entity from which and where the children should run|
+|children|a List of children that should be executed|
+|[encapsulate]|same as base |
+
+Asat combines as and at to just one entity.
+```dart
+Execute.asat(
+	Entity.player(),
+	children: List<Widget> [
+		Command("/say I get executed")
+	]
+),
+
+⇒ execute as @p at @s run say I get executed
+```
+
+|Execute.positioned| |
+|--|--|
+|Entity\|Location|the new position |
+|...||
+
+Positioned sets the execution point of the command to a new Location or Entity.
+```dart
+Execute.positioned(
+	Entity.player(), // Location...
+	children: List<Widget> [
+		Command("/say I get executed")
+	]
+),
+
+⇒ execute positioned as @p run say I get executed
+```
+
+
+|Execute.align| |
+|--|--|
+|String|representation of the alignment |
+|...||
+
+Aligns the position to the corners of the block grid.
+
+|Execute.anchored| |
+|--|--|
+|Facing|Facing.eyes or Facing.feet |
+|...||
+
+Sets the execution position(^ ^ ^) to the eyes or the feet.
+
+
+|Execute.facing| |
+|--|--|
+|Entity or Location|the target to face(required) |
+|facing| either face the Facing.eyes(default) or Facing.feet |
+|...||
+
+Sets the execution rotation so that it faces a location or an entity's feet or eyes.
+**Example:**
+```dart
+Execute.facing(
+	Entity.player(), // or Location...
+	facing: Facing.feet // optional
+	children: List<Widget> [
+		Command("/say I get executed")
+	]
+)
+⇒ execute facing entity @p feet run say I get executed
+```
+
+
+|Execute.rotated| |
+|--|--|
+|Rotation|the rotation object |
+|...||
+
+Sets the execution rotation to the given rotation.
+
+|Execute.dimension| |
+|--|--|
+|Dimension|the given dimension type |
+|...||
+
+Sets the execution dimension(execute in) to either `Dimension.overworld`, `Dimension.the_end` or `Dimension.the_nether`.
+
+### Methods
+All of these constructors are also available as methods with some additional utils:
+
+|Methods|  |
+|--|--|
+| center | centeres the alignment(middle of the block) |
+
+That means you can chain the actions, like with score, and use multiple actions at once:
+
+```dart
+// declaring the base
+Execute ex = Execute(
+	children:[
+		Say("Hello"),
+		Command("say e")
+	]
+)
+// in the generate method:
+ex.asat(
+Entity.All())
+	.center()
+	.positioned(Location.rel(x:0,y:20,z:0))
+⇒ execute as @a at @s align xyz positioned ~0.5 ~0.5 ~0.5 positioned ~ ~20 ~ run say Hello
+   execute as @a at @s align xyz positioned ~0.5 ~0.5 ~0.5 positioned ~ ~20 ~ run say e
+```
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

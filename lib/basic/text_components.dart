@@ -14,16 +14,47 @@ class TextComponent {
   TextClickEvent clickEvent;
   TextHoverEvent hoverEvent;
   String insertion;
-  // ToDo: new 1.14 types!!!
   // default text display
   /// In Minecraft text in the chat or as title is defined with JSON-data. objD makes the JSON part of it easier by utilizing the TextComponent Class:
   TextComponent(String text, {this.color,this.bold, this.underlined,this.italic, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){
     value = {"text":text};
   }
+  /// This inserts a simple line break
+  TextComponent.lineBreak(){
+    value = {"text":"\n"};
+  }
+
+/// |TextComponent.customFont||
+/// |--|--|
+/// |String| a Custom Font Character(\u[HEX]) to insert in your text|
+/// |...same properties...|from TextComponent|
+///
+/// ```dart
+/// TextComponent.customFont("\uFaa4")
+/// ⇒ {"text":"\uFaa4","color":"white"}
+/// ```
   TextComponent.customFont(String char, {this.color,this.bold, this.underlined,this.italic, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){
     if(color == null) color = Color.White;
     value = {"text":char};
   }
+///**Attention: This requires a custom negative spaces font by AmberW installed(https://cdn.discordapp.com/attachments/157097006500806656/486915349569208322/NegativeSpaceFont3.zip)**
+/// 
+/// |TextComponent.space|  |
+/// |--|--|
+/// |int| the pixel amount you want to move the next TextComponent (positive or negative)|
+/// |...same properties...|from TextComponent|
+/// This automatically calculates the custom characters for moving your text horizontally.
+///
+/// ```dart
+/// Tellraw(
+/// 	Entity.All(),
+/// 	show:[
+/// 		TextComponent.space(478),
+/// 		TextComponent("This is moved")
+/// 	]
+/// )
+/// ⇒ tellraw  @a  [{"text":"\uF82D\uF82C\uF82B\uF829\uF828\uF826"},{"text":"This is moved"}]
+/// ```
   TextComponent.space(int pixels, {this.color,this.bold, this.underlined,this.italic, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){
     Map nums = { 1: '\uF821',2: '\uF822',3: '\uF823',4: '\uF824',5: '\uF825',6: '\uF826',7: '\uF827',8: '\uF828',16: '\uF829',32: '\uF82A',64: '\uF82B',128: '\uF82C',
               256: '\uF82D',512: '\uF82E',1024: '\uF82F'};
@@ -54,13 +85,50 @@ class TextComponent {
     value = {"translate":key};
     if(conversionFlags != null && conversionFlags.length > 0) value['with'] = conversionFlags;
   }
+///```dart
+/// TextComponent.score(
+/// 	Entity.Selected(),
+/// 	objective: "myscores",
+/// 	color:Color.Black
+/// )
+/// ⇒ {"score":{"name": "@s","objective":"myscores"},"color":"black"}
+/// ```
   TextComponent.score(Score score, { this.color,this.bold,this.italic, this.underlined, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){
     value = {"score":{"name":score.entity.toString(),"objective":score.score}};
   }
+/// |TextComponent.entityNbt| |
+/// |--|--|
+/// |Entity|the entity which has nbt to display|
+/// |path| the path as a String |
+/// |interpret|bool if nbt should be interpreted as TextComponent(optional)|
+/// |...same properties...|from TextComponent|
+/// 
+/// ```dart
+/// TextComponent.entityNbt(
+/// 	Entity.Selected(),
+/// 	path: "CustomName"
+/// 	underlined: true
+/// )
+/// ⇒ {"entity":"@s","nbt":"CustomName","underlined":true}
+/// ```
   TextComponent.entityNbt(Entity entity, { @required String path,bool interpret,this.color,this.bold, this.underlined,this.italic, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){
     value = {"nbt":path,"entity":entity.toString()};
     if(interpret != null) value["interpret"] = interpret;
   }
+/// |TextComponent.blockNbt| |
+/// |--|--|
+/// |Location|a location of a block|
+/// |path| the path as a String |
+/// |interpret|bool if nbt should be interpreted as TextComponent(optional)|
+/// |...same properties...|from TextComponent|
+/// 
+/// ```dart
+/// TextComponent.blockNbt(
+/// 	Location.glob(x:5,y:10,z:100),
+/// 	path: "Items[0].tag.display.Name"
+/// 	interpret: true
+/// )
+/// ```
   TextComponent.blockNbt(Location location, { @required String path,bool interpret,this.color,this.bold, this.underlined,this.italic, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){
     value = {"nbt":path,"block":location.toString()};
     if(interpret != null) value["interpret"] = interpret;

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/basics/command</title>
+<xmp theme="spacelab" style="display:none;">
+## Command
+A Command is a raw action, that is executed by Minecraft directly.
+
+|constructor | |
+|--|--|
+| String | the raw command in the format "/command" or "command" |
+
+**Example:**
+```dart
+// using a command in a file:
+File(
+	path:"command",
+	child: Command('/say hey')
+)
+// uses the say command in command.mcfunction:
+say hey
+```
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>
