@@ -34,7 +34,7 @@ And inside of that create a file named `pubspec.yaml` and another folder called 
 Open the pubspec.yaml file and add 
 ```yaml
 dependencies:  
-   objd: ^0.2
+   objd: ^0.2.0
 ```
 And run 
 ```
