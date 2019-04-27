@@ -2,6 +2,7 @@ import 'package:objd/basic/extend.dart';
 import 'package:objd/basic/file.dart';
 import 'package:objd/basic/group.dart';
 import 'package:objd/basic/pack.dart';
+import 'package:objd/basic/scoreboard.dart';
 import 'package:objd/basic/text.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/build/buildFile.dart';
@@ -27,6 +28,10 @@ scan(Widget wid,
     return;
   }
   if(wid is Comment && !wid.force && (wid.text == "[null]" || context.prod)) return;
+
+  if(wid is Scoreboard && wid.subcommand == "add"){
+    if(!pack.addScoreboard(wid.name)) return;
+  }
 
   if (wid is Widget) {
     dynamic child = wid.generate(context);

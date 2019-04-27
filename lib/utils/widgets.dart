@@ -6,3 +6,6 @@ export 'areaeffectcloud.dart';
 export 'hologram.dart';
 export 'randomScore.dart';
 export 'repeat.dart';
+export 'foreach.dart';
+export 'do_loop.dart';
+export 'raycast.dart';

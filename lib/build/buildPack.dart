@@ -36,7 +36,11 @@ class BuildPack {
     }
 
     addScoreboard(String name){
-      if(!scoreboards.contains(name)) scoreboards.add(name);
+      if(!scoreboards.contains(name)){
+        scoreboards.add(name);
+        return true;
+      } 
+      return false;
     }
 
     addFile(File file, BuildProject prj){

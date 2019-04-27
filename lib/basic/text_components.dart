@@ -21,43 +21,32 @@ class TextComponent {
     value = {"text":text};
   }
   TextComponent.customFont(String char, {this.color,this.bold, this.underlined,this.italic, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){
-    if(char.length > 1 && char.substring(0,1) == "\\") char = "\\[repl]" + char;
+    if(color == null) color = Color.White;
     value = {"text":char};
   }
   TextComponent.space(int pixels, {this.color,this.bold, this.underlined,this.italic, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){
-    Map nums = {
-      1024: "F",
-      512: "E",
-      256: "D",
-      128: "C",
-      64: "B",
-      32: "A",
-      16: "9",
-      8: "8",
-      7: "7",
-      6: "6",
-      5: "5",
-      4: "4",
-      3: "3",
-      2: "2",
-      1: "1",
-    };
-    bool isNeg = pixels < 0;
-    if(isNeg) pixels * -1;
+    Map nums = { 1: '\uF821',2: '\uF822',3: '\uF823',4: '\uF824',5: '\uF825',6: '\uF826',7: '\uF827',8: '\uF828',16: '\uF829',32: '\uF82A',64: '\uF82B',128: '\uF82C',
+              256: '\uF82D',512: '\uF82E',1024: '\uF82F'};
+    Map negnums = {-1024:'\uF80F',-512:'\uF80E',-256:'\uF80D',-128:'\uF80C',-64:'\uF80B',-32:'\uF80A',-16:'\uF809',-8:'\uF808',-7:'\uF807',-6:'\uF806',-5:'\uF805',-4:'\uF804',-3:'\uF803',-2:'\uF802',-1:'\uF801'};
+
     if(pixels == 0) throw("Please insert a pixel amount on how much you want to move characters");
-    List<String> amounts = [];
-    for (var value in nums.keys) {
-      if(pixels >= value) {
-        amounts.add(nums[value]);
+    String res = "";
+    if(pixels > 0){
+    for (var value in nums.keys.toList().reversed) {
+      while(pixels >= value) {
+        res += nums[value];
         pixels -= value;
       }
     }
-    String res = "";
-    amounts.forEach((am){
-      if(isNeg) res = "\u005CuF82";
-      else res = "\u005CuF80";
-      res+= am;
-    });
+    } else {
+      for (var value in negnums.keys) {
+      while(pixels <= value) {
+        res += nums[value];
+        pixels -= value;
+      }
+    }
+    }
+    
     value = {"text":res};
   }
   // translates from a key in the translations
@@ -172,8 +161,8 @@ class TextHoverEvent {
 /// 
 /// See all available colors: https://minecraft.gamepedia.com/Formatting_codes#Color_codes
 class Color {
-  String color;
-  Color(this.color);
+  final String _color;
+  Color(this._color);
 
   static Color White = Color('white');
   static Color Black = Color('black');
@@ -192,8 +181,8 @@ class Color {
   static Color LightPurple = Color('light_purple');
   static Color Yellow = Color('yellow');
 
-  @override
+    @override
   String toString() {
-    return color;
+    return _color;
   }
 }

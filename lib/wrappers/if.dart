@@ -60,6 +60,7 @@ class If extends Widget {
       this.Else,
       this.targetFilePath = "objd",
       this.targetFileName,
+      this.encapsulate = true,
       this.assignTag}) {
     assert(Then != null);
     assert(Then.isNotEmpty);
