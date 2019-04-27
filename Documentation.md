@@ -1,5 +1,6 @@
 
 
+
 [//]: # (main)
 # objD
 
@@ -139,6 +140,7 @@ The Context is a way to get certain important information from the parents.
 |--|--|
 | packId | String of the current pack's name |
 | file | the current file name|
+| prod | see if project is in production mode(bool)|
 | loadFile | the filename of your load  file|
 | mainFile | the filename of your main file |
 |prefixes| a List of Strings that should be added in front of actions(mainly used by Groups)|
@@ -955,13 +957,14 @@ In this section are a few classes that build commands with inputs(Entities, Text
 [//]: # (wrappers/comment)
 ## Comment
 The Comment widget generates a simple line with some annotations(# ...).
-It also features a simple line break:
+It also features a simple line break and a Null Value:
 **Example:**
 ```dart
 Comment("hello world")
 ⇒ # hello world
 Comment.LineBreak()
 ⇒ 
+Comment.Null() // dead end in widget tree
 
 ```
 
@@ -1206,6 +1209,7 @@ Well it is not as easy as it looks. A condition can accept many values and this 
 
 | The argument can be a... | and generates e.g ||
 |--|--|--|
+| Block | if block ~ ~ ~ minecraft:stone |To test a specific location use Condition.block|
 | Entity | if entity @s |
 | Score | if score @s objective matches 5| Attention! This needs a score condition method!
 | Tag | if entity @s[tag=test] | turns a tag into an entity |
@@ -1510,19 +1514,16 @@ The Say Class writes a simple message or an entity in the chat.
 
 |constructor| |
 |--|--|
-|msg|Message as String|
-|entity| enity of type Entity|
-
-**You can't put both parameters in Say!**
+|msg|MessageString or Entity|
 
 Example:
 ```dart
 Say(
-	msg: "Hello"
+	"Hello"
 )
 ⇒ say Hello
 Say(
-	entity: Entity.Player()
+	Entity.Player()
 )
 ⇒ say @p
 ```
@@ -1931,11 +1932,11 @@ Fires on mouse over, Part of TextComponent.
 
 [//]: # (text/log)
 ## Log
-The log widgets displays a console logging in the players chat. That way you can quickly check execution times, score values and entities.
+The log widgets displays a console logging in the players chat. That way you can quickly check execution times, score values, numbers, booleans and entities.
 
 |constructor||
 |--|--|
-|String, Score or Entity| message to display |
+|String, Number, Boolean, Score or Entity| message to display |
 |to|which player you want to send the log(default = `Entity.All()`) |
 |color|the color of the console indicator(default = Color.DarkAqua)|
 
