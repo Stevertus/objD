@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/basics/entity</title>
+<xmp theme="spacelab" style="display:none;">
+## Entity
+
+|constructor | arguments are optional |
+|--|--|
+|selector|the entity selector(e.g p,s,e or r)|
+|limit|number of matched entities|
+|tags|a List of Strings or Tags that the entity should have|
+|scores|a List of Score matches that the entity should match|
+|team|a Team the entity has to be part of|
+|type|[EntityType](), id of the entity|
+|nbt|a Map of required nbt properties|
+|strNbt| option to override the nbt map with a String to support expressions like `1b` |
+|area|A Area where the entity should be|
+|distance| [Range]() to the entity|
+|level|Range of experience levels|
+|gamemode|Gamemode type(e.g Gamemode.creative, Gamemode.survival)|
+|horizontalRotation|Range of the horizontal facing direction|
+|verticalRotation|Range of the vertical facing direction|
+|playerName|a String if you prefer to use a playername instead of arguments |
+|**Methods** |  |
+|sort|adds a sort attribute of type [Sort]()|
+| storeResult | Command, path, useSuccess |
+|joinTeam|entity joins the given team|
+|leaveTeam|entity leaves the current team|
+|addTag|adds a new tag to the entity|
+|addTags|adds multiple tags|
+|removeTag| removes tag again|
+
+storeResult stores a result or success of a command in the nbt path of an entity.
+**Example:**
+```dart
+Entity.Selected().storeResult(
+	Command('say hello'),
+	path: "Invisisble",
+	scale: 1,
+	datatype: "byte"
+	useSuccess:true
+)
+
+⇒ execute store success entity @s Invisisble byte 1 run say hello
+```
+
+|Sort|
+|--|
+|Sort.random|
+|Sort.furthest|
+|Sort.nearest|
+|Sort.albitrary|
+
+The Range class defines a range of values(e.g 3..10 in vanilla)
+
+|Range |  |
+|--|--|
+|[to]|Number for the maximum range|
+|[from]|Number for the minimal range|
+
+|EntityType |  |
+|--|--|
+|String|String representation of the type|
+
+There is also an EntityType for every type_id in minecraft with `EntityType.[type_id]`
+
+```dart
+Say(
+	Entity(
+		selector: "e",
+		limit: 1,
+		tags:["first","second"],
+		scores:[Score(score1).matches(10)],
+		team: Team("my_team"),
+		type: EntityType.armor_stand,
+		distance: Range(to:2),
+		area: Area.fromLocations(
+			// use null for a unlimited selection
+			Location.glob(x: -10,y: null,z: -10), 
+			Location.glob(x: 10, y: null, z: 10)
+		),
+		level: Range(from: 1),
+		gamemode: Gamemode.creative,
+		horizontalRotation: Range(from:1),
+		verticalRotation: Range(from: 20, to: 80),
+	).sort(Sort.random)
+)
+
+⇒ say @e[limit=1,tag=first,tag=second,scores:{test=10},team=my_team,type=armor_stand,distance=..2,x=-10,z=-10,dx=20,dz=20,level=1..,gamemode=creative,y_rotation=1..,x_rotation=20..80,sort=random]
+```
+
+|specific constructors|  |
+|--|--|
+|Entity.Selected(...)| creates an entity with @s|
+| Entity.Player(...) | creates an entity with @p |
+| Entity.PlayerName(String) | creates an entity with an implicit name |
+|Entity.All(...)| creates an entity with @a|
+|Entity.Random(...)| creates an entity with @r|
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

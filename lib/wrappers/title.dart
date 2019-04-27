@@ -45,6 +45,7 @@ class Title extends Widget {
   }
   @override
   Widget generate(Context context) {
+    jsonText = jsonText.replaceAll("\\[repl]\\", "\\");
     return Command("title " + entity + " "+type+" " + jsonText);
   }
 }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/utils/Do-Loop</title>
+<xmp theme="spacelab" style="display:none;">
+## Do Until/While Loop
+This Loop repeats a set of widget as long/until a condition is/becomes true.
+The Loop uses a Grouped File and Recursion to repeat commands.
+
+| Do.While|  |
+|--|--|
+|Condition or conditional value| a condition to test for each iteration |
+|then| a List of Widgets to execute each time |
+|testBefore| test before entering the loop if condition is true(optional) |
+
+> Until just negates the Condition
+
+**Example:**
+
+```dart
+Do.Until(Tag("istrue",entity:  Entity.All()),then:[
+	Say("repeat")
+])
+⇒ execute unless entity @a[tag=istrue] run function  mypack:objd/doloop1
+```
+```mcfunction
+# objd/doloop1 file
+say repeat
+execute unless entity @a[tag=istrue] run function  mypack:objd/doloop1
+```
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/basics/location</title>
+<xmp theme="spacelab" style="display:none;">
+## Location
+In the block example we already used a class called Location. This translates into Minecraft Coordinates.
+
+|constructor | |
+|--|--|
+|String|the minecraft coordinate string(e.g "~ ~ ~")|
+
+```dart
+SetBlock(Block.stone,location: Location("~ 5 ~"))
+```
+There is also a shortcut for " ~ ~ ~ ":
+
+|Location.here| Selects the current Position |
+|--|--|
+
+```dart
+Location.here()
+⇒ ~ ~ ~
+```
+
+But the Location class also provides a wrapper for global coordinates:
+
+|Location.glob| |
+|--|--|
+|x|a double defining the absolute x coordinate|
+|y|a double defining the absolute y coordinate|
+|z|a double defining the absolute z coordinate|
+
+```dart
+Location.glob(x: 5,y: 51.5,z: 784.20) 
+⇒ 5 51.5 784.2
+```
+And also for relative coordinates:
+
+|Location.rel| |
+|--|--|
+|x|a double defining the relative x coordinate|
+|y|a double defining the relative y coordinate|
+|z|a double defining the relative z coordinate|
+
+```dart
+Location.rel(x: 5,y: 1.5,z: 0)
+⇒ ~5 ~1.5 ~
+```
+And local coordinates(depends on the rotation of the head):
+
+|Location.local| |
+|--|--|
+|x|a double defining the local x coordinate|
+|y|a double defining the local y coordinate|
+|z|a double defining the local z coordinate|
+
+```dart
+Location.local(x: 0,y: 1,z: 2.5)
+⇒ ^ ^1 ^2.5
+```
+
+There is also a method for a location:
+
+|methods|  |
+|--|--|
+| storeResult | Command, path, useSuccess |
+This stores a result or success of a command in the nbt path of a location.
+**Example:**
+```dart
+Location.here().storeResult(Command('say hello'),path: "Items[0].tag.command",useSuccess:true)
+
+⇒ execute store success block ~ ~ ~ Items[0].tag.command run say hello
+```
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/text/main</title>
+<xmp theme="spacelab" style="display:none;">
+# Texts and Strings
+
+In Minecraft text in the chat or as title is defined with JSON-data. objD makes the JSON part of it easier by utilizing a few classes:
+
+|TextComponent| |
+|--|--|
+|String|the text displayed (required)|
+|color|a the color of the type Color|
+|bold|bool whether it is bold|
+|italic|bool whether it is italic|
+|underlined|bool whether it is underlined|
+|strikethrough|bool whether it is strikethrough|
+|obfuscated|bool whether it is obfuscated|
+|clickEvent|A TextClickEvent to handle left clicks|
+|hoverEvent|A TextHoverEvent to handle mouse overs|
+|insertion| a String witch is inserted into the input if shift left clicked|
+
+Puuh, that are a lot of properties, we'll come to Color, TextClickEvent  and TextHoverEvent  in a bit.
+
+**Example**
+```dart
+Title(
+	Entity.Player(),
+	show: [
+		TextComponent("Hello",
+			color: Color.White,
+			bold: true,
+			italic:true,
+			underlined: true,
+			strikethrough: false,
+			obfuscated: false,
+			clickEvent: TextClickEvent.open_url("https://stevertus.com"),
+			hoverEvent: TextHoverEvent.text([TextComponent("hover me")]),
+			insertion: "panic"
+		)
+	]
+)
+⇒ title @p title [{"text":"Hello","color":"white","bold":true,"italic":true,"underlined":true,"clickEvent":{"action":"open_url","value":"https://stevertus.com"},"hoverEvent":{"action":"text","value":[{text:"hover me"}]}}]
+```
+Now, its up to you to decide which is easier to read.
+There are also some other data sources: 
+
+|TextComponent.translate| |
+|--|--|
+|String|the translate key (required)|
+|conversionFlags|a List of strings that replace placeholder values(e.g $s)|
+|...same properties...|from TextComponent|
+
+|TextComponent.score| |
+|--|--|
+|Entity|the entity with the score(required)|
+|objective|Name of the Scoreboard Objective(required)|
+|...same properties...|from TextComponent|
+
+```dart
+TextComponent.score(
+	Entity.Selected(),
+	objective: "myscores",
+	color:Color.Black
+)
+⇒ {"score":{"name": "@s","objective":"myscores"},"color":"black"}
+```
+
+|TextComponent.selector| |
+|--|--|
+|Entity|the entity whose name you want to display(required)|
+|...same properties...|from TextComponent|
+
+```dart
+TextComponent.selector(
+	Entity(name:"hello"),
+	color:Color.Black
+)
+⇒ {"selector":"@e[name=hello]","color":"black"}
+```
+
+|TextComponent.entityNbt| |
+|--|--|
+|Entity|the entity which has nbt to display|
+|path| the path as a String |
+|interpret|bool if nbt should be interpreted as TextComponent(optional)|
+|...same properties...|from TextComponent|
+
+```dart
+TextComponent.entityNbt(
+	Entity.Selected(),
+	path: "CustomName"
+	underlined: true
+)
+⇒ {"entity":"@s","nbt":"CustomName","underlined":true}
+```
+
+|TextComponent.blockNbt| |
+|--|--|
+|Location|a location of a block|
+|path| the path as a String |
+|interpret|bool if nbt should be interpreted as TextComponent(optional)|
+|...same properties...|from TextComponent|
+
+```dart
+TextComponent.blockNbt(
+	Location.glob(x:5,y:10,z:100),
+	path: "Items[0].tag.display.Name"
+	interpret: true
+)
+⇒ {"block":"5 10 100","nbt":"Items[0].tag.display.Name","interpret":true}
+```
+
+|TextComponent.lineBreak|
+|--|--|
+|This inserts a simple line break|
+
+|TextComponent.customFont||
+|--|--|
+|String| a Custom Font Character(\u[HEX]) to insert in your text|
+|...same properties...|from TextComponent|
+
+```dart
+TextComponent.customFont("\uFaa4")
+⇒ {"text":"\uFaa4","color":"white"}
+```
+
+**Attention: This requires a custom negative spaces font by AmberW installed(https://cdn.discordapp.com/attachments/157097006500806656/486915349569208322/NegativeSpaceFont3.zip)**
+
+|TextComponent.space|  |
+|--|--|
+|int| the pixel amount you want to move the next TextComponent (positive or negative)|
+|...same properties...|from TextComponent|
+
+This automatically calculates the custom characters for moving your text horizontally.
+
+```dart
+Tellraw(
+	Entity.All(),
+	show:[
+		TextComponent.space(478),
+		TextComponent("This is moved")
+	]
+)
+⇒ tellraw  @a  [{"text":"\uF82D\uF82C\uF82B\uF829\uF828\uF826"},{"text":"This is moved"}]
+```
+
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

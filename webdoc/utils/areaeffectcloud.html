@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/utils/areaeffectcloud</title>
+<xmp theme="spacelab" style="display:none;">
+## AreaEffectCloud
+An areaeffectcloud can be created with the Summon Widget, but there is also a specific Widget with special properties for an AreaEffectCloud.
+
+| constructor |  |
+|--|--|
+|Location| the location as type Location(default Location.here())|
+|name|a TextComponent respresenting the name of the entity|
+|age|int|
+|radius|the radius an effect applies|
+|applicationDelay|int|
+|tags|List of tags|
+|duration|int|
+|waitTime|int|
+|nbt|additional nbt as Map|
+
+This would create an Areaeffectcloud that only lasts the current tick: 
+```dart
+AreaEffectCloud(
+	Location.here(),
+	name: TextComponent("myname"),
+	waitTime: 10,
+)
+⇒ summon area_effect_cloud ~  ~  ~  {"WaitTime":10,"CustomName":"{\"text\":\"myname\"}"}
+```
+To keep the entity alive there is`AreaEffectCloud.persistent` that sets the age to multiple years.
+
+| AreaEffectCloud.persistent|  |
+|--|--|
+|Location| the location as type Location(default Location.here())|
+|name|a TextComponent respresenting the name of the entity|
+|radius|the radius an effect applies|
+|applicationDelay|int|
+|tags|List of tags|
+|nbt|additional nbt as Map|
+
+**Example:**
+```dart
+AreaEffectCloud.persistent(Location.here(),tags:["new_tag"])
+⇒ summon area_effect_cloud ~  ~  ~  {"Duration":-1,"WaitTime":-2147483648,"Tags":["new_tag"],"Age":-2147483648}
+```
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

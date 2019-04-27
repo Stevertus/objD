@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/basics/file</title>
+<xmp theme="spacelab" style="display:none;">
+## File
+The [Pack]() class already required some files. The file class simply generates a new mcfunction file with content and a path.
+
+The File constructor has two required arguments:
+
+|constructor | |
+|--|--|
+| path | the desired file path going from `/data/:packId:/functions/` on |
+| child| the content of the file |
+| execute | bool if the function should be executed directly(optional) |
+| create | bool if the file should be created or just interpreted with execute(optional, default = true)|
+
+The File class can be used as often as you want and where you want, so you can also define a new file in a For container for example.
+**Example:**
+```dart
+Pack(
+	name:"tpcraft",
+	main: File(
+		path:"main",
+		// and defining a new file inside of an widget
+		child: File.execute( // same as execute: true
+			path: 'new'
+			child: Command(...)
+		)
+	),
+)
+```
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

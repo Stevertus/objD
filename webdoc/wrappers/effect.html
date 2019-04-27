@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/wrappers/effect</title>
+<xmp theme="spacelab" style="display:none;">
+## Effect
+This command is used to give an entity a specific effect and affect their gameplay.
+
+|constructor| |
+|--|--|
+|EffectType| the kind of effect - usage: EffectType.[effect_id] |
+| entity | the Entity you want to give the effect to(required) |
+|duration| the amount of seconds the effect should last(default = 30) |
+|amplifier| the strength of the effect(default = 1) |
+|showParticles| bool if effect particles should be visible(default = true) |
+
+**Example:**
+```dart
+Effect(
+	EffectType.jump_boost,
+	entity: Entity.Player(),
+	duration: 20,
+	amplifier: 3,
+	showParticles: false
+)
+⇒ effect give @p minecraft:jump_boost 20 3 true
+```
+
+Of course you can clear an effect again:
+
+|constructor| |
+|--|--|
+|Entity| the entity that you want to clear |
+|EffectType| the type of effect you want to clear(optional) |
+
+**Example:**
+```dart
+Effect.clear(Entity.Player(),EffectType.jump_boost)
+⇒ effect clear @p minecraft:jump_boost
+```
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

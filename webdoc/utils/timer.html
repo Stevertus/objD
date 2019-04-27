@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/utils/timer</title>
+<xmp theme="spacelab" style="display:none;">
+## Timer
+A Timer is very similar to a Timeout, but instead of delaying the code it is run over and over again always delayed by the ticks. In the end it creates a loop with slower tick speed as 20t/s to perform some operations more performant.
+
+| constructor |  |
+|--|--|
+| String | the name of the timeout(used as filename) |
+| children | the content that should be delayed |
+| ticks | the delay as integer ticks |
+|infinite| should it run infinitely? (default = true) |
+| path |the folder path(optional, default = "timers")|
+
+**Example:**
+```dart
+Timer(
+	"timer1",
+	children: [Say("Timer reached")],
+	ticks: 100
+)
+⇒ function example:timers/timer1
+// timers/timer1:
+⇒ say Timer reached
+⇒ schedule function example:timers/timer1 100t
+```
+It is recommended to start these timers in your load function. 
+
+With a finite timer, you can also stop the timer with `Timer.stop`:
+
+```dart
+Timer(
+	"timer2",
+	infinite:false,
+	children: [Say("Timer reached")],
+	ticks: 10
+)
+Timer.stop("timer2")
+```
+This uses a tag internally to stop scheduling the next timeout if the tag is existing.
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

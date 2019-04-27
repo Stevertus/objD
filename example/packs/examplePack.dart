@@ -14,11 +14,11 @@ class ExamplePack extends Widget {
     return Pack(
       name: "mypack", // name of the subpack
       main: File(     // definining a file that runs every tick
-        path: 'main',
+        'main',
         child: MainFile()
       ),
       load: File(     // definining a file that runs on reload
-        path: 'load',
+        'load',
         child: LoadFile()
       ),
       files: [

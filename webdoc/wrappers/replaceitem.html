@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/wrappers/replaceitem</title>
+<xmp theme="spacelab" style="display:none;">
+## Replaceitem
+Sets a specific container slot to a item.
+* for Entities:
+
+|constructor| |
+|--|--|
+|Entity|The entity|
+|item|the Item you want to set(required) |
+|slot|a String representation of the slot(required)|
+
+**Example:**
+```dart
+Replaceitem(Entity.Player(),
+	slot: "hotbar.5"
+	item: Item(
+		ItemType.apple,
+		count: 5,
+		model: 339001
+	)
+)
+
+⇒ replaceitem entity @p hotbar.5 minecraft:apple{"CustomModelData":339001} 5 
+```
+> replaceitem block will follow
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

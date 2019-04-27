@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/wrappers/summon</title>
+<xmp theme="spacelab" style="display:none;">
+## Summon
+The summon class creates a new entity at a given location.
+
+|constructor| |
+|--|--|
+|EntityType|the type of entity(required)|
+|location| the location as type Location(default Location.here())|
+|name|a TextComponent respresenting the name of the entity|
+|nameVisible|bool if name is shown|
+|invulnerable|bool|
+|persistent|bool|
+|noAI|bool|
+|silent|bool|
+|small|bool|
+|gravity|bool (put negated value in NoGravity)|
+|glowing|bool|
+|passengers|List of Summon Widgets that ride the entity|
+|effects|List of Effects|
+|tags|List of tags as String|
+|fire|ticks(int) the entity should be on fire|
+|age|int|
+|rotation|initial Rotation|
+|nbt|additional nbt as Map(key-value pairs)|
+
+**Example:**
+```dart
+Summon(
+	EntityType.armor_stand,
+	location: Location.rel(x: 0,y:1,z:0),
+	name: TextComponent("this is my name",color: Color.DarkBlue),
+	invulnerable:true,
+	small: true,
+	gravity: false,
+	fire: 100,
+	effects:[Effect(EffectType.glowing,duration: 10,showParticles:false)],
+	rotation: Rotation.abs(x: 10,y:100),
+	nbt: {"Invisible":1},
+)
+⇒ summon armor_stand ~  ~1  ~  {"Invisible":1,"CustomName":"{\"text\":\"this is my name\",\"color\":\"dark_blue\"}","Invulnerable":1,"Small":1,"NoGravity":1,"ActiveEffects":[{"Id":24,"Amplifier":0,"Duration":200,"ShowParticles":0}],"Fire":100,"Rotation":[10.0,100.0]}
+```
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

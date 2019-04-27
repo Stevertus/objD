@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/wrappers/team</title>
+<xmp theme="spacelab" style="display:none;">
+## Team
+The team Wiget is a wrapper for the team command and allows you to group entities together and apply group rules.
+
+There are a few constructors:
+
+**Team(String)** - just adds a new team
+**Team.add(String,[options])** - adds the team and also applies some modifiers to it(take a look at Team.modify)
+**Team.empty(String)** - clears the team and removes all entities in it
+**Team.join(String, Entity)** - adds the entity to the team(an entity can only be in one team at a time)
+**Team.leave(Entity)** - the entity is removed from their current team
+
+|Team.modify or Team.add| |
+|--|--|
+|String|name of the team|
+|display|TextComponent showing the team name in chat or scoreboard|
+|color| the teams Color |
+|nametag| Either ModifyTeam.[always,never,hideForOtherTeam,hideForOwnTeam] |
+|collision| Either ModifyTeam.[always,never,pushOtherTeams,pushOwnTeam] |
+|deathMessage|Either ModifyTeam.[always,never,hideForOtherTeam,hideForOwnTeam] |
+|friendlyFire|Should a member be able to hit a team mate?(bool)|
+|seeInvisisble|Should a member be able to see an invisible team mate?(bool)|
+|prefix| a String showing in front of a player name |
+|suffix| a String showing after a player name |
+
+**Example:**
+```dart
+Team.add(
+	"test",
+	collision:ModifyTeam.always,
+	color:Color.Red,
+	display:  TextComponent("Hello"),
+	friendlyFire:  true,
+	suffix:  "Test",
+	deathMessage:  ModifyTeam.hideForOwnTeam
+)
+⇒ team add test
+⇒ team modify test displayName {"text":"Hello"}
+⇒ team modify test color red
+⇒ team modify test deathMessageVisibility hideForOwnTeam
+⇒ team modify test friendlyFire true
+⇒ team modify test collisionRule always
+⇒ team modify test suffix Test
+```
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

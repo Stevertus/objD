@@ -1,0 +1,6 @@
+#file: test
+raycast(10, "air") {
+    /say hi
+},{
+    /say hey
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/basics/extend</title>
+<xmp theme="spacelab" style="display:none;">
+## Extend
+Extend is very similar to File, but instead of creating a new file it adds content to an existing file.
+
+|constructor | |
+|--|--|
+| String | the desired file path going from `/data/:packId:/functions/` on |
+| child| the additional content|
+| [first] | Boolean if the content should be added in front of the original(def. false) |
+
+So lets say we already have some files in our pack, but want to add something to the main file somewhere entirely else in our project:
+
+```dart
+Extend(
+	"main",
+	child: Command("say okay"),
+	first: true
+)
+``` 
+This would add the command `say okay` in front of our main.mcfunction. 
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

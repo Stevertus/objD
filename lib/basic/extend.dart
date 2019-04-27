@@ -1,5 +1,7 @@
+import 'package:objd/basic/for_list.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/build/build.dart';
+import 'package:objd/wrappers/comment.dart';
 
 class Extend extends Widget {
   Widget child;
@@ -24,7 +26,7 @@ class Extend extends Widget {
 
     @override
   Widget generate(Context context) {
-      return child;
+    child;
   }
 
   @override
