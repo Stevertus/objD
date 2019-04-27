@@ -80,6 +80,10 @@ class Condition {
         _generated =
             new _ConditionUtil("entity " + cond.toString(), invert: invert);
         break;
+      case "Block":
+        _generated =
+            new _ConditionUtil("block ~ ~ ~ " + cond.toString(), invert: invert);
+        break;
       case "Score":
         if(cond.getString().isEmpty) throw("Please insert a score condition method into a condidition!");
         _generated =
@@ -112,6 +116,7 @@ class Condition {
     if (cond is Entity) return "Entity";
     if (cond is Location) return "Location";
     if (cond is Area) return "Area";
+    if (cond is Block) return "Block";
     if (cond is Score) return "Score";
     if (cond is Tag) return "Tag";
     return null;

@@ -33,7 +33,7 @@ And inside of that create a file named `pubspec.yaml` and another folder called 
 Open the pubspec.yaml file and add 
 ```yaml
 dependencies:  
-   objd: ^0.1.3
+   objd: ^0.2
 ```
 And run 
 ```
@@ -51,13 +51,14 @@ import 'package:objd/core.dart';
 ```
 Then we need to create a new datapack project:
 ```dart
-void main(){
+void main(List<String> args){
 	createProject(
 		Project(
 			name:"This is going to be the generated folder name",
 			target:"./", // path for where to generate the project
 			generate: CustomWidget() // The starting point of generation
-		)
+		),
+		args
 	);
 }
 ```
@@ -450,7 +451,7 @@ There is also an EntityType for every type_id in minecraft with `EntityType.[typ
 
 ```dart
 Say(
-	entity: Entity(
+	Entity(
 		selector: "e",
 		limit: 1,
 		tags:["first","second"],
@@ -520,7 +521,7 @@ Tag("mytag",entity:Entity.Selected()).toggle()
 The `removeIfExists` method removes the tag and may execute some action before if the tag exists.
 ```dart
 Tag("mytag",entity:Entity.Selected()).removeIfExists(
-	then: Say(msg:"removed")
+	then: Say("removed")
 ) // optional argument
 ⇒ execute if entity @s[tag=mytag] run say removed
 ⇒ execute if entity @s[tag=mytag] run tag @s remove mytag
@@ -999,7 +1000,7 @@ Execute(
 	dimension: Dimension.the_nether
 	children: List<Widget> [
 		Command("/say I get executed")
-		Say(msg:"Me too")
+		Say("Me too")
 	]
 ),
 
@@ -1140,7 +1141,7 @@ That means you can chain the actions, like with score, and use multiple actions 
 // declaring the base
 Execute ex = Execute(
 	children:[
-		Say(msg:"Hello"),
+		Say("Hello"),
 		Command("say e")
 	]
 )
@@ -1172,10 +1173,10 @@ If just gives you an execute wrapper with if and else statements. The conditions
 If(
 	Condition(Entity.Player()),
 	Then: [
-		Say(msg:"true")
+		Log("true")
 	],
 	Else: [
-		Say(msg:"false")
+		Log("false")
 	]
 )
 ⇒ execute if entity @p run say true
@@ -1188,7 +1189,7 @@ You can also negate the Condition with `If.not`:
 If.not(
 	Condition(Entity.Player()),
 	Then: [
-		Say(msg:"true")
+		Log("true")
 	]
 )
 ⇒ execute unless entity @p run say true
@@ -1217,14 +1218,14 @@ If(
 	Condition(
 		Entity.Selected()
 	)
-	,Then:[Say(msg:'entity')],
+	,Then:[Log('entity')],
 )
 ⇒ execute if entity @s run say entity
 If(
 	Condition(
 		Location.here()
 	),
-	Then:[Say(msg:'block')],
+	Then:[Say('block')],
 )
 ⇒ execute unless block ~ ~ ~ minecraft:air run say block
 If.not(
@@ -1234,7 +1235,7 @@ If.not(
 			"objective"
 		).matches(10)
 	),
-	Then:[Say(msg:'score')],
+	Then:[Say('score')],
 )
 ⇒ execute unless score Stevertus objective matches 10 run say score
 ```
@@ -1253,7 +1254,7 @@ If(
 		Location.here(),
 		block: Block.stone
 	),
-	Then:[Say(msg:'stone')],
+	Then:[Say('stone')],
 )
 ⇒ execute if block ~ ~ ~ minecraft:stone run say stone
 ```
@@ -1269,7 +1270,7 @@ If(
 		Entity(),
 		Condition(...)
 	]),
-	Then:[Say(msg:'true')],
+	Then:[Say('true')],
 )
 ⇒ execute unless block ~ ~ ~ minecraft:air if entity @e if ... run say true
 ```
@@ -1281,7 +1282,7 @@ If(
 		Entity(),
 		Condition(...)
 	]),
-	Then:[Say(msg:'true')],
+	Then:[Say('true')],
 )
 ⇒ execute unless block ~ ~ ~ minecraft:air run tag @p add objd_isTrue1
 ⇒ execute if entity @e run tag @p add objd_isTrue1
@@ -1310,7 +1311,7 @@ If.not(
 			),
 		]),
 	]),
-	Then: [Say(msg:"I'm done")]
+	Then: [Say("I'm done")]
 )
 ⇒ 
 execute if entity @p unless entity @r run tag @p add objd_isTrue1
@@ -1785,7 +1786,7 @@ Title(
 ⇒ title @p title [{"text":"Hello","color":"white","bold":true,"italic":true,"underlined":true,"clickEvent":{"action":"open_url","value":"https://stevertus.com"},"hoverEvent":{"action":"text","value":[{text:"hover me"}]}}]
 ```
 Now, its up to you to decide which is easier to read.
-There are also some other data sources: TODO: new 1.14 types!
+There are also some other data sources: 
 
 |TextComponent.translate| |
 |--|--|
@@ -1851,6 +1852,40 @@ TextComponent.blockNbt(
 	interpret: true
 )
 ⇒ {"block":"5 10 100","nbt":"Items[0].tag.display.Name","interpret":true}
+```
+
+|TextComponent.lineBreak|
+|--|--|
+|This inserts a simple line break|
+
+|TextComponent.customFont||
+|--|--|
+|String| a Custom Font Character(\u[HEX]) to insert in your text|
+|...same properties...|from TextComponent|
+
+```dart
+TextComponent.customFont("\uFaa4")
+⇒ {"text":"\uFaa4","color":"white"}
+```
+
+**Attention: This requires a custom negative spaces font by AmberW installed(https://cdn.discordapp.com/attachments/157097006500806656/486915349569208322/NegativeSpaceFont3.zip)**
+
+|TextComponent.space|  |
+|--|--|
+|int| the pixel amount you want to move the next TextComponent (positive or negative)|
+|...same properties...|from TextComponent|
+
+This automatically calculates the custom characters for moving your text horizontally.
+
+```dart
+Tellraw(
+	Entity.All(),
+	show:[
+		TextComponent.space(478),
+		TextComponent("This is moved")
+	]
+)
+⇒ tellraw  @a  [{"text":"\uF82D\uF82C\uF82B\uF829\uF828\uF826"},{"text":"This is moved"}]
 ```
 
 
@@ -2003,6 +2038,94 @@ Tellraw(
 )
 ⇒ tellraw @p [{"text":"hey","color":"black"}]
 ```
+### Item.Book
+This provides a book generator to use TextComponents with Books.
+| Item.Book |  |
+|--|--|
+| List of BookPage | content of the pages |
+| title | a String to give the book a title(optional) |
+|author| displays an author message (optional) |
+|...| same as **Item**|
+
+The page itself is another class:
+| BookPage |  |
+|--|--|
+| content | either a String, TextComponent or List of TextComponents |
+
+Or with a custom font character:
+
+|BookPage.customFont|  |
+|--|--|
+| String | your custom character(\u[HEX]) |
+
+A possible book could look like this:
+
+```dart
+Item.Book(
+ [
+   BookPage("This is the title page"),
+   BookPage(
+     TextComponent("Colored text",color:Color.Blue),
+   ),
+   BookPage.customFont("\uEaa2"),
+   BookPage([
+     TextComponent("one text"),
+     TextComponent(
+	     "another clickable text",
+	     clickEvent:TextClickEvent.change_page(0)
+     )
+   ])
+ ],
+ title: "my book",
+ lore: [TextComponent("This is my description")]
+)
+⇒ minecraft:written_book{"title":"my book","author":"","pages":["[{\"text\":\"This is the title page\"}]","[{\"text\":\"Colored text\",\"color\":\"blue\"}]","[{\"text\":\"\uEaa2\",\"color\":\"white\"}]","[{\"text\":\"one text\"},{\"text\":\"another clickable text\",\"clickEvent\":{\"action\":\"change_page\",\"value\":\"0\"}}]"],"display":{"Lore":["{\"text\":\"This is my description\"}"]}}
+```
+[//]: # (text/Book Generator)
+### Item.Book
+This provides a book generator to use TextComponents with Books.
+| Item.Book |  |
+|--|--|
+| List of BookPage | content of the pages |
+| title | a String to give the book a title(optional) |
+|author| displays an author message (optional) |
+|...| same as **Item**|
+
+The page itself is another class:
+| BookPage |  |
+|--|--|
+| content | either a String, TextComponent or List of TextComponents |
+
+Or with a custom font character:
+
+|BookPage.customFont|  |
+|--|--|
+| String | your custom character(\u[HEX]) |
+
+A possible book could look like this:
+
+```dart
+Item.Book(
+ [
+   BookPage("This is the title page"),
+   BookPage(
+     TextComponent("Colored text",color:Color.Blue),
+   ),
+   BookPage.customFont("\uEaa2"),
+   BookPage([
+     TextComponent("one text"),
+     TextComponent(
+	     "another clickable text",
+	     clickEvent:TextClickEvent.change_page(0)
+     )
+   ])
+ ],
+ title: "my book",
+ lore: [TextComponent("This is my description")]
+)
+⇒ minecraft:written_book{"title":"my book","author":"","pages":["[{\"text\":\"This is the title page\"}]","[{\"text\":\"Colored text\",\"color\":\"blue\"}]","[{\"text\":\"\uEaa2\",\"color\":\"white\"}]","[{\"text\":\"one text\"},{\"text\":\"another clickable text\",\"clickEvent\":{\"action\":\"change_page\",\"value\":\"0\"}}]"],"display":{"Lore":["{\"text\":\"This is my description\"}"]}}
+```
+
 [//]: # (text/bossbar)
 ## Bossbar
 The Bossbar shows up on the top of a specific player screen and displays a text with a value bar.
@@ -2073,7 +2196,7 @@ A Timeout is a simple delay in your code. It is done with the Schedule Command a
 ```dart
 Timeout(
 	"timeout1",
-	children: [Say(msg:"Timeout reached")],
+	children: [Say("Timeout reached")],
 	ticks: 100
 )
 ⇒ schedule function example:timers/timeout1 100t
@@ -2096,7 +2219,7 @@ A Timer is very similar to a Timeout, but instead of delaying the code it is run
 ```dart
 Timer(
 	"timer1",
-	children: [Say(msg:"Timer reached")],
+	children: [Say("Timer reached")],
 	ticks: 100
 )
 ⇒ function example:timers/timer1
@@ -2112,7 +2235,7 @@ With a finite timer, you can also stop the timer with `Timer.stop`:
 Timer(
 	"timer2",
 	infinite:false,
-	children: [Say(msg:"Timer reached")],
+	children: [Say("Timer reached")],
 	ticks: 10
 )
 Timer.stop("timer2")
@@ -2330,6 +2453,147 @@ AroundLocation(
 ⇒ setblock ~ ~ ~1 stone
 ⇒ setblock ~ ~ ~-1 stone
 ```
+[//]: # (utils/Raycast)
+## Raycast
+The Raycast Widget is one of the most powerful widgets by giving you many options to configure raytracing in Minecraft.
+Internally it uses local coordinates, a distance counter and recursion.
+
+|constructor|  |
+|--|--|
+| Entity | from which entity to go from |
+|onhit|a List of Widgets that execute on a hit|
+|max| maximum block distance(optional)|
+|step| how many steps to go forward each iteration(default = 1) |
+|through| a Block or Blocktag with passable Blocks(default = air) |
+|ray|a Function with an interface for each iteration(optional)|
+|scoreName|option to specify counter score(default = objd_count)|
+
+There are a lot of values to play around, but this here would make a fully functioning raycast function:
+```dart
+Raycast(
+	Entity.All(),
+	onhit: [
+		SetBlock(Block.sandstone,location:Location.here())
+	]
+)
+⇒ execute as @a at @s anchored eyes positioned ^  ^  ^ anchored feet run function mypack:objd/ray1
+```
+```mcfunction
+# objd/ray1 file
+execute unless block ~ ~ ~ minecraft:air run tag @s add objd_ray_hit
+execute unless entity @s[tag=objd_ray_hit] positioned ^ ^ ^1 run function mypack:objd/ray1
+execute if entity @s[tag=objd_ray_hit] run function mypack:objd/rayhit1
+execute if entity @s[tag=objd_ray_hit] run tag @s remove objd_ray_hit
+
+# objd/rayhit1 file
+setblock  ~  ~  ~  minecraft:sandstone
+```
+
+objD takes the hard work and generates the commands based on your inputs.
+### Customization
+There is the ray argument to give you more control over the ray.
+Here you can execute Widgets for each step and optionally stop or let the ray hit an obstacle.
+In Dart this is done with a Function:
+```dart
+Raycast(
+	Entity.All(),
+	onhit: [
+		SetBlock(Block.sandstone,location:Location.here())
+	],
+	ray: (stop, hit){
+		return If(...,Then:[stop()]); 
+		// stop and hit are functions as well 
+		//that can be executed to perform actions
+	}
+)
+```
+Let's also change other inputs:
+```dart
+Raycast(
+	Entity.All(),
+	onhit: [
+		SetBlock(Block.sandstone,location:Location.here())
+	],
+	ray: (stop, hit) => If(...,Then:[stop()]),
+	max: 10, // set maximum distance to 10 blocks
+	step: 0.1,
+	through: Block("#minecraft:transparent"),
+)
+⇒ scoreboard players set @s objd_count 0
+⇒ execute as @a at @s anchored eyes positioned ^ ^ ^ anchored feet run function mypack:objd/ray1
+```
+```mcfunction
+# objd/ray1 file
+# our blocktag:
+execute unless block ~ ~ ~ #minecraft:transparent run tag @s add objd_ray_hit
+# the result of the ray function:
+execute if ... run tag @s add objd_ray_stop
+# our distance increases:
+scoreboard players add @s objd_count 1
+# command changed depending on our inputs:
+execute unless entity @s[tag=objd_ray_hit] unless entity @s[tag=objd_ray_stop] if score @s objd_count matches ..100 positioned ^ ^ ^0.1 run function mypack:objd/ray1
+execute if entity @s[tag=objd_ray_hit] run function mypack:objd/rayhit1
+execute if entity @s[tag=objd_ray_hit] run tag @s remove objd_ray_hit
+tag @s remove objd_ray_stop
+```
+[//]: # (utils/Do-Loop)
+## Do Until/While Loop
+This Loop repeats a set of widget as long/until a condition is/becomes true.
+The Loop uses a Grouped File and Recursion to repeat commands.
+
+| Do.While|  |
+|--|--|
+|Condition or conditional value| a condition to test for each iteration |
+|then| a List of Widgets to execute each time |
+|testBefore| test before entering the loop if condition is true(optional) |
+
+> Until just negates the Condition
+
+**Example:**
+
+```dart
+Do.Until(Tag("istrue",entity:  Entity.All()),then:[
+	Say("repeat")
+])
+⇒ execute unless entity @a[tag=istrue] run function  mypack:objd/doloop1
+```
+```mcfunction
+# objd/doloop1 file
+say repeat
+execute unless entity @a[tag=istrue] run function  mypack:objd/doloop1
+```
+
+[//]: # (utils/ForEach)
+## ForEach Loop
+The ForEach Loop repeats a set of widgets for each value in a Score.
+Therefore a file is called recursively and a counter score is increased.
+
+| constructor |  |
+|--|--|
+|Score| the score to iterate through |
+|then| A Function that takes in the count Score |
+|from| the initial value for the counter(default = 0) |
+|counter| an Entity to hold the count value(default = #objd_foreach) |
+|step| how much to increase or decrease the counter each time(default = 1) |
+
+**Example:**
+```dart
+ForEach(
+	Score(Entity.All(), "myscore"), 
+	then: (score) {
+		return  Log(score);
+	}
+)
+⇒ scoreboard players set #objd_foreach objd_count 0
+⇒ execute if score #objd_foreach objd_count < @a myscore run function mypack:objd/foreach2
+```
+```mcfunction
+# objd/foreach2 file
+tellraw  @a  [{"text":"Console > ","color":"dark_aqua"},{"score":{"name":"#objd_foreach","objective":"objd_count"}}]
+scoreboard players add #objd_foreach objd_count 1
+execute if score #objd_foreach objd_count <= @a myscore run function  mypack:objd/foreach2
+```
+
 
 [//]: # (global_commands)
 ## Global CLI Commands
@@ -2355,3 +2619,32 @@ pub global run objd:[command] [args]
 * **new** [project_name] - generates a new project from a boilerplate
 * **run** [project_root] - builds one project
 * **serve** [directory] [project_root] - watches the directory to change and builds the project on change
+
+### Build Options
+You can use certain arguments to pass options to the build methods.
+This argument list can directly be edited in createProject:
+```dart
+createProject(
+	Project(...),
+	["arg1","arg2", ... ] // arguments as optional List
+)
+```
+**OR** (what I recommend) you can just take the program arguments from main:
+```dart
+void main(List<String> args) {
+  createProject(
+    Project(...),
+    args
+  );
+}
+```
+This allows you to use the arguments in the execution command, like:
+* ```dart index.dart arg1 -min``` 
+* ```objd run index.dart arg1 -min``` 
+* ```objd serve . index.dart -min``` 
+
+**All Available Arguments:**
+* `-min`: This minifies the file amount by ignoring the mcmeta and tag files
+* `-prod`: This creates a production build of your project and saves it into another datapack(`(prod)` added).
+In Production Comments and line breaks are removed and every widget can access the prod value in Context to get notified.
+* `-debug`: This creates a debug json file in your project root, that lists all properties and other generated files

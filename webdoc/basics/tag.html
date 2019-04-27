@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/basics/tag</title>
+<xmp theme="spacelab" style="display:none;">
+## Tag
+A tag saves a boolean value with an entity inside the game.
+
+|constructor|  |
+|--|--|
+|String|the name of the tag|
+| entity| the entity you that want to assign a tag to |
+| value | the boolean value(default true) |
+
+**Example:**
+```dart
+Tag("firstTag",entity:Entity.Player(),value: true)
+⇒ tag @p add firstTag
+```
+There is also the add or remove method for changing a variable:
+```dart
+Tag mytag = Tag("firstTag",entity:Entity.Player())
+// in generate
+mytag.add(),
+mytag.remove()
+
+⇒ tag @p add firstTag
+⇒ tag @p remove firstTag
+```
+Also consider the addTag method on an entity.
+### toggle
+With the toggle method you can toggle the value(invert the tag). This is done with a temporary tag:
+```dart
+Tag("mytag",entity:Entity.Selected()).toggle()
+⇒ execute if entity @s[tag=mytag] run tag @s add objd_temp
+⇒ execute if entity @s[tag=objd_temp] run tag @s remove mytag
+⇒ execute if entity @s[tag=!objd_temp] run tag @s add mytag
+⇒ tag @s remove objd_temp
+```
+### removeIfExists
+The `removeIfExists` method removes the tag and may execute some action before if the tag exists.
+```dart
+Tag("mytag",entity:Entity.Selected()).removeIfExists(
+	then: Say("removed")
+) // optional argument
+⇒ execute if entity @s[tag=mytag] run say removed
+⇒ execute if entity @s[tag=mytag] run tag @s remove mytag
+```
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

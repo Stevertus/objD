@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/utils/timeout</title>
+<xmp theme="spacelab" style="display:none;">
+## Timeout
+A Timeout is a simple delay in your code. It is done with the Schedule Command and generates a File under the hood.
+
+| constructor |  |
+|--|--|
+| String | the name of the timeout(used as filename) |
+| children | the content that should be delayed |
+| ticks | the delay as integer ticks |
+| path |the folder path(optional, default = "timers")|
+
+**Example:**
+```dart
+Timeout(
+	"timeout1",
+	children: [Say("Timeout reached")],
+	ticks: 100
+)
+⇒ schedule function example:timers/timeout1 100t
+// timers/timeout1:
+⇒ say Timeout reached
+```
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

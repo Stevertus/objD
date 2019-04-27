@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/utils/ForEach</title>
+<xmp theme="spacelab" style="display:none;">
+## ForEach Loop
+The ForEach Loop repeats a set of widgets for each value in a Score.
+Therefore a file is called recursively and a counter score is increased.
+
+| constructor |  |
+|--|--|
+|Score| the score to iterate through |
+|then| A Function that takes in the count Score |
+|from| the initial value for the counter(default = 0) |
+|counter| an Entity to hold the count value(default = #objd_foreach) |
+|step| how much to increase or decrease the counter each time(default = 1) |
+
+**Example:**
+```dart
+ForEach(
+	Score(Entity.All(), "myscore"), 
+	then: (score) {
+		return  Log(score);
+	}
+)
+⇒ scoreboard players set #objd_foreach objd_count 0
+⇒ execute if score #objd_foreach objd_count < @a myscore run function mypack:objd/foreach2
+```
+```mcfunction
+# objd/foreach2 file
+tellraw  @a  [{"text":"Console > ","color":"dark_aqua"},{"score":{"name":"#objd_foreach","objective":"objd_count"}}]
+scoreboard players add #objd_foreach objd_count 1
+execute if score #objd_foreach objd_count <= @a myscore run function  mypack:objd/foreach2
+```
+
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

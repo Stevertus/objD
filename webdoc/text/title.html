@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/text/title</title>
+<xmp theme="spacelab" style="display:none;">
+## Title
+To display our TextComponent, we need the `/title` command and the Title class wrapper.
+
+|constructor||
+|--|--|
+|selector|the Entity for the title to show|
+|show|A List of TextComponents to show|
+
+**Example**
+```dart
+Title(
+	Entity.Player(),
+	show: List<TextComponent>[
+		TextComponent(
+			"hey",
+			color: Color.Black
+		)
+	]
+)
+⇒ title @p title [{"text":"hey","color":"black"}]
+```
+The same goes also for subtitle and actionbar:
+
+|Title.subtitle or Title.actionbar||
+|--|--|
+|selector|the Entity for the title to show|
+|show|A List of TextComponents to show|
+
+Title.clear clears all titles again:
+
+|Title.clear||
+|--|--|
+|selector|clears title for the selector|
+
+Title.times sets the timings
+
+|Title.times||
+|--|--|
+|selector|edit the durations for this selector|
+|fadein|the fadein time in ticks(default 20)|
+|display|the time the title stays in ticks(default 60)|
+|fadeout|the fadeout time in ticks(default 20)|
+
+And also a resetter for that:
+
+|Title.resetTimes||
+|--|--|
+|selector|resets times for this selector|
+
+**Examples:**
+```dart
+Title.actionbar(
+	Entity.All(),
+	show: [
+		TextComponent("hey")
+	]
+)
+⇒ title @a actionbar [{"text":"hey"}]
+Title.clear(Entity())
+⇒ title @e clear
+
+Title.times(Entity.All(),fadein:30,display:40,fadeout:20)
+⇒ title @a times 30 40 20
+
+Title.resetTimes(Entity.All())
+⇒ title @a reset
+```
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

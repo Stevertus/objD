@@ -61,7 +61,7 @@ class Team extends Widget {
       String suffix,
       bool seeInvisible) {
         if(display != null) modifiers["displayName"] = display.toJson();
-        if(color != null) modifiers["color"] = color.color;
+        if(color != null) modifiers["color"] = color.toString();
         if(deathMessage != null) modifiers["deathMessageVisibility"] = _genEnum(deathMessage);
         if(friendlyFire != null) modifiers["friendlyFire"] = friendlyFire;
         if(nametag != null) modifiers["nametagVisibility"] =  _genEnum(nametag);

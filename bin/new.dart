@@ -12,7 +12,7 @@ main(args){
 name: """+args[0]+"""
 
 dependencies:
-  objd: ^0.1.0
+  objd: ^0.2.0
   """);
   
   _createFile(path + "/index.dart","""
@@ -21,13 +21,14 @@ import 'package:objd/core.dart';
 // import the custom pack:
 import './packs/examplePack.dart';
 
-void main() {
+void main(List<String> args) {
   createProject(
     Project(
       name: '"""+args[0]+"""',
       target: "./",             // path for where to generate the project
       generate: ExamplePack(),  // The starting point of generation
     ),
+    args
   );
 }
 """);

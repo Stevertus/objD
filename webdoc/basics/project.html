@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/basics/project</title>
+<xmp theme="spacelab" style="display:none;">
+## Project
+The project is a special Widget which is just defined once. It contains some built options, like description or name, but also the entire underlying tree of packs, files and actions.
+
+|constructor | |
+|--|--|
+| name | the name of the datapack folder |
+| generate| a widget that defines the projects content |
+| [description] | A description that will go in pack.mcmeta |
+
+**Example:**
+```dart
+main() {
+// create Project takes in one project and compiles it
+createProject(
+	Project(
+	name:  "tested",
+	generate:  mainWidget(),
+	));
+}
+```
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

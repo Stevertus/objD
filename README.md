@@ -28,7 +28,7 @@ And inside of that create a file named `pubspec.yaml` and another folder called 
 Open the pubspec.yaml file and add 
 ```yaml
 dependencies:  
-   objd: ^0.1.3
+   objd: ^0.2
 ```
 And run 
 ```
@@ -46,13 +46,14 @@ import 'package:objd/core.dart';
 ```
 Then we need to create a new datapack project:
 ```dart
-void main(){
+void main(List<String> args){
 	createProject(
 		Project(
 			name:"This is going to be the generated folder name",
 			target:"./", // path for where to generate the project
 			generate: CustomWidget() // The starting point of generation
-		)
+		),
+		args
 	);
 }
 ```
@@ -83,17 +84,18 @@ What we are doing right now is to generate a new subpack with a name(This will b
 You can run the project already and the result should be a pack with an empty main.mcfunction file.
 
 So lets add some functionality to our project in our main file.
+We can use the Log Widget to display a message to the player.
 ```dart
 main: File(
 	path: 'main',
-	child: Say(msg:'Hello World')
+	child: Log('Hello World')
 )
 ```
 But how to add a list of Actions then? Well there's also an Widget for that:
-[For.of]()
+`For.of`
 ```dart
 child: For.of(List<Widget>[
-	Say(msg:'Hello World'),
+	Log('Hello World'),
 	Command('setblock 0 0 0 air')
 ])
 ```
@@ -104,4 +106,5 @@ The example folder contains a boilerplate to start off.
 
 There are many more widgets for objD including basic Widgeds, Command Wrappers, Text and Util Widgets. 
 So check out the documentation at https://stevertus.com/objD/documentation
-or my youtube channel https://www.youtube.com/stevertus
+or my youtube channel https://www.youtube.com/stevertus.
+In this video playlist are all objD related videos: https://www.youtube.com/playlist?list=PL5AxRIlgrL5GnKz69w4AUyqpZC35BlxdD

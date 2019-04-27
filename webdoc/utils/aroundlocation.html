@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/utils/aroundlocation</title>
+<xmp theme="spacelab" style="display:none;">
+## AroundLocation
+Often times you need to check blocks or entities around one Location. AroundLocation utilizes this by using just one build method for all sides:
+
+| constructor |  |
+|--|--|
+|double| the amount you want to go to each side(required)|
+|build| a method requiring one Location argument and returning a Widget(required)|
+|top|bool for +y|
+|bottom|bool for -y|
+|left|boo for +x|
+|right|bool for -x|
+|front|bool for +z|
+|back|bool for -z|
+
+**Example:**
+```dart
+AroundLocation(
+	1,
+	build: (Location loc){
+		return Setblock(Block.stone,location:loc)
+	}
+)
+⇒ setblock ~1 ~ ~ stone
+⇒ setblock ~-1 ~ ~ stone
+⇒ setblock ~ ~1 ~ stone
+⇒ setblock ~ ~-1 ~ stone
+⇒ setblock ~ ~ ~1 stone
+⇒ setblock ~ ~ ~-1 stone
+```
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

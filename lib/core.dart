@@ -1,7 +1,7 @@
 
 // all build functions
 export 'build/context.dart';
-export 'build/create_project.dart';
+export 'build/build.dart';
 
 // basic widgets
 export 'basic/widgets.dart';

@@ -3,6 +3,7 @@ import 'package:objd/basic/for_list.dart';
 import 'package:objd/basic/file.dart';
 import 'package:objd/build/build.dart';
 import 'package:meta/meta.dart';
+import 'package:objd/wrappers/comment.dart';
 
 class Group extends Widget {
   static int fileId = 1;
@@ -51,10 +52,12 @@ class Group extends Widget {
 
   @override
   Widget generate(Context context) {
+    
     if (_isFile) {
+      children.insert(0, Comment("Generated ${filename} Group Widget from ${context.file}"));
       return File(
+        getPath(),
         execute: true,
-        path: getPath(),
         child: For.of(children),
       );
     }

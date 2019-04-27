@@ -21,7 +21,7 @@ class Timeout extends Widget {
   generate(Context context) {
     return Schedule.file(
       new File.execute(
-        path: path + "/" + name,
+        path + "/" + name,
         child:For.of(children)
       ),
       ticks: ticks,
@@ -64,7 +64,7 @@ class Timer extends Widget {
     //} 
     
     return File.execute(
-        path: path + "/" + name,
+        path + "/" + name,
         child:For.of(children)
       );
   }

@@ -18,7 +18,7 @@ class Repeat extends Widget {
       String filePath = path + "/" + name;
     return For.of([
       score.set(0),
-      File.execute(path: filePath,child:For.of([
+      File.execute(filePath,child:For.of([
         child,
         score.add(1),
         If(score.matchesRange(Range(to:to)),Then:[

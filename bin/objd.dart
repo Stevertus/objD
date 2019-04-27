@@ -32,5 +32,10 @@ Use objd [command] [args] or pub global run objd:[command] [args] to run command
 * serve [directory] [project_root] - watches the directory to change and builds the project on change
 
 * help - opens this help menu
+
+Arguments
+Use -prod to generate a seperate datapack with all Widgets notified through the Context
+Use -min to generate just the mcfunction files
+Get a debug file with -debug
 """);
 }

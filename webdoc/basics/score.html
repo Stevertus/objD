@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<title>webdoc/basics/score</title>
+<xmp theme="spacelab" style="display:none;">
+## Score
+The score class is the basis for setting values, calculating with scores and checking the values.
+It implements one base class with no functionality and several methods to do actions:
+
+|constructor|  |
+|--|--|
+|Entity| the entity within the scoreboard |
+|String| the name of the objective |
+|addNew| bool whether it should add the scoreboard itself if it does not exist(default = true)|
+
+> With the addNew property it is not required to add a scoreboard before!
+#### Calculations
+These methods can be used to set or calculate the value:
+
+| name | arguments |
+|--|--|
+| set | int |
+| reset ||
+| add | int |
+| subtract|int|
+||**The following compare another Score**|
+|setEqual|Score|
+|swapWith|Score|
+|setToSmallest|Score|
+|setToBiggest|Score|
+|addScore|Score|
+|subtractScore|Score|
+|multiplyByScore|Score|
+|divideByScore|Score|
+|modulo|Score|
+|setToData|Data|
+|setToResult|Command,useSuccess(bool)|
+
+> All of these methods return a new instance of Score with the calculations applied.
+> So you can also chain single calculations or use multiple on one base Score.
+
+**Examples:**
+```dart
+// defining scores variables inside the widget
+Score base = Score(Entity.Selected(),"score",addNew: true)
+Score another = Score(Entity.Selected(),"score2")
+// ... in the generate method:
+base.set(5).add(3).subtract(10).reset()
+⇒ scoreboard players set @s score 5
+⇒ scoreboard players add @s score 3
+⇒ scoreboard players remove @s score 10
+⇒ scoreboard players reset @s score
+
+base.setEqual(another).swapWith(another).setToBiggest(another)
+⇒ scoreboard players operation @s score = @s score2
+⇒ scoreboard players operation @s score >< @s score2
+⇒ scoreboard players operation @s score > @s score2
+
+another.addScore(base).divideByScore(base).modulo(base)
+⇒ scoreboard players operation @s score2 += @s score
+⇒ scoreboard players operation @s score2 /= @s score
+⇒ scoreboard players operation @s score2 %= @s score
+
+// setToData must take in Data.get 
+base.setToData(Data.get(Location("~ ~ ~"),"Items[0].Count"))
+⇒ execute store result score @s score run data get block ~ ~ ~ Items[0].Count 1
+
+// using success instead of result
+base.setToResult(Command("say hi"),useSuccess:true) 
+⇒ execute store success score @s score run say hi
+```
+#### Conditions
+These methods can be used for example with if to match values:
+
+| name | arguments |example Result|
+|--|--|--|
+|matches|int|@s score matches 5|
+|matchesRange|Range|@s score matches 0..20|
+|isEqual|Score|@s score = @s score2|
+|isSmaller|Score|@s score < @s score2|
+|isSmallerOrEqual|Score|@s score <= @s score2|
+|isBigger|Score|@s score > @s score2|
+|isBiggerOrEqual|Score|@s score >= @s score2|
+
+### Constant Score
+Do you need constant values with scores? objD got you covered with `Score.con`:
+
+|Score.con| |
+|--|--|
+|int| a constant number |
+|addNew|bool whether it should add objd_consts itself if it does not exist(default = true)|
+
+This will automatically create a scoreboard called `objd_consts` and set the value to the fake entity `#[value]`
+**Example:**
+```dart
+Score.con(5)
+⇒ scoreboard players set #5 objd_consts 5
+```
+### Selected Score
+Often times you want the score of a selected Entity(@s). Score.fromSelected is the same as Score but has a predefined entity.
+**Example:**
+```dart
+Score.fromSelected("objective").set(3)
+⇒ scoreboard players set @s objective 3
+```
+
+
+</xmp>
+
+<script src="https://lbesson.bitbucket.io/md/strapdown.min.js?nonnavbar=y"></script>
+</html>

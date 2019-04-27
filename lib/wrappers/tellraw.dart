@@ -10,7 +10,7 @@ class Tellraw extends Widget {
   /// The Tellraw class is very similar to the Title class, but shows its texts in the chat.
   Tellraw(Entity selector, {List<TextComponent> show}){
     entity = selector.toString();
-    jsonText = json.encode(show.map((text) => text.toMap()).toList());
+    jsonText = json.encode(show.map((text) => text.toMap()).toList()).replaceAll("\\", "\u005C");;
   }
   @override
   Widget generate(Context context) {

@@ -16,6 +16,26 @@ class Item {
     else throw("Please insert either an ItemType, a Block or a string representing an item type into Item");
 
     // check tags
+    _checkTags(damage,model,hideFlags,name,lore,nbt);
+  }
+
+  Item.Book(List<BookPage> pages, {String title = "", String author = "", this.count,this.slot,int damage, int model,int hideFlags, TextComponent name, List<TextComponent> lore, Map<String,dynamic> nbt}){
+    if(nbt == null) nbt = {};
+    this.type = ItemType.written_book;
+    nbt["title"] = title;
+    nbt["author"] = author;
+    nbt["pages"] = pages.map(
+        (page) => json.encode(
+          page.list.map(
+            (item) => item.toMap()
+          ).toList()
+        )
+      ).toList();
+
+    _checkTags(damage,model,hideFlags,name,lore,nbt);
+  }
+
+  _checkTags(int damage, int model, int hideFlags, TextComponent name, List<TextComponent> lore, Map<String,dynamic> nbt){
     if(nbt != null && nbt.length > 0) tag.addAll(nbt);
     if(damage != null) tag["Damage"] = damage;
     if(model != null) tag["CustomModelData"] = model;
@@ -29,6 +49,7 @@ class Item {
       tag["display"]['Lore'] = lore.map((lor) => lor.toJson()).toList();
     }  
   }
+
   String getGiveNotation(){
     String result = type.toString();
     if(tag != null && tag.length > 0){
@@ -49,6 +70,20 @@ class Item {
     return json.encode(this.getMap());
   }
 }
+
+class BookPage {
+  List<TextComponent> list;
+  BookPage(dynamic content){
+    if(content is TextComponent) list = [content];
+    if(content is String) list = [TextComponent(content)];
+    if(content is List<TextComponent> ) list = content;
+  }
+
+  BookPage.customFont(String char){
+    list = [TextComponent.customFont(char)];
+  }
+}
+
 /// ItemType is like EntityType or Block a utility class to provide a list of all available items.
 class ItemType {
   final String _type;
