@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:objd/build/buildProject.dart';
 import 'package:objd/build/project.dart';
+import 'package:objd/build/reloader.dart' as hotreload;
 export 'package:objd/build/project.dart';
 export 'package:objd/build/context.dart';
 import './io.dart';
@@ -18,7 +19,11 @@ import './io.dart';
 void createProject(Project prj,[List<String> args = const []]) {
   Stopwatch stopwatch = new Stopwatch()..start();
   GenOptions opt = GenOptions(args);
-  generateIO(BuildProject(prj,prod: opt.prod),opt);
+  BuildProject bPrj = BuildProject(prj,prod: opt.prod);
+
+  if(opt.hotreload) hotreload.reloadProject(bPrj);
+
+  generateIO(bPrj,opt);
   print("Total Generation Time: ${stopwatch.elapsedMilliseconds}ms");
 }
 

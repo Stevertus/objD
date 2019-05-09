@@ -19,6 +19,8 @@ class BuildFile {
   String path;
   Widget child;
 
+  bool isGen = true;
+
 
   BuildFile(File file){
     path = file.path;

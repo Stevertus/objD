@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:objd/basic/command.dart';
+import 'package:objd/basic/score.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/basic/entity.dart';
 import 'package:objd/basic/location.dart';
@@ -13,6 +14,8 @@ class Data extends Widget {
   get subcommand => _subcommand;
   String path = "";
   num scale;
+  String datatype;
+  Score score;
   DataModify modify;
 
   Map<String,dynamic> nbt;
@@ -44,6 +47,10 @@ class Data extends Widget {
   Data.remove(dynamic target,{@required this.path}){
     handleTarget(target);
     _subcommand = "remove";
+  }
+  Data.fromScore(dynamic target,{@required this.path, @required this.score, this.scale = 1, this.datatype = "byte"}){
+    handleTarget(target);
+    _subcommand = "score";
   }
   /// The modify operation is also available, yet a bit more complex.
   /// 
@@ -91,6 +98,7 @@ class Data extends Widget {
       case "get": return new Command('data get ' + getTarget() + ' ' + path + ' ' + (scale < 0.000001 ? scale.toStringAsFixed(10): scale.toString()));
       case "remove": return new Command('data remove ' + getTarget() + ' ' + path);
       case "modify": return new Command('data modify ' + getTarget() + ' ${path} ${modify}');
+      case "score": return new Command('execute store result ' + getTarget() + ' ${path} ${scale} ${datatype} run scoreboard players get ${score.entity.toString()} ${score.score}');
     }
     throw("Invalid subcommand!");
   }

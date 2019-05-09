@@ -1,4 +1,14 @@
-## 0.2
+## 0.2.1
+* added new Slot class with helper functions
+* added Data.fromScore
+* added Rotation utilities like Rotation.n and Rotation.north
+* added isRotated value on entities to test for a Rotation object
+* reworked ReplaceItem for Blocks and using the new Slot
+* updated Item Slot requirements to match the Slot datatype
+* updated project generator without File path
+* fixed Location.storeResult
+
+## 0.2.0
 * Completly reworked build algorithms that run the generate method just once.
 * improved performace
 * added new build arguments in createProject

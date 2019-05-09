@@ -11,6 +11,8 @@ class BuildProject {
     String name;
     String description;
     bool prod;
+    bool isGen = true;
+    bool isGenMeta = true;
 
     BuildProject(Project prj,{this.prod = false}){
       path = prj.target;

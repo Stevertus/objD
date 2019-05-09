@@ -14,6 +14,10 @@ class BuildPack {
     String main;
     String load;
     Context context;
+    
+    bool isGen = true;
+    bool isGenLoad = true;
+    bool isGenMain = true;
 
     BuildPack(Pack pack){
       Stopwatch stopwatch = new Stopwatch()..start();

@@ -7,19 +7,16 @@ The Say Class writes a simple message or an entity in the chat.
 
 |constructor| |
 |--|--|
-|msg|Message as String|
-|entity| enity of type Entity|
-
-**You can't put both parameters in Say!**
+|msg|MessageString or Entity|
 
 Example:
 ```dart
 Say(
-	msg: "Hello"
+	"Hello"
 )
 ⇒ say Hello
 Say(
-	entity: Entity.Player()
+	Entity.Player()
 )
 ⇒ say @p
 ```

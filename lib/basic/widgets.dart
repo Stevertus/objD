@@ -16,3 +16,4 @@ export 'location.dart';
 export 'rotation.dart';
 export 'area.dart';
 export 'condition.dart';
+export 'slot.dart';
