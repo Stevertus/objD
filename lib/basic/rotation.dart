@@ -14,6 +14,36 @@ class Rotation {
     _rotation = "~ ~";
     x = y = 0;
   }
+
+  static int n = 180;
+  static int s = 0;
+  static int e = -90;
+  static int w = 90;
+
+  Rotation.north({double dx = 0,this.y = 0}){
+    x = Rotation.n + dx;
+  }
+  Rotation.south({double dx = 0,this.y = 0}){
+    x = Rotation.s + dx;
+  }
+  Rotation.east({double dx = 0,this.y = 0}){
+    x = Rotation.e + dx;
+  }
+  Rotation.west({double dx = 0,this.y = 0}){
+    x = Rotation.w + dx;
+  }
+
+  getDirection(){
+    int dir = x ~/ 90;
+    switch (dir) {
+      case 0: return "south"; 
+      case 1: return "west"; 
+      case 2: return "north"; 
+      case -1: return "east"; 
+    }
+    return "north";
+  }
+
     @override
   String toString() {
     return _rotation.replaceAll('.0', '');

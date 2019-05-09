@@ -48,13 +48,13 @@ class Location {
 ///⇒ execute store success block ~ ~ ~ Items[0].tag.command run say hello
 ///```
   Execute storeResult(Command command,
-      {@required String path, bool useSuccess = false}) {
+      {@required String path, String datatype = "double", double scale = 1, bool useSuccess = false}) {
     assert(path == null && path.isEmpty);
     return new Execute(
       children: [command],
       encapsulate: false,
       args: [
-        'store ' + (useSuccess ? 'success' : 'result') + ' block ' + _location + ' ' + path,
+        'store ' + (useSuccess ? 'success' : 'result') + ' block ' + _location  + ' ' + path + ' ${datatype} ${scale}',
       ],
     );
   }

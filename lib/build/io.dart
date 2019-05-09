@@ -5,14 +5,21 @@ import 'package:colorize/colorize.dart';
 import 'package:objd/build/buildPack.dart';
 import 'package:objd/build/buildProject.dart';
 void generateIO(BuildProject prj,GenOptions options) {
+
+  if(!prj.isGen) return;
+
   if(options.prod)  prj.name += "(prod)";
   String path = getPath(prj);
   color('Saving Datapack ' + prj.name + ' and its files...',front: Styles.BLUE);
 
 
-  Map<String,dynamic> mcmeta = {"pack":{"pack_format":1,"description":prj.description}};
+  
+  // create mcmeta
+  if(!options.minified && prj.isGenMeta){
+    Map<String,dynamic> mcmeta = {"pack":{"pack_format":1,"description":prj.description}};
+    _createFile(path + 'pack.mcmeta', json.encode(mcmeta));
+  } 
 
-  _createFile(path + 'pack.mcmeta', json.encode(mcmeta));
   _ensureDirExists(path + 'data/minecraft/tags/functions');
 
   Map<String,dynamic> tickJson = {"values":[]};
@@ -20,16 +27,21 @@ void generateIO(BuildProject prj,GenOptions options) {
 
   if(prj.packs != null && prj.packs.length > 0){
     prj.packs.forEach((pack) {
-      if(!options.minified){
-        if(pack.load != null && pack.load.length >= 0) loadJson["values"].add(pack.name + ":" + pack.load);
-        if(pack.main != null && pack.main.length >= 0) tickJson["values"].add(pack.name + ":" + pack.main);
-      }
+      if(pack.isGen){
+        // only run if should generate
+        if(!options.minified){
+          if(pack.load != null && pack.load.length >= 0 && pack.isGenLoad) 
+            loadJson["values"].add(pack.name + ":" + pack.load);
+          if(pack.main != null && pack.main.length >= 0 && pack.isGenMain) 
+            tickJson["values"].add(pack.name + ":" + pack.main);
+        }
         _createPack(path + 'data/', pack);
+      }
     });
   }
   if(!options.minified){
-    _createFile(path + 'data/minecraft/tags/functions/tick.json', json.encode(tickJson));
-    _createFile(path + 'data/minecraft/tags/functions/load.json', json.encode(loadJson));
+    if(tickJson["values"].isNotEmpty) _createFile(path + 'data/minecraft/tags/functions/tick.json', json.encode(tickJson));
+    if(loadJson["values"].isNotEmpty) _createFile(path + 'data/minecraft/tags/functions/load.json', json.encode(loadJson));
   }
   if(options.debugFile) _createFile(path + 'objd.json', json.encode(prj.toMap()));
 }
@@ -49,7 +61,7 @@ void _createPack(path,BuildPack pack){
 
   if(pack.files != null && pack.files.length > 0){
     pack.files.forEach((filepath,file) {
-        futures.add(_createFile(path + pack.name + '/functions/' + filepath + '.mcfunction', file.commands.join("\n")));
+        if(file.isGen) futures.add(_createFile(path + pack.name + '/functions/' + filepath + '.mcfunction', file.commands.join("\n")));
     }); 
 
 
@@ -86,12 +98,18 @@ class GenOptions {
   bool minified = false;
   bool prod = false;
   bool debugFile = false;
+  bool hotreload = false;
 
   GenOptions(List<String> args){
+    if(args.contains("-hotreload")){
+      hotreload = true;
+      debugFile = true;
+    } 
     if(args.contains("-min")) minified = true;
     if(args.contains("-prod")){
       prod = true;
       minified = false;
+      hotreload = false;
     }
     if(args.contains("-debug")){
       debugFile = true;

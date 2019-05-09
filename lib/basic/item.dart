@@ -1,11 +1,12 @@
 import 'package:objd/basic/block.dart';
+import 'package:objd/basic/slot.dart';
 import 'dart:convert';
 
 import 'package:objd/basic/text_components.dart';
 class Item {
   ItemType type;
   int count;
-  int slot;
+  Slot slot;
   Map<String,dynamic> tag = {};
   /// The Item class represents an item in an inventory in Minecraft. It is used in the [Give] or Nbt Commands.
   Item(dynamic type,{this.count,this.slot,int damage, int model,int hideFlags, TextComponent name, List<TextComponent> lore, Map<String,dynamic> nbt}){
@@ -63,7 +64,11 @@ class Item {
     Map<String,dynamic> map = {"id":type.toString()};
     if(tag.isNotEmpty) map["tag"] = tag;
     if(count != null) map["Count"] = count;
-    if(slot != null) map["Slot"] = slot;
+    if(slot != null){
+      if(slot.id == null) throw("An Item needs the Slot id!");
+      if(slot.id < 0) print("Please note that you are using Item with a negative slot. This is reserved for a selecteditem and can't be accessed within the Inventory propery!");
+      map["Slot"] = slot.id;
+    } 
     return map;
   }
   String getNbt(){

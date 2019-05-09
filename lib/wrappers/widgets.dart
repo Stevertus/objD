@@ -19,3 +19,4 @@ export 'particle.dart';
 export 'trigger.dart';
 export 'team.dart';
 export 'bossbar.dart';
+export 'advancement.dart';
