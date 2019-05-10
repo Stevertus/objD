@@ -48,6 +48,16 @@ class Data extends Widget {
     handleTarget(target);
     _subcommand = "remove";
   }
+/// You can also convert a score directly to a nbt field with Data.fromScore:
+/// 
+/// |Data.fromScore| |
+/// |--|--|
+/// |dynamic|The target Entity OR Location which you want to modify|
+/// |path|the nbt path you want to copy to|
+/// |score|The source Score|
+/// |scale|optional int (default = 1)|
+/// |datatype| a Java datatype for the score(default = byte) |
+
   Data.fromScore(dynamic target,{@required this.path, @required this.score, this.scale = 1, this.datatype = "byte"}){
     handleTarget(target);
     _subcommand = "score";

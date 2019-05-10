@@ -1,9 +1,19 @@
 import 'package:objd/core.dart';
-
+/// The Slot object gives you certain utils to manipulate Inventories and Containers with the Item, Replaceitem or Data.
 class Slot {
   final int id;
   final String slot;
+/// The Slot object gives you certain utils to manipulate Inventories and Containers with the Item, Replaceitem or Data.
+/// Every Slot has a String(slot) like `inventory.10` used in replaceitem and an id like `19` that is used with nbt data.
+/// objD should change between these values automatically for the specific usecase.
   const Slot({this.slot,this.id});
+
+///**Slot.inv** takes in a double number, like `2.6`
+/// The number before the . represents the row in the inventory, so the second row
+/// The six is the sixth slot of that row.
+///
+/// objD calculates the corresponding Slot. In this case `inventory.14`.
+/// > Notice: also the hotbar can be calculated with this. It is the 4th row
 
   static Slot inv(double n){
     int res = 0;
@@ -19,6 +29,9 @@ class Slot {
       return Slot(slot:"inventory.$res",id:res + 9);
     }
   }
+
+/// **Slot.chest** takes in a double number, like `5.6`
+/// And does exactly the same as Slot.inv but with a container, like a chest.
   static Slot chest(double n){
     int res = 0;
     int row = n.toInt();
@@ -29,6 +42,10 @@ class Slot {
 
     return Slot(slot: "container.$res",id:res);
   }
+
+/// **Slot.drop** takes in a double number, like `1.3`
+/// This calculates the rows and columns for a 3x3 Container like a Dropper or a Dispenser.
+///Therefore just values from 1 to 3 are allowed.
   static Slot drop(double n){
     int res = 0;
     int row = n.toInt();
