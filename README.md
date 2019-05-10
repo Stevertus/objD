@@ -27,16 +27,20 @@ And inside of that create a file named `pubspec.yaml` and another folder called 
 
 Open the pubspec.yaml file and add 
 ```yaml
+name: [unique_namespace]
 dependencies:  
-   objd: ^0.2.0
+   objd: ^0.2.1
 ```
+Also remember to replace the `[unique_namespace]` with your own project name.
 And run 
 ```
 $  pub get
 ```
 with the console in the new folder(VS code does this automatically)
 
-[//]: # (getting_started)
+> Tip: You can also generate a full project with a console command. [read more](https://stevertus.com/objD/documentation/Global%20Commands)
+
+
 ## Getting started
 Let's get started and create our first dart file with `lib/main.dart` file. 
 
@@ -74,7 +78,7 @@ Widget generate(Context context){
 	return Pack(
 		name:"mypack",
 		main: File( // optional
-			path: 'main'
+			'main'
 		)
 	)
 }
@@ -87,19 +91,51 @@ So lets add some functionality to our project in our main file.
 We can use the Log Widget to display a message to the player.
 ```dart
 main: File(
-	path: 'main',
+	'main',
 	child: Log('Hello World')
 )
 ```
 But how to add a list of Actions then? Well there's also an Widget for that:
 `For.of`
 ```dart
-child: For.of(List<Widget>[
+child: For.of([
 	Log('Hello World'),
 	Command('setblock 0 0 0 air')
 ])
 ```
 So now we have a [List](https://www.dartlang.org/guides/language/language-tour#lists) of Widget, so we can use as many as we want
+
+Whole code:
+```dart
+import 'package:objd/core.dart';
+
+void main(List<String> args){
+    createProject(
+        Project(
+            name:"This is going to be the generated folder name",
+            target:"./",
+            generate: CustomWidget() 
+        ),
+        args
+    );
+}
+
+class CustomWidget extends Widget {
+    @override
+    Widget generate(Context context){
+        return Pack(
+            name:"mypack",
+            main: File( // optional
+                'main',
+                child: For.of([
+			Log('Hello World'),
+			Command('setblock 0 0 0 air')
+		])
+            )
+        );
+    }
+}
+```
 
 ## Documentation and Examples
 The example folder contains a boilerplate to start off.

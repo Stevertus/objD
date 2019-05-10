@@ -13,7 +13,10 @@ main(List args){
     print("objD will now watch all your files in ${args[0]} and generate the datapack itself");
     args = args.sublist(1);
     run.main(args);
-  args.add("-min");
+    
+  // enable hotreload
+  if(!args.contains("-full")) args.add("-hotreload");
+
   watcher.events.listen((event) {
     if(event.path.split('.').last == "dart") run.main(args);
   });

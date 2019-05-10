@@ -33,14 +33,18 @@ And inside of that create a file named `pubspec.yaml` and another folder called 
 
 Open the pubspec.yaml file and add 
 ```yaml
+name: [unique_namespace]
 dependencies:  
-   objd: ^0.2.0
+   objd: ^0.2.1
 ```
+Also remember to replace the `[unique_namespace]` with your own project name.
 And run 
 ```
 $  pub get
 ```
 with the console in the new folder(VS code does this automatically)
+
+> Tip: You can also generate a full project with a console command. [read more](https://stevertus.com/objD/documentation/Global%20Commands)
 
 [//]: # (getting_started)
 ## Getting started
@@ -80,7 +84,7 @@ Widget generate(Context context){
 	return Pack(
 		name:"mypack",
 		main: File( // optional
-			path: 'main'
+			'main'
 		)
 	)
 }
@@ -93,20 +97,51 @@ So lets add some functionality to our project in our main file.
 We can use the Log Widget to display a message to the player.
 ```dart
 main: File(
-	path: 'main',
+	'main',
 	child: Log('Hello World')
 )
 ```
 But how to add a list of Actions then? Well there's also an Widget for that:
 `For.of`
 ```dart
-child: For.of(List<Widget>[
+child: For.of([
 	Log('Hello World'),
 	Command('setblock 0 0 0 air')
 ])
 ```
 So now we have a [List](https://www.dartlang.org/guides/language/language-tour#lists) of Widget, so we can use as many as we want
 
+Whole code:
+```dart
+import 'package:objd/core.dart';
+
+void main(List<String> args){
+    createProject(
+        Project(
+            name:"This is going to be the generated folder name",
+            target:"./",
+            generate: CustomWidget() 
+        ),
+        args
+    );
+}
+
+class CustomWidget extends Widget {
+    @override
+    Widget generate(Context context){
+        return Pack(
+            name:"mypack",
+            main: File( // optional
+                'main',
+                child: For.of([
+					Log('Hello World'),
+					Command('setblock 0 0 0 air')
+				])
+            )
+        );
+    }
+}
+```
 [//]: # (basics/widget)
 ## Widget
 A widget is the base element for basically everything in objD.
@@ -407,10 +442,11 @@ Group(
 |gamemode|Gamemode type(e.g Gamemode.creative, Gamemode.survival)|
 |horizontalRotation|Range of the horizontal facing direction|
 |verticalRotation|Range of the vertical facing direction|
+|isRotated|a Rotation Object for testing a specific rotation|
 |playerName|a String if you prefer to use a playername instead of arguments |
 |**Methods** |  |
 |sort|adds a sort attribute of type [Sort]()|
-| storeResult | Command, path, useSuccess |
+| storeResult | Command, path, scale,datatype, useSuccess |
 |joinTeam|entity joins the given team|
 |leaveTeam|entity leaves the current team|
 |addTag|adds a new tag to the entity|
@@ -755,13 +791,19 @@ There is also a method for a location:
 
 |methods|  |
 |--|--|
-| storeResult | Command, path, useSuccess |
+| storeResult | Command, path, scale, datatype, useSuccess |
 This stores a result or success of a command in the nbt path of a location.
 **Example:**
 ```dart
-Location.here().storeResult(Command('say hello'),path: "Items[0].tag.command",useSuccess:true)
+Location.here().storeResult(
+	Command('say hello'),
+	path: "Items[0].tag.command",
+	useSuccess:true,
+	scale: 1,
+	datatype: "byte"
+)
 
-⇒ execute store success block ~ ~ ~ Items[0].tag.command run say hello
+⇒ execute store success block ~ ~ ~ Items[0].tag.command 1 byte run say hello
 ```
 [//]: # (basics/area)
 ## Area
@@ -817,6 +859,30 @@ Execute.rotated(Rotation.glob(x:0,y:90),children:[
 	Command("tp @s ^ ^ ^10")
 ])
 ⇒ execute rotated 0 90 run command tp @s ^ ^ ^10
+```
+### Predefined Values
+The Rotation object has some common values. These mainly include all the directions(north, west, south, east):
+```dart
+Rotation.n ⇒ 180
+Rotation.s ⇒ 0
+Rotation.e ⇒ -90
+Rotation.w ⇒ 90
+```
+You can also generate a Rotation object directly:
+```dart
+Rotation.north() 		⇒ 180  0
+Rotation.east(y: 10) 	⇒ -90 10
+Rotation.south(dx: 45)  ⇒  45  0
+```
+Here you can also specify the y-value and an additional difference in x.
+### Get Direction
+The `getDirection` method allows you to extract a direction from the x value of a Rotation. This can be used in Blockstates for example.
+All the direction are rounded to 90° steps.
+
+Example:
+```dart
+var myrot = Rotation.global(x: 90, y: 56)
+myrot.getDirection() ⇒ "west"
 ```
 
 [//]: # (basics/data)
@@ -906,6 +972,23 @@ Data.copy(
 )
 ⇒ data modify @s my_Custom_Path2 set from block ~ ~-1 ~ Items[0].tag.display.name
 ```
+You can also convert a score directly to a nbt field with Data.fromScore:
+|Data.fromScore| |
+|--|--|
+|dynamic|The target Entity OR Location which you want to modify|
+|path|the nbt path you want to copy to|
+|score|The source Score|
+|scale|optional int (default = 1)|
+|datatype| a Java datatype for the score(default = byte) |
+
+```dart
+Data.fromScore(
+	Entity.Selected(),
+	path: "my_Custom_Path",
+	score: Score(Entity(),"myscore")
+)
+⇒ execute store result entity @s my_Custom_Path 1 byte run scoreboard players get @e myscore
+```
 
 [//]: # (basics/item)
 ## Item
@@ -919,7 +1002,7 @@ The Item class represents an item in an inventory in Minecraft. It is used in th
 |count|Integer value for the amount of stacked items|
 |name|a TextComponent showing a name|
 |lore| a  List of TextComponents giving extra information|
-|slot|The current slot of the item(does not work for give)|
+|slot|The current Slot of the item(does not work for give)|
 |damage|the used durability of the item|
 |model|int describing which model varient should be used|
 |nbt|addional NBT as Dart Map|
@@ -949,6 +1032,68 @@ ItemType is like EntityType or Block a utility class to provide a list of all av
 |ItemType([minecraft_item_id])| creates a ItemType from a String |
 |--|--|
 |ItemType.[minecraft_item_id]|there is also an value for each item in Minecraft|
+
+[//]: # (basics/slot)
+## Slot
+The Slot object gives you certain utils to manipulate Inventories and Containers with the Item, Replaceitem or Data.
+Every Slot has a String(slot) like `inventory.10` used in replaceitem and an id like `19` that is used with nbt data.
+objD should change between these values automatically for the specific usecase.
+
+|constructor||
+|--|--|
+|slot|String for Replaceitem|
+|id|int for NBT|
+
+### Constants
+More important are all the constants:
+* Slot.Hotbar[0-8]
+* Slot.Inventory[0-26]
+* Slot.Enderchest[0-26]
+* Slot.Container[0-53]
+* Slot.MainHand
+* Slot.OffHand
+* Slot.Head
+* Slot.Chest
+* Slot.Legs
+* Slot.Feet
+
+**Example:**
+
+```dart
+ReplaceItem(
+	Entity.All(),
+	item:Item(ItemType.golden_helmet),
+	slot:Slot.Head
+)
+⇒ replaceitem entity @a armor.head minecraft:golden_helmet
+```
+
+### Helpers
+Together with this objD also introduces helpers to quickly find the desired slot.
+
+**Slot.inv** takes in a double number, like `2.6`
+The number before the . represents the row in the inventory, so the second row
+The six is the sixth slot of that row.
+
+objD calculates the corresponding Slot. In this case `inventory.14`.
+> Notice: also the hotbar can be calculated with this. It is the 4th row
+
+**Slot.chest** takes in a double number, like `5.6`
+And does exactly the same but with a container, like a chest.
+
+**Slot.drop** takes in a double number, like `1.3`
+This calculates the rows and columns for a 3x3 Container like a Dropper or a Dispenser.
+Therefore just values from 1 to 3 are allowed.
+
+**Example:**
+```dart
+ReplaceItem.block(
+	Location.here(),
+	item:Item(ItemType.beef),
+	slot:Slot.chest(3.8)
+)
+⇒ replaceitem block ~  ~  ~  container.25 minecraft:beef
+```
 
 [//]: # (wrappers/main)
 # Command Wrappers
@@ -1550,7 +1695,7 @@ Give(Entity.Player(),
 ```
 
 [//]: # (wrappers/replaceitem)
-## Replaceitem
+## ReplaceItem
 Sets a specific container slot to a item.
 * for Entities:
 
@@ -1558,12 +1703,12 @@ Sets a specific container slot to a item.
 |--|--|
 |Entity|The entity|
 |item|the Item you want to set(required) |
-|slot|a String representation of the slot(required)|
+|slot|a Slot Object with the slot set(required)|
 
 **Example:**
 ```dart
-Replaceitem(Entity.Player(),
-	slot: "hotbar.5"
+ReplaceItem(Entity.Player(),
+	slot: Slot.Hotbar5,
 	item: Item(
 		ItemType.apple,
 		count: 5,
@@ -1573,7 +1718,13 @@ Replaceitem(Entity.Player(),
 
 ⇒ replaceitem entity @p hotbar.5 minecraft:apple{"CustomModelData":339001} 5 
 ```
-> replaceitem block will follow
+This works the same with ReplaceItem.block:
+
+|ReplaceItem.block| |
+|--|--|
+|Location|The block location|
+|item|the Item you want to set(required) |
+|slot|a Slot Object with the slot set(required)|
 
 [//]: # (wrappers/particle)
 ## Particle
@@ -1745,6 +1896,52 @@ Trigger.set(
 )
 ⇒ trigger test_objective set 5
 ```
+
+[//]: # (wrappers/advancement)
+## Advancement
+The advancement gives you a convenient interface to trigger or revoke specific advancements and advancement groups. It implements the advancement command.
+
+This gives the advancement to the player:
+
+|Advancement.grant| |
+|--|--|
+|Entity| the target player |
+|String| your advancement |
+|mode| the advancement mode(default = only, modes are also seperate constructors) |
+|criterium| optional String criterium for an advancement|
+
+You can also revoke it again:
+
+|Advancement.revoke| |
+|--|--|
+|. . .|same as Advancement.grant|
+
+### Named Constructors
+Every mode also has a seperated named constructor:
+
+|Advancement.everything| Unlocks everything |
+|--|--|
+|Entity| the target player |
+|revoke| set true if you want to revoke |
+
+|Advancement.only| Unlocks everything |
+|--|--|
+|Entity| the target player |
+|String | your advancement|
+|revoke| set true if you want to revoke |
+|criterium|optional String for an advancement|
+
+There are also `Advancement.from`, `Advancement.until` and `Advancement.through` that have the same arguments as only.
+
+**Example:**
+```dart
+Advancement.only(
+	Entity.Player(),
+	"minecraft:story/mine_stone",
+	revoke: true
+)
+⇒ advancement revoke @p only minecraft:story/mine_stone
+``` 
 
 [//]: # (text/main)
 # Texts and Strings
@@ -2085,6 +2282,7 @@ Item.Book(
 [//]: # (text/Book Generator)
 ### Item.Book
 This provides a book generator to use TextComponents with Books.
+
 | Item.Book |  |
 |--|--|
 | List of BookPage | content of the pages |
@@ -2093,6 +2291,7 @@ This provides a book generator to use TextComponents with Books.
 |...| same as **Item**|
 
 The page itself is another class:
+
 | BookPage |  |
 |--|--|
 | content | either a String, TextComponent or List of TextComponents |
@@ -2645,7 +2844,20 @@ This allows you to use the arguments in the execution command, like:
 * ```objd serve . index.dart -min``` 
 
 **All Available Arguments:**
+* `-hotreload`: Saves the state of your project and compares just the latest changes.
+* `-full`: Generates the full project(just for objd serve!).
 * `-min`: This minifies the file amount by ignoring the mcmeta and tag files
 * `-prod`: This creates a production build of your project and saves it into another datapack(`(prod)` added).
 In Production Comments and line breaks are removed and every widget can access the prod value in Context to get notified.
 * `-debug`: This creates a debug json file in your project root, that lists all properties and other generated files
+
+### Hotreload
+The hotreload option is an experimental feature, that just looks at the things you changed since the last build. This can improve performance significantly especially for big projects with many generated mcfunctions.
+
+This feature is enabled by default for `objd serve`, if you include the args.
+You can disable it with the `-full` option.
+
+**How it works:**
+
+objD saves a representation of your project in the objd.json file of your project.
+For each new build or reload it checks which parts of the project you changed and just generates the new necessary files to implement your change in the datapack.
