@@ -1,1 +1,0 @@
-tellraw @a [{"text":"Console > ","color":"dark_aqua"},{"text":"test 1"}]

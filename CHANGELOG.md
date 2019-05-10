@@ -1,11 +1,16 @@
 ## 0.2.1
+* added experimental hotreload to boost performance
+* added new -hotreload and -full build arguments
 * added new Slot class with helper functions
+* added Advancement Widget
 * added Data.fromScore
 * added Rotation utilities like Rotation.n and Rotation.north
+* added Rotation.getDirection
 * added isRotated value on entities to test for a Rotation object
 * reworked ReplaceItem for Blocks and using the new Slot
 * updated Item Slot requirements to match the Slot datatype
 * updated project generator without File path
+* updated Getting Started to fit new requirements and systems
 * fixed Location.storeResult
 
 ## 0.2.0
