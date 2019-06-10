@@ -5,6 +5,7 @@ import 'package:objd/basic/for_list.dart';
 import 'package:objd/basic/entity.dart';
 import 'package:objd/basic/scoreboard.dart';
 import 'package:objd/build/build.dart';
+import 'package:objd/wrappers/if.dart';
 
 
 class Score extends Widget {
@@ -200,6 +201,22 @@ class Score extends Widget {
       "execute store "+(useSuccess ? "success" : "result")+" score " + _getESStr() + " run " + command.toMap()['command']
     ));
     
+  }
+/// finds the smallest value in a list of scores
+  Widget findSmallest(List<Score> scores,{int min}){
+    return For(to: scores.length - 1,create: (int i){
+      Score ret = this.setToSmallest(scores[i]);
+      if(min != null) return If(scores[i].matchesRange(Range(from: min)),Then: [ret],);
+      return ret;
+    });
+  }
+/// finds the biggest value in a list of scores
+  Widget findBiggest(List<Score> scores,{int max}){
+    return For(to: scores.length - 1,create: (int i){
+      Score ret = this.setToBiggest(scores[i]);
+      if(max != null) return If(scores[i].matchesRange(Range(to: max)),Then: [ret],);
+      return ret;
+    });
   }
 
   /// tests

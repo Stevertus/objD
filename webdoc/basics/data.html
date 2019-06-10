@@ -88,6 +88,23 @@ Data.copy(
 )
 ⇒ data modify @s my_Custom_Path2 set from block ~ ~-1 ~ Items[0].tag.display.name
 ```
+You can also convert a score directly to a nbt field with Data.fromScore:
+|Data.fromScore| |
+|--|--|
+|dynamic|The target Entity OR Location which you want to modify|
+|path|the nbt path you want to copy to|
+|score|The source Score|
+|scale|optional int (default = 1)|
+|datatype| a Java datatype for the score(default = byte) |
+
+```dart
+Data.fromScore(
+	Entity.Selected(),
+	path: "my_Custom_Path",
+	score: Score(Entity(),"myscore")
+)
+⇒ execute store result entity @s my_Custom_Path 1 byte run scoreboard players get @e myscore
+```
 
 
 </xmp>

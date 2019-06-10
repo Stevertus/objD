@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 /// This is an util class which provides a wrapper for all available blocks in Minecraft.
 /// ```dart
 /// Block([minecraft_block_id]) // as string or
@@ -16,6 +18,24 @@ class Block {
   /// Block.[minecraft_block_id]
   /// ```
   const Block(this._block);
+  
+  static Block nbt(dynamic block,{Map<String,dynamic> states, Map<String,dynamic> nbt, String strNbt = ""}){
+    String id;
+    if(block is String) id = block;
+    else if(block is Block) id = block.toString();
+    else throw("Please insert a block or string into Block.nbt!");
+
+    String strState = "";
+    if(states != null){
+      List<String> liState = [];
+      states.forEach((String key, val){
+        liState.add("$key=$val");
+      });
+      strState = "[${liState.join(',')}]";
+    }
+    if(nbt != null) strNbt = json.encode(nbt);
+    return Block(id + strState + strNbt);
+  }
 
 static const Block air = const Block('minecraft:air');
 static const Block stone = const Block('minecraft:stone');

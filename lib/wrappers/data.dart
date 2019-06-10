@@ -21,6 +21,8 @@ class Data extends Widget {
   Map<String,dynamic> nbt;
   String strNbt;
 
+   String get type => _type;
+   String get typeValue => _typeValue;
   /// The Data Widgets allows you to edit nbt data of Entities or Blocks.
 /// ```dart
 /// Data(
@@ -108,7 +110,7 @@ class Data extends Widget {
       case "get": return new Command('data get ' + getTarget() + ' ' + path + ' ' + (scale < 0.000001 ? scale.toStringAsFixed(10): scale.toString()));
       case "remove": return new Command('data remove ' + getTarget() + ' ' + path);
       case "modify": return new Command('data modify ' + getTarget() + ' ${path} ${modify}');
-      case "score": return new Command('execute store result ' + getTarget() + ' ${path} ${scale} ${datatype} run scoreboard players get ${score.entity.toString()} ${score.score}');
+      case "score": return new Command('execute store result ' + getTarget() + ' ${path} ${datatype} ${scale} run scoreboard players get ${score.entity.toString()} ${score.score}');
     }
     throw("Invalid subcommand!");
   }

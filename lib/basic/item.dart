@@ -6,10 +6,11 @@ import 'package:objd/basic/text_components.dart';
 class Item {
   ItemType type;
   int count;
+  int damage;
   Slot slot;
   Map<String,dynamic> tag = {};
   /// The Item class represents an item in an inventory in Minecraft. It is used in the [Give] or Nbt Commands.
-  Item(dynamic type,{this.count,this.slot,int damage, int model,int hideFlags, TextComponent name, List<TextComponent> lore, Map<String,dynamic> nbt}){
+  Item(dynamic type,{this.count,this.slot,this.damage, int model,int hideFlags, TextComponent name, List<TextComponent> lore, Map<String,dynamic> nbt}){
     // check item type
     if(type is ItemType ) this.type = type;
     else if(type is Block ) this.type = new ItemType(type.toString());
@@ -17,10 +18,10 @@ class Item {
     else throw("Please insert either an ItemType, a Block or a string representing an item type into Item");
 
     // check tags
-    _checkTags(damage,model,hideFlags,name,lore,nbt);
+    _checkTags(model,hideFlags,name,lore,nbt);
   }
 
-  Item.Book(List<BookPage> pages, {String title = "", String author = "", this.count,this.slot,int damage, int model,int hideFlags, TextComponent name, List<TextComponent> lore, Map<String,dynamic> nbt}){
+  Item.Book(List<BookPage> pages, {String title = "", String author = "", this.count,this.slot,this.damage, int model,int hideFlags, TextComponent name, List<TextComponent> lore, Map<String,dynamic> nbt}){
     if(nbt == null) nbt = {};
     this.type = ItemType.written_book;
     nbt["title"] = title;
@@ -33,10 +34,29 @@ class Item {
         )
       ).toList();
 
-    _checkTags(damage,model,hideFlags,name,lore,nbt);
+    _checkTags(model,hideFlags,name,lore,nbt);
+  }
+/// creates a new object based on a existing Item to modify properties.
+  Item.clone(Item it){
+    this.type = it.type.clone();
+    if(it.count != null ) this.count = it.count;
+    if(it.slot != null ) this.slot = it.slot.clone();
+    if(it.tag != null) this.tag = new Map.from(it.tag);
+  }
+/// creates an Item based on nbt or json data.
+  Item.fromJson(Map<String,dynamic> json){
+    if(json["item"] != null) type = ItemType(json["item"]);
+    if(json["id"] != null) type = ItemType(json["id"]);
+    if(json["Slot"] != null) slot = Slot(id:json["Slot"]);
+    if(json["Count"] != null && json["Count"] > 0) count = json["Count"];
+    if(json["Damage"] != null && json["Damage"] > 0) damage = json["Damage"];
+    int model;
+    if(json["model"] != null) model = json["model"];
+    if(json["tag"] != null) tag = json["tag"];
+    _checkTags(model, null, null, null);
   }
 
-  _checkTags(int damage, int model, int hideFlags, TextComponent name, List<TextComponent> lore, Map<String,dynamic> nbt){
+  _checkTags(int model,[ int hideFlags, TextComponent name, List<TextComponent> lore, Map<String,dynamic> nbt]){
     if(nbt != null && nbt.length > 0) tag.addAll(nbt);
     if(damage != null) tag["Damage"] = damage;
     if(model != null) tag["CustomModelData"] = model;
@@ -51,17 +71,18 @@ class Item {
     }  
   }
 
-  String getGiveNotation(){
+  String getGiveNotation({bool withDamage = true}){
     String result = type.toString();
     if(tag != null && tag.length > 0){
       result += json.encode(tag);
     }
     result += " ";
     if(count != null) result += count.toString();
+    if(damage != null && withDamage) result +=  " " + damage.toString();
     return result;
   }
   Map<String,dynamic> getMap(){
-    Map<String,dynamic> map = {"id":type.toString()};
+    Map<String,dynamic> map = {"id":"minecraft:" + type.toString().replaceFirst("minecraft:", "")};
     if(tag.isNotEmpty) map["tag"] = tag;
     if(count != null) map["Count"] = count;
     if(slot != null){
@@ -93,6 +114,10 @@ class BookPage {
 class ItemType {
   final String _type;
   const ItemType(this._type);
+
+  clone(){
+    return ItemType(this.toString());
+  }
 
     @override
   String toString() {

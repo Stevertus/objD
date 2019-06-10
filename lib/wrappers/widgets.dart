@@ -20,3 +20,4 @@ export 'trigger.dart';
 export 'team.dart';
 export 'bossbar.dart';
 export 'advancement.dart';
+export 'clear.dart';

@@ -12,7 +12,7 @@ main(args){
 name: """+args[0]+"""
 
 dependencies:
-  objd: ^0.2.0
+  objd:
   """);
   
   _createFile(path + "/index.dart","""

@@ -29,6 +29,30 @@ Execute.rotated(Rotation.glob(x:0,y:90),children:[
 ])
 ⇒ execute rotated 0 90 run command tp @s ^ ^ ^10
 ```
+### Predefined Values
+The Rotation object has some common values. These mainly include all the directions(north, west, south, east):
+```dart
+Rotation.n ⇒ 180
+Rotation.s ⇒ 0
+Rotation.e ⇒ -90
+Rotation.w ⇒ 90
+```
+You can also generate a Rotation object directly:
+```dart
+Rotation.north() 		⇒ 180  0
+Rotation.east(y: 10) 	⇒ -90 10
+Rotation.south(dx: 45)  ⇒  45  0
+```
+Here you can also specify the y-value and an additional difference in x.
+### Get Direction
+The `getDirection` method allows you to extract a direction from the x value of a Rotation. This can be used in Blockstates for example.
+All the direction are rounded to 90° steps.
+
+Example:
+```dart
+var myrot = Rotation.global(x: 90, y: 56)
+myrot.getDirection() ⇒ "west"
+```
 
 
 </xmp>
