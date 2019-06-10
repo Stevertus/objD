@@ -1,3 +1,16 @@
+## 0.2.2
+* added Item.clone, Entity.clone and similar Methods with ItemType and Slot to enrich changeable inputs
+* added Entity.not to negate arguments
+* added Slot.craft
+* added Clear Wrapper
+* added Condition.Data
+* added Block.nbt to include Nbt-data and Blockstates
+* added Score.findSmallest and Score.findBiggest
+* updated Item.getGiveNotation to include Damage
+* changed Slot utilities to use seperate row and column arguments
+* fixed missing minecraft: on Item nbt
+* fixed wrong order of scale and datatype for Data.fromScore
+
 ## 0.2.1
 * added experimental hotreload to boost performance
 * added new -hotreload and -full build arguments

@@ -63,13 +63,19 @@ There is also a method for a location:
 
 |methods|  |
 |--|--|
-| storeResult | Command, path, useSuccess |
+| storeResult | Command, path, scale, datatype, useSuccess |
 This stores a result or success of a command in the nbt path of a location.
 **Example:**
 ```dart
-Location.here().storeResult(Command('say hello'),path: "Items[0].tag.command",useSuccess:true)
+Location.here().storeResult(
+	Command('say hello'),
+	path: "Items[0].tag.command",
+	useSuccess:true,
+	scale: 1,
+	datatype: "byte"
+)
 
-⇒ execute store success block ~ ~ ~ Items[0].tag.command run say hello
+⇒ execute store success block ~ ~ ~ Items[0].tag.command 1 byte run say hello
 ```
 
 </xmp>

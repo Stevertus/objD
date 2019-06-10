@@ -8,20 +8,22 @@ class Slot {
 /// objD should change between these values automatically for the specific usecase.
   const Slot({this.slot,this.id});
 
-///**Slot.inv** takes in a double number, like `2.6`
-/// The number before the . represents the row in the inventory, so the second row
-/// The six is the sixth slot of that row.
+///**Slot.inv** takes in two numbers, like `2,6`
+///The first number represents the row in the inventory, so the second row
+///And the second number is the sixth slot of that row.
 ///
 /// objD calculates the corresponding Slot. In this case `inventory.14`.
 /// > Notice: also the hotbar can be calculated with this. It is the 4th row
 
-  static Slot inv(double n){
+  static Slot inv(int row, [int col]){
     int res = 0;
-    int row = n.toInt();
-    int col = (n*10).toInt() - row * 10;
 
-    if(col > 0) res = col - 1;
-    if(row > 0) res += (row -1) * 9;
+    if(col != null){
+      if(col > 0) res = col - 1;
+      if(row > 0) res += (row -1) * 9;
+    } else {
+      res = row - 1;
+    }
 
     if(res > 26){
       return Slot(slot:"hotbar.${res - 27}",id:res - 27);
@@ -29,32 +31,57 @@ class Slot {
       return Slot(slot:"inventory.$res",id:res + 9);
     }
   }
-
-/// **Slot.chest** takes in a double number, like `5.6`
-/// And does exactly the same as Slot.inv but with a container, like a chest.
-  static Slot chest(double n){
+///used to mark a 3x3 space inside a conventional container.
+///takes in two numbers, like Slot.inv or one number from 1-9. The start options marks the upper left.
+  static Slot craft(int row, [int col, int start = 1]){
     int res = 0;
-    int row = n.toInt();
-    int col = (n*10).toInt() - row * 10;
-
-    if(col > 0) res = col - 1;
-    if(row > 0) res += (row -1) * 9;
+    if(col != null){
+      if(col > 0) res = col - 1;
+      if(row > 0) res += (row -1) * 3;
+    } else {
+      res = row - 1;
+    }
+    
+    if(res > 5) res = start + 18 + (res - 6);
+    else if(res > 2) res = start +  9 + (res - 3);
+    else res += start;
 
     return Slot(slot: "container.$res",id:res);
   }
 
-/// **Slot.drop** takes in a double number, like `1.3`
-/// This calculates the rows and columns for a 3x3 Container like a Dropper or a Dispenser.
-///Therefore just values from 1 to 3 are allowed.
-  static Slot drop(double n){
+/// **Slot.chest** takes in numbers, like `5,6`
+/// And does exactly the same as slot.inv but with a container, like a chest.
+  static Slot chest(int row, [int col]){
     int res = 0;
-    int row = n.toInt();
-    int col = (n*10).toInt() - row * 10;
 
-    if(col > 0) res = col - 1;
-    if(row > 0) res += (row -1) * 3;
+    if(col != null){
+      if(col > 0) res = col - 1;
+      if(row > 0) res += (row -1) * 9;
+    } else {
+      res = row - 1;
+    }
 
     return Slot(slot: "container.$res",id:res);
+  }
+
+/// **Slot.drop** takes in numbers, like `1,3`
+/// This calculates the rows and columns for a 3x3 Container like a Dropper or a Dispenser.
+///Therefore just values from 1 to 3 are allowed.
+  static Slot drop(int row, [int col]){
+    int res = 0;
+
+    if(col != null){
+      if(col > 0) res = col - 1;
+      if(row > 0) res += (row -1) * 3;
+    } else {
+      res = row - 1;
+    }
+
+    return Slot(slot: "container.$res",id:res);
+  }
+
+  clone(){
+    return Slot(id: this.id, slot: this.slot);
   }
 
 // Hotbar

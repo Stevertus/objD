@@ -17,22 +17,34 @@ abstract class EntityClass {
 class Entity implements EntityClass{
   String selector;
   /// creates an entity with @p
-  Entity.Player ({Range distance,List<dynamic> tags,Team team,String strNbt,Map<String,dynamic> nbt,List<Score> scores,Range level, Gamemode gamemode, Area area, String name,Rotation isRotated, Range horizontalRotation, Range verticalRotation}) :
-    this(selector: 'p',distance:distance,tags:tags,team:team,scores:scores,strNbt:strNbt,nbt:nbt,level: level,area: area,gamemode: gamemode,name: name,isRotated:isRotated,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
+  Entity.Player ({Range distance,List<dynamic> tags,Team team,String strNbt,Map<String,dynamic> nbt,List<Score> scores,Range level, Gamemode gamemode, Area area, String name,Rotation isRotated, Range horizontalRotation, Range verticalRotation}){
+        selector = "p";
+        _setArguments(null,tags,team,scores,nbt,strNbt,null,area,distance,level,gamemode,name,isRotated,horizontalRotation,verticalRotation,false);
+  }
   /// creates an entity with an implicit name
   Entity.PlayerName (String name): this(playerName:name);
   /// creates an entity with @a
-  Entity.All ({Range distance,List<dynamic> tags,Team team,String strNbt,Map<String,dynamic> nbt,int limit,List<Score> scores,Range level, Gamemode gamemode, Area area, String name,Rotation isRotated, Range horizontalRotation, Range verticalRotation}): 
-    this(selector: 'a',limit:limit,distance:distance,tags:tags,team:team,strNbt:strNbt,nbt:nbt,scores:scores,level: level,area: area,gamemode: gamemode,name: name,isRotated:isRotated,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
-
+  Entity.All ({Range distance,List<dynamic> tags,Team team,String strNbt,Map<String,dynamic> nbt,int limit,List<Score> scores,Range level, Gamemode gamemode, Area area, String name,Rotation isRotated, Range horizontalRotation, Range verticalRotation}){
+        selector = "a";
+        _setArguments(limit,tags,team,scores,nbt,strNbt,null,area,distance,level,gamemode,name,isRotated,horizontalRotation,verticalRotation,false);
+  }
   /// creates an entity with @r
-  Entity.Random({EntityType type,Range distance,List<dynamic> tags,Team team,String strNbt,Map<String,dynamic> nbt,int limit,List<Score> scores,Range level, Gamemode gamemode, Area area, String name,Rotation isRotated, Range horizontalRotation, Range verticalRotation}): 
-    this(selector: 'r',type:type,limit:limit,distance:distance,tags:tags,team:team,strNbt:strNbt,nbt:nbt,scores:scores,level: level,area: area,gamemode: gamemode,name: name,isRotated:isRotated,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
-
+  Entity.Random({EntityType type,Range distance,List<dynamic> tags,Team team,String strNbt,Map<String,dynamic> nbt,int limit,List<Score> scores,Range level, Gamemode gamemode, Area area, String name,Rotation isRotated, Range horizontalRotation, Range verticalRotation}){
+    selector = "r";
+    _setArguments(limit,tags,team,scores,nbt,strNbt,type,area,distance,level,gamemode,name,isRotated,horizontalRotation,verticalRotation,false);
+  }
   /// creates an entity with @s
-  Entity.Selected ({EntityType type, Range distance,List<dynamic> tags,Team team,String strNbt,Map<String,dynamic> nbt,List<Score> scores,Range level, Gamemode gamemode, Area area, String name,Rotation isRotated, Range horizontalRotation, Range verticalRotation}):
-    this(selector: 's',type:type,distance:distance,tags:tags,team:team,strNbt:strNbt,nbt:nbt,scores:scores,level: level,area: area,gamemode: gamemode,name: name,isRotated:isRotated,horizontalRotation: horizontalRotation,verticalRotation: verticalRotation);
-  // Todo: implement Scores, Tags, Area, Nbt
+  Entity.Selected ({EntityType type, Range distance,List<dynamic> tags,Team team,String strNbt,Map<String,dynamic> nbt,List<Score> scores,Range level, Gamemode gamemode, Area area, String name,Rotation isRotated, Range horizontalRotation, Range verticalRotation}){
+    selector = "s";
+    _setArguments(null,tags,team,scores,nbt,strNbt,type,area,distance,level,gamemode,name,isRotated,horizontalRotation,verticalRotation,false);
+  }
+  /// creates a new instance of an already existing Entity object
+  Entity.clone(Entity ent){
+    this.selector = ent.selector;
+    this.playerName = ent.playerName;
+    this.arguments = new Map.from(ent.arguments);
+  }
+
   /// Entity is an util class to convert an argument list into the Minecraft Entity format(@p...)
   Entity({
       this.selector = 'e',
@@ -53,45 +65,96 @@ class Entity implements EntityClass{
       Range verticalRotation,
       this.playerName}){
 
-    if(distance != null) arguments['distance'] = distance.toString();
-    if(level != null) arguments['level'] = level.toString();
-    if(limit != null) arguments['limit'] = limit.toString();
+    _setArguments(limit,tags,team,scores,nbt,strNbt,type,area,distance,level,gamemode,name,isRotated,horizontalRotation,verticalRotation,false);
+  }
+  _setArguments(
+      int limit,
+      List<dynamic> tags,
+      Team team,
+      List<Score> scores,
+      Map<String,dynamic> nbt,
+      String strNbt,
+      EntityType type,
+      Area area,
+      Range distance,
+      Range level,
+      Gamemode gamemode, 
+      String name,
+      Rotation isRotated, 
+      Range horizontalRotation, 
+      Range verticalRotation,
+      bool not,
+      ){
+    var n = "";
+    if(not != null && not) n = "!";
+    if(distance != null) arguments['distance'] = n+distance.toString();
+    if(level != null) arguments['level'] = n+level.toString();
+    if(limit != null) arguments['limit'] = n+limit.toString();
     if(type != null) arguments['type'] = type.toString();
-    if(gamemode != null) arguments['gamemode'] = gamemode.toString().split('.').last;
-    if(name != null) arguments['name'] = name;
-    if(horizontalRotation != null) arguments['y_rotation'] = horizontalRotation.toString();
-    if(verticalRotation != null) arguments['x_rotation'] = verticalRotation.toString();
+    if(gamemode != null) arguments['gamemode'] = n+gamemode.toString().split('.').last;
+    if(name != null) arguments['name'] = n+name;
+    if(horizontalRotation != null) arguments['y_rotation'] = n+horizontalRotation.toString();
+    if(verticalRotation != null) arguments['x_rotation'] = n+verticalRotation.toString();
     if(isRotated != null) {
-      arguments['y_rotation'] = isRotated.x.toString();
-      arguments['x_rotation'] = isRotated.y.toString();
+      arguments['y_rotation'] = n+isRotated.x.toString();
+      arguments['x_rotation'] = n+isRotated.y.toString();
     }
     if(area != null) arguments.addAll(area.getRanges());
-    if(nbt != null) arguments['nbt'] = json.encode(nbt);
-    if(strNbt != null && strNbt.isNotEmpty) arguments['nbt'] = strNbt;
-    if(team != null) arguments['team'] = team.name;
+    if(nbt != null) arguments['nbt'] = n+json.encode(nbt);
+    if(strNbt != null && strNbt.isNotEmpty) arguments['nbt'] = n+strNbt;
+    if(team != null) arguments['team'] = n+team.name;
     if(tags != null){
       arguments['tag'] = [];
       tags.forEach((tag){
-        if(tag is Tag) arguments['tag'].add(tag.tag);
-        else if(tag is String) arguments['tag'].add(tag);
+        if(tag is Tag) arguments['tag'].add(n+tag.tag);
+        else if(tag is String) arguments['tag'].add(n+tag);
         else throw("Please insert a Tag or String as tag into Entity!");
       });
     }
     if(scores != null){
-      String ret = "{";
+      String ret = n+"{";
       scores.forEach((score){
         if(score.getMatch().isEmpty) throw("Please insert a match method in the scores value for an entity!");
         ret += score.score + "=" + score.getMatch();
       });
       arguments['scores'] = ret + "}";
     }
+
   }
   Map arguments = {
     
   };
   String playerName;
+  
   Entity sort(Sort sort){
     arguments['sort'] = sort.toString().split('.').last;
+    return this;
+  }
+/// With the not function you can negate specific arguments. It takes in the same options as `Entity()`.
+///
+/// **Example:**
+/// ```dart
+/// Say(Entity().not(tags:["mytag"],nbt:{"istrue":1}))
+/// ⇒ say @e[tag=!mytag,nbt=!{"istrue":1}]
+/// ```
+  Entity not({
+      int limit,
+      List<dynamic> tags,
+      Team team,
+      List<Score> scores,
+      Map<String,dynamic> nbt,
+      String strNbt,
+      EntityType type,
+      Area area,
+      Range distance,
+      Range level,
+      Gamemode gamemode, 
+      String name,
+      Rotation isRotated, 
+      Range horizontalRotation, 
+      Range verticalRotation,}){
+
+    _setArguments(limit,tags,team,scores,nbt,strNbt,type,area,distance,level,gamemode,name,isRotated,horizontalRotation,verticalRotation,true);
     return this;
   }
 

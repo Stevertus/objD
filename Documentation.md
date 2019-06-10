@@ -35,7 +35,7 @@ Open the pubspec.yaml file and add
 ```yaml
 name: [unique_namespace]
 dependencies:  
-   objd: ^0.2.1
+   objd: ^0.2.2
 ```
 Also remember to replace the `[unique_namespace]` with your own project name.
 And run 
@@ -519,6 +519,15 @@ Say(
 | Entity.PlayerName(String) | creates an entity with an implicit name |
 |Entity.All(...)| creates an entity with @a|
 |Entity.Random(...)| creates an entity with @r|
+|Entity.clone(Entity)| creates a new instance of an already existing Entity object |
+### Entity.not
+With the not function you can negate specific arguments. It takes in the same options as `Entity()`.
+
+**Example:**
+```dart
+Say(Entity().not(tags:["mytag"],nbt:{"istrue":1}))
+⇒ say @e[tag=!mytag,nbt=!{"istrue":1}]
+``` 
 
 [//]: # (basics/tag)
 ## Tag
@@ -636,6 +645,8 @@ These methods can be used to set or calculate the value:
 |modulo|Score|
 |setToData|Data|
 |setToResult|Command,useSuccess(bool)|
+|findSmallest|List\<Score>,min (⇒ finds the smallest value in a list of scores)|
+|findBiggest|List\<Score>,max (⇒ finds the biggest value in a list of scores)|
 
 > All of these methods return a new instance of Score with the calculations applied.
 > So you can also chain single calculations or use multiple on one base Score.
@@ -728,6 +739,17 @@ SetBlock(
 	location: Location.here()
 )
 ```
+### Block.nbt
+This is a special function that creates a block with the option to add nbt data and blockstates.
+
+| Block.nbt |  |
+|--|--|
+| Block or String | the Block type |
+| states | a Map of Blockstates(e.g {"left":true}, optional) |
+| nbt | Nbt in form of a Dart Map(optional)|
+|strNbt| Nbt in a pure String format, allows for 1b etc(optional)|
+
+With this function you can fully configure your blocks.
 
 [//]: # (basics/location)
 ## Location
@@ -1027,6 +1049,11 @@ Give(Entity.Selected(),
 
 ⇒ give  @s minecraft:iron_axe{"customNBT":1,"Damage":40,"CustomModelData":3390001,"display":{"Name":"{\"text\":\"My Item\",\"color\":\"black\"}","Lore":["{\"text\":\"My Description\",\"color\":\"blue\"}"]}} 5
 ```
+
+**Item.clone** creates a new object based on a existing Item to modify properties.
+
+**Item.fromJson** creates an Item based on nbt or json data.
+
 ItemType is like EntityType or Block a utility class to provide a list of all available items.
 
 |ItemType([minecraft_item_id])| creates a ItemType from a String |
@@ -1071,26 +1098,29 @@ ReplaceItem(
 ### Helpers
 Together with this objD also introduces helpers to quickly find the desired slot.
 
-**Slot.inv** takes in a double number, like `2.6`
-The number before the . represents the row in the inventory, so the second row
-The six is the sixth slot of that row.
+**Slot.inv** takes in two numbers, like `2,6`
+The first number represents the row in the inventory, so the second row
+And the second number is the sixth slot of that row.
 
 objD calculates the corresponding Slot. In this case `inventory.14`.
 > Notice: also the hotbar can be calculated with this. It is the 4th row
 
-**Slot.chest** takes in a double number, like `5.6`
+**Slot.chest** takes in numbers, like `5,6`
 And does exactly the same but with a container, like a chest.
 
-**Slot.drop** takes in a double number, like `1.3`
+**Slot.drop** takes in numbers, like `1,3`
 This calculates the rows and columns for a 3x3 Container like a Dropper or a Dispenser.
 Therefore just values from 1 to 3 are allowed.
+
+**Slot.craft** used to mark a 3x3 space inside a conventional container.
+takes in two numbers, like Slot.inv or one number from 1-9. The start options marks the upper left.
 
 **Example:**
 ```dart
 ReplaceItem.block(
 	Location.here(),
 	item:Item(ItemType.beef),
-	slot:Slot.chest(3.8)
+	slot:Slot.chest(3,8)
 )
 ⇒ replaceitem block ~  ~  ~  container.25 minecraft:beef
 ```
@@ -1357,6 +1387,7 @@ Well it is not as easy as it looks. A condition can accept many values and this 
 | Block | if block ~ ~ ~ minecraft:stone |To test a specific location use Condition.block|
 | Entity | if entity @s |
 | Score | if score @s objective matches 5| Attention! This needs a score condition method!
+| Data.get | if data entity @s flying | Just Data.get is accepted! |
 | Tag | if entity @s[tag=test] | turns a tag into an entity |
 | Location | unless block ~ ~2 ~ air | Just checks whether a block is present
 | Condition | if entity @s if block ~ ~ ~ stone | Yes, you can nest Conditions like Widgets and combine them.
@@ -1924,7 +1955,7 @@ Every mode also has a seperated named constructor:
 |Entity| the target player |
 |revoke| set true if you want to revoke |
 
-|Advancement.only| Unlocks everything |
+|Advancement.only| Only unlocks on Advancment |
 |--|--|
 |Entity| the target player |
 |String | your advancement|
@@ -1942,6 +1973,21 @@ Advancement.only(
 )
 ⇒ advancement revoke @p only minecraft:story/mine_stone
 ``` 
+[//]: # (wrappers/clear)
+## Clear
+The Clear Widget removes Items from the inventory of an specified Entity.
+
+| constructor |  |
+|--|--|
+| Entity | the target Entity |
+|Item| the item to clear(you can also set the count in there) |
+
+**Example:**
+```dart
+Clear(Entity.All(),Item(ItemType.apple,Count:10))
+⇒ clear @a minecraft:apple 10
+```
+
 
 [//]: # (text/main)
 # Texts and Strings

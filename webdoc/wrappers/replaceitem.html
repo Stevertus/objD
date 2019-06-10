@@ -2,7 +2,7 @@
 <html>
 <title>webdoc/wrappers/replaceitem</title>
 <xmp theme="spacelab" style="display:none;">
-## Replaceitem
+## ReplaceItem
 Sets a specific container slot to a item.
 * for Entities:
 
@@ -10,12 +10,12 @@ Sets a specific container slot to a item.
 |--|--|
 |Entity|The entity|
 |item|the Item you want to set(required) |
-|slot|a String representation of the slot(required)|
+|slot|a Slot Object with the slot set(required)|
 
 **Example:**
 ```dart
-Replaceitem(Entity.Player(),
-	slot: "hotbar.5"
+ReplaceItem(Entity.Player(),
+	slot: Slot.Hotbar5,
 	item: Item(
 		ItemType.apple,
 		count: 5,
@@ -25,7 +25,13 @@ Replaceitem(Entity.Player(),
 
 ⇒ replaceitem entity @p hotbar.5 minecraft:apple{"CustomModelData":339001} 5 
 ```
-> replaceitem block will follow
+This works the same with ReplaceItem.block:
+
+|ReplaceItem.block| |
+|--|--|
+|Location|The block location|
+|item|the Item you want to set(required) |
+|slot|a Slot Object with the slot set(required)|
 
 
 </xmp>

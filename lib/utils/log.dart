@@ -24,7 +24,6 @@ class Log extends Widget {
     if(msg is String) text =TextComponent(msg);
     if(msg is Score) text =TextComponent.score(msg);
     if(msg is Entity) text =TextComponent.selector(msg);
-
     return Tellraw(to,show: [
       TextComponent("Console > ",color:color),
       text
