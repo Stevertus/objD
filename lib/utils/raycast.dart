@@ -66,7 +66,7 @@ class Raycast extends Widget {
     List<Widget> children = [
       If.not(through,Then:[_isHit.add()])
     ];
-    if(ray != null) children.add(ray(_stop,_hit));
+    if(ray != null) children.insert(0,ray(_stop,_hit));
     if(_maxScore != null){
       _maxScore.entity = Entity.Selected();
       children.add(_maxScore.add());
@@ -84,9 +84,12 @@ class Raycast extends Widget {
     ]).positioned(Location.local(z:step)));
 
     onhit.insert(0, Comment("This is the raycast result from your raycast widget in ${context.file}"));
-    children.add(
-      _isHit.removeIfExists(then: File.execute("objd/rayhit${id}",child:For.of(onhit)))
-    );
+    children.addAll([
+      If(Condition.and([_isHit,_useStop ? Condition.not(_isStopped) : null]),Then: [
+        File.execute("objd/rayhit${id}",child:For.of(onhit))
+      ]),
+      _isHit.removeIfExists()
+    ]);
     if(_useStop) children.add(_isStopped.remove());
 
 

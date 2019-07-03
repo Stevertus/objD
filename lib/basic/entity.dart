@@ -90,7 +90,7 @@ class Entity implements EntityClass{
     if(distance != null) arguments['distance'] = n+distance.toString();
     if(level != null) arguments['level'] = n+level.toString();
     if(limit != null) arguments['limit'] = n+limit.toString();
-    if(type != null) arguments['type'] = type.toString();
+    if(type != null) arguments['type'] = n + type.toString();
     if(gamemode != null) arguments['gamemode'] = n+gamemode.toString().split('.').last;
     if(name != null) arguments['name'] = n+name;
     if(horizontalRotation != null) arguments['y_rotation'] = n+horizontalRotation.toString();

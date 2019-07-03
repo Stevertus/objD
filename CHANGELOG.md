@@ -1,3 +1,12 @@
+## 0.2.3
+* added new Module type to allow registering tick functions and files with a convenient api
+* added modules property to Pack to inject new modules
+* added ScoreTimerModule that implements a Timer using Scoreboards
+* changed Widget class to be abstract
+* tweaked Raycast to work properly
+* improved Entity.not
+* fixed TextComponent.space with negative numbers
+
 ## 0.2.2
 * added Item.clone, Entity.clone and similar Methods with ItemType and Slot to enrich changeable inputs
 * added Entity.not to negate arguments

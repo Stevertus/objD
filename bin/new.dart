@@ -56,6 +56,9 @@ class ExamplePack extends Widget {
         path: 'load',
         child: LoadFile()
       ),
+      modules: [
+
+      ],
       files: [
         
       ]
