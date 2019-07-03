@@ -6,7 +6,7 @@ homepage: https://stevertus.com/objD
 repository: https://github.com/Stevertus/objD
 issue_tracker: https://github.com/Stevertus/objD/issues
 documentation: https://stevertus.com/objD/documentation
-description: objd is a Object Oriented framework for Building Minecraft Datapacks with ease
+description: objd is an Object Oriented framework for Building Minecraft Datapacks with ease
 environment:
     sdk: ">=2.3.0 <3.0.0"
 dependencies:
