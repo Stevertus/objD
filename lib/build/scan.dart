@@ -1,6 +1,7 @@
 import 'package:objd/basic/extend.dart';
 import 'package:objd/basic/file.dart';
 import 'package:objd/basic/group.dart';
+import 'package:objd/basic/module.dart';
 import 'package:objd/basic/pack.dart';
 import 'package:objd/basic/scoreboard.dart';
 import 'package:objd/basic/text.dart';
@@ -35,6 +36,13 @@ scan(Widget wid,
 
   if (wid is Widget) {
     dynamic child = wid.generate(context);
+  	// is module
+    if (wid is Module) {
+      List<File> files = wid.registerFiles();
+      // add files to child
+      if(files != null && files.length > 0) child = <Widget>[child,...files];
+    }
+
     // is single widget
     if (child is Widget){
       scan(

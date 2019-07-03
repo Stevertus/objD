@@ -1,4 +1,5 @@
 export 'widget.dart';
+export 'module.dart';
 export 'command.dart';
 export 'pack.dart';
 export 'group.dart';

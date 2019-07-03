@@ -3,6 +3,7 @@ import 'package:objd/basic/command.dart';
 import 'package:objd/basic/text_components.dart';
 import 'package:objd/basic/extend.dart';
 import 'package:objd/build/build.dart';
+import 'package:objd/wrappers/comment.dart';
 
 class Scoreboard extends Widget {
   String subcommand;
@@ -65,7 +66,7 @@ class Scoreboard extends Widget {
       case "setdisplay":
         return Command("scoreboard objectives setdisplay " + type + " " + name);
     }
-    return Widget();
+    return Comment.Null();
   }
 
   @override

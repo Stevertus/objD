@@ -72,7 +72,7 @@ class TextComponent {
     } else {
       for (var value in negnums.keys) {
       while(pixels <= value) {
-        res += nums[value];
+        res += negnums[value];
         pixels -= value;
       }
     }
@@ -199,7 +199,7 @@ class TextHoverEvent {
   TextHoverEvent.text(List<TextComponent> texts){
     action = "show_text";
     // ToDo: catch if score, selector or event listener
-    value = texts.map((item) => item.toMap());
+    value = texts.map((item) => item.toMap()).toList();
   }
   /// shows an achievement
   TextHoverEvent.achievement(String name){

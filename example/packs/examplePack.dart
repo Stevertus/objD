@@ -13,6 +13,9 @@ class ExamplePack extends Widget {
   Widget generate(Context context) {
     return Pack(
       name: "mypack", // name of the subpack
+      modules: [
+        
+      ],
       main: File(     // definining a file that runs every tick
         'main',
         child: MainFile()
