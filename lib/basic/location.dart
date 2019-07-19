@@ -39,6 +39,13 @@ class Location {
     _location = "~ ~ ~";
     x = y = z = 0;
   }
+  /// Clones a Location:
+  Location.clone(Location loc){
+    x = loc.x;
+    y = loc.y;
+    z = loc.z;
+    _location = loc.toString();
+  }
 
 /// This stores a result or success of a [command] in the nbt [path] of a location.
 /// **Example:**
@@ -61,6 +68,6 @@ class Location {
 
   @override
   String toString() {
-    return _location.replaceAll('.0', '');
+    return _location.replaceAll('.0 ', ' ');
   }
 }

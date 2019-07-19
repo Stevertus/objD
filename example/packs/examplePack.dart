@@ -14,7 +14,6 @@ class ExamplePack extends Widget {
     return Pack(
       name: "mypack", // name of the subpack
       modules: [
-        
       ],
       main: File(     // definining a file that runs every tick
         'main',

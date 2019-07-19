@@ -76,6 +76,7 @@ class Condition {
   }
 
   _setCond(dynamic cond, {bool invert = false, Block block, Location target}) {
+    if(cond == null) return;
     switch (_getType(cond)) {
       case "Condition":
         _children.add(cond);

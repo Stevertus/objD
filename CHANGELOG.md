@@ -1,3 +1,15 @@
+## 0.2.4
+* added ClickEvent Module
+* added copyWith on Entities
+* added setValues on Entity to change selections afterwards
+* added Location.clone
+* added desc to Log
+* changed Color to const to allow defaults
+* changed Particle to use a double type for speed and no requirement for a location
+* fixed Particle.item to use ItemType instead of Item
+* fixed CommandList Type Error
+* fixed Raycast Error when not using stop in the ray property
+* fixed missing Invisible Nbt on ArmorStand
 ## 0.2.3
 * added new Module type to allow registering tick functions and files with a convenient api
 * added modules property to Pack to inject new modules

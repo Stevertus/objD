@@ -2,7 +2,7 @@
 <html>
 <title>webdoc/basics/entity</title>
 <xmp theme="spacelab" style="display:none;">
-## Entity
+
 
 |constructor | arguments are optional |
 |--|--|
@@ -97,6 +97,34 @@ Say(
 | Entity.PlayerName(String) | creates an entity with an implicit name |
 |Entity.All(...)| creates an entity with @a|
 |Entity.Random(...)| creates an entity with @r|
+|Entity.clone(Entity)| creates a new instance of an already existing Entity object |
+### Entity.not
+With the not function you can negate specific arguments. It takes in the same options as `Entity()`.
+
+**Example:**
+```dart
+Say(Entity().not(tags:["mytag"],nbt:{"istrue":1}))
+⇒ say @e[tag=!mytag,nbt=!{"istrue":1}]
+``` 
+
+### Entity.copyWith
+Creates a new Entity based on the existing one and applies new arguments. (same as constructors)
+
+**Example:**
+```dart
+Entity ent1 = Entity(type:EntityType.sheep)
+Entity ent2 = ent1.copyWith(distance:Range(to:1))
+``` 
+
+### Entity.setValues
+Modifies the properties of the existing Entity and applies new arguments(same as constructors)
+
+**Example:**
+```dart
+Entity ent1 = Entity(type:EntityType.sheep)
+ent1.setValues(distance:Range(to:1))
+⇒ @e[type=sheep,distance=..1] 
+``` 
 
 
 </xmp>

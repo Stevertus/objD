@@ -2,7 +2,7 @@
 <html>
 <title>webdoc/basics/score</title>
 <xmp theme="spacelab" style="display:none;">
-## Score
+
 The score class is the basis for setting values, calculating with scores and checking the values.
 It implements one base class with no functionality and several methods to do actions:
 
@@ -34,6 +34,8 @@ These methods can be used to set or calculate the value:
 |modulo|Score|
 |setToData|Data|
 |setToResult|Command,useSuccess(bool)|
+|findSmallest|List\<Score>,min (⇒ finds the smallest value in a list of scores)|
+|findBiggest|List\<Score>,max (⇒ finds the biggest value in a list of scores)|
 
 > All of these methods return a new instance of Score with the calculations applied.
 > So you can also chain single calculations or use multiple on one base Score.

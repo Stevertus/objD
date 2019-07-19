@@ -67,6 +67,25 @@ class Entity implements EntityClass{
 
     _setArguments(limit,tags,team,scores,nbt,strNbt,type,area,distance,level,gamemode,name,isRotated,horizontalRotation,verticalRotation,false);
   }
+
+  /// Modifies the properties of the existing Entity and applies new arguments(same as constructors)
+  setValues({int limit,
+      List<dynamic> tags,
+      Team team,
+      List<Score> scores,
+      Map<String,dynamic> nbt,
+      String strNbt,
+      EntityType type,
+      Area area,
+      Range distance,
+      Range level,
+      Gamemode gamemode, 
+      String name,
+      Rotation isRotated, 
+      Range horizontalRotation, 
+      Range verticalRotation,}){
+         _setArguments(limit,tags,team,scores,nbt,strNbt,type,area,distance,level,gamemode,name,isRotated,horizontalRotation,verticalRotation,false);
+      }
   _setArguments(
       int limit,
       List<dynamic> tags,
@@ -169,6 +188,31 @@ class Entity implements EntityClass{
         'store ' + (useSuccess ? 'success' : 'result') + ' entity ' + this.toString() + ' ' + path + ' ${datatype} ${scale}',
       ],
     );
+  }
+/// Creates a new Entity based on the existing one and applies new arguments. (same as constructors)
+///
+/// **Example:**
+/// ```dart
+/// Entity ent1 = Entity(type:EntityType.sheep)
+/// Entity ent2 = ent1.copyWith(distance:Range(to:1))
+/// ``` 
+  Entity copyWith({
+      int limit,
+      List<dynamic> tags,
+      Team team,
+      List<Score> scores,
+      Map<String,dynamic> nbt,
+      String strNbt,
+      EntityType type,
+      Area area,
+      Range distance,
+      Range level,
+      Gamemode gamemode, 
+      String name,
+      Rotation isRotated, 
+      Range horizontalRotation, 
+      Range verticalRotation,}){
+      return Entity.clone(this)._setArguments(limit, tags, team, scores, nbt, strNbt, type, area, distance, level, gamemode, name, isRotated, horizontalRotation, verticalRotation, false);
   }
 
   Tag addTag(String tag){

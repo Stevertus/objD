@@ -19,6 +19,7 @@ Item mainHand,offHand,head,chest,legs,boots;
   List<String> tags;
   int fire;
   Rotation rotation;
+  List<Summon> passengers;
   
 /// An armorstand can be created with the Summon Widget, but there is also a specific Widget with special properties for an ArmorStand.
   ArmorStand(this.location,
@@ -40,12 +41,14 @@ Item mainHand,offHand,head,chest,legs,boots;
       this.glowing,
       this.fire,
       this.small,
+      this.passengers,
       this.tags,
       this.rotation}) {
     if(nbt == null) nbt = {};
     
     _addBoolNbt(marker, "Marker");
     _addBoolNbt(hasArms, "ShowArms");
+    _addBoolNbt(invisible, "Invisible");
     if(basePlate != null) _addBoolNbt(!basePlate, "NoBasePlate");
     _addSlots();
 
@@ -80,6 +83,7 @@ Item mainHand,offHand,head,chest,legs,boots;
       this.glowing,
       this.fire,
       this.small,
+      this.passengers,
       this.tags,
       this.rotation}) {
     if(nbt == null) nbt = {};
@@ -105,6 +109,7 @@ Item mainHand,offHand,head,chest,legs,boots;
         glowing: glowing,
         gravity: gravity,
         small: small,
+        passengers: passengers,
         rotation: rotation);
   }
 }
