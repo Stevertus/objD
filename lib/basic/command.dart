@@ -3,7 +3,7 @@ import 'package:objd/build/build.dart';
 import './text.dart';
 import './for_list.dart';
 
-class CommandList extends Widget {
+class CommandList<T> extends Widget {
   List _commands;
   /// There is a more efficient way to list raw Minecraft commands. 
   /// 
@@ -17,11 +17,11 @@ class CommandList extends Widget {
 /// 		Command('say 3')
 /// ]),
 /// ```
-  CommandList(List commands) {
-    if (commands[0] is String)
-      _commands = commands.map((x) => Command(x)).toList();
-    else if (commands[0] is Command)
-      _commands = commands;
+  CommandList(List<T> commands) {
+    if (T.toString() == "String")
+      _commands = commands.map((x) => Command(x.toString())).toList();
+    else if (T.toString() == "Command")
+      _commands = (commands as List<Command>);
     else
       throw ('Please insert a string or a list into CommandList');
   }

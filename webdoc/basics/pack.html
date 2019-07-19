@@ -2,7 +2,7 @@
 <html>
 <title>webdoc/basics/pack</title>
 <xmp theme="spacelab" style="display:none;">
-## Pack
+
 A pack is logically the next step. This defines a sub-pack with an name again that will be our namespace afterwards.
 Here we can also define included files as well as the main and load function:
 
@@ -12,6 +12,7 @@ Here we can also define included files as well as the main and load function:
 | [main]| the main file that is ran every tick |
 | [load] | the load file that is ran on reload |
 | [files] | A List of type File witch includes other needed files |
+| [modules] | used to inject a List of Modules(read more about modules in the Modules section) |
 
 **Example:**
 ```dart
@@ -19,6 +20,9 @@ Pack(
 	name:"tpcraft",
 	main: File(...),
 	load: File(...),
+	modules: [
+		MyModule()
+	]
 	files: List<File> [
 		File(...)
 	]

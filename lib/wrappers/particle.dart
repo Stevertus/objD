@@ -32,28 +32,28 @@ class Particle extends Widget {
 /// )
 /// ⇒ particle minecraft:flame ~ ~ ~
 /// ```
-  Particle(ParticleType particle,{@required Location location,Location delta, int speed = 1, int count = 1, bool force}){
+  Particle(ParticleType particle,{Location location,Location delta, double speed = 1, int count = 1, bool force}){
     _gen = "minecraft:" + particle.toString().split(".")[1];
     if(location != null) _gen += " " + location.toString();
     if(delta != null){
-      if(speed == null || count == null) throw("If you decide to use the full particle command add a delta, speed and count property!");
-      _gen += " ${delta} ${speed} ${count}";
+      if(speed == null || count == null || location == null) throw("If you decide to use the full particle command add a delta, location, speed and count property!");
+       _gen += " ${delta} ${speed} ${count}";
       if(force != null) _gen += force ? "force" : "normal";
     } 
   }
   /// For the Block particle(shows block break) there is a named constructor
-  Particle.block(Block block,{@required Location location,Location delta, int speed = 1, int count = 1, bool force}){
+  Particle.block(Block block,{Location location,Location delta, double speed = 1, int count = 1, bool force}){
     _gen = "minecraft:block ";
     _gen += block.toString();
     if(location != null) _gen += " " + location.toString();
     if(delta != null){
-      if(speed == null || count == null) throw("If you decide to use the full particle command add a delta, speed and count property!");
+      if(speed == null || count == null || location == null) throw("If you decide to use the full particle command add a delta, location, speed and count property!");
        _gen += " ${delta} ${speed} ${count}";
       if(force != null) _gen += force ? "force" : "normal";
     } 
   }
   /// For the Item particle(shows item break) there is a named constructor
-  Particle.item(Item item,{@required Location location,Location delta, int speed = 1, int count = 1, bool force}){
+  Particle.item(ItemType item,{@required Location location,Location delta, double speed = 1, int count = 1, bool force}){
     _gen = "minecraft:item ";
     _gen += item.toString();
     if(location != null) _gen += " " + location.toString();

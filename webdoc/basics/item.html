@@ -2,7 +2,7 @@
 <html>
 <title>webdoc/basics/item</title>
 <xmp theme="spacelab" style="display:none;">
-## Item
+
 The Item class represents an item in an inventory in Minecraft. It is used in the [Give]() or Nbt Commands.
 
 > This Class is incomplete, more functionality soon...
@@ -38,6 +38,11 @@ Give(Entity.Selected(),
 
 ⇒ give  @s minecraft:iron_axe{"customNBT":1,"Damage":40,"CustomModelData":3390001,"display":{"Name":"{\"text\":\"My Item\",\"color\":\"black\"}","Lore":["{\"text\":\"My Description\",\"color\":\"blue\"}"]}} 5
 ```
+
+**Item.clone** creates a new object based on a existing Item to modify properties.
+
+**Item.fromJson** creates an Item based on nbt or json data.
+
 ItemType is like EntityType or Block a utility class to provide a list of all available items.
 
 |ItemType([minecraft_item_id])| creates a ItemType from a String |

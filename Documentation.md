@@ -35,7 +35,7 @@ Open the pubspec.yaml file and add
 ```yaml
 name: [unique_namespace]
 dependencies:  
-   objd: ^0.2.3
+   objd: ^0.2.4
 ```
 Also remember to replace the `[unique_namespace]` with your own project name.
 And run 
@@ -533,6 +533,25 @@ Say(Entity().not(tags:["mytag"],nbt:{"istrue":1}))
 ⇒ say @e[tag=!mytag,nbt=!{"istrue":1}]
 ``` 
 
+### Entity.copyWith
+Creates a new Entity based on the existing one and applies new arguments. (same as constructors)
+
+**Example:**
+```dart
+Entity ent1 = Entity(type:EntityType.sheep)
+Entity ent2 = ent1.copyWith(distance:Range(to:1))
+``` 
+
+### Entity.setValues
+Modifies the properties of the existing Entity and applies new arguments(same as constructors)
+
+**Example:**
+```dart
+Entity ent1 = Entity(type:EntityType.sheep)
+ent1.setValues(distance:Range(to:1))
+⇒ @e[type=sheep,distance=..1] 
+``` 
+
 [//]: # (basics/tag)
 ## Tag
 A tag saves a boolean value with an entity inside the game.
@@ -811,6 +830,17 @@ And local coordinates(depends on the rotation of the head):
 ```dart
 Location.local(x: 0,y: 1,z: 2.5)
 ⇒ ^ ^1 ^2.5
+```
+
+To clone a Location use Location.clone:
+
+|Location.clone| |
+|--|--|
+|Location|the source location|
+
+```dart
+Location.clone(Location.rel(y:2))
+⇒ ~ ~2 ~
 ```
 
 There is also a method for a location:
@@ -1762,6 +1792,8 @@ This works the same with ReplaceItem.block:
 |slot|a Slot Object with the slot set(required)|
 
 [//]: # (wrappers/particle)
+video
+q8cI-Irpv9Q
 ## Particle
 The particle command spawns particles in the world to enhance certain graphics.
 
@@ -1795,7 +1827,7 @@ For the Block and Item particle(shows item or block break) there is a named cons
 
 |Particle.block or Particle.item| |
 |--|--|
-|Item or Block| the block or item you want to show |
+|ItemType or Block| the block or item you want to show |
 | ... | same as Particle
 
 **Example:**
@@ -2185,6 +2217,7 @@ The log widgets displays a console logging in the players chat. That way you can
 |--|--|
 |String, Number, Boolean, Score or Entity| message to display |
 |to|which player you want to send the log(default = `Entity.All()`) |
+|desc| a message that is inserted before the value |
 |color|the color of the console indicator(default = Color.DarkAqua)|
 
 **Example:**
@@ -2481,6 +2514,31 @@ ScoreTimerModule(
 )
 ```
 
+[//]: # (modules/click_event)
+## ClickEvent
+The ClickEvent Module uses the trigger of a carrot on a stick to register right clicks with a scoreboard and execute a [onClick] Widget.
+
+This module has to be executed every tick to work!
+
+| constructor |  |
+|--|--|
+|name|used to identify different click Events|
+|onClick| Widget that is executed if the COAS is clicked |
+|selectedItem| just triggers the click if this Item is selected(optional) |
+|path| path to create the click handler function(default = `events/`) |
+
+**Example:**
+
+```dart
+ClickEvent(
+	onClick: Log("Clicked"),
+	name: "firstClick",
+	selectedItem: Item(ItemType.carrot_on_a_stick),
+	path: "events/"
+)
+```
+
+
 [//]: # (utils/main)
 # Utils
 Util Widgets provide a complete solution that Minecraft does not support that easily out of the box and make your workflow easier and faster.
@@ -2580,6 +2638,8 @@ execute if score repeat1 objd_repeat matches ..10 run schedule function mypack:t
 This function is executed until the score becomes 11.
 
 [//]: # (utils/armorstand)
+video
+dQvZRGUH4F8
 ## ArmorStand
 An armorstand can be created with the Summon Widget, but there is also a specific Widget with special properties for an ArmorStand.
 

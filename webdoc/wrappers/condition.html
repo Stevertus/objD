@@ -2,7 +2,7 @@
 <html>
 <title>webdoc/wrappers/condition</title>
 <xmp theme="spacelab" style="display:none;">
-## Condition
+
 The Condition class defines conditions for the if widget and more. It can also combines conditions and generates an argument list.
 
 |constructor| |
@@ -15,6 +15,7 @@ Well it is not as easy as it looks. A condition can accept many values and this 
 | Block | if block ~ ~ ~ minecraft:stone |To test a specific location use Condition.block|
 | Entity | if entity @s |
 | Score | if score @s objective matches 5| Attention! This needs a score condition method!
+| Data.get | if data entity @s flying | Just Data.get is accepted! |
 | Tag | if entity @s[tag=test] | turns a tag into an entity |
 | Location | unless block ~ ~2 ~ air | Just checks whether a block is present
 | Condition | if entity @s if block ~ ~ ~ stone | Yes, you can nest Conditions like Widgets and combine them.

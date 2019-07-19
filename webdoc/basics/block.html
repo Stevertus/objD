@@ -2,7 +2,7 @@
 <html>
 <title>webdoc/basics/block</title>
 <xmp theme="spacelab" style="display:none;">
-## Block
+
 There is also a util class called Block which provides a wrapper for all available blocks in Minecraft.
 **Usage:**
 ```dart
@@ -24,6 +24,17 @@ SetBlock(
 	location: Location.here()
 )
 ```
+### Block.nbt
+This is a special function that creates a block with the option to add nbt data and blockstates.
+
+| Block.nbt |  |
+|--|--|
+| Block or String | the Block type |
+| states | a Map of Blockstates(e.g {"left":true}, optional) |
+| nbt | Nbt in form of a Dart Map(optional)|
+|strNbt| Nbt in a pure String format, allows for 1b etc(optional)|
+
+With this function you can fully configure your blocks.
 
 
 </xmp>

@@ -230,24 +230,24 @@ class TextHoverEvent {
 /// See all available colors: https://minecraft.gamepedia.com/Formatting_codes#Color_codes
 class Color {
   final String _color;
-  Color(this._color);
+  const Color(this._color);
 
-  static Color White = Color('white');
-  static Color Black = Color('black');
-  static Color DarkBlue = Color('dark_blue');
-  static Color DarkGreen = Color('dark_green');
-  static Color DarkAqua = Color('dark_aqua');
-  static Color DarkRed = Color('dark_red');
-  static Color DarkPurple = Color('dark_purple');
-  static Color Gold = Color('gold');
-  static Color Gray = Color('gray');
-  static Color DarkGray = Color('dark_gray');
-  static Color Blue = Color('blue');
-  static Color Green = Color('green');
-  static Color Aqua = Color('aqua');
-  static Color Red = Color('red');
-  static Color LightPurple = Color('light_purple');
-  static Color Yellow = Color('yellow');
+  static const Color White = Color('white');
+  static const Color Black = Color('black');
+  static const Color DarkBlue = Color('dark_blue');
+  static const Color DarkGreen = Color('dark_green');
+  static const Color DarkAqua = Color('dark_aqua');
+  static const Color DarkRed = Color('dark_red');
+  static const Color DarkPurple = Color('dark_purple');
+  static const Color Gold = Color('gold');
+  static const Color Gray = Color('gray');
+  static const Color DarkGray = Color('dark_gray');
+  static const Color Blue = Color('blue');
+  static const Color Green = Color('green');
+  static const Color Aqua = Color('aqua');
+  static const Color Red = Color('red');
+  static const Color LightPurple = Color('light_purple');
+  static const Color Yellow = Color('yellow');
 
     @override
   String toString() {
