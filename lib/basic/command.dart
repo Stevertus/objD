@@ -1,9 +1,10 @@
-import './widget.dart';
+import 'package:objd/basic/rest_action.dart';
+import 'package:objd/basic/widget.dart';
 import 'package:objd/build/build.dart';
-import './text.dart';
-import './for_list.dart';
+import 'package:objd/basic/text.dart';
+import 'package:objd/basic/for_list.dart';
 
-class CommandList<T> extends Widget {
+class CommandList<T> extends RestActionAble {
   List _commands;
   /// There is a more efficient way to list raw Minecraft commands. 
   /// 
@@ -44,7 +45,7 @@ class CommandList<T> extends Widget {
   }
 }
 
-class Command extends Widget {
+class Command extends RestActionAble {
 
   String _command;
   /// A Command is a raw action, that is executed by Minecraft directly.

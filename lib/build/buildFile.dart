@@ -1,7 +1,4 @@
-import 'package:objd/basic/text.dart';
 import 'package:objd/basic/widget.dart';
-import 'package:objd/basic/pack.dart';
-import 'package:objd/basic/group.dart';
 import 'package:objd/basic/file.dart';
 import 'package:objd/basic/extend.dart';
 import 'package:objd/build/buildPack.dart';

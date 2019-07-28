@@ -1,8 +1,9 @@
+import 'package:objd/basic/rest_action.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:meta/meta.dart';
 import 'package:objd/build/build.dart';
 
-class For extends Widget {
+class For extends RestActionAble {
   List<Widget> _list;
 /// The For class enables you to add multiple endpoints to one Widget.
 ///

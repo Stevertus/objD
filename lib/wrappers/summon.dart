@@ -4,12 +4,11 @@ import 'package:objd/basic/widget.dart';
 import 'package:objd/basic/entity.dart';
 import 'package:objd/basic/text_components.dart';
 import 'package:objd/basic/location.dart';
+import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/build.dart';
-import 'dart:convert';
-
 import 'package:objd/wrappers/effect.dart';
 
-class Summon extends Widget {
+class Summon extends RestActionAble {
   Map<String, dynamic> nbt;
   Location location;
   EntityType type;
@@ -70,6 +69,6 @@ class Summon extends Widget {
         ' ' +
         location.toString() +
         ' ' +
-        json.encode(nbt));
+        gsonEncode(nbt));
   }
 }

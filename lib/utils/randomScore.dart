@@ -2,7 +2,7 @@ import 'package:meta/meta.dart';
 import 'package:objd/core.dart';
 
 /// The RandomScore Widget assigns a random value to a score using the UUID of an areaeffectcloud.
-class RandomScore extends Widget {
+class RandomScore extends RestActionAble {
   String targetFilePath;
   String targetFileName;
 

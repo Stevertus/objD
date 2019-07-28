@@ -1,3 +1,4 @@
+import 'package:objd/basic/rest_action.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/basic/command.dart';
 import 'package:objd/basic/text_components.dart';
@@ -5,7 +6,7 @@ import 'package:objd/basic/extend.dart';
 import 'package:objd/build/build.dart';
 import 'package:objd/wrappers/comment.dart';
 
-class Scoreboard extends Widget {
+class Scoreboard extends RestActionAble {
   String subcommand;
   String name;
   String type;

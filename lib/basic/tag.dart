@@ -1,12 +1,13 @@
 import 'package:meta/meta.dart';
 import 'package:objd/basic/for_list.dart';
+import 'package:objd/basic/rest_action.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/basic/command.dart';
 import 'package:objd/basic/entity.dart';
 import 'package:objd/build/build.dart';
 import 'package:objd/wrappers/if.dart';
 
-class Tag extends Widget {
+class Tag extends RestActionAble {
   bool value;
   Entity entity;
   String tag;

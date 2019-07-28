@@ -3,3 +3,5 @@ generatedoc.dart
 /webdoc
 /testing
 .packages
+pubspec.lock
+.packages

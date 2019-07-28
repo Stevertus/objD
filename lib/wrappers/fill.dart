@@ -1,11 +1,12 @@
 import 'package:objd/basic/command.dart';
 import 'package:meta/meta.dart';
+import 'package:objd/basic/rest_action.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/basic/block.dart';
 import 'package:objd/basic/area.dart';
 import 'package:objd/build/build.dart';
 
-class Fill extends Widget {
+class Fill extends RestActionAble {
   Area area;
   Block block;
   String type = "";

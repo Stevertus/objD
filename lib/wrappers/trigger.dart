@@ -1,7 +1,7 @@
 import 'package:meta/meta.dart';
 import 'package:objd/core.dart';
 
-class Trigger extends Widget {
+class Trigger extends RestActionAble {
 
   String objective = "";
   Score enableScore;

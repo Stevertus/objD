@@ -2,7 +2,7 @@ import 'package:objd/core.dart';
 
 /// This Loop repeats a set of widget as long/until a condition is/becomes true.
 /// The Loop uses a Grouped File and Recursion to repeat commands.
-class Do extends Widget {
+class Do extends RestActionAble {
   Condition cond;
   bool testBefore;
   bool _isWhile;

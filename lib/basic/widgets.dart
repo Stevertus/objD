@@ -18,3 +18,6 @@ export 'rotation.dart';
 export 'area.dart';
 export 'condition.dart';
 export 'slot.dart';
+export 'rest_action.dart';
+export 'strait_widget.dart';
+export 'gson.dart';

@@ -3,9 +3,10 @@ import 'package:objd/basic/entity.dart';
 import 'package:objd/basic/for_list.dart';
 import 'package:objd/basic/text_components.dart';
 import 'package:objd/basic/widget.dart';
+import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/context.dart';
 
-class Team extends Widget {
+class Team extends RestActionAble {
   String name;
   Entity entity;
   Map<String, dynamic> modifiers = {};

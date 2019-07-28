@@ -61,7 +61,7 @@ class Location {
       children: [command],
       encapsulate: false,
       args: [
-        'store ' + (useSuccess ? 'success' : 'result') + ' block ' + _location  + ' ' + path + ' ${datatype} ${scale}',
+        ['store ' + (useSuccess ? 'success' : 'result') + ' block ' + _location  + ' ' + path + ' ${datatype} ${scale}'],
       ],
     );
   }

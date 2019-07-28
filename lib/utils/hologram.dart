@@ -1,7 +1,6 @@
-
-
 import 'package:meta/meta.dart';
 import 'package:objd/basic/location.dart';
+import 'package:objd/basic/rest_action.dart';
 import 'package:objd/basic/text_components.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/wrappers/comment.dart';
@@ -9,7 +8,7 @@ import 'package:objd/build/context.dart';
 import 'package:objd/utils/armorstand.dart';
 import 'package:objd/wrappers/execute.dart';
 /// A Hologram shows a floating text at a specific Location using Armorstands.
-class Hologram extends Widget {
+class Hologram extends RestActionAble {
 
   List<TextComponent> texts;
   List<String> tags;

@@ -1,5 +1,3 @@
-
-
 import 'package:meta/meta.dart';
 import 'package:objd/basic/entity.dart';
 import 'package:objd/basic/file.dart';
@@ -7,12 +5,13 @@ import 'package:objd/basic/for_list.dart';
 import 'package:objd/basic/group.dart';
 import 'package:objd/basic/score.dart';
 import 'package:objd/basic/widget.dart';
+import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/context.dart';
 import 'package:objd/wrappers/if.dart';
 
 /// The ForEach Loop repeats a set of commands for each value in a Score.
 /// Therefore a file is called recursively and a counter score is increased.
-class ForEach extends Widget {
+class ForEach extends RestActionAble {
 
   Score score;
   Score _countScore;

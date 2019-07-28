@@ -1,4 +1,3 @@
-import 'package:objd/basic/extend.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/basic/file.dart';
 import 'package:meta/meta.dart';

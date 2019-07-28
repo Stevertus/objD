@@ -4,10 +4,10 @@ import 'package:objd/basic/score.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/basic/entity.dart';
 import 'package:objd/basic/location.dart';
+import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/build.dart';
-import 'dart:convert';
 
-class Data extends Widget {
+class Data extends RestActionAble {
   String _type;
   String _typeValue;
   String _subcommand;
@@ -117,7 +117,7 @@ class Data extends Widget {
 
   _getNbt(){
     if(strNbt != null && strNbt.isNotEmpty) return strNbt;
-    return json.encode(nbt);
+    return gsonEncode(nbt);
   }
 }
 /// There are five sub operations again: set, merge, prepend, append and insert.
@@ -149,7 +149,7 @@ class DataModify {
     _checkValue(value);
   }
   _checkValue(dynamic value){
-    if(value is Map) return this.value = json.encode(value);
+    if(value is Map) return this.value = gsonEncode(value);
     if(value is num || value is String) return this.value = value.toString();
     if(value is Entity){
       fromType = "entity";

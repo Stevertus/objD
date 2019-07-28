@@ -2,7 +2,7 @@ import 'package:meta/meta.dart';
 import 'package:objd/core.dart';
 
  /// The Repeat Widget repeats a given action multiple times with a tick delay.
-class Repeat extends Widget {
+class Repeat extends RestActionAble {
   String name;
   String path;
   Widget child;

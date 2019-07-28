@@ -4,10 +4,11 @@ import 'package:objd/basic/location.dart';
 import 'package:objd/basic/rotation.dart';
 import 'package:objd/basic/text_components.dart';
 import 'package:objd/basic/widget.dart';
+import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/context.dart';
 import 'package:objd/wrappers/summon.dart';
 
-class ArmorStand extends Widget {
+class ArmorStand extends RestActionAble {
   TextComponent name;
   Map<String, dynamic> nbt;
   Location location;

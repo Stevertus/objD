@@ -1,5 +1,6 @@
 import 'package:objd/basic/condition.dart';
 import 'package:objd/basic/entity.dart';
+import 'package:objd/basic/widgets.dart';
 import 'package:objd/wrappers/comment.dart';
 import 'package:objd/basic/group.dart';
 import 'package:objd/basic/for_list.dart';
@@ -7,7 +8,7 @@ import 'package:meta/meta.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/build/build.dart';
 
-class If extends Widget {
+class If extends RestActionAble {
   List<List<dynamic>> conds;
   List<Widget> Then;
   List<Widget> Else;

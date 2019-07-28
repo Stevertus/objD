@@ -1,8 +1,9 @@
 import 'package:objd/basic/text.dart';
 import 'package:objd/basic/widget.dart';
+import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/build.dart';
 
-class Comment extends Widget {
+class Comment extends RestActionAble {
   String text;
   bool force = false;
   /// The Comment widget generates a simple line with some annotations(# ...).

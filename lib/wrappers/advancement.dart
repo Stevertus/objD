@@ -1,8 +1,7 @@
-
 import 'package:objd/core.dart';
 
 /// The advancement gives you a convenient interface to trigger or revoke specific advancements and advancement groups. It implements the advancement command.
-class Advancement extends Widget {
+class Advancement extends RestActionAble {
   Entity entity;
   bool revoke;
   String mode;

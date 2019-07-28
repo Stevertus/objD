@@ -1,6 +1,6 @@
 import 'package:objd/core.dart';
 
-class Clear extends Widget {
+class Clear extends RestActionAble {
 
   Entity target;
   Item item;
