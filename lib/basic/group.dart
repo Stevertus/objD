@@ -1,3 +1,4 @@
+import 'package:objd/basic/rest_action.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/basic/for_list.dart';
 import 'package:objd/basic/file.dart';
@@ -5,7 +6,7 @@ import 'package:objd/build/build.dart';
 import 'package:meta/meta.dart';
 import 'package:objd/wrappers/comment.dart';
 
-class Group extends Widget {
+class Group extends RestActionAble {
   static int fileId = 1;
   bool _isFile = false;
   String prefix;

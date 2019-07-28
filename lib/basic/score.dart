@@ -1,3 +1,4 @@
+import 'package:objd/basic/rest_action.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/wrappers/data.dart';
 import 'package:objd/basic/command.dart';
@@ -8,7 +9,7 @@ import 'package:objd/build/build.dart';
 import 'package:objd/wrappers/if.dart';
 
 
-class Score extends Widget {
+class Score extends RestActionAble {
   List<Widget> _commands = [];
   Entity entity;
   String score;

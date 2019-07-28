@@ -1,12 +1,13 @@
 import 'package:meta/meta.dart';
 import 'package:objd/basic/command.dart';
 import 'package:objd/basic/location.dart';
+import 'package:objd/basic/rest_action.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/basic/block.dart';
 import 'package:objd/basic/area.dart';
 import 'package:objd/build/build.dart';
 
-class Clone extends Widget {
+class Clone extends RestActionAble {
   Area area;
   Location to;
   String type = "";

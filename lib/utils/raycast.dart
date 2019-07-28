@@ -2,7 +2,7 @@ import 'package:objd/core.dart';
 
 /// The Raycast Widget is one of the most powerful widgets by giving you many options to configure raytracing in Minecraft.
 /// Internally it uses local coordinates, a distance counter and recursion.
-class Raycast extends Widget {
+class Raycast extends RestActionAble {
   int id;
   Entity entity;
   int max;

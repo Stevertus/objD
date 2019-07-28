@@ -4,13 +4,15 @@
 import 'package:meta/meta.dart';
 import 'package:objd/basic/block.dart';
 import 'package:objd/basic/command.dart';
+import 'package:objd/basic/entity.dart';
 import 'package:objd/basic/item.dart';
 import 'package:objd/basic/location.dart';
+import 'package:objd/basic/rest_action.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/build/context.dart';
 
 /// The particle command spawns particles in the world to enhance certain graphics.
-class Particle extends Widget {
+class Particle extends RestActionAble {
 
   String _gen;
 
@@ -32,35 +34,38 @@ class Particle extends Widget {
 /// )
 /// ⇒ particle minecraft:flame ~ ~ ~
 /// ```
-  Particle(ParticleType particle,{Location location,Location delta, double speed = 1, int count = 1, bool force}){
+  Particle(ParticleType particle,{Location location,Location delta, double speed = 1, int count = 1, bool force = false, Entity player}){
     _gen = "minecraft:" + particle.toString().split(".")[1];
     if(location != null) _gen += " " + location.toString();
     if(delta != null){
       if(speed == null || count == null || location == null) throw("If you decide to use the full particle command add a delta, location, speed and count property!");
        _gen += " ${delta} ${speed} ${count}";
-      if(force != null) _gen += force ? "force" : "normal";
+      _gen += force ? "force" : "normal";
+      if(player != null) _gen += " " + player.toString();
     } 
   }
   /// For the Block particle(shows block break) there is a named constructor
-  Particle.block(Block block,{Location location,Location delta, double speed = 1, int count = 1, bool force}){
+  Particle.block(Block block,{Location location,Location delta, double speed = 1, int count = 1, bool force, Entity player}){
     _gen = "minecraft:block ";
     _gen += block.toString();
     if(location != null) _gen += " " + location.toString();
     if(delta != null){
       if(speed == null || count == null || location == null) throw("If you decide to use the full particle command add a delta, location, speed and count property!");
        _gen += " ${delta} ${speed} ${count}";
-      if(force != null) _gen += force ? "force" : "normal";
+      _gen += force ? "force" : "normal";
+      if(player != null) _gen += " " + player.toString();
     } 
   }
   /// For the Item particle(shows item break) there is a named constructor
-  Particle.item(ItemType item,{@required Location location,Location delta, double speed = 1, int count = 1, bool force}){
+  Particle.item(ItemType item,{@required Location location,Location delta, double speed = 1, int count = 1, bool force = false, Entity player}){
     _gen = "minecraft:item ";
     _gen += item.toString();
     if(location != null) _gen += " " + location.toString();
     if(delta != null){
       if(speed == null || count == null) throw("If you decide to use the full particle command add a delta, speed and count property!");
        _gen += " ${delta} ${speed} ${count}";
-      if(force != null) _gen += force ? "force" : "normal";
+      _gen += force ? "force" : "normal";
+      if(player != null) _gen += " " + player.toString();
     } 
   }
 

@@ -1,5 +1,6 @@
 
 import 'package:objd/basic/entity.dart';
+import 'package:objd/basic/rest_action.dart';
 import 'package:objd/basic/score.dart';
 import 'package:objd/basic/text_components.dart';
 import 'package:objd/basic/widget.dart';
@@ -7,7 +8,7 @@ import 'package:objd/build/context.dart';
 import 'package:objd/wrappers/comment.dart';
 import 'package:objd/wrappers/tellraw.dart';
 
-class Log extends Widget {
+class Log extends RestActionAble {
   dynamic msg;
   Entity to;
   Color color;

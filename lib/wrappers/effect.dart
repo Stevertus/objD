@@ -2,10 +2,11 @@
 
 import 'package:objd/basic/command.dart';
 import 'package:objd/basic/entity.dart';
+import 'package:objd/basic/rest_action.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/build/context.dart';
 
-class Effect extends Widget {
+class Effect extends RestActionAble {
 
   EffectType effect;
   Entity entity;

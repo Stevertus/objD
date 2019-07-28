@@ -2,10 +2,10 @@ import 'package:objd/basic/command.dart';
 import 'package:objd/basic/file.dart';
 import 'package:objd/basic/group.dart';
 import 'package:meta/meta.dart';
-import 'package:objd/basic/widget.dart';
+import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/build.dart';
 
-class Schedule extends Widget {
+class Schedule extends RestActionAble {
   String _name;
   File _file;
 

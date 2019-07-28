@@ -1,9 +1,10 @@
 import 'package:objd/basic/command.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/basic/entity.dart';
+import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/build.dart';
 
-class Say extends Widget {
+class Say extends RestActionAble {
   String message;
   /// The Say Class writes a simple message or an entity in the chat.
   /// 

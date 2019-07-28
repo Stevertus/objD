@@ -7,17 +7,17 @@ import 'package:objd/basic/rotation.dart';
 import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/build.dart';
 
-class Teleport extends RestActionAble {
+class Tp extends RestActionAble {
   Entity entity;
   String to;
   /// Sets the location of an Entity to a new Location and Rotation(optional).
-  Teleport(this.entity,{@required Location to, dynamic facing, Rotation rot}){
+  Tp(this.entity,{@required Location to, dynamic facing, Rotation rot}){
     this.to = to.toString();
     if(rot != null) this.to += " " + rot.toString();
     _setFacing(facing);
   }
 
-  Teleport.entity(this.entity,{Entity to, dynamic facing}){
+  Tp.entity(this.entity,{Entity to, dynamic facing}){
     this.to = to.toString();
     _setFacing(facing);
   }
@@ -31,6 +31,6 @@ class Teleport extends RestActionAble {
   
   @override
   Widget generate(Context context){
-    return new Command('teleport ' + entity.toString() + ' ' + to);
+    return new Command('tp ' + entity.toString() + ' ' + to);
   }
 }

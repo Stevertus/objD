@@ -4,11 +4,12 @@ import 'package:objd/basic/file.dart';
 import 'package:objd/basic/for_list.dart';
 import 'package:meta/meta.dart';
 import 'package:objd/basic/widget.dart';
+import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/build.dart';
 import 'package:objd/wrappers/if.dart';
 import 'package:objd/wrappers/schedule.dart';
 
-class Timeout extends Widget {
+class Timeout extends RestActionAble {
 
   String name;
   String path;
@@ -30,7 +31,7 @@ class Timeout extends Widget {
 
 }
 
-class Timer extends Widget {
+class Timer extends RestActionAble {
 
   bool _stop;
 

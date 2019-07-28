@@ -1,15 +1,15 @@
-import 'dart:convert';
-
 import 'package:objd/basic/command.dart';
 import 'package:objd/basic/entity.dart';
 import 'package:objd/basic/for_list.dart';
+import 'package:objd/basic/rest_action.dart';
 import 'package:objd/basic/text_components.dart';
 import 'package:objd/basic/widget.dart';
+import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/context.dart';
 import 'package:objd/wrappers/execute.dart';
 
 
-class Bossbar extends Widget {
+class Bossbar extends RestActionAble {
 
   String _type;
 
@@ -69,7 +69,7 @@ class Bossbar extends Widget {
 
   _getNameJson(){
     if(nameTexts.length == 1) return nameTexts[0].toJson();
-    return json.encode(nameTexts.map((text) => text.toMap()).toList());
+    return gsonEncode(nameTexts.map((text) => text.toMap()).toList());
   }
 
   Execute storeResult(Command command,BossbarOption option,
@@ -86,7 +86,7 @@ class Bossbar extends Widget {
       children: [command],
       encapsulate: false,
       args: [
-        'store ' + (useSuccess ? 'success' : 'result') + ' bossbar ${id} ${strOption}',
+        ['store ' + (useSuccess ? 'success' : 'result') + ' bossbar ${id} ${strOption}'],
       ],
     );
   }

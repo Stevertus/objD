@@ -21,3 +21,4 @@ export 'team.dart';
 export 'bossbar.dart';
 export 'advancement.dart';
 export 'clear.dart';
+export 'tp.dart';

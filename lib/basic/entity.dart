@@ -1,11 +1,11 @@
-import 'dart:convert';
-
 import 'package:objd/basic/area.dart';
 import 'package:objd/basic/command.dart';
 import 'package:objd/basic/for_list.dart';
 import 'package:objd/basic/rotation.dart';
 import 'package:objd/basic/score.dart';
 import 'package:objd/basic/tag.dart';
+import 'package:objd/basic/widgets.dart';
+import 'package:objd/core.dart';
 import 'package:objd/wrappers/execute.dart';
 import 'package:meta/meta.dart';
 import 'package:objd/wrappers/team.dart';
@@ -14,8 +14,10 @@ abstract class EntityClass {
   String selector;
   String toString();
 }
-class Entity implements EntityClass{
+class Entity implements EntityClass {
+
   String selector;
+
   /// creates an entity with @p
   Entity.Player ({Range distance,List<dynamic> tags,Team team,String strNbt,Map<String,dynamic> nbt,List<Score> scores,Range level, Gamemode gamemode, Area area, String name,Rotation isRotated, Range horizontalRotation, Range verticalRotation}){
         selector = "p";
@@ -35,6 +37,11 @@ class Entity implements EntityClass{
   }
   /// creates an entity with @s
   Entity.Selected ({EntityType type, Range distance,List<dynamic> tags,Team team,String strNbt,Map<String,dynamic> nbt,List<Score> scores,Range level, Gamemode gamemode, Area area, String name,Rotation isRotated, Range horizontalRotation, Range verticalRotation}){
+    selector = "s";
+    _setArguments(null,tags,team,scores,nbt,strNbt,type,area,distance,level,gamemode,name,isRotated,horizontalRotation,verticalRotation,false);
+  }
+  /// creates an entity with @s
+  Entity.self ({EntityType type, Range distance,List<dynamic> tags,Team team,String strNbt,Map<String,dynamic> nbt,List<Score> scores,Range level, Gamemode gamemode, Area area, String name,Rotation isRotated, Range horizontalRotation, Range verticalRotation}){
     selector = "s";
     _setArguments(null,tags,team,scores,nbt,strNbt,type,area,distance,level,gamemode,name,isRotated,horizontalRotation,verticalRotation,false);
   }
@@ -119,7 +126,7 @@ class Entity implements EntityClass{
       arguments['x_rotation'] = n+isRotated.y.toString();
     }
     if(area != null) arguments.addAll(area.getRanges());
-    if(nbt != null) arguments['nbt'] = n+json.encode(nbt);
+    if(nbt != null) arguments['nbt'] = n+gsonEncode(nbt);
     if(strNbt != null && strNbt.isNotEmpty) arguments['nbt'] = n+strNbt;
     if(team != null) arguments['team'] = n+team.name;
     if(tags != null){
@@ -185,7 +192,7 @@ class Entity implements EntityClass{
       children: [command],
       encapsulate: false,
       args: [
-        'store ' + (useSuccess ? 'success' : 'result') + ' entity ' + this.toString() + ' ' + path + ' ${datatype} ${scale}',
+        ['store ' + (useSuccess ? 'success' : 'result') + ' entity ' + this.toString() + ' ' + path + ' ${datatype} ${scale}'],
       ],
     );
   }
@@ -215,21 +222,272 @@ class Entity implements EntityClass{
       return Entity.clone(this)._setArguments(limit, tags, team, scores, nbt, strNbt, type, area, distance, level, gamemode, name, isRotated, horizontalRotation, verticalRotation, false);
   }
 
-  Tag addTag(String tag){
-    return Tag(tag,entity: this,value: true);
+  /**
+   * Generates a Kill Widget
+   * ```dart
+   * entity.kill().queue()
+   * ```
+   */
+  Kill kill() => StraitWidget.builder.create(Kill(this));
+
+  /**
+   * Generates a Raycast Widget
+   * ```dart
+   * entity.raycast(onhit: [
+   *  ...
+   * ]).queue()
+   * ```
+   */
+  Raycast raycast({int max, double step = 1, Block through = Block.air, Widget Function(Function,Function) ray, List<Widget> onhit, String scoreName = "objd_count"}) => StraitWidget.builder.create(Raycast(this,max: max, step: step,through: through, ray: ray, onhit: onhit, scoreName: scoreName));
+
+  /**
+   * Generates a Teleport Widget
+   * ```dart
+   * entity.teleport(Location.here()).queue()
+   * ```
+   */
+  Teleport teleport({Location location, Entity entity, dynamic facing, Rotation rot}) {
+
+    //Teleport to entity
+    if(entity != null && facing != null) return StraitWidget.builder.create(Teleport.entity(this, to: entity, facing: facing));
+    if(entity != null) return StraitWidget.builder.create(Teleport.entity(this, to: entity));
+
+    // Teleport to Location
+    if(location != null && facing != null && rot != null) return StraitWidget.builder.create(Teleport(this, to: location, facing: facing, rot: rot));
+    if(location != null && facing != null) return StraitWidget.builder.create(Teleport(this, to: location, facing: facing));
+    if(location != null && rot != null) return StraitWidget.builder.create(Teleport(this, to: location, rot: rot));
+    if(location != null) return StraitWidget.builder.create(Teleport(this, to: location));
+    throw new Error();
   }
-  Team joinTeam(String team){
-    return Team.join(team, this);
+
+  /**
+   * Generates a Tp Widget
+   * ```dart
+   * entity.tp(Location.here()).queue()
+   * ```
+   */
+  Tp tp({Location location, Entity entity, dynamic facing, Rotation rot}) {
+
+    //Teleport to entity
+    if(entity != null && facing != null) return StraitWidget.builder.create(Tp.entity(this, to: entity, facing: facing));
+    if(entity != null) return StraitWidget.builder.create(Tp.entity(this, to: entity));
+
+    // Teleport to Location
+    if(location != null && facing != null && rot != null) return StraitWidget.builder.create(Tp(this, to: location, facing: facing, rot: rot));
+    if(location != null && facing != null) return StraitWidget.builder.create(Tp(this, to: location, facing: facing));
+    if(location != null && rot != null) return StraitWidget.builder.create(Tp(this, to: location, rot: rot));
+    if(location != null) return StraitWidget.builder.create(Tp(this, to: location));
+    throw new Error();
   }
-  Team leaveTeam(){
-    return Team.leave(this);
+
+  // Data Commands
+
+  /**
+   * Use #dataMerge, #dataGet, #dataRemove and #dataModify instead
+   */
+  @Deprecated('Use #dataMerge, #dataGet, #dataRemove and #dataModify instead')
+  Data data({Map<String,dynamic> nbt, String type = "merge"}) {
+    if((this.selector == "a" || this.selector == "r" || this.selector == "p" || this.arguments["type"] == "minecraft:player" || this.arguments["type"] == "player")) throw("Cannot modify a player's data");
+    if((this.selector == "a" || this.selector == "e") && (this.arguments["limit"] == null || this.arguments["limit"] != "1")) throw("Cannot work with data of multiple entities in data command");
+    return StraitWidget.builder.create(Data(this,nbt: nbt, type: type));
   }
-  For addTags(List<String> tags){
-    return For.of(tags.map((tag) => Tag(tag,entity: this,value: true)).toList());
+
+  /**
+   * Generates a Data Widget
+   * ```dart
+   * entity.dataMerge(nbt: {"CustomNameVisible":true}).queue()
+   * ```
+   */
+  Data dataMerge({Map<String,dynamic> nbt, String strNbt}) {
+    if((this.selector == "a" || this.selector == "r" || this.selector == "p" || this.arguments["type"] == "minecraft:player" || this.arguments["type"] == "player")) throw("Cannot modify a player's data");
+    if((this.selector == "a" || this.selector == "e") && (this.arguments["limit"] == null || this.arguments["limit"] != "1")) throw("Cannot work with data of multiple entities in data command");
+    return StraitWidget.builder.create(Data.merge(this,nbt: nbt, strNbt: strNbt));
   }
-  Tag removeTag(String tag){
-    return Tag(tag,entity: this,value: false);
+
+  /**
+   * Generates a Data Widget
+   * ```dart
+   * entity.dataGet(path: "CustomName").queue()
+   * ```
+   */
+  Data dataGet({@required String path, num scale = 1}) {
+    if((this.selector == "a" || this.selector == "e") && (this.arguments["limit"] == null || this.arguments["limit"] != "1")) throw("Cannot work with data of multiple entities in data command");
+    return StraitWidget.builder.create(Data.get(this, path: path, scale: scale));
   }
+
+  /**
+   * Generates a Data Widget
+   * ```dart
+   * entity.dataRemove(path: "CustomName").queue()
+   * ```
+   */
+  Data dataRemove({@required String path}) {
+    if((this.selector == "a" || this.selector == "r" || this.selector == "p" || this.arguments["type"] == "minecraft:player" || this.arguments["type"] == "player")) throw("Cannot modify a player's data");
+    if((this.selector == "a" || this.selector == "e") && (this.arguments["limit"] == null || this.arguments["limit"] != "1")) throw("Cannot work with data of multiple entities in data command");
+    return StraitWidget.builder.create(Data.remove(this, path: path));
+  }
+  
+  /**
+   * Generates a Data Widget
+   * ```dart
+   * entity.dataModify(path: "CustomName", modify: ...).queue()
+   * ```
+   */
+  Data dataModify({@required String path, @required DataModify modify}) {
+    if((this.selector == "a" || this.selector == "r" || this.selector == "p" || this.arguments["type"] == "minecraft:player" || this.arguments["type"] == "player")) throw("Cannot modify a player's data");
+    if((this.selector == "a" || this.selector == "e") && (this.arguments["limit"] == null || this.arguments["limit"] != "1")) throw("Cannot work with data of multiple entities in data command");
+    return StraitWidget.builder.create(Data.modify(this, path: path, modify: modify));
+  }
+
+  /**
+   * Generates a Execute Widget (execute as the entity)
+   * ```dart
+   * entity.execute().run(Say("hi")).queue()
+   * ```
+   */
+  Execute execute({List<Widget> children = null, String targetFilePath="objd", String targetFileName, bool encapsulate = true})
+    => as(children: children, targetFilePath: targetFilePath, targetFileName: targetFileName, encapsulate: encapsulate);
+
+  /**
+   * Generates a Execute Widget (execute as the entity)
+   * ```dart
+   * entity.exec().run(Say("hi")).queue()
+   * ```
+   * short form for `entity.execute()`
+   */
+  Execute exec({List<Widget> children = null, String targetFilePath="objd", String targetFileName, bool encapsulate = true})
+    => as(children: children, targetFilePath: targetFilePath, targetFileName: targetFileName, encapsulate: encapsulate);
+
+  /**
+   * Generates a Execute Widget strait (execute as the entity)
+   * ```dart
+   * entity.executeStrait(run: (List<Widget> cont) {
+   *  ...
+   * }).queue()
+   * ```
+   */
+  Execute executeStrait({@required Function(List<Widget>) run, String targetFilePath="objd", String targetFileName, bool encapsulate = true})
+    => asStrait(run: run, targetFilePath: targetFilePath, targetFileName: targetFileName, encapsulate: encapsulate);
+
+  /**
+   * Generates a Execute Widget strait (execute as the entity)
+   * ```dart
+   * entity.execStrait(run: (List<Widget> cont) {
+   *  ...
+   * }).queue()
+   * ```
+   * short form for `entity.executeStrait()`
+   */
+  Execute execStrait({@required Function(List<Widget>) run, String targetFilePath="objd", String targetFileName, bool encapsulate = true})
+    => asStrait(run: run, targetFilePath: targetFilePath, targetFileName: targetFileName, encapsulate: encapsulate);
+
+  /**
+   * Generates a Execute Widget (execute as and at the entity)
+   * ```dart
+   * entity.asat().run(Particle(ParticleType.flame)).queue()
+   * ```
+   */
+  Execute asat({List<Widget> children = null, String targetFilePath="objd", String targetFileName, bool encapsulate = true}) 
+    => StraitWidget.builder.create(Execute(children: children, targetFilePath: targetFilePath, targetFileName: targetFileName, encapsulate: encapsulate).asat(this));
+
+  /**
+   * Generates a Execute Widget strait (execute as and at the entity)
+   * ```dart
+   * entity.asatStrait(run: (List<Widget> cont) {
+   *  ...
+   * }).queue()
+   * ```
+   */
+  Execute asatStrait({@required Function(List<Widget>) run, String targetFilePath="objd", String targetFileName, bool encapsulate = true})
+    => StraitWidget.builder.create(Execute.strait(run: run, targetFilePath: targetFilePath, targetFileName: targetFileName, encapsulate: encapsulate).asat(this));
+
+  /**
+   * Generates a Execute Widget (execute as the entity)
+   * ```dart
+   * entity.as().run(Say("hi")).queue()
+   * ```
+   */
+  Execute as({List<Widget> children = null, String targetFilePath="objd", String targetFileName, bool encapsulate = true}) 
+    => StraitWidget.builder.create(Execute(children: children, targetFilePath: targetFilePath, targetFileName: targetFileName, encapsulate: encapsulate).as(this));
+
+  /**
+   * Generates a Execute Widget strait (execute as the entity)
+   * ```dart
+   * entity.asStrait(run: (List<Widget> cont) {
+   *  ...
+   * }).queue()
+   * ```
+   */
+  Execute asStrait({@required Function(List<Widget>) run, String targetFilePath="objd", String targetFileName, bool encapsulate = true})
+    => StraitWidget.builder.create(Execute.strait(run: run, targetFilePath: targetFilePath, targetFileName: targetFileName, encapsulate: encapsulate).as(this));
+
+  /**
+   * Generates a Execute Widget (execute at the entity)
+   * ```dart
+   * entity.at().run(Particle(ParticleType.flame)).queue()
+   * ```
+   */
+  Execute at({List<Widget> children = null, String targetFilePath="objd", String targetFileName, bool encapsulate = true}) 
+    => StraitWidget.builder.create(Execute(children: children, targetFilePath: targetFilePath, targetFileName: targetFileName, encapsulate: encapsulate).at(this));
+
+  /**
+   * Generates a Execute Widget strait (execute at the entity)
+   * ```dart
+   * entity.atStrait(run: (List<Widget> cont) {
+   *  ...
+   * }).queue()
+   * ```
+   */
+  Execute atStrait({@required Function(List<Widget>) run, String targetFilePath="objd", String targetFileName, bool encapsulate = true})
+    => StraitWidget.builder.create(Execute.strait(run: run, targetFilePath: targetFilePath, targetFileName: targetFileName, encapsulate: encapsulate).at(this));
+  
+  /**
+   * Adds a tag to the entity
+   * ```dart
+   * entity.addTag("objDTest").queue()
+   * ```
+   */
+  Tag addTag(String tag) => StraitWidget.builder.create(Tag(tag,entity: this,value: true));
+  
+  /**
+   * Adds tags to the entity
+   * ```dart
+   * entity.addTags(["objDTest","objDTest2"]).queue()
+   * ```
+   */
+  For addTags(List<String> tags) => StraitWidget.builder.create(For.of(tags.map((tag) => Tag(tag,entity: this,value: true)).toList()));
+  
+  /**
+   * Removes a tag from the entity
+   * ```dart
+   * entity.removeTag("objDTest").queue()
+   * ```
+   */
+  Tag removeTag(String tag) => StraitWidget.builder.create(Tag(tag,entity: this,value: false));
+  
+  /**
+   * Removes tags from the entity
+   * ```dart
+   * entity.removeTags(["objDTest","objDTest2"]).queue()
+   * ```
+   */
+  For removeTags(List<String> tags) => StraitWidget.builder.create(For.of(tags.map((tag) => Tag(tag,entity: this,value: false)).toList()));
+
+  /**
+   * The entity joins a team
+   * ```dart
+   * entity.joinTeam("red").queue()
+   * ```
+   */
+  Team joinTeam(String team) => StraitWidget.builder.create(Team.join(team, this));
+
+  /**
+   * The entity leaves a team
+   * ```dart
+   * entity.leaveTeam("red").queue()
+   * ```
+   */
+  Team leaveTeam() => StraitWidget.builder.create(Team.leave(this));
 
   @override
   String toString([Map arguments]){

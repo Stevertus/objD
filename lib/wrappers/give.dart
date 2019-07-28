@@ -3,9 +3,10 @@ import 'package:meta/meta.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/basic/item.dart';
 import 'package:objd/basic/entity.dart';
+import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/build.dart';
 
-class Give extends Widget {
+class Give extends RestActionAble {
   Entity entity;
   Item item;
   /// Gives a item to a player.

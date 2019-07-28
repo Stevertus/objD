@@ -3,6 +3,7 @@ import 'package:objd/basic/slot.dart';
 import 'dart:convert';
 
 import 'package:objd/basic/text_components.dart';
+import 'package:objd/basic/widgets.dart';
 class Item {
   ItemType type;
   int count;
@@ -93,7 +94,7 @@ class Item {
     return map;
   }
   String getNbt(){
-    return json.encode(this.getMap());
+    return gsonEncode(this.getMap());
   }
 }
 

@@ -1,4 +1,3 @@
-import 'package:objd/core.dart';
 /// The Slot object gives you certain utils to manipulate Inventories and Containers with the Item, Replaceitem or Data.
 class Slot {
   final int id;

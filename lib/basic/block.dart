@@ -1,5 +1,4 @@
-
-import 'dart:convert';
+import 'package:objd/basic/widgets.dart';
 
 /// This is an util class which provides a wrapper for all available blocks in Minecraft.
 /// ```dart
@@ -33,7 +32,7 @@ class Block {
       });
       strState = "[${liState.join(',')}]";
     }
-    if(nbt != null) strNbt = json.encode(nbt);
+    if(nbt != null) strNbt = gsonEncode(nbt);
     return Block(id + strState + strNbt);
   }
 
