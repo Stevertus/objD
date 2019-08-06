@@ -1,3 +1,4 @@
+import 'package:gson/gson.dart';
 import 'package:objd/basic/block.dart';
 import 'package:objd/basic/slot.dart';
 import 'dart:convert';
@@ -94,7 +95,7 @@ class Item {
     return map;
   }
   String getNbt(){
-    return gsonEncode(this.getMap());
+    return gson.encode(this.getMap());
   }
 }
 

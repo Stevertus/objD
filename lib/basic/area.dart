@@ -6,10 +6,31 @@ class Area {
   Location loc2;
 
   Area({double x1, double y1, double z1, double x2, double y2, double z2}){
-    loc1 =Location.glob(x: _min(x1,x2),y: _min(y1,y2), z:_min(z1, z2));
-    loc2 =Location.glob(x: _max(x1,x2),y: _max(y1,y2), z:_max(z1, z2));
+    loc1 = Location.glob(x: _min(x1,x2),y: _min(y1,y2), z:_min(z1, z2));
+    loc2 = Location.glob(x: _max(x1,x2),y: _max(y1,y2), z:_max(z1, z2));
     _setDifferences();
   }
+
+  Area.fromRanges({double x, double y, double z, double dx, double dy, double dz, Map<String,double> ranges}){
+
+    x = x ?? ranges["x"];
+    y = y ?? ranges["y"];
+    z = z ?? ranges["z"];
+    
+    dx = dx ?? ranges["dx"];
+    dy = dy ?? ranges["dy"];
+    dz = dz ?? ranges["dz"];
+
+    double x2 = x != null && dx != null ? x + dx : null;
+    double y2 = y != null && dy != null ? y + dy : null;
+    double z2 = z != null && dz != null ? z + dz : null;
+
+    loc1 = Location.glob(x: _min(x,x2),y: _min(y,y2), z:_min(z, z2));
+    loc2 = Location.glob(x: _max(x,x2),y: _max(y,y2), z:_max(z, z2));
+    _setDifferences();
+
+  }
+
   Area.fromLocations(this.loc1,this.loc2){
     _setDifferences();
   }

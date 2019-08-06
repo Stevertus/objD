@@ -1,3 +1,4 @@
+import 'package:gson/gson.dart';
 import 'package:meta/meta.dart';
 import 'package:objd/basic/command.dart';
 import 'package:objd/basic/score.dart';
@@ -117,7 +118,7 @@ class Data extends RestActionAble {
 
   _getNbt(){
     if(strNbt != null && strNbt.isNotEmpty) return strNbt;
-    return gsonEncode(nbt);
+    return gson.encode(nbt);
   }
 }
 /// There are five sub operations again: set, merge, prepend, append and insert.
@@ -149,7 +150,7 @@ class DataModify {
     _checkValue(value);
   }
   _checkValue(dynamic value){
-    if(value is Map) return this.value = gsonEncode(value);
+    if(value is Map) return this.value = gson.encode(value);
     if(value is num || value is String) return this.value = value.toString();
     if(value is Entity){
       fromType = "entity";

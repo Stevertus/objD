@@ -1,3 +1,4 @@
+import 'package:gson/gson.dart';
 import 'package:objd/basic/command.dart';
 import 'package:meta/meta.dart';
 import 'package:objd/basic/rest_action.dart';
@@ -16,6 +17,6 @@ class SetBlock extends RestActionAble {
   
   @override
   Widget generate(Context context){
-    return new Command('setblock ' + location.toString() + ' ' + block.toString() + (nbt == null? '': gsonEncode(nbt)));
+    return new Command('setblock ' + location.toString() + ' ' + block.toString() + (nbt == null? '': gson.encode(nbt)));
   }
 }

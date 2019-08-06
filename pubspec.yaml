@@ -14,5 +14,6 @@ dependencies:
   colorize: ^2.0.0
   path: ^1.6.2
   watcher: ^0.9.7+10
+  gson: ^0.1.2
 executables:
   objd:

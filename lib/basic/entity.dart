@@ -1,4 +1,6 @@
+import 'package:gson/gson.dart';
 import 'package:objd/basic/area.dart';
+import 'package:objd/basic/selector.dart';
 import 'package:objd/basic/command.dart';
 import 'package:objd/basic/for_list.dart';
 import 'package:objd/basic/rotation.dart';
@@ -20,31 +22,45 @@ class Entity implements EntityClass {
 
   /// creates an entity with @p
   Entity.Player ({Range distance,List<dynamic> tags,Team team,String strNbt,Map<String,dynamic> nbt,List<Score> scores,Range level, Gamemode gamemode, Area area, String name,Rotation isRotated, Range horizontalRotation, Range verticalRotation}){
-        selector = "p";
-        _setArguments(null,tags,team,scores,nbt,strNbt,null,area,distance,level,gamemode,name,isRotated,horizontalRotation,verticalRotation,false);
+    selector = "p";
+    _setArguments(null,tags,team,scores,nbt,strNbt,null,area,distance,level,gamemode,name,isRotated,horizontalRotation,verticalRotation,false);
   }
   /// creates an entity with an implicit name
   Entity.PlayerName (String name): this(playerName:name);
+
   /// creates an entity with @a
   Entity.All ({Range distance,List<dynamic> tags,Team team,String strNbt,Map<String,dynamic> nbt,int limit,List<Score> scores,Range level, Gamemode gamemode, Area area, String name,Rotation isRotated, Range horizontalRotation, Range verticalRotation}){
-        selector = "a";
-        _setArguments(limit,tags,team,scores,nbt,strNbt,null,area,distance,level,gamemode,name,isRotated,horizontalRotation,verticalRotation,false);
+    selector = "a";
+    _setArguments(limit,tags,team,scores,nbt,strNbt,null,area,distance,level,gamemode,name,isRotated,horizontalRotation,verticalRotation,false);
   }
+
   /// creates an entity with @r
   Entity.Random({EntityType type,Range distance,List<dynamic> tags,Team team,String strNbt,Map<String,dynamic> nbt,int limit,List<Score> scores,Range level, Gamemode gamemode, Area area, String name,Rotation isRotated, Range horizontalRotation, Range verticalRotation}){
     selector = "r";
     _setArguments(limit,tags,team,scores,nbt,strNbt,type,area,distance,level,gamemode,name,isRotated,horizontalRotation,verticalRotation,false);
   }
+
   /// creates an entity with @s
   Entity.Selected ({EntityType type, Range distance,List<dynamic> tags,Team team,String strNbt,Map<String,dynamic> nbt,List<Score> scores,Range level, Gamemode gamemode, Area area, String name,Rotation isRotated, Range horizontalRotation, Range verticalRotation}){
     selector = "s";
     _setArguments(null,tags,team,scores,nbt,strNbt,type,area,distance,level,gamemode,name,isRotated,horizontalRotation,verticalRotation,false);
   }
+
   /// creates an entity with @s
   Entity.self ({EntityType type, Range distance,List<dynamic> tags,Team team,String strNbt,Map<String,dynamic> nbt,List<Score> scores,Range level, Gamemode gamemode, Area area, String name,Rotation isRotated, Range horizontalRotation, Range verticalRotation}){
     selector = "s";
     _setArguments(null,tags,team,scores,nbt,strNbt,type,area,distance,level,gamemode,name,isRotated,horizontalRotation,verticalRotation,false);
   }
+
+  /// creates an entity from a prepared selector
+  Entity.Select (Selector selector){
+    this.selector = selector.selector;
+    _setArguments(selector.limit,selector.tags,selector.team,selector.scores,selector.nbt,selector.strNbt,selector.type,selector.area,selector.distance,selector.level,selector.gamemode,selector.name,selector.isRotated,selector.horizontalRotation,selector.verticalRotation,false);
+    if(selector.sorting != null) {
+      sort(selector.sorting);
+    }
+  }
+
   /// creates a new instance of an already existing Entity object
   Entity.clone(Entity ent){
     this.selector = ent.selector;
@@ -93,6 +109,7 @@ class Entity implements EntityClass {
       Range verticalRotation,}){
          _setArguments(limit,tags,team,scores,nbt,strNbt,type,area,distance,level,gamemode,name,isRotated,horizontalRotation,verticalRotation,false);
       }
+
   _setArguments(
       int limit,
       List<dynamic> tags,
@@ -126,7 +143,7 @@ class Entity implements EntityClass {
       arguments['x_rotation'] = n+isRotated.y.toString();
     }
     if(area != null) arguments.addAll(area.getRanges());
-    if(nbt != null) arguments['nbt'] = n+gsonEncode(nbt);
+    if(nbt != null) arguments['nbt'] = n+gson.encode(nbt);
     if(strNbt != null && strNbt.isNotEmpty) arguments['nbt'] = n+strNbt;
     if(team != null) arguments['team'] = n+team.name;
     if(tags != null){
@@ -139,10 +156,11 @@ class Entity implements EntityClass {
     }
     if(scores != null){
       String ret = n+"{";
-      scores.forEach((score){
+      for(int i = 0; i < scores.length; i++) {
+        Score score = scores[i];
         if(score.getMatch().isEmpty) throw("Please insert a match method in the scores value for an entity!");
-        ret += score.score + "=" + score.getMatch();
-      });
+        ret += score.score + "=" + score.getMatch() + (i < scores.length - 1 ? "," : "");
+      }
       arguments['scores'] = ret + "}";
     }
 
@@ -156,13 +174,14 @@ class Entity implements EntityClass {
     arguments['sort'] = sort.toString().split('.').last;
     return this;
   }
-/// With the not function you can negate specific arguments. It takes in the same options as `Entity()`.
-///
-/// **Example:**
-/// ```dart
-/// Say(Entity().not(tags:["mytag"],nbt:{"istrue":1}))
-/// ⇒ say @e[tag=!mytag,nbt=!{"istrue":1}]
-/// ```
+  
+  /// With the not function you can negate specific arguments. It takes in the same options as `Entity()`.
+  ///
+  /// **Example:**
+  /// ```dart
+  /// Say(Entity().not(tags:["mytag"],nbt:{"istrue":1}))
+  /// ⇒ say @e[tag=!mytag,nbt=!{"istrue":1}]
+  /// ```
   Entity not({
       int limit,
       List<dynamic> tags,
@@ -196,13 +215,14 @@ class Entity implements EntityClass {
       ],
     );
   }
-/// Creates a new Entity based on the existing one and applies new arguments. (same as constructors)
-///
-/// **Example:**
-/// ```dart
-/// Entity ent1 = Entity(type:EntityType.sheep)
-/// Entity ent2 = ent1.copyWith(distance:Range(to:1))
-/// ``` 
+  
+  /// Creates a new Entity based on the existing one and applies new arguments. (same as constructors)
+  ///
+  /// **Example:**
+  /// ```dart
+  /// Entity ent1 = Entity(type:EntityType.sheep)
+  /// Entity ent2 = ent1.copyWith(distance:Range(to:1))
+  /// ``` 
   Entity copyWith({
       int limit,
       List<dynamic> tags,
@@ -525,16 +545,17 @@ class Entity implements EntityClass {
 }
 
 class Range {
-  num from,to;
+  num from,to,exact;
   /// The Range class defines a range of values(e.g 3..10 in vanilla)
-  Range({this.from, this.to});
+  Range({this.from, this.to,this.exact});
 
   @override
-  String toString(){
+  String toString() {
     String ret = "0";
-    if(from != null && to == null) ret = "$from..";
-    if(from == null && to != null) ret = "..$to";
-    if(from != null && to != null) ret = "$from..$to";
+    if(exact != null) ret = exact.toString();
+    else if(from != null && to == null) ret = "$from..";
+    else if(from == null && to != null) ret = "..$to";
+    else if(from != null && to != null) ret = "$from..$to";
     return ret.replaceAll(r'[0-9].0', '');
   }
 }
@@ -653,6 +674,17 @@ class EntityType {
 
   final String type;
   const EntityType(this.type);
+
+  bool operator ==(dynamic other) {
+    if(other is EntityType && other.type == this.type) {
+      return true;
+    }
+    if(other is String && other == this.type) {
+      return true;
+    }
+    return false;
+  }
+
   @override
     String toString() {
       return type;

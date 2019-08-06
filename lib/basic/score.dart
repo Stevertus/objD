@@ -14,28 +14,32 @@ class Score extends RestActionAble {
   Entity entity;
   String score;
   String _strGen = "";
-/// The [Score] class is the basis for setting values, calculating with scores and checking the values.
-///It implements one base class with no functionality and several methods to do actions:
-///
-///|constructor|  |
-///|--|--|
-///|Entity| the entity within the scoreboard |
-///|String| the name of the objective |
-///|addNew| bool whether it should add the scoreboard itself if it does not exist(default = true)|
-///
-///```dart
-/// Score(Entity.Selected(),"score",addNew: true)
-///```
 
+  /// Get commands
+  List<Widget> get commands => _commands;
+  
+  /// The [Score] class is the basis for setting values, calculating with scores and checking the values.
+  ///It implements one base class with no functionality and several methods to do actions:
+  ///
+  ///|constructor|  |
+  ///|--|--|
+  ///|Entity| the entity within the scoreboard |
+  ///|String| the name of the objective |
+  ///|addNew| bool whether it should add the scoreboard itself if it does not exist(default = true)|
+  ///
+  ///```dart
+  /// Score(Entity.Selected(),"score",addNew: true)
+  ///```
   Score(this.entity, this.score, {bool addNew = true, List<Widget> commands}){
     if(commands != null) _commands = commands; 
     if(addNew) _commands.add(Scoreboard(score));
   }
+
   /// same as Score() but with a predefined entity(Entity.Selected())
   /// ```dart
-/// Score.fromSelected("objective").set(3)
-/// ⇒ scoreboard players set @s objective 3
-/// ```
+  /// Score.fromSelected("objective").set(3)
+  /// ⇒ scoreboard players set @s objective 3
+  /// ```
   Score.fromSelected(this.score,{bool addNew = true}){
     entity =Entity.Selected();
     if(addNew) _commands.add(Scoreboard(score));
@@ -44,20 +48,20 @@ class Score extends RestActionAble {
     _match =match;
   }
 
-/// Do you need constant values with scores? objD got you covered with `Score.con`:
-///
-/// |Score.con| |
-/// |--|--|
-/// |int| a constant number |
-/// |addNew|bool whether it should add objd_consts itself if it does not exist(default = true)|
+  /// Do you need constant values with scores? objD got you covered with `Score.con`:
+  ///
+  /// |Score.con| |
+  /// |--|--|
+  /// |int| a constant number |
+  /// |addNew|bool whether it should add objd_consts itself if it does not exist(default = true)|
 
-/// This will automatically create a scoreboard called `objd_consts` and set the value to the fake entity `#[value]`
-/// 
-/// **Example:**
-/// ```dart
-/// Score.con(5)
-/// ⇒ scoreboard players set #5 objd_consts 5
-/// ```
+  /// This will automatically create a scoreboard called `objd_consts` and set the value to the fake entity `#[value]`
+  /// 
+  /// **Example:**
+  /// ```dart
+  /// Score.con(5)
+  /// ⇒ scoreboard players set #5 objd_consts 5
+  /// ```
   Score.con(int number, {bool addNew = true}){
     score = "objd_consts";
     entity = Entity.PlayerName('#' + number.toString());

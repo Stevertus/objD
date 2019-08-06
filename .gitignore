@@ -4,4 +4,4 @@ generatedoc.dart
 /testing
 .packages
 pubspec.lock
-.packages
+/.dart_tool

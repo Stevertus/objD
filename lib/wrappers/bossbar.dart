@@ -1,3 +1,4 @@
+import 'package:gson/gson.dart';
 import 'package:objd/basic/command.dart';
 import 'package:objd/basic/entity.dart';
 import 'package:objd/basic/for_list.dart';
@@ -69,7 +70,7 @@ class Bossbar extends RestActionAble {
 
   _getNameJson(){
     if(nameTexts.length == 1) return nameTexts[0].toJson();
-    return gsonEncode(nameTexts.map((text) => text.toMap()).toList());
+    return gson.encode(nameTexts.map((text) => text.toMap()).toList());
   }
 
   Execute storeResult(Command command,BossbarOption option,

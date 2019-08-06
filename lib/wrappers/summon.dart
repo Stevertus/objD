@@ -1,3 +1,4 @@
+import 'package:gson/gson.dart';
 import 'package:objd/basic/command.dart';
 import 'package:objd/basic/rotation.dart';
 import 'package:objd/basic/widget.dart';
@@ -69,6 +70,6 @@ class Summon extends RestActionAble {
         ' ' +
         location.toString() +
         ' ' +
-        gsonEncode(nbt));
+        gson.encode(nbt));
   }
 }
