@@ -20,4 +20,3 @@ export 'condition.dart';
 export 'slot.dart';
 export 'rest_action.dart';
 export 'strait_widget.dart';
-export 'gson.dart';

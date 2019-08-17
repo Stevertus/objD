@@ -1,4 +1,4 @@
-import 'package:objd/basic/widgets.dart';
+import 'package:gson/gson.dart';
 
 /// This is an util class which provides a wrapper for all available blocks in Minecraft.
 /// ```dart
@@ -32,7 +32,7 @@ class Block {
       });
       strState = "[${liState.join(',')}]";
     }
-    if(nbt != null) strNbt = gsonEncode(nbt);
+    if(nbt != null) strNbt = gson.encode(nbt);
     return Block(id + strState + strNbt);
   }
 
