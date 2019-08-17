@@ -10,8 +10,6 @@ import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/build.dart';
 import 'package:objd/wrappers/widgets.dart';
 
-// TODO: Concerns of unsolid structure, too many calls?
-
 /// The execute command has multiple syntaxes that allow to manipulate the position, executer or condition.
 class Execute extends RestActionAble {
   List<List<String>> _args = [[]];

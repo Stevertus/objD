@@ -11,6 +11,7 @@ String gsonEncode(dynamic obj) {
   }
   if(obj is Map) {
     //Map<String,String> cont = {};
+    if(obj.length == 0) return "{}";
     String cont = "";
     obj.forEach((k,v)=>cont += ",${k}:${gsonEncode(v)}");
     return "{" + cont.substring(1) + "}";
