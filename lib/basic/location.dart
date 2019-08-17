@@ -68,6 +68,6 @@ class Location {
 
   @override
   String toString() {
-    return _location.replaceAll('.0 ', ' ');
+    return (_location + ' ').replaceAll('.0 ', ' ').trim();
   }
 }

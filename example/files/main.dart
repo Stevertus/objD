@@ -8,7 +8,6 @@ class MainFile extends Widget {
   Widget generate(Context context) {
     return For.of([
       // put your tick widgets here
-      Raycast(Entity.Selected(),onhit: [Say("Hi")],step: 0.25,ray: (stop,hit){return For.of([Say("Hi")]);})
     ]);
   }
 }

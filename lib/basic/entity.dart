@@ -261,6 +261,55 @@ class Entity implements EntityClass {
   }
 
   /**
+   * Generates a Give Widget
+   * ```dart
+   * player.give(item).queue()
+   * ```
+   */
+  Give give(Item item) => StraitWidget.builder.create(Give(this, item: item));
+
+  /**
+   * Generates a ReplaceItem Widget
+   * ```dart
+   * player.replaceitem(item: item, slot: slot).queue()
+   * ```
+   */
+  ReplaceItem replaceitem({@required Item item, @required Slot slot}) => StraitWidget.builder.create(ReplaceItem(this, item: item, slot: slot));
+
+  /**
+   * Generates a Particle Widget
+   * ```dart
+   * player.particle(particle: ParticleType.barrier, location: location).queue()
+   * ```
+   */
+  Particle particle({@required ParticleType particle,@required Location location, Location delta, double speed = 1, int count = 1, bool force = false})
+    => StraitWidget.builder.create(Particle(particle,location: location, delta: delta, speed: speed, count: count, force: force, player: this));
+
+  /**
+   * Crashes a player's game by sending him to many particles and forces the client to show them (Who ever wants to do that, propably for people who don't like your map or datapack 😉)
+   * ```dart
+   * player.crash().queue()
+   * ```
+   * ---
+   * Uses `StraitPlayer.particle()` and `StraitEntity.at()`
+   */
+  Execute crash() => at(children: [this.particle(particle: ParticleType.barrier, location: Location.here(), count: 1000000000, force: true)]);
+
+  Clear clear([Item item]) => StraitWidget.builder.create(Clear(this, item));
+
+  /**
+   * Generates a tellraw command
+   * ```dart
+   * player.tellraw([
+   *  TextComponent("Welcome to my Server!")
+   * ]).queue()
+   * ```
+   * ---
+   * Uses `StraitPlayer.particle()` and `StraitEntity.at()`
+   */
+  Tellraw tellraw({List<TextComponent> show}) => StraitWidget.builder.create(Tellraw(this,show: show));
+
+  /**
    * Generates a Tp Widget
    * ```dart
    * entity.tp(Location.here()).queue()
@@ -488,6 +537,17 @@ class Entity implements EntityClass {
    * ```
    */
   Team leaveTeam() => StraitWidget.builder.create(Team.leave(this));
+
+    /**
+   * Executes given content for all entities matching the selector (Strait function)
+   * ```dart
+   * entity.forEach((LivingEntity e, List<Widget> strait) {
+   *   e.kill().queue();
+   * }).queue();
+   * ```
+   */
+  Execute forEach(Function(Entity p, List<Widget> strait) fn) => asStrait(run: (List<Widget> strait) => fn(new Entity.self(), strait));
+
 
   @override
   String toString([Map arguments]){

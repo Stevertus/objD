@@ -39,6 +39,8 @@ class RestAction extends RestActionAble {
 
   Widget _rest;
 
+  List<Widget> writable;
+
   /**
    * If autoQueue is enabled, you dont have to manually run the `queue()` method on your RestActions.
    * 
@@ -81,9 +83,7 @@ class RestAction extends RestActionAble {
    * RestAction([], Kill(...))
    * ```
    */
-  RestAction(List<Widget> writable, Widget rest) {
-    this.writable = writable;
-    this._rest = rest;
+  RestAction(this.writable, this._rest) {
     if(RestAction.autoQueue) this.queue();
   }
 
@@ -128,9 +128,7 @@ class RestActionBuilder {
   List<Widget> writable;
 
   /// Made for creating RestActions, usefull for APIs if you need to create multiple RestActions
-  RestActionBuilder(List<Widget> writable) {
-    this.writable = writable;
-  }
+  RestActionBuilder(this.writable);
 
   // Creates a RestAction from a Widget
   RestActionAble create(Widget rest) {
