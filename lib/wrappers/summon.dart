@@ -7,6 +7,7 @@ import 'package:objd/basic/location.dart';
 import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/build.dart';
 import 'package:objd/wrappers/effect.dart';
+import 'package:gson/gson.dart';
 
 class Summon extends RestActionAble {
   Map<String, dynamic> nbt;
@@ -69,6 +70,6 @@ class Summon extends RestActionAble {
         ' ' +
         location.toString() +
         ' ' +
-        gsonEncode(nbt));
+        gson.encode(nbt));
   }
 }

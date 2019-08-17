@@ -7,6 +7,7 @@ import 'package:objd/basic/widget.dart';
 import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/context.dart';
 import 'package:objd/wrappers/execute.dart';
+import 'package:gson/gson.dart';
 
 
 class Bossbar extends RestActionAble {
@@ -69,7 +70,7 @@ class Bossbar extends RestActionAble {
 
   _getNameJson(){
     if(nameTexts.length == 1) return nameTexts[0].toJson();
-    return gsonEncode(nameTexts.map((text) => text.toMap()).toList());
+    return gson.encode(nameTexts.map((text) => text.toMap()).toList());
   }
 
   Execute storeResult(Command command,BossbarOption option,

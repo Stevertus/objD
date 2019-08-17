@@ -6,6 +6,7 @@ import 'package:objd/basic/block.dart';
 import 'package:objd/basic/location.dart';
 import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/build.dart';
+import 'package:gson/gson.dart';
 
 class SetBlock extends RestActionAble {
   Location location;
@@ -16,6 +17,6 @@ class SetBlock extends RestActionAble {
   
   @override
   Widget generate(Context context){
-    return new Command('setblock ' + location.toString() + ' ' + block.toString() + (nbt == null? '': gsonEncode(nbt)));
+    return new Command('setblock ' + location.toString() + ' ' + block.toString() + (nbt == null? '': gson.encode(nbt)));
   }
 }
