@@ -1,5 +1,5 @@
 name: objd
-version: 0.2.4
+version: 0.3.0
 
 author: Stevertus <stevertusyt@gmail.com>
 homepage: https://stevertus.com/objD
@@ -14,5 +14,3 @@ dependencies:
   colorize: ^2.0.0
   path: ^1.6.2
   watcher: ^0.9.7+10
-executables:
-  objd:
