@@ -11,6 +11,8 @@ import 'package:objd/wrappers/if.dart';
 
 class Score extends RestActionAble {
   List<Widget> _commands = [];
+    /// Get commands
+  List<Widget> get commands => _commands;
   Entity entity;
   String score;
   String _strGen = "";

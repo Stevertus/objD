@@ -10,6 +10,8 @@ import 'package:objd/wrappers/execute.dart';
 import 'package:meta/meta.dart';
 import 'package:objd/wrappers/team.dart';
 
+import 'selector.dart';
+
 abstract class EntityClass {
   String selector;
   String toString();
@@ -45,6 +47,16 @@ class Entity implements EntityClass {
     selector = "s";
     _setArguments(null,tags,team,scores,nbt,strNbt,type,area,distance,level,gamemode,name,isRotated,horizontalRotation,verticalRotation,false);
   }
+
+    /// creates an entity from a prepared selector
+  Entity.Select (Selector selector){
+    this.selector = selector.selector;
+    _setArguments(selector.limit,selector.tags,selector.team,selector.scores,selector.nbt,selector.strNbt,selector.type,selector.area,selector.distance,selector.level,selector.gamemode,selector.name,selector.isRotated,selector.horizontalRotation,selector.verticalRotation,false);
+    if(selector.sorting != null) {
+      sort(selector.sorting);
+    }
+  }
+  
   /// creates a new instance of an already existing Entity object
   Entity.clone(Entity ent){
     this.selector = ent.selector;
@@ -138,12 +150,12 @@ class Entity implements EntityClass {
       });
     }
     if(scores != null){
-      String ret = n+"{";
+      List<String> ret = [];
       scores.forEach((score){
         if(score.getMatch().isEmpty) throw("Please insert a match method in the scores value for an entity!");
-        ret += score.score + "=" + score.getMatch();
+        ret.add(score.score + "=" + score.getMatch());
       });
-      arguments['scores'] = ret + "}";
+      arguments['scores'] = n+"{" + ret.join(",") + "}";
     }
 
   }
@@ -587,16 +599,17 @@ class Entity implements EntityClass {
 }
 
 class Range {
-  num from,to;
+  num from,to,exact;
   /// The Range class defines a range of values(e.g 3..10 in vanilla)
-  Range({this.from, this.to});
+  Range({this.from, this.to, this.exact});
 
   @override
   String toString(){
     String ret = "0";
-    if(from != null && to == null) ret = "$from..";
-    if(from == null && to != null) ret = "..$to";
-    if(from != null && to != null) ret = "$from..$to";
+    if(exact != null) ret = exact.toString();
+    else if(from != null && to == null) ret = "$from..";
+    else if(from == null && to != null) ret = "..$to";
+    else if(from != null && to != null) ret = "$from..$to";
     return ret.replaceAll(r'[0-9].0', '');
   }
 }
@@ -715,6 +728,17 @@ class EntityType {
 
   final String type;
   const EntityType(this.type);
+
+  bool operator ==(dynamic other) {
+    if(other is EntityType && other.type == this.type) {
+      return true;
+    }
+    if(other is String && other == this.type) {
+      return true;
+    }
+    return false;
+  }
+
   @override
     String toString() {
       return type;
