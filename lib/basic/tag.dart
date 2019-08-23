@@ -13,7 +13,7 @@ class Tag extends RestActionAble {
   String tag;
   
   ///A tag saves a boolean value with an entity inside the game.
-  Tag(this.tag, {@required this.entity,this.value = true}){
+  Tag(this.tag, {this.entity,this.value = true}){
     if(this.entity == null) this.entity = Entity.Selected();
   }
 

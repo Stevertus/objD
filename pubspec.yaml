@@ -1,5 +1,5 @@
 name: objd
-version: 0.3.0
+version: 0.3.0-beta.1
 
 author: Stevertus <stevertusyt@gmail.com>
 homepage: https://stevertus.com/objD
@@ -12,4 +12,4 @@ environment:
 dependencies:
   meta: ^1.1.7
   colorize: ^2.0.0
-  gson: 0.1.2
+  gson: ^0.1.2
