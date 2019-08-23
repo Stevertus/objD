@@ -4,14 +4,26 @@
 * added Entity.Self Constructor as a shortcut
 * added Entity kill, raycast, teleport, give, replaceitem, particle, crash, tellraw, tp, execute, exec, execStrait, asat, as, at, joinTeam, leaveTeam and forEach Methods.
 * added Data Manipulation within Entity with dataMerge, dataGet, dataRemove and dataModify methods
+* added Selector
 * added Tp Widget
 * added RestAction, RestActionAble and StraitWidget to support underlying structure
+* added Area.rel
+* added Area.fromRanges
+* added exact parameter for Range to support single matches
+* added EntityType operator == to match same Types
 * rewritten Execute with StraitWidget
 * rewritten Entity addTag, addTags, removeTag, removeTags
 * moved the cli commands and related files to a new package here:  https://pub.dev/packages/objd_cli
+* fixed missing seperator when using multiple scores in Entity
+* fixed missing items and added documentation references
 * fixed that global Location does not cut of last double digit(1.0)
 * fixed unnessesary required value with Tag
 * fixed that Entity.copyWith just returned null
+
+A big thanks goes to Minimine who actually did most of the new additions, the new gson package and bug fixes. Thanks for contributing!
+Check out his projects here: https://github.com/MinimineLP
+Thanks as well for the critical bugs reports by Mastermori!
+
 ## 0.2.4
 * added ClickEvent Module
 * added copyWith on Entities

@@ -1,13 +1,14 @@
 import 'package:objd/basic/for_list.dart';
+import 'package:objd/basic/strait_widget.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/build/build.dart';
 
 abstract class RestActionAble extends Widget {
 
-  // The writable list the RestAction writes it's contents on
+  /// The writable list the RestAction writes it's contents on
   List<Widget> writable;
 
-  // Contains the Information, if this RestAction is already called (and can't be called again)
+  /// Contains the Information, if this RestAction is already called (and can't be called again)
   bool called = false;
   
   /**
@@ -28,8 +29,7 @@ abstract class RestActionAble extends Widget {
   void queue([List<Widget> writable = null]) {
     if(this.called) throw("Rest action is already executed, cant execute it again");
     this.called = true;
-    if(writable == null) writable = this.writable;
-    writable.add(this);
+    (writable ?? this.writable ?? StraitWidget.builder.writable).add(this);
   }
 
   generate(Context context);
