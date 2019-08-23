@@ -1,3 +1,17 @@
+## 0.3.0-beta.1
+* added completly new gson parser capable of types, see more here: https://pub.dev/packages/gson
+* added operators to Score: +, -, *, /, %, <, >, <=, >=. >>, &
+* added Entity.Self Constructor as a shortcut
+* added Entity kill, raycast, teleport, give, replaceitem, particle, crash, tellraw, tp, execute, exec, execStrait, asat, as, at, joinTeam, leaveTeam and forEach Methods.
+* added Data Manipulation within Entity with dataMerge, dataGet, dataRemove and dataModify methods
+* added Tp Widget
+* added RestAction, RestActionAble and StraitWidget to support underlying structure
+* rewritten Execute with StraitWidget
+* rewritten Entity addTag, addTags, removeTag, removeTags
+* moved the cli commands and related files to a new package here:  https://pub.dev/packages/objd_cli
+* fixed that global Location does not cut of last double digit(1.0)
+* fixed unnessesary required value with Tag
+* fixed that Entity.copyWith just returned null
 ## 0.2.4
 * added ClickEvent Module
 * added copyWith on Entities

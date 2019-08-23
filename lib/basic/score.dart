@@ -78,6 +78,58 @@ class Score extends RestActionAble {
     return new Score(this.entity,this.score,addNew: false,commands: commands);
   }
 
+  Score operator + (dynamic other){
+    if(other is int) return this.add(other);
+    if(other is Score) return this.addScore(other);
+    throw("Please use either a Score or an Int in the operator +");
+  }
+  Score operator - (dynamic other){
+    if(other is int) return this.subtract(other);
+    if(other is Score) return this.subtractScore(other);
+    throw("Please use either a Score or an Int in the operator -");
+  }
+  Score operator % (dynamic other){
+    if(other is int) return this.modulo(Score.con(other));
+    if(other is Score) return this.modulo(other);
+    throw("Please use either a Score or an Int in the operator %");
+  }
+  Score operator / (dynamic other){
+    if(other is int) return this.divideByScore(Score.con(other));
+    if(other is Score) return this.divideByScore(other);
+    throw("Please use either a Score or an Int in the operator /");
+  }
+  Score operator * (dynamic other){
+    if(other is int) return this.multiplyByScore(Score.con(other));
+    if(other is Score) return this.multiplyByScore(other);
+    throw("Please use either a Score or an Int in the operator /");
+  }
+  Score operator > (dynamic other){
+    if(other is int) return this.matchesRange(Range(from: other + 1));
+    if(other is Score) return this.isBigger(other);
+    throw("Please use either a Score or an Int in the operator >");
+  }
+  Score operator < (dynamic other){
+    if(other is int) return this.matchesRange(Range(to: other + -1));
+    if(other is Score) return this.isSmaller(other);
+    throw("Please use either a Score or an Int in the operator >");
+  }
+  Score operator >= (dynamic other){
+    if(other is int) return this.matchesRange(Range(from: other));
+    if(other is Score) return this.isBiggerOrEqual(other);
+    throw("Please use either a Score or an Int in the operator >=");
+  }
+  Score operator & (dynamic other){
+    if(other is int) return this.matches(other);
+    if(other is Range) return this.matchesRange(other);
+    if(other is Score) return this.isEqual(other);
+    throw("Please use either a Score, Range or an Int in the operator &");
+  }
+  Score operator >> (dynamic other){
+    if(other is int) return this.set(other);
+    if(other is Score) return this.setEqual(other);
+    throw("Please use either a Score or an Int in the operator >>");
+  }
+
 
   /// sets the score to a given value of int
   Score set(int val){

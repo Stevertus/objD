@@ -219,7 +219,9 @@ class Entity implements EntityClass {
       Rotation isRotated, 
       Range horizontalRotation, 
       Range verticalRotation,}){
-      return Entity.clone(this)._setArguments(limit, tags, team, scores, nbt, strNbt, type, area, distance, level, gamemode, name, isRotated, horizontalRotation, verticalRotation, false);
+        Entity temp = Entity.clone(this);
+        temp._setArguments(limit, tags, team, scores, nbt, strNbt, type, area, distance, level, gamemode, name, isRotated, horizontalRotation, verticalRotation, false);
+        return temp;
   }
 
   /**
