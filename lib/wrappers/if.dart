@@ -82,9 +82,11 @@ class If extends RestActionAble {
     List<Widget> children = [];
     // group into seperate file(and get if id)
     if (Else != null || prefixes.length >= 2 || this.assignTag != null) {
-      if(this.assignTag == null) this.assignTag =Entity.Player();
-      if(Then.length > 2 && context.file.isNotEmpty) Then.insert(0, Comment("If statement from file: " + context.file));
-      if(Else != null && Else.length > 2 && context.file.isNotEmpty) Else.insert(0, Comment("Else statement from file: " + context.file));
+      if (this.assignTag == null) this.assignTag = Entity.Player();
+      if (Then.length > 2 && context.file.isNotEmpty)
+        Then.insert(0, Comment("If statement from file: " + context.file));
+      if (Else != null && Else.length > 2 && context.file.isNotEmpty)
+        Else.insert(0, Comment("Else statement from file: " + context.file));
       children = _getTagVersion(prefixes);
       // if (context.file.isNotEmpty)
       //   Then.insert(0, Comment("If statement from file: " + context.file));
@@ -104,12 +106,13 @@ class If extends RestActionAble {
       // insert Then inline
       prefixes.forEach((prefix) {
         children.add(Group(
-            prefix: "execute " + prefix + " run",
-            path:targetFilePath,
-            generateIDs: targetFileName == null,
-            filename: targetFileName ?? "if",
-            groupMin: encapsulate ? 3 : -1,
-            children: Then));
+          prefix: "execute " + prefix + " run",
+          path: targetFilePath,
+          generateIDs: targetFileName == null,
+          filename: targetFileName ?? "if",
+          groupMin: encapsulate ? 3 : -1,
+          children: Then,
+        ));
       });
     }
     if (elseWidget != null) children.add(elseWidget);
@@ -119,7 +122,7 @@ class If extends RestActionAble {
 
   List<Widget> _getTagVersion(List<String> prefixes) {
     List<Widget> children = [];
-    int id = Group.fileId;
+    int id = IndexedFile.getIndexed("if");
     prefixes.forEach((prefix) {
       children.add(
         Group(
@@ -128,21 +131,30 @@ class If extends RestActionAble {
         ),
       );
     });
-    if(id == Group.fileId) Group.fileId++;
     children.add(Group(
-        prefix: "execute as "+assignTag.toString()+" if entity @s[tag=objd_isTrue"+ id.toString() + "] run",
-        path:targetFilePath,
-        generateIDs: targetFileName == null,
-        filename: targetFileName ??"if",
-        children: Then));
+      prefix: "execute as " +
+          assignTag.toString() +
+          " if entity @s[tag=objd_isTrue" +
+          id.toString() +
+          "] run",
+      path: targetFilePath,
+      generateIDs: targetFileName == null,
+      filename: targetFileName ?? "if",
+      children: Then,
+    ));
     if (this.Else != null) {
       children.add(Group(
-          prefix: "execute as "+assignTag.toString()+" unless entity @s[tag=objd_isTrue"+ id.toString() + "] run",
-          path:targetFilePath,
-          filename: "else",
-          children: Else));
+        prefix: "execute as " +
+            assignTag.toString() +
+            " unless entity @s[tag=objd_isTrue" +
+            id.toString() +
+            "] run",
+        path: targetFilePath,
+        filename: "else",
+        children: Else,
+      ));
     }
-    children.add(assignTag.removeTag("objd_isTrue"+ id.toString()));
+    children.add(assignTag.removeTag("objd_isTrue" + id.toString()));
     return children;
   }
 }

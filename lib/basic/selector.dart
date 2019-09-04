@@ -256,7 +256,7 @@ class Selector {
       range = true;
     }
     while(new RegExp(r"[0-9\.]").hasMatch(p.actual())) number2 += p.next();
-    if(!range) return Range(exact: int.parse(number1));
+    if(!range) return Range.exact(int.parse(number1));
     if(number1 != "" && number2 != "") return Range(from: num.parse(number1), to: num.parse(number2));
     if(number1 != "" && number2 == "") return Range(from: num.parse(number1));
     if(number1 == "" && number2 != "") return Range(to: num.parse(number2));
