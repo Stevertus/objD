@@ -1,3 +1,12 @@
+## 0.3.0-beta.2
+* added Builder & ItemBuilder Widgets
+* added IndexedFile to update the old complicated Group functionality.
+* added --out argument to change the output directory with the CLI
+* changed Entity.self to Entity.Self
+* changed Range(exact:...) to Range.exact(...)
+* changed all args to fit the CLI
+* updated Group to IndexedFile. BREAKING: Removed fileId and generateIDs
+* removed gson parser in TextComponent, Bossbar, Title and Tellraw
 ## 0.3.0-beta.1
 * added completly new gson parser capable of types, see more here: https://pub.dev/packages/gson
 * added operators to Score: +, -, *, /, %, <, >, <=, >=. >>, &

@@ -42,8 +42,14 @@ class Entity implements EntityClass {
     selector = "s";
     _setArguments(null,tags,team,scores,nbt,strNbt,type,area,distance,level,gamemode,name,isRotated,horizontalRotation,verticalRotation,false);
   }
+  @deprecated
   /// creates an entity with @s
   Entity.self ({EntityType type, Range distance,List<dynamic> tags,Team team,String strNbt,Map<String,dynamic> nbt,List<Score> scores,Range level, Gamemode gamemode, Area area, String name,Rotation isRotated, Range horizontalRotation, Range verticalRotation}){
+    selector = "s";
+    _setArguments(null,tags,team,scores,nbt,strNbt,type,area,distance,level,gamemode,name,isRotated,horizontalRotation,verticalRotation,false);
+  }
+  /// creates an entity with @s
+  Entity.Self ({EntityType type, Range distance,List<dynamic> tags,Team team,String strNbt,Map<String,dynamic> nbt,List<Score> scores,Range level, Gamemode gamemode, Area area, String name,Rotation isRotated, Range horizontalRotation, Range verticalRotation}){
     selector = "s";
     _setArguments(null,tags,team,scores,nbt,strNbt,type,area,distance,level,gamemode,name,isRotated,horizontalRotation,verticalRotation,false);
   }
@@ -601,7 +607,9 @@ class Entity implements EntityClass {
 class Range {
   num from,to,exact;
   /// The Range class defines a range of values(e.g 3..10 in vanilla)
-  Range({this.from, this.to, this.exact});
+  Range({this.from, this.to});
+
+  Range.exact(this.exact);
 
   @override
   String toString(){

@@ -161,7 +161,7 @@ class Execute extends RestActionAble {
   Widget generate(Context context) {
     return Group(
         children: children,
-        prefix: 'execute ' + _args.join(" ") + ' run',
+        prefix: 'execute ' + _args[0].join(" ") + ' run',
         groupMin: encapsulate ? 3 : -1,
         generateIDs: targetFileName == null,
         path:targetFilePath ?? "objd",

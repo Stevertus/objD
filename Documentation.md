@@ -35,7 +35,7 @@ Open the pubspec.yaml file and add
 ```yaml
 name: [unique_namespace]
 dependencies:  
-   objd: ^0.3.0-beta.1
+   objd: ^0.3.0
 ```
 Also remember to replace the `[unique_namespace]` with your own project name.
 And run 
@@ -451,11 +451,6 @@ Group(
 |**Methods** |  |
 |sort|adds a sort attribute of type [Sort]()|
 | storeResult | Command, path, scale,datatype, useSuccess |
-|joinTeam|entity joins the given team|
-|leaveTeam|entity leaves the current team|
-|addTag|adds a new tag to the entity|
-|addTags|adds multiple tags|
-|removeTag| removes tag again|
 
 storeResult stores a result or success of a command in the nbt path of an entity.
 **Example:**
@@ -470,6 +465,40 @@ Entity.Selected().storeResult(
 
 ⇒ execute store success entity @s Invisisble byte 1 run say hello
 ```
+### Queables
+
+Queables are methods on a selected entity that can be queued.
+
+|kill|kills the entity|
+|raycast|sends out a raycast(take a look at the raycast docs)|
+|tp/teleport|teleports the entity to a certain location or another entity(ref teleport docs)|
+|give|gives an item to a player(ref Give docs)|
+|replaceitem|replaces a certain slot with an Item(ref ReplaceItem docs)|
+|particle|shows particles at the entitys position(ref Particle docs)|
+|crash|crashes a players client|
+|clear| clears the players inventory(ref Clear docs)|
+|tellraw|prints a message in the players chat(ref Tellraw docs)|
+|dataMerge|merges nbt data into the entity|
+|dataGet|uses execute to get nbt data from the entity|
+|dataRemove|removes the nbt data of a specific path|
+|dataModify|modifies the nbt data of the entity(ref Data Widget!)|
+|execute|uses the execute on the entity(as)|
+|exec|short for execute|
+|executeStrait|uses the execute on the entity(as) with StraitWidget|
+|execStrait|short for executeStrait|
+|asat|uses execute with the entity and their location|
+|asatStrait|asat with Strait|
+|as|uses execute as the entity|
+|asStrait|as with Strait|
+|at|uses execute with the entities location|
+|atStrait|at with Strait|
+|addTag|adds a Tag(String) to the entity(ref Tag docs)|
+|addTags| adds a List of Tags(String) to the entity|
+|removeTag|removes a certain Tag(String)|
+|removeTags|removes a List of Tags(String)|
+|joinTeam|entity joins the given team|
+|leaveTeam|entity leaves the current team|
+|forEach|executes for each given Entity that fulfills the selector a Function with a List of Widgets(see example)|
 
 |Sort|
 |--|
@@ -484,6 +513,14 @@ The Range class defines a range of values(e.g 3..10 in vanilla)
 |--|--|
 |[to]|Number for the maximum range|
 |[from]|Number for the minimal range|
+
+Use Range.exact to get the exact Range(e.g 4)
+
+ˋˋˋdart
+Range.exact(4)
+
+ˋˋˋ
+
 
 |EntityType |  |
 |--|--|
@@ -696,7 +733,128 @@ another.addScore(base).divideByScore(base).modulo(base)
 ⇒ scoreboard players operation @s score2 /= @s score
 ⇒ scoreboard players operation @s score2 %= @s score
 
-// setToData must take in Data.get 
+
+
+base.setToData(Data.get(Location("~ ~ ~"),"Items[0].Count"))
+⇒ execute store result score @s score run data get block ~ ~ ~ Items[0].Count 1
+
+// using success instead of result
+base.setToResult(Command("say hi"),useSuccess:true) 
+⇒ execute store success score @s score run say hi
+```
+#### Conditions
+These methods can be used for example with if to match values:
+
+| name | arguments |example Result|
+|--|--|--|
+|matches|int|@s score matches 5|
+|matchesRange|Range|@s score matches 0..20|
+|isEqual|Score|@s score = @s score2|
+|isSmaller|Score|@s score < @s score2|
+|isSmallerOrEqual|Score|@s score <= @s score2|
+|isBigger|Score|@s score > @s score2|
+|isBiggerOrEqual|Score|@s score >= @s score2|
+### Operators
+Operators are a way to make the common used methods easier and more accessible. You can use the operators(+,-,/,*...) like you would with numbers or strings. The Score Widget detects the type automatically and returns the matching methods.
+
+|Operator|available Types | equivilant to |
+|--|--|
+|>>|int, Score| score.set(int) |
+|+|int, Score| score.add(int) |
+|-|int, Score| score.substract(int) |
+|%|int, Score| score.modulo(score2) |
+|/|int, Score| score.divideByScore(score2) |
+|*|int, Score| score.multiplyByScore(score2) |
+|Conditions|used in If|
+|&|int,Score,Range|score.matches(int)|
+|>|int, Score| score.isBigger(score2) |
+|<|int, Score| score.isSmaller(score2) |
+|>=|int, Score| score.isBiggerOrEqual(score2) |
+|<=|int, Score| score.isSmallerOrEqual(score2) |
+
+
+### Constant Score
+Do you need constant values with scores? objD got you covered with `Score.con`:
+
+|Score.con| |
+|--|--|
+|int| a constant number |
+|addNew|bool whether it should add objd_consts itself if it does not exist(default = true)|
+
+This will automatically create a scoreboard called `objd_consts` and set the value to the fake entity `#[value]`
+**Example:**
+```dart
+Score.con(5)
+⇒ scoreboard players set #5 objd_consts 5
+```
+### Selected Score
+Often times you want the score of a selected Entity(@s). Score.fromSelected is the same as Score but has a predefined entity.
+**Example:**
+```dart
+Score.fromSelected("objective").set(3)
+⇒ scoreboard players set @s objective 3
+```
+The score class is the basis for setting values, calculating with scores and checking the values.
+It implements one base class with no functionality and several methods to do actions:
+
+|constructor|  |
+|--|--|
+|Entity| the entity within the scoreboard |
+|String| the name of the objective |
+|addNew| bool whether it should add the scoreboard itself if it does not exist(default = true)|
+
+> With the addNew property it is not required to add a scoreboard before!
+#### Calculations
+These methods can be used to set or calculate the value:
+
+| name | arguments |
+|--|--|
+| set | int |
+| reset ||
+| add | int |
+| subtract|int|
+||**The following compare another Score**|
+|setEqual|Score|
+|swapWith|Score|
+|setToSmallest|Score|
+|setToBiggest|Score|
+|addScore|Score|
+|subtractScore|Score|
+|multiplyByScore|Score|
+|divideByScore|Score|
+|modulo|Score|
+|setToData|Data|
+|setToResult|Command,useSuccess(bool)|
+|findSmallest|List\<Score>,min (⇒ finds the smallest value in a list of scores)|
+|findBiggest|List\<Score>,max (⇒ finds the biggest value in a list of scores)|
+
+> All of these methods return a new instance of Score with the calculations applied.
+> So you can also chain single calculations or use multiple on one base Score.
+
+**Examples:**
+```dart
+// defining scores variables inside the widget
+Score base = Score(Entity.Selected(),"score",addNew: true)
+Score another = Score(Entity.Selected(),"score2")
+// ... in the generate method:
+base.set(5).add(3).subtract(10).reset()
+⇒ scoreboard players set @s score 5
+⇒ scoreboard players add @s score 3
+⇒ scoreboard players remove @s score 10
+⇒ scoreboard players reset @s score
+
+base.setEqual(another).swapWith(another).setToBiggest(another)
+⇒ scoreboard players operation @s score = @s score2
+⇒ scoreboard players operation @s score >< @s score2
+⇒ scoreboard players operation @s score > @s score2
+
+another.addScore(base).divideByScore(base).modulo(base)
+⇒ scoreboard players operation @s score2 += @s score
+⇒ scoreboard players operation @s score2 /= @s score
+⇒ scoreboard players operation @s score2 %= @s score
+
+
+
 base.setToData(Data.get(Location("~ ~ ~"),"Items[0].Count"))
 ⇒ execute store result score @s score run data get block ~ ~ ~ Items[0].Count 1
 
@@ -881,12 +1039,41 @@ This is especially useful for `if blocks`, Fill and Clone.
 Area(x1: 100, y1: -15.75, z1: 0, x2: 2, y1: 10, z2: -10)
 ⇒ 2 -15.75 -10 100 10 0
 ```
+
+Use Area.rel if you want to select the area relative to an unknown position.
+
 But if you would also like local or relative coordinates, you can always pass the locations directly:
 
 |Area.fromLocations| |
 |--|--|
 |Location|location 1|
 |Location|location 2|
+
+There is as well a constructor to construct an Area within a defined Range of a Location(Works like fill or clone).
+
+|Area.fromRanges| |
+|--|--|
+|x|original location|
+|y|original location|
+|z|original location|
+|dx|distance to next location|
+|dy|distance to next location|
+|dz|distance to next location|
+
+**Example:**
+ˋˋˋdart
+Area.fromRanges(
+    x: 10,
+    y: 64,
+    z: 10,
+    dx: 10,
+    dy: 10,
+    dz: 10
+)
+==> 10 64 10 20 74 20
+ˋˋˋ
+
+
 
 [//]: # (basics/rotation)
 ## Rotation
@@ -2962,9 +3149,9 @@ execute if score #objd_foreach objd_count <= @a myscore run function  mypack:obj
 
 [//]: # (global_commands)
 ## Global CLI Commands
-objD has some useful console commands. To activate the global package(will be available anywhere on your system), run this command:
+The objD CLI is an additional package to handle execution, building and deploying of your project. To activate the global package(will be available anywhere on your system), run this command:
 ```
-pub global activate objd
+pub global activate objd_cli
 ```
 This will add the commands to your console.
 To run a command run:  
@@ -2984,6 +3171,8 @@ pub global run objd:[command] [args]
 * **new** [project_name] - generates a new project from a boilerplate
 * **run** [project_root] - builds one project
 * **serve** [directory] [project_root] - watches the directory to change and builds the project on change
+* **server inject** [jar-file] - injects a server file(use bukkit with plugins to reload automatically) before starting the server(The file is not included in the package due to legal reasons)
+* **server start** [world_dir] - copies the world into the server directory and starts the server
 
 ### Build Options
 You can use certain arguments to pass options to the build methods.
@@ -3004,17 +3193,17 @@ void main(List<String> args) {
 }
 ```
 This allows you to use the arguments in the execution command, like:
-* ```dart index.dart arg1 -min``` 
-* ```objd run index.dart arg1 -min``` 
-* ```objd serve . index.dart -min``` 
+* ```dart index.dart arg1 --min``` 
+* ```objd run index.dart arg1 --min``` 
+* ```objd serve . index.dart --min``` 
 
 **All Available Arguments:**
-* `-hotreload`: Saves the state of your project and compares just the latest changes.
-* `-full`: Generates the full project(just for objd serve!).
-* `-min`: This minifies the file amount by ignoring the mcmeta and tag files
-* `-prod`: This creates a production build of your project and saves it into another datapack(`(prod)` added).
+* `--hotreload`: Saves the state of your project and compares just the latest changes.
+* `--full`: Generates the full project(just for objd serve!).
+* `--min`: This minifies the file amount by ignoring the mcmeta and tag files
+* `--prod`: This creates a production build of your project and saves it into another datapack(`(prod)` added).
 In Production Comments and line breaks are removed and every widget can access the prod value in Context to get notified.
-* `-debug`: This creates a debug json file in your project root, that lists all properties and other generated files
+* `--debug`: This creates a debug json file in your project root, that lists all properties and other generated files
 
 ### Hotreload
 The hotreload option is an experimental feature, that just looks at the things you changed since the last build. This can improve performance significantly especially for big projects with many generated mcfunctions.

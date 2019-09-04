@@ -9,7 +9,7 @@ void generateIO(BuildProject prj,GenOptions options) {
   if(!prj.isGen) return;
 
   if(options.prod)  prj.name += "(prod)";
-  String path = getPath(prj);
+  String path = options.output != null ? getPath(options.output,"") : getPath(prj.path,prj.name);
   color('Saving Datapack ' + prj.name + ' and its files...',front: Styles.BLUE);
 
 
@@ -46,11 +46,11 @@ void generateIO(BuildProject prj,GenOptions options) {
   if(options.debugFile) _createFile(path + 'objd.json', json.encode(prj.toMap()));
 }
 
-String getPath(BuildProject prj){
-    if(!Directory(prj.path).existsSync()) throw('Please ensure that the project path is an existing directory!');
-    String path = prj.path + prj.name + '/';
-   _ensureDirExists(path);
-   return path;
+String getPath(String path, String name){
+    if(!Directory(path).existsSync()) throw('Please ensure that the project path is an existing directory!');
+    String ppath = path + name + '/';
+   _ensureDirExists(ppath);
+   return ppath;
 }
 
 void _createPack(path,BuildPack pack){
@@ -99,20 +99,27 @@ class GenOptions {
   bool prod = false;
   bool debugFile = false;
   bool hotreload = false;
+  String output;
 
   GenOptions(List<String> args){
-    if(args.contains("-hotreload")){
+    if(args.contains("--hotreload") || args.contains("-r")){
       hotreload = true;
       debugFile = true;
     } 
-    if(args.contains("-min")) minified = true;
-    if(args.contains("-prod")){
+    if(args.contains("--min")) minified = true;
+    if(args.contains("--prod") || args.contains("-p")){
       prod = true;
       minified = false;
       hotreload = false;
     }
-    if(args.contains("-debug")){
+    if(args.contains("--debug") || args.contains("-d")){
       debugFile = true;
+    } 
+    if(args.contains("--out")){
+      int index = args.indexOf("--out");
+      if(index < args.length -1){
+        output = args[index + 1];
+      }
     } 
   }
 
