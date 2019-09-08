@@ -25,7 +25,7 @@ class Extend extends RestActionAble {
 
     @override
   Widget generate(Context context) {
-    child;
+    return child;
   }
 
   @override

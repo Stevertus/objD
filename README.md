@@ -29,7 +29,7 @@ Open the pubspec.yaml file and add
 ```yaml
 name: [unique_namespace]
 dependencies:  
-   objd: ^0.3.0-beta.1
+   objd: ^0.3.0
 ```
 Also remember to replace the `[unique_namespace]` with your own project name.
 And run 
@@ -141,6 +141,6 @@ class CustomWidget extends Widget {
 The example folder contains a boilerplate to start off.
 
 There are many more widgets for objD including basic Widgeds, Command Wrappers, Text and Util Widgets. 
-So check out the documentation at https://stevertus.com/objD/documentation
+So check out the documentation at https://objd.stevertus.com
 or my youtube channel https://www.youtube.com/stevertus.
 In this video playlist are all objD related videos: https://www.youtube.com/playlist?list=PL5AxRIlgrL5GnKz69w4AUyqpZC35BlxdD

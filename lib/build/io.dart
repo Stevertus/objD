@@ -25,15 +25,17 @@ void generateIO(BuildProject prj,GenOptions options) {
   Map<String,dynamic> tickJson = {"values":[]};
   Map<String,dynamic> loadJson = {"values":[]};
 
-  if(prj.packs != null && prj.packs.length > 0){
+  if(prj.packs != null && prj.packs.isNotEmpty){
     prj.packs.forEach((pack) {
       if(pack.isGen){
         // only run if should generate
         if(!options.minified){
-          if(pack.load != null && pack.load.length >= 0 && pack.isGenLoad) 
+          if(pack.load != null && pack.load.length > 0 && pack.isGenLoad){
             loadJson["values"].add(pack.name + ":" + pack.load);
-          if(pack.main != null && pack.main.length >= 0 && pack.isGenMain) 
+          }  
+          if(pack.main != null && pack.main.length > 0 && pack.isGenMain){
             tickJson["values"].add(pack.name + ":" + pack.main);
+          }  
         }
         _createPack(path + 'data/', pack);
       }

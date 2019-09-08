@@ -1,13 +1,5 @@
-## 0.3.0-beta.2
-* added Builder & ItemBuilder Widgets
-* added IndexedFile to update the old complicated Group functionality.
-* added --out argument to change the output directory with the CLI
-* changed Entity.self to Entity.Self
-* changed Range(exact:...) to Range.exact(...)
-* changed all args to fit the CLI
-* updated Group to IndexedFile. BREAKING: Removed fileId and generateIDs
-* removed gson parser in TextComponent, Bossbar, Title and Tellraw
-## 0.3.0-beta.1
+## 0.3.0
+* added updated documentation site at https://objd.stevertus.com
 * added completly new gson parser capable of types, see more here: https://pub.dev/packages/gson
 * added operators to Score: +, -, *, /, %, <, >, <=, >=. >>, &
 * added Entity.Self Constructor as a shortcut
@@ -20,14 +12,24 @@
 * added Area.fromRanges
 * added exact parameter for Range to support single matches
 * added EntityType operator == to match same Types
+* added Builder & ItemBuilder Widgets
+* added IndexedFile to update the old complicated Group functionality.
+* added --out argument to change the output directory with the CLI
 * rewritten Execute with StraitWidget
 * rewritten Entity addTag, addTags, removeTag, removeTags
 * moved the cli commands and related files to a new package here:  https://pub.dev/packages/objd_cli
+* removed gson parser in TextComponent, Bossbar, Title and Tellraw
+* changed Entity.self to Entity.Self
+* changed Range(exact:...) to Range.exact(...)
+* changed all args to fit the CLI
+* updated Group to IndexedFile. BREAKING: Removed fileId and generateIDs
 * fixed missing seperator when using multiple scores in Entity
 * fixed missing items and added documentation references
 * fixed that global Location does not cut of last double digit(1.0)
 * fixed unnessesary required value with Tag
-* fixed that Entity.copyWith just returned null
+* fixed that Entity.copyWith just returned null´
+* fixed bug that Execute generated a List instead of just execute
+* refactored code
 
 A big thanks goes to Minimine who actually did most of the new additions, the new gson package and bug fixes. Thanks for contributing!
 Check out his projects here: https://github.com/MinimineLP

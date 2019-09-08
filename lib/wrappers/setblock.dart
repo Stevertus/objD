@@ -11,12 +11,23 @@ import 'package:gson/gson.dart';
 class SetBlock extends RestActionAble {
   Location location;
   Block block;
-  Map<String,dynamic> nbt;
+  Map<String, dynamic> nbt;
+
   /// The SetBlock Command Class sets a Block at the specified location.
-  SetBlock(this.block,{@required this.location,this.nbt});
-  
+  SetBlock(
+    this.block, {
+    @required this.location,
+    this.nbt,
+  });
+
   @override
-  Widget generate(Context context){
-    return new Command('setblock ' + location.toString() + ' ' + block.toString() + (nbt == null? '': gson.encode(nbt)));
+  Widget generate(Context context) {
+    return new Command(
+      'setblock ' +
+          location.toString() +
+          ' ' +
+          block.toString() +
+          (nbt == null ? '' : gson.encode(nbt)),
+    );
   }
 }
