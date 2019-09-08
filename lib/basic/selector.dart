@@ -188,7 +188,9 @@ class Selector {
         if(!foundComma) throw p.error("Expecting \",\" or \"]\"");
         if(!new RegExp(r"[a-z]").hasMatch(p.actual())) throw p.error("Needing letter a-z or \"]\"");
         String key = "";
-        while(new RegExp(r"[a-z]").hasMatch(p.actual())) key += p.next();
+        while(new RegExp(r"[a-z]").hasMatch(p.actual())){
+          key += p.next();
+        } 
         if(p.next() != "=") throw p.error("Expecting \"=\"");
         switch (key) {
           case "scores":
@@ -232,13 +234,13 @@ class Selector {
         if(p.actual() == ",") {foundComma = true; p.skip();}
       }
     }
-    if(ranges.length > 0) { this.area = Area.fromRanges(ranges: ranges); }
+    if(ranges.isNotEmpty) { this.area = Area.fromRanges(ranges: ranges); }
 
    }
 
    dynamic _parseKeyword(Parsable p, Map<String,dynamic> keywordmap) {
     String keyword = _parseString(p);
-    dynamic ret = null;
+    dynamic ret;
     keywordmap.forEach((k, v) { if(keyword == k) ret = v; });
     if(ret == null) { p.goBack(1); throw p.error("Unexpected value \"$keyword\"",from: keyword.length - 1); }
     return ret;
@@ -255,7 +257,9 @@ class Selector {
       p.skip(); p.skip();
       range = true;
     }
-    while(new RegExp(r"[0-9\.]").hasMatch(p.actual())) number2 += p.next();
+    while(new RegExp(r"[0-9\.]").hasMatch(p.actual())){
+      number2 += p.next();
+    } 
     if(!range) return Range.exact(int.parse(number1));
     if(number1 != "" && number2 != "") return Range(from: num.parse(number1), to: num.parse(number2));
     if(number1 != "" && number2 == "") return Range(from: num.parse(number1));
@@ -267,9 +271,13 @@ class Selector {
     List<dynamic> tags = this.tags;
     this.tags = [];
     tags.forEach((tag){
-      if(tag is Tag) this.tags.add(tag.tag);
-      else if(tag is String) this.tags.add(tag);
-      else throw("Please insert a Tag or String as tag into Entity!");
+      if(tag is Tag){
+        this.tags.add(tag.tag);
+      } 
+      else if(tag is String) {
+        this.tags.add(tag);
+      } 
+      else {throw("Please insert a Tag or String as tag into Entity!");}
     });
   }
 

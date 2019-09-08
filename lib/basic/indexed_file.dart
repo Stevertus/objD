@@ -2,10 +2,12 @@ import 'package:objd/basic/file.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/build/context.dart';
 
+  /// The IndexedFile behaves similar to File. Additionally it makes sure that each File, created with IndexedFile, is unique and does not get overwritten. 
 class IndexedFile extends Widget {
 
   static Map<String,int> _indexed = {};
 
+  // get the id of a name.
   static int getIndexed(String name){
     return IndexedFile._indexed[name] != null && IndexedFile._indexed[name] > 0 ? IndexedFile._indexed[name] : 0;
   }
@@ -17,8 +19,11 @@ class IndexedFile extends Widget {
   final Widget child;
   final bool execute;
 
+  /// The IndexedFile behaves similar to File. Additionally it makes sure that each File, created with IndexedFile, is unique and does not get overwritten. 
+  /// In order to do that IndexedFile saves for each inputted name an id, which gets incremented after each use.
   IndexedFile(this.name,{this.child,this.custom,this.path,this.execute = false,this.pack});
 
+  // gets the File id.
   int getId(){
     return IndexedFile.getIndexed(name);
   }

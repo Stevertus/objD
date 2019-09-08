@@ -5,8 +5,6 @@ import './packs/examplePack.dart';
 
 void main(List<String> args) {
 
-  print(gsonEncode(gsonEncode({"test":{"value":1.8,"str":"hi","arr":[10]}})));
-
   createProject(
     Project(
       name: "folder name",

@@ -11,6 +11,7 @@ export 'file.dart';
 export 'extend.dart';
 export 'for_list.dart';
 export 'entity.dart';
+export 'selector.dart';
 export 'item.dart';
 export 'block.dart';
 export 'location.dart';

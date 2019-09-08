@@ -30,23 +30,24 @@ class Execute extends RestActionAble {
   bool encapsulate = true;
 
   /// All Execute classes are also an Group, so they will group commands in seperate files and allow multiple children.
-  Execute(
-      {this.children,
-      Entity as,
-      Entity at,
-      dynamic location,
-      String align,
-      this.targetFilePath = "objd",
-      this.targetFileName,
-      Facing anchor,
-      Condition If,
-      Condition unless,
-      dynamic facing,
-      Rotation rotation,
-      Dimension dimension,
-      this.encapsulate = true,
-      List<List<String>> args,
-      List<Widget> writable}) {
+  Execute({
+    this.children,
+    Entity as,
+    Entity at,
+    dynamic location,
+    String align,
+    this.targetFilePath = "objd",
+    this.targetFileName,
+    Facing anchor,
+    Condition If,
+    Condition unless,
+    dynamic facing,
+    Rotation rotation,
+    Dimension dimension,
+    this.encapsulate = true,
+    List<List<String>> args,
+    List<Widget> writable,
+  }) {
     if (args != null) _args = args;
 
     if (as != null) _args = this.as(as).args;
@@ -60,7 +61,7 @@ class Execute extends RestActionAble {
     if (If != null) this._args = this.If(If).args;
     if (unless != null) this._args = this.unless(unless).args;
 
-    if(this.children == null) this.children = [];
+    if (this.children == null) this.children = [];
     this.writable = writable;
   }
 
@@ -80,14 +81,31 @@ class Execute extends RestActionAble {
     Dimension dimension,
     bool encapsulate = true,
     List<List<String>> args,
-    List<Widget> writable
-  }): this(children: [new StraitWidget(run)], as: as, at: at, location: location, align: align, targetFilePath: targetFilePath, targetFileName: targetFileName,anchor: anchor,If: If,unless: unless,
-           rotation: rotation, dimension: dimension, encapsulate: encapsulate, args: args, writable: writable);
+    List<Widget> writable,
+  }) : this(
+          children: [new StraitWidget(run)],
+          as: as,
+          at: at,
+          location: location,
+          align: align,
+          targetFilePath: targetFilePath,
+          targetFileName: targetFileName,
+          anchor: anchor,
+          If: If,
+          unless: unless,
+          rotation: rotation,
+          dimension: dimension,
+          encapsulate: encapsulate,
+          args: args,
+          writable: writable,
+        );
 
-  Execute.as(Entity entity,{@required this.children, this.encapsulate = true}) {
+  Execute.as(Entity entity,
+      {@required this.children, this.encapsulate = true}) {
     _args = as(entity).args;
   }
-  Execute.at(Entity entity,{@required this.children, this.encapsulate = true}) {
+  Execute.at(Entity entity,
+      {@required this.children, this.encapsulate = true}) {
     _args = at(entity).args;
   }
 
@@ -102,7 +120,8 @@ class Execute extends RestActionAble {
   ///
   /// ⇒ execute as @p at @s run say I get executed
   /// ```
-  Execute.asat(Entity entity,{@required this.children, this.encapsulate = true}) {
+  Execute.asat(Entity entity,
+      {@required this.children, this.encapsulate = true}) {
     _args = this.asat(entity).args;
   }
 
@@ -117,27 +136,32 @@ class Execute extends RestActionAble {
   ///
   /// ⇒ execute positioned as @p run say I get executed
   /// ```
-  Execute.positioned(dynamic loc,{@required this.children, this.encapsulate = true}) {
+  Execute.positioned(dynamic loc,
+      {@required this.children, this.encapsulate = true}) {
     _args = positioned(loc).args;
   }
 
   /// Aligns the position to the corners of the block grid.
-  Execute.align(String axis,{@required this.children, this.encapsulate = true}) {
+  Execute.align(String axis,
+      {@required this.children, this.encapsulate = true}) {
     _args = align(axis).args;
   }
 
   /// Sets the execution position(^ ^ ^) to the eyes or the feet.
-  Execute.anchored(Facing anchor,{@required this.children, this.encapsulate = true}) {
+  Execute.anchored(Facing anchor,
+      {@required this.children, this.encapsulate = true}) {
     _args = anchored(anchor).args;
   }
 
   /// Sets the execution rotation to the given rotation.
-  Execute.rotated(dynamic rot,{@required this.children, this.encapsulate = true}) {
+  Execute.rotated(dynamic rot,
+      {@required this.children, this.encapsulate = true}) {
     _args = rotated(rot).args;
   }
 
   ///Sets the execution dimension(execute in) to either `Dimension.overworld`, `Dimension.the_end` or `Dimension.the_nether`.
-  Execute.dimension(Dimension dimension,{@required this.children, this.encapsulate = true}) {
+  Execute.dimension(Dimension dimension,
+      {@required this.children, this.encapsulate = true}) {
     _args = this.dimension(dimension).args;
   }
 
@@ -153,25 +177,39 @@ class Execute extends RestActionAble {
   /// )
   /// ⇒ execute facing entity @p feet run say I get executed
   /// ```
-  Execute.facing(dynamic target,{@required this.children,this.encapsulate = true,Facing facing = Facing.eyes}) {
+  Execute.facing(
+    dynamic target, {
+    @required this.children,
+    this.encapsulate = true,
+    Facing facing = Facing.eyes,
+  }) {
     _args = this.facing(target, facing: facing).args;
   }
 
   @override
   Widget generate(Context context) {
-    return Group(
-        children: children,
-        prefix: 'execute ' + _args[0].join(" ") + ' run',
-        groupMin: encapsulate ? 3 : -1,
-        generateIDs: targetFileName == null,
-        path:targetFilePath ?? "objd",
-        filename: targetFileName ?? 'execute');
+    List<Widget> res = _args
+        .map((subargs) => Group(
+              children: children,
+              prefix: 'execute ' + subargs.join(" ") + ' run',
+              groupMin: encapsulate ? 3 : -1,
+              generateIDs: targetFileName == null,
+              path: targetFilePath ?? "objd",
+              filename: targetFileName ?? 'execute',
+            ))
+        .toList();
+    if (res.length == 1) return res[0];
+    return For.of(res);
   }
 
   Execute _addArgumentRet(String arg) {
     List<List<String>> args = _resolve(this._args);
     args.forEach((e) => e.add(arg));
-    return new Execute(children: List<Widget>.from(this.children), encapsulate: this.encapsulate, args: args, writable: writable);
+    return new Execute(
+        children: List<Widget>.from(this.children),
+        encapsulate: this.encapsulate,
+        args: args,
+        writable: writable);
   }
 
   // the entity from which the children should run
@@ -191,7 +229,8 @@ class Execute extends RestActionAble {
   ///
   /// ⇒ execute as @p at @s run say I get executed
   /// ```
-  Execute asat(Entity entity) => _addArgumentRet('as ' + entity.toString() + ' at @s');
+  Execute asat(Entity entity) =>
+      _addArgumentRet('as ' + entity.toString() + ' at @s');
 
   /// Positioned sets the execution point of the command to a new Location or Entity.
   /// ```dart
@@ -219,7 +258,7 @@ class Execute extends RestActionAble {
 
   // centeres the alignment(middle of the block)
   Execute center() => align("xyz");
-  
+
   // centeres the alignment(vertical middle of the block)
   Execute vcenter() => align("xz");
 
@@ -253,7 +292,6 @@ class Execute extends RestActionAble {
     throw ("Please insert either a Location or an Entity into Execute.facing");
   }
 
-  
   Execute If(Condition c) {
     List<String> prefixes = Condition.getPrefixes(c.getList());
     List<List<String>> args = this.args;
@@ -267,17 +305,61 @@ class Execute extends RestActionAble {
     return this;
   }
 
-  storeBlock({ExecuteStoreResultType result = ExecuteStoreResultType.result, @required Location location, @required String path, int scale = 1, ExecuteStoreVarType varType = ExecuteStoreVarType.int}) 
-    => _addArgumentRet('store ' + result.toString().split(".")[1] + ' block ' + location.toString() + ' ' + path + ' ' + varType.toString().split(".")[1] + ' ' + scale.toString());
+  storeBlock(
+          {ExecuteStoreResultType result = ExecuteStoreResultType.result,
+          @required Location location,
+          @required String path,
+          int scale = 1,
+          ExecuteStoreVarType varType = ExecuteStoreVarType.int}) =>
+      _addArgumentRet('store ' +
+          result.toString().split(".")[1] +
+          ' block ' +
+          location.toString() +
+          ' ' +
+          path +
+          ' ' +
+          varType.toString().split(".")[1] +
+          ' ' +
+          scale.toString());
 
-  storeEntity({ExecuteStoreResultType result = ExecuteStoreResultType.result, @required Entity entity, @required String path, int scale = 1, ExecuteStoreVarType varType = ExecuteStoreVarType.int}) 
-    => _addArgumentRet('store ' + result.toString().split(".")[1] + ' entity ' + entity.toString() + ' ' + path +  ' ' + varType.toString().split(".")[1] + ' ' + scale.toString());
+  storeEntity(
+          {ExecuteStoreResultType result = ExecuteStoreResultType.result,
+          @required Entity entity,
+          @required String path,
+          int scale = 1,
+          ExecuteStoreVarType varType = ExecuteStoreVarType.int}) =>
+      _addArgumentRet('store ' +
+          result.toString().split(".")[1] +
+          ' entity ' +
+          entity.toString() +
+          ' ' +
+          path +
+          ' ' +
+          varType.toString().split(".")[1] +
+          ' ' +
+          scale.toString());
 
-  storeScore({ExecuteStoreResultType result = ExecuteStoreResultType.result, @required Entity entity, @required String score}) 
-    => _addArgumentRet('store ' + result.toString().split(".")[1] + ' score ' + entity.toString() + ' ' + score);
+  storeScore(
+          {ExecuteStoreResultType result = ExecuteStoreResultType.result,
+          @required Entity entity,
+          @required String score}) =>
+      _addArgumentRet('store ' +
+          result.toString().split(".")[1] +
+          ' score ' +
+          entity.toString() +
+          ' ' +
+          score);
 
-  storeBossbar({ExecuteStoreResultType result = ExecuteStoreResultType.result, @required String name, BossbarOption setting = BossbarOption.value}) 
-    => _addArgumentRet('store ' + result.toString().split(".")[1] + ' score ' + name + ' ' + setting.toString().split(".")[1]);
+  storeBossbar(
+          {ExecuteStoreResultType result = ExecuteStoreResultType.result,
+          @required String name,
+          BossbarOption setting = BossbarOption.value}) =>
+      _addArgumentRet('store ' +
+          result.toString().split(".")[1] +
+          ' score ' +
+          name +
+          ' ' +
+          setting.toString().split(".")[1]);
 
   Execute unless(Condition c) => If(Condition.not(c));
 
@@ -296,12 +378,17 @@ class Execute extends RestActionAble {
   Execute dimension(Dimension dimension) {
     return _addArgumentRet('in ' + dimension.toString().split('.')[1]);
   }
+
   Execute In(Dimension d) => dimension(d);
 
   Execute run(Widget w) {
     List<Widget> children = new List<Widget>.from(this.children);
     children.add(w);
-    return new Execute(children: children, encapsulate: this.encapsulate, args: _resolve(this.args), writable: writable);
+    return new Execute(
+        children: children,
+        encapsulate: this.encapsulate,
+        args: _resolve(this.args),
+        writable: writable);
   }
 
   Execute runStrait(Function(List<Widget>) f) => run(new StraitWidget(f));
@@ -316,7 +403,5 @@ class Execute extends RestActionAble {
 enum Facing { eyes, feet }
 enum Dimension { overworld, the_end, the_nether }
 
-
-enum ExecuteStoreResultType {result, success}
-enum ExecuteStoreVarType {byte, short, int, long, float, double}
-
+enum ExecuteStoreResultType { result, success }
+enum ExecuteStoreVarType { byte, short, int, long, float, double }
