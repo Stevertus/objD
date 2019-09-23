@@ -57,7 +57,7 @@ class Location {
   Execute storeResult(Command command,
       {@required String path, String datatype = "double", double scale = 1, bool useSuccess = false}) {
     assert(path == null && path.isEmpty);
-    return new Execute(
+    return Execute(
       children: [command],
       encapsulate: false,
       args: [

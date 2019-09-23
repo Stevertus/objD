@@ -18,6 +18,6 @@ class Comment extends RestActionAble {
 
   @override
   Widget generate(Context context) {
-    return text != "" ? new Text("# " + text) : new Text("");
+    return text != "" ? Text("# " + text) : Text("");
   }
 }

@@ -282,7 +282,7 @@ class Entity implements EntityClass {
   Entity.clone(Entity ent) {
     this.selector = ent.selector;
     this.playerName = ent.playerName;
-    this.arguments = new Map.from(ent.arguments);
+    this.arguments = Map.from(ent.arguments);
   }
 
   /// Entity is an util class to convert an argument list into the Minecraft Entity format(@p...)
@@ -508,7 +508,7 @@ class Entity implements EntityClass {
       double scale = 1,
       bool useSuccess = false}) {
     assert(path != null || path.isNotEmpty);
-    return new Execute(
+    return Execute(
       children: [command],
       encapsulate: false,
       args: [
@@ -576,7 +576,7 @@ class Entity implements EntityClass {
   ///entity.kill().queue()
   ///```
 
-  Kill kill() => StraitWidget.builder.create(Kill(this));
+  RestActionAble kill() => StraitWidget.builder.create(Kill(this));
 
   ///
   ///Generates a Raycast Widget
@@ -586,13 +586,14 @@ class Entity implements EntityClass {
   ///]).queue()
   ///```
 
-  Raycast raycast(
-          {int max,
-          double step = 1,
-          Block through = Block.air,
-          Widget Function(Function, Function) ray,
-          List<Widget> onhit,
-          String scoreName = "objd_count"}) =>
+  RestActionAble raycast({
+    int max,
+    double step = 1,
+    Block through = Block.air,
+    Widget Function(Function, Function) ray,
+    List<Widget> onhit,
+    String scoreName = "objd_count",
+  }) =>
       StraitWidget.builder.create(Raycast(this,
           max: max,
           step: step,
@@ -607,28 +608,38 @@ class Entity implements EntityClass {
   ///entity.teleport(Location.here()).queue()
   ///```
 
-  Teleport teleport(
+  RestActionAble teleport(
       {Location location, Entity entity, dynamic facing, Rotation rot}) {
     //Teleport to entity
-    if (entity != null && facing != null)
+    if (entity != null && facing != null) {
       return StraitWidget.builder
           .create(Teleport.entity(this, to: entity, facing: facing));
-    if (entity != null)
+    }
+
+    if (entity != null) {
       return StraitWidget.builder.create(Teleport.entity(this, to: entity));
+    }
 
     // Teleport to Location
-    if (location != null && facing != null && rot != null)
+    if (location != null && facing != null && rot != null) {
       return StraitWidget.builder
           .create(Teleport(this, to: location, facing: facing, rot: rot));
-    if (location != null && facing != null)
+    }
+
+    if (location != null && facing != null) {
       return StraitWidget.builder
           .create(Teleport(this, to: location, facing: facing));
-    if (location != null && rot != null)
+    }
+
+    if (location != null && rot != null) {
       return StraitWidget.builder
           .create(Teleport(this, to: location, rot: rot));
-    if (location != null)
+    }
+
+    if (location != null) {
       return StraitWidget.builder.create(Teleport(this, to: location));
-    throw new Error();
+    }
+    throw Error();
   }
 
   ///
@@ -637,7 +648,8 @@ class Entity implements EntityClass {
   ///player.give(item).queue()
   ///```
 
-  Give give(Item item) => StraitWidget.builder.create(Give(this, item: item));
+  RestActionAble give(Item item) =>
+      StraitWidget.builder.create(Give(this, item: item));
 
   ///
   ///Generates a ReplaceItem Widget
@@ -645,7 +657,7 @@ class Entity implements EntityClass {
   ///player.replaceitem(item: item, slot: slot).queue()
   ///```
 
-  ReplaceItem replaceitem({@required Item item, @required Slot slot}) =>
+  RestActionAble replaceitem({@required Item item, @required Slot slot}) =>
       StraitWidget.builder.create(ReplaceItem(this, item: item, slot: slot));
 
   ///
@@ -654,20 +666,23 @@ class Entity implements EntityClass {
   ///player.particle(particle: ParticleType.barrier, location: location).queue()
   ///```
 
-  Particle particle(
-          {@required ParticleType particle,
-          @required Location location,
-          Location delta,
-          double speed = 1,
-          int count = 1,
-          bool force = false}) =>
-      StraitWidget.builder.create(Particle(particle,
-          location: location,
-          delta: delta,
-          speed: speed,
-          count: count,
-          force: force,
-          player: this));
+  RestActionAble particle({
+    @required ParticleType particle,
+    @required Location location,
+    Location delta,
+    double speed = 1,
+    int count = 1,
+    bool force = false,
+  }) =>
+      StraitWidget.builder.create(Particle(
+        particle,
+        location: location,
+        delta: delta,
+        speed: speed,
+        count: count,
+        force: force,
+        player: this,
+      ));
 
   ///
   ///Crashes a player's game by sending him to many particles and forces the client to show them (Who ever wants to do that, propably for people who don't like your map or datapack 😉)
@@ -677,15 +692,17 @@ class Entity implements EntityClass {
   ///---
   ///Uses `StraitPlayer.particle()` and `StraitEntity.at()`
 
-  Execute crash() => at(children: [
+  RestActionAble crash() => at(children: [
         this.particle(
-            particle: ParticleType.barrier,
-            location: Location.here(),
-            count: 1000000000,
-            force: true)
+          particle: ParticleType.barrier,
+          location: Location.here(),
+          count: 1000000000,
+          force: true,
+        ),
       ]);
 
-  Clear clear([Item item]) => StraitWidget.builder.create(Clear(this, item));
+  RestActionAble clear([Item item]) =>
+      StraitWidget.builder.create(Clear(this, item));
 
   ///
   ///Generates a tellraw command
@@ -697,7 +714,7 @@ class Entity implements EntityClass {
   ///---
   ///Uses `StraitPlayer.particle()` and `StraitEntity.at()`
 
-  Tellraw tellraw({List<TextComponent> show}) =>
+  RestActionAble tellraw({List<TextComponent> show}) =>
       StraitWidget.builder.create(Tellraw(this, show: show));
 
   ///
@@ -706,26 +723,34 @@ class Entity implements EntityClass {
   ///entity.tp(Location.here()).queue()
   ///```
 
-  Tp tp({Location location, Entity entity, dynamic facing, Rotation rot}) {
+  RestActionAble tp(
+      {Location location, Entity entity, dynamic facing, Rotation rot}) {
     //Teleport to entity
-    if (entity != null && facing != null)
+    if (entity != null && facing != null) {
       return StraitWidget.builder
           .create(Tp.entity(this, to: entity, facing: facing));
-    if (entity != null)
+    }
+
+    if (entity != null) {
       return StraitWidget.builder.create(Tp.entity(this, to: entity));
+    }
 
     // Teleport to Location
-    if (location != null && facing != null && rot != null)
+    if (location != null && facing != null && rot != null) {
       return StraitWidget.builder
           .create(Tp(this, to: location, facing: facing, rot: rot));
-    if (location != null && facing != null)
+    }
+    if (location != null && facing != null) {
       return StraitWidget.builder
           .create(Tp(this, to: location, facing: facing));
-    if (location != null && rot != null)
+    }
+    if (location != null && rot != null) {
       return StraitWidget.builder.create(Tp(this, to: location, rot: rot));
-    if (location != null)
+    }
+    if (location != null) {
       return StraitWidget.builder.create(Tp(this, to: location));
-    throw new Error();
+    }
+    throw Error();
   }
 
   // Data Commands
@@ -734,16 +759,18 @@ class Entity implements EntityClass {
   ///Use #dataMerge, #dataGet, #dataRemove and #dataModify instead
 
   @Deprecated('Use #dataMerge, #dataGet, #dataRemove and #dataModify instead')
-  Data data({Map<String, dynamic> nbt, String type = "merge"}) {
+  RestActionAble data({Map<String, dynamic> nbt, String type = "merge"}) {
     if ((this.selector == "a" ||
         this.selector == "r" ||
         this.selector == "p" ||
         this.arguments["type"] == "minecraft:player" ||
-        this.arguments["type"] == "player"))
+        this.arguments["type"] == "player")) {
       throw ("Cannot modify a player's data");
+    }
     if ((this.selector == "a" || this.selector == "e") &&
-        (this.arguments["limit"] == null || this.arguments["limit"] != "1"))
+        (this.arguments["limit"] == null || this.arguments["limit"] != "1")) {
       throw ("Cannot work with data of multiple entities in data command");
+    }
     return StraitWidget.builder.create(Data(this, nbt: nbt, type: type));
   }
 
@@ -753,16 +780,18 @@ class Entity implements EntityClass {
   ///entity.dataMerge(nbt: {"CustomNameVisible":true}).queue()
   ///```
 
-  Data dataMerge({Map<String, dynamic> nbt, String strNbt}) {
+  RestActionAble dataMerge({Map<String, dynamic> nbt, String strNbt}) {
     if ((this.selector == "a" ||
         this.selector == "r" ||
         this.selector == "p" ||
         this.arguments["type"] == "minecraft:player" ||
-        this.arguments["type"] == "player"))
+        this.arguments["type"] == "player")) {
       throw ("Cannot modify a player's data");
+    }
     if ((this.selector == "a" || this.selector == "e") &&
-        (this.arguments["limit"] == null || this.arguments["limit"] != "1"))
+        (this.arguments["limit"] == null || this.arguments["limit"] != "1")) {
       throw ("Cannot work with data of multiple entities in data command");
+    }
     return StraitWidget.builder
         .create(Data.merge(this, nbt: nbt, strNbt: strNbt));
   }
@@ -773,10 +802,11 @@ class Entity implements EntityClass {
   ///entity.dataGet(path: "CustomName").queue()
   ///```
 
-  Data dataGet({@required String path, num scale = 1}) {
+  RestActionAble dataGet({@required String path, num scale = 1}) {
     if ((this.selector == "a" || this.selector == "e") &&
-        (this.arguments["limit"] == null || this.arguments["limit"] != "1"))
+        (this.arguments["limit"] == null || this.arguments["limit"] != "1")) {
       throw ("Cannot work with data of multiple entities in data command");
+    }
     return StraitWidget.builder
         .create(Data.get(this, path: path, scale: scale));
   }
@@ -787,16 +817,18 @@ class Entity implements EntityClass {
   ///entity.dataRemove(path: "CustomName").queue()
   ///```
 
-  Data dataRemove({@required String path}) {
+  RestActionAble dataRemove({@required String path}) {
     if ((this.selector == "a" ||
         this.selector == "r" ||
         this.selector == "p" ||
         this.arguments["type"] == "minecraft:player" ||
-        this.arguments["type"] == "player"))
+        this.arguments["type"] == "player")) {
       throw ("Cannot modify a player's data");
+    }
     if ((this.selector == "a" || this.selector == "e") &&
-        (this.arguments["limit"] == null || this.arguments["limit"] != "1"))
+        (this.arguments["limit"] == null || this.arguments["limit"] != "1")) {
       throw ("Cannot work with data of multiple entities in data command");
+    }
     return StraitWidget.builder.create(Data.remove(this, path: path));
   }
 
@@ -806,16 +838,19 @@ class Entity implements EntityClass {
   ///entity.dataModify(path: "CustomName", modify: ...).queue()
   ///```
 
-  Data dataModify({@required String path, @required DataModify modify}) {
+  RestActionAble dataModify(
+      {@required String path, @required DataModify modify}) {
     if ((this.selector == "a" ||
         this.selector == "r" ||
         this.selector == "p" ||
         this.arguments["type"] == "minecraft:player" ||
-        this.arguments["type"] == "player"))
+        this.arguments["type"] == "player")) {
       throw ("Cannot modify a player's data");
+    }
     if ((this.selector == "a" || this.selector == "e") &&
-        (this.arguments["limit"] == null || this.arguments["limit"] != "1"))
+        (this.arguments["limit"] == null || this.arguments["limit"] != "1")) {
       throw ("Cannot work with data of multiple entities in data command");
+    }
     return StraitWidget.builder
         .create(Data.modify(this, path: path, modify: modify));
   }
@@ -826,16 +861,18 @@ class Entity implements EntityClass {
   ///entity.execute().run(Say("hi")).queue()
   ///```
 
-  Execute execute(
-          {List<Widget> children = null,
-          String targetFilePath = "objd",
-          String targetFileName,
-          bool encapsulate = true}) =>
+  RestActionAble execute({
+    List<Widget> children,
+    String targetFilePath = "objd",
+    String targetFileName,
+    bool encapsulate = true,
+  }) =>
       as(
-          children: children,
-          targetFilePath: targetFilePath,
-          targetFileName: targetFileName,
-          encapsulate: encapsulate);
+        children: children,
+        targetFilePath: targetFilePath,
+        targetFileName: targetFileName,
+        encapsulate: encapsulate,
+      );
 
   ///
   ///Generates a Execute Widget (execute as the entity)
@@ -844,16 +881,18 @@ class Entity implements EntityClass {
   ///```
   ///short form for `entity.execute()`
 
-  Execute exec(
-          {List<Widget> children = null,
-          String targetFilePath = "objd",
-          String targetFileName,
-          bool encapsulate = true}) =>
+  RestActionAble exec({
+    List<Widget> children,
+    String targetFilePath = "objd",
+    String targetFileName,
+    bool encapsulate = true,
+  }) =>
       as(
-          children: children,
-          targetFilePath: targetFilePath,
-          targetFileName: targetFileName,
-          encapsulate: encapsulate);
+        children: children,
+        targetFilePath: targetFilePath,
+        targetFileName: targetFileName,
+        encapsulate: encapsulate,
+      );
 
   ///
   ///Generates a Execute Widget strait (execute as the entity)
@@ -863,16 +902,18 @@ class Entity implements EntityClass {
   ///}).queue()
   ///```
 
-  Execute executeStrait(
-          {@required Function(List<Widget>) run,
-          String targetFilePath = "objd",
-          String targetFileName,
-          bool encapsulate = true}) =>
+  RestActionAble executeStrait({
+    @required Function(List<Widget>) run,
+    String targetFilePath = "objd",
+    String targetFileName,
+    bool encapsulate = true,
+  }) =>
       asStrait(
-          run: run,
-          targetFilePath: targetFilePath,
-          targetFileName: targetFileName,
-          encapsulate: encapsulate);
+        run: run,
+        targetFilePath: targetFilePath,
+        targetFileName: targetFileName,
+        encapsulate: encapsulate,
+      );
 
   ///
   ///Generates a Execute Widget strait (execute as the entity)
@@ -883,16 +924,18 @@ class Entity implements EntityClass {
   ///```
   ///short form for `entity.executeStrait()`
 
-  Execute execStrait(
-          {@required Function(List<Widget>) run,
-          String targetFilePath = "objd",
-          String targetFileName,
-          bool encapsulate = true}) =>
+  RestActionAble execStrait({
+    @required Function(List<Widget>) run,
+    String targetFilePath = "objd",
+    String targetFileName,
+    bool encapsulate = true,
+  }) =>
       asStrait(
-          run: run,
-          targetFilePath: targetFilePath,
-          targetFileName: targetFileName,
-          encapsulate: encapsulate);
+        run: run,
+        targetFilePath: targetFilePath,
+        targetFileName: targetFileName,
+        encapsulate: encapsulate,
+      );
 
   ///
   ///Generates a Execute Widget (execute as and at the entity)
@@ -900,17 +943,18 @@ class Entity implements EntityClass {
   ///entity.asat().run(Particle(ParticleType.flame)).queue()
   ///```
 
-  Execute asat(
-          {List<Widget> children = null,
-          String targetFilePath = "objd",
-          String targetFileName,
-          bool encapsulate = true}) =>
+  RestActionAble asat({
+    List<Widget> children,
+    String targetFilePath = "objd",
+    String targetFileName,
+    bool encapsulate = true,
+  }) =>
       StraitWidget.builder.create(Execute(
-              children: children,
-              targetFilePath: targetFilePath,
-              targetFileName: targetFileName,
-              encapsulate: encapsulate)
-          .asat(this));
+        children: children,
+        targetFilePath: targetFilePath,
+        targetFileName: targetFileName,
+        encapsulate: encapsulate,
+      ).asat(this));
 
   ///
   ///Generates a Execute Widget strait (execute as and at the entity)
@@ -920,17 +964,18 @@ class Entity implements EntityClass {
   ///}).queue()
   ///```
 
-  Execute asatStrait(
-          {@required Function(List<Widget>) run,
-          String targetFilePath = "objd",
-          String targetFileName,
-          bool encapsulate = true}) =>
+  RestActionAble asatStrait({
+    @required Function(List<Widget>) run,
+    String targetFilePath = "objd",
+    String targetFileName,
+    bool encapsulate = true,
+  }) =>
       StraitWidget.builder.create(Execute.strait(
-              run: run,
-              targetFilePath: targetFilePath,
-              targetFileName: targetFileName,
-              encapsulate: encapsulate)
-          .asat(this));
+        run: run,
+        targetFilePath: targetFilePath,
+        targetFileName: targetFileName,
+        encapsulate: encapsulate,
+      ).asat(this));
 
   ///
   ///Generates a Execute Widget (execute as the entity)
@@ -938,17 +983,18 @@ class Entity implements EntityClass {
   ///entity.as().run(Say("hi")).queue()
   ///```
 
-  Execute as(
-          {List<Widget> children = null,
-          String targetFilePath = "objd",
-          String targetFileName,
-          bool encapsulate = true}) =>
+  RestActionAble as({
+    List<Widget> children,
+    String targetFilePath = "objd",
+    String targetFileName,
+    bool encapsulate = true,
+  }) =>
       StraitWidget.builder.create(Execute(
-              children: children,
-              targetFilePath: targetFilePath,
-              targetFileName: targetFileName,
-              encapsulate: encapsulate)
-          .as(this));
+        children: children,
+        targetFilePath: targetFilePath,
+        targetFileName: targetFileName,
+        encapsulate: encapsulate,
+      ).as(this));
 
   ///
   ///Generates a Execute Widget strait (execute as the entity)
@@ -958,17 +1004,18 @@ class Entity implements EntityClass {
   ///}).queue()
   ///```
 
-  Execute asStrait(
-          {@required Function(List<Widget>) run,
-          String targetFilePath = "objd",
-          String targetFileName,
-          bool encapsulate = true}) =>
+  RestActionAble asStrait({
+    @required Function(List<Widget>) run,
+    String targetFilePath = "objd",
+    String targetFileName,
+    bool encapsulate = true,
+  }) =>
       StraitWidget.builder.create(Execute.strait(
-              run: run,
-              targetFilePath: targetFilePath,
-              targetFileName: targetFileName,
-              encapsulate: encapsulate)
-          .as(this));
+        run: run,
+        targetFilePath: targetFilePath,
+        targetFileName: targetFileName,
+        encapsulate: encapsulate,
+      ).as(this));
 
   ///
   ///Generates a Execute Widget (execute at the entity)
@@ -976,17 +1023,18 @@ class Entity implements EntityClass {
   ///entity.at().run(Particle(ParticleType.flame)).queue()
   ///```
 
-  Execute at(
-          {List<Widget> children = null,
-          String targetFilePath = "objd",
-          String targetFileName,
-          bool encapsulate = true}) =>
+  RestActionAble at({
+    List<Widget> children,
+    String targetFilePath = "objd",
+    String targetFileName,
+    bool encapsulate = true,
+  }) =>
       StraitWidget.builder.create(Execute(
-              children: children,
-              targetFilePath: targetFilePath,
-              targetFileName: targetFileName,
-              encapsulate: encapsulate)
-          .at(this));
+        children: children,
+        targetFilePath: targetFilePath,
+        targetFileName: targetFileName,
+        encapsulate: encapsulate,
+      ).at(this));
 
   ///
   ///Generates a Execute Widget strait (execute at the entity)
@@ -996,17 +1044,18 @@ class Entity implements EntityClass {
   ///}).queue()
   ///```
 
-  Execute atStrait(
-          {@required Function(List<Widget>) run,
-          String targetFilePath = "objd",
-          String targetFileName,
-          bool encapsulate = true}) =>
+  RestActionAble atStrait({
+    @required Function(List<Widget>) run,
+    String targetFilePath = "objd",
+    String targetFileName,
+    bool encapsulate = true,
+  }) =>
       StraitWidget.builder.create(Execute.strait(
-              run: run,
-              targetFilePath: targetFilePath,
-              targetFileName: targetFileName,
-              encapsulate: encapsulate)
-          .at(this));
+        run: run,
+        targetFilePath: targetFilePath,
+        targetFileName: targetFileName,
+        encapsulate: encapsulate,
+      ).at(this));
 
   ///
   ///Adds a tag to the entity
@@ -1014,7 +1063,7 @@ class Entity implements EntityClass {
   ///entity.addTag("objDTest").queue()
   ///```
 
-  Tag addTag(String tag) =>
+  RestActionAble addTag(String tag) =>
       StraitWidget.builder.create(Tag(tag, entity: this, value: true));
 
   ///
@@ -1023,7 +1072,7 @@ class Entity implements EntityClass {
   ///entity.addTags(["objDTest","objDTest2"]).queue()
   ///```
 
-  For addTags(List<String> tags) => StraitWidget.builder.create(
+  RestActionAble addTags(List<String> tags) => StraitWidget.builder.create(
       For.of(tags.map((tag) => Tag(tag, entity: this, value: true)).toList()));
 
   ///
@@ -1032,7 +1081,7 @@ class Entity implements EntityClass {
   ///entity.removeTag("objDTest").queue()
   ///```
 
-  Tag removeTag(String tag) =>
+  RestActionAble removeTag(String tag) =>
       StraitWidget.builder.create(Tag(tag, entity: this, value: false));
 
   ///
@@ -1041,7 +1090,7 @@ class Entity implements EntityClass {
   ///entity.removeTags(["objDTest","objDTest2"]).queue()
   ///```
 
-  For removeTags(List<String> tags) => StraitWidget.builder.create(
+  RestActionAble removeTags(List<String> tags) => StraitWidget.builder.create(
       For.of(tags.map((tag) => Tag(tag, entity: this, value: false)).toList()));
 
   ///
@@ -1050,7 +1099,7 @@ class Entity implements EntityClass {
   ///entity.joinTeam("red").queue()
   ///```
 
-  Team joinTeam(String team) =>
+  RestActionAble joinTeam(String team) =>
       StraitWidget.builder.create(Team.join(team, this));
 
   ///
@@ -1059,7 +1108,7 @@ class Entity implements EntityClass {
   ///entity.leaveTeam("red").queue()
   ///```
 
-  Team leaveTeam() => StraitWidget.builder.create(Team.leave(this));
+  RestActionAble leaveTeam() => StraitWidget.builder.create(Team.leave(this));
 
   ///
   ///Executes given content for all entities matching the selector (Strait function)
@@ -1069,8 +1118,8 @@ class Entity implements EntityClass {
   ///}).queue();
   ///```
 
-  Execute forEach(Function(Entity p, List<Widget> strait) fn) =>
-      asStrait(run: (List<Widget> strait) => fn(new Entity.Self(), strait));
+  RestActionAble forEach(Function(Entity p, List<Widget> strait) fn) =>
+      asStrait(run: (List<Widget> strait) => fn(Entity.Self(), strait));
 
   @override
   String toString([Map arguments]) {
@@ -1078,7 +1127,7 @@ class Entity implements EntityClass {
     if (playerName != null && playerName.isNotEmpty) return playerName;
     String ret = "@" + selector;
 
-    if (arguments.length > 0) {
+    if (arguments.isNotEmpty) {
       ret += '[';
       arguments.keys.forEach((key) {
         if (arguments[key] is List) {
@@ -1102,7 +1151,7 @@ class Entity implements EntityClass {
 
     if (arg != null) {
       arg = arg.toString().replaceAll(r"[0-9].0", "");
-      ret += key + '=' + arg;
+      ret += key.toString() + '=' + arg.toString();
     }
     return ret;
   }
@@ -1120,13 +1169,13 @@ class Range {
   @override
   String toString() {
     String ret = "0";
-    if (exact != null)
+    if (exact != null) {
       ret = exact.toString();
-    else if (from != null && to == null)
+    } else if (from != null && to == null) {
       ret = "$from..";
-    else if (from == null && to != null)
+    } else if (from == null && to != null) {
       ret = "..$to";
-    else if (from != null && to != null) ret = "$from..$to";
+    } else if (from != null && to != null) ret = "$from..$to";
     return ret.replaceAll(r'[0-9].0', '');
   }
 }
@@ -1137,107 +1186,102 @@ enum Sort { random, furthest, nearest, arbitrary }
 /// There is an EntityType for every type_id in minecraft with `EntityType.[type_id]`
 class EntityType {
   // throwable
-  static const EntityType armor_stand = const EntityType('armor_stand');
-  static const EntityType area_effect_cloud =
-      const EntityType('area_effect_cloud');
-  static const EntityType player = const EntityType('player');
-  static const EntityType boat = const EntityType('boat');
-  static const EntityType minecart = const EntityType('minecart');
-  static const EntityType chest_minecart = const EntityType('chest_minecart');
-  static const EntityType furnace_minecart =
-      const EntityType('furnace_minecart');
-  static const EntityType tnt_minecart = const EntityType('tnt_minecart');
-  static const EntityType hopper_minecart = const EntityType('hopper_minecart');
-  static const EntityType spawner_minecart =
-      const EntityType('spawner_minecart');
-  static const EntityType item = const EntityType('item');
-  static const EntityType experience_orb = const EntityType('experience_orb');
-  static const EntityType experience_bottle =
-      const EntityType('experience_bottle');
-  static const EntityType arrow = const EntityType('arrow');
-  static const EntityType spectral_arrow = const EntityType('spectral_arrow');
-  static const EntityType trident = const EntityType('trident');
-  static const EntityType snowball = const EntityType('snowball');
-  static const EntityType egg = const EntityType('egg');
-  static const EntityType llama_spit = const EntityType('llama_spit');
-  static const EntityType ender_pearl = const EntityType('ender_pearl');
-  static const EntityType eye_of_ender = const EntityType('eye_of_ender');
-  static const EntityType fireworks_rocket =
-      const EntityType('fireworks_rocket');
-  static const EntityType tnt = const EntityType('tnt');
-  static const EntityType falling_block = const EntityType('falling_block');
-  static const EntityType fishing_bobber = const EntityType('fishing_bobber');
-  static const EntityType leash_knot = const EntityType('leash_knot');
-  static const EntityType painting = const EntityType('painting');
-  static const EntityType item_frame = const EntityType('item_frame');
-  static const EntityType fireball = const EntityType('fireball');
-  static const EntityType shulker_bullet = const EntityType('shulker_bullet');
-  static const EntityType end_crystal = const EntityType('end_crystal');
-  static const EntityType evoker_fangs = const EntityType('evoker_fangs');
-  static const EntityType potion = const EntityType('potion');
+  static const EntityType armor_stand = EntityType('armor_stand');
+  static const EntityType area_effect_cloud = EntityType('area_effect_cloud');
+  static const EntityType player = EntityType('player');
+  static const EntityType boat = EntityType('boat');
+  static const EntityType minecart = EntityType('minecart');
+  static const EntityType chest_minecart = EntityType('chest_minecart');
+  static const EntityType furnace_minecart = EntityType('furnace_minecart');
+  static const EntityType tnt_minecart = EntityType('tnt_minecart');
+  static const EntityType hopper_minecart = EntityType('hopper_minecart');
+  static const EntityType spawner_minecart = EntityType('spawner_minecart');
+  static const EntityType item = EntityType('item');
+  static const EntityType experience_orb = EntityType('experience_orb');
+  static const EntityType experience_bottle = EntityType('experience_bottle');
+  static const EntityType arrow = EntityType('arrow');
+  static const EntityType spectral_arrow = EntityType('spectral_arrow');
+  static const EntityType trident = EntityType('trident');
+  static const EntityType snowball = EntityType('snowball');
+  static const EntityType egg = EntityType('egg');
+  static const EntityType llama_spit = EntityType('llama_spit');
+  static const EntityType ender_pearl = EntityType('ender_pearl');
+  static const EntityType eye_of_ender = EntityType('eye_of_ender');
+  static const EntityType fireworks_rocket = EntityType('fireworks_rocket');
+  static const EntityType tnt = EntityType('tnt');
+  static const EntityType falling_block = EntityType('falling_block');
+  static const EntityType fishing_bobber = EntityType('fishing_bobber');
+  static const EntityType leash_knot = EntityType('leash_knot');
+  static const EntityType painting = EntityType('painting');
+  static const EntityType item_frame = EntityType('item_frame');
+  static const EntityType fireball = EntityType('fireball');
+  static const EntityType shulker_bullet = EntityType('shulker_bullet');
+  static const EntityType end_crystal = EntityType('end_crystal');
+  static const EntityType evoker_fangs = EntityType('evoker_fangs');
+  static const EntityType potion = EntityType('potion');
 
   // hostile
-  static const EntityType elder_guardian = const EntityType('elder_guardian');
-  static const EntityType wither_skeleton = const EntityType('wither_skeleton');
-  static const EntityType stray = const EntityType('stray');
-  static const EntityType husk = const EntityType('husk');
-  static const EntityType zombie_villager = const EntityType('zombie_villager');
-  static const EntityType vex = const EntityType('vex');
-  static const EntityType vindicator = const EntityType('vindicator');
-  static const EntityType illager_beast = const EntityType('illager_beast');
-  static const EntityType illusioner = const EntityType('illusioner');
-  static const EntityType pillager = const EntityType('pillager');
-  static const EntityType creeper = const EntityType('creeper');
-  static const EntityType skeleton = const EntityType('skeleton');
-  static const EntityType spider = const EntityType('spider');
-  static const EntityType giant = const EntityType('giant');
-  static const EntityType zombie = const EntityType('zombie');
-  static const EntityType slime = const EntityType('slime');
-  static const EntityType ghast = const EntityType('ghast');
-  static const EntityType zombie_pigman = const EntityType('zombie_pigman');
-  static const EntityType enderman = const EntityType('enderman');
-  static const EntityType cave_spider = const EntityType('cave_spider');
-  static const EntityType silverfish = const EntityType('silverfish');
-  static const EntityType blaze = const EntityType('blaze');
-  static const EntityType magma_cube = const EntityType('magma_cube');
-  static const EntityType ender_dragon = const EntityType('ender_dragon');
-  static const EntityType wither = const EntityType('wither');
-  static const EntityType wither_skull = const EntityType('wither_skull');
-  static const EntityType witch = const EntityType('witch');
-  static const EntityType endermite = const EntityType('endermite');
-  static const EntityType guardian = const EntityType('guardian');
-  static const EntityType shulker = const EntityType('shulker');
-  static const EntityType dragon_fireball = const EntityType('dragon_fireball');
-  static const EntityType drowned = const EntityType('drowned');
+  static const EntityType elder_guardian = EntityType('elder_guardian');
+  static const EntityType wither_skeleton = EntityType('wither_skeleton');
+  static const EntityType stray = EntityType('stray');
+  static const EntityType husk = EntityType('husk');
+  static const EntityType zombie_villager = EntityType('zombie_villager');
+  static const EntityType vex = EntityType('vex');
+  static const EntityType vindicator = EntityType('vindicator');
+  static const EntityType illager_beast = EntityType('illager_beast');
+  static const EntityType illusioner = EntityType('illusioner');
+  static const EntityType pillager = EntityType('pillager');
+  static const EntityType creeper = EntityType('creeper');
+  static const EntityType skeleton = EntityType('skeleton');
+  static const EntityType spider = EntityType('spider');
+  static const EntityType giant = EntityType('giant');
+  static const EntityType zombie = EntityType('zombie');
+  static const EntityType slime = EntityType('slime');
+  static const EntityType ghast = EntityType('ghast');
+  static const EntityType zombie_pigman = EntityType('zombie_pigman');
+  static const EntityType enderman = EntityType('enderman');
+  static const EntityType cave_spider = EntityType('cave_spider');
+  static const EntityType silverfish = EntityType('silverfish');
+  static const EntityType blaze = EntityType('blaze');
+  static const EntityType magma_cube = EntityType('magma_cube');
+  static const EntityType ender_dragon = EntityType('ender_dragon');
+  static const EntityType wither = EntityType('wither');
+  static const EntityType wither_skull = EntityType('wither_skull');
+  static const EntityType witch = EntityType('witch');
+  static const EntityType endermite = EntityType('endermite');
+  static const EntityType guardian = EntityType('guardian');
+  static const EntityType shulker = EntityType('shulker');
+  static const EntityType dragon_fireball = EntityType('dragon_fireball');
+  static const EntityType drowned = EntityType('drowned');
 
   // passive
-  static const EntityType skeleton_horse = const EntityType('skeleton_horse');
-  static const EntityType zombie_horse = const EntityType('zombie_horse');
-  static const EntityType donkey = const EntityType('donkey');
-  static const EntityType mule = const EntityType('mule');
-  static const EntityType bat = const EntityType('bat');
-  static const EntityType pig = const EntityType('pig');
-  static const EntityType sheep = const EntityType('sheep');
-  static const EntityType cow = const EntityType('cow');
-  static const EntityType chicken = const EntityType('chicken');
-  static const EntityType squid = const EntityType('squid');
-  static const EntityType wolf = const EntityType('wolf');
-  static const EntityType mooshroom = const EntityType('mooshroom');
-  static const EntityType snowman = const EntityType('snowman');
-  static const EntityType ocelot = const EntityType('ocelot');
-  static const EntityType iron_golem = const EntityType('iron_golem');
-  static const EntityType horse = const EntityType('horse');
-  static const EntityType rabbit = const EntityType('rabbit');
-  static const EntityType polar_bear = const EntityType('polar_bear');
-  static const EntityType llama = const EntityType('llama');
-  static const EntityType parrot = const EntityType('parrot');
-  static const EntityType villager = const EntityType('villager');
-  static const EntityType cod = const EntityType('cod');
-  static const EntityType salmon = const EntityType('salmon');
-  static const EntityType tropical_fish = const EntityType('tropical_fish');
-  static const EntityType turtle = const EntityType('turtle');
-  static const EntityType dolphin = const EntityType('dolphin');
-  static const EntityType panda = const EntityType('panda');
+  static const EntityType skeleton_horse = EntityType('skeleton_horse');
+  static const EntityType zombie_horse = EntityType('zombie_horse');
+  static const EntityType donkey = EntityType('donkey');
+  static const EntityType mule = EntityType('mule');
+  static const EntityType bat = EntityType('bat');
+  static const EntityType pig = EntityType('pig');
+  static const EntityType sheep = EntityType('sheep');
+  static const EntityType cow = EntityType('cow');
+  static const EntityType chicken = EntityType('chicken');
+  static const EntityType squid = EntityType('squid');
+  static const EntityType wolf = EntityType('wolf');
+  static const EntityType mooshroom = EntityType('mooshroom');
+  static const EntityType snowman = EntityType('snowman');
+  static const EntityType ocelot = EntityType('ocelot');
+  static const EntityType iron_golem = EntityType('iron_golem');
+  static const EntityType horse = EntityType('horse');
+  static const EntityType rabbit = EntityType('rabbit');
+  static const EntityType polar_bear = EntityType('polar_bear');
+  static const EntityType llama = EntityType('llama');
+  static const EntityType parrot = EntityType('parrot');
+  static const EntityType villager = EntityType('villager');
+  static const EntityType cod = EntityType('cod');
+  static const EntityType salmon = EntityType('salmon');
+  static const EntityType tropical_fish = EntityType('tropical_fish');
+  static const EntityType turtle = EntityType('turtle');
+  static const EntityType dolphin = EntityType('dolphin');
+  static const EntityType panda = EntityType('panda');
 
   final String type;
   const EntityType(this.type);

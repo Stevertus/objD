@@ -25,9 +25,9 @@ class Log extends RestActionAble {
 
     TextComponent text =TextComponent("undefined");
     if(msg is num || msg is bool) text =TextComponent(msg.toString());
-    if(msg is String) text =TextComponent(msg);
-    if(msg is Score) text =TextComponent.score(msg);
-    if(msg is Entity) text =TextComponent.selector(msg);
+    if(msg is String) text =TextComponent(msg as String);
+    if(msg is Score) text =TextComponent.score(msg as Score);
+    if(msg is Entity) text =TextComponent.selector(msg as Entity);
     return Tellraw(to,show: [
       TextComponent("Console > ",color:color),
       if(desc != null) TextComponent("$desc "),

@@ -37,7 +37,7 @@ class Clone extends RestActionAble {
   
   @override
   Widget generate(Context context){
-    if(type.length > 0) type = " " + type;
-    return new Command('clone ' + area.getCoordinates() + ' ' + to.toString() + type);
+    if(type.isNotEmpty) type = " " + type;
+    return Command('clone ' + area.getCoordinates() + ' ' + to.toString() + type);
   }
 }

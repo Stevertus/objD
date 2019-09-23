@@ -22,7 +22,7 @@ class SetBlock extends RestActionAble {
 
   @override
   Widget generate(Context context) {
-    return new Command(
+    return Command(
       'setblock ' +
           location.toString() +
           ' ' +

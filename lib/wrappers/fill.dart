@@ -30,7 +30,7 @@ class Fill extends RestActionAble {
   
   @override
   Widget generate(Context context){
-    if(type.length > 0) type = " " + type;
-    return new Command('fill ' + area.getCoordinates() + ' ' + block.toString() + type);
+    if(type.isNotEmpty) type = " " + type;
+    return Command('fill ' + area.getCoordinates() + ' ' + block.toString() + type);
   }
 }

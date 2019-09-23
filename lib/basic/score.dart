@@ -75,9 +75,9 @@ class Score extends RestActionAble {
     return entity.toString() + " " + score;
   }
   Score addCommandRet(Command command){
-    List<Widget> commands = new List<Widget>.from(_commands);
+    List<Widget> commands = List<Widget>.from(_commands);
       commands.add(command);
-    return new Score(this.entity,this.score,addNew: false,commands: commands);
+    return Score(this.entity,this.score,addNew: false,commands: commands);
   }
 
   Score operator + (dynamic other){
@@ -253,7 +253,7 @@ class Score extends RestActionAble {
   /// sets the score to the success of the given command
   Score setToResult(Command command, {bool useSuccess = false}){
     return addCommandRet(Command(
-      "execute store "+(useSuccess ? "success" : "result")+" score " + _getESStr() + " run " + command.toMap()['command']
+      "execute store "+(useSuccess ? "success" : "result")+" score " + _getESStr() + " run " + command.toMap()['command'].toString()
     ));
     
   }
@@ -292,7 +292,7 @@ class Score extends RestActionAble {
     return Score.str(_getESStr() + " > " + _getESStr(entity: score.entity,score: score.score));
   }
   String _match = "0";
-  getMatch() => _match;
+  String getMatch() => _match;
   Score matches(int value){
     _match =value.toString();
     return Score.str(_getESStr() + " matches " + _match,score:score,match: _match);

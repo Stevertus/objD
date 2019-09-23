@@ -19,7 +19,7 @@ class BuildProject {
       name = prj.name;
       description = prj.description;
       packs = [
-        BuildPack(findPack(prj.generate))
+        BuildPack(findPack(prj.generate) as Pack)
       ];
       packs.first.generate(prj:this);
     }

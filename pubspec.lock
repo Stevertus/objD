@@ -22,5 +22,12 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.7"
+  pedantic:
+    dependency: "direct dev"
+    description:
+      name: pedantic
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.8.0+1"
 sdks:
   dart: ">=2.3.0 <3.0.0"

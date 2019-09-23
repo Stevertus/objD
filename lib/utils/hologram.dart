@@ -28,15 +28,15 @@ class Hologram extends RestActionAble {
 /// )
 /// ```
   Hologram(String str,{@required this.location, Color color,this.tags,this.space = 0.25}){
-    if(tags == null) tags = ["objd_hologram"];
-    else tags.add("objd_hologram");
+    if(tags == null) {tags = ["objd_hologram"];}
+    else {tags.add("objd_hologram");}
 
     texts = str.split("\n").map((line) => line.isNotEmpty ? TextComponent(line,color:color): null).toList();
   }
   /// If you wish you can assign each line a seperate TextComponent with `Hologram.multiple`
   Hologram.multiple(this.texts,{@required this.location,this.tags,this.space = 0.25}){
-    if(tags == null) tags = ["objd_hologram"];
-    else tags.add("objd_hologram");
+    if(tags == null) {tags = ["objd_hologram"];}
+    else {tags.add("objd_hologram");}
   }
 
   @override

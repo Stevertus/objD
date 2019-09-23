@@ -4,7 +4,7 @@ import 'package:objd/basic/extend.dart';
 import 'package:objd/build/buildPack.dart';
 import 'package:objd/build/buildProject.dart';
 import 'context.dart';
-import 'scan.dart' as Scanner;
+import 'scan.dart' as scanner;
 
 List addAndReturn(List list, dynamic item) {
   list.add(item);
@@ -41,7 +41,7 @@ class BuildFile {
   }
 
   generate({Context context, BuildPack pack, BuildProject prj}){
-    Scanner.scan(child,context:context,file:this,pack:pack,project:prj);
+    scanner.scan(child,context:context,file:this,pack:pack,project:prj);
   }
 
   

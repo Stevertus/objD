@@ -52,8 +52,9 @@ class Condition {
     _setCond(cond);
   }
   Condition.data(Data cond) {
-    if (cond.subcommand != "get")
+    if (cond.subcommand != "get") {
       throw ("Please insert a Data.get Widget in Condition.data!");
+    }
     _setCond(cond);
   }
 
@@ -71,7 +72,7 @@ class Condition {
       if (cond is Condition) {
         _children.add(cond);
       } else {
-        _children.add(new Condition(cond));
+        _children.add(Condition(cond));
       }
     });
   }
@@ -80,89 +81,92 @@ class Condition {
   Condition.or(List<dynamic> conds) {
     type = _ConditionType.or;
     conds.forEach((cond) {
-      if (cond is Condition)
+      if (cond is Condition) {
         _children.add(cond);
-      else
-        _children.add(new Condition(cond));
+      } else {
+        _children.add(Condition(cond));
+      }
     });
   }
 
   _setCond(dynamic cond, {bool invert = false, Block block, Location target}) {
     if (cond == null) return;
-    switch (_getType(cond)) {
-      case "Condition":
-        _children.add(cond);
-        if (invert) _children.forEach((child) => child._invertGenerated());
-        break;
-      case "Entity":
-        _generated =
-            new _ConditionUtil("entity " + cond.toString(), invert: invert);
-        break;
-      case "Block": {
-        _generated = new _ConditionUtil("block ~ ~ ~ " + cond.toString(),
-            invert: invert);
-        break;
-      }
-      case "Score":
-        if (cond.getString().isEmpty)
-          throw ("Please insert a score condition method into a condidition!");
-        _generated =
-            new _ConditionUtil("score " + cond.getString(), invert: invert);
-        break;
-      case "Tag":
-        _generated =
-            new _ConditionUtil("entity " + cond.getEntity(), invert: invert);
-        break;
-      case "Location":
-        if (block == null)
-          _generated = new _ConditionUtil(
-              "block " + cond.toString() + " minecraft:air",
-              invert: !invert);
-        else
-          _generated = new _ConditionUtil(
-              "block " + cond.toString() + " " + block.toString(),
-              invert: invert);
-        break;
-      case "Data":
-        _generated = new _ConditionUtil(
-            "data " + cond.getTarget() + " " + cond.path,
-            invert: invert);
-        break;
-      case "Area":
-        if (target != null)
-          "Please use Condition.blocks to test for an area of blocks!";
-        _generated = new _ConditionUtil(
-            "blocks " + cond.getCoordinates() + " " + target.toString(),
-            invert: invert);
-        break;
-      default:
-        throw (" A Condition can just take in another Condition, Entity, Block, Data, Score or Tag!");
+    if (cond is Condition) {
+      _children.add(cond);
+      if (invert) _children.forEach((child) => child._invertGenerated());
+      return;
     }
+    if (cond is Entity) {
+      _generated = _ConditionUtil("entity " + cond.toString(), invert: invert);
+      return;
+    }
+
+    if (cond is Block) {
+      _generated =
+          _ConditionUtil("block ~ ~ ~ " + cond.toString(), invert: invert);
+      return;
+    }
+
+    if (cond is Score) {
+      if (cond.getString().isEmpty) {
+        throw ("Please insert a score condition method into a condidition!");
+      }
+      _generated = _ConditionUtil("score " + cond.getString(), invert: invert);
+      return;
+    }
+
+    if (cond is Tag) {
+      _generated = _ConditionUtil("entity " + cond.getEntity(), invert: invert);
+      return;
+    }
+
+    if (cond is Location) {
+      if (block == null) {
+        _generated = _ConditionUtil(
+          "block " + cond.toString() + " minecraft:air",
+          invert: !invert,
+        );
+      } else {
+        _generated = _ConditionUtil(
+          "block " + cond.toString() + " " + block.toString(),
+          invert: invert,
+        );
+      }
+      return;
+    }
+
+    if (cond is Data) {
+      _generated = _ConditionUtil("data " + cond.getTarget() + " " + cond.path,
+          invert: invert);
+      return;
+    }
+
+    if (cond is Area) {
+      if (target != null) {
+        throw ("Please use Condition.blocks to test for an area of blocks!");
+      }
+      _generated = _ConditionUtil(
+          "blocks " + cond.getCoordinates() + " " + target.toString(),
+          invert: invert);
+      return;
+    }
+
+    throw (" A Condition can just take in another Condition, Entity, Block, Data, Score or Tag!");
   }
 
   _invertGenerated() {
     if (_generated != null) _generated.invert = !_generated.invert;
-    if (_children != null)
+    if (_children != null) {
       _children.forEach((child) => child._invertGenerated());
-  }
-
-  String _getType(dynamic cond) {
-    if (cond is Condition) return "Condition";
-    if (cond is Entity) return "Entity";
-    if (cond is Location) return "Location";
-    if (cond is Area) return "Area";
-    if (cond is Block) return "Block";
-    if (cond is Score) return "Score";
-    if (cond is Tag) return "Tag";
-    if (cond is Data && cond.subcommand == "get") return "Data";
-    return null;
+    }
   }
 
   List<List<_ConditionUtil>> getList() {
     List<List<_ConditionUtil>> list = [[]];
     _children.forEach((child) {
-      if (list.length == 1 && list[0].isEmpty)
+      if (list.length == 1 && list[0].isEmpty) {
         list = child.getList();
+      }
       // is and
       else if (type == _ConditionType.and) {
         list = child.getList().map((inner) {
@@ -185,16 +189,18 @@ class Condition {
     return list;
   }
 
-  static List<String> getPrefixes(List<List<_ConditionUtil>> conds,
+  static List<String> getPrefixes(List<List<dynamic>> conds,
       [bool invert = false]) {
     return conds.map((outer) {
       return outer
           .map((inner) {
-            String key = "if";
-            if (invert ^ inner.invert) {
-              key = "unless";
+            if (inner is _ConditionUtil) {
+              String key = "if";
+              if (invert ^ inner.invert) {
+                key = "unless";
+              }
+              if (inner.str.isNotEmpty) return key + " " + inner.str;
             }
-            if (inner.str.isNotEmpty) return key + " " + inner.str;
             return "";
           })
           .join(" ")

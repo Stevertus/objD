@@ -18,7 +18,7 @@ class ForEach extends RestActionAble {
   int from;
   int step;
   Entity counter;
-  Function(Widget) then;
+  Widget Function(Widget) then;
 /// The ForEach Loop repeats a set of commands for each value in a Score.
 /// Therefore a file is called recursively and a counter score is increased.
 ///
@@ -37,7 +37,7 @@ class ForEach extends RestActionAble {
   @override
   Widget generate(Context context) {
 
-    Group gr = new Group(filename: "foreach",children: [
+    Group gr = Group(filename: "foreach",children: [
       then(_countScore),
       step < 0 ? _countScore.subtract(-step) : _countScore.add(step),
       If(_countScore.isSmallerOrEqual(score),Then:[File.recursive()])

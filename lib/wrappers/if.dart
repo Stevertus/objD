@@ -69,10 +69,14 @@ class If extends RestActionAble {
     getCondition(condition);
   }
   getCondition(dynamic condition) {
-    if (condition is Condition)
+    if (condition is Condition) {
       this.conds = condition.getList();
-    else
-      this.conds = new Condition(condition).getList();
+    }
+      
+    else {
+      this.conds = Condition(condition).getList();
+    }
+      
   }
 
   @override
@@ -83,10 +87,14 @@ class If extends RestActionAble {
     // group into seperate file(and get if id)
     if (Else != null || prefixes.length >= 2 || this.assignTag != null) {
       if (this.assignTag == null) this.assignTag = Entity.Player();
-      if (Then.length > 2 && context.file.isNotEmpty)
+      if (Then.length > 2 && context.file.isNotEmpty){
         Then.insert(0, Comment("If statement from file: " + context.file));
-      if (Else != null && Else.length > 2 && context.file.isNotEmpty)
+      }
+        
+      if (Else != null && Else.length > 2 && context.file.isNotEmpty){
         Else.insert(0, Comment("Else statement from file: " + context.file));
+      }
+        
       children = _getTagVersion(prefixes);
       // if (context.file.isNotEmpty)
       //   Then.insert(0, Comment("If statement from file: " + context.file));

@@ -15,7 +15,7 @@ import 'package:objd/wrappers/comment.dart';
 scan(Widget wid,
     {BuildFile file, BuildPack pack, BuildProject project, Context context}) {
   file.add(_findText(wid, context));
-  if(findFile(wid,context: context,pack: pack,project: project)) return;
+  if (findFile(wid, context: context, pack: pack, project: project)) return;
 
   if (wid is Group) {
     scan(
@@ -28,23 +28,27 @@ scan(Widget wid,
     );
     return;
   }
-  if(wid is Comment && !wid.force && (wid.text == "[null]" || context.prod)) return;
+  if (wid is Comment && !wid.force && (wid.text == "[null]" || context.prod)) {
+    return;
+  }
 
-  if(wid is Scoreboard && wid.subcommand == "add"){
-    if(!pack.addScoreboard(wid.name)) return;
+  if (wid is Scoreboard && wid.subcommand == "add") {
+    if (!pack.addScoreboard(wid.name)) return;
   }
 
   if (wid is Widget) {
     dynamic child = wid.generate(context);
-  	// is module
+    // is module
     if (wid is Module) {
       List<File> files = wid.registerFiles();
       // add files to child
-      if(files != null && files.length > 0) child = <Widget>[child,...files];
+      if (files != null && files.isNotEmpty && child is Widget) {
+        child = <Widget>[(child as Widget), ...files];
+      }
     }
 
     // is single widget
-    if (child is Widget){
+    if (child is Widget) {
       scan(
         child,
         file: file,
@@ -53,7 +57,7 @@ scan(Widget wid,
         context: context,
       );
       return;
-    }      
+    }
 
     // is list widget
     if (child is List<Widget>) {
@@ -75,26 +79,29 @@ String _findText(Widget wid, Context context) {
   if (wid is Text) {
     String suffixes = "";
     String prefixes = "";
-    if (context.prefixes.length > 0)
+    if (context.prefixes.isNotEmpty) {
       prefixes = context.prefixes.join(' ') + ' ';
-    if (context.suffixes.length > 0)
+    }
+    if (context.suffixes.isNotEmpty) {
       suffixes = context.suffixes.join(' ') + ' ';
+    }
     return prefixes + wid.generate(context) + suffixes;
   }
   return "";
 }
 
-bool findFile(Widget wid,{BuildPack pack, BuildProject project, Context context}){
-  if( wid is File){
-    if(wid.create) pack.addFile(wid,project);
+bool findFile(Widget wid,
+    {BuildPack pack, BuildProject project, Context context}) {
+  if (wid is File) {
+    if (wid.create) pack.addFile(wid, project);
     return !wid.execute;
   }
-  if( wid is Extend){
-    pack.extendFile(wid,front: wid.first);
+  if (wid is Extend) {
+    pack.extendFile(wid, front: wid.first);
     return true;
   }
 
-  if( wid is Pack){
+  if (wid is Pack) {
     project.addPack(wid);
     return true;
   }

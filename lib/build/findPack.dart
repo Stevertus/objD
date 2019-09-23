@@ -5,7 +5,7 @@ import 'package:objd/basic/pack.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/build/context.dart';
 
-findPack(Widget wid){
+Widget findPack(Widget wid){
   if(wid is Pack) return wid;
   if(wid is For) {
     for (var child in wid.children) {
@@ -14,5 +14,5 @@ findPack(Widget wid){
     }
   }
   // maybe add a limit here
-  return findPack(wid.generate(new Context(prod: false)));
+  return findPack(wid.generate( Context(prod: false)) as Widget);
 }
