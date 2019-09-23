@@ -11,6 +11,6 @@ class Kill extends RestActionAble {
   
   @override
   Widget generate(Context context){
-    return new Command('kill ' + target.toString());
+    return Command('kill ' + target.toString());
   }
 }

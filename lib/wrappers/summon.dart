@@ -65,7 +65,7 @@ class Summon extends RestActionAble {
 
   @override
   Widget generate(Context context) {
-    return new Command('summon ' +
+    return Command('summon ' +
         type.toString() +
         ' ' +
         location.toString() +

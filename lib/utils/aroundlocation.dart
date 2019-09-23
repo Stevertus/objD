@@ -8,7 +8,7 @@ import 'package:objd/build/context.dart';
 class AroundLocation extends RestActionAble {
 
   double rel;
-  Function build;
+  Widget Function(Location) build;
   bool top, bottom, left, right, front, back;
 
 /// Often times you need to check blocks or entities around one Location. AroundLocation utilizes this by using just one build method for all sides:

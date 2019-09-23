@@ -12,7 +12,7 @@ class Data extends RestActionAble {
   String _type;
   String _typeValue;
   String _subcommand;
-  get subcommand => _subcommand;
+  String get subcommand => _subcommand;
   String path = "";
   num scale;
   String datatype;
@@ -86,7 +86,7 @@ class Data extends RestActionAble {
   Data.copy(dynamic target,{@required this.path, @required dynamic from, @required String fromPath}){
     handleTarget(target);
      _subcommand = "modify";
-    this.modify = new DataModify.set(
+    this.modify = DataModify.set(
       from,
       fromPath: fromPath
     );
@@ -97,7 +97,7 @@ class Data extends RestActionAble {
       _type = "entity";
     } else if(target is Location){
       _type = "block";
-    } else throw("Please insert either an entity or location into data");
+    } else {throw("Please insert either an entity or location into data");}
   }
 
   String getTarget(){
@@ -107,16 +107,16 @@ class Data extends RestActionAble {
   @override
   Widget generate(Context context){
     switch (_subcommand) {
-      case "merge": return new Command('data merge ' + getTarget() + ' ' + _getNbt());
-      case "get": return new Command('data get ' + getTarget() + ' ' + path + ' ' + (scale < 0.000001 ? scale.toStringAsFixed(10): scale.toString()));
-      case "remove": return new Command('data remove ' + getTarget() + ' ' + path);
-      case "modify": return new Command('data modify ' + getTarget() + ' ${path} ${modify}');
-      case "score": return new Command('execute store result ' + getTarget() + ' ${path} ${datatype} ${scale} run scoreboard players get ${score.entity.toString()} ${score.score}');
+      case "merge": return Command('data merge ' + getTarget() + ' ' + _getNbt());
+      case "get": return Command('data get ' + getTarget() + ' ' + path + ' ' + (scale < 0.000001 ? scale.toStringAsFixed(10): scale.toString()));
+      case "remove": return Command('data remove ' + getTarget() + ' ' + path);
+      case "modify": return Command('data modify ' + getTarget() + ' ${path} ${modify}');
+      case "score": return Command('execute store result ' + getTarget() + ' ${path} ${datatype} ${scale} run scoreboard players get ${score.entity.toString()} ${score.score}');
     }
     throw("Invalid subcommand!");
   }
 
-  _getNbt(){
+  String _getNbt(){
     if(strNbt != null && strNbt.isNotEmpty) return strNbt;
     return gson.encode(nbt);
   }

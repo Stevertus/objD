@@ -51,8 +51,8 @@ class Context {
 
   Context.clone(Context context)
       : this(
-            prefixes: new List<String>.from(context.prefixes),
-            suffixes: new List<String>.from(context.suffixes),
+            prefixes: List<String>.from(context.prefixes),
+            suffixes: List<String>.from(context.suffixes),
             prod: context.prod,
             packId: context.packId,
             file: context.file,

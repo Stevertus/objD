@@ -56,14 +56,14 @@ class TextComponent {
 /// ⇒ tellraw  @a  [{"text":"\uF82D\uF82C\uF82B\uF829\uF828\uF826"},{"text":"This is moved"}]
 /// ```
   TextComponent.space(int pixels, {this.color,this.bold, this.underlined,this.italic, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){
-    Map nums = { 1: '\uF821',2: '\uF822',3: '\uF823',4: '\uF824',5: '\uF825',6: '\uF826',7: '\uF827',8: '\uF828',16: '\uF829',32: '\uF82A',64: '\uF82B',128: '\uF82C',
+    Map<int,String> nums = { 1: '\uF821',2: '\uF822',3: '\uF823',4: '\uF824',5: '\uF825',6: '\uF826',7: '\uF827',8: '\uF828',16: '\uF829',32: '\uF82A',64: '\uF82B',128: '\uF82C',
               256: '\uF82D',512: '\uF82E',1024: '\uF82F'};
-    Map negnums = {-1024:'\uF80F',-512:'\uF80E',-256:'\uF80D',-128:'\uF80C',-64:'\uF80B',-32:'\uF80A',-16:'\uF809',-8:'\uF808',-7:'\uF807',-6:'\uF806',-5:'\uF805',-4:'\uF804',-3:'\uF803',-2:'\uF802',-1:'\uF801'};
+    Map<int,String> negnums = {-1024:'\uF80F',-512:'\uF80E',-256:'\uF80D',-128:'\uF80C',-64:'\uF80B',-32:'\uF80A',-16:'\uF809',-8:'\uF808',-7:'\uF807',-6:'\uF806',-5:'\uF805',-4:'\uF804',-3:'\uF803',-2:'\uF802',-1:'\uF801'};
 
     if(pixels == 0) throw("Please insert a pixel amount on how much you want to move characters");
     String res = "";
     if(pixels > 0){
-    for (var value in nums.keys.toList().reversed) {
+    for (int value in nums.keys.toList().reversed) {
       while(pixels >= value) {
         res += nums[value];
         pixels -= value;
@@ -83,7 +83,7 @@ class TextComponent {
   // translates from a key in the translations
   TextComponent.translate(String key, {List<String> conversionFlags,this.color,this.bold,this.italic, this.underlined, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){
     value = {"translate":key};
-    if(conversionFlags != null && conversionFlags.length > 0) value['with'] = conversionFlags;
+    if(conversionFlags != null && conversionFlags.isNotEmpty) value['with'] = conversionFlags;
   }
 ///```dart
 /// TextComponent.score(

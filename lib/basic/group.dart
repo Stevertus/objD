@@ -43,7 +43,7 @@ class Group extends RestActionAble {
   Widget generate(Context context) {
     print(filename);
     // check if new file is needed
-    if (groupMin > -1 && children.length > 0 && children.length >= groupMin) {
+    if (groupMin > -1 && children.isNotEmpty && children.length >= groupMin) {
       return IndexedFile(
         generateIDs && filename != null ? filename : "group",
         execute: true,

@@ -23,14 +23,14 @@ class Tp extends RestActionAble {
   }
   _setFacing(facing){
       if(facing != null){
-      if(facing is Location) this.to += " facing " + facing.toString();
-      else if(facing is Entity) this.to += " facing entity " + facing.toString();
-      else throw("Please set the facing part either to a entity or location");
+      if(facing is Location) {this.to += " facing " + facing.toString();}
+      else if(facing is Entity) {this.to += " facing entity " + facing.toString();}
+      else {throw("Please set the facing part either to a entity or location");}
     }
   }
   
   @override
   Widget generate(Context context){
-    return new Command('tp ' + entity.toString() + ' ' + to);
+    return Command('tp ' + entity.toString() + ' ' + to);
   }
 }

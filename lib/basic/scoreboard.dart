@@ -15,18 +15,18 @@ class Scoreboard extends RestActionAble {
   /// The Scoreboard class just handles adding or removing objectives. The value assignment is handled by the Score class.
   /// 
   /// objD automatically keeps a list of all scoreboards and inserts them into the given load file, ignoring doubled names.
-  Scoreboard(this.name, {this.type = "dummy", TextComponent display, addIntoLoad = true}) {
+  Scoreboard(this.name, {this.type = "dummy", TextComponent display, bool addIntoLoad = true}) {
     subcommand = addIntoLoad ? "add": "addHere";
     if (display != null) type += " " + display.toJson();
   }
   /// The `Scoreboard.click` constructor adds a carrot on a stick click event objective 
-  Scoreboard.click(this.name, {TextComponent display, addIntoLoad = true}) {
+  Scoreboard.click(this.name, {TextComponent display,bool addIntoLoad = true}) {
     this.type = "minecraft.used:minecraft.carrot_on_a_stick";
     subcommand = addIntoLoad ? "add": "addHere";
     if (display != null) type += " " + display.toJson();
   }
   /// The `Scoreboard.trigger` constructor adds a trigger objective 
-  Scoreboard.trigger(this.name, {TextComponent display, addIntoLoad = true}) {
+  Scoreboard.trigger(this.name, {TextComponent display,bool addIntoLoad = true}) {
     this.type = "trigger";
     subcommand = addIntoLoad ? "add": "addHere";
     if (display != null) type += " " + display.toJson();

@@ -14,7 +14,7 @@ import './io.dart';
 ///}
 ///```
 void createProject(Project prj,[List<String> args = const []]) {
-  Stopwatch stopwatch = new Stopwatch()..start();
+  Stopwatch stopwatch = Stopwatch()..start();
   GenOptions opt = GenOptions(args);
   BuildProject bPrj = BuildProject(prj,prod: opt.prod);
 

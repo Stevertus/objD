@@ -69,19 +69,19 @@ class Area {
   }
 }
 
-_abs(num val) {
+double _abs(double val) {
   if (val != null && val.isNegative) return (0 - val);
   return val;
 }
 
-_min(num one, num two) {
+double _min(double one, double two) {
   if (one == null) return two;
   if (two == null) return one;
   if (one > two) return two;
   return one;
 }
 
-_max(num one, num two) {
+double _max(double one, double two) {
   if (one == null) return two;
   if (two == null) return one;
   if (one < two) return two;

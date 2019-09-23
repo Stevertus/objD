@@ -13,3 +13,5 @@ dependencies:
   meta: ^1.1.7
   colorize: ^2.0.0
   gson: ^0.1.2
+dev_dependencies:
+  pedantic: ^1.8.0

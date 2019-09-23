@@ -15,7 +15,7 @@ class Execute extends RestActionAble {
   List<List<String>> _args = [[]];
 
   // The arguments
-  get args => _args;
+  List<List<String>> get args => _args;
 
   // Child content
   List<Widget> children = [];
@@ -83,7 +83,7 @@ class Execute extends RestActionAble {
     List<List<String>> args,
     List<Widget> writable,
   }) : this(
-          children: [new StraitWidget(run)],
+          children: [StraitWidget(run)],
           as: as,
           at: at,
           location: location,
@@ -205,7 +205,7 @@ class Execute extends RestActionAble {
   Execute _addArgumentRet(String arg) {
     List<List<String>> args = _resolve(this._args);
     args.forEach((e) => e.add(arg));
-    return new Execute(
+    return Execute(
         children: List<Widget>.from(this.children),
         encapsulate: this.encapsulate,
         args: args,
@@ -245,7 +245,7 @@ class Execute extends RestActionAble {
   /// ```
   Execute positioned(dynamic loc) {
     if (!(loc is Location || loc is Entity))
-      throw ("Please insert either a Location or an Entity into Execute.positioned");
+      {throw ("Please insert either a Location or an Entity into Execute.positioned");}
     return _addArgumentRet(
         'positioned ' + (loc is Entity ? 'as ' : '') + loc.toString());
   }
@@ -297,7 +297,7 @@ class Execute extends RestActionAble {
     List<List<String>> args = this.args;
     this._args = [];
     prefixes.forEach((p) {
-      List<List<String>> add = new List<List<String>>();
+      List<List<String>> add = List<List<String>>();
       args.forEach((e) => add.add(List<String>.from(e)));
       add.forEach((e) => e.add(p));
       this.args.addAll(add);
@@ -382,20 +382,20 @@ class Execute extends RestActionAble {
   Execute In(Dimension d) => dimension(d);
 
   Execute run(Widget w) {
-    List<Widget> children = new List<Widget>.from(this.children);
+    List<Widget> children = List<Widget>.from(this.children);
     children.add(w);
-    return new Execute(
+    return Execute(
         children: children,
         encapsulate: this.encapsulate,
         args: _resolve(this.args),
         writable: writable);
   }
 
-  Execute runStrait(Function(List<Widget>) f) => run(new StraitWidget(f));
+  Execute runStrait(Function(List<Widget>) f) => run( StraitWidget(f));
 
   List<List<String>> _resolve(src) {
-    List<List<String>> ret = new List<List<String>>();
-    src.forEach((e) => ret.add(List<String>.from(e)));
+    List<List<String>> ret = List<List<String>>();
+    src.forEach((e) => ret.add(List<String>.from((e as List<dynamic>))));
     return ret;
   }
 }

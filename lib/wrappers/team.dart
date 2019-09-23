@@ -96,7 +96,7 @@ class Team extends RestActionAble {
         break;
       default:
     }
-    if(modifiers.length > 0){
+    if(modifiers.isNotEmpty){
       modifiers.keys.forEach((key) => wids.add(Command("team modify ${name} ${key} ${modifiers[key]}")));
     }
     print(modifiers);

@@ -20,7 +20,7 @@ class BuildPack {
     bool isGenMain = true;
 
     BuildPack(Pack pack){
-      Stopwatch stopwatch = new Stopwatch()..start();
+      Stopwatch stopwatch = Stopwatch()..start();
       name = pack.name;
       scoreboards = [];
 
@@ -35,11 +35,11 @@ class BuildPack {
 
       if(pack.files != null) pack.files.forEach((file) => files[file.path] = BuildFile(file));
 
-      context = new Context(packId: name,loadFile: load,mainFile: main);
+      context = Context(packId: name,loadFile: load,mainFile: main);
       print("Compiled Pack ${name} in ${stopwatch.elapsedMilliseconds}ms");
     }
 
-    addScoreboard(String name){
+    bool addScoreboard(String name){
       if(!scoreboards.contains(name)){
         scoreboards.add(name);
         return true;
@@ -48,12 +48,12 @@ class BuildPack {
     }
 
     addFile(File file, BuildProject prj){
-      files[file.path] = new BuildFile(file);
+      files[file.path] = BuildFile(file);
       //files[file.path].generate(context: context,pack: this,prj: prj);
     }
 
     extendFile(Extend file,{bool front, BuildProject prj}){
-      BuildFile myfile = new BuildFile.extended(file);
+      BuildFile myfile = BuildFile.extended(file);
       if(files[file.path] == null){
         files[file.path] = myfile;
         return;

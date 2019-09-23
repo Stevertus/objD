@@ -83,7 +83,7 @@ class Bossbar extends RestActionAble {
         break;
       default: throw("Please use BossbarOption.max or BossbarOption.value with storeResult!");
     };
-    return new Execute(
+    return Execute(
       children: [command],
       encapsulate: false,
       args: [

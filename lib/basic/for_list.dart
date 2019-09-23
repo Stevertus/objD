@@ -17,9 +17,9 @@ class For extends RestActionAble {
 /// 	}
 /// )
 /// ```
-  For({@required Function create, @required int to, int from = 0,int step =1}){
+  For({@required Widget Function(int) create, @required int to, int from = 0,int step =1}){
     _list = [];
-    for (var i = from; i <= to; i += step) {
+    for (int i = from; i <= to; i += step) {
       _list.add(create(i));
     }
   }

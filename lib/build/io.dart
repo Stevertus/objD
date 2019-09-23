@@ -30,10 +30,10 @@ void generateIO(BuildProject prj,GenOptions options) {
       if(pack.isGen){
         // only run if should generate
         if(!options.minified){
-          if(pack.load != null && pack.load.length > 0 && pack.isGenLoad){
+          if(pack.load != null && pack.load.isNotEmpty && pack.isGenLoad){
             loadJson["values"].add(pack.name + ":" + pack.load);
           }  
-          if(pack.main != null && pack.main.length > 0 && pack.isGenMain){
+          if(pack.main != null && pack.main.isNotEmpty && pack.isGenMain){
             tickJson["values"].add(pack.name + ":" + pack.main);
           }  
         }
@@ -42,8 +42,8 @@ void generateIO(BuildProject prj,GenOptions options) {
     });
   }
   if(!options.minified){
-    if(tickJson["values"].isNotEmpty) _createFile(path + 'data/minecraft/tags/functions/tick.json', json.encode(tickJson));
-    if(loadJson["values"].isNotEmpty) _createFile(path + 'data/minecraft/tags/functions/load.json', json.encode(loadJson));
+    if(tickJson["values"] != null && (tickJson["values"] as List).isNotEmpty) _createFile(path + 'data/minecraft/tags/functions/tick.json', json.encode(tickJson));
+    if(loadJson["values"] != null && (loadJson["values"] as List).isNotEmpty) _createFile(path + 'data/minecraft/tags/functions/load.json', json.encode(loadJson));
   }
   if(options.debugFile) _createFile(path + 'objd.json', json.encode(prj.toMap()));
 }
@@ -55,13 +55,13 @@ String getPath(String path, String name){
    return ppath;
 }
 
-void _createPack(path,BuildPack pack){
-  Stopwatch stopwatch = new Stopwatch()..start();
+void _createPack(String path,BuildPack pack){
+  Stopwatch stopwatch =  Stopwatch()..start();
   List<Future> futures = [];
   
     _ensureDirExists(path + pack.name + '/functions');
 
-  if(pack.files != null && pack.files.length > 0){
+  if(pack.files != null && pack.files.isNotEmpty){
     pack.files.forEach((filepath,file) {
         if(file.isGen) futures.add(_createFile(path + pack.name + '/functions/' + filepath + '.mcfunction', file.commands.join("\n")));
     }); 
@@ -72,7 +72,7 @@ void _createPack(path,BuildPack pack){
     });
   }
 }
-void _ensureDirExists(path){
+void _ensureDirExists(String path){
   if(Directory(path).existsSync() == false) Directory(path).createSync(recursive: true);
 }
 
@@ -80,7 +80,7 @@ Future _createFile(String name,String content) async {
     content = content.replaceAll("\\", "\u005C");
     dynamic path = name.split('/');
     path = path.sublist(0,path.length - 1).join('/');
-    _ensureDirExists(path);
+    _ensureDirExists(path as String);
     var logFile = File(name);
     var sink = logFile.openWrite();
     sink.write(content);
@@ -90,7 +90,7 @@ Future _createFile(String name,String content) async {
     return "";
 }
 
-readFile(String name) {
+String readFile(String name) {
   File myfile = File(name);
   if(!myfile.existsSync()) return null;
   return myfile.readAsStringSync();
