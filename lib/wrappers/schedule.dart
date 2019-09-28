@@ -16,9 +16,13 @@ class Schedule extends RestActionAble {
   Schedule.file(this._file,{@required this.ticks,this.mode}) : assert(ticks != null) {
     _file.execute = true;
   }
+
+  /// Appends a Scheduled Function to the current Schedule.
   Schedule.append(this._name,{@required this.ticks}) : assert(ticks != null){
     mode = ScheduleMode.append;
   }
+
+  /// Appends a Scheduled File to the current Schedule.
   Schedule.appendFile(this._file,{@required this.ticks}) : assert(ticks != null){
     mode = ScheduleMode.append;
   }

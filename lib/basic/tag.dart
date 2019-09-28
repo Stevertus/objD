@@ -51,10 +51,13 @@ class Tag extends RestActionAble {
     return If(this, Then: [then, this.remove()]);
   }
 
+  /// Checks if the Tag is a certain value and returns a Condition to use in If.
   Condition operator & (bool other){
     if(other!= null && other) return Condition.tag(this);
     return Condition.not(Condition.tag(this));
   }
+
+  /// Assignes a new boolean value to the Tag(removes or adds the tag).
   Tag operator >> (bool other){
     if(other!= null && other) return Tag(tag, entity: entity, value: true);
     return Tag(tag, entity: entity, value: false);

@@ -4,9 +4,10 @@ import 'package:objd/basic/widget.dart';
 import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/build.dart';
 
+/// Kills an Entity. It defaults to Entity.Self.
 class Kill extends RestActionAble {
   Entity target;
-  /// The Kill Command removes an entity.
+  /// Kills an Entity. It defaults to Entity.Self.
   Kill([this.target]);
   
   @override
