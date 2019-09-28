@@ -1,1 +1,0 @@
-execute store result storage mypack:test new byte 1 run scoreboard players get @s test
