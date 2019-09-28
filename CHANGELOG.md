@@ -1,3 +1,15 @@
+## 0.3.1
+* added Schedule.append, Schedule.appendFile and ScheduleMode for the upcoming 1.15 release
+* added Support for Predicates in Entity
+* added Condition.predicate
+* added Storage Widget to handle global nbt storage
+* added Data target DataStorage to store nbt globally
+* added TextComponent.storageNbt to display nbt from Storage
+* added RawFile to allow generation of any kind of file in a pack(for upcoming Predicates, LootTables...)
+* added Operators & and >> to Tag to enable faster Conditions and Assignments
+* updated Kill to include just an optional target
+* code refactoring, issue fixing
+
 ## 0.3.0
 * added updated documentation site at https://objd.stevertus.com
 * added completly new gson parser capable of types, see more here: https://pub.dev/packages/gson

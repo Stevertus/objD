@@ -7,10 +7,11 @@ import 'package:objd/build/build.dart';
 class Kill extends RestActionAble {
   Entity target;
   /// The Kill Command removes an entity.
-  Kill(this.target);
+  Kill([this.target]);
   
   @override
   Widget generate(Context context){
+    if(target == null) return Command('kill');
     return Command('kill ' + target.toString());
   }
 }

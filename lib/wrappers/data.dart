@@ -9,6 +9,7 @@ import 'package:objd/build/build.dart';
 import 'package:gson/gson.dart';
 
 class Data extends RestActionAble {
+  dynamic target;
   String _type;
   String _typeValue;
   String _subcommand;
@@ -35,19 +36,19 @@ class Data extends RestActionAble {
 /// )
 /// ⇒ data merge entity @s {"Invisible":1,"NoGravity":1}
 /// ```
-  Data(dynamic target,{this.nbt = const {}, String type = "merge"}){
+  Data(this.target,{this.nbt = const {}, String type = "merge"}){
     handleTarget(target);
     _subcommand = type;
   }
-  Data.merge(dynamic target,{this.nbt = const {},this.strNbt}){
+  Data.merge(this.target,{this.nbt = const {},this.strNbt}){
     handleTarget(target);
     _subcommand = "merge";
   }
-  Data.get(dynamic target,{@required this.path, this.scale = 1}){
+  Data.get(this.target,{@required this.path, this.scale = 1}){
     handleTarget(target);
     _subcommand = "get";
   }
-  Data.remove(dynamic target,{@required this.path}){
+  Data.remove(this.target,{@required this.path}){
     handleTarget(target);
     _subcommand = "remove";
   }
@@ -61,7 +62,7 @@ class Data extends RestActionAble {
 /// |scale|optional int (default = 1)|
 /// |datatype| a Java datatype for the score(default = byte) |
 
-  Data.fromScore(dynamic target,{@required this.path, @required this.score, this.scale = 1, this.datatype = "byte"}){
+  Data.fromScore(this.target,{@required this.path, @required this.score, this.scale = 1, this.datatype = "byte"}){
     handleTarget(target);
     _subcommand = "score";
   }
@@ -78,12 +79,12 @@ class Data extends RestActionAble {
 /// )
 /// ⇒ data modify @s my_Custom_Path set value "hey"
 /// ```
-  Data.modify(dynamic target,{@required this.path,@required this.modify}){
+  Data.modify(this.target,{@required this.path,@required this.modify}){
     handleTarget(target);
     _subcommand = "modify";
   }
   /// A handy shortcut to copy data quickly is the Data.copy constructor, which just copies a property from one path to another.
-  Data.copy(dynamic target,{@required this.path, @required dynamic from, @required String fromPath}){
+  Data.copy(this.target,{@required this.path, @required dynamic from, @required String fromPath}){
     handleTarget(target);
      _subcommand = "modify";
     this.modify = DataModify.set(
@@ -93,7 +94,9 @@ class Data extends RestActionAble {
   }
   handleTarget(dynamic target){
     _typeValue = target.toString();
-    if(target is Entity){
+    if(target is DataStorage){
+      _type = "storage";
+    } else if(target is Entity){
       _type = "entity";
     } else if(target is Location){
       _type = "block";
@@ -175,5 +178,16 @@ class DataModify {
       str += " value " + value;
     }
     return str;
+  }
+}
+
+class DataStorage {
+  final String name;
+
+  const DataStorage(this.name);
+
+  @override
+  String toString() {
+    return name;
   }
 }
