@@ -10,6 +10,7 @@ import 'package:objd/build/buildFile.dart';
 import 'package:objd/build/buildPack.dart';
 import 'package:objd/build/buildProject.dart';
 import 'package:objd/build/context.dart';
+import 'package:objd/core.dart';
 import 'package:objd/wrappers/comment.dart';
 
 scan(Widget wid,
@@ -92,6 +93,10 @@ String _findText(Widget wid, Context context) {
 
 bool findFile(Widget wid,
     {BuildPack pack, BuildProject project, Context context}) {
+  if (wid is RawFile) {
+    pack.addRawFile(wid, project);
+    return true;
+  }
   if (wid is File) {
     if (wid.create) pack.addFile(wid, project);
     return !wid.execute;

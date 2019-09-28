@@ -23,3 +23,4 @@ export 'rest_action.dart';
 export 'strait_widget.dart';
 export 'parsable.dart';
 export 'indexed_file.dart';
+export 'raw_file.dart';

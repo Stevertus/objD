@@ -35,6 +35,7 @@ class Entity implements EntityClass {
     Rotation isRotated,
     Range horizontalRotation,
     Range verticalRotation,
+    String predicate,
   }) {
     selector = "p";
     _setArguments(
@@ -53,6 +54,7 @@ class Entity implements EntityClass {
       isRotated,
       horizontalRotation,
       verticalRotation,
+      predicate,
       false,
     );
   }
@@ -76,6 +78,7 @@ class Entity implements EntityClass {
     Rotation isRotated,
     Range horizontalRotation,
     Range verticalRotation,
+    String predicate,
   }) {
     selector = "a";
     _setArguments(
@@ -94,6 +97,7 @@ class Entity implements EntityClass {
       isRotated,
       horizontalRotation,
       verticalRotation,
+      predicate,
       false,
     );
   }
@@ -115,6 +119,7 @@ class Entity implements EntityClass {
     Rotation isRotated,
     Range horizontalRotation,
     Range verticalRotation,
+    String predicate,
   }) {
     selector = "r";
     _setArguments(
@@ -133,6 +138,7 @@ class Entity implements EntityClass {
       isRotated,
       horizontalRotation,
       verticalRotation,
+      predicate,
       false,
     );
   }
@@ -153,6 +159,7 @@ class Entity implements EntityClass {
     Rotation isRotated,
     Range horizontalRotation,
     Range verticalRotation,
+    String predicate,
   }) {
     selector = "s";
     _setArguments(
@@ -171,6 +178,7 @@ class Entity implements EntityClass {
       isRotated,
       horizontalRotation,
       verticalRotation,
+      predicate,
       false,
     );
   }
@@ -192,6 +200,7 @@ class Entity implements EntityClass {
     Rotation isRotated,
     Range horizontalRotation,
     Range verticalRotation,
+    String predicate,
   }) {
     selector = "s";
     _setArguments(
@@ -210,6 +219,7 @@ class Entity implements EntityClass {
       isRotated,
       horizontalRotation,
       verticalRotation,
+      predicate,
       false,
     );
   }
@@ -230,6 +240,7 @@ class Entity implements EntityClass {
     Rotation isRotated,
     Range horizontalRotation,
     Range verticalRotation,
+    String predicate,
   }) {
     selector = "s";
     _setArguments(
@@ -248,6 +259,7 @@ class Entity implements EntityClass {
       isRotated,
       horizontalRotation,
       verticalRotation,
+      predicate,
       false,
     );
   }
@@ -271,6 +283,7 @@ class Entity implements EntityClass {
       selector.isRotated,
       selector.horizontalRotation,
       selector.verticalRotation,
+      null, //TODO: Predicate
       false,
     );
     if (selector.sorting != null) {
@@ -295,6 +308,7 @@ class Entity implements EntityClass {
     Map<String, dynamic> nbt,
     String strNbt,
     EntityType type,
+    String predicate,
     Area area,
     Range distance,
     Range level,
@@ -321,6 +335,7 @@ class Entity implements EntityClass {
       isRotated,
       horizontalRotation,
       verticalRotation,
+      predicate,
       false,
     );
   }
@@ -342,6 +357,7 @@ class Entity implements EntityClass {
     Rotation isRotated,
     Range horizontalRotation,
     Range verticalRotation,
+    String predicate
   }) {
     _setArguments(
       limit,
@@ -359,6 +375,7 @@ class Entity implements EntityClass {
       isRotated,
       horizontalRotation,
       verticalRotation,
+      predicate,
       false,
     );
   }
@@ -379,6 +396,7 @@ class Entity implements EntityClass {
     Rotation isRotated,
     Range horizontalRotation,
     Range verticalRotation,
+    String predicate,
     bool not,
   ) {
     var n = "";
@@ -424,6 +442,9 @@ class Entity implements EntityClass {
     }
     if (team != null) {
       arguments['team'] = n + team.name;
+    }
+    if (predicate != null) {
+      arguments['predicate'] = n + predicate;
     }
     if (tags != null) {
       arguments['tag'] = [];
@@ -480,6 +501,7 @@ class Entity implements EntityClass {
     Rotation isRotated,
     Range horizontalRotation,
     Range verticalRotation,
+    String predicate,
   }) {
     _setArguments(
         limit,
@@ -497,6 +519,7 @@ class Entity implements EntityClass {
         isRotated,
         horizontalRotation,
         verticalRotation,
+        predicate,
         true);
     return this;
   }
@@ -548,6 +571,7 @@ class Entity implements EntityClass {
     Rotation isRotated,
     Range horizontalRotation,
     Range verticalRotation,
+    String predicate,
   }) {
     Entity temp = Entity.clone(this);
     temp._setArguments(
@@ -566,6 +590,7 @@ class Entity implements EntityClass {
         isRotated,
         horizontalRotation,
         verticalRotation,
+        predicate,
         false);
     return temp;
   }

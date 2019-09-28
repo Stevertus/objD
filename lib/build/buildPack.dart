@@ -3,6 +3,7 @@
 import 'package:objd/basic/extend.dart';
 import 'package:objd/basic/file.dart';
 import 'package:objd/basic/pack.dart';
+import 'package:objd/basic/raw_file.dart';
 import 'package:objd/build/buildFile.dart';
 import 'package:objd/build/buildProject.dart';
 import 'package:objd/build/context.dart';
@@ -10,6 +11,7 @@ import 'package:objd/build/context.dart';
 class BuildPack {
     String name;
     Map<String,BuildFile> files = {};
+    Map<String,String> rawFiles = {};
     List<String> scoreboards;
     String main;
     String load;
@@ -47,9 +49,11 @@ class BuildPack {
       return false;
     }
 
+    addRawFile(RawFile file, BuildProject prj){
+      rawFiles[file.fullPath] = file.content;
+    }
     addFile(File file, BuildProject prj){
       files[file.path] = BuildFile(file);
-      //files[file.path].generate(context: context,pack: this,prj: prj);
     }
 
     extendFile(Extend file,{bool front, BuildProject prj}){

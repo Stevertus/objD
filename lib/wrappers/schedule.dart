@@ -8,20 +8,39 @@ import 'package:objd/build/build.dart';
 class Schedule extends RestActionAble {
   String _name;
   File _file;
+  ScheduleMode mode;
 
   int ticks;
 
-  Schedule(this._name,{@required this.ticks});
-  Schedule.file(this._file,{@required this.ticks}){
+  Schedule(this._name,{@required this.ticks,this.mode}) : assert(ticks != null);
+  Schedule.file(this._file,{@required this.ticks,this.mode}) : assert(ticks != null) {
     _file.execute = true;
+  }
+  Schedule.append(this._name,{@required this.ticks}) : assert(ticks != null){
+    mode = ScheduleMode.append;
+  }
+  Schedule.appendFile(this._file,{@required this.ticks}) : assert(ticks != null){
+    mode = ScheduleMode.append;
   }
 
   @override
   generate(Context context) {
-    if(_file != null){
-      return Group(prefix:"schedule",children: [_file],suffix: " " + ticks.toString() + "t");
+
+    String getMode(){
+      if(mode == null) return "";
+      if(mode == ScheduleMode.append) return " append";
+      return " replace";
     }
-    return Command("schedule function " + context.packId + ":" + _name + " " + ticks.toString()+ "t");
+
+    if(_file != null){
+      return Group(prefix:"schedule",children: [_file],suffix: " " + ticks.toString() + "t" + getMode());
+    }
+    return Command("schedule function " + context.packId + ":" + _name + " " + ticks.toString()+ "t" + getMode());
   }
 
+}
+
+enum ScheduleMode {
+  append,
+  replace,
 }

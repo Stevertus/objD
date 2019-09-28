@@ -133,6 +133,24 @@ class TextComponent {
     value = {"nbt":path,"block":location.toString()};
     if(interpret != null) value["interpret"] = interpret;
   }
+/// |TextComponent.storageNbt| |
+/// |--|--|
+/// |String|The name of your Storage(including namespace)|
+/// |path| the path as a String |
+/// |interpret|bool if nbt should be interpreted as TextComponent(optional)|
+/// |...same properties...|from TextComponent|
+/// 
+/// ```dart
+/// TextComponent.storageNbt(
+/// 	"mypack:storage1",
+/// 	path: "Custom.Stored.Text"
+/// 	interpret: true
+/// )
+/// ```
+  TextComponent.storageNbt(String name, { @required String path,bool interpret,this.color,this.bold, this.underlined,this.italic, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){
+    value = {"nbt":path,"storage":name};
+    if(interpret != null) value["interpret"] = interpret;
+  }
   // shows entity
   TextComponent.selector(Entity entity, {this.color,this.bold, this.underlined,this.italic, this.strikethrough,this.obfuscated,this.clickEvent,this.hoverEvent,this.insertion}){
     value = {"selector":entity.toString()};

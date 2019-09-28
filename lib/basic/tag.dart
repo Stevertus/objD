@@ -1,3 +1,4 @@
+import 'package:objd/basic/condition.dart';
 import 'package:objd/basic/for_list.dart';
 import 'package:objd/basic/rest_action.dart';
 import 'package:objd/basic/widget.dart';
@@ -48,6 +49,15 @@ class Tag extends RestActionAble {
   /// ```
   If removeIfExists({Widget then}) {
     return If(this, Then: [then, this.remove()]);
+  }
+
+  Condition operator & (bool other){
+    if(other!= null && other) return Condition.tag(this);
+    return Condition.not(Condition.tag(this));
+  }
+  Tag operator >> (bool other){
+    if(other!= null && other) return Tag(tag, entity: entity, value: true);
+    return Tag(tag, entity: entity, value: false);
   }
 
   String getEntity() {
