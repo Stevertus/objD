@@ -8,7 +8,7 @@ class MainFile extends Widget {
   Widget generate(Context context) {
     return For.of([
       // put your tick widgets here
-      RawFile("test.json","Hallo!")
+      Storage.copyScore("test",key: "new",score: Score.fromSelected("test"))
     ]);
   }
 }
