@@ -1,3 +1,7 @@
+## 0.3.2
+* changed If Then and Else to `then` and `orElse`, old syntax is deprecated
+* further code refactoring and formatting
+
 ## 0.3.1
 * added Schedule.append, Schedule.appendFile and ScheduleMode for the upcoming 1.15 release
 * added Support for Predicates in Entity

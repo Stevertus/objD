@@ -4,8 +4,9 @@ import 'package:objd/build/reloader.dart' as hotreload;
 export 'package:objd/build/project.dart';
 export 'package:objd/build/context.dart';
 import './io.dart';
+
 /// builds a project and generates the files. Should be placed in the main method.
-/// 
+///
 /// Takes in a [Project]
 /// ```dart
 ///main() {
@@ -13,14 +14,13 @@ import './io.dart';
 /// createProject()
 ///}
 ///```
-void createProject(Project prj,[List<String> args = const []]) {
+void createProject(Project prj, [List<String> args = const []]) {
   Stopwatch stopwatch = Stopwatch()..start();
   GenOptions opt = GenOptions(args);
-  BuildProject bPrj = BuildProject(prj,prod: opt.prod);
+  BuildProject bPrj = BuildProject(prj, prod: opt.prod);
 
-  if(opt.hotreload) hotreload.reloadProject(bPrj);
+  if (opt.hotreload) hotreload.reloadProject(bPrj);
 
-  generateIO(bPrj,opt);
+  generateIO(bPrj, opt);
   print("Total Generation Time: ${stopwatch.elapsedMilliseconds}ms");
 }
-

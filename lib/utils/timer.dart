@@ -57,7 +57,7 @@ class Timer extends RestActionAble {
     } else {
       children.addAll([
         If(Condition.not(Entity.All(tags: ["objd_" + name])),
-            Then: [Schedule(path + "/" + name, ticks: ticks)]),
+            then: [Schedule(path + "/" + name, ticks: ticks)]),
         Entity.All().removeTag("objd_" + name)
       ]);
     }

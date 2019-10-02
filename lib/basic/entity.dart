@@ -357,7 +357,7 @@ class Entity implements EntityClass {
     Rotation isRotated,
     Range horizontalRotation,
     Range verticalRotation,
-    String predicate
+    String predicate,
   }) {
     _setArguments(
       limit,

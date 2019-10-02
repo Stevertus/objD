@@ -86,11 +86,15 @@ class Block {
   static const Block jungle_log = Block('minecraft:jungle_log');
   static const Block acacia_log = Block('minecraft:acacia_log');
   static const Block dark_oak_log = Block('minecraft:dark_oak_log');
-  static const Block stripped_spruce_log = Block('minecraft:stripped_spruce_log');
+  static const Block stripped_spruce_log =
+      Block('minecraft:stripped_spruce_log');
   static const Block stripped_birch_log = Block('minecraft:stripped_birch_log');
-  static const Block stripped_jungle_log = Block('minecraft:stripped_jungle_log');
-  static const Block stripped_acacia_log = Block('minecraft:stripped_acacia_log');
-  static const Block stripped_dark_oak_log = Block('minecraft:stripped_dark_oak_log');
+  static const Block stripped_jungle_log =
+      Block('minecraft:stripped_jungle_log');
+  static const Block stripped_acacia_log =
+      Block('minecraft:stripped_acacia_log');
+  static const Block stripped_dark_oak_log =
+      Block('minecraft:stripped_dark_oak_log');
   static const Block stripped_oak_log = Block('minecraft:stripped_oak_log');
   static const Block oak_wood = Block('minecraft:oak_wood');
   static const Block spruce_wood = Block('minecraft:spruce_wood');
@@ -99,10 +103,14 @@ class Block {
   static const Block acacia_wood = Block('minecraft:acacia_wood');
   static const Block dark_oak_wood = Block('minecraft:dark_oak_wood');
   static const Block stripped_oak_wood = Block('minecraft:stripped_oak_wood');
-  static const Block stripped_spruce_wood = Block('minecraft:stripped_spruce_wood');
-  static const Block stripped_birch_wood = Block('minecraft:stripped_birch_wood');
-  static const Block stripped_jungle_wood = Block('minecraft:stripped_jungle_wood');
-  static const Block stripped_acacia_wood = Block('minecraft:stripped_acacia_wood');
+  static const Block stripped_spruce_wood =
+      Block('minecraft:stripped_spruce_wood');
+  static const Block stripped_birch_wood =
+      Block('minecraft:stripped_birch_wood');
+  static const Block stripped_jungle_wood =
+      Block('minecraft:stripped_jungle_wood');
+  static const Block stripped_acacia_wood =
+      Block('minecraft:stripped_acacia_wood');
   static const Block stripped_dark_oak_wood =
       Block('minecraft:stripped_dark_oak_wood');
   static const Block oak_leaves = Block('minecraft:oak_leaves');
@@ -217,18 +225,24 @@ class Block {
   static const Block jungle_wall_sign = Block('minecraft:jungle_wall_sign');
   static const Block dark_oak_wall_sign = Block('minecraft:dark_oak_wall_sign');
   static const Block lever = Block('minecraft:lever');
-  static const Block stone_pressure_plate = Block('minecraft:stone_pressure_plate');
+  static const Block stone_pressure_plate =
+      Block('minecraft:stone_pressure_plate');
   static const Block iron_door = Block('minecraft:iron_door');
   static const Block oak_pressure_plate = Block('minecraft:oak_pressure_plate');
-  static const Block spruce_pressure_plate = Block('minecraft:spruce_pressure_plate');
-  static const Block birch_pressure_plate = Block('minecraft:birch_pressure_plate');
-  static const Block jungle_pressure_plate = Block('minecraft:jungle_pressure_plate');
-  static const Block acacia_pressure_plate = Block('minecraft:acacia_pressure_plate');
+  static const Block spruce_pressure_plate =
+      Block('minecraft:spruce_pressure_plate');
+  static const Block birch_pressure_plate =
+      Block('minecraft:birch_pressure_plate');
+  static const Block jungle_pressure_plate =
+      Block('minecraft:jungle_pressure_plate');
+  static const Block acacia_pressure_plate =
+      Block('minecraft:acacia_pressure_plate');
   static const Block dark_oak_pressure_plate =
       Block('minecraft:dark_oak_pressure_plate');
   static const Block redstone_ore = Block('minecraft:redstone_ore');
   static const Block redstone_torch = Block('minecraft:redstone_torch');
-  static const Block redstone_wall_torch = Block('minecraft:redstone_wall_torch');
+  static const Block redstone_wall_torch =
+      Block('minecraft:redstone_wall_torch');
   static const Block stone_button = Block('minecraft:stone_button');
   static const Block snow = Block('minecraft:snow');
   static const Block ice = Block('minecraft:ice');
@@ -247,24 +261,32 @@ class Block {
   static const Block jack_o_lantern = Block('minecraft:jack_o_lantern');
   static const Block cake = Block('minecraft:cake');
   static const Block repeater = Block('minecraft:repeater');
-  static const Block white_stained_glass = Block('minecraft:white_stained_glass');
-  static const Block orange_stained_glass = Block('minecraft:orange_stained_glass');
-  static const Block magenta_stained_glass = Block('minecraft:magenta_stained_glass');
+  static const Block white_stained_glass =
+      Block('minecraft:white_stained_glass');
+  static const Block orange_stained_glass =
+      Block('minecraft:orange_stained_glass');
+  static const Block magenta_stained_glass =
+      Block('minecraft:magenta_stained_glass');
   static const Block light_blue_stained_glass =
       Block('minecraft:light_blue_stained_glass');
-  static const Block yellow_stained_glass = Block('minecraft:yellow_stained_glass');
+  static const Block yellow_stained_glass =
+      Block('minecraft:yellow_stained_glass');
   static const Block lime_stained_glass = Block('minecraft:lime_stained_glass');
   static const Block pink_stained_glass = Block('minecraft:pink_stained_glass');
   static const Block gray_stained_glass = Block('minecraft:gray_stained_glass');
   static const Block light_gray_stained_glass =
       Block('minecraft:light_gray_stained_glass');
   static const Block cyan_stained_glass = Block('minecraft:cyan_stained_glass');
-  static const Block purple_stained_glass = Block('minecraft:purple_stained_glass');
+  static const Block purple_stained_glass =
+      Block('minecraft:purple_stained_glass');
   static const Block blue_stained_glass = Block('minecraft:blue_stained_glass');
-  static const Block brown_stained_glass = Block('minecraft:brown_stained_glass');
-  static const Block green_stained_glass = Block('minecraft:green_stained_glass');
+  static const Block brown_stained_glass =
+      Block('minecraft:brown_stained_glass');
+  static const Block green_stained_glass =
+      Block('minecraft:green_stained_glass');
   static const Block red_stained_glass = Block('minecraft:red_stained_glass');
-  static const Block black_stained_glass = Block('minecraft:black_stained_glass');
+  static const Block black_stained_glass =
+      Block('minecraft:black_stained_glass');
   static const Block oak_trapdoor = Block('minecraft:oak_trapdoor');
   static const Block spruce_trapdoor = Block('minecraft:spruce_trapdoor');
   static const Block birch_trapdoor = Block('minecraft:birch_trapdoor');
@@ -273,25 +295,32 @@ class Block {
   static const Block dark_oak_trapdoor = Block('minecraft:dark_oak_trapdoor');
   static const Block stone_bricks = Block('minecraft:stone_bricks');
   static const Block mossy_stone_bricks = Block('minecraft:mossy_stone_bricks');
-  static const Block cracked_stone_bricks = Block('minecraft:cracked_stone_bricks');
-  static const Block chiseled_stone_bricks = Block('minecraft:chiseled_stone_bricks');
+  static const Block cracked_stone_bricks =
+      Block('minecraft:cracked_stone_bricks');
+  static const Block chiseled_stone_bricks =
+      Block('minecraft:chiseled_stone_bricks');
   static const Block infested_stone = Block('minecraft:infested_stone');
-  static const Block infested_cobblestone = Block('minecraft:infested_cobblestone');
-  static const Block infested_stone_bricks = Block('minecraft:infested_stone_bricks');
+  static const Block infested_cobblestone =
+      Block('minecraft:infested_cobblestone');
+  static const Block infested_stone_bricks =
+      Block('minecraft:infested_stone_bricks');
   static const Block infested_mossy_stone_bricks =
       Block('minecraft:infested_mossy_stone_bricks');
   static const Block infested_cracked_stone_bricks =
       Block('minecraft:infested_cracked_stone_bricks');
   static const Block infested_chiseled_stone_bricks =
       Block('minecraft:infested_chiseled_stone_bricks');
-  static const Block brown_mushroom_block = Block('minecraft:brown_mushroom_block');
+  static const Block brown_mushroom_block =
+      Block('minecraft:brown_mushroom_block');
   static const Block red_mushroom_block = Block('minecraft:red_mushroom_block');
   static const Block mushroom_stem = Block('minecraft:mushroom_stem');
   static const Block iron_bars = Block('minecraft:iron_bars');
   static const Block glass_pane = Block('minecraft:glass_pane');
   static const Block melon = Block('minecraft:melon');
-  static const Block attached_pumpkin_stem = Block('minecraft:attached_pumpkin_stem');
-  static const Block attached_melon_stem = Block('minecraft:attached_melon_stem');
+  static const Block attached_pumpkin_stem =
+      Block('minecraft:attached_pumpkin_stem');
+  static const Block attached_melon_stem =
+      Block('minecraft:attached_melon_stem');
   static const Block pumpkin_stem = Block('minecraft:pumpkin_stem');
   static const Block melon_stem = Block('minecraft:melon_stem');
   static const Block vine = Block('minecraft:vine');
@@ -302,7 +331,8 @@ class Block {
   static const Block lily_pad = Block('minecraft:lily_pad');
   static const Block nether_bricks = Block('minecraft:nether_bricks');
   static const Block nether_brick_fence = Block('minecraft:nether_brick_fence');
-  static const Block nether_brick_stairs = Block('minecraft:nether_brick_stairs');
+  static const Block nether_brick_stairs =
+      Block('minecraft:nether_brick_stairs');
   static const Block nether_wart = Block('minecraft:nether_wart');
   static const Block enchanting_table = Block('minecraft:enchanting_table');
   static const Block brewing_stand = Block('minecraft:brewing_stand');
@@ -329,10 +359,14 @@ class Block {
       Block('minecraft:mossy_cobblestone_wall');
   static const Block flower_pot = Block('minecraft:flower_pot');
   static const Block potted_oak_sapling = Block('minecraft:potted_oak_sapling');
-  static const Block potted_spruce_sapling = Block('minecraft:potted_spruce_sapling');
-  static const Block potted_birch_sapling = Block('minecraft:potted_birch_sapling');
-  static const Block potted_jungle_sapling = Block('minecraft:potted_jungle_sapling');
-  static const Block potted_acacia_sapling = Block('minecraft:potted_acacia_sapling');
+  static const Block potted_spruce_sapling =
+      Block('minecraft:potted_spruce_sapling');
+  static const Block potted_birch_sapling =
+      Block('minecraft:potted_birch_sapling');
+  static const Block potted_jungle_sapling =
+      Block('minecraft:potted_jungle_sapling');
+  static const Block potted_acacia_sapling =
+      Block('minecraft:potted_acacia_sapling');
   static const Block potted_dark_oak_sapling =
       Block('minecraft:potted_dark_oak_sapling');
   static const Block potted_fern = Block('minecraft:potted_fern');
@@ -342,7 +376,8 @@ class Block {
   static const Block potted_allium = Block('minecraft:potted_allium');
   static const Block potted_azure_bluet = Block('minecraft:potted_azure_bluet');
   static const Block potted_red_tulip = Block('minecraft:potted_red_tulip');
-  static const Block potted_orange_tulip = Block('minecraft:potted_orange_tulip');
+  static const Block potted_orange_tulip =
+      Block('minecraft:potted_orange_tulip');
   static const Block potted_white_tulip = Block('minecraft:potted_white_tulip');
   static const Block potted_pink_tulip = Block('minecraft:potted_pink_tulip');
   static const Block potted_oxeye_daisy = Block('minecraft:potted_oxeye_daisy');
@@ -350,8 +385,10 @@ class Block {
   static const Block potted_lily_of_the_valley =
       Block('minecraft:potted_lily_of_the_valley');
   static const Block potted_wither_rose = Block('minecraft:potted_wither_rose');
-  static const Block potted_red_mushroom = Block('minecraft:potted_red_mushroom');
-  static const Block potted_brown_mushroom = Block('minecraft:potted_brown_mushroom');
+  static const Block potted_red_mushroom =
+      Block('minecraft:potted_red_mushroom');
+  static const Block potted_brown_mushroom =
+      Block('minecraft:potted_brown_mushroom');
   static const Block potted_dead_bush = Block('minecraft:potted_dead_bush');
   static const Block potted_cactus = Block('minecraft:potted_cactus');
   static const Block carrots = Block('minecraft:carrots');
@@ -363,8 +400,10 @@ class Block {
   static const Block acacia_button = Block('minecraft:acacia_button');
   static const Block dark_oak_button = Block('minecraft:dark_oak_button');
   static const Block skeleton_skull = Block('minecraft:skeleton_skull');
-  static const Block skeleton_wall_skull = Block('minecraft:skeleton_wall_skull');
-  static const Block wither_skeleton_skull = Block('minecraft:wither_skeleton_skull');
+  static const Block skeleton_wall_skull =
+      Block('minecraft:skeleton_wall_skull');
+  static const Block wither_skeleton_skull =
+      Block('minecraft:wither_skeleton_skull');
   static const Block wither_skeleton_wall_skull =
       Block('minecraft:wither_skeleton_wall_skull');
   static const Block zombie_head = Block('minecraft:zombie_head');
@@ -389,7 +428,8 @@ class Block {
   static const Block nether_quartz_ore = Block('minecraft:nether_quartz_ore');
   static const Block hopper = Block('minecraft:hopper');
   static const Block quartz_block = Block('minecraft:quartz_block');
-  static const Block chiseled_quartz_block = Block('minecraft:chiseled_quartz_block');
+  static const Block chiseled_quartz_block =
+      Block('minecraft:chiseled_quartz_block');
   static const Block quartz_pillar = Block('minecraft:quartz_pillar');
   static const Block quartz_stairs = Block('minecraft:quartz_stairs');
   static const Block activator_rail = Block('minecraft:activator_rail');
@@ -397,12 +437,14 @@ class Block {
   static const Block white_terracotta = Block('minecraft:white_terracotta');
   static const Block orange_terracotta = Block('minecraft:orange_terracotta');
   static const Block magenta_terracotta = Block('minecraft:magenta_terracotta');
-  static const Block light_blue_terracotta = Block('minecraft:light_blue_terracotta');
+  static const Block light_blue_terracotta =
+      Block('minecraft:light_blue_terracotta');
   static const Block yellow_terracotta = Block('minecraft:yellow_terracotta');
   static const Block lime_terracotta = Block('minecraft:lime_terracotta');
   static const Block pink_terracotta = Block('minecraft:pink_terracotta');
   static const Block gray_terracotta = Block('minecraft:gray_terracotta');
-  static const Block light_gray_terracotta = Block('minecraft:light_gray_terracotta');
+  static const Block light_gray_terracotta =
+      Block('minecraft:light_gray_terracotta');
   static const Block cyan_terracotta = Block('minecraft:cyan_terracotta');
   static const Block purple_terracotta = Block('minecraft:purple_terracotta');
   static const Block blue_terracotta = Block('minecraft:blue_terracotta');
@@ -456,8 +498,10 @@ class Block {
   static const Block dark_prismarine_stairs =
       Block('minecraft:dark_prismarine_stairs');
   static const Block prismarine_slab = Block('minecraft:prismarine_slab');
-  static const Block prismarine_brick_slab = Block('minecraft:prismarine_brick_slab');
-  static const Block dark_prismarine_slab = Block('minecraft:dark_prismarine_slab');
+  static const Block prismarine_brick_slab =
+      Block('minecraft:prismarine_brick_slab');
+  static const Block dark_prismarine_slab =
+      Block('minecraft:dark_prismarine_slab');
   static const Block sea_lantern = Block('minecraft:sea_lantern');
   static const Block hay_block = Block('minecraft:hay_block');
   static const Block white_carpet = Block('minecraft:white_carpet');
@@ -503,7 +547,8 @@ class Block {
   static const Block black_banner = Block('minecraft:black_banner');
   static const Block white_wall_banner = Block('minecraft:white_wall_banner');
   static const Block orange_wall_banner = Block('minecraft:orange_wall_banner');
-  static const Block magenta_wall_banner = Block('minecraft:magenta_wall_banner');
+  static const Block magenta_wall_banner =
+      Block('minecraft:magenta_wall_banner');
   static const Block light_blue_wall_banner =
       Block('minecraft:light_blue_wall_banner');
   static const Block yellow_wall_banner = Block('minecraft:yellow_wall_banner');
@@ -523,7 +568,8 @@ class Block {
   static const Block chiseled_red_sandstone =
       Block('minecraft:chiseled_red_sandstone');
   static const Block cut_red_sandstone = Block('minecraft:cut_red_sandstone');
-  static const Block red_sandstone_stairs = Block('minecraft:red_sandstone_stairs');
+  static const Block red_sandstone_stairs =
+      Block('minecraft:red_sandstone_stairs');
   static const Block oak_slab = Block('minecraft:oak_slab');
   static const Block spruce_slab = Block('minecraft:spruce_slab');
   static const Block birch_slab = Block('minecraft:birch_slab');
@@ -544,12 +590,14 @@ class Block {
   static const Block smooth_stone = Block('minecraft:smooth_stone');
   static const Block smooth_sandstone = Block('minecraft:smooth_sandstone');
   static const Block smooth_quartz = Block('minecraft:smooth_quartz');
-  static const Block smooth_red_sandstone = Block('minecraft:smooth_red_sandstone');
+  static const Block smooth_red_sandstone =
+      Block('minecraft:smooth_red_sandstone');
   static const Block spruce_fence_gate = Block('minecraft:spruce_fence_gate');
   static const Block birch_fence_gate = Block('minecraft:birch_fence_gate');
   static const Block jungle_fence_gate = Block('minecraft:jungle_fence_gate');
   static const Block acacia_fence_gate = Block('minecraft:acacia_fence_gate');
-  static const Block dark_oak_fence_gate = Block('minecraft:dark_oak_fence_gate');
+  static const Block dark_oak_fence_gate =
+      Block('minecraft:dark_oak_fence_gate');
   static const Block spruce_fence = Block('minecraft:spruce_fence');
   static const Block birch_fence = Block('minecraft:birch_fence');
   static const Block jungle_fence = Block('minecraft:jungle_fence');
@@ -572,7 +620,8 @@ class Block {
   static const Block end_gateway = Block('minecraft:end_gateway');
   static const Block repeating_command_block =
       Block('minecraft:repeating_command_block');
-  static const Block chain_command_block = Block('minecraft:chain_command_block');
+  static const Block chain_command_block =
+      Block('minecraft:chain_command_block');
   static const Block frosted_ice = Block('minecraft:frosted_ice');
   static const Block magma_block = Block('minecraft:magma_block');
   static const Block nether_wart_block = Block('minecraft:nether_wart_block');
@@ -583,7 +632,8 @@ class Block {
   static const Block shulker_box = Block('minecraft:shulker_box');
   static const Block white_shulker_box = Block('minecraft:white_shulker_box');
   static const Block orange_shulker_box = Block('minecraft:orange_shulker_box');
-  static const Block magenta_shulker_box = Block('minecraft:magenta_shulker_box');
+  static const Block magenta_shulker_box =
+      Block('minecraft:magenta_shulker_box');
   static const Block light_blue_shulker_box =
       Block('minecraft:light_blue_shulker_box');
   static const Block yellow_shulker_box = Block('minecraft:yellow_shulker_box');
@@ -627,18 +677,21 @@ class Block {
       Block('minecraft:brown_glazed_terracotta');
   static const Block green_glazed_terracotta =
       Block('minecraft:green_glazed_terracotta');
-  static const Block red_glazed_terracotta = Block('minecraft:red_glazed_terracotta');
+  static const Block red_glazed_terracotta =
+      Block('minecraft:red_glazed_terracotta');
   static const Block black_glazed_terracotta =
       Block('minecraft:black_glazed_terracotta');
   static const Block white_concrete = Block('minecraft:white_concrete');
   static const Block orange_concrete = Block('minecraft:orange_concrete');
   static const Block magenta_concrete = Block('minecraft:magenta_concrete');
-  static const Block light_blue_concrete = Block('minecraft:light_blue_concrete');
+  static const Block light_blue_concrete =
+      Block('minecraft:light_blue_concrete');
   static const Block yellow_concrete = Block('minecraft:yellow_concrete');
   static const Block lime_concrete = Block('minecraft:lime_concrete');
   static const Block pink_concrete = Block('minecraft:pink_concrete');
   static const Block gray_concrete = Block('minecraft:gray_concrete');
-  static const Block light_gray_concrete = Block('minecraft:light_gray_concrete');
+  static const Block light_gray_concrete =
+      Block('minecraft:light_gray_concrete');
   static const Block cyan_concrete = Block('minecraft:cyan_concrete');
   static const Block purple_concrete = Block('minecraft:purple_concrete');
   static const Block blue_concrete = Block('minecraft:blue_concrete');
@@ -646,7 +699,8 @@ class Block {
   static const Block green_concrete = Block('minecraft:green_concrete');
   static const Block red_concrete = Block('minecraft:red_concrete');
   static const Block black_concrete = Block('minecraft:black_concrete');
-  static const Block white_concrete_powder = Block('minecraft:white_concrete_powder');
+  static const Block white_concrete_powder =
+      Block('minecraft:white_concrete_powder');
   static const Block orange_concrete_powder =
       Block('minecraft:orange_concrete_powder');
   static const Block magenta_concrete_powder =
@@ -655,30 +709,42 @@ class Block {
       Block('minecraft:light_blue_concrete_powder');
   static const Block yellow_concrete_powder =
       Block('minecraft:yellow_concrete_powder');
-  static const Block lime_concrete_powder = Block('minecraft:lime_concrete_powder');
-  static const Block pink_concrete_powder = Block('minecraft:pink_concrete_powder');
-  static const Block gray_concrete_powder = Block('minecraft:gray_concrete_powder');
+  static const Block lime_concrete_powder =
+      Block('minecraft:lime_concrete_powder');
+  static const Block pink_concrete_powder =
+      Block('minecraft:pink_concrete_powder');
+  static const Block gray_concrete_powder =
+      Block('minecraft:gray_concrete_powder');
   static const Block light_gray_concrete_powder =
       Block('minecraft:light_gray_concrete_powder');
-  static const Block cyan_concrete_powder = Block('minecraft:cyan_concrete_powder');
+  static const Block cyan_concrete_powder =
+      Block('minecraft:cyan_concrete_powder');
   static const Block purple_concrete_powder =
       Block('minecraft:purple_concrete_powder');
-  static const Block blue_concrete_powder = Block('minecraft:blue_concrete_powder');
-  static const Block brown_concrete_powder = Block('minecraft:brown_concrete_powder');
-  static const Block green_concrete_powder = Block('minecraft:green_concrete_powder');
-  static const Block red_concrete_powder = Block('minecraft:red_concrete_powder');
-  static const Block black_concrete_powder = Block('minecraft:black_concrete_powder');
+  static const Block blue_concrete_powder =
+      Block('minecraft:blue_concrete_powder');
+  static const Block brown_concrete_powder =
+      Block('minecraft:brown_concrete_powder');
+  static const Block green_concrete_powder =
+      Block('minecraft:green_concrete_powder');
+  static const Block red_concrete_powder =
+      Block('minecraft:red_concrete_powder');
+  static const Block black_concrete_powder =
+      Block('minecraft:black_concrete_powder');
   static const Block kelp = Block('minecraft:kelp');
   static const Block kelp_plant = Block('minecraft:kelp_plant');
   static const Block dried_kelp_block = Block('minecraft:dried_kelp_block');
   static const Block turtle_egg = Block('minecraft:turtle_egg');
-  static const Block dead_tube_coral_block = Block('minecraft:dead_tube_coral_block');
+  static const Block dead_tube_coral_block =
+      Block('minecraft:dead_tube_coral_block');
   static const Block dead_brain_coral_block =
       Block('minecraft:dead_brain_coral_block');
   static const Block dead_bubble_coral_block =
       Block('minecraft:dead_bubble_coral_block');
-  static const Block dead_fire_coral_block = Block('minecraft:dead_fire_coral_block');
-  static const Block dead_horn_coral_block = Block('minecraft:dead_horn_coral_block');
+  static const Block dead_fire_coral_block =
+      Block('minecraft:dead_fire_coral_block');
+  static const Block dead_horn_coral_block =
+      Block('minecraft:dead_horn_coral_block');
   static const Block tube_coral_block = Block('minecraft:tube_coral_block');
   static const Block brain_coral_block = Block('minecraft:brain_coral_block');
   static const Block bubble_coral_block = Block('minecraft:bubble_coral_block');
@@ -694,11 +760,16 @@ class Block {
   static const Block bubble_coral = Block('minecraft:bubble_coral');
   static const Block fire_coral = Block('minecraft:fire_coral');
   static const Block horn_coral = Block('minecraft:horn_coral');
-  static const Block dead_tube_coral_fan = Block('minecraft:dead_tube_coral_fan');
-  static const Block dead_brain_coral_fan = Block('minecraft:dead_brain_coral_fan');
-  static const Block dead_bubble_coral_fan = Block('minecraft:dead_bubble_coral_fan');
-  static const Block dead_fire_coral_fan = Block('minecraft:dead_fire_coral_fan');
-  static const Block dead_horn_coral_fan = Block('minecraft:dead_horn_coral_fan');
+  static const Block dead_tube_coral_fan =
+      Block('minecraft:dead_tube_coral_fan');
+  static const Block dead_brain_coral_fan =
+      Block('minecraft:dead_brain_coral_fan');
+  static const Block dead_bubble_coral_fan =
+      Block('minecraft:dead_bubble_coral_fan');
+  static const Block dead_fire_coral_fan =
+      Block('minecraft:dead_fire_coral_fan');
+  static const Block dead_horn_coral_fan =
+      Block('minecraft:dead_horn_coral_fan');
   static const Block tube_coral_fan = Block('minecraft:tube_coral_fan');
   static const Block brain_coral_fan = Block('minecraft:brain_coral_fan');
   static const Block bubble_coral_fan = Block('minecraft:bubble_coral_fan');
@@ -714,11 +785,16 @@ class Block {
       Block('minecraft:dead_fire_coral_wall_fan');
   static const Block dead_horn_coral_wall_fan =
       Block('minecraft:dead_horn_coral_wall_fan');
-  static const Block tube_coral_wall_fan = Block('minecraft:tube_coral_wall_fan');
-  static const Block brain_coral_wall_fan = Block('minecraft:brain_coral_wall_fan');
-  static const Block bubble_coral_wall_fan = Block('minecraft:bubble_coral_wall_fan');
-  static const Block fire_coral_wall_fan = Block('minecraft:fire_coral_wall_fan');
-  static const Block horn_coral_wall_fan = Block('minecraft:horn_coral_wall_fan');
+  static const Block tube_coral_wall_fan =
+      Block('minecraft:tube_coral_wall_fan');
+  static const Block brain_coral_wall_fan =
+      Block('minecraft:brain_coral_wall_fan');
+  static const Block bubble_coral_wall_fan =
+      Block('minecraft:bubble_coral_wall_fan');
+  static const Block fire_coral_wall_fan =
+      Block('minecraft:fire_coral_wall_fan');
+  static const Block horn_coral_wall_fan =
+      Block('minecraft:horn_coral_wall_fan');
   static const Block sea_pickle = Block('minecraft:sea_pickle');
   static const Block blue_ice = Block('minecraft:blue_ice');
   static const Block conduit = Block('minecraft:conduit');
@@ -743,7 +819,8 @@ class Block {
   static const Block stone_stairs = Block('minecraft:stone_stairs');
   static const Block smooth_sandstone_stairs =
       Block('minecraft:smooth_sandstone_stairs');
-  static const Block smooth_quartz_stairs = Block('minecraft:smooth_quartz_stairs');
+  static const Block smooth_quartz_stairs =
+      Block('minecraft:smooth_quartz_stairs');
   static const Block granite_stairs = Block('minecraft:granite_stairs');
   static const Block andesite_stairs = Block('minecraft:andesite_stairs');
   static const Block red_nether_brick_stairs =
@@ -751,20 +828,25 @@ class Block {
   static const Block polished_andesite_stairs =
       Block('minecraft:polished_andesite_stairs');
   static const Block diorite_stairs = Block('minecraft:diorite_stairs');
-  static const Block polished_granite_slab = Block('minecraft:polished_granite_slab');
+  static const Block polished_granite_slab =
+      Block('minecraft:polished_granite_slab');
   static const Block smooth_red_sandstone_slab =
       Block('minecraft:smooth_red_sandstone_slab');
   static const Block mossy_stone_brick_slab =
       Block('minecraft:mossy_stone_brick_slab');
-  static const Block polished_diorite_slab = Block('minecraft:polished_diorite_slab');
+  static const Block polished_diorite_slab =
+      Block('minecraft:polished_diorite_slab');
   static const Block mossy_cobblestone_slab =
       Block('minecraft:mossy_cobblestone_slab');
-  static const Block end_stone_brick_slab = Block('minecraft:end_stone_brick_slab');
-  static const Block smooth_sandstone_slab = Block('minecraft:smooth_sandstone_slab');
+  static const Block end_stone_brick_slab =
+      Block('minecraft:end_stone_brick_slab');
+  static const Block smooth_sandstone_slab =
+      Block('minecraft:smooth_sandstone_slab');
   static const Block smooth_quartz_slab = Block('minecraft:smooth_quartz_slab');
   static const Block granite_slab = Block('minecraft:granite_slab');
   static const Block andesite_slab = Block('minecraft:andesite_slab');
-  static const Block red_nether_brick_slab = Block('minecraft:red_nether_brick_slab');
+  static const Block red_nether_brick_slab =
+      Block('minecraft:red_nether_brick_slab');
   static const Block polished_andesite_slab =
       Block('minecraft:polished_andesite_slab');
   static const Block diorite_slab = Block('minecraft:diorite_slab');
@@ -777,9 +859,11 @@ class Block {
   static const Block stone_brick_wall = Block('minecraft:stone_brick_wall');
   static const Block nether_brick_wall = Block('minecraft:nether_brick_wall');
   static const Block andesite_wall = Block('minecraft:andesite_wall');
-  static const Block red_nether_brick_wall = Block('minecraft:red_nether_brick_wall');
+  static const Block red_nether_brick_wall =
+      Block('minecraft:red_nether_brick_wall');
   static const Block sandstone_wall = Block('minecraft:sandstone_wall');
-  static const Block end_stone_brick_wall = Block('minecraft:end_stone_brick_wall');
+  static const Block end_stone_brick_wall =
+      Block('minecraft:end_stone_brick_wall');
   static const Block diorite_wall = Block('minecraft:diorite_wall');
   static const Block scaffolding = Block('minecraft:scaffolding');
   static const Block loom = Block('minecraft:loom');

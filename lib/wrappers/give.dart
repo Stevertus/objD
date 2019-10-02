@@ -9,11 +9,12 @@ import 'package:objd/build/build.dart';
 class Give extends RestActionAble {
   Entity entity;
   Item item;
+
   /// Gives a item to a player.
-  Give(this.entity, {@required this.item}):assert(item != null);
-  
+  Give(this.entity, {@required this.item}) : assert(item != null);
+
   @override
-  Widget generate(Context context){
+  Widget generate(Context context) {
     return Command('give ' + entity.toString() + ' ' + item.getGiveNotation());
   }
 }

@@ -75,12 +75,18 @@ class Item {
   Item.fromJson(Map<String, dynamic> json) {
     if (json["item"] != null) type = ItemType(json["item"].toString());
     if (json["id"] != null) type = ItemType(json["id"].toString());
-    if (json["Slot"] != null) slot = Slot(id: int.parse(json["Slot"].toString()));
-    if (json["Count"] != null && int.parse(json["Count"].toString()) > 0) int.parse(json["Count"].toString());
-    if (json["Damage"] != null && int.parse(json["Damage"].toString()) > 0) damage = int.parse(json["Damage"].toString());
+    if (json["Slot"] != null) {
+      slot = Slot(id: int.parse(json["Slot"].toString()));
+    }
+    if (json["Count"] != null && int.parse(json["Count"].toString()) > 0) {
+      int.parse(json["Count"].toString());
+    }
+    if (json["Damage"] != null && int.parse(json["Damage"].toString()) > 0) {
+      damage = int.parse(json["Damage"].toString());
+    }
     int model;
     if (json["model"] != null) model = int.parse(json["Damage"].toString());
-    if (json["tag"] != null) tag = json["tag"] as Map<String,dynamic>;
+    if (json["tag"] != null) tag = json["tag"] as Map<String, dynamic>;
     _checkTags(model, null, null, null);
   }
 
@@ -122,9 +128,10 @@ class Item {
     if (count != null) map["Count"] = count;
     if (slot != null) {
       if (slot.id == null) throw ("An Item needs the Slot id!");
-      if (slot.id < 0)
-        {print(
-            "Please note that you are using Item with a negative slot. This is reserved for a selecteditem and can't be accessed within the Inventory propery!");}
+      if (slot.id < 0) {
+        print(
+            "Please note that you are using Item with a negative slot. This is reserved for a selecteditem and can't be accessed within the Inventory propery!");
+      }
       map["Slot"] = slot.id;
     }
     return map;

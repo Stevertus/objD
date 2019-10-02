@@ -15,19 +15,22 @@ class Team extends RestActionAble {
   Team(this.name) {
     _action = _TeamAction.add;
   }
-    Team.add(this.name,
-      {TextComponent display,
-      Color color,
-      ModifyTeam nametag,
-      ModifyTeam collision,
-      ModifyTeam deathMessage,
-      bool friendlyFire,
-      String prefix,
-      String suffix,
-      bool seeInvisible}) {
-        _action =_TeamAction.add;
-        _setModifiers(display,color,nametag,collision,deathMessage,friendlyFire,prefix,suffix,seeInvisible);
-      }
+  Team.add(
+    this.name, {
+    TextComponent display,
+    Color color,
+    ModifyTeam nametag,
+    ModifyTeam collision,
+    ModifyTeam deathMessage,
+    bool friendlyFire,
+    String prefix,
+    String suffix,
+    bool seeInvisible,
+  }) {
+    _action = _TeamAction.add;
+    _setModifiers(display, color, nametag, collision, deathMessage,
+        friendlyFire, prefix, suffix, seeInvisible);
+  }
 
   Team.empty(this.name) {
     _action = _TeamAction.empty;
@@ -38,40 +41,47 @@ class Team extends RestActionAble {
   Team.leave(this.entity) {
     _action = _TeamAction.leave;
   }
-  Team.modify(this.name,
-      {TextComponent display,
-      Color color,
-      ModifyTeam nametag,
-      ModifyTeam collision,
-      ModifyTeam deathMessage,
-      bool friendlyFire,
-      String prefix,
-      String suffix,
-      bool seeInvisible}) {
-         _action =_TeamAction.modify;
-        _setModifiers(display,color,nametag,collision,deathMessage,friendlyFire,prefix,suffix,seeInvisible);
-      }
+  Team.modify(
+    this.name, {
+    TextComponent display,
+    Color color,
+    ModifyTeam nametag,
+    ModifyTeam collision,
+    ModifyTeam deathMessage,
+    bool friendlyFire,
+    String prefix,
+    String suffix,
+    bool seeInvisible,
+  }) {
+    _action = _TeamAction.modify;
+    _setModifiers(display, color, nametag, collision, deathMessage,
+        friendlyFire, prefix, suffix, seeInvisible);
+  }
   _setModifiers(
-      TextComponent display,
-      Color color,
-      ModifyTeam nametag,
-      ModifyTeam collision,
-      ModifyTeam deathMessage,
-      bool friendlyFire,
-      String prefix,
-      String suffix,
-      bool seeInvisible) {
-        if(display != null) modifiers["displayName"] = display.toJson();
-        if(color != null) modifiers["color"] = color.toString();
-        if(deathMessage != null) modifiers["deathMessageVisibility"] = _genEnum(deathMessage);
-        if(friendlyFire != null) modifiers["friendlyFire"] = friendlyFire;
-        if(nametag != null) modifiers["nametagVisibility"] =  _genEnum(nametag);
-        if(collision != null) modifiers["collisionRule"] =  _genEnum(collision);
-        if(prefix != null) modifiers["prefix"] =  prefix;
-        if(suffix != null) modifiers["suffix"] =  suffix;
-        if(seeInvisible != null) modifiers["seeFriendlyInvisible"] = seeInvisible;
-      }
-  _genEnum(dynamic en){
+    TextComponent display,
+    Color color,
+    ModifyTeam nametag,
+    ModifyTeam collision,
+    ModifyTeam deathMessage,
+    bool friendlyFire,
+    String prefix,
+    String suffix,
+    bool seeInvisible,
+  ) {
+    if (display != null) modifiers["displayName"] = display.toJson();
+    if (color != null) modifiers["color"] = color.toString();
+    if (deathMessage != null) {
+      modifiers["deathMessageVisibility"] = _genEnum(deathMessage);
+    }
+    if (friendlyFire != null) modifiers["friendlyFire"] = friendlyFire;
+    if (nametag != null) modifiers["nametagVisibility"] = _genEnum(nametag);
+    if (collision != null) modifiers["collisionRule"] = _genEnum(collision);
+    if (prefix != null) modifiers["prefix"] = prefix;
+    if (suffix != null) modifiers["suffix"] = suffix;
+    if (seeInvisible != null) modifiers["seeFriendlyInvisible"] = seeInvisible;
+  }
+
+  _genEnum(dynamic en) {
     return en.toString().split(".")[1];
   }
 
@@ -96,8 +106,9 @@ class Team extends RestActionAble {
         break;
       default:
     }
-    if(modifiers.isNotEmpty){
-      modifiers.keys.forEach((key) => wids.add(Command("team modify ${name} ${key} ${modifiers[key]}")));
+    if (modifiers.isNotEmpty) {
+      modifiers.keys.forEach((key) =>
+          wids.add(Command("team modify ${name} ${key} ${modifiers[key]}")));
     }
     print(modifiers);
     return For.of(wids);

@@ -2,7 +2,6 @@ import 'package:objd/basic/file.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/build/context.dart';
 
-
 /// A Module extends the functionality of a Widget. It allows deeper intregration and file generation.
 ///
 /// The Module is therefore mostly used in your tick function or with the modules provider of the Pack.

@@ -206,7 +206,7 @@ class Execute extends RestActionAble {
     List<List<String>> args = _resolve(this._args);
     args.forEach((e) => e.add(arg));
     return Execute(
-        children: List<Widget>.from(this.children),
+        children: List<Widget>.from(this.children ?? []),
         encapsulate: this.encapsulate,
         args: args,
         writable: writable);
@@ -244,8 +244,9 @@ class Execute extends RestActionAble {
   /// ⇒ execute positioned as @p run say I get executed
   /// ```
   Execute positioned(dynamic loc) {
-    if (!(loc is Location || loc is Entity))
-      {throw ("Please insert either a Location or an Entity into Execute.positioned");}
+    if (!(loc is Location || loc is Entity)) {
+      throw ("Please insert either a Location or an Entity into Execute.positioned");
+    }
     return _addArgumentRet(
         'positioned ' + (loc is Entity ? 'as ' : '') + loc.toString());
   }
@@ -391,7 +392,7 @@ class Execute extends RestActionAble {
         writable: writable);
   }
 
-  Execute runStrait(Function(List<Widget>) f) => run( StraitWidget(f));
+  Execute runStrait(Function(List<Widget>) f) => run(StraitWidget(f));
 
   List<List<String>> _resolve(src) {
     List<List<String>> ret = List<List<String>>();

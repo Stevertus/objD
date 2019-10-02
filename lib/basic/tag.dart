@@ -31,10 +31,10 @@ class Tag extends RestActionAble {
   toggle({String temp = "objd_temp"}) {
     var tempTag = Tag(temp, entity: entity);
     return For.of([
-      If(this, Then: [tempTag]),
-      If(tempTag, Then: [Tag(tag, entity: entity, value: false)]),
+      If(this, then: [tempTag]),
+      If(tempTag, then: [Tag(tag, entity: entity, value: false)]),
       If(Tag("!" + temp, entity: entity),
-          Then: [Tag(tag, entity: entity, value: true)]),
+          then: [Tag(tag, entity: entity, value: true)]),
       tempTag.remove()
     ]);
   }
@@ -48,18 +48,18 @@ class Tag extends RestActionAble {
   /// ⇒ execute if entity @s[tag=mytag] run tag @s remove mytag
   /// ```
   If removeIfExists({Widget then}) {
-    return If(this, Then: [then, this.remove()]);
+    return If(this, then: [then, this.remove()]);
   }
 
   /// Checks if the Tag is a certain value and returns a Condition to use in If.
-  Condition operator & (bool other){
-    if(other!= null && other) return Condition.tag(this);
+  Condition operator &(bool other) {
+    if (other != null && other) return Condition.tag(this);
     return Condition.not(Condition.tag(this));
   }
 
   /// Assignes a new boolean value to the Tag(removes or adds the tag).
-  Tag operator >> (bool other){
-    if(other!= null && other) return Tag(tag, entity: entity, value: true);
+  Tag operator >>(bool other) {
+    if (other != null && other) return Tag(tag, entity: entity, value: true);
     return Tag(tag, entity: entity, value: false);
   }
 

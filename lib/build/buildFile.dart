@@ -18,32 +18,28 @@ class BuildFile {
 
   bool isGen = true;
 
-
-  BuildFile(File file){
+  BuildFile(File file) {
     path = file.path;
     child = file.child;
     commands = [];
   }
-  BuildFile.extended(Extend file){
+  BuildFile.extended(Extend file) {
     path = file.path;
     child = file.child;
     commands = [];
   }
 
-  add(String str){
-    if(str != null && str.isNotEmpty){
+  add(String str) {
+    if (str != null && str.isNotEmpty) {
       commands.add(str);
-    } 
+    }
   }
 
   List toMap() {
     return commands;
   }
 
-  generate({Context context, BuildPack pack, BuildProject prj}){
-    scanner.scan(child,context:context,file:this,pack:pack,project:prj);
+  generate({Context context, BuildPack pack, BuildProject prj}) {
+    scanner.scan(child, context: context, file: this, pack: pack, project: prj);
   }
-
-  
 }
-

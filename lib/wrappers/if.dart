@@ -10,8 +10,8 @@ import 'package:objd/build/build.dart';
 
 class If extends RestActionAble {
   List<List<dynamic>> conds;
-  List<Widget> Then;
-  List<Widget> Else;
+  List<Widget> then;
+  List<Widget> orElse;
   If elseWidget;
   bool invert = false;
   Entity assignTag;
@@ -35,15 +35,21 @@ class If extends RestActionAble {
   /// 	]
   /// )
   /// ```
-  If(dynamic condition,
-      {@required this.Then,
-      this.Else,
-      this.targetFilePath = "objd",
-      this.targetFileName,
-      this.encapsulate = true,
-      this.assignTag}) {
-    assert(Then != null);
-    assert(Then.isNotEmpty);
+  If(
+    dynamic condition, {
+    @required this.then,
+    this.orElse,
+    @deprecated List<Widget> Then,
+    @deprecated List<Widget> Else,
+    this.targetFilePath = "objd",
+    this.targetFileName,
+    this.encapsulate = true,
+    this.assignTag,
+  }) {
+    if (Then != null) then = Then;
+    if (Else != null) orElse = Else;
+    assert(then != null);
+    assert(then.isNotEmpty);
     getCondition(condition);
   }
 
@@ -56,27 +62,30 @@ class If extends RestActionAble {
   /// 	]
   /// )
   /// ```
-  If.not(dynamic condition,
-      {@required this.Then,
-      this.Else,
-      this.targetFilePath = "objd",
-      this.targetFileName,
-      this.encapsulate = true,
-      this.assignTag}) {
-    assert(Then != null);
-    assert(Then.isNotEmpty);
+  If.not(
+    dynamic condition, {
+    @required this.then,
+    this.orElse,
+    @deprecated List<Widget> Then,
+    @deprecated List<Widget> Else,
+    this.targetFilePath = "objd",
+    this.targetFileName,
+    this.encapsulate = true,
+    this.assignTag,
+  }) {
+    if (Then != null) then = Then;
+    if (Else != null) orElse = Else;
+    assert(then != null);
+    assert(then.isNotEmpty);
     invert = true;
     getCondition(condition);
   }
   getCondition(dynamic condition) {
     if (condition is Condition) {
       this.conds = condition.getList();
-    }
-      
-    else {
+    } else {
       this.conds = Condition(condition).getList();
     }
-      
   }
 
   @override
@@ -85,16 +94,16 @@ class If extends RestActionAble {
 
     List<Widget> children = [];
     // group into seperate file(and get if id)
-    if (Else != null || prefixes.length >= 2 || this.assignTag != null) {
+    if (orElse != null || prefixes.length >= 2 || this.assignTag != null) {
       if (this.assignTag == null) this.assignTag = Entity.Player();
-      if (Then.length > 2 && context.file.isNotEmpty){
-        Then.insert(0, Comment("If statement from file: " + context.file));
+      if (then.length > 2 && context.file.isNotEmpty) {
+        then.insert(0, Comment("If statement from file: " + context.file));
       }
-        
-      if (Else != null && Else.length > 2 && context.file.isNotEmpty){
-        Else.insert(0, Comment("Else statement from file: " + context.file));
+
+      if (orElse != null && orElse.length > 2 && context.file.isNotEmpty) {
+        orElse.insert(0, Comment("Else statement from file: " + context.file));
       }
-        
+
       children = _getTagVersion(prefixes);
       // if (context.file.isNotEmpty)
       //   Then.insert(0, Comment("If statement from file: " + context.file));
@@ -119,7 +128,7 @@ class If extends RestActionAble {
           generateIDs: targetFileName == null,
           filename: targetFileName ?? "if",
           groupMin: encapsulate ? 3 : -1,
-          children: Then,
+          children: then,
         ));
       });
     }
@@ -148,9 +157,9 @@ class If extends RestActionAble {
       path: targetFilePath,
       generateIDs: targetFileName == null,
       filename: targetFileName ?? "if",
-      children: Then,
+      children: then,
     ));
-    if (this.Else != null) {
+    if (this.orElse != null) {
       children.add(Group(
         prefix: "execute as " +
             assignTag.toString() +
@@ -159,7 +168,7 @@ class If extends RestActionAble {
             "] run",
         path: targetFilePath,
         filename: "else",
-        children: Else,
+        children: orElse,
       ));
     }
     children.add(assignTag.removeTag("objd_isTrue" + id.toString()));

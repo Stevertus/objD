@@ -10,12 +10,14 @@ class Area {
     loc2 = Location.glob(x: _max(x1, x2), y: _max(y1, y2), z: _max(z1, z2));
     _setDifferences();
   }
+
   /// Use Area.rel if you want to select the area relative to an unknown position.
   Area.rel({double x1, double y1, double z1, double x2, double y2, double z2}) {
     loc1 = Location.rel(x: _min(x1, x2), y: _min(y1, y2), z: _min(z1, z2));
     loc2 = Location.rel(x: _max(x1, x2), y: _max(y1, y2), z: _max(z1, z2));
     _setDifferences();
   }
+
   /// fromRanges is a constructor to construct an Area within a defined Range of a Location(Works like fill or clone).
   Area.fromRanges({
     double x,

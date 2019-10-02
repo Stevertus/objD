@@ -50,7 +50,7 @@ class Condition {
 
   /// checks for a predicate
   Condition.predicate(String cond) {
-   _generated = _ConditionUtil("predicate " + cond);
+    _generated = _ConditionUtil("predicate " + cond);
   }
   // checks if the tag exists
   Condition.tag(Tag cond) {

@@ -84,12 +84,12 @@ void _createPack(String path, BuildPack pack) {
   // add raw files
   if (pack.rawFiles != null && pack.rawFiles.isNotEmpty) {
     pack.rawFiles.forEach((filepath, file) {
-        futures.add(
-          _createFile(
-            path + pack.name + filepath,
-            file,
-          ),
-        );
+      futures.add(
+        _createFile(
+          path + pack.name + filepath,
+          file,
+        ),
+      );
     });
   }
 

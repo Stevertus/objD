@@ -45,9 +45,9 @@ class Do extends RestActionAble {
     if (!_isWhile) {
       cond = Condition.not(cond);
     }
-    then.add(If(cond, Then: [File.recursive()]));
+    then.add(If(cond, then: [File.recursive()]));
     Group gr = Group(filename: "doloop", children: then, groupMin: 0);
-    if (testBefore) return If(cond, Then: [gr]);
+    if (testBefore) return If(cond, then: [gr]);
     return gr;
   }
 }

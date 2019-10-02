@@ -12,36 +12,47 @@ class Schedule extends RestActionAble {
 
   int ticks;
 
-  Schedule(this._name,{@required this.ticks,this.mode}) : assert(ticks != null);
-  Schedule.file(this._file,{@required this.ticks,this.mode}) : assert(ticks != null) {
+  Schedule(this._name, {@required this.ticks, this.mode})
+      : assert(ticks != null);
+  Schedule.file(this._file, {@required this.ticks, this.mode})
+      : assert(ticks != null) {
     _file.execute = true;
   }
 
   /// Appends a Scheduled Function to the current Schedule.
-  Schedule.append(this._name,{@required this.ticks}) : assert(ticks != null){
+  Schedule.append(this._name, {@required this.ticks}) : assert(ticks != null) {
     mode = ScheduleMode.append;
   }
 
   /// Appends a Scheduled File to the current Schedule.
-  Schedule.appendFile(this._file,{@required this.ticks}) : assert(ticks != null){
+  Schedule.appendFile(this._file, {@required this.ticks})
+      : assert(ticks != null) {
     mode = ScheduleMode.append;
   }
 
   @override
   generate(Context context) {
-
-    String getMode(){
-      if(mode == null) return "";
-      if(mode == ScheduleMode.append) return " append";
+    String getMode() {
+      if (mode == null) return "";
+      if (mode == ScheduleMode.append) return " append";
       return " replace";
     }
 
-    if(_file != null){
-      return Group(prefix:"schedule",children: [_file],suffix: " " + ticks.toString() + "t" + getMode());
+    if (_file != null) {
+      return Group(
+          prefix: "schedule",
+          children: [_file],
+          suffix: " " + ticks.toString() + "t" + getMode());
     }
-    return Command("schedule function " + context.packId + ":" + _name + " " + ticks.toString()+ "t" + getMode());
+    return Command("schedule function " +
+        context.packId +
+        ":" +
+        _name +
+        " " +
+        ticks.toString() +
+        "t" +
+        getMode());
   }
-
 }
 
 enum ScheduleMode {

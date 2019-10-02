@@ -7,16 +7,17 @@ class ClickEvent extends Module {
   Widget onClick;
   Item selectedItem;
   Score _score = Score.fromSelected("objd_click");
-/// The ClickEvent Module uses the trigger of a carrot on a stick to register right clicks with a scoreboard and execute a [onClick] Widget.
-///
-/// This module has to be executed every tick to work!
-///
-/// | constructor |  |
-/// |--|--|
-/// |name|used to identify different click Events|
-/// |onClick| Widget that is executed if the COAS is clicked |
-/// |selectedItem| just triggers the click if this Item is selected(optional) |
-/// |path| path to create the click handler function(default = `events/`) |
+
+  /// The ClickEvent Module uses the trigger of a carrot on a stick to register right clicks with a scoreboard and execute a [onClick] Widget.
+  ///
+  /// This module has to be executed every tick to work!
+  ///
+  /// | constructor |  |
+  /// |--|--|
+  /// |name|used to identify different click Events|
+  /// |onClick| Widget that is executed if the COAS is clicked |
+  /// |selectedItem| just triggers the click if this Item is selected(optional) |
+  /// |path| path to create the click handler function(default = `events/`) |
 
   ClickEvent(
       {this.name = "objd_click",

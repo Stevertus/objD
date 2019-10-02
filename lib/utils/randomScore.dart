@@ -11,13 +11,16 @@ class RandomScore extends RestActionAble {
   int to;
   int from;
   int _diff;
+
   /// The RandomScore Widget assigns a random value to a score using the UUID of an areaeffectcloud.
-  RandomScore(this.entity,
-      {this.from = 0,
-      @required this.to,
-      this.objective = "objd_random",
-      this.targetFilePath = "objd",
-      this.targetFileName}) {
+  RandomScore(
+    this.entity, {
+    this.from = 0,
+    @required this.to,
+    this.objective = "objd_random",
+    this.targetFilePath = "objd",
+    this.targetFileName,
+  }) {
     _diff = to - from + 1;
   }
 
@@ -25,9 +28,10 @@ class RandomScore extends RestActionAble {
 
   @override
   Widget generate(Context context) {
-    return For.of([
-      Score(Entity.PlayerName("#max"), objective).set(_diff),
-      Group(
+    return For.of(
+      [
+        Score(Entity.PlayerName("#max"), objective).set(_diff),
+        Group(
           path: targetFilePath,
           filename: targetFileName ?? "random",
           generateIDs: targetFileName == null,
@@ -36,21 +40,13 @@ class RandomScore extends RestActionAble {
             AreaEffectCloud(Location.here(), tags: ["objd_random"]),
             Score(entity, objective).setToResult(Command(
                 "data get entity @e[tag=objd_random,sort=nearest,limit=1] UUIDMost 0.0000000001")),
-            Score(entity, objective)
-                .modulo(Score(Entity.PlayerName("#max"), objective))
-          ]),
-      from > 0 ? score.add(from) : null
-      // File.execute(
-      //     path: targetFilePath.isNotEmpty
-      //         ? targetFilePath + "/" + targetFileName
-      //         : targetFileName,
-      //     child: For.of([
-      //       Comment("Random UUID Generator from ${context.file}"),
-      //       AreaEffectCloud(Location.here(), tags: ["objd_random"]),
-      //       Score(entity, objective).setToResult(Command("data get entity @e[tag=objd_random,sort=nearest,limit=1] UUIDMost 0.0000000001")),
-      //       Score(entity, objective)
-      //           .modulo(Score(Entity.PlayerName("#max"), objective))
-      //     ]))
-    ]);
+            Score(entity, objective).modulo(
+              Score(Entity.PlayerName("#max"), objective),
+            ),
+          ],
+        ),
+        from > 0 ? score.add(from) : null,
+      ],
+    );
   }
 }
