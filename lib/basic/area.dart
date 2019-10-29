@@ -36,9 +36,9 @@ class Area {
     dy = dy ?? ranges["dy"];
     dz = dz ?? ranges["dz"];
 
-    double x2 = x != null && dx != null ? x + dx : null;
-    double y2 = y != null && dy != null ? y + dy : null;
-    double z2 = z != null && dz != null ? z + dz : null;
+    final double x2 = x != null && dx != null ? x + dx : null;
+    final double y2 = y != null && dy != null ? y + dy : null;
+    final double z2 = z != null && dz != null ? z + dz : null;
 
     loc1 = Location.glob(x: _min(x, x2), y: _min(y, y2), z: _min(z, z2));
     loc2 = Location.glob(x: _max(x, x2), y: _max(y, y2), z: _max(z, z2));
@@ -48,14 +48,14 @@ class Area {
     _setDifferences();
   }
 
-  _setDifferences() {
+  void _setDifferences() {
     if (loc1.x != null && loc2.x != null) dx = _abs(loc2.x - loc1.x) ?? -1;
     if (loc1.y != null && loc2.y != null) dy = _abs(loc2.y - loc1.y) ?? -1;
     if (loc1.z != null && loc2.z != null) dz = _abs(loc2.z - loc1.z) ?? -1;
   }
 
   Map getRanges() {
-    var ret = {};
+    Map<String,double> ret = {};
     if (loc1.x != null) ret["x"] = loc1.x;
     if (loc1.y != null) ret["y"] = loc1.y;
     if (loc1.z != null) ret["z"] = loc1.z;
@@ -72,7 +72,7 @@ class Area {
 }
 
 double _abs(double val) {
-  if (val != null && val.isNegative) return (0 - val);
+  if (val != null && val.isNegative) return 0 - val;
   return val;
 }
 

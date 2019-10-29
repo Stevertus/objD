@@ -182,6 +182,10 @@ class DataModify {
   _checkValue(dynamic value) {
     if (value is Map) return this.value = gson.encode(value);
     if (value is num || value is String) return this.value = value.toString();
+    if(value is DataStorage){
+      fromType = "storage";
+      return fromSource = value.name;
+    }
     if (value is Entity) {
       fromType = "entity";
       return fromSource = value.toString();

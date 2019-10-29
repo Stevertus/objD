@@ -5,11 +5,29 @@ import 'package:gson/gson.dart';
 /// Block([minecraft_block_id]) // as string or
 /// Block.[minecraft_block_id]
 /// ```
+
+String _getId(val) => (val is Block) ? val.toString() : (val as String);
+
 class Block {
-  final String _block;
+  final String _id;
+  String get id => _id;
+  final String tag;
+  final Map<String, dynamic> states;
+  final Map<String, dynamic> nbt;
   @override
   String toString() {
-    return _block;
+    String strState = "";
+    String strNbt = "";
+    String id = tag ?? _id;
+    if (states != null) {
+      List<String> liState = [];
+      states.forEach((String key, dynamic val) {
+        liState.add("$key=$val");
+      });
+      strState = "[${liState.join(',')}]";
+    }
+    if (nbt != null) strNbt = gson.encode(nbt);
+    return id + strState + strNbt;
   }
 
   /// **Usage:**
@@ -17,34 +35,15 @@ class Block {
   /// Block([minecraft_block_id]) // as string or
   /// Block.[minecraft_block_id]
   /// ```
-  const Block(this._block);
+  const Block(this._id) : nbt = null, states = null, tag = null;
 
-  static Block nbt(
+  Block.nbt(
     dynamic block, {
-    Map<String, dynamic> states,
-    Map<String, dynamic> nbt,
+    this.states,
+    this.tag,
+    this.nbt,
     String strNbt = "",
-  }) {
-    String id;
-    if (block is String) {
-      id = block;
-    } else if (block is Block) {
-      id = block.toString();
-    } else {
-      throw ("Please insert a block or string into Block.nbt!");
-    }
-
-    String strState = "";
-    if (states != null) {
-      List<String> liState = [];
-      states.forEach((String key, val) {
-        liState.add("$key=$val");
-      });
-      strState = "[${liState.join(',')}]";
-    }
-    if (nbt != null) strNbt = gson.encode(nbt);
-    return Block(id + strState + strNbt);
-  }
+  }) : assert(block is String || block is Block, "Please insert a block or string into Block.nbt!"), _id = _getId(block);
 
   static const Block air = Block('minecraft:air');
   static const Block stone = Block('minecraft:stone');

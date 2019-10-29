@@ -3,6 +3,7 @@ import 'package:objd/basic/area.dart';
 import 'package:objd/basic/block.dart';
 import 'package:objd/basic/entity.dart';
 import 'package:objd/basic/location.dart';
+import 'package:objd/basic/predicate.dart';
 import 'package:objd/basic/score.dart';
 import 'package:objd/basic/tag.dart';
 import 'package:objd/wrappers/data.dart';
@@ -49,8 +50,8 @@ class Condition {
   }
 
   /// checks for a predicate
-  Condition.predicate(String cond) {
-    _generated = _ConditionUtil("predicate " + cond);
+  Condition.predicate(Predicate cond) {
+    _generated = _ConditionUtil("predicate " + cond.name);
   }
   // checks if the tag exists
   Condition.tag(Tag cond) {
@@ -156,7 +157,12 @@ class Condition {
       return;
     }
 
-    throw (" A Condition can just take in another Condition, Entity, Block, Data, Score or Tag!");
+    if(cond is Predicate) {
+      _generated = _ConditionUtil("predicate " + cond.name);
+      return;
+    }
+
+    throw (" A Condition can just take in another Condition, Entity, Block, Data, Score, Predicate or Tag!");
   }
 
   _invertGenerated() {

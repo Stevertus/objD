@@ -19,6 +19,7 @@ class If extends RestActionAble {
 
   String targetFilePath;
   String targetFileName;
+  Predicate predicate;
 
   /// The if widget accepts a Condition and runs the children if the condition is true.
   ///
@@ -49,7 +50,10 @@ class If extends RestActionAble {
     if (Then != null) then = Then;
     if (Else != null) orElse = Else;
     assert(then != null);
-    assert(then.isNotEmpty);
+    if (then.isEmpty) {
+      print("ahh");
+    }
+    //assert(then.isNotEmpty);
     getCondition(condition);
   }
 
@@ -81,6 +85,7 @@ class If extends RestActionAble {
     getCondition(condition);
   }
   getCondition(dynamic condition) {
+    if(condition is Predicate) predicate = condition;
     if (condition is Condition) {
       this.conds = condition.getList();
     } else {
@@ -133,6 +138,7 @@ class If extends RestActionAble {
       });
     }
     if (elseWidget != null) children.add(elseWidget);
+    if(predicate != null) children.add(predicate);
 
     return For.of(children);
   }

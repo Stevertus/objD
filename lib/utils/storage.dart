@@ -148,11 +148,8 @@ class Storage extends Widget {
           datatype: datatype,
           score: score);
 
-  @override
-  generate(Context context) {
-    var target = DataStorage(autoNamespace != null && autoNamespace
-        ? context.packId + ':$name'
-        : name);
+  Data toData([DataStorage target]) {
+    if (target == null) target = DataStorage(name);
 
     if (_type == _StorageType.merge) return Data.merge(target, nbt: nbt);
     if (_type == _StorageType.get) {
@@ -182,7 +179,22 @@ class Storage extends Widget {
         datatype: datatype,
       );
     }
-    return Comment.Null();
+    return null;
+  }
+
+  @override
+  generate(Context context) {
+    var target = DataStorage(autoNamespace != null && autoNamespace
+        ? context.packId + ':$name'
+        : name);
+
+    Data data = toData(target);
+
+    if (data != null) {
+      return data;
+    } else {
+      return Comment.Null();
+    }
   }
 }
 

@@ -41,7 +41,6 @@ class Group extends RestActionAble {
 
   @override
   Widget generate(Context context) {
-    print(filename);
     // check if new file is needed
     if (groupMin > -1 && children.isNotEmpty && children.length >= groupMin) {
       return IndexedFile(

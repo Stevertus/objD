@@ -1,0 +1,20 @@
+
+export 'external/predicates/alternative.dart';
+export 'external/predicates/inverted.dart';
+export 'external/predicates/random.dart';
+export 'external/predicates/weather.dart';
+export 'external/predicates/item/table_bonus.dart';
+export 'external/predicates/item/tool_enchantment.dart';
+export 'external/predicates/item/match_tool.dart';
+export 'external/predicates/location/block_state.dart';
+export 'external/predicates/location/location.dart';
+export 'external/predicates/entity/damage_source.dart';
+export 'external/predicates/entity/entity.dart';
+export 'external/predicates/entity/killed_by_player.dart';
+export 'external/predicates/entity/present.dart';
+export 'external/predicates/entity/properties.dart';
+export 'external/predicates/entity/scores.dart';
+export 'external/predicates/entity/survives_explosion.dart';
+export 'external/predicates/range.dart';
+export 'external/predicates/tag.dart';
+export 'external/predicates/time_check.dart';

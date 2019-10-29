@@ -1,4 +1,6 @@
+import 'package:objd/basic/entity.dart';
 import 'package:objd/basic/rest_action.dart';
+import 'package:objd/basic/score.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/basic/command.dart';
 import 'package:objd/basic/text_components.dart';
@@ -78,6 +80,12 @@ class Scoreboard extends RestActionAble {
         return Command("scoreboard objectives setdisplay " + type + " " + name);
     }
     return Comment.Null();
+  }
+
+  Score operator [](dynamic target){
+    if(target is Entity) return Score(target,name);
+    if(target is String) return Score(Entity.PlayerName(target),name);
+    throw('The operator [] just accepts Entity or String!');
   }
 
   @override

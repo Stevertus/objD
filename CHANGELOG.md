@@ -1,5 +1,11 @@
-## 0.3.2
+## 0.3.2-beta.1
+* added Predicates subpackage, that allows to create all major types of predicates right in objD
+* added Predicate Widget to register a new Predicate with content
+* added Storage.toData to convert to a Data Widget
+* updated Condition.predicate and If to allow for Predicates(and automatically register them)
+* updated Block class to allow public insight into nbt and states
 * changed If Then and Else to `then` and `orElse`, old syntax is deprecated
+* extended the ForEach widget to support translation location for each step
 * further code refactoring and formatting
 
 ## 0.3.1
