@@ -285,7 +285,7 @@ class Execute extends RestActionAble {
       return _addArgumentRet('facing ' + target.toString());
     }
     if (target is Entity) {
-      return _addArgumentRet('facing entity' +
+      return _addArgumentRet('facing entity ' +
           target.toString() +
           ' ' +
           facing.toString().split('.')[1]);

@@ -452,7 +452,10 @@ class Entity implements EntityClass {
         if (tag is Tag) {
           arguments['tag'].add(n + tag.tag);
         } else if (tag is String) {
-          arguments['tag'].add(n + tag);
+          if (Tag.prefix != null && !(tag as String).contains(Tag.prefix)) {
+            tag = Tag.prefix + (tag as String);
+          }
+          arguments['tag'].add(n + (tag as String));
         } else {
           throw ("Please insert a Tag or String as tag into Entity!");
         }

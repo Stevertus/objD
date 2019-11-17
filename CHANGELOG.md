@@ -1,7 +1,13 @@
-## 0.3.2-beta.1
+## 0.3.2-beta.2
 * added Predicates subpackage, that allows to create all major types of predicates right in objD
 * added Predicate Widget to register a new Predicate with content
+* added VersionCheck and ServerVersionCheck
 * added Storage.toData to convert to a Data Widget
+* added global Scoreboard.prefix and Tag.prefix that get applied to all created Scoreboards and Tags
+* added Comment.seperate to generate a comment line
+* added Comment.fileHeader to generate a file header with author, description, context and calledin
+* added header field to File to be able to add a header to a file directly
+* added Spectate and Gamemode Widgets
 * updated Condition.predicate and If to allow for Predicates(and automatically register them)
 * updated Block class to allow public insight into nbt and states
 * changed If Then and Else to `then` and `orElse`, old syntax is deprecated

@@ -6,6 +6,7 @@ class Do extends RestActionAble {
   Condition cond;
   bool testBefore;
   bool _isWhile;
+  Location translate;
   List<Widget> then;
 
   /// This Loop repeats a set of widget as long a condition is true.
@@ -16,7 +17,7 @@ class Do extends RestActionAble {
   /// |Condition or conditional value| a condition to test for each iteration |
   /// |then| a List of Widgets to execute each time |
   /// |testBefore| test before entering the loop if condition is true(optional) |
-  Do.While(dynamic condition, {this.testBefore = true, this.then}) {
+  Do.While(dynamic condition, {this.testBefore = true, this.then,this.translate}) {
     _setValues(true, condition);
   }
 
@@ -28,7 +29,7 @@ class Do extends RestActionAble {
   /// |Condition or conditional value| a condition to test for each iteration |
   /// |then| a List of Widgets to execute each time |
   /// |testBefore| test before entering the loop if condition is false(optional) |
-  Do.Until(dynamic condition, {this.testBefore = true, this.then}) {
+  Do.Until(dynamic condition, {this.testBefore = true, this.then,this.translate}) {
     _setValues(false, condition);
   }
   _setValues(bool iswhile, condition) {
@@ -45,7 +46,7 @@ class Do extends RestActionAble {
     if (!_isWhile) {
       cond = Condition.not(cond);
     }
-    then.add(If(cond, then: [File.recursive()]));
+    then.add(Execute(If: cond, children: [File.recursive()]).positioned(translate));
     Group gr = Group(filename: "doloop", children: then, groupMin: 0);
     if (testBefore) return If(cond, then: [gr]);
     return gr;

@@ -22,3 +22,5 @@ export 'bossbar.dart';
 export 'advancement.dart';
 export 'clear.dart';
 export 'tp.dart';
+export 'gamemode.dart';
+export 'spectate.dart';

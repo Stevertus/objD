@@ -3,6 +3,7 @@ import 'package:objd/basic/command.dart';
 import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/build.dart';
 import 'package:meta/meta.dart';
+import 'package:objd/wrappers/comment.dart';
 
 class File extends Widget {
   Widget child;
@@ -11,6 +12,7 @@ class File extends Widget {
   bool execute;
   bool create;
   bool isRecursive;
+  Comment header;
 
   /// The file class simply generates a new mcfunction file with content and a path.
   ///
@@ -30,13 +32,20 @@ class File extends Widget {
     this.execute = false,
     this.pack,
     this.create = true,
+    this.header,
   }) {
     this.path.replaceAll('.mcfunction', '');
     if (this.path.substring(0, 1) == '/') this.path = this.path.substring(1);
   }
 
   /// the execute subconstructor adds an execution statement forwarding to the new file into the original
-  File.execute(this.path, {this.child, this.pack, this.create = true}) {
+  File.execute(
+    this.path, {
+    this.child,
+    this.pack,
+    this.create = true,
+    this.header,
+  }) {
     this.path.replaceAll('.mcfunction', '');
     if (this.path.substring(0, 1) == '/') this.path = this.path.substring(1);
     execute = true;
@@ -53,32 +62,38 @@ class File extends Widget {
   ///   ...
   ///  });
   ///  ```
-  File.strait(
+  factory File.strait(
     String path, {
     @required Function(List<Widget>) child,
     bool execute = false,
     String pack,
     bool create = true,
-  }) : this(
-          path,
-          child: StraitWidget(child),
-          execute: execute,
-          pack: pack,
-          create: create,
-        );
+    Comment header,
+  }) =>
+      File(
+        path,
+        child: StraitWidget(child),
+        execute: execute,
+        pack: pack,
+        create: create,
+        header: header,
+      );
 
-  File.executeStrait(
+  factory File.executeStrait(
     String path, {
     @required Function(List<Widget>) child,
     String pack,
     bool create = true,
-  }) : this.strait(
-          path,
-          child: child,
-          execute: true,
-          pack: pack,
-          create: create,
-        );
+    Comment header,
+  }) =>
+      File(
+        path,
+        child: StraitWidget(child),
+        execute: true,
+        pack: pack,
+        create: create,
+        header: header,
+      );
 
   @override
   Widget generate(Context context) {

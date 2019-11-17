@@ -22,6 +22,7 @@ class BuildFile {
     path = file.path;
     child = file.child;
     commands = [];
+    if (file.header != null) commands.add(file.header.text);
   }
   BuildFile.extended(Extend file) {
     path = file.path;

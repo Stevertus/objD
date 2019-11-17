@@ -23,28 +23,30 @@ class ArmorStand extends RestActionAble {
   List<Summon> passengers;
 
   /// An armorstand can be created with the Summon Widget, but there is also a specific Widget with special properties for an ArmorStand.
-  ArmorStand(this.location,
-      {this.name,
-      this.nameVisible,
-      this.nbt,
-      bool invisible,
-      this.invulnerable,
-      bool marker,
-      bool hasArms,
-      bool basePlate,
-      this.mainHand,
-      this.offHand,
-      this.head,
-      this.chest,
-      this.legs,
-      this.boots,
-      this.gravity,
-      this.glowing,
-      this.fire,
-      this.small,
-      this.passengers,
-      this.tags,
-      this.rotation}) {
+  ArmorStand(
+    this.location, {
+    this.name,
+    this.nameVisible,
+    this.nbt,
+    bool invisible,
+    this.invulnerable,
+    bool marker,
+    bool hasArms,
+    bool basePlate,
+    this.mainHand,
+    this.offHand,
+    this.head,
+    this.chest,
+    this.legs,
+    this.boots,
+    this.gravity,
+    this.glowing,
+    this.fire,
+    this.small,
+    this.passengers,
+    this.tags,
+    this.rotation,
+  }) {
     if (nbt == null) nbt = {};
 
     _addBoolNbt(marker, "Marker");
@@ -72,25 +74,27 @@ class ArmorStand extends RestActionAble {
   }
 
   /// Often times you need a static armorstand that just acts as a marker for a location, there is ArmorStand.staticMarker that sets properties automatically.
-  ArmorStand.staticMarker(this.location,
-      {this.name,
-      this.nameVisible,
-      this.nbt,
-      bool invisible = true,
-      this.invulnerable = true,
-      this.gravity = false,
-      this.mainHand,
-      this.offHand,
-      this.head,
-      this.chest,
-      this.legs,
-      this.boots,
-      this.glowing,
-      this.fire,
-      this.small,
-      this.passengers,
-      this.tags,
-      this.rotation}) {
+  ArmorStand.staticMarker(
+    this.location, {
+    this.name,
+    this.nameVisible,
+    this.nbt,
+    bool invisible = true,
+    this.invulnerable = true,
+    this.gravity = false,
+    this.mainHand,
+    this.offHand,
+    this.head,
+    this.chest,
+    this.legs,
+    this.boots,
+    this.glowing,
+    this.fire,
+    this.small,
+    this.passengers,
+    this.tags,
+    this.rotation,
+  }) {
     if (nbt == null) nbt = {};
 
     _addBoolNbt(true, "Marker");

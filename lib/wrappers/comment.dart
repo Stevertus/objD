@@ -4,22 +4,64 @@ import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/build.dart';
 
 class Comment extends RestActionAble {
-  String text;
+  static String Author = "";
+
+  String _text;
+  String get text => _text;
   bool force = false;
 
   /// The Comment widget generates a simple line with some annotations(# ...).
-  Comment(this.text, {this.force = false});
+  Comment(String text, {this.force = false})
+      : _text = text.startsWith("#") ? text : "# " + text;
 
   /// The Comment features a simple line break.
-  Comment.LineBreak() {
-    text = "";
+  Comment.LineBreak() : _text = "";
+
+  /// Seperates parts of your code
+  Comment.Seperate([int length = 48]) {
+    _text = _seperate(length);
   }
+
+  /// Used to describe
+  Comment.FileHeader(
+    String desc, {
+    String author,
+    String calledFrom,
+    String context,
+  }) {
+    _text = _seperate() +
+        """
+\n#
+# Author:
+#  ${author ?? Author}
+#
+# Description:    
+""";
+
+    _text += desc.split("\n").map((s) => "#  " + s).join("\n");
+
+    if (calledFrom != null) {
+      _text += "\n#\n# Called in:";
+      _text += "\n#  " + calledFrom;
+    }
+    if (context != null) {
+      _text += "\n#\n# Context:";
+      _text += "\n#  " + context;
+    }
+
+    _text += "\n#\n" + _seperate();
+  }
+
   Comment.Null() {
-    text = "[null]";
+    _text = "[null]";
+  }
+
+  String _seperate([int length = 48]) {
+    return List.generate(length, (i) => "#").join();
   }
 
   @override
   Widget generate(Context context) {
-    return text != "" ? Text("# " + text) : Text("");
+    return Text(_text ?? "");
   }
 }

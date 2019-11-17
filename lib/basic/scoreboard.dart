@@ -9,6 +9,10 @@ import 'package:objd/build/build.dart';
 import 'package:objd/wrappers/comment.dart';
 
 class Scoreboard extends RestActionAble {
+  // static prefix
+
+  static String prefix;
+
   String subcommand;
   String name;
   String type;
@@ -18,37 +22,52 @@ class Scoreboard extends RestActionAble {
   /// The Scoreboard class just handles adding or removing objectives. The value assignment is handled by the Score class.
   ///
   /// objD automatically keeps a list of all scoreboards and inserts them into the given load file, ignoring doubled names.
-  Scoreboard(this.name,
-      {this.type = "dummy", TextComponent display, bool addIntoLoad = true}) {
+  Scoreboard(
+    this.name, {
+    this.type = "dummy",
+    TextComponent display,
+    bool addIntoLoad = true,
+  }) {
     subcommand = addIntoLoad ? "add" : "addHere";
     if (display != null) type += " " + display.toJson();
+    prefixName();
   }
 
   /// The `Scoreboard.click` constructor adds a carrot on a stick click event objective
-  Scoreboard.click(this.name,
-      {TextComponent display, bool addIntoLoad = true}) {
+  Scoreboard.click(
+    this.name, {
+    TextComponent display,
+    bool addIntoLoad = true,
+  }) {
     this.type = "minecraft.used:minecraft.carrot_on_a_stick";
     subcommand = addIntoLoad ? "add" : "addHere";
     if (display != null) type += " " + display.toJson();
+    prefixName();
   }
 
   /// The `Scoreboard.trigger` constructor adds a trigger objective
-  Scoreboard.trigger(this.name,
-      {TextComponent display, bool addIntoLoad = true}) {
+  Scoreboard.trigger(
+    this.name, {
+    TextComponent display,
+    bool addIntoLoad = true,
+  }) {
     this.type = "trigger";
     subcommand = addIntoLoad ? "add" : "addHere";
     if (display != null) type += " " + display.toJson();
+    prefixName();
   }
 
   /// The `Scoreboard.add` constructor does exactly the same as Scoreboard but puts the result without checking in the current file.
   Scoreboard.add(this.name, {this.type = "dummy", TextComponent display}) {
     subcommand = "addHere";
     if (display != null) type += " " + display.toJson();
+    prefixName();
   }
 
   /// `Scoreboard.remove` removes an objective by its name again.
   Scoreboard.remove(this.name) {
     subcommand = "remove";
+    prefixName();
   }
 
   /// With `Scoreboard.setdisplay` you can display the values:
@@ -61,8 +80,14 @@ class Scoreboard extends RestActionAble {
   Scoreboard.setdisplay(this.name, {String display = "sidebar"}) {
     subcommand = "setdisplay";
     type = display;
+    prefixName();
   }
   // TODO: modify
+
+  void prefixName() {
+    if (prefix != null && !name.contains(prefix)) name = prefix + name;
+  }
+
   @override
   Widget generate(Context context) {
     switch (subcommand) {
@@ -82,10 +107,10 @@ class Scoreboard extends RestActionAble {
     return Comment.Null();
   }
 
-  Score operator [](dynamic target){
-    if(target is Entity) return Score(target,name);
-    if(target is String) return Score(Entity.PlayerName(target),name);
-    throw('The operator [] just accepts Entity or String!');
+  Score operator [](dynamic target) {
+    if (target is Entity) return Score(target, name);
+    if (target is String) return Score(Entity.PlayerName(target), name);
+    throw ('The operator [] just accepts Entity or String!');
   }
 
   @override

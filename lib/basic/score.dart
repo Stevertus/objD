@@ -37,6 +37,7 @@ class Score extends RestActionAble {
         Scoreboard(score),
       );
     }
+    if (Scoreboard.prefix != null && !score.contains(Scoreboard.prefix)) score = Scoreboard.prefix + score;
   }
 
   /// same as Score() but with a predefined entity(Entity.Selected(),)
@@ -51,6 +52,7 @@ class Score extends RestActionAble {
         Scoreboard(score),
       );
     }
+    if (Scoreboard.prefix != null && !score.contains(Scoreboard.prefix)) score = Scoreboard.prefix + score;
   }
   Score.str(this._strGen, {this.score = "", String match = "0"}) {
     _match = match;
@@ -72,6 +74,7 @@ class Score extends RestActionAble {
   /// ```
   Score.con(int number, {bool addNew = true}) {
     score = "objd_consts";
+    if (Scoreboard.prefix != null && !score.contains(Scoreboard.prefix)) score = Scoreboard.prefix + score;
     entity = Entity.PlayerName(
       '#' + number.toString(),
     );

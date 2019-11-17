@@ -33,7 +33,7 @@ class Particle extends RestActionAble {
   Particle(ParticleType particle,
       {Location location,
       Location delta,
-      double speed = 1,
+      double speed = 0,
       int count = 1,
       bool force = false,
       Entity player}) {
@@ -43,7 +43,7 @@ class Particle extends RestActionAble {
       if (speed == null || count == null || location == null) {
         throw ("If you decide to use the full particle command add a delta, location, speed and count property!");
       }
-      _gen += " ${delta} ${speed} ${count}";
+      _gen += " ${delta} ${speed} ${count} ";
       _gen += force ? "force" : "normal";
       if (player != null) _gen += " " + player.toString();
     }
@@ -53,7 +53,7 @@ class Particle extends RestActionAble {
   Particle.block(Block block,
       {Location location,
       Location delta,
-      double speed = 1,
+      double speed = 0,
       int count = 1,
       bool force,
       Entity player}) {
@@ -64,7 +64,7 @@ class Particle extends RestActionAble {
       if (speed == null || count == null || location == null) {
         throw ("If you decide to use the full particle command add a delta, location, speed and count property!");
       }
-      _gen += " ${delta} ${speed} ${count}";
+      _gen += " ${delta} ${speed} ${count} ";
       _gen += force ? "force" : "normal";
       if (player != null) _gen += " " + player.toString();
     }
@@ -74,7 +74,7 @@ class Particle extends RestActionAble {
   Particle.item(ItemType item,
       {@required Location location,
       Location delta,
-      double speed = 1,
+      double speed = 0,
       int count = 1,
       bool force = false,
       Entity player}) {

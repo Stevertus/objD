@@ -8,6 +8,10 @@ import 'package:objd/build/build.dart';
 import 'package:objd/wrappers/if.dart';
 
 class Tag extends RestActionAble {
+  // static prefix
+
+  static String prefix;
+
   bool value;
   Entity entity;
   String tag;
@@ -15,6 +19,7 @@ class Tag extends RestActionAble {
   ///A tag saves a boolean value with an entity inside the game.
   Tag(this.tag, {this.entity, this.value = true}) {
     if (this.entity == null) this.entity = Entity.Selected();
+    if (prefix != null && !tag.contains(prefix)) tag = prefix + tag;
   }
 
   Tag add() => Tag(tag, entity: entity, value: true);

@@ -47,7 +47,13 @@ class Summon extends RestActionAble {
     _addBoolNbt(persistent, "PersistenceRequired");
     _addBoolNbt(noAI, "NoAI");
     if (gravity != null) _addBoolNbt(!gravity, "NoGravity");
-    if (tags != null && tags.isNotEmpty) nbt["Tags"] = tags;
+    if (tags != null && tags.isNotEmpty) {
+      nbt["Tags"] = Tag.prefix != null
+          ? tags
+              .map((String t) => t.contains(Tag.prefix) ? t : Tag.prefix + t)
+              .toList()
+          : tags;
+    }
     if (effects != null && effects.isNotEmpty) {
       nbt["ActiveEffects"] = effects.map((effect) => effect.getMap()).toList();
     }

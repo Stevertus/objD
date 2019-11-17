@@ -40,17 +40,19 @@ class Item {
     _checkTags(model, hideFlags, name, lore, nbt);
   }
 
-  Item.Book(List<BookPage> pages,
-      {String title = "",
-      String author = "",
-      this.count,
-      this.slot,
-      this.damage,
-      int model,
-      int hideFlags,
-      TextComponent name,
-      List<TextComponent> lore,
-      Map<String, dynamic> nbt}) {
+  Item.Book(
+    List<BookPage> pages, {
+    String title = "",
+    String author = "",
+    this.count,
+    this.slot,
+    this.damage,
+    int model,
+    int hideFlags,
+    TextComponent name,
+    List<TextComponent> lore,
+    Map<String, dynamic> nbt,
+  }) {
     if (nbt == null) nbt = {};
     this.type = ItemType.written_book;
     nbt["title"] = title;
@@ -125,7 +127,7 @@ class Item {
       "id": "minecraft:" + type.toString().replaceFirst("minecraft:", "")
     };
     if (tag.isNotEmpty) map["tag"] = tag;
-    if (count != null) map["Count"] = count;
+    if (count != null) map["Count"] = Byte(count);
     if (slot != null) {
       if (slot.id == null) throw ("An Item needs the Slot id!");
       if (slot.id < 0) {
@@ -330,6 +332,11 @@ class ItemType {
   ///
   /// _(minecraft:bat_spawn_egg)_
   static const ItemType bat_spawn_egg = ItemType('minecraft:bat_spawn_egg');
+
+  /// [Bee Spawn Egg](https://minecraft.gamepedia.com/bee_spawn_egg)
+  ///
+  /// _(minecraft:bee_spawn_egg)_
+  static const ItemType bee_spawn_egg = ItemType('minecraft:bee_spawn_egg');
 
   /// [Beacon](https://minecraft.gamepedia.com/beacon)
   ///
