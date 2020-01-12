@@ -10,7 +10,7 @@
 /// 	Widget generate(Context context){
 /// 		return Command(
 ///       'function '
-///       + context.packId + ":"
+///       + context.packId + ':'
 ///       + context.loadFile
 ///     )
 /// 	}
@@ -33,7 +33,7 @@ class Context {
   /// class LoadWidget extends Widget {
   /// 	@override
   /// 	Widget generate(Context context){
-  /// 		return Command('function ' + context.packId + ":" + context.loadFile)
+  /// 		return Command('function ' + context.packId + ':' + context.loadFile)
   /// 	}
   /// }
   /// ```
@@ -41,13 +41,13 @@ class Context {
     this.prefixes,
     this.prod = false,
     this.suffixes,
-    this.packId = "",
-    this.file = "",
-    this.loadFile = "load",
-    this.mainFile = "main",
+    this.packId = '',
+    this.file = '',
+    this.loadFile = 'load',
+    this.mainFile = 'main',
   }) {
-    if (prefixes == null) prefixes = [];
-    if (suffixes == null) suffixes = [];
+    prefixes ??= [];
+    suffixes ??= [];
   }
 
   Context.clone(Context context)

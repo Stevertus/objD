@@ -16,7 +16,7 @@ class Score extends RestActionAble {
   List<Widget> get commands => _commands;
   Entity entity;
   String score;
-  String _strGen = "";
+  String _strGen = '';
 
   /// The [Score] class is the basis for setting values, calculating with scores and checking the values.
   ///It implements one base class with no functionality and several methods to do actions:
@@ -28,7 +28,7 @@ class Score extends RestActionAble {
   ///|addNew| bool whether it should add the scoreboard itself if it does not exist(default = true)|
   ///
   ///```dart
-  /// Score(Entity.Selected(),"score",addNew: true)
+  /// Score(Entity.Selected(),'score',addNew: true)
   ///```
 
   Score(this.entity, this.score, {bool addNew = true, List<Widget> commands}) {
@@ -45,7 +45,7 @@ class Score extends RestActionAble {
 
   /// same as Score() but with a predefined entity(Entity.Selected(),)
   /// ```dart
-  /// Score.fromSelected("objective").set(3)
+  /// Score.fromSelected('objective').set(3)
   /// ⇒ scoreboard players set @s objective 3
   /// ```
   Score.fromSelected(this.score, {bool addNew = true}) {
@@ -59,7 +59,7 @@ class Score extends RestActionAble {
       score = Scoreboard.prefix + score;
     }
   }
-  Score.str(this._strGen, {this.score = "", String match = "0"}) {
+  Score.str(this._strGen, {this.score = '', String match = '0'}) {
     _match = match;
   }
 
@@ -78,7 +78,7 @@ class Score extends RestActionAble {
   /// ⇒ scoreboard players set #5 objd_consts 5
   /// ```
   Score.con(int number, {bool addNew = true}) {
-    score = "objd_consts";
+    score = 'objd_consts';
     if (Scoreboard.prefix != null && !score.contains(Scoreboard.prefix)) {
       score = Scoreboard.prefix + score;
     }
@@ -97,117 +97,117 @@ class Score extends RestActionAble {
   }
 
   String _getESStr({Entity entity, String score}) {
-    if (entity == null) entity = this.entity;
-    if (score == null) score = this.score;
-    return entity.toString() + " " + score;
+    entity ??= entity;
+    score ??= score;
+    return entity.toString() + ' ' + score;
   }
 
   Score addCommandRet(Command command) {
-    List<Widget> commands = List<Widget>.from(_commands);
+    var commands = List<Widget>.from(_commands);
     commands.add(command);
-    return Score(this.entity, this.score, addNew: false, commands: commands);
+    return Score(entity, score, addNew: false, commands: commands);
   }
 
   Score operator +(dynamic other) {
-    if (other is int) return this.add(other);
-    if (other is Score) return this.addScore(other);
-    throw ("Please use either a Score or an Int in the operator +");
+    if (other is int) return add(other);
+    if (other is Score) return addScore(other);
+    throw ('Please use either a Score or an Int in the operator +');
   }
 
   Score operator -(dynamic other) {
-    if (other is int) return this.subtract(other);
-    if (other is Score) return this.subtractScore(other);
-    throw ("Please use either a Score or an Int in the operator -");
+    if (other is int) return subtract(other);
+    if (other is Score) return subtractScore(other);
+    throw ('Please use either a Score or an Int in the operator -');
   }
 
   Score operator %(dynamic other) {
     if (other is int) {
-      return this.modulo(
+      return modulo(
         Score.con(other),
       );
     }
-    if (other is Score) return this.modulo(other);
-    throw ("Please use either a Score or an Int in the operator %");
+    if (other is Score) return modulo(other);
+    throw ('Please use either a Score or an Int in the operator %');
   }
 
   Score operator /(dynamic other) {
     if (other is int) {
-      return this.divideByScore(
+      return divideByScore(
         Score.con(other),
       );
     }
-    if (other is Score) return this.divideByScore(other);
-    throw ("Please use either a Score or an Int in the operator /");
+    if (other is Score) return divideByScore(other);
+    throw ('Please use either a Score or an Int in the operator /');
   }
 
   Score operator *(dynamic other) {
     if (other is int) {
-      return this.multiplyByScore(
+      return multiplyByScore(
         Score.con(other),
       );
     }
-    if (other is Score) return this.multiplyByScore(other);
-    throw ("Please use either a Score or an Int in the operator /");
+    if (other is Score) return multiplyByScore(other);
+    throw ('Please use either a Score or an Int in the operator /');
   }
 
   Score operator >(dynamic other) {
     if (other is int) {
-      return this.matchesRange(
+      return matchesRange(
         Range(from: other + 1),
       );
     }
-    if (other is Score) return this.isBigger(other);
-    throw ("Please use either a Score or an Int in the operator >");
+    if (other is Score) return isBigger(other);
+    throw ('Please use either a Score or an Int in the operator >');
   }
 
   Score operator <(dynamic other) {
     if (other is int) {
-      return this.matchesRange(
+      return matchesRange(
         Range(to: other + -1),
       );
     }
-    if (other is Score) return this.isSmaller(other);
-    throw ("Please use either a Score or an Int in the operator >");
+    if (other is Score) return isSmaller(other);
+    throw ('Please use either a Score or an Int in the operator >');
   }
 
   Score operator >=(dynamic other) {
     if (other is int) {
-      return this.matchesRange(
+      return matchesRange(
         Range(from: other),
       );
     }
-    if (other is Score) return this.isBiggerOrEqual(other);
-    throw ("Please use either a Score or an Int in the operator >=");
+    if (other is Score) return isBiggerOrEqual(other);
+    throw ('Please use either a Score or an Int in the operator >=');
   }
 
   Score operator <=(dynamic other) {
     if (other is int) {
-      return this.matchesRange(
+      return matchesRange(
         Range(to: other),
       );
     }
-    if (other is Score) return this.isSmallerOrEqual(other);
-    throw ("Please use either a Score or an Int in the operator <=");
+    if (other is Score) return isSmallerOrEqual(other);
+    throw ('Please use either a Score or an Int in the operator <=');
   }
 
   Score operator &(dynamic other) {
-    if (other is int) return this.matches(other);
-    if (other is Range) return this.matchesRange(other);
-    if (other is Score) return this.isEqual(other);
-    throw ("Please use either a Score, Range or an Int in the operator &");
+    if (other is int) return matches(other);
+    if (other is Range) return matchesRange(other);
+    if (other is Score) return isEqual(other);
+    throw ('Please use either a Score, Range or an Int in the operator &');
   }
 
   Score operator >>(dynamic other) {
-    if (other is int) return this.set(other);
-    if (other is Score) return this.setEqual(other);
-    throw ("Please use either a Score or an Int in the operator >>");
+    if (other is int) return set(other);
+    if (other is Score) return setEqual(other);
+    throw ('Please use either a Score or an Int in the operator >>');
   }
 
   /// sets the score to a given value of int
   Score set(int val) {
     return addCommandRet(
       Command(
-        "scoreboard players set " + _getESStr() + " " + val.toString(),
+        'scoreboard players set ' + _getESStr() + ' ' + val.toString(),
       ),
     );
   }
@@ -216,7 +216,7 @@ class Score extends RestActionAble {
   Score reset() {
     return addCommandRet(
       Command(
-        "scoreboard players reset " + _getESStr(),
+        'scoreboard players reset ' + _getESStr(),
       ),
     );
   }
@@ -225,7 +225,7 @@ class Score extends RestActionAble {
   Score add([int val = 1]) {
     return addCommandRet(
       Command(
-        "scoreboard players add " + _getESStr() + " " + val.toString(),
+        'scoreboard players add ' + _getESStr() + ' ' + val.toString(),
       ),
     );
   }
@@ -234,7 +234,7 @@ class Score extends RestActionAble {
   Score subtract([int val = 1]) {
     return addCommandRet(
       Command(
-        "scoreboard players remove " + _getESStr() + " " + val.toString(),
+        'scoreboard players remove ' + _getESStr() + ' ' + val.toString(),
       ),
     );
   }
@@ -243,7 +243,7 @@ class Score extends RestActionAble {
   Score get() {
     return addCommandRet(
       Command(
-        "scoreboard players get " + _getESStr(),
+        'scoreboard players get ' + _getESStr(),
       ),
     );
   }
@@ -253,7 +253,7 @@ class Score extends RestActionAble {
   Score setEqual(Score score) {
     return addCommandRet(
       Command(
-        "scoreboard players operation " + isEqual(score).getString(),
+        'scoreboard players operation ' + isEqual(score).getString(),
       ),
     );
   }
@@ -262,9 +262,9 @@ class Score extends RestActionAble {
   Score swapWith(Score score) {
     return addCommandRet(
       Command(
-        "scoreboard players operation " +
+        'scoreboard players operation ' +
             _getESStr() +
-            " >< " +
+            ' >< ' +
             _getESStr(entity: score.entity, score: score.score),
       ),
     );
@@ -274,7 +274,7 @@ class Score extends RestActionAble {
   Score setToSmallest(Score score) {
     return addCommandRet(
       Command(
-        "scoreboard players operation " + isSmaller(score).getString(),
+        'scoreboard players operation ' + isSmaller(score).getString(),
       ),
     );
   }
@@ -283,7 +283,7 @@ class Score extends RestActionAble {
   Score setToBiggest(Score score) {
     return addCommandRet(
       Command(
-        "scoreboard players operation " + isBigger(score).getString(),
+        'scoreboard players operation ' + isBigger(score).getString(),
       ),
     );
   }
@@ -292,9 +292,9 @@ class Score extends RestActionAble {
   Score addScore(Score score) {
     return addCommandRet(
       Command(
-        "scoreboard players operation " +
+        'scoreboard players operation ' +
             _getESStr() +
-            " += " +
+            ' += ' +
             _getESStr(entity: score.entity, score: score.score),
       ),
     );
@@ -304,9 +304,9 @@ class Score extends RestActionAble {
   Score subtractScore(Score score) {
     return addCommandRet(
       Command(
-        "scoreboard players operation " +
+        'scoreboard players operation ' +
             _getESStr() +
-            " -= " +
+            ' -= ' +
             _getESStr(entity: score.entity, score: score.score),
       ),
     );
@@ -316,9 +316,9 @@ class Score extends RestActionAble {
   Score multiplyByScore(Score score) {
     return addCommandRet(
       Command(
-        "scoreboard players operation " +
+        'scoreboard players operation ' +
             _getESStr() +
-            " *= " +
+            ' *= ' +
             _getESStr(entity: score.entity, score: score.score),
       ),
     );
@@ -328,9 +328,9 @@ class Score extends RestActionAble {
   Score divideByScore(Score score) {
     return addCommandRet(
       Command(
-        "scoreboard players operation " +
+        'scoreboard players operation ' +
             _getESStr() +
-            " /= " +
+            ' /= ' +
             _getESStr(entity: score.entity, score: score.score),
       ),
     );
@@ -340,9 +340,9 @@ class Score extends RestActionAble {
   Score modulo(Score score) {
     return addCommandRet(
       Command(
-        "scoreboard players operation " +
+        'scoreboard players operation ' +
             _getESStr() +
-            " %= " +
+            ' %= ' +
             _getESStr(entity: score.entity, score: score.score),
       ),
     );
@@ -350,18 +350,18 @@ class Score extends RestActionAble {
 
   /// sets the score to an nbt value
   Score setToData(Data data) {
-    if (data.subcommand != "get") {
-      throw ("Please set a score to Data.get and not Data." + data.subcommand);
+    if (data.subcommand != 'get') {
+      throw ('Please set a score to Data.get and not Data.' + data.subcommand);
     }
     return addCommandRet(
       Command(
-        "execute store result score " +
+        'execute store result score ' +
             _getESStr() +
-            " run data get " +
+            ' run data get ' +
             data.getTarget() +
-            " " +
+            ' ' +
             data.path +
-            " " +
+            ' ' +
             (data.scale ?? 1).toString(),
       ),
     );
@@ -371,11 +371,11 @@ class Score extends RestActionAble {
   Score setToResult(Command command, {bool useSuccess = false}) {
     return addCommandRet(
       Command(
-        "execute store " +
-            (useSuccess ? "success" : "result") +
-            " score " +
+        'execute store ' +
+            (useSuccess ? 'success' : 'result') +
+            ' score ' +
             _getESStr() +
-            " run " +
+            ' run ' +
             command.toMap()['command'].toString(),
       ),
     );
@@ -385,11 +385,11 @@ class Score extends RestActionAble {
   Score setToCondition(Condition cond, {bool useSuccess = false}) {
     return addCommandRet(
       Command(
-        "execute store " +
-            (useSuccess ? "success" : "result") +
-            " score " +
+        'execute store ' +
+            (useSuccess ? 'success' : 'result') +
+            ' score ' +
             _getESStr() +
-            " " +
+            ' ' +
             Condition.getPrefixes(cond.getList())[0],
       ),
     );
@@ -400,7 +400,7 @@ class Score extends RestActionAble {
     return For(
         to: scores.length - 1,
         create: (int i) {
-          Score ret = this.setToSmallest(scores[i]);
+          var ret = setToSmallest(scores[i]);
           if (min != null) {
             return If(
               scores[i].matchesRange(
@@ -418,7 +418,7 @@ class Score extends RestActionAble {
     return For(
         to: scores.length - 1,
         create: (int i) {
-          Score ret = this.setToBiggest(scores[i]);
+          var ret = setToBiggest(scores[i]);
           if (max != null) {
             return If(
               scores[i].matchesRange(
@@ -435,20 +435,20 @@ class Score extends RestActionAble {
 
   Score isEqual(Score score) {
     return Score.str(
-      _getESStr() + " = " + _getESStr(entity: score.entity, score: score.score),
+      _getESStr() + ' = ' + _getESStr(entity: score.entity, score: score.score),
     );
   }
 
   Score isSmaller(Score score) {
     return Score.str(
-      _getESStr() + " < " + _getESStr(entity: score.entity, score: score.score),
+      _getESStr() + ' < ' + _getESStr(entity: score.entity, score: score.score),
     );
   }
 
   Score isSmallerOrEqual(Score score) {
     return Score.str(
       _getESStr() +
-          " <= " +
+          ' <= ' +
           _getESStr(entity: score.entity, score: score.score),
     );
   }
@@ -456,28 +456,28 @@ class Score extends RestActionAble {
   Score isBiggerOrEqual(Score score) {
     return Score.str(
       _getESStr() +
-          " >= " +
+          ' >= ' +
           _getESStr(entity: score.entity, score: score.score),
     );
   }
 
   Score isBigger(Score score) {
     return Score.str(
-      _getESStr() + " > " + _getESStr(entity: score.entity, score: score.score),
+      _getESStr() + ' > ' + _getESStr(entity: score.entity, score: score.score),
     );
   }
 
-  String _match = "0";
+  String _match = '0';
   String getMatch() => _match;
   Score matches(int value) {
     _match = value.toString();
-    return Score.str(_getESStr() + " matches " + _match,
+    return Score.str(_getESStr() + ' matches ' + _match,
         score: score, match: _match);
   }
 
   Score matchesRange(Range range) {
     _match = range.toString();
-    return Score.str(_getESStr() + " matches " + _match,
+    return Score.str(_getESStr() + ' matches ' + _match,
         score: score, match: _match);
   }
 

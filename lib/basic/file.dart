@@ -34,8 +34,8 @@ class File extends Widget {
     this.create = true,
     this.header,
   }) {
-    this.path.replaceAll('.mcfunction', '');
-    if (this.path.substring(0, 1) == '/') this.path = this.path.substring(1);
+    path.replaceAll('.mcfunction', '');
+    if (path.substring(0, 1) == '/') path = path.substring(1);
   }
 
   /// the execute subconstructor adds an execution statement forwarding to the new file into the original
@@ -46,8 +46,8 @@ class File extends Widget {
     this.create = true,
     this.header,
   }) {
-    this.path.replaceAll('.mcfunction', '');
-    if (this.path.substring(0, 1) == '/') this.path = this.path.substring(1);
+    path.replaceAll('.mcfunction', '');
+    if (path.substring(0, 1) == '/') path = path.substring(1);
     execute = true;
   }
   File.recursive() {
@@ -97,9 +97,9 @@ class File extends Widget {
 
   @override
   Widget generate(Context context) {
-    if (this.isRecursive != null && isRecursive) path = context.file;
+    if (isRecursive != null && isRecursive) path = context.file;
 
-    if (pack == null) pack = context.packId;
+    pack ??= context.packId;
     return Command('function ${pack}:' + path);
   }
 

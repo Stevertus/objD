@@ -9,17 +9,17 @@ class VersionCheck extends Widget {
 
   VersionCheck(
     this.currentVersion, {
-    this.score = "objd_data",
+    this.score = 'objd_data',
     this.onDowndate,
     this.onUpdate,
     this.then,
   });
 
   @override
-  generate(Context context) {
+  Widget generate(Context context) {
     var s = Scoreboard(score);
-    var prev = s["build_number.prev"];
-    var current = s["build_number"];
+    var prev = s['build_number.prev'];
+    var current = s['build_number'];
 
     return For.of([
       prev >> current,

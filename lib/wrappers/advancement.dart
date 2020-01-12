@@ -17,13 +17,13 @@ class Advancement extends RestActionAble {
   /// |mode| the advancement mode(default = only, modes are also seperate constructors) |
   /// |criterium| optional String criterium for an advancement|
   Advancement.grant(this.entity, this.advancement,
-      {this.mode = "only", this.criterium}) {
+      {this.mode = 'only', this.criterium}) {
     revoke = false;
   }
 
   /// You can also revoke an Advancement
   Advancement.revoke(this.entity, this.advancement,
-      {this.mode = "only", this.criterium}) {
+      {this.mode = 'only', this.criterium}) {
     revoke = true;
   }
 
@@ -34,7 +34,7 @@ class Advancement extends RestActionAble {
   ///|Entity| the target player |
   ///|revoke| set true if you want to revoke |
   Advancement.everything(this.entity, {this.revoke = false}) {
-    this.mode = "everything";
+    mode = 'everything';
   }
 
   /// Every mode also has a seperated named constructor:
@@ -47,24 +47,24 @@ class Advancement extends RestActionAble {
   ///|criterium|optional String for an advancement|
   Advancement.only(this.entity, this.advancement,
       {this.revoke = false, this.criterium}) {
-    this.mode = "only";
+    mode = 'only';
   }
   Advancement.from(this.entity, this.advancement, {this.revoke = false}) {
-    this.mode = "from";
+    mode = 'from';
   }
   Advancement.until(this.entity, this.advancement, {this.revoke = false}) {
-    this.mode = "until";
+    mode = 'until';
   }
   Advancement.through(this.entity, this.advancement, {this.revoke = false}) {
-    this.mode = "through";
+    mode = 'through';
   }
 
   @override
   Widget generate(Context context) {
-    String res = "advancement ";
-    res += revoke ? "revoke" : "grant";
-    res += " ${entity.toString()} $mode $advancement";
-    if (criterium != null) res += " $criterium";
+    var res = 'advancement ';
+    res += revoke ? 'revoke' : 'grant';
+    res += ' ${entity.toString()} $mode $advancement';
+    if (criterium != null) res += ' $criterium';
     return Command(res);
   }
 }

@@ -15,21 +15,21 @@ class Log extends RestActionAble {
 
   /// The log widgets displays a console logging in the players chat. That way you can quickly check execution times, score values and entities.
   Log(this.msg, {this.to, this.desc, this.color = Color.DarkAqua}) {
-    if (to == null) to = Entity.All();
+    to ??= Entity.All();
   }
 
   @override
   Widget generate(Context context) {
     if (context.prod) return Comment.Null();
 
-    TextComponent text = TextComponent("undefined");
+    var text = TextComponent('undefined');
     if (msg is num || msg is bool) text = TextComponent(msg.toString());
     if (msg is String) text = TextComponent(msg as String);
     if (msg is Score) text = TextComponent.score(msg as Score);
     if (msg is Entity) text = TextComponent.selector(msg as Entity);
     return Tellraw(to, show: [
-      TextComponent("Console > ", color: color),
-      if (desc != null) TextComponent("$desc "),
+      TextComponent('Console > ', color: color),
+      if (desc != null) TextComponent('$desc '),
       text
     ]);
   }

@@ -16,13 +16,13 @@ class Timeout extends RestActionAble {
   int ticks;
 
   Timeout(this.name,
-      {@required this.children, @required this.ticks, this.path = "timers"})
+      {@required this.children, @required this.ticks, this.path = 'timers'})
       : assert(ticks != null);
 
   @override
-  generate(Context context) {
+  Widget generate(Context context) {
     return Schedule.file(
-      File.execute(path + "/" + name, child: For.of(children)),
+      File.execute(path + '/' + name, child: For.of(children)),
       ticks: ticks,
     );
   }
@@ -40,7 +40,7 @@ class Timer extends RestActionAble {
   Timer(this.name,
       {@required this.children,
       @required this.ticks,
-      this.path = "timers",
+      this.path = 'timers',
       this.infinite = true})
       : assert(ticks != null);
 
@@ -48,22 +48,22 @@ class Timer extends RestActionAble {
     _stop = true;
   }
   @override
-  generate(Context context) {
-    if (_stop == true) return Entity.All().addTag("objd_" + name);
+  Widget generate(Context context) {
+    if (_stop == true) return Entity.All().addTag('objd_' + name);
 
     //if(context.prod){
     if (infinite) {
-      children.add(Schedule(path + "/" + name, ticks: ticks));
+      children.add(Schedule(path + '/' + name, ticks: ticks));
     } else {
       children.addAll([
-        If(Condition.not(Entity.All(tags: ["objd_" + name])),
-            then: [Schedule(path + "/" + name, ticks: ticks)]),
-        Entity.All().removeTag("objd_" + name)
+        If(Condition.not(Entity.All(tags: ['objd_' + name])),
+            then: [Schedule(path + '/' + name, ticks: ticks)]),
+        Entity.All().removeTag('objd_' + name)
       ]);
     }
 
     //}
 
-    return File.execute(path + "/" + name, child: For.of(children));
+    return File.execute(path + '/' + name, child: For.of(children));
   }
 }

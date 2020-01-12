@@ -28,15 +28,15 @@ class AreaEffectCloud extends RestActionAble {
     int duration,
     int waitTime,
   }) {
-    if (nbt == null) nbt = {};
+    nbt ??= {};
 
-    _addIfExist(radius, "Radius");
-    _addIfExist(applicationDelay, "ReapplicationDelay");
-    _addIfExist(duration, "Duration");
-    _addIfExist(waitTime, "WaitTime");
+    _addIfExist(radius, 'Radius');
+    _addIfExist(applicationDelay, 'ReapplicationDelay');
+    _addIfExist(duration, 'Duration');
+    _addIfExist(waitTime, 'WaitTime');
   }
 
-  _addIfExist(dynamic val, String tag) {
+  void _addIfExist(dynamic val, String tag) {
     if (val != null) nbt[tag] = val;
   }
 
@@ -49,14 +49,14 @@ class AreaEffectCloud extends RestActionAble {
     int radius,
     int applicationDelay,
   }) {
-    if (nbt == null) nbt = {};
+    nbt ??= {};
     var inf = -2147483648;
 
     age = inf;
-    _addIfExist(radius, "Radius");
-    _addIfExist(applicationDelay, "ReapplicationDelay");
-    _addIfExist(-1, "Duration");
-    _addIfExist(inf, "WaitTime");
+    _addIfExist(radius, 'Radius');
+    _addIfExist(applicationDelay, 'ReapplicationDelay');
+    _addIfExist(-1, 'Duration');
+    _addIfExist(inf, 'WaitTime');
   }
 
   @override

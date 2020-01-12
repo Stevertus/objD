@@ -4,7 +4,7 @@ import 'package:objd/build/context.dart';
 
 /// The IndexedFile behaves similar to File. Additionally it makes sure that each File, created with IndexedFile, is unique and does not get overwritten.
 class IndexedFile extends Widget {
-  static Map<String, int> _indexed = {};
+  static final Map<String, int> _indexed = {};
 
   // get the id of a name.
   static int getIndexed(String name) {
@@ -31,15 +31,15 @@ class IndexedFile extends Widget {
   }
 
   @override
-  generate(Context context) {
+  Widget generate(Context context) {
     String _name;
     if (custom != null) {
       _name = custom;
     } else {
       IndexedFile._indexed[name] = getId() + 1;
-      _name = this.name + getId().toString();
+      _name = name + getId().toString();
     }
-    if (path != null) _name = path.trim() + "/" + _name;
+    if (path != null) _name = path.trim() + '/' + _name;
     return File(_name, child: child, execute: execute, pack: pack);
   }
 }

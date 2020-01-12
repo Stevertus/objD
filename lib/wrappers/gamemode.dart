@@ -10,11 +10,11 @@ class SetGamemode extends RestActionAble {
   SetGamemode(this.mode, {this.target});
 
   @override
-  generate(Context context) {
+  Command generate(Context context) {
     return Command(
       'gamemode ' +
-          mode.toString().split(".")[1] +
-          " " +
+          mode.toString().split('.')[1] +
+          ' ' +
           (target ?? Entity.Self()).toString(),
     );
   }

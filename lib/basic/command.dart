@@ -20,9 +20,9 @@ class CommandList<T> extends RestActionAble {
   /// ]),
   /// ```
   CommandList(List<T> commands) {
-    if (T.toString() == "String") {
+    if (T.toString() == 'String') {
       _commands = commands.map((x) => Command(x.toString())).toList();
-    } else if (T.toString() == "Command") {
+    } else if (T.toString() == 'Command') {
       _commands = (commands as List<Command>);
     } else {
       throw ('Please insert a string or a list into CommandList');
@@ -57,7 +57,7 @@ class Command extends RestActionAble {
   /// ==> say hey
   /// ```
   Command(this._command) {
-    if (_command.isNotEmpty && _command.substring(0, 1) == "/") {
+    if (_command.isNotEmpty && _command.substring(0, 1) == '/') {
       _command = _command.substring(1);
     }
   }

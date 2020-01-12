@@ -14,7 +14,7 @@ class Alternative extends Tag {
 
   @override
   Map<String, dynamic> getJson() => {
-        "condition": "minecraft:alternative",
-        "terms": terms.map((t) => t.getJson()).toList(),
+        'condition': 'minecraft:alternative',
+        'terms': terms.map((t) => t.getJson()).toList(),
       };
 }

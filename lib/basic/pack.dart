@@ -33,7 +33,7 @@ class Pack extends Widget {
     }
     if (modules != null) {
       if (main == null) {
-        main = File("main", child: For.of(modules));
+        main = File('main', child: For.of(modules));
       } else {
         main.child = For.of([...modules, main.child]);
       }

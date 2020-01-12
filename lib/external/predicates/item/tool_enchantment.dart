@@ -9,8 +9,8 @@ class Enchantment extends Tag {
 
   @override
   Map<String, dynamic> getJson() => {
-        "condition": "minecraft:table_bonus",
-        "enchantments": enchantments.map((e) => e.getJson()).toList(),
+        'condition': 'minecraft:table_bonus',
+        'enchantments': enchantments.map((e) => e.getJson()).toList(),
       };
 }
 
@@ -22,7 +22,7 @@ class EnchantmentData {
       : assert(levels != null);
 
   Map<String, dynamic> getJson() => {
-        "enchantment": enchantment,
-        "levels": levels.getJson(),
+        'enchantment': enchantment,
+        'levels': levels.getJson(),
       };
 }

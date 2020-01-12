@@ -31,14 +31,14 @@ class Tool extends Tag {
     } else if (val is num) {
       return val;
     }
-    throw ("Please provide either a Range or a double value!");
+    throw ('Please provide either a Range or a double value!');
   }
 
   @override
   Map<String, dynamic> getJson() {
-    Map<String, dynamic> ret = {
-      "condition": "minecraft:match_tool",
-      "predicate": predicate?.getJson() ?? {},
+    var ret = <String, dynamic>{
+      'condition': 'minecraft:match_tool',
+      'predicate': predicate?.getJson() ?? {},
     };
     if (count != null) ret['predicate']['count'] = _getRangeMap(count);
     if (durability != null) {

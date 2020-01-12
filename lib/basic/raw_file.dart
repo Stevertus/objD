@@ -22,12 +22,12 @@ class RawFile extends Widget {
   /// 	path: "/predicates",
   /// )
   /// ```
-  RawFile(this.name, this.content, {this.path = "/"});
+  RawFile(this.name, this.content, {this.path = '/'});
 
   String get fullPath => path + name;
 
   @override
-  generate(Context context) {
+  Widget generate(Context context) {
     return null;
   }
 }

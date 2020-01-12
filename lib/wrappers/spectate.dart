@@ -9,7 +9,7 @@ class Spectate extends RestActionAble {
   Spectate(this.target);
 
   @override
-  generate(Context context) {
+  Command generate(Context context) {
     return Command('spectate ' + target.toString());
   }
 }

@@ -8,8 +8,8 @@ class Weather extends Tag {
 
   @override
   Map<String, dynamic> getJson() {
-    Map<String, dynamic> ret = {
-      "condition": "minecraft:weather_check",
+    var ret = <String, dynamic>{
+      'condition': 'minecraft:weather_check',
     };
     if (raining != null) ret['raining'] = raining;
     if (thundering != null) ret['thundering'] = thundering;

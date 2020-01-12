@@ -41,14 +41,14 @@ class Particle extends RestActionAble {
     Entity player,
   }) {
     _gen = particle.toString();
-    if (location != null) _gen += " " + location.toString();
+    if (location != null) _gen += ' ' + location.toString();
     if (delta != null) {
       if (speed == null || count == null || location == null) {
-        throw ("If you decide to use the full particle command add a delta, location, speed and count property!");
+        throw ('If you decide to use the full particle command add a delta, location, speed and count property!');
       }
-      _gen += " ${delta} ${speed} ${count} ";
-      _gen += force ? "force" : "normal";
-      if (player != null) _gen += " " + player.toString();
+      _gen += ' ${delta} ${speed} ${count} ';
+      _gen += force ? 'force' : 'normal';
+      if (player != null) _gen += ' ' + player.toString();
     }
   }
 
@@ -62,16 +62,16 @@ class Particle extends RestActionAble {
     bool force,
     Entity player,
   }) {
-    _gen = "minecraft:block ";
+    _gen = 'minecraft:block ';
     _gen += block.toString();
-    if (location != null) _gen += " " + location.toString();
+    if (location != null) _gen += ' ' + location.toString();
     if (delta != null) {
       if (speed == null || count == null || location == null) {
-        throw ("If you decide to use the full particle command add a delta, location, speed and count property!");
+        throw ('If you decide to use the full particle command add a delta, location, speed and count property!');
       }
-      _gen += " ${delta} ${speed} ${count} ";
-      _gen += force ? "force" : "normal";
-      if (player != null) _gen += " " + player.toString();
+      _gen += ' ${delta} ${speed} ${count} ';
+      _gen += force ? 'force' : 'normal';
+      if (player != null) _gen += ' ' + player.toString();
     }
   }
 
@@ -83,21 +83,21 @@ class Particle extends RestActionAble {
       int count = 1,
       bool force = false,
       Entity player}) {
-    _gen = "minecraft:item ";
+    _gen = 'minecraft:item ';
     _gen += item.toString();
-    if (location != null) _gen += " " + location.toString();
+    if (location != null) _gen += ' ' + location.toString();
     if (delta != null) {
       if (speed == null || count == null) {
-        throw ("If you decide to use the full particle command add a delta, speed and count property!");
+        throw ('If you decide to use the full particle command add a delta, speed and count property!');
       }
-      _gen += " ${delta} ${speed} ${count}";
-      _gen += force ? "force" : "normal";
-      if (player != null) _gen += " " + player.toString();
+      _gen += ' ${delta} ${speed} ${count}';
+      _gen += force ? 'force' : 'normal';
+      if (player != null) _gen += ' ' + player.toString();
     }
   }
 
   @override
   Widget generate(Context context) {
-    return Command("particle " + _gen);
+    return Command('particle ' + _gen);
   }
 }

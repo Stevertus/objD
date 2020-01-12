@@ -30,7 +30,7 @@ class BuildFile {
     commands = [];
   }
 
-  add(String str) {
+  void add(String str) {
     if (str != null && str.isNotEmpty) {
       commands.add(str);
     }
@@ -40,7 +40,7 @@ class BuildFile {
     return commands;
   }
 
-  generate({Context context, BuildPack pack, BuildProject prj}) {
+  void generate({Context context, BuildPack pack, BuildProject prj}) {
     scanner.scan(child, context: context, file: this, pack: pack, project: prj);
   }
 }

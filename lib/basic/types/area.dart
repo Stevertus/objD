@@ -28,17 +28,17 @@ class Area {
     double dz,
     Map<String, double> ranges,
   }) {
-    x = x ?? ranges["x"];
-    y = y ?? ranges["y"];
-    z = z ?? ranges["z"];
+    x = x ?? ranges['x'];
+    y = y ?? ranges['y'];
+    z = z ?? ranges['z'];
 
-    dx = dx ?? ranges["dx"];
-    dy = dy ?? ranges["dy"];
-    dz = dz ?? ranges["dz"];
+    dx = dx ?? ranges['dx'];
+    dy = dy ?? ranges['dy'];
+    dz = dz ?? ranges['dz'];
 
-    final double x2 = x != null && dx != null ? x + dx : null;
-    final double y2 = y != null && dy != null ? y + dy : null;
-    final double z2 = z != null && dz != null ? z + dz : null;
+    final x2 = x != null && dx != null ? x + dx : null;
+    final y2 = y != null && dy != null ? y + dy : null;
+    final z2 = z != null && dz != null ? z + dz : null;
 
     loc1 = Location.glob(x: _min(x, x2), y: _min(y, y2), z: _min(z, z2));
     loc2 = Location.glob(x: _max(x, x2), y: _max(y, y2), z: _max(z, z2));
@@ -55,19 +55,19 @@ class Area {
   }
 
   Map getRanges() {
-    Map<String, double> ret = {};
-    if (loc1.x != null) ret["x"] = loc1.x;
-    if (loc1.y != null) ret["y"] = loc1.y;
-    if (loc1.z != null) ret["z"] = loc1.z;
+    var ret = <String, double>{};
+    if (loc1.x != null) ret['x'] = loc1.x;
+    if (loc1.y != null) ret['y'] = loc1.y;
+    if (loc1.z != null) ret['z'] = loc1.z;
 
-    if (dx != null && dx >= 0) ret["dx"] = dx;
-    if (dy != null && dy >= 0) ret["dy"] = dy;
-    if (dz != null && dz >= 0) ret["dz"] = dz;
+    if (dx != null && dx >= 0) ret['dx'] = dx;
+    if (dy != null && dy >= 0) ret['dy'] = dy;
+    if (dz != null && dz >= 0) ret['dz'] = dz;
     return ret;
   }
 
   String getCoordinates() {
-    return loc1.toString() + " " + loc2.toString();
+    return loc1.toString() + ' ' + loc2.toString();
   }
 }
 

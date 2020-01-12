@@ -13,7 +13,7 @@ import 'package:objd/build/context.dart';
 import 'package:objd/core.dart';
 import 'package:objd/wrappers/comment.dart';
 
-scan(Widget wid,
+void scan(Widget wid,
     {BuildFile file, BuildPack pack, BuildProject project, Context context}) {
   file.add(_findText(wid, context));
   if (findFile(wid, context: context, pack: pack, project: project)) return;
@@ -29,11 +29,11 @@ scan(Widget wid,
     );
     return;
   }
-  if (wid is Comment && !wid.force && (wid.text == "[null]" || context.prod)) {
+  if (wid is Comment && !wid.force && (wid.text == '[null]' || context.prod)) {
     return;
   }
 
-  if (wid is Scoreboard && wid.subcommand == "add") {
+  if (wid is Scoreboard && wid.subcommand == 'add') {
     if (!pack.addScoreboard(wid.name)) return;
   }
 
@@ -41,7 +41,7 @@ scan(Widget wid,
     dynamic child = wid.generate(context);
     // is module
     if (wid is Module) {
-      List<File> files = wid.registerFiles();
+      var files = wid.registerFiles();
       // add files to child
       if (files != null && files.isNotEmpty && child is Widget) {
         child = <Widget>[(child as Widget), ...files];
@@ -72,14 +72,14 @@ scan(Widget wid,
         );
       });
     }
-    //throw "Cannot build Widget: " + wid.toString();
+    //throw 'Cannot build Widget: ' + wid.toString();
   }
 }
 
 String _findText(Widget wid, Context context) {
   if (wid is Text) {
-    String suffixes = "";
-    String prefixes = "";
+    var suffixes = '';
+    var prefixes = '';
     if (context.prefixes.isNotEmpty) {
       prefixes = context.prefixes.join(' ') + ' ';
     }
@@ -88,7 +88,7 @@ String _findText(Widget wid, Context context) {
     }
     return prefixes + wid.generate(context) + suffixes;
   }
-  return "";
+  return '';
 }
 
 bool findFile(Widget wid,

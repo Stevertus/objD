@@ -57,7 +57,7 @@ class Team extends RestActionAble {
     _setModifiers(display, color, nametag, collision, deathMessage,
         friendlyFire, prefix, suffix, seeInvisible);
   }
-  _setModifiers(
+  void _setModifiers(
     TextComponent display,
     Color color,
     ModifyTeam nametag,
@@ -68,47 +68,47 @@ class Team extends RestActionAble {
     String suffix,
     bool seeInvisible,
   ) {
-    if (display != null) modifiers["displayName"] = display.toJson();
-    if (color != null) modifiers["color"] = color.toString();
+    if (display != null) modifiers['displayName'] = display.toJson();
+    if (color != null) modifiers['color'] = color.toString();
     if (deathMessage != null) {
-      modifiers["deathMessageVisibility"] = _genEnum(deathMessage);
+      modifiers['deathMessageVisibility'] = _genEnum(deathMessage);
     }
-    if (friendlyFire != null) modifiers["friendlyFire"] = friendlyFire;
-    if (nametag != null) modifiers["nametagVisibility"] = _genEnum(nametag);
-    if (collision != null) modifiers["collisionRule"] = _genEnum(collision);
-    if (prefix != null) modifiers["prefix"] = prefix;
-    if (suffix != null) modifiers["suffix"] = suffix;
-    if (seeInvisible != null) modifiers["seeFriendlyInvisible"] = seeInvisible;
+    if (friendlyFire != null) modifiers['friendlyFire'] = friendlyFire;
+    if (nametag != null) modifiers['nametagVisibility'] = _genEnum(nametag);
+    if (collision != null) modifiers['collisionRule'] = _genEnum(collision);
+    if (prefix != null) modifiers['prefix'] = prefix;
+    if (suffix != null) modifiers['suffix'] = suffix;
+    if (seeInvisible != null) modifiers['seeFriendlyInvisible'] = seeInvisible;
   }
 
-  _genEnum(dynamic en) {
-    return en.toString().split(".")[1];
+  String _genEnum(dynamic en) {
+    return en.toString().split('.')[1];
   }
 
   @override
   Widget generate(Context context) {
-    List<Widget> wids = [];
+    var wids = <Widget>[];
     switch (_action) {
       case _TeamAction.add:
-        wids.add(Command("team add ${name}"));
+        wids.add(Command('team add ${name}'));
         break;
       case _TeamAction.empty:
-        wids.add(Command("team empty ${name}"));
+        wids.add(Command('team empty ${name}'));
         break;
       case _TeamAction.remove:
-        wids.add(Command("team remove ${name}"));
+        wids.add(Command('team remove ${name}'));
         break;
       case _TeamAction.join:
-        wids.add(Command("team join ${name} ${entity}"));
+        wids.add(Command('team join ${name} ${entity}'));
         break;
       case _TeamAction.leave:
-        wids.add(Command("team leave ${entity}"));
+        wids.add(Command('team leave ${entity}'));
         break;
       default:
     }
     if (modifiers.isNotEmpty) {
       modifiers.keys.forEach((key) =>
-          wids.add(Command("team modify ${name} ${key} ${modifiers[key]}")));
+          wids.add(Command('team modify ${name} ${key} ${modifiers[key]}')));
     }
     print(modifiers);
     return For.of(wids);

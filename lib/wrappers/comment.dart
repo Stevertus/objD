@@ -4,7 +4,7 @@ import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/build.dart';
 
 class Comment extends RestActionAble {
-  static String Author = "";
+  static String Author = '';
 
   String _text;
   String get text => _text;
@@ -12,10 +12,10 @@ class Comment extends RestActionAble {
 
   /// The Comment widget generates a simple line with some annotations(# ...).
   Comment(String text, {this.force = false})
-      : _text = text.startsWith("#") ? text : "# " + text;
+      : _text = text.startsWith('#') ? text : '# ' + text;
 
   /// The Comment features a simple line break.
-  Comment.LineBreak() : _text = "";
+  Comment.LineBreak() : _text = '';
 
   /// Seperates parts of your code
   Comment.Seperate([int length = 48]) {
@@ -30,38 +30,38 @@ class Comment extends RestActionAble {
     String context,
   }) {
     _text = _seperate() +
-        """
+        '''
 \n#
 # Author:
 #  ${author ?? Author}
 #
 # Description:    
-""";
+''';
 
-    _text += desc.split("\n").map((s) => "#  " + s).join("\n");
+    _text += desc.split('\n').map((s) => '#  ' + s).join('\n');
 
     if (calledFrom != null) {
-      _text += "\n#\n# Called in:";
-      _text += "\n#  " + calledFrom;
+      _text += '\n#\n# Called in:';
+      _text += '\n#  ' + calledFrom;
     }
     if (context != null) {
-      _text += "\n#\n# Context:";
-      _text += "\n#  " + context;
+      _text += '\n#\n# Context:';
+      _text += '\n#  ' + context;
     }
 
-    _text += "\n#\n" + _seperate();
+    _text += '\n#\n' + _seperate();
   }
 
   Comment.Null() {
-    _text = "[null]";
+    _text = '[null]';
   }
 
   String _seperate([int length = 48]) {
-    return List.generate(length, (i) => "#").join();
+    return List.generate(length, (i) => '#').join();
   }
 
   @override
   Widget generate(Context context) {
-    return Text(_text ?? "");
+    return Text(_text ?? '');
   }
 }

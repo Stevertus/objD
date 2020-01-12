@@ -24,12 +24,12 @@ class Scoreboard extends RestActionAble {
   /// objD automatically keeps a list of all scoreboards and inserts them into the given load file, ignoring doubled names.
   Scoreboard(
     this.name, {
-    this.type = "dummy",
+    this.type = 'dummy',
     TextComponent display,
     bool addIntoLoad = true,
   }) {
-    subcommand = addIntoLoad ? "add" : "addHere";
-    if (display != null) type += " " + display.toJson();
+    subcommand = addIntoLoad ? 'add' : 'addHere';
+    if (display != null) type += ' ' + display.toJson();
     prefixName();
   }
 
@@ -39,9 +39,9 @@ class Scoreboard extends RestActionAble {
     TextComponent display,
     bool addIntoLoad = true,
   }) {
-    this.type = "minecraft.used:minecraft.carrot_on_a_stick";
-    subcommand = addIntoLoad ? "add" : "addHere";
-    if (display != null) type += " " + display.toJson();
+    type = 'minecraft.used:minecraft.carrot_on_a_stick';
+    subcommand = addIntoLoad ? 'add' : 'addHere';
+    if (display != null) type += ' ' + display.toJson();
     prefixName();
   }
 
@@ -51,22 +51,22 @@ class Scoreboard extends RestActionAble {
     TextComponent display,
     bool addIntoLoad = true,
   }) {
-    this.type = "trigger";
-    subcommand = addIntoLoad ? "add" : "addHere";
-    if (display != null) type += " " + display.toJson();
+    type = 'trigger';
+    subcommand = addIntoLoad ? 'add' : 'addHere';
+    if (display != null) type += ' ' + display.toJson();
     prefixName();
   }
 
   /// The `Scoreboard.add` constructor does exactly the same as Scoreboard but puts the result without checking in the current file.
-  Scoreboard.add(this.name, {this.type = "dummy", TextComponent display}) {
-    subcommand = "addHere";
-    if (display != null) type += " " + display.toJson();
+  Scoreboard.add(this.name, {this.type = 'dummy', TextComponent display}) {
+    subcommand = 'addHere';
+    if (display != null) type += ' ' + display.toJson();
     prefixName();
   }
 
   /// `Scoreboard.remove` removes an objective by its name again.
   Scoreboard.remove(this.name) {
-    subcommand = "remove";
+    subcommand = 'remove';
     prefixName();
   }
 
@@ -77,8 +77,8 @@ class Scoreboard extends RestActionAble {
   /// |String|name of the objective(required)|
   /// |display|String for display location (default = sidebar)|
 
-  Scoreboard.setdisplay(this.name, {String display = "sidebar"}) {
-    subcommand = "setdisplay";
+  Scoreboard.setdisplay(this.name, {String display = 'sidebar'}) {
+    subcommand = 'setdisplay';
     type = display;
     prefixName();
   }
@@ -91,18 +91,18 @@ class Scoreboard extends RestActionAble {
   @override
   Widget generate(Context context) {
     switch (subcommand) {
-      case "add":
+      case 'add':
         return Extend(
           context.loadFile ?? 'load',
-          child: Command("scoreboard objectives add " + name + " " + type),
+          child: Command('scoreboard objectives add ' + name + ' ' + type),
           first: true,
         );
-      case "addHere":
-        return Command("scoreboard objectives add " + name + " " + type);
-      case "remove":
-        return Command("scoreboard objectives remove " + name);
-      case "setdisplay":
-        return Command("scoreboard objectives setdisplay " + type + " " + name);
+      case 'addHere':
+        return Command('scoreboard objectives add ' + name + ' ' + type);
+      case 'remove':
+        return Command('scoreboard objectives remove ' + name);
+      case 'setdisplay':
+        return Command('scoreboard objectives setdisplay ' + type + ' ' + name);
     }
     return Comment.Null();
   }

@@ -17,8 +17,8 @@ class RandomScore extends RestActionAble {
     this.entity, {
     this.from = 0,
     @required this.to,
-    this.objective = "objd_random",
-    this.targetFilePath = "objd",
+    this.objective = 'objd_random',
+    this.targetFilePath = 'objd',
     this.targetFileName,
   }) {
     _diff = to - from + 1;
@@ -30,18 +30,18 @@ class RandomScore extends RestActionAble {
   Widget generate(Context context) {
     return For.of(
       [
-        Score(Entity.PlayerName("#max"), objective).set(_diff),
+        Score(Entity.PlayerName('#max'), objective).set(_diff),
         Group(
           path: targetFilePath,
-          filename: targetFileName ?? "random",
+          filename: targetFileName ?? 'random',
           generateIDs: targetFileName == null,
           children: [
-            Comment("Random UUID Generator from ${context.file}"),
-            AreaEffectCloud(Location.here(), tags: ["objd_random"]),
+            Comment('Random UUID Generator from ${context.file}'),
+            AreaEffectCloud(Location.here(), tags: ['objd_random']),
             Score(entity, objective).setToResult(Command(
-                "data get entity @e[tag=objd_random,sort=nearest,limit=1] UUIDMost 0.0000000001")),
+                'data get entity @e[tag=objd_random,sort=nearest,limit=1] UUIDMost 0.0000000001')),
             Score(entity, objective).modulo(
-              Score(Entity.PlayerName("#max"), objective),
+              Score(Entity.PlayerName('#max'), objective),
             ),
           ],
         ),

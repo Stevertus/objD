@@ -39,7 +39,7 @@ class AroundLocation extends RestActionAble {
 
   @override
   Widget generate(Context context) {
-    List<Widget> builds = [];
+    var builds = <Widget>[];
     if (left) builds.add(build(Location.rel(x: rel, y: 0, z: 0)));
     if (right) builds.add(build(Location.rel(x: -rel, y: 0, z: 0)));
     if (top) builds.add(build(Location.rel(x: 0, y: rel, z: 0)));

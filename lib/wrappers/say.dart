@@ -16,7 +16,7 @@ class Say extends RestActionAble {
     } else if (msg is String) {
       message = msg;
     } else {
-      throw ("Please insert either an entity or a string!");
+      throw ('Please insert either an entity or a string!');
     }
   }
 

@@ -10,8 +10,8 @@ class BlockState extends Tag {
 
   @override
   Map<String, dynamic> getJson() {
-    Map<String, dynamic> ret = {
-      "condition": "minecraft:block_state_property",
+    var ret = <String, dynamic>{
+      'condition': 'minecraft:block_state_property',
     };
 
     if (properties != null && properties.isNotEmpty) {

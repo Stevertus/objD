@@ -28,7 +28,7 @@ class For extends RestActionAble {
     int step = 1,
   }) {
     _list = [];
-    for (int i = from; i <= to; i += step) {
+    for (var i = from; i <= to; i += step) {
       _list.add(create(i));
     }
   }

@@ -11,7 +11,7 @@ class Clear extends RestActionAble {
   @override
   Widget generate(Context context) {
     return Command(
-      "clear ${target.toString()} ${item.getGiveNotation(withDamage: false)}",
+      'clear ${target.toString()} ${item.getGiveNotation(withDamage: false)}',
     );
   }
 }

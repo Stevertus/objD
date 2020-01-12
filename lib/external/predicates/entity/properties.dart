@@ -44,36 +44,36 @@ class Properties extends Tag {
 
   @override
   Map<String, dynamic> getJson() {
-    Map<String, dynamic> ret = {
-      "condition": "minecraft:entity_properties",
-      "entity": entity.toString(),
-      "predicate": predicate?.getJson() ?? {},
+    var ret = <String, dynamic>{
+      'condition': 'minecraft:entity_properties',
+      'entity': entity.toString(),
+      'predicate': predicate?.getJson() ?? {},
     };
-    Map<String, bool> flags = {};
-    if (is_baby != null) flags["is_baby"] = is_baby;
-    if (is_on_fire != null) flags["is_on_fire"] = is_on_fire;
-    if (is_sneaking != null) flags["is_sneaking"] = is_sneaking;
-    if (is_sprinting != null) flags["is_sprinting"] = is_sprinting;
-    if (is_swimming != null) flags["is_swimming"] = is_swimming;
+    var flags = <String, bool>{};
+    if (is_baby != null) flags['is_baby'] = is_baby;
+    if (is_on_fire != null) flags['is_on_fire'] = is_on_fire;
+    if (is_sneaking != null) flags['is_sneaking'] = is_sneaking;
+    if (is_sprinting != null) flags['is_sprinting'] = is_sprinting;
+    if (is_swimming != null) flags['is_swimming'] = is_swimming;
 
-    if (flags.isNotEmpty) ret["predicate"]["flags"] = flags;
+    if (flags.isNotEmpty) ret['predicate']['flags'] = flags;
 
-    Map<String, dynamic> player = {};
+    var player = <String, dynamic>{};
 
-    if (level != null) player["level"] = level.getJson();
-    if (gamemode != null) player["gamemode"] = gamemode.toString();
-    if (stats != null) player["stats"] = stats.map((s) => s.getJson()).toList();
-    if (recipes != null) player["recipes"] = recipes;
-    if (advancements != null) player["advancements"] = advancements;
-    if (advancements != null) player["advancements"] = advancements;
+    if (level != null) player['level'] = level.getJson();
+    if (gamemode != null) player['gamemode'] = gamemode.toString();
+    if (stats != null) player['stats'] = stats.map((s) => s.getJson()).toList();
+    if (recipes != null) player['recipes'] = recipes;
+    if (advancements != null) player['advancements'] = advancements;
+    if (advancements != null) player['advancements'] = advancements;
 
-    if (player.isNotEmpty) ret["predicate"]["player"] = player;
+    if (player.isNotEmpty) ret['predicate']['player'] = player;
 
     if (nbt != null && nbt.isNotEmpty) {
-      ret["predicate"]["nbt"] = gson.encode(nbt);
+      ret['predicate']['nbt'] = gson.encode(nbt);
     }
-    if (type != null) ret["predicate"]["type"] = type.toString();
-    if (team != null) ret["predicate"]["team"] = team;
+    if (type != null) ret['predicate']['type'] = type.toString();
+    if (team != null) ret['predicate']['team'] = team;
 
     return ret;
   }
@@ -87,8 +87,8 @@ class Stat {
   Stat(this.stat, {@required this.type, @required this.value});
 
   Map<String, dynamic> getJson() => {
-        "type": type,
-        "stat": stat,
-        "value": value.getJson(),
+        'type': type,
+        'stat': stat,
+        'value': value.getJson(),
       };
 }

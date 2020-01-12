@@ -15,13 +15,13 @@
     },
     {
       "name": "meta",
-      "rootUri": "file:///C:/Users/Marten/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/meta-1.1.7",
+      "rootUri": "file:///C:/Users/Marten/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/meta-1.1.8",
       "packageUri": "lib/",
       "languageVersion": "1.12"
     },
     {
       "name": "pedantic",
-      "rootUri": "file:///C:/Users/Marten/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/pedantic-1.8.0+1",
+      "rootUri": "file:///C:/Users/Marten/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/pedantic-1.9.0",
       "packageUri": "lib/",
       "languageVersion": "2.1"
     },
@@ -32,7 +32,7 @@
       "languageVersion": "2.3"
     }
   ],
-  "generated": "2020-01-12T13:15:58.822242Z",
+  "generated": "2020-01-12T13:22:40.587723Z",
   "generator": "pub",
   "generatorVersion": "2.7.0"
 }

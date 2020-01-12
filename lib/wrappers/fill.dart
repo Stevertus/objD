@@ -9,29 +9,29 @@ import 'package:objd/build/build.dart';
 class Fill extends RestActionAble {
   Area area;
   Block block;
-  String type = "";
+  String type = '';
 
   /// Fill acts similar to setblock, but fills a whole area instead.
   Fill(this.block, {@required this.area});
   Fill.destroy(this.block, {@required this.area}) {
-    type = "destroy";
+    type = 'destroy';
   }
   Fill.hollow(this.block, {@required this.area}) {
-    type = "hollow";
+    type = 'hollow';
   }
   Fill.outline(this.block, {@required this.area}) {
-    type = "outline";
+    type = 'outline';
   }
   Fill.keep(this.block, {@required this.area}) {
-    type = "keep";
+    type = 'keep';
   }
   Fill.replace(this.block, {@required this.area, Block replace}) {
-    if (replace != null) type = "replace " + replace.toString();
+    if (replace != null) type = 'replace ' + replace.toString();
   }
 
   @override
   Widget generate(Context context) {
-    if (type.isNotEmpty) type = " " + type;
+    if (type.isNotEmpty) type = ' ' + type;
     return Command(
         'fill ' + area.getCoordinates() + ' ' + block.toString() + type);
   }

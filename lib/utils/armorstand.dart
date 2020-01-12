@@ -47,30 +47,30 @@ class ArmorStand extends RestActionAble {
     this.tags,
     this.rotation,
   }) {
-    if (nbt == null) nbt = {};
+    nbt ??= {};
 
-    _addBoolNbt(marker, "Marker");
-    _addBoolNbt(hasArms, "ShowArms");
-    _addBoolNbt(invisible, "Invisible");
-    if (basePlate != null) _addBoolNbt(!basePlate, "NoBasePlate");
+    _addBoolNbt(marker, 'Marker');
+    _addBoolNbt(hasArms, 'ShowArms');
+    _addBoolNbt(invisible, 'Invisible');
+    if (basePlate != null) _addBoolNbt(!basePlate, 'NoBasePlate');
     _addSlots();
 
     // TODO: Pose
   }
-  _addSlots() {
-    if ((mainHand != null || offHand != null) && nbt["HandItems"] == null) {
-      nbt["HandItems"] = [{}, {}];
+  void _addSlots() {
+    if ((mainHand != null || offHand != null) && nbt['HandItems'] == null) {
+      nbt['HandItems'] = [{}, {}];
     }
     if (!(head == null && chest == null && legs == null && boots == null)) {
-      nbt["ArmorItems"] = [{}, {}, {}, {}];
+      nbt['ArmorItems'] = [{}, {}, {}, {}];
     }
 
-    if (mainHand != null) nbt["HandItems"][0] = mainHand.getMap();
-    if (offHand != null) nbt["HandItems"][1] = offHand.getMap();
-    if (head != null) nbt["ArmorItems"][3] = head.getMap();
-    if (chest != null) nbt["ArmorItems"][2] = chest.getMap();
-    if (legs != null) nbt["ArmorItems"][1] = legs.getMap();
-    if (boots != null) nbt["ArmorItems"][0] = boots.getMap();
+    if (mainHand != null) nbt['HandItems'][0] = mainHand.getMap();
+    if (offHand != null) nbt['HandItems'][1] = offHand.getMap();
+    if (head != null) nbt['ArmorItems'][3] = head.getMap();
+    if (chest != null) nbt['ArmorItems'][2] = chest.getMap();
+    if (legs != null) nbt['ArmorItems'][1] = legs.getMap();
+    if (boots != null) nbt['ArmorItems'][0] = boots.getMap();
   }
 
   /// Often times you need a static armorstand that just acts as a marker for a location, there is ArmorStand.staticMarker that sets properties automatically.
@@ -95,14 +95,14 @@ class ArmorStand extends RestActionAble {
     this.tags,
     this.rotation,
   }) {
-    if (nbt == null) nbt = {};
+    nbt ??= {};
 
-    _addBoolNbt(true, "Marker");
-    _addBoolNbt(invisible, "Invisible");
+    _addBoolNbt(true, 'Marker');
+    _addBoolNbt(invisible, 'Invisible');
     _addSlots();
   }
 
-  _addBoolNbt(bool value, String path) {
+  void _addBoolNbt(bool value, String path) {
     if (value != null) nbt[path] = value ? 1 : 0;
   }
 

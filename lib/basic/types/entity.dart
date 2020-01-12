@@ -20,10 +20,12 @@ export 'entities.dart';
 
 abstract class EntityClass {
   String selector;
+  @override
   String toString();
 }
 
 class Entity implements EntityClass {
+  @override
   String selector;
 
   /// creates an entity with @p
@@ -43,7 +45,7 @@ class Entity implements EntityClass {
     Range verticalRotation,
     String predicate,
   }) {
-    selector = "p";
+    selector = 'p';
     _setArguments(
       null,
       tags,
@@ -86,7 +88,7 @@ class Entity implements EntityClass {
     Range verticalRotation,
     String predicate,
   }) {
-    selector = "a";
+    selector = 'a';
     _setArguments(
       limit,
       tags,
@@ -127,7 +129,7 @@ class Entity implements EntityClass {
     Range verticalRotation,
     String predicate,
   }) {
-    selector = "r";
+    selector = 'r';
     _setArguments(
       limit,
       tags,
@@ -167,7 +169,7 @@ class Entity implements EntityClass {
     Range verticalRotation,
     String predicate,
   }) {
-    selector = "s";
+    selector = 's';
     _setArguments(
       null,
       tags,
@@ -208,7 +210,7 @@ class Entity implements EntityClass {
     Range verticalRotation,
     String predicate,
   }) {
-    selector = "s";
+    selector = 's';
     _setArguments(
       null,
       tags,
@@ -248,7 +250,7 @@ class Entity implements EntityClass {
     Range verticalRotation,
     String predicate,
   }) {
-    selector = "s";
+    selector = 's';
     _setArguments(
       null,
       tags,
@@ -299,9 +301,9 @@ class Entity implements EntityClass {
 
   /// creates a new instance of an already existing Entity object
   Entity.clone(Entity ent) {
-    this.selector = ent.selector;
-    this.playerName = ent.playerName;
-    this.arguments = Map.from(ent.arguments);
+    selector = ent.selector;
+    playerName = ent.playerName;
+    arguments = Map.from(ent.arguments);
   }
 
   /// Entity is an util class to convert an argument list into the Minecraft Entity format(@p...)
@@ -347,7 +349,7 @@ class Entity implements EntityClass {
   }
 
   /// Modifies the properties of the existing Entity and applies new arguments(same as constructors)
-  setValues({
+  void setValues({
     int limit,
     List<dynamic> tags,
     Team team,
@@ -386,7 +388,7 @@ class Entity implements EntityClass {
     );
   }
 
-  _setArguments(
+  void _setArguments(
     int limit,
     List<dynamic> tags,
     Team team,
@@ -405,9 +407,9 @@ class Entity implements EntityClass {
     String predicate,
     bool not,
   ) {
-    var n = "";
+    var n = '';
     if (not != null && not) {
-      n = "!";
+      n = '!';
     }
     if (distance != null) {
       arguments['distance'] = n + distance.toString();
@@ -463,19 +465,19 @@ class Entity implements EntityClass {
           }
           arguments['tag'].add(n + (tag as String));
         } else {
-          throw ("Please insert a Tag or String as tag into Entity!");
+          throw ('Please insert a Tag or String as tag into Entity!');
         }
       });
     }
     if (scores != null) {
-      List<String> ret = [];
+      var ret = <String>[];
       scores.forEach((score) {
         if (score.getMatch().isEmpty) {
-          throw ("Please insert a match method in the scores value for an entity!");
+          throw ('Please insert a match method in the scores value for an entity!');
         }
-        ret.add(score.score + "=" + score.getMatch());
+        ret.add(score.score + '=' + score.getMatch());
       });
-      arguments['scores'] = n + "{" + ret.join(",") + "}";
+      arguments['scores'] = n + '{' + ret.join(',') + '}';
     }
   }
 
@@ -491,8 +493,8 @@ class Entity implements EntityClass {
   ///
   /// **Example:**
   /// ```dart
-  /// Say(Entity().not(tags:["mytag"],nbt:{"istrue":1}))
-  /// ⇒ say @e[tag=!mytag,nbt=!{"istrue":1}]
+  /// Say(Entity().not(tags:['mytag'],nbt:{'istrue':1}))
+  /// ⇒ say @e[tag=!mytag,nbt=!{'istrue':1}]
   /// ```
   Entity not({
     int limit,
@@ -536,7 +538,7 @@ class Entity implements EntityClass {
   /// stores the result or success of a [command] in a nbt [path] in your entity
   Execute storeResult(Command command,
       {@required String path,
-      String datatype = "double",
+      String datatype = 'double',
       double scale = 1,
       bool useSuccess = false}) {
     assert(path != null || path.isNotEmpty);
@@ -548,7 +550,7 @@ class Entity implements EntityClass {
           'store ' +
               (useSuccess ? 'success' : 'result') +
               ' entity ' +
-              this.toString() +
+              toString() +
               ' ' +
               path +
               ' ${datatype} ${scale}'
@@ -582,7 +584,7 @@ class Entity implements EntityClass {
     Range verticalRotation,
     String predicate,
   }) {
-    Entity temp = Entity.clone(this);
+    var temp = Entity.clone(this);
     temp._setArguments(
         limit,
         tags,
@@ -626,7 +628,7 @@ class Entity implements EntityClass {
     Block through = Blocks.air,
     Widget Function(Function, Function) ray,
     List<Widget> onhit,
-    String scoreName = "objd_count",
+    String scoreName = 'objd_count',
   }) =>
       StraitWidget.builder.create(Raycast(this,
           max: max,
@@ -731,7 +733,7 @@ class Entity implements EntityClass {
   ///Uses `StraitPlayer.particle()` and `StraitEntity.at()`
 
   RestActionAble crash() => at(children: [
-        this.particle(
+        particle(
           particle: Particles.barrier,
           location: Location.here(),
           count: 1000000000,
@@ -746,7 +748,7 @@ class Entity implements EntityClass {
   ///Generates a tellraw command
   ///```dart
   ///player.tellraw([
-  /// TextComponent("Welcome to my Server!")
+  /// TextComponent('Welcome to my Server!')
   ///]).queue()
   ///```
   ///---
@@ -797,17 +799,17 @@ class Entity implements EntityClass {
   ///Use #dataMerge, #dataGet, #dataRemove and #dataModify instead
 
   @Deprecated('Use #dataMerge, #dataGet, #dataRemove and #dataModify instead')
-  RestActionAble data({Map<String, dynamic> nbt, String type = "merge"}) {
-    if ((this.selector == "a" ||
-        this.selector == "r" ||
-        this.selector == "p" ||
-        this.arguments["type"] == "minecraft:player" ||
-        this.arguments["type"] == "player")) {
-      throw ("Cannot modify a player's data");
+  RestActionAble data({Map<String, dynamic> nbt, String type = 'merge'}) {
+    if ((selector == 'a' ||
+        selector == 'r' ||
+        selector == 'p' ||
+        arguments['type'] == 'minecraft:player' ||
+        arguments['type'] == 'player')) {
+      throw ('Cannot modify a player\'s data');
     }
-    if ((this.selector == "a" || this.selector == "e") &&
-        (this.arguments["limit"] == null || this.arguments["limit"] != "1")) {
-      throw ("Cannot work with data of multiple entities in data command");
+    if ((selector == 'a' || selector == 'e') &&
+        (arguments['limit'] == null || arguments['limit'] != '1')) {
+      throw ('Cannot work with data of multiple entities in data command');
     }
     return StraitWidget.builder.create(Data(this, nbt: nbt, type: type));
   }
@@ -815,20 +817,20 @@ class Entity implements EntityClass {
   ///
   ///Generates a Data Widget
   ///```dart
-  ///entity.dataMerge(nbt: {"CustomNameVisible":true}).queue()
+  ///entity.dataMerge(nbt: {'CustomNameVisible':true}).queue()
   ///```
 
   RestActionAble dataMerge({Map<String, dynamic> nbt, String strNbt}) {
-    if ((this.selector == "a" ||
-        this.selector == "r" ||
-        this.selector == "p" ||
-        this.arguments["type"] == "minecraft:player" ||
-        this.arguments["type"] == "player")) {
-      throw ("Cannot modify a player's data");
+    if ((selector == 'a' ||
+        selector == 'r' ||
+        selector == 'p' ||
+        arguments['type'] == 'minecraft:player' ||
+        arguments['type'] == 'player')) {
+      throw ('Cannot modify a player\'s data');
     }
-    if ((this.selector == "a" || this.selector == "e") &&
-        (this.arguments["limit"] == null || this.arguments["limit"] != "1")) {
-      throw ("Cannot work with data of multiple entities in data command");
+    if ((selector == 'a' || selector == 'e') &&
+        (arguments['limit'] == null || arguments['limit'] != '1')) {
+      throw ('Cannot work with data of multiple entities in data command');
     }
     return StraitWidget.builder
         .create(Data.merge(this, nbt: nbt, strNbt: strNbt));
@@ -837,13 +839,13 @@ class Entity implements EntityClass {
   ///
   ///Generates a Data Widget
   ///```dart
-  ///entity.dataGet(path: "CustomName").queue()
+  ///entity.dataGet(path: 'CustomName').queue()
   ///```
 
   RestActionAble dataGet({@required String path, num scale = 1}) {
-    if ((this.selector == "a" || this.selector == "e") &&
-        (this.arguments["limit"] == null || this.arguments["limit"] != "1")) {
-      throw ("Cannot work with data of multiple entities in data command");
+    if ((selector == 'a' || selector == 'e') &&
+        (arguments['limit'] == null || arguments['limit'] != '1')) {
+      throw ('Cannot work with data of multiple entities in data command');
     }
     return StraitWidget.builder
         .create(Data.get(this, path: path, scale: scale));
@@ -852,20 +854,20 @@ class Entity implements EntityClass {
   ///
   ///Generates a Data Widget
   ///```dart
-  ///entity.dataRemove(path: "CustomName").queue()
+  ///entity.dataRemove(path: 'CustomName').queue()
   ///```
 
   RestActionAble dataRemove({@required String path}) {
-    if ((this.selector == "a" ||
-        this.selector == "r" ||
-        this.selector == "p" ||
-        this.arguments["type"] == "minecraft:player" ||
-        this.arguments["type"] == "player")) {
-      throw ("Cannot modify a player's data");
+    if ((selector == 'a' ||
+        selector == 'r' ||
+        selector == 'p' ||
+        arguments['type'] == 'minecraft:player' ||
+        arguments['type'] == 'player')) {
+      throw ('Cannot modify a player\'s data');
     }
-    if ((this.selector == "a" || this.selector == "e") &&
-        (this.arguments["limit"] == null || this.arguments["limit"] != "1")) {
-      throw ("Cannot work with data of multiple entities in data command");
+    if ((selector == 'a' || selector == 'e') &&
+        (arguments['limit'] == null || arguments['limit'] != '1')) {
+      throw ('Cannot work with data of multiple entities in data command');
     }
     return StraitWidget.builder.create(Data.remove(this, path: path));
   }
@@ -873,21 +875,21 @@ class Entity implements EntityClass {
   ///
   ///Generates a Data Widget
   ///```dart
-  ///entity.dataModify(path: "CustomName", modify: ...).queue()
+  ///entity.dataModify(path: 'CustomName', modify: ...).queue()
   ///```
 
   RestActionAble dataModify(
       {@required String path, @required DataModify modify}) {
-    if ((this.selector == "a" ||
-        this.selector == "r" ||
-        this.selector == "p" ||
-        this.arguments["type"] == "minecraft:player" ||
-        this.arguments["type"] == "player")) {
-      throw ("Cannot modify a player's data");
+    if ((selector == 'a' ||
+        selector == 'r' ||
+        selector == 'p' ||
+        arguments['type'] == 'minecraft:player' ||
+        arguments['type'] == 'player')) {
+      throw ('Cannot modify a player\'s data');
     }
-    if ((this.selector == "a" || this.selector == "e") &&
-        (this.arguments["limit"] == null || this.arguments["limit"] != "1")) {
-      throw ("Cannot work with data of multiple entities in data command");
+    if ((selector == 'a' || selector == 'e') &&
+        (arguments['limit'] == null || arguments['limit'] != '1')) {
+      throw ('Cannot work with data of multiple entities in data command');
     }
     return StraitWidget.builder
         .create(Data.modify(this, path: path, modify: modify));
@@ -896,12 +898,12 @@ class Entity implements EntityClass {
   ///
   ///Generates a Execute Widget (execute as the entity)
   ///```dart
-  ///entity.execute().run(Say("hi")).queue()
+  ///entity.execute().run(Say('hi')).queue()
   ///```
 
   RestActionAble execute({
     List<Widget> children,
-    String targetFilePath = "objd",
+    String targetFilePath = 'objd',
     String targetFileName,
     bool encapsulate = true,
   }) =>
@@ -915,13 +917,13 @@ class Entity implements EntityClass {
   ///
   ///Generates a Execute Widget (execute as the entity)
   ///```dart
-  ///entity.exec().run(Say("hi")).queue()
+  ///entity.exec().run(Say('hi')).queue()
   ///```
   ///short form for `entity.execute()`
 
   RestActionAble exec({
     List<Widget> children,
-    String targetFilePath = "objd",
+    String targetFilePath = 'objd',
     String targetFileName,
     bool encapsulate = true,
   }) =>
@@ -942,7 +944,7 @@ class Entity implements EntityClass {
 
   RestActionAble executeStrait({
     @required Function(List<Widget>) run,
-    String targetFilePath = "objd",
+    String targetFilePath = 'objd',
     String targetFileName,
     bool encapsulate = true,
   }) =>
@@ -964,7 +966,7 @@ class Entity implements EntityClass {
 
   RestActionAble execStrait({
     @required Function(List<Widget>) run,
-    String targetFilePath = "objd",
+    String targetFilePath = 'objd',
     String targetFileName,
     bool encapsulate = true,
   }) =>
@@ -983,7 +985,7 @@ class Entity implements EntityClass {
 
   RestActionAble asat({
     List<Widget> children,
-    String targetFilePath = "objd",
+    String targetFilePath = 'objd',
     String targetFileName,
     bool encapsulate = true,
   }) =>
@@ -1004,7 +1006,7 @@ class Entity implements EntityClass {
 
   RestActionAble asatStrait({
     @required Function(List<Widget>) run,
-    String targetFilePath = "objd",
+    String targetFilePath = 'objd',
     String targetFileName,
     bool encapsulate = true,
   }) =>
@@ -1018,12 +1020,12 @@ class Entity implements EntityClass {
   ///
   ///Generates a Execute Widget (execute as the entity)
   ///```dart
-  ///entity.as().run(Say("hi")).queue()
+  ///entity.as().run(Say('hi')).queue()
   ///```
 
   RestActionAble as({
     List<Widget> children,
-    String targetFilePath = "objd",
+    String targetFilePath = 'objd',
     String targetFileName,
     bool encapsulate = true,
   }) =>
@@ -1044,7 +1046,7 @@ class Entity implements EntityClass {
 
   RestActionAble asStrait({
     @required Function(List<Widget>) run,
-    String targetFilePath = "objd",
+    String targetFilePath = 'objd',
     String targetFileName,
     bool encapsulate = true,
   }) =>
@@ -1063,7 +1065,7 @@ class Entity implements EntityClass {
 
   RestActionAble at({
     List<Widget> children,
-    String targetFilePath = "objd",
+    String targetFilePath = 'objd',
     String targetFileName,
     bool encapsulate = true,
   }) =>
@@ -1084,7 +1086,7 @@ class Entity implements EntityClass {
 
   RestActionAble atStrait({
     @required Function(List<Widget>) run,
-    String targetFilePath = "objd",
+    String targetFilePath = 'objd',
     String targetFileName,
     bool encapsulate = true,
   }) =>
@@ -1098,7 +1100,7 @@ class Entity implements EntityClass {
   ///
   ///Adds a tag to the entity
   ///```dart
-  ///entity.addTag("objDTest").queue()
+  ///entity.addTag('objDTest').queue()
   ///```
 
   RestActionAble addTag(String tag) =>
@@ -1107,7 +1109,7 @@ class Entity implements EntityClass {
   ///
   ///Adds tags to the entity
   ///```dart
-  ///entity.addTags(["objDTest","objDTest2"]).queue()
+  ///entity.addTags(['objDTest','objDTest2']).queue()
   ///```
 
   RestActionAble addTags(List<String> tags) => StraitWidget.builder.create(
@@ -1116,7 +1118,7 @@ class Entity implements EntityClass {
   ///
   ///Removes a tag from the entity
   ///```dart
-  ///entity.removeTag("objDTest").queue()
+  ///entity.removeTag('objDTest').queue()
   ///```
 
   RestActionAble removeTag(String tag) =>
@@ -1125,7 +1127,7 @@ class Entity implements EntityClass {
   ///
   ///Removes tags from the entity
   ///```dart
-  ///entity.removeTags(["objDTest","objDTest2"]).queue()
+  ///entity.removeTags(['objDTest','objDTest2']).queue()
   ///```
 
   RestActionAble removeTags(List<String> tags) => StraitWidget.builder.create(
@@ -1134,7 +1136,7 @@ class Entity implements EntityClass {
   ///
   ///The entity joins a team
   ///```dart
-  ///entity.joinTeam("red").queue()
+  ///entity.joinTeam('red').queue()
   ///```
 
   RestActionAble joinTeam(String team) =>
@@ -1143,7 +1145,7 @@ class Entity implements EntityClass {
   ///
   ///The entity leaves a team
   ///```dart
-  ///entity.leaveTeam("red").queue()
+  ///entity.leaveTeam('red').queue()
   ///```
 
   RestActionAble leaveTeam() => StraitWidget.builder.create(Team.leave(this));
@@ -1161,9 +1163,9 @@ class Entity implements EntityClass {
 
   @override
   String toString([Map arguments]) {
-    if (arguments == null) arguments = this.arguments;
+    arguments ??= arguments;
     if (playerName != null && playerName.isNotEmpty) return playerName;
-    String ret = "@" + selector;
+    var ret = '@' + selector;
 
     if (arguments.isNotEmpty) {
       ret += '[';
@@ -1185,10 +1187,10 @@ class Entity implements EntityClass {
   }
 
   String _addArg(arg, key) {
-    String ret = "";
+    var ret = '';
 
     if (arg != null) {
-      arg = arg.toString().replaceAll(r"[0-9].0", "");
+      arg = arg.toString().replaceAll(r'[0-9].0', '');
       ret += key.toString() + '=' + arg.toString();
     }
     return ret;
@@ -1206,14 +1208,14 @@ class Range {
 
   @override
   String toString() {
-    String ret = "0";
+    var ret = '0';
     if (exact != null) {
       ret = exact.toString();
     } else if (from != null && to == null) {
-      ret = "$from..";
+      ret = '$from..';
     } else if (from == null && to != null) {
-      ret = "..$to";
-    } else if (from != null && to != null) ret = "$from..$to";
+      ret = '..$to';
+    } else if (from != null && to != null) ret = '$from..$to';
     return ret.replaceAll(r'[0-9].0', '');
   }
 }
@@ -1226,11 +1228,12 @@ class EntityType {
   final String type;
   const EntityType(this.type);
 
+  @override
   bool operator ==(dynamic other) {
-    if (other is EntityType && other.type == this.type) {
+    if (other is EntityType && other.type == type) {
       return true;
     }
-    if (other is String && other == this.type) {
+    if (other is String && other == type) {
       return true;
     }
     return false;

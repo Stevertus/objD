@@ -15,36 +15,36 @@ class ServerVersionCheck extends Widget {
   });
 
   @override
-  generate(Context context) {
-    Entity e = Entity(type: Entities.armor_stand, tags: ["objd_version_check"]);
+  Widget generate(Context context) {
+    var e = Entity(type: Entities.armor_stand, tags: ['objd_version_check']);
 
     var s = serverVersion ??
-        Score(Entity.PlayerName("server_version"), "objd_data");
+        Score(Entity.PlayerName('server_version'), 'objd_data');
 
     return For.of([
       ArmorStand.staticMarker(
-        Location("~ 0 ~"),
+        Location('~ 0 ~'),
         small: true,
-        tags: ["objd_version_check"],
+        tags: ['objd_version_check'],
         mainHand: Item(
           Items.trident,
           count: 1,
           nbt: {
-            "objd": {"update": 13}
+            'objd': {'update': 13}
           },
         ),
         offHand: Item(
           Items.lectern,
           count: 1,
           nbt: {
-            "objd": {"update": 14}
+            'objd': {'update': 14}
           },
         ),
         head: Item(
           Items.bee_spawn_egg,
           count: 1,
           nbt: {
-            "objd": {"update": 15}
+            'objd': {'update': 15}
           },
         ),
       ),
@@ -53,10 +53,10 @@ class ServerVersionCheck extends Widget {
 
       If(
         e.copyWith(nbt: {
-          "HandItems": [
+          'HandItems': [
             {
-              "tag": {
-                "fard": {"update": 13}
+              'tag': {
+                'fard': {'update': 13}
               }
             }
           ]
@@ -67,10 +67,10 @@ class ServerVersionCheck extends Widget {
       ),
       If(
         e.copyWith(nbt: {
-          "HandItems": [
+          'HandItems': [
             {
-              "tag": {
-                "fard": {"update": 14}
+              'tag': {
+                'fard': {'update': 14}
               }
             }
           ]
@@ -81,10 +81,10 @@ class ServerVersionCheck extends Widget {
       ),
       If(
         e.copyWith(nbt: {
-          "ArmorItems": [
+          'ArmorItems': [
             {
-              "tag": {
-                "fard": {"update": 14}
+              'tag': {
+                'fard': {'update': 14}
               }
             }
           ]

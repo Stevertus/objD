@@ -38,7 +38,7 @@ class Item {
     } else if (type is String) {
       this.type = ItemType(type);
     } else {
-      throw ("Please insert either an ItemType, a Block or a string representing an item type into Item");
+      throw ('Please insert either an ItemType, a Block or a string representing an item type into Item');
     }
 
     // check tags
@@ -57,13 +57,13 @@ class Item {
     List<TextComponent> lore,
     Map<String, dynamic> nbt,
   }) {
-    assert(entity != null, "Please provide an entity to spawn!");
+    assert(entity != null, 'Please provide an entity to spawn!');
     nbt ??= {};
     this.type = type;
 
     nbt.addAll({
-      "EntityTag": {
-        "id": "minecraft:" + entity.type.type,
+      'EntityTag': {
+        'id': 'minecraft:' + entity.type.type,
         ...entity.nbt,
       }
     });
@@ -73,8 +73,8 @@ class Item {
 
   Item.Book(
     List<BookPage> pages, {
-    String title = "",
-    String author = "",
+    String title = '',
+    String author = '',
     this.count,
     this.slot,
     this.damage,
@@ -84,11 +84,11 @@ class Item {
     List<TextComponent> lore,
     Map<String, dynamic> nbt,
   }) {
-    if (nbt == null) nbt = {};
-    this.type = Items.written_book;
-    nbt["title"] = title;
-    nbt["author"] = author;
-    nbt["pages"] = pages
+    nbt ??= {};
+    type = Items.written_book;
+    nbt['title'] = title;
+    nbt['author'] = author;
+    nbt['pages'] = pages
         .map((page) =>
             json.encode(page.list.map((item) => item.toMap()).toList()))
         .toList();
@@ -98,80 +98,82 @@ class Item {
 
   /// creates a new object based on a existing Item to modify properties.
   Item.clone(Item it) {
-    this.type = it.type.clone();
-    if (it.count != null) this.count = it.count;
-    if (it.slot != null) this.slot = it.slot.clone();
-    if (it.tag != null) this.tag = Map.from(it.tag);
+    type = it.type.clone();
+    if (it.count != null) count = it.count;
+    if (it.slot != null) slot = it.slot.clone();
+    if (it.tag != null) tag = Map.from(it.tag);
   }
 
   /// creates an Item based on nbt or json data.
   Item.fromJson(Map<String, dynamic> json) {
-    if (json["item"] != null) type = ItemType(json["item"].toString());
-    if (json["id"] != null) type = ItemType(json["id"].toString());
-    if (json["Slot"] != null) {
-      slot = Slot(id: int.parse(json["Slot"].toString()));
+    if (json['item'] != null) type = ItemType(json['item'].toString());
+    if (json['id'] != null) type = ItemType(json['id'].toString());
+    if (json['Slot'] != null) {
+      slot = Slot(id: int.parse(json['Slot'].toString()));
     }
-    if (json["Count"] != null && int.parse(json["Count"].toString()) > 0) {
-      int.parse(json["Count"].toString());
+    if (json['Count'] != null && int.parse(json['Count'].toString()) > 0) {
+      int.parse(json['Count'].toString());
     }
-    if (json["Damage"] != null && int.parse(json["Damage"].toString()) > 0) {
-      damage = int.parse(json["Damage"].toString());
+    if (json['Damage'] != null && int.parse(json['Damage'].toString()) > 0) {
+      damage = int.parse(json['Damage'].toString());
     }
     int model;
-    if (json["model"] != null) model = int.parse(json["Damage"].toString());
-    if (json["tag"] != null) tag = json["tag"] as Map<String, dynamic>;
+    if (json['model'] != null) model = int.parse(json['Damage'].toString());
+    if (json['tag'] != null) tag = json['tag'] as Map<String, dynamic>;
     _checkTags(model, null, null, null);
   }
 
-  _checkTags(int model,
-      [int hideFlags,
-      TextComponent name,
-      List<TextComponent> lore,
-      Map<String, dynamic> nbt]) {
+  void _checkTags(
+    int model, [
+    int hideFlags,
+    TextComponent name,
+    List<TextComponent> lore,
+    Map<String, dynamic> nbt,
+  ]) {
     if (nbt != null && nbt.isNotEmpty) tag.addAll(nbt);
-    if (damage != null) tag["Damage"] = damage;
-    if (model != null) tag["CustomModelData"] = model;
-    if (hideFlags != null) tag["HideFlags"] = hideFlags;
+    if (damage != null) tag['Damage'] = damage;
+    if (model != null) tag['CustomModelData'] = model;
+    if (hideFlags != null) tag['HideFlags'] = hideFlags;
     if (name != null) {
-      tag["display"] = tag["display"] ?? {};
-      tag["display"]['Name'] = name.toJson();
+      tag['display'] = tag['display'] ?? {};
+      tag['display']['Name'] = name.toJson();
     }
     if (lore != null) {
-      tag["display"] = tag["display"] ?? {};
-      tag["display"]['Lore'] = lore.map((lor) => lor.toJson()).toList();
+      tag['display'] = tag['display'] ?? {};
+      tag['display']['Lore'] = lore.map((lor) => lor.toJson()).toList();
     }
   }
 
   String getGiveNotation({bool withDamage = true}) {
-    String result = type.toString();
+    var result = type.toString();
     if (tag != null && tag.isNotEmpty) {
       result += json.encode(tag);
     }
-    result += " ";
+    result += ' ';
     if (count != null) result += count.toString();
-    if (damage != null && withDamage) result += " " + damage.toString();
+    if (damage != null && withDamage) result += ' ' + damage.toString();
     return result;
   }
 
   Map<String, dynamic> getMap() {
-    Map<String, dynamic> map = {
-      "id": "minecraft:" + type.toString().replaceFirst("minecraft:", "")
+    var map = <String, dynamic>{
+      'id': 'minecraft:' + type.toString().replaceFirst('minecraft:', '')
     };
-    if (tag.isNotEmpty) map["tag"] = tag;
-    if (count != null) map["Count"] = Byte(count);
+    if (tag.isNotEmpty) map['tag'] = tag;
+    if (count != null) map['Count'] = Byte(count);
     if (slot != null) {
-      if (slot.id == null) throw ("An Item needs the Slot id!");
+      if (slot.id == null) throw ('An Item needs the Slot id!');
       if (slot.id < 0) {
         print(
-            "Please note that you are using Item with a negative slot. This is reserved for a selecteditem and can't be accessed within the Inventory propery!");
+            'Please note that you are using Item with a negative slot. This is reserved for a selecteditem and can\'t be accessed within the Inventory propery!');
       }
-      map["Slot"] = slot.id;
+      map['Slot'] = slot.id;
     }
     return map;
   }
 
   String getNbt() {
-    return gson.encode(this.getMap());
+    return gson.encode(getMap());
   }
 }
 
@@ -183,7 +185,7 @@ int HideFlags({
   bool canPlaceOn,
   bool others,
 }) {
-  int res = 0;
+  var res = 0;
   if (enchantments) res += 1;
   if (attributes) res += 2;
   if (unbreakable) res += 4;
@@ -212,7 +214,7 @@ class ItemType {
   const ItemType(this._type);
 
   ItemType clone() {
-    return ItemType(this.toString());
+    return ItemType(toString());
   }
 
   @override

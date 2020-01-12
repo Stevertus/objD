@@ -35,43 +35,43 @@ class Summon extends RestActionAble {
     int age,
     Rotation rotation,
   }) {
-    if (location == null) location = Location.here();
-    if (nbt == null) nbt = {};
+    location ??= Location.here();
+    nbt ??= {};
 
-    if (name != null) nbt["CustomName"] = name.toJson();
-    _addBoolNbt(invulnerable, "Invulnerable");
-    _addBoolNbt(silent, "Silent");
-    _addBoolNbt(small, "Small");
-    _addBoolNbt(glowing, "Glowing");
-    _addBoolNbt(nameVisible, "CustomNameVisible");
-    _addBoolNbt(persistent, "PersistenceRequired");
-    _addBoolNbt(noAI, "NoAI");
-    if (gravity != null) _addBoolNbt(!gravity, "NoGravity");
+    if (name != null) nbt['CustomName'] = name.toJson();
+    _addBoolNbt(invulnerable, 'Invulnerable');
+    _addBoolNbt(silent, 'Silent');
+    _addBoolNbt(small, 'Small');
+    _addBoolNbt(glowing, 'Glowing');
+    _addBoolNbt(nameVisible, 'CustomNameVisible');
+    _addBoolNbt(persistent, 'PersistenceRequired');
+    _addBoolNbt(noAI, 'NoAI');
+    if (gravity != null) _addBoolNbt(!gravity, 'NoGravity');
     if (tags != null && tags.isNotEmpty) {
-      nbt["Tags"] = Tag.prefix != null
+      nbt['Tags'] = Tag.prefix != null
           ? tags
               .map((String t) => t.contains(Tag.prefix) ? t : Tag.prefix + t)
               .toList()
           : tags;
     }
     if (effects != null && effects.isNotEmpty) {
-      nbt["ActiveEffects"] = effects.map((effect) => effect.getMap()).toList();
+      nbt['ActiveEffects'] = effects.map((effect) => effect.getMap()).toList();
     }
     if (passengers != null) {
-      nbt["Passengers"] = passengers.map((pass) => pass.getMap()).toList();
+      nbt['Passengers'] = passengers.map((pass) => pass.getMap()).toList();
     }
-    if (fire != null && fire > 0) nbt["Fire"] = fire;
-    if (rotation != null) nbt["Rotation"] = [rotation.x, rotation.y];
-    if (age != null) nbt["Age"] = age;
+    if (fire != null && fire > 0) nbt['Fire'] = fire;
+    if (rotation != null) nbt['Rotation'] = [rotation.x, rotation.y];
+    if (age != null) nbt['Age'] = age;
   }
 
   Map getMap() {
-    Map ret = Map.from(nbt);
-    ret["id"] = type.type;
+    var ret = Map.from(nbt);
+    ret['id'] = type.type;
     return ret;
   }
 
-  _addBoolNbt(bool value, String path) {
+  void _addBoolNbt(bool value, String path) {
     if (value != null) nbt[path] = value ? 1 : 0;
   }
 

@@ -30,8 +30,8 @@ class Effect extends RestActionAble {
     this.amplifier = 1,
     this.showParticles = true,
   }) {
-    if (entity == null) entity = Entity.Selected();
-    _type = "give";
+    entity ??= Entity.Selected();
+    _type = 'give';
   }
 
   /// You can clear an effect again.
@@ -40,31 +40,31 @@ class Effect extends RestActionAble {
   /// ⇒ effect clear @p minecraft:jump_boost
   /// ```
   Effect.clear(this.entity, [this.effect]) {
-    _type = "clear";
+    _type = 'clear';
   }
-  getMap() {
-    Map ret = {};
-    ret["Id"] = EffectType.values.indexOf(effect) + 1;
-    ret["Amplifier"] = amplifier != null ? amplifier - 1 : 0;
-    ret["Duration"] = duration != null ? duration * 20 : 0;
-    ret["ShowParticles"] = showParticles != null && showParticles ? 1 : 0;
+  Map getMap() {
+    var ret = {};
+    ret['Id'] = EffectType.values.indexOf(effect) + 1;
+    ret['Amplifier'] = amplifier != null ? amplifier - 1 : 0;
+    ret['Duration'] = duration != null ? duration * 20 : 0;
+    ret['ShowParticles'] = showParticles != null && showParticles ? 1 : 0;
     return ret;
   }
 
   @override
   Widget generate(Context context) {
-    if (_type == "clear") {
+    if (_type == 'clear') {
       return Command(
-        "effect clear ${entity}" +
+        'effect clear ${entity}' +
             (effect != null
-                ? " minecraft:" + effect.toString().split(".")[1]
-                : ""),
+                ? ' minecraft:' + effect.toString().split('.')[1]
+                : ''),
       );
     } else {
       return Command(
-        "effect give ${entity} minecraft:" +
-            effect.toString().split(".")[1] +
-            " ${duration} ${amplifier} ${!showParticles}",
+        'effect give ${entity} minecraft:' +
+            effect.toString().split('.')[1] +
+            ' ${duration} ${amplifier} ${!showParticles}',
       );
     }
   }

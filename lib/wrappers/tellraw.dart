@@ -15,11 +15,11 @@ class Tellraw extends RestActionAble {
     entity = selector.toString();
     jsonText = json
         .encode(show.map((text) => text.toMap()).toList())
-        .replaceAll("\\", "\u005C");
+        .replaceAll('\\', '\u005C');
     ;
   }
   @override
   Widget generate(Context context) {
-    return Command("tellraw " + entity + " " + jsonText);
+    return Command('tellraw ' + entity + ' ' + jsonText);
   }
 }

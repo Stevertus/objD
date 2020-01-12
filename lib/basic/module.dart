@@ -29,6 +29,7 @@ import 'package:objd/build/context.dart';
 /// A Module can still be used as a widget everywhere and also handles conditions and groups.
 
 abstract class Module extends Widget {
+  @override
   Widget generate(Context context);
   List<File> registerFiles();
 }

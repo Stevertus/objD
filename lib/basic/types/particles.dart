@@ -283,11 +283,12 @@ class ParticleType {
   final String type;
   const ParticleType(this.type);
 
+  @override
   bool operator ==(dynamic other) {
-    if (other is ParticleType && other.type == this.type) {
+    if (other is ParticleType && other.type == type) {
       return true;
     }
-    if (other is String && other == this.type) {
+    if (other is String && other == type) {
       return true;
     }
     return false;

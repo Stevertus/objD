@@ -14,7 +14,7 @@ class Data extends RestActionAble {
   String _typeValue;
   String _subcommand;
   String get subcommand => _subcommand;
-  String path = "";
+  String path = '';
   num scale;
   String datatype;
   Score score;
@@ -31,27 +31,27 @@ class Data extends RestActionAble {
   /// Data(
   /// 	Entity.Selected(),
   /// 	nbt: {
-  /// 		"Invisible":1,
-  /// 		"NoGravity":1
+  /// 		'Invisible':1,
+  /// 		'NoGravity':1
   /// 	}
   /// )
-  /// ⇒ data merge entity @s {"Invisible":1,"NoGravity":1}
+  /// ⇒ data merge entity @s {'Invisible':1,'NoGravity':1}
   /// ```
-  Data(this.target, {this.nbt = const {}, String type = "merge"}) {
+  Data(this.target, {this.nbt = const {}, String type = 'merge'}) {
     handleTarget(target);
     _subcommand = type;
   }
   Data.merge(this.target, {this.nbt = const {}, this.strNbt}) {
     handleTarget(target);
-    _subcommand = "merge";
+    _subcommand = 'merge';
   }
   Data.get(this.target, {@required this.path, this.scale = 1}) {
     handleTarget(target);
-    _subcommand = "get";
+    _subcommand = 'get';
   }
   Data.remove(this.target, {@required this.path}) {
     handleTarget(target);
-    _subcommand = "remove";
+    _subcommand = 'remove';
   }
 
   /// You can also convert a score directly to a nbt field with Data.fromScore:
@@ -69,10 +69,10 @@ class Data extends RestActionAble {
     @required this.path,
     @required this.score,
     this.scale = 1,
-    this.datatype = "byte",
+    this.datatype = 'byte',
   }) {
     handleTarget(target);
-    _subcommand = "score";
+    _subcommand = 'score';
   }
 
   /// The modify operation is also available, yet a bit more complex.
@@ -81,16 +81,16 @@ class Data extends RestActionAble {
   /// ```dart
   /// Data.modify(
   /// 	Entity.Selected(),
-  /// 	path: "my_Custom_Path",
+  /// 	path: 'my_Custom_Path',
   /// 	modify: DataModify.set(
-  /// 		"hey" // or {"nbt":"here"} or 56
+  /// 		'hey' // or {'nbt':'here'} or 56
   /// 	),
   /// )
-  /// ⇒ data modify @s my_Custom_Path set value "hey"
+  /// ⇒ data modify @s my_Custom_Path set value 'hey'
   /// ```
   Data.modify(this.target, {@required this.path, @required this.modify}) {
     handleTarget(target);
-    _subcommand = "modify";
+    _subcommand = 'modify';
   }
 
   /// A handy shortcut to copy data quickly is the Data.copy constructor, which just copies a property from one path to another.
@@ -101,19 +101,19 @@ class Data extends RestActionAble {
     @required String fromPath,
   }) {
     handleTarget(target);
-    _subcommand = "modify";
-    this.modify = DataModify.set(from, fromPath: fromPath);
+    _subcommand = 'modify';
+    modify = DataModify.set(from, fromPath: fromPath);
   }
-  handleTarget(dynamic target) {
+  void handleTarget(dynamic target) {
     _typeValue = target.toString();
     if (target is DataStorage) {
-      _type = "storage";
+      _type = 'storage';
     } else if (target is Entity) {
-      _type = "entity";
+      _type = 'entity';
     } else if (target is Location) {
-      _type = "block";
+      _type = 'block';
     } else {
-      throw ("Please insert either an entity or location into data");
+      throw ('Please insert either an entity or location into data');
     }
   }
 
@@ -124,25 +124,25 @@ class Data extends RestActionAble {
   @override
   Widget generate(Context context) {
     switch (_subcommand) {
-      case "merge":
+      case 'merge':
         return Command('data merge ' + getTarget() + ' ' + _getNbt());
-      case "get":
+      case 'get':
         return Command('data get ' +
             getTarget() +
             ' ' +
             path +
             ' ' +
             (scale < 0.000001 ? scale.toStringAsFixed(10) : scale.toString()));
-      case "remove":
+      case 'remove':
         return Command('data remove ' + getTarget() + ' ' + path);
-      case "modify":
+      case 'modify':
         return Command('data modify ' + getTarget() + ' ${path} ${modify}');
-      case "score":
+      case 'score':
         return Command('execute store result ' +
             getTarget() +
             ' ${path} ${datatype} ${scale} run scoreboard players get ${score.entity.toString()} ${score.score}');
     }
-    throw ("Invalid subcommand!");
+    throw ('Invalid subcommand!');
   }
 
   String _getNbt() {
@@ -159,53 +159,53 @@ class DataModify {
   String fromType;
   String fromPath;
   int index;
-  DataModify.set(dynamic value, {this.fromPath = ""}) {
-    type = "set";
+  DataModify.set(dynamic value, {this.fromPath = ''}) {
+    type = 'set';
     _checkValue(value);
   }
-  DataModify.merge(dynamic value, {this.fromPath = ""}) {
-    type = "merge";
+  DataModify.merge(dynamic value, {this.fromPath = ''}) {
+    type = 'merge';
     _checkValue(value);
   }
-  DataModify.prepend(dynamic value, {this.fromPath = ""}) {
-    type = "prepend";
+  DataModify.prepend(dynamic value, {this.fromPath = ''}) {
+    type = 'prepend';
     _checkValue(value);
   }
-  DataModify.append(dynamic value, {this.fromPath = ""}) {
-    type = "append";
+  DataModify.append(dynamic value, {this.fromPath = ''}) {
+    type = 'append';
     _checkValue(value);
   }
-  DataModify.insert(dynamic value, {this.fromPath = "", this.index = 0}) {
-    type = "insert";
+  DataModify.insert(dynamic value, {this.fromPath = '', this.index = 0}) {
+    type = 'insert';
     _checkValue(value);
   }
-  _checkValue(dynamic value) {
+  String _checkValue(dynamic value) {
     if (value is Map) return this.value = gson.encode(value);
     if (value is num || value is String) return this.value = value.toString();
     if (value is DataStorage) {
-      fromType = "storage";
+      fromType = 'storage';
       return fromSource = value.name;
     }
     if (value is Entity) {
-      fromType = "entity";
+      fromType = 'entity';
       return fromSource = value.toString();
     }
     if (value is Location) {
-      fromType = "block";
+      fromType = 'block';
       return fromSource = value.toString();
     }
-    throw ("Please insert a Map, number, String, Entity or Location as value for Data Modify!");
+    throw ('Please insert a Map, number, String, Entity or Location as value for Data Modify!');
   }
 
   @override
   String toString() {
-    String str = type;
-    if (index != null) str += " " + index.toString();
+    var str = type;
+    if (index != null) str += ' ' + index.toString();
     if (fromType != null) {
-      str += " from ";
-      str += fromType + " " + fromSource + " " + fromPath;
+      str += ' from ';
+      str += fromType + ' ' + fromSource + ' ' + fromPath;
     } else {
-      str += " value " + value;
+      str += ' value ' + value;
     }
     return str;
   }

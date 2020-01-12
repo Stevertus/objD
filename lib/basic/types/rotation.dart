@@ -5,16 +5,16 @@ class Rotation {
   /// The Rotation Widget is very similar to Location but takes in just two directions for an entities rotation:
   Rotation(this._rotation);
   Rotation.glob({this.x = 0, this.y = 0}) {
-    _rotation = x.toString() + " " + y.toString();
+    _rotation = x.toString() + ' ' + y.toString();
   }
   Rotation.rel({this.x = 0, this.y = 0}) {
-    _rotation = "~" +
-        (x == 0 ? "" : x.toString()) +
-        " ~" +
-        (y == 0 ? "" : y.toString());
+    _rotation = '~' +
+        (x == 0 ? '' : x.toString()) +
+        ' ~' +
+        (y == 0 ? '' : y.toString());
   }
   Rotation.here() {
-    _rotation = "~ ~";
+    _rotation = '~ ~';
     x = y = 0;
   }
 
@@ -36,19 +36,19 @@ class Rotation {
     x = Rotation.w + dx;
   }
 
-  getDirection() {
-    int dir = x ~/ 90;
+  String getDirection() {
+    var dir = x ~/ 90;
     switch (dir) {
       case 0:
-        return "south";
+        return 'south';
       case 1:
-        return "west";
+        return 'west';
       case 2:
-        return "north";
+        return 'north';
       case -1:
-        return "east";
+        return 'east';
     }
-    return "north";
+    return 'north';
   }
 
   @override

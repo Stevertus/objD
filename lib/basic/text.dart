@@ -11,6 +11,6 @@ class Text extends RestActionAble {
 
   @override
   Map toMap() {
-    return {"Text": _str};
+    return {'Text': _str};
   }
 }

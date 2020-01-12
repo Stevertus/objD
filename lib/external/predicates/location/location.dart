@@ -7,7 +7,7 @@ import 'package:objd/wrappers/execute.dart';
 void _checkRangeOrDouble(dynamic val) {
   if (val != null) {
     assert(val is Range || val is double,
-        "Please provide either a Range or a double value!");
+        'Please provide either a Range or a double value!');
   }
 }
 
@@ -46,19 +46,19 @@ class Location extends Tag {
   }
 
   Map<String, dynamic> _convertBlock(Block block, [bool isFluid = false]) {
-    Map<String, dynamic> ret = {};
+    var ret = <String, dynamic>{};
     if (block.id != null && block.id.isNotEmpty) {
       if (isFluid) {
-        ret["fluid"] = block.id;
+        ret['fluid'] = block.id;
       } else {
-        ret["block"] = block.id;
+        ret['block'] = block.id;
       }
     }
-    if (block.tag != null) ret["tag"] = block.tag;
-    if (block.nbt != null) ret["nbt"] = block.nbt;
-    if (block.states != null) ret["state"] = block.states;
+    if (block.tag != null) ret['tag'] = block.tag;
+    if (block.nbt != null) ret['nbt'] = block.nbt;
+    if (block.states != null) ret['state'] = block.states;
     if (blockState != null && blockState.isNotEmpty) {
-      ret["state"] = blockState.map(
+      ret['state'] = blockState.map(
         (key, val) {
           _checkRangeOrDouble(val);
           if (val is Range) return MapEntry(key, val.getJson());
@@ -72,38 +72,38 @@ class Location extends Tag {
 
   @override
   Map<String, dynamic> getJson() {
-    Map<String, dynamic> ret = {
-      "condition": "minecraft:location_check",
-      "predicate": predicate?.getJson() ?? {},
+    var ret = <String, dynamic>{
+      'condition': 'minecraft:location_check',
+      'predicate': predicate?.getJson() ?? {},
     };
 
-    if (block != null) ret["predicate"]["block"] = _convertBlock(block);
-    if (fluid != null) ret["predicate"]["fluid"] = _convertBlock(fluid);
-    if (biome != null) ret["predicate"]["biome"] = biome;
+    if (block != null) ret['predicate']['block'] = _convertBlock(block);
+    if (fluid != null) ret['predicate']['fluid'] = _convertBlock(fluid);
+    if (biome != null) ret['predicate']['biome'] = biome;
     if (dimension != null) {
-      ret["predicate"]["dimension"] = dimension.toString().split(".")[1];
+      ret['predicate']['dimension'] = dimension.toString().split('.')[1];
     }
-    if (feature != null) ret["predicate"]["feature"] = feature;
+    if (feature != null) ret['predicate']['feature'] = feature;
     if (light != null) {
-      ret["predicate"]["light"] = {
-        "light": light is Range ? light.getJson() : light,
+      ret['predicate']['light'] = {
+        'light': light is Range ? light.getJson() : light,
       };
     }
-    if (x != null || y != null || z != null) ret["predicate"]["position"] = {};
+    if (x != null || y != null || z != null) ret['predicate']['position'] = {};
     if (x != null) {
-      ret["predicate"]["position"]["x"] = x is Range ? x.getJson() : x;
+      ret['predicate']['position']['x'] = x is Range ? x.getJson() : x;
     }
     if (y != null) {
-      ret["predicate"]["position"]["y"] = y is Range ? y.getJson() : y;
+      ret['predicate']['position']['y'] = y is Range ? y.getJson() : y;
     }
     if (z != null) {
-      ret["predicate"]["position"]["z"] = z is Range ? z.getJson() : z;
+      ret['predicate']['position']['z'] = z is Range ? z.getJson() : z;
     }
 
     if (offset != null) {
-      if (offset.x != 0) ret["predicate"]["offsetX"] = offset.x;
-      if (offset.y != 0) ret["predicate"]["offsetY"] = offset.y;
-      if (offset.z != 0) ret["predicate"]["offsetZ"] = offset.z;
+      if (offset.x != 0) ret['predicate']['offsetX'] = offset.x;
+      if (offset.y != 0) ret['predicate']['offsetY'] = offset.y;
+      if (offset.z != 0) ret['predicate']['offsetZ'] = offset.z;
     }
 
     return ret;

@@ -15,15 +15,15 @@ class Repeat extends RestActionAble {
     this.name, {
     @required this.child,
     @required this.to,
-    this.counter = "objd_repeat",
-    this.path = "timers",
+    this.counter = 'objd_repeat',
+    this.path = 'timers',
     this.ticks = 1,
   });
 
   @override
   Widget generate(Context context) {
-    Score score = Score(Entity.PlayerName(name), counter);
-    String filePath = path + "/" + name;
+    var score = Score(Entity.PlayerName(name), counter);
+    var filePath = path + '/' + name;
     return For.of([
       score.set(0),
       File.execute(filePath,

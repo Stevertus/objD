@@ -31,26 +31,26 @@ class Schedule extends RestActionAble {
   }
 
   @override
-  generate(Context context) {
+  Widget generate(Context context) {
     String getMode() {
-      if (mode == null) return "";
-      if (mode == ScheduleMode.append) return " append";
-      return " replace";
+      if (mode == null) return '';
+      if (mode == ScheduleMode.append) return ' append';
+      return ' replace';
     }
 
     if (_file != null) {
       return Group(
-          prefix: "schedule",
+          prefix: 'schedule',
           children: [_file],
-          suffix: " " + ticks.toString() + "t" + getMode());
+          suffix: ' ' + ticks.toString() + 't' + getMode());
     }
-    return Command("schedule function " +
+    return Command('schedule function ' +
         context.packId +
-        ":" +
+        ':' +
         _name +
-        " " +
+        ' ' +
         ticks.toString() +
-        "t" +
+        't' +
         getMode());
   }
 }

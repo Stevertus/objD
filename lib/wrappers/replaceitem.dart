@@ -23,7 +23,7 @@ class ReplaceItem extends RestActionAble {
   @override
   Widget generate(Context context) {
     if (slot.slot == null) {
-      throw ("The Slot for a ReplaceItem needs a slot property!");
+      throw ('The Slot for a ReplaceItem needs a slot property!');
     }
     if (entity != null) {
       return Command(
@@ -35,6 +35,6 @@ class ReplaceItem extends RestActionAble {
         'replaceitem block $_loc ${slot.slot} ${item.getGiveNotation()}',
       );
     }
-    throw ("You have to give an entity or a location to the replaceitem-widget");
+    throw ('You have to give an entity or a location to the replaceitem-widget');
   }
 }

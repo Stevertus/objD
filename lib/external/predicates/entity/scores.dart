@@ -11,13 +11,13 @@ class Scores extends Tag {
 
   @override
   Map<String, dynamic> getJson() => {
-        "condition": "minecraft:entity_scores",
-        "entity": entity.toString(),
-        "scores": scores.map((name, range) {
-          if(range is int) return MapEntry(name, range);
-          if(range is Range) return MapEntry(name, range.getJson());
+        'condition': 'minecraft:entity_scores',
+        'entity': entity.toString(),
+        'scores': scores.map((name, range) {
+          if (range is int) return MapEntry(name, range);
+          if (range is Range) return MapEntry(name, range.getJson());
 
-          throw("A score value must be int or Range!");
+          throw ('A score value must be int or Range!');
         }),
       };
 }

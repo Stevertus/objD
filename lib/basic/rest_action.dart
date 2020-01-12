@@ -25,19 +25,21 @@ abstract class RestActionAble extends Widget {
   ///```
 
   void queue([List<Widget> writable]) {
-    if (this.called) {
-      throw ("Rest action is already executed, cant execute it again");
+    if (called) {
+      throw ('Rest action is already executed, cant execute it again');
     }
-    this.called = true;
-    (writable ?? this.writable ?? StraitWidget.builder.writable).add(this);
+    called = true;
+    (writable ?? writable ?? StraitWidget.builder.writable).add(this);
   }
 
-  generate(Context context);
+  @override
+  dynamic generate(Context context) => null;
 }
 
 class RestAction extends RestActionAble {
   Widget _rest;
 
+  @override
   List<Widget> writable;
 
   ///If autoQueue is enabled, you dont have to manually run the `queue()` method on your RestActions.
@@ -81,7 +83,7 @@ class RestAction extends RestActionAble {
   ///```
 
   RestAction(this.writable, this._rest) {
-    if (RestAction.autoQueue) this.queue();
+    if (RestAction.autoQueue) queue();
   }
 
   ///RestActions are a big part of the Strait system, you have to pull your widgets anywhere, and the RestActions do that for you. You activate them by calling the
@@ -116,7 +118,7 @@ class RestAction extends RestActionAble {
       : this(writable, For.of(rest));
 
   @override
-  generate(Context context) {
+  Widget generate(Context context) {
     return _rest;
   }
 }
@@ -130,14 +132,14 @@ class RestActionBuilder {
   // Creates a RestAction from a Widget
   RestActionAble create(Widget rest) {
     if (rest is RestActionAble) {
-      rest.writable = this.writable;
+      rest.writable = writable;
       return rest;
     }
-    return RestAction(this.writable, rest);
+    return RestAction(writable, rest);
   }
 
   // Creates a RestAction from multiple Widgets
   RestActionAble createAll(List<Widget> rest) {
-    return RestAction.all(this.writable, rest);
+    return RestAction.all(writable, rest);
   }
 }

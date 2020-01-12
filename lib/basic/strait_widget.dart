@@ -23,8 +23,8 @@ class StraitWidget extends Widget {
   ///```
 
   StraitWidget(Function(List<Widget>) strait) {
-    List<Widget> content = [];
-    RestActionBuilder b = StraitWidget.builder;
+    var content = <Widget>[];
+    var b = StraitWidget.builder;
     StraitWidget.builder = RestActionBuilder(content);
 
     dynamic ret = strait(content);

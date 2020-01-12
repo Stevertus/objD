@@ -17,7 +17,12 @@ class Do extends RestActionAble {
   /// |Condition or conditional value| a condition to test for each iteration |
   /// |then| a List of Widgets to execute each time |
   /// |testBefore| test before entering the loop if condition is true(optional) |
-  Do.While(dynamic condition, {this.testBefore = true, this.then,this.translate}) {
+  Do.While(
+    dynamic condition, {
+    this.testBefore = true,
+    this.then,
+    this.translate,
+  }) {
     _setValues(true, condition);
   }
 
@@ -29,10 +34,15 @@ class Do extends RestActionAble {
   /// |Condition or conditional value| a condition to test for each iteration |
   /// |then| a List of Widgets to execute each time |
   /// |testBefore| test before entering the loop if condition is false(optional) |
-  Do.Until(dynamic condition, {this.testBefore = true, this.then,this.translate}) {
+  Do.Until(
+    dynamic condition, {
+    this.testBefore = true,
+    this.then,
+    this.translate,
+  }) {
     _setValues(false, condition);
   }
-  _setValues(bool iswhile, condition) {
+  void _setValues(bool iswhile, condition) {
     _isWhile = iswhile;
     if (condition is Condition) {
       cond = condition;
@@ -46,8 +56,9 @@ class Do extends RestActionAble {
     if (!_isWhile) {
       cond = Condition.not(cond);
     }
-    then.add(Execute(If: cond, children: [File.recursive()]).positioned(translate));
-    Group gr = Group(filename: "doloop", children: then, groupMin: 0);
+    then.add(
+        Execute(If: cond, children: [File.recursive()]).positioned(translate));
+    var gr = Group(filename: 'doloop', children: then, groupMin: 0);
     if (testBefore) return If(cond, then: [gr]);
     return gr;
   }

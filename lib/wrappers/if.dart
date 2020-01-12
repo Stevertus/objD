@@ -29,10 +29,10 @@ class If extends RestActionAble {
   /// If(
   /// 	Condition(Entity.Player()),
   /// 	Then: [
-  /// 		Say(msg:"true")
+  /// 		Say(msg:'true')
   /// 	],
   /// 	Else: [
-  /// 		Say(msg:"false")
+  /// 		Say(msg:'false')
   /// 	]
   /// )
   /// ```
@@ -42,7 +42,7 @@ class If extends RestActionAble {
     this.orElse,
     @deprecated List<Widget> Then,
     @deprecated List<Widget> Else,
-    this.targetFilePath = "objd",
+    this.targetFilePath = 'objd',
     this.targetFileName,
     this.encapsulate = true,
     this.assignTag,
@@ -50,10 +50,6 @@ class If extends RestActionAble {
     if (Then != null) then = Then;
     if (Else != null) orElse = Else;
     assert(then != null);
-    if (then.isEmpty) {
-      print("ahh");
-    }
-    //assert(then.isNotEmpty);
     getCondition(condition);
   }
 
@@ -62,7 +58,7 @@ class If extends RestActionAble {
   /// If.not(
   /// 	Condition(Entity.Player()),
   /// 	Then: [
-  /// 		Say(msg:"true")
+  /// 		Say(msg:'true')
   /// 	]
   /// )
   /// ```
@@ -72,7 +68,7 @@ class If extends RestActionAble {
     this.orElse,
     @deprecated List<Widget> Then,
     @deprecated List<Widget> Else,
-    this.targetFilePath = "objd",
+    this.targetFilePath = 'objd',
     this.targetFileName,
     this.encapsulate = true,
     this.assignTag,
@@ -84,54 +80,40 @@ class If extends RestActionAble {
     invert = true;
     getCondition(condition);
   }
-  getCondition(dynamic condition) {
+  void getCondition(dynamic condition) {
     if (condition is Predicate) predicate = condition;
     if (condition is Condition) {
-      this.conds = condition.getList();
+      conds = condition.getList();
     } else {
-      this.conds = Condition(condition).getList();
+      conds = Condition(condition).getList();
     }
   }
 
   @override
-  generate(Context context) {
-    List<String> prefixes = Condition.getPrefixes(conds, this.invert);
+  Widget generate(Context context) {
+    var prefixes = Condition.getPrefixes(conds, invert);
 
-    List<Widget> children = [];
+    var children = <Widget>[];
     // group into seperate file(and get if id)
-    if (orElse != null || prefixes.length >= 2 || this.assignTag != null) {
-      if (this.assignTag == null) this.assignTag = Entity.Player();
+    if (orElse != null || prefixes.length >= 2 || assignTag != null) {
+      assignTag ??= Entity.Player();
       if (then.length > 2 && context.file.isNotEmpty) {
-        then.insert(0, Comment("If statement from file: " + context.file));
+        then.insert(0, Comment('If statement from file: ' + context.file));
       }
 
       if (orElse != null && orElse.length > 2 && context.file.isNotEmpty) {
-        orElse.insert(0, Comment("Else statement from file: " + context.file));
+        orElse.insert(0, Comment('Else statement from file: ' + context.file));
       }
 
       children = _getTagVersion(prefixes);
-      // if (context.file.isNotEmpty)
-      //   Then.insert(0, Comment("If statement from file: " + context.file));
-      // children.add(Group(
-      //     prefix: "execute " + prefixes[0] + " run",
-      //     filename: "if",
-      //     children: Then));
-      // Group group = children[0];
-      // prefixes.forEach((prefix) {
-      //   if (prefixes.indexOf(prefix) != 0) {
-      //     children.add(Group(prefix: "execute " + prefix + " run", children: [
-      //       Command("function " + context.packId + ":" + group.getPath())
-      //     ]));
-      //   }
-      // });
     } else {
       // insert Then inline
       prefixes.forEach((prefix) {
         children.add(Group(
-          prefix: "execute " + prefix + " run",
+          prefix: 'execute ' + prefix + ' run',
           path: targetFilePath,
           generateIDs: targetFileName == null,
-          filename: targetFileName ?? "if",
+          filename: targetFileName ?? 'if',
           groupMin: encapsulate ? 3 : -1,
           children: then,
         ));
@@ -144,40 +126,40 @@ class If extends RestActionAble {
   }
 
   List<Widget> _getTagVersion(List<String> prefixes) {
-    List<Widget> children = [];
-    int id = IndexedFile.getIndexed("if");
+    var children = <Widget>[];
+    var id = IndexedFile.getIndexed('if');
     prefixes.forEach((prefix) {
       children.add(
         Group(
-          prefix: "execute " + prefix + " run",
-          children: [assignTag.addTag("objd_isTrue" + id.toString())],
+          prefix: 'execute ' + prefix + ' run',
+          children: [assignTag.addTag('objd_isTrue' + id.toString())],
         ),
       );
     });
     children.add(Group(
-      prefix: "execute as " +
+      prefix: 'execute as ' +
           assignTag.toString() +
-          " if entity @s[tag=objd_isTrue" +
+          ' if entity @s[tag=objd_isTrue' +
           id.toString() +
-          "] run",
+          '] run',
       path: targetFilePath,
       generateIDs: targetFileName == null,
-      filename: targetFileName ?? "if",
+      filename: targetFileName ?? 'if',
       children: then,
     ));
-    if (this.orElse != null) {
+    if (orElse != null) {
       children.add(Group(
-        prefix: "execute as " +
+        prefix: 'execute as ' +
             assignTag.toString() +
-            " unless entity @s[tag=objd_isTrue" +
+            ' unless entity @s[tag=objd_isTrue' +
             id.toString() +
-            "] run",
+            '] run',
         path: targetFilePath,
-        filename: "else",
+        filename: 'else',
         children: orElse,
       ));
     }
-    children.add(assignTag.removeTag("objd_isTrue" + id.toString()));
+    children.add(assignTag.removeTag('objd_isTrue' + id.toString()));
     return children;
   }
 }

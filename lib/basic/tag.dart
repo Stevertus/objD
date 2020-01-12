@@ -18,7 +18,7 @@ class Tag extends RestActionAble {
 
   ///A tag saves a boolean value with an entity inside the game.
   Tag(this.tag, {this.entity, this.value = true}) {
-    if (this.entity == null) this.entity = Entity.Selected();
+    entity ??= Entity.Selected();
     if (prefix != null && !tag.contains(prefix)) tag = prefix + tag;
   }
 
@@ -27,13 +27,13 @@ class Tag extends RestActionAble {
 
   /// With the toggle method you can toggle the value(invert the tag). This is done with a temporary tag:
   /// ```dart
-  /// Tag("mytag",entity:Entity.Selected()).toggle()
+  /// Tag('mytag',entity:Entity.Selected()).toggle()
   /// ⇒ execute if entity @s[tag=mytag] run tag @s add objd_temp
   /// ⇒ execute if entity @s[tag=objd_temp] run tag @s remove mytag
   /// ⇒ execute if entity @s[tag=!objd_temp] run tag @s add mytag
   /// ⇒ tag @s remove objd_temp
   /// ```
-  toggle({String temp = "objd_temp"}) {
+  Widget toggle({String temp = 'objd_temp'}) {
     var tempTag = Tag(temp, entity: entity);
     return For.of([
       If(this, then: [tempTag]),
@@ -46,14 +46,14 @@ class Tag extends RestActionAble {
 
   /// The `removeIfExists` method removes the tag and may execute some action before if the tag exists.
   /// ```dart
-  /// Tag("mytag",entity:Entity.Selected()).removeIfExists(
-  /// 	then: Say(msg:"removed")
+  /// Tag('mytag',entity:Entity.Selected()).removeIfExists(
+  /// 	then: Say(msg:'removed')
   /// ) // optional argument
   /// ⇒ execute if entity @s[tag=mytag] run say removed
   /// ⇒ execute if entity @s[tag=mytag] run tag @s remove mytag
   /// ```
   If removeIfExists({Widget then}) {
-    return If(this, then: [then, this.remove()]);
+    return If(this, then: [then, remove()]);
   }
 
   /// Checks if the Tag is a certain value and returns a Condition to use in If.
@@ -77,12 +77,12 @@ class Tag extends RestActionAble {
 
   Command getCommand() {
     return value
-        ? Command('tag ' + entity.toString() + " add " + tag)
-        : Command('tag ' + entity.toString() + " remove " + tag);
+        ? Command('tag ' + entity.toString() + ' add ' + tag)
+        : Command('tag ' + entity.toString() + ' remove ' + tag);
   }
 
   @override
-  generate(Context context) {
+  Widget generate(Context context) {
     return getCommand();
   }
 }

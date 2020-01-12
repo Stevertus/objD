@@ -20,9 +20,9 @@ class Extend extends RestActionAble {
   /// ```
   /// This would add the command `say okay` in front of our main.mcfunction.
   Extend(this.path, {this.child, this.first = false}) {
-    assert(path != null, "Please provide a files path to extend");
-    this.path.replaceAll('.mcfunction', '');
-    if (this.path.substring(0, 1) == '/') this.path = this.path.substring(1);
+    assert(path != null, 'Please provide a files path to extend');
+    path.replaceAll('.mcfunction', '');
+    if (path.substring(0, 1) == '/') path = path.substring(1);
   }
 
   @override

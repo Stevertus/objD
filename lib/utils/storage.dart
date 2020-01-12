@@ -22,7 +22,7 @@ class Storage extends Widget {
 
   /// **Example:**
   /// ```dart
-  /// var storage = Storage("mystorage",autoNamespace:true)
+  /// var storage = Storage('mystorage',autoNamespace:true)
   /// ```
   Storage(
     this.name, {
@@ -80,8 +80,8 @@ class Storage extends Widget {
     @required this.data,
   })  : assert(data != null),
         assert(key != null),
-        assert(data.subcommand == "get",
-            "You have to insert a Data.get into copyData!"),
+        assert(data.subcommand == 'get',
+            'You have to insert a Data.get into copyData!'),
         _type = _StorageType.data;
 
   /// Similar to copyData is copyScore which copies the value of a score into a nbt path.
@@ -89,7 +89,7 @@ class Storage extends Widget {
     this.name, {
     this.autoNamespace = true,
     this.scale = 1,
-    this.datatype = "byte",
+    this.datatype = 'byte',
     @required this.key,
     @required this.score,
   })  : assert(score != null),
@@ -139,7 +139,7 @@ class Storage extends Widget {
   Storage copyScore(
     String key, {
     double scale = 1,
-    String datatype = "byte",
+    String datatype = 'byte',
     Score score,
   }) =>
       Storage.copyScore(name,
@@ -149,7 +149,7 @@ class Storage extends Widget {
           score: score);
 
   Data toData([DataStorage target]) {
-    if (target == null) target = DataStorage(name);
+    target ??= DataStorage(name);
 
     if (_type == _StorageType.merge) return Data.merge(target, nbt: nbt);
     if (_type == _StorageType.get) {
@@ -183,12 +183,12 @@ class Storage extends Widget {
   }
 
   @override
-  generate(Context context) {
+  Widget generate(Context context) {
     var target = DataStorage(autoNamespace != null && autoNamespace
         ? context.packId + ':$name'
         : name);
 
-    Data data = toData(target);
+    var data = toData(target);
 
     if (data != null) {
       return data;

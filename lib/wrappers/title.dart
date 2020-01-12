@@ -18,26 +18,26 @@ class Title extends RestActionAble {
     Entity selector, {
     @required List<TextComponent> show,
   }) {
-    type = "title";
+    type = 'title';
     entity = selector.toString();
     jsonText = json.encode(show.map((text) => text.toMap()).toList());
   }
   Title.subtitle(Entity selector, {@required List<TextComponent> show}) {
-    type = "subtitle";
+    type = 'subtitle';
     entity = selector.toString();
     jsonText = json.encode(show.map((text) => text.toMap()).toList());
   }
   Title.actionbar(Entity selector, {@required List<TextComponent> show}) {
-    type = "actionbar";
+    type = 'actionbar';
     entity = selector.toString();
     jsonText = json.encode(show.map((text) => text.toMap()).toList());
   }
 
   /// Title.clear clears all titles again:
   Title.clear(Entity selector) {
-    type = "clear";
+    type = 'clear';
     entity = selector.toString();
-    jsonText = "";
+    jsonText = '';
   }
 
   /// Title.times sets the timings
@@ -47,21 +47,21 @@ class Title extends RestActionAble {
     int display = 60,
     int fadeout = 20,
   }) {
-    type = "times";
+    type = 'times';
     entity = selector.toString();
     jsonText =
-        fadein.toString() + " " + display.toString() + " " + fadeout.toString();
+        fadein.toString() + ' ' + display.toString() + ' ' + fadeout.toString();
   }
 
   /// resets times for one selector
   Title.resetTimes(Entity selector) {
-    type = "reset";
+    type = 'reset';
     entity = selector.toString();
-    jsonText = "";
+    jsonText = '';
   }
   @override
   Widget generate(Context context) {
-    jsonText = jsonText.replaceAll("\\[repl]\\", "\\");
-    return Command("title " + entity + " " + type + " " + jsonText);
+    jsonText = jsonText.replaceAll('\\[repl]\\', '\\');
+    return Command('title ' + entity + ' ' + type + ' ' + jsonText);
   }
 }

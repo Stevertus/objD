@@ -19,23 +19,23 @@ class Bossbar extends RestActionAble {
   Map<String, String> modifiers = {};
 
   Bossbar(this.id, {this.name}) {
-    if (name == null) name = id;
-    _type = "add";
+    name ??= id;
+    _type = 'add';
   }
 
   Bossbar remove() {
-    _type = "remove";
+    _type = 'remove';
     return this;
   }
 
   Bossbar get(BossbarOption option) {
     _option = option;
-    _type = "get";
+    _type = 'get';
     return this;
   }
 
   Bossbar show(Entity player) {
-    modifiers["players"] = player.toString();
+    modifiers['players'] = player.toString();
     return this;
   }
 
@@ -51,40 +51,42 @@ class Bossbar extends RestActionAble {
   }) {
     if (name != null) this.nameTexts = [TextComponent(name)];
     if (nameTexts != null) this.nameTexts = nameTexts;
-    if (color != null) modifiers["color"] = color.toString();
-    if (style != null) modifiers["style"] = style;
-    if (value != null) modifiers["value"] = value.toString();
-    if (max != null) modifiers["max"] = max.toString();
-    if (visible != null) modifiers["visible"] = visible.toString();
-    if (players != null) modifiers["players"] = players.toString();
-    _type = "set";
+    if (color != null) modifiers['color'] = color.toString();
+    if (style != null) modifiers['style'] = style;
+    if (value != null) modifiers['value'] = value.toString();
+    if (max != null) modifiers['max'] = max.toString();
+    if (visible != null) modifiers['visible'] = visible.toString();
+    if (players != null) modifiers['players'] = players.toString();
+    _type = 'set';
     return this;
   }
 
   @override
-  generate(Context context) {
+  Widget generate(Context context) {
     switch (_type) {
-      case "add":
+      case 'add':
         return Command('bossbar add ${id} {"text":"${name}"}');
-      case "remove":
-        return Command("bossbar remove ${id}");
-      case "get":
-        return Command("bossbar get ${id} ${_option.toString().split(".")[1]}");
-      case "set":
+      case 'remove':
+        return Command('bossbar remove ${id}');
+      case 'get':
+        return Command('bossbar get ${id} ${_option.toString().split('.')[1]}');
+      case 'set':
         {
-          List<Widget> widgets = [];
+          var widgets = <Widget>[];
           if (nameTexts != null) {
-            widgets.add(Command("bossbar set ${id} name ${_getNameJson()}"));
+            widgets.add(Command('bossbar set ${id} name ${_getNameJson()}'));
           }
           modifiers.forEach((key, value) {
-            widgets.add(Command("bossbar set ${id} ${key} ${value}"));
+            widgets.add(Command('bossbar set ${id} ${key} ${value}'));
           });
           return For.of(widgets);
         }
+      default:
+        return null;
     }
   }
 
-  _getNameJson() {
+  String _getNameJson() {
     if (nameTexts.length == 1) return nameTexts[0].toJson();
     return json.encode(nameTexts.map((text) => text.toMap()).toList());
   }
@@ -94,13 +96,13 @@ class Bossbar extends RestActionAble {
     String strOption;
     switch (option) {
       case BossbarOption.max:
-        strOption = "max";
+        strOption = 'max';
         break;
       case BossbarOption.value:
-        strOption = "value";
+        strOption = 'value';
         break;
       default:
-        throw ("Please use BossbarOption.max or BossbarOption.value with storeResult!");
+        throw ('Please use BossbarOption.max or BossbarOption.value with storeResult!');
     }
     ;
     return Execute(

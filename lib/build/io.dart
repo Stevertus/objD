@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:colorize/colorize.dart';
 
 Future<List> generateIO(Map<String, String> files, String path) async {
-  List<Future> futures = [];
+  var futures = <Future>[];
 
   files.forEach((name, content) {
     futures.add(_createFile(path + name, content));
@@ -16,7 +16,7 @@ String getPath(String path, String name) {
   if (!Directory(path).existsSync()) {
     throw ('Please ensure that the project path is an existing directory!');
   }
-  String ppath = path + name + '/';
+  var ppath = path + name + '/';
   _ensureDirExists(ppath);
   return ppath;
 }
@@ -28,7 +28,7 @@ void _ensureDirExists(String path) {
 }
 
 Future _createFile(String name, String content) async {
-  content = content.replaceAll("\\", "\u005C");
+  content = content.replaceAll('\\', '\u005C');
   dynamic path = name.split('/');
   path = path.sublist(0, path.length - 1).join('/');
   _ensureDirExists(path as String);
@@ -37,12 +37,12 @@ Future _createFile(String name, String content) async {
   sink.write(content);
   await sink.flush();
   await sink.close();
-  color("Generated: " + name, front: Styles.LIGHT_YELLOW);
-  return "";
+  color('Generated: ' + name, front: Styles.LIGHT_YELLOW);
+  return '';
 }
 
 String readFile(String name) {
-  File myfile = File(name);
+  var myfile = File(name);
   if (!myfile.existsSync()) return null;
   return myfile.readAsStringSync();
 }

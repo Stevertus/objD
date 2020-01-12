@@ -11,6 +11,7 @@
 * fixed crash when Scoreboard was used without any load File
 * fixed Tag toggle wrong negation
 * fixed text options with the conversionFlags in TextComponent.translate
+* refactoring code
 
 ## 0.3.2-beta.2
 * added Predicates subpackage, that allows to create all major types of predicates right in objD

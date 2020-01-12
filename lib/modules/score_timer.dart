@@ -30,9 +30,9 @@ class ScoreTimerModule extends Module {
   ///
   /// ```dart
   /// ScoreTimerModule(
-  ///           "timer1",
+  ///           'timer1',
   ///           ticks: 200, // 10sec
-  ///           child: Log("Timer triggered"),
+  ///           child: Log('Timer triggered'),
   ///           steps: 1,
   ///           start: 0,
   /// )
@@ -43,14 +43,15 @@ class ScoreTimerModule extends Module {
     this.child,
     this.selector,
     this.steps = 1,
-    this.path = "timers/",
+    this.path = 'timers/',
     @required this.ticks,
     this.start = 0,
   }) {
-    if (selector == null) selector = Entity.PlayerName(name);
+    selector ??= Entity.PlayerName(name);
     _score = Score(selector, name);
     assert(ticks != null);
   }
+  @override
   Widget generate(Context context) {
     return For.of([
       if (steps >= 0) _score.add(steps),
@@ -61,6 +62,7 @@ class ScoreTimerModule extends Module {
     ]);
   }
 
+  @override
   List<File> registerFiles() => [
         File(
           path + name,

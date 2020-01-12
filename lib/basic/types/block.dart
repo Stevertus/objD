@@ -17,15 +17,15 @@ class Block {
   final Map<String, dynamic> nbt;
   @override
   String toString() {
-    String strState = "";
-    String strNbt = "";
-    String id = tag ?? _id;
+    var strState = '';
+    var strNbt = '';
+    var id = tag ?? _id;
     if (states != null) {
-      List<String> liState = [];
+      var liState = <String>[];
       states.forEach((String key, dynamic val) {
-        liState.add("$key=$val");
+        liState.add('$key=$val');
       });
-      strState = "[${liState.join(',')}]";
+      strState = '[${liState.join(',')}]';
     }
     if (nbt != null) strNbt = gson.encode(nbt);
     return id + strState + strNbt;
@@ -46,9 +46,9 @@ class Block {
     this.states,
     this.tag,
     this.nbt,
-    String strNbt = "",
+    String strNbt = '',
   })  : assert(block is String || block is Block,
-            "Please insert a block or string into Block.nbt!"),
+            'Please insert a block or string into Block.nbt!'),
         _id = _getId(block);
 
   /// DEPRECATED, please use Blocks.air

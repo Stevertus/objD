@@ -20,7 +20,7 @@ class BuildPack {
   bool isGenMain = true;
 
   BuildPack(Pack pack) {
-    Stopwatch stopwatch = Stopwatch()..start();
+    var stopwatch = Stopwatch()..start();
     name = pack.name;
     scoreboards = [];
 
@@ -33,11 +33,12 @@ class BuildPack {
       files[load] = BuildFile(pack.load);
     }
 
-    if (pack.files != null)
-      {pack.files.forEach((file) => files[file.path] = BuildFile(file));}
+    if (pack.files != null) {
+      pack.files.forEach((file) => files[file.path] = BuildFile(file));
+    }
 
     context = Context(packId: name, loadFile: load, mainFile: main);
-    print("Compiled Pack ${name} in ${stopwatch.elapsedMilliseconds}ms");
+    print('Compiled Pack ${name} in ${stopwatch.elapsedMilliseconds}ms');
   }
 
   bool addScoreboard(String name) {
@@ -48,16 +49,16 @@ class BuildPack {
     return false;
   }
 
-  addRawFile(RawFile file, BuildProject prj) {
+  void addRawFile(RawFile file, BuildProject prj) {
     rawFiles[file.fullPath] = file.content;
   }
 
-  addFile(File file, BuildProject prj) {
+  void addFile(File file, BuildProject prj) {
     files[file.path] = BuildFile(file);
   }
 
-  extendFile(Extend file, {bool front, BuildProject prj}) {
-    BuildFile myfile = BuildFile.extended(file);
+  void extendFile(Extend file, {bool front, BuildProject prj}) {
+    var myfile = BuildFile.extended(file);
     if (files[file.path] == null) {
       files[file.path] = myfile;
       return;
@@ -72,7 +73,7 @@ class BuildPack {
     }
   }
 
-  generate({BuildProject prj}) {
+  void generate({BuildProject prj}) {
     if (prj.prod) context.prod = true;
     for (var i = 0; i < files.length; i++) {
       context.file = files.values.toList()[i].path;
@@ -82,10 +83,10 @@ class BuildPack {
 
   Map toMap() {
     return {
-      "name": name,
-      "files": files.map((key, file) => MapEntry(key, file.toMap())),
-      "main": main,
-      "load": load
+      'name': name,
+      'files': files.map((key, file) => MapEntry(key, file.toMap())),
+      'main': main,
+      'load': load
     };
   }
 }

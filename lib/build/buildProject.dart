@@ -20,18 +20,18 @@ class BuildProject {
     packs.first.generate(prj: this);
   }
 
-  addPack(Pack pack) {
+  void addPack(Pack pack) {
     if (packs.any((pac) => pack.name == pac.name)) {
-      throw ("You specified two packs with the same name!");
+      throw ('You specified two packs with the same name!');
     }
     packs.add(BuildPack(pack));
     packs.last.generate(prj: this);
   }
 
   Map toMap() => {
-      "name": name,
-      "path": path,
-      "packs": packs.map((pack) => pack.toMap()).toList(),
-      "description": description
-    };
+        'name': name,
+        'path': path,
+        'packs': packs.map((pack) => pack.toMap()).toList(),
+        'description': description
+      };
 }

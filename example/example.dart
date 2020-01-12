@@ -6,8 +6,8 @@ import './packs/examplePack.dart';
 void main(List<String> args) {
   createProject(
     Project(
-      name: "folder name",
-      target: "./", // path for where to generate the project
+      name: 'folder name',
+      target: './', // path for where to generate the project
       generate: ExamplePack(), // The starting point of generation
     ),
     args,

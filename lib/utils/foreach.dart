@@ -39,16 +39,16 @@ class ForEach extends RestActionAble {
     this.step = 1,
     this.translate,
   }) {
-    if (counter == null) counter = Entity.PlayerName("#objd_foreach");
-    _countScore = Score(counter, "objd_count");
+    counter ??= Entity.PlayerName('#objd_foreach');
+    _countScore = Score(counter, 'objd_count');
   }
 
   @override
   Widget generate(Context context) {
-    Condition c = Condition(step < 0
+    var c = Condition(step < 0
         ? _countScore.isBiggerOrEqual(score)
         : _countScore.isSmallerOrEqual(score));
-    Group gr = Group(filename: "foreach", children: [
+    var gr = Group(filename: 'foreach', children: [
       then(_countScore),
       step < 0 ? _countScore.subtract(-step) : _countScore.add(step),
       Execute(

@@ -19,10 +19,10 @@ class Hologram extends RestActionAble {
   /// **Example:**
   ///
   /// ```dart
-  /// Hologram("""
+  /// Hologram('''
   /// Hello,
   /// World!
-  /// """,
+  /// ''',
   /// 	location:  Location.here(),
   /// 	color:Color.Aqua,
   /// )
@@ -35,13 +35,13 @@ class Hologram extends RestActionAble {
     this.space = 0.25,
   }) {
     if (tags == null) {
-      tags = ["objd_hologram"];
+      tags = ['objd_hologram'];
     } else {
-      tags.add("objd_hologram");
+      tags.add('objd_hologram');
     }
 
     texts = str
-        .split("\n")
+        .split('\n')
         .map((line) =>
             line.isNotEmpty ? TextComponent(line, color: color) : null)
         .toList();
@@ -55,15 +55,15 @@ class Hologram extends RestActionAble {
     this.space = 0.25,
   }) {
     if (tags == null) {
-      tags = ["objd_hologram"];
+      tags = ['objd_hologram'];
     } else {
-      tags.add("objd_hologram");
+      tags.add('objd_hologram');
     }
   }
 
   @override
   Widget generate(Context context) {
-    int i = texts.length;
+    var i = texts.length;
     if (i == 1) {
       return ArmorStand.staticMarker(
         location,

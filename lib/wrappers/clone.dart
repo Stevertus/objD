@@ -10,7 +10,7 @@ import 'package:objd/build/build.dart';
 class Clone extends RestActionAble {
   Area area;
   Location to;
-  String type = "";
+  String type = '';
 
   /// The clone command clones an Area to another Location with different modes.
   /// **Example:**
@@ -25,21 +25,21 @@ class Clone extends RestActionAble {
 
   Clone.filtered(this.area,
       {@required this.to, Block block = Blocks.air, String mode}) {
-    type = "filtered " + block.toString();
-    if (mode != null && mode.isNotEmpty) type += " " + mode;
+    type = 'filtered ' + block.toString();
+    if (mode != null && mode.isNotEmpty) type += ' ' + mode;
   }
   Clone.masked(this.area, {@required this.to, String mode}) {
-    type = "masked";
-    if (mode != null && mode.isNotEmpty) type += " " + mode;
+    type = 'masked';
+    if (mode != null && mode.isNotEmpty) type += ' ' + mode;
   }
   Clone.replace(this.area, {@required this.to, String mode}) {
-    type = "replace";
-    if (mode != null && mode.isNotEmpty) type += " " + mode;
+    type = 'replace';
+    if (mode != null && mode.isNotEmpty) type += ' ' + mode;
   }
 
   @override
   Widget generate(Context context) {
-    if (type.isNotEmpty) type = " " + type;
+    if (type.isNotEmpty) type = ' ' + type;
     return Command(
         'clone ' + area.getCoordinates() + ' ' + to.toString() + type);
   }

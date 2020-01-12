@@ -33,7 +33,7 @@ class Group extends RestActionAble {
     this.prefix,
     @required this.children,
     this.suffix,
-    this.path = "objd",
+    this.path = 'objd',
     this.groupMin = 3,
     this.filename,
     this.generateIDs = true,
@@ -44,10 +44,10 @@ class Group extends RestActionAble {
     // check if new file is needed
     if (groupMin > -1 && children.isNotEmpty && children.length >= groupMin) {
       return IndexedFile(
-        generateIDs && filename != null ? filename : "group",
+        generateIDs && filename != null ? filename : 'group',
         execute: true,
         child: For.of(children),
-        custom: generateIDs && filename != null ? null : this.filename,
+        custom: generateIDs && filename != null ? null : filename,
         path: path,
       );
     }
