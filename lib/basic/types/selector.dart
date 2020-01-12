@@ -1,9 +1,9 @@
 import 'package:gson/gson.dart';
 import 'package:objd/basic/parsable.dart';
 import 'package:objd/basic/score.dart';
-import 'package:objd/basic/area.dart';
-import 'package:objd/basic/entity.dart';
-import 'package:objd/basic/rotation.dart';
+import 'package:objd/basic/types/area.dart';
+import 'package:objd/basic/types/entity.dart';
+import 'package:objd/basic/types/rotation.dart';
 import 'package:objd/basic/tag.dart';
 import 'package:objd/wrappers/team.dart';
 

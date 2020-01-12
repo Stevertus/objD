@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:objd/basic/command.dart';
-import 'package:objd/basic/entity.dart';
+import 'package:objd/basic/types/entity.dart';
 import 'package:objd/basic/for_list.dart';
 import 'package:objd/basic/rest_action.dart';
 import 'package:objd/basic/text_components.dart';

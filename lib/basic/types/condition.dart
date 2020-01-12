@@ -1,8 +1,8 @@
 import 'package:meta/meta.dart';
-import 'package:objd/basic/area.dart';
-import 'package:objd/basic/block.dart';
-import 'package:objd/basic/entity.dart';
-import 'package:objd/basic/location.dart';
+import 'package:objd/basic/types/area.dart';
+import 'package:objd/basic/types/block.dart';
+import 'package:objd/basic/types/entity.dart';
+import 'package:objd/basic/types/location.dart';
 import 'package:objd/basic/predicate.dart';
 import 'package:objd/basic/score.dart';
 import 'package:objd/basic/tag.dart';
@@ -157,7 +157,7 @@ class Condition {
       return;
     }
 
-    if(cond is Predicate) {
+    if (cond is Predicate) {
       _generated = _ConditionUtil("predicate " + cond.name);
       return;
     }

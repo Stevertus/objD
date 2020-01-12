@@ -1,11 +1,11 @@
-import 'package:objd/basic/condition.dart';
+import 'package:objd/basic/types/condition.dart';
 import 'package:objd/basic/group.dart';
 import 'package:meta/meta.dart';
 import 'package:objd/basic/rest_action.dart';
 import 'package:objd/basic/widget.dart';
-import 'package:objd/basic/entity.dart';
-import 'package:objd/basic/location.dart';
-import 'package:objd/basic/rotation.dart';
+import 'package:objd/basic/types/entity.dart';
+import 'package:objd/basic/types/location.dart';
+import 'package:objd/basic/types/rotation.dart';
 import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/build.dart';
 import 'package:objd/wrappers/widgets.dart';

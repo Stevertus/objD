@@ -48,7 +48,7 @@ class Raycast extends RestActionAble {
     this.entity, {
     this.max,
     this.step = 1,
-    this.through = Block.air,
+    this.through = Blocks.air,
     this.ray,
     this.onhit,
     String scoreName = "objd_count",

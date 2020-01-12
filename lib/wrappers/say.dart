@@ -1,6 +1,6 @@
 import 'package:objd/basic/command.dart';
 import 'package:objd/basic/widget.dart';
-import 'package:objd/basic/entity.dart';
+import 'package:objd/basic/types/entity.dart';
 import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/build.dart';
 

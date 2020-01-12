@@ -1,7 +1,7 @@
-import 'package:objd/basic/entity.dart';
-import 'package:objd/basic/item.dart';
-import 'package:objd/basic/location.dart';
-import 'package:objd/basic/rotation.dart';
+import 'package:objd/basic/types/entity.dart';
+import 'package:objd/basic/types/item.dart';
+import 'package:objd/basic/types/location.dart';
+import 'package:objd/basic/types/rotation.dart';
 import 'package:objd/basic/text_components.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/basic/widgets.dart';
@@ -108,7 +108,7 @@ class ArmorStand extends RestActionAble {
 
   @override
   Widget generate(Context context) {
-    return Summon(EntityType.armor_stand,
+    return Summon(Entities.armor_stand,
         location: location,
         tags: tags,
         name: name,

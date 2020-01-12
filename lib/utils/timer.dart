@@ -1,5 +1,5 @@
-import 'package:objd/basic/condition.dart';
-import 'package:objd/basic/entity.dart';
+import 'package:objd/basic/types/condition.dart';
+import 'package:objd/basic/types/entity.dart';
 import 'package:objd/basic/file.dart';
 import 'package:objd/basic/for_list.dart';
 import 'package:meta/meta.dart';

@@ -1,4 +1,4 @@
-import 'package:objd/basic/entity.dart';
+import 'package:objd/basic/types/entity.dart';
 import 'package:objd/basic/rest_action.dart';
 import 'package:objd/basic/score.dart';
 import 'package:objd/basic/text_components.dart';

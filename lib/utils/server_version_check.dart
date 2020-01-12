@@ -3,21 +3,20 @@ import 'package:objd/core.dart';
 /// checks the server version (e.g. 1.14) - increments, such as 1.14.1, aren't and can't be detected
 class ServerVersionCheck extends Widget {
   final int minVersion;
-  final List<Widget> versionToLow;
+  final List<Widget> versionTooLow;
   final Widget Function(Score) then;
   final Score serverVersion;
 
   ServerVersionCheck({
     this.minVersion,
-    this.versionToLow,
+    this.versionTooLow,
     this.serverVersion,
     this.then,
   });
 
   @override
   generate(Context context) {
-    Entity e =
-        Entity(type: EntityType.armor_stand, tags: ["objd_version_check"]);
+    Entity e = Entity(type: Entities.armor_stand, tags: ["objd_version_check"]);
 
     var s = serverVersion ??
         Score(Entity.PlayerName("server_version"), "objd_data");
@@ -28,21 +27,21 @@ class ServerVersionCheck extends Widget {
         small: true,
         tags: ["objd_version_check"],
         mainHand: Item(
-          ItemType.trident,
+          Items.trident,
           count: 1,
           nbt: {
             "objd": {"update": 13}
           },
         ),
         offHand: Item(
-          ItemType.lectern,
+          Items.lectern,
           count: 1,
           nbt: {
             "objd": {"update": 14}
           },
         ),
         head: Item(
-          ItemType.bee_spawn_egg,
+          Items.bee_spawn_egg,
           count: 1,
           nbt: {
             "objd": {"update": 15}
@@ -98,10 +97,10 @@ class ServerVersionCheck extends Widget {
       if (then != null)
         then(s),
 
-      if (minVersion != null && versionToLow != null)
+      if (minVersion != null && versionTooLow != null)
         If(
           Condition.not(s >= 15),
-          then: versionToLow,
+          then: versionTooLow,
         ),
 
       Kill(e),

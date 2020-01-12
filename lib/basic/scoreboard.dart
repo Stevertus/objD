@@ -1,4 +1,4 @@
-import 'package:objd/basic/entity.dart';
+import 'package:objd/basic/types/entity.dart';
 import 'package:objd/basic/rest_action.dart';
 import 'package:objd/basic/score.dart';
 import 'package:objd/basic/widget.dart';
@@ -93,7 +93,7 @@ class Scoreboard extends RestActionAble {
     switch (subcommand) {
       case "add":
         return Extend(
-          context.loadFile,
+          context.loadFile ?? 'load',
           child: Command("scoreboard objectives add " + name + " " + type),
           first: true,
         );

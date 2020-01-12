@@ -29,11 +29,13 @@ class VersionCheck extends Widget {
           prev < current,
           then: onUpdate,
         ),
-      if (onDowndate != null)
-        If(
-          prev > current,
-          then: onDowndate,
-        ),
+      If(
+        prev > current,
+        then: [
+          if (onDowndate != null) ...onDowndate,
+          current >> prev,
+        ],
+      ),
       if (then != null) then(current),
       prev.reset(),
     ]);

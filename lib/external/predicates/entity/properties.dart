@@ -1,6 +1,6 @@
 import 'package:gson/gson.dart';
 import 'package:meta/meta.dart';
-import 'package:objd/basic/entity.dart' as e;
+import 'package:objd/basic/types/entity.dart' as e;
 import 'package:objd/external/predicates/entity/entity.dart';
 import 'package:objd/external/predicates/range.dart';
 import 'package:objd/external/predicates/tag.dart';
@@ -68,13 +68,12 @@ class Properties extends Tag {
     if (advancements != null) player["advancements"] = advancements;
 
     if (player.isNotEmpty) ret["predicate"]["player"] = player;
-    
+
     if (nbt != null && nbt.isNotEmpty) {
       ret["predicate"]["nbt"] = gson.encode(nbt);
     }
     if (type != null) ret["predicate"]["type"] = type.toString();
     if (team != null) ret["predicate"]["team"] = team;
-
 
     return ret;
   }

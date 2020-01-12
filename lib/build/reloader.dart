@@ -22,7 +22,7 @@ reloadProject(BuildProject prj) {
   if (old["packs"] == null) return;
   prj.packs.forEach((pack) {
     int i = prj.packs.indexOf(pack);
-    Map newPack = (newPrj["packs"] as List<Map>)[i] as Map;
+    Map newPack = newPrj["packs"][i] as Map;
     Map<String, dynamic> oldPack =
         (old["packs"] as List)[i] as Map<String, dynamic>;
     if (oldPack == null) return;

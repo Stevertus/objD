@@ -2,8 +2,8 @@ import 'package:meta/meta.dart';
 import 'package:objd/basic/command.dart';
 import 'package:objd/basic/score.dart';
 import 'package:objd/basic/widget.dart';
-import 'package:objd/basic/entity.dart';
-import 'package:objd/basic/location.dart';
+import 'package:objd/basic/types/entity.dart';
+import 'package:objd/basic/types/location.dart';
 import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/build.dart';
 import 'package:gson/gson.dart';
@@ -182,7 +182,7 @@ class DataModify {
   _checkValue(dynamic value) {
     if (value is Map) return this.value = gson.encode(value);
     if (value is num || value is String) return this.value = value.toString();
-    if(value is DataStorage){
+    if (value is DataStorage) {
       fromType = "storage";
       return fromSource = value.name;
     }

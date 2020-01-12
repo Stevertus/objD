@@ -5,3 +5,4 @@ generatedoc.dart
 .packages
 pubspec.lock
 .packages
+/generators

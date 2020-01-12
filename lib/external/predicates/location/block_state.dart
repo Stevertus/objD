@@ -1,5 +1,5 @@
 import 'package:gson/gson.dart';
-import 'package:objd/basic/block.dart';
+import 'package:objd/basic/types/block.dart';
 import 'package:objd/external/predicates/tag.dart';
 
 class BlockState extends Tag {
@@ -14,8 +14,9 @@ class BlockState extends Tag {
       "condition": "minecraft:block_state_property",
     };
 
-    if(properties != null && properties.isNotEmpty){
-      ret['properties'] = properties.map<String,String>((key,val) => MapEntry(key,gson.encode(val)));
+    if (properties != null && properties.isNotEmpty) {
+      ret['properties'] = properties
+          .map<String, String>((key, val) => MapEntry(key, gson.encode(val)));
     }
     return ret;
   }

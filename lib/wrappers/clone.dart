@@ -1,10 +1,10 @@
 import 'package:meta/meta.dart';
 import 'package:objd/basic/command.dart';
-import 'package:objd/basic/location.dart';
+import 'package:objd/basic/types/location.dart';
 import 'package:objd/basic/rest_action.dart';
 import 'package:objd/basic/widget.dart';
-import 'package:objd/basic/block.dart';
-import 'package:objd/basic/area.dart';
+import 'package:objd/basic/types/block.dart';
+import 'package:objd/basic/types/area.dart';
 import 'package:objd/build/build.dart';
 
 class Clone extends RestActionAble {
@@ -24,7 +24,7 @@ class Clone extends RestActionAble {
   Clone(this.area, {@required this.to});
 
   Clone.filtered(this.area,
-      {@required this.to, Block block = Block.air, String mode}) {
+      {@required this.to, Block block = Blocks.air, String mode}) {
     type = "filtered " + block.toString();
     if (mode != null && mode.isNotEmpty) type += " " + mode;
   }

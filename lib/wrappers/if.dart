@@ -1,5 +1,5 @@
-import 'package:objd/basic/condition.dart';
-import 'package:objd/basic/entity.dart';
+import 'package:objd/basic/types/condition.dart';
+import 'package:objd/basic/types/entity.dart';
 import 'package:objd/basic/widgets.dart';
 import 'package:objd/wrappers/comment.dart';
 import 'package:objd/basic/group.dart';
@@ -85,7 +85,7 @@ class If extends RestActionAble {
     getCondition(condition);
   }
   getCondition(dynamic condition) {
-    if(condition is Predicate) predicate = condition;
+    if (condition is Predicate) predicate = condition;
     if (condition is Condition) {
       this.conds = condition.getList();
     } else {
@@ -138,7 +138,7 @@ class If extends RestActionAble {
       });
     }
     if (elseWidget != null) children.add(elseWidget);
-    if(predicate != null) children.add(predicate);
+    if (predicate != null) children.add(predicate);
 
     return For.of(children);
   }

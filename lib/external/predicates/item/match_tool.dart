@@ -1,5 +1,5 @@
 import 'package:gson/gson.dart';
-import 'package:objd/basic/item.dart';
+import 'package:objd/basic/types/item.dart';
 import 'package:objd/external/predicates/item/tool_enchantment.dart';
 import 'package:objd/external/predicates/range.dart';
 import 'package:objd/external/predicates/tag.dart';

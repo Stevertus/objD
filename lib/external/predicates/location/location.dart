@@ -1,5 +1,5 @@
-import 'package:objd/basic/block.dart';
-import 'package:objd/basic/location.dart' as l;
+import 'package:objd/basic/types/block.dart';
+import 'package:objd/basic/types/location.dart' as l;
 import 'package:objd/external/predicates/range.dart';
 import 'package:objd/external/predicates/tag.dart';
 import 'package:objd/wrappers/execute.dart';
@@ -100,10 +100,10 @@ class Location extends Tag {
       ret["predicate"]["position"]["z"] = z is Range ? z.getJson() : z;
     }
 
-    if(offset != null) {
-      if(offset.x != 0) ret["predicate"]["offsetX"] = offset.x;
-      if(offset.y != 0) ret["predicate"]["offsetY"] = offset.y;
-      if(offset.z != 0) ret["predicate"]["offsetZ"] = offset.z;
+    if (offset != null) {
+      if (offset.x != 0) ret["predicate"]["offsetX"] = offset.x;
+      if (offset.y != 0) ret["predicate"]["offsetY"] = offset.y;
+      if (offset.z != 0) ret["predicate"]["offsetZ"] = offset.z;
     }
 
     return ret;

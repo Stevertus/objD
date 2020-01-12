@@ -1,5 +1,5 @@
 import 'package:meta/meta.dart';
-import 'package:objd/basic/entity.dart';
+import 'package:objd/basic/types/entity.dart';
 import 'package:objd/basic/file.dart';
 import 'package:objd/basic/for_list.dart';
 import 'package:objd/basic/group.dart';
@@ -45,7 +45,9 @@ class ForEach extends RestActionAble {
 
   @override
   Widget generate(Context context) {
-    Condition c = Condition(step < 0 ? _countScore.isBiggerOrEqual(score) : _countScore.isSmallerOrEqual(score));
+    Condition c = Condition(step < 0
+        ? _countScore.isBiggerOrEqual(score)
+        : _countScore.isSmallerOrEqual(score));
     Group gr = Group(filename: "foreach", children: [
       then(_countScore),
       step < 0 ? _countScore.subtract(-step) : _countScore.add(step),
@@ -61,7 +63,7 @@ class ForEach extends RestActionAble {
     return For.of([
       _countScore.set(from),
       If(
-        step < 0 ? _countScore.isBigger(score) :  _countScore.isSmaller(score),
+        step < 0 ? _countScore.isBigger(score) : _countScore.isSmaller(score),
         then: [gr],
       ),
     ]);

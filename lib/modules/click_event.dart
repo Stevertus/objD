@@ -19,11 +19,12 @@ class ClickEvent extends Module {
   /// |selectedItem| just triggers the click if this Item is selected(optional) |
   /// |path| path to create the click handler function(default = `events/`) |
 
-  ClickEvent(
-      {this.name = "objd_click",
-      this.onClick,
-      this.selectedItem,
-      this.path = "events/"});
+  ClickEvent({
+    this.name = "objd_click",
+    this.onClick,
+    this.selectedItem,
+    this.path = "events/",
+  });
 
   @override
   generate(Context context) {

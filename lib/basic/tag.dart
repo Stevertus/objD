@@ -1,9 +1,9 @@
-import 'package:objd/basic/condition.dart';
+import 'package:objd/basic/types/condition.dart';
 import 'package:objd/basic/for_list.dart';
 import 'package:objd/basic/rest_action.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/basic/command.dart';
-import 'package:objd/basic/entity.dart';
+import 'package:objd/basic/types/entity.dart';
 import 'package:objd/build/build.dart';
 import 'package:objd/wrappers/if.dart';
 
@@ -38,7 +38,7 @@ class Tag extends RestActionAble {
     return For.of([
       If(this, then: [tempTag]),
       If(tempTag, then: [Tag(tag, entity: entity, value: false)]),
-      If(Tag("!" + temp, entity: entity),
+      If(entity.copyWith().not(tags: [temp]),
           then: [Tag(tag, entity: entity, value: true)]),
       tempTag.remove()
     ]);

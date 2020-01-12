@@ -1,5 +1,5 @@
-import 'package:objd/basic/entity.dart';
-import 'package:objd/basic/location.dart';
+import 'package:objd/basic/types/entity.dart';
+import 'package:objd/basic/types/location.dart';
 import 'package:objd/basic/text_components.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/basic/widgets.dart';
@@ -61,7 +61,13 @@ class AreaEffectCloud extends RestActionAble {
 
   @override
   Widget generate(Context context) {
-    return Summon(EntityType.area_effect_cloud,
-        location: location, tags: tags, name: name, nbt: nbt, age: age);
+    return Summon(
+      Entities.area_effect_cloud,
+      location: location,
+      tags: tags,
+      name: name,
+      nbt: nbt,
+      age: age,
+    );
   }
 }

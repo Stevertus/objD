@@ -1,16 +1,22 @@
-import 'package:objd/basic/area.dart';
+import 'package:objd/basic/types/area.dart';
 import 'package:objd/basic/command.dart';
 import 'package:objd/basic/for_list.dart';
-import 'package:objd/basic/rotation.dart';
+import 'package:objd/basic/types/block.dart';
+import 'package:objd/basic/types/location.dart';
+import 'package:objd/basic/types/particles.dart';
+import 'package:objd/basic/types/rotation.dart';
 import 'package:objd/basic/score.dart';
 import 'package:objd/basic/tag.dart';
+import 'package:objd/basic/types/slot.dart';
 import 'package:objd/basic/widgets.dart';
+import 'package:objd/basic/types/selector.dart';
 import 'package:objd/core.dart';
 import 'package:objd/wrappers/execute.dart';
 import 'package:meta/meta.dart';
 import 'package:objd/wrappers/team.dart';
 
-import 'selector.dart';
+import 'item.dart';
+export 'entities.dart';
 
 abstract class EntityClass {
   String selector;
@@ -617,7 +623,7 @@ class Entity implements EntityClass {
   RestActionAble raycast({
     int max,
     double step = 1,
-    Block through = Block.air,
+    Block through = Blocks.air,
     Widget Function(Function, Function) ray,
     List<Widget> onhit,
     String scoreName = "objd_count",
@@ -636,8 +642,12 @@ class Entity implements EntityClass {
   ///entity.teleport(Location.here()).queue()
   ///```
 
-  RestActionAble teleport(
-      {Location location, Entity entity, dynamic facing, Rotation rot}) {
+  RestActionAble teleport({
+    Location location,
+    Entity entity,
+    dynamic facing,
+    Rotation rot,
+  }) {
     //Teleport to entity
     if (entity != null && facing != null) {
       return StraitWidget.builder
@@ -722,7 +732,7 @@ class Entity implements EntityClass {
 
   RestActionAble crash() => at(children: [
         this.particle(
-          particle: ParticleType.barrier,
+          particle: Particles.barrier,
           location: Location.here(),
           count: 1000000000,
           force: true,
@@ -1213,104 +1223,6 @@ enum Sort { random, furthest, nearest, arbitrary }
 
 /// There is an EntityType for every type_id in minecraft with `EntityType.[type_id]`
 class EntityType {
-  // throwable
-  static const EntityType armor_stand = EntityType('armor_stand');
-  static const EntityType area_effect_cloud = EntityType('area_effect_cloud');
-  static const EntityType player = EntityType('player');
-  static const EntityType boat = EntityType('boat');
-  static const EntityType minecart = EntityType('minecart');
-  static const EntityType chest_minecart = EntityType('chest_minecart');
-  static const EntityType furnace_minecart = EntityType('furnace_minecart');
-  static const EntityType tnt_minecart = EntityType('tnt_minecart');
-  static const EntityType hopper_minecart = EntityType('hopper_minecart');
-  static const EntityType spawner_minecart = EntityType('spawner_minecart');
-  static const EntityType item = EntityType('item');
-  static const EntityType experience_orb = EntityType('experience_orb');
-  static const EntityType experience_bottle = EntityType('experience_bottle');
-  static const EntityType arrow = EntityType('arrow');
-  static const EntityType spectral_arrow = EntityType('spectral_arrow');
-  static const EntityType trident = EntityType('trident');
-  static const EntityType snowball = EntityType('snowball');
-  static const EntityType egg = EntityType('egg');
-  static const EntityType llama_spit = EntityType('llama_spit');
-  static const EntityType ender_pearl = EntityType('ender_pearl');
-  static const EntityType eye_of_ender = EntityType('eye_of_ender');
-  static const EntityType fireworks_rocket = EntityType('fireworks_rocket');
-  static const EntityType tnt = EntityType('tnt');
-  static const EntityType falling_block = EntityType('falling_block');
-  static const EntityType fishing_bobber = EntityType('fishing_bobber');
-  static const EntityType leash_knot = EntityType('leash_knot');
-  static const EntityType painting = EntityType('painting');
-  static const EntityType item_frame = EntityType('item_frame');
-  static const EntityType fireball = EntityType('fireball');
-  static const EntityType shulker_bullet = EntityType('shulker_bullet');
-  static const EntityType end_crystal = EntityType('end_crystal');
-  static const EntityType evoker_fangs = EntityType('evoker_fangs');
-  static const EntityType potion = EntityType('potion');
-
-  // hostile
-  static const EntityType elder_guardian = EntityType('elder_guardian');
-  static const EntityType wither_skeleton = EntityType('wither_skeleton');
-  static const EntityType stray = EntityType('stray');
-  static const EntityType husk = EntityType('husk');
-  static const EntityType zombie_villager = EntityType('zombie_villager');
-  static const EntityType vex = EntityType('vex');
-  static const EntityType vindicator = EntityType('vindicator');
-  static const EntityType illager_beast = EntityType('illager_beast');
-  static const EntityType illusioner = EntityType('illusioner');
-  static const EntityType pillager = EntityType('pillager');
-  static const EntityType creeper = EntityType('creeper');
-  static const EntityType skeleton = EntityType('skeleton');
-  static const EntityType spider = EntityType('spider');
-  static const EntityType giant = EntityType('giant');
-  static const EntityType zombie = EntityType('zombie');
-  static const EntityType slime = EntityType('slime');
-  static const EntityType ghast = EntityType('ghast');
-  static const EntityType zombie_pigman = EntityType('zombie_pigman');
-  static const EntityType enderman = EntityType('enderman');
-  static const EntityType cave_spider = EntityType('cave_spider');
-  static const EntityType silverfish = EntityType('silverfish');
-  static const EntityType blaze = EntityType('blaze');
-  static const EntityType magma_cube = EntityType('magma_cube');
-  static const EntityType ender_dragon = EntityType('ender_dragon');
-  static const EntityType wither = EntityType('wither');
-  static const EntityType wither_skull = EntityType('wither_skull');
-  static const EntityType witch = EntityType('witch');
-  static const EntityType endermite = EntityType('endermite');
-  static const EntityType guardian = EntityType('guardian');
-  static const EntityType shulker = EntityType('shulker');
-  static const EntityType dragon_fireball = EntityType('dragon_fireball');
-  static const EntityType drowned = EntityType('drowned');
-
-  // passive
-  static const EntityType skeleton_horse = EntityType('skeleton_horse');
-  static const EntityType zombie_horse = EntityType('zombie_horse');
-  static const EntityType donkey = EntityType('donkey');
-  static const EntityType mule = EntityType('mule');
-  static const EntityType bat = EntityType('bat');
-  static const EntityType pig = EntityType('pig');
-  static const EntityType sheep = EntityType('sheep');
-  static const EntityType cow = EntityType('cow');
-  static const EntityType chicken = EntityType('chicken');
-  static const EntityType squid = EntityType('squid');
-  static const EntityType wolf = EntityType('wolf');
-  static const EntityType mooshroom = EntityType('mooshroom');
-  static const EntityType snowman = EntityType('snowman');
-  static const EntityType ocelot = EntityType('ocelot');
-  static const EntityType iron_golem = EntityType('iron_golem');
-  static const EntityType horse = EntityType('horse');
-  static const EntityType rabbit = EntityType('rabbit');
-  static const EntityType polar_bear = EntityType('polar_bear');
-  static const EntityType llama = EntityType('llama');
-  static const EntityType parrot = EntityType('parrot');
-  static const EntityType villager = EntityType('villager');
-  static const EntityType cod = EntityType('cod');
-  static const EntityType salmon = EntityType('salmon');
-  static const EntityType tropical_fish = EntityType('tropical_fish');
-  static const EntityType turtle = EntityType('turtle');
-  static const EntityType dolphin = EntityType('dolphin');
-  static const EntityType panda = EntityType('panda');
-
   final String type;
   const EntityType(this.type);
 
@@ -1328,4 +1240,436 @@ class EntityType {
   String toString() {
     return type;
   }
+
+  /// DEPRECATED, please use Entities.area_effect_cloud
+  @deprecated
+  static const EntityType area_effect_cloud =
+      EntityType('minecraft:area_effect_cloud');
+
+  /// DEPRECATED, please use Entities.armor_stand
+  @deprecated
+  static const EntityType armor_stand = EntityType('minecraft:armor_stand');
+
+  /// DEPRECATED, please use Entities.arrow
+  @deprecated
+  static const EntityType arrow = EntityType('minecraft:arrow');
+
+  /// DEPRECATED, please use Entities.bat
+  @deprecated
+  static const EntityType bat = EntityType('minecraft:bat');
+
+  /// DEPRECATED, please use Entities.bee
+  @deprecated
+  static const EntityType bee = EntityType('minecraft:bee');
+
+  /// DEPRECATED, please use Entities.blaze
+  @deprecated
+  static const EntityType blaze = EntityType('minecraft:blaze');
+
+  /// DEPRECATED, please use Entities.boat
+  @deprecated
+  static const EntityType boat = EntityType('minecraft:boat');
+
+  /// DEPRECATED, please use Entities.cat
+  @deprecated
+  static const EntityType cat = EntityType('minecraft:cat');
+
+  /// DEPRECATED, please use Entities.cave_spider
+  @deprecated
+  static const EntityType cave_spider = EntityType('minecraft:cave_spider');
+
+  /// DEPRECATED, please use Entities.chicken
+  @deprecated
+  static const EntityType chicken = EntityType('minecraft:chicken');
+
+  /// DEPRECATED, please use Entities.cod
+  @deprecated
+  static const EntityType cod = EntityType('minecraft:cod');
+
+  /// DEPRECATED, please use Entities.cow
+  @deprecated
+  static const EntityType cow = EntityType('minecraft:cow');
+
+  /// DEPRECATED, please use Entities.creeper
+  @deprecated
+  static const EntityType creeper = EntityType('minecraft:creeper');
+
+  /// DEPRECATED, please use Entities.donkey
+  @deprecated
+  static const EntityType donkey = EntityType('minecraft:donkey');
+
+  /// DEPRECATED, please use Entities.dolphin
+  @deprecated
+  static const EntityType dolphin = EntityType('minecraft:dolphin');
+
+  /// DEPRECATED, please use Entities.dragon_fireball
+  @deprecated
+  static const EntityType dragon_fireball =
+      EntityType('minecraft:dragon_fireball');
+
+  /// DEPRECATED, please use Entities.drowned
+  @deprecated
+  static const EntityType drowned = EntityType('minecraft:drowned');
+
+  /// DEPRECATED, please use Entities.elder_guardian
+  @deprecated
+  static const EntityType elder_guardian =
+      EntityType('minecraft:elder_guardian');
+
+  /// DEPRECATED, please use Entities.end_crystal
+  @deprecated
+  static const EntityType end_crystal = EntityType('minecraft:end_crystal');
+
+  /// DEPRECATED, please use Entities.ender_dragon
+  @deprecated
+  static const EntityType ender_dragon = EntityType('minecraft:ender_dragon');
+
+  /// DEPRECATED, please use Entities.enderman
+  @deprecated
+  static const EntityType enderman = EntityType('minecraft:enderman');
+
+  /// DEPRECATED, please use Entities.endermite
+  @deprecated
+  static const EntityType endermite = EntityType('minecraft:endermite');
+
+  /// DEPRECATED, please use Entities.evoker_fangs
+  @deprecated
+  static const EntityType evoker_fangs = EntityType('minecraft:evoker_fangs');
+
+  /// DEPRECATED, please use Entities.evoker
+  @deprecated
+  static const EntityType evoker = EntityType('minecraft:evoker');
+
+  /// DEPRECATED, please use Entities.experience_orb
+  @deprecated
+  static const EntityType experience_orb =
+      EntityType('minecraft:experience_orb');
+
+  /// DEPRECATED, please use Entities.eye_of_ender
+  @deprecated
+  static const EntityType eye_of_ender = EntityType('minecraft:eye_of_ender');
+
+  /// DEPRECATED, please use Entities.falling_block
+  @deprecated
+  static const EntityType falling_block = EntityType('minecraft:falling_block');
+
+  /// DEPRECATED, please use Entities.firework_rocket
+  @deprecated
+  static const EntityType firework_rocket =
+      EntityType('minecraft:firework_rocket');
+
+  /// DEPRECATED, please use Entities.fox
+  @deprecated
+  static const EntityType fox = EntityType('minecraft:fox');
+
+  /// DEPRECATED, please use Entities.ghast
+  @deprecated
+  static const EntityType ghast = EntityType('minecraft:ghast');
+
+  /// DEPRECATED, please use Entities.giant
+  @deprecated
+  static const EntityType giant = EntityType('minecraft:giant');
+
+  /// DEPRECATED, please use Entities.guardian
+  @deprecated
+  static const EntityType guardian = EntityType('minecraft:guardian');
+
+  /// DEPRECATED, please use Entities.horse
+  @deprecated
+  static const EntityType horse = EntityType('minecraft:horse');
+
+  /// DEPRECATED, please use Entities.husk
+  @deprecated
+  static const EntityType husk = EntityType('minecraft:husk');
+
+  /// DEPRECATED, please use Entities.illusioner
+  @deprecated
+  static const EntityType illusioner = EntityType('minecraft:illusioner');
+
+  /// DEPRECATED, please use Entities.item
+  @deprecated
+  static const EntityType item = EntityType('minecraft:item');
+
+  /// DEPRECATED, please use Entities.item_frame
+  @deprecated
+  static const EntityType item_frame = EntityType('minecraft:item_frame');
+
+  /// DEPRECATED, please use Entities.fireball
+  @deprecated
+  static const EntityType fireball = EntityType('minecraft:fireball');
+
+  /// DEPRECATED, please use Entities.leash_knot
+  @deprecated
+  static const EntityType leash_knot = EntityType('minecraft:leash_knot');
+
+  /// DEPRECATED, please use Entities.llama
+  @deprecated
+  static const EntityType llama = EntityType('minecraft:llama');
+
+  /// DEPRECATED, please use Entities.llama_spit
+  @deprecated
+  static const EntityType llama_spit = EntityType('minecraft:llama_spit');
+
+  /// DEPRECATED, please use Entities.magma_cube
+  @deprecated
+  static const EntityType magma_cube = EntityType('minecraft:magma_cube');
+
+  /// DEPRECATED, please use Entities.minecart
+  @deprecated
+  static const EntityType minecart = EntityType('minecraft:minecart');
+
+  /// DEPRECATED, please use Entities.chest_minecart
+  @deprecated
+  static const EntityType chest_minecart =
+      EntityType('minecraft:chest_minecart');
+
+  /// DEPRECATED, please use Entities.command_block_minecart
+  @deprecated
+  static const EntityType command_block_minecart =
+      EntityType('minecraft:command_block_minecart');
+
+  /// DEPRECATED, please use Entities.furnace_minecart
+  @deprecated
+  static const EntityType furnace_minecart =
+      EntityType('minecraft:furnace_minecart');
+
+  /// DEPRECATED, please use Entities.hopper_minecart
+  @deprecated
+  static const EntityType hopper_minecart =
+      EntityType('minecraft:hopper_minecart');
+
+  /// DEPRECATED, please use Entities.spawner_minecart
+  @deprecated
+  static const EntityType spawner_minecart =
+      EntityType('minecraft:spawner_minecart');
+
+  /// DEPRECATED, please use Entities.tnt_minecart
+  @deprecated
+  static const EntityType tnt_minecart = EntityType('minecraft:tnt_minecart');
+
+  /// DEPRECATED, please use Entities.mule
+  @deprecated
+  static const EntityType mule = EntityType('minecraft:mule');
+
+  /// DEPRECATED, please use Entities.mooshroom
+  @deprecated
+  static const EntityType mooshroom = EntityType('minecraft:mooshroom');
+
+  /// DEPRECATED, please use Entities.ocelot
+  @deprecated
+  static const EntityType ocelot = EntityType('minecraft:ocelot');
+
+  /// DEPRECATED, please use Entities.painting
+  @deprecated
+  static const EntityType painting = EntityType('minecraft:painting');
+
+  /// DEPRECATED, please use Entities.panda
+  @deprecated
+  static const EntityType panda = EntityType('minecraft:panda');
+
+  /// DEPRECATED, please use Entities.parrot
+  @deprecated
+  static const EntityType parrot = EntityType('minecraft:parrot');
+
+  /// DEPRECATED, please use Entities.pig
+  @deprecated
+  static const EntityType pig = EntityType('minecraft:pig');
+
+  /// DEPRECATED, please use Entities.pufferfish
+  @deprecated
+  static const EntityType pufferfish = EntityType('minecraft:pufferfish');
+
+  /// DEPRECATED, please use Entities.zombie_pigman
+  @deprecated
+  static const EntityType zombie_pigman = EntityType('minecraft:zombie_pigman');
+
+  /// DEPRECATED, please use Entities.polar_bear
+  @deprecated
+  static const EntityType polar_bear = EntityType('minecraft:polar_bear');
+
+  /// DEPRECATED, please use Entities.tnt
+  @deprecated
+  static const EntityType tnt = EntityType('minecraft:tnt');
+
+  /// DEPRECATED, please use Entities.rabbit
+  @deprecated
+  static const EntityType rabbit = EntityType('minecraft:rabbit');
+
+  /// DEPRECATED, please use Entities.salmon
+  @deprecated
+  static const EntityType salmon = EntityType('minecraft:salmon');
+
+  /// DEPRECATED, please use Entities.sheep
+  @deprecated
+  static const EntityType sheep = EntityType('minecraft:sheep');
+
+  /// DEPRECATED, please use Entities.shulker
+  @deprecated
+  static const EntityType shulker = EntityType('minecraft:shulker');
+
+  /// DEPRECATED, please use Entities.shulker_bullet
+  @deprecated
+  static const EntityType shulker_bullet =
+      EntityType('minecraft:shulker_bullet');
+
+  /// DEPRECATED, please use Entities.silverfish
+  @deprecated
+  static const EntityType silverfish = EntityType('minecraft:silverfish');
+
+  /// DEPRECATED, please use Entities.skeleton
+  @deprecated
+  static const EntityType skeleton = EntityType('minecraft:skeleton');
+
+  /// DEPRECATED, please use Entities.skeleton_horse
+  @deprecated
+  static const EntityType skeleton_horse =
+      EntityType('minecraft:skeleton_horse');
+
+  /// DEPRECATED, please use Entities.slime
+  @deprecated
+  static const EntityType slime = EntityType('minecraft:slime');
+
+  /// DEPRECATED, please use Entities.small_fireball
+  @deprecated
+  static const EntityType small_fireball =
+      EntityType('minecraft:small_fireball');
+
+  /// DEPRECATED, please use Entities.snow_golem
+  @deprecated
+  static const EntityType snow_golem = EntityType('minecraft:snow_golem');
+
+  /// DEPRECATED, please use Entities.snowball
+  @deprecated
+  static const EntityType snowball = EntityType('minecraft:snowball');
+
+  /// DEPRECATED, please use Entities.spectral_arrow
+  @deprecated
+  static const EntityType spectral_arrow =
+      EntityType('minecraft:spectral_arrow');
+
+  /// DEPRECATED, please use Entities.spider
+  @deprecated
+  static const EntityType spider = EntityType('minecraft:spider');
+
+  /// DEPRECATED, please use Entities.squid
+  @deprecated
+  static const EntityType squid = EntityType('minecraft:squid');
+
+  /// DEPRECATED, please use Entities.stray
+  @deprecated
+  static const EntityType stray = EntityType('minecraft:stray');
+
+  /// DEPRECATED, please use Entities.trader_llama
+  @deprecated
+  static const EntityType trader_llama = EntityType('minecraft:trader_llama');
+
+  /// DEPRECATED, please use Entities.tropical_fish
+  @deprecated
+  static const EntityType tropical_fish = EntityType('minecraft:tropical_fish');
+
+  /// DEPRECATED, please use Entities.turtle
+  @deprecated
+  static const EntityType turtle = EntityType('minecraft:turtle');
+
+  /// DEPRECATED, please use Entities.egg
+  @deprecated
+  static const EntityType egg = EntityType('minecraft:egg');
+
+  /// DEPRECATED, please use Entities.ender_pearl
+  @deprecated
+  static const EntityType ender_pearl = EntityType('minecraft:ender_pearl');
+
+  /// DEPRECATED, please use Entities.experience_bottle
+  @deprecated
+  static const EntityType experience_bottle =
+      EntityType('minecraft:experience_bottle');
+
+  /// DEPRECATED, please use Entities.potion
+  @deprecated
+  static const EntityType potion = EntityType('minecraft:potion');
+
+  /// DEPRECATED, please use Entities.trident
+  @deprecated
+  static const EntityType trident = EntityType('minecraft:trident');
+
+  /// DEPRECATED, please use Entities.vex
+  @deprecated
+  static const EntityType vex = EntityType('minecraft:vex');
+
+  /// DEPRECATED, please use Entities.villager
+  @deprecated
+  static const EntityType villager = EntityType('minecraft:villager');
+
+  /// DEPRECATED, please use Entities.iron_golem
+  @deprecated
+  static const EntityType iron_golem = EntityType('minecraft:iron_golem');
+
+  /// DEPRECATED, please use Entities.vindicator
+  @deprecated
+  static const EntityType vindicator = EntityType('minecraft:vindicator');
+
+  /// DEPRECATED, please use Entities.pillager
+  @deprecated
+  static const EntityType pillager = EntityType('minecraft:pillager');
+
+  /// DEPRECATED, please use Entities.wandering_trader
+  @deprecated
+  static const EntityType wandering_trader =
+      EntityType('minecraft:wandering_trader');
+
+  /// DEPRECATED, please use Entities.witch
+  @deprecated
+  static const EntityType witch = EntityType('minecraft:witch');
+
+  /// DEPRECATED, please use Entities.wither
+  @deprecated
+  static const EntityType wither = EntityType('minecraft:wither');
+
+  /// DEPRECATED, please use Entities.wither_skeleton
+  @deprecated
+  static const EntityType wither_skeleton =
+      EntityType('minecraft:wither_skeleton');
+
+  /// DEPRECATED, please use Entities.wither_skull
+  @deprecated
+  static const EntityType wither_skull = EntityType('minecraft:wither_skull');
+
+  /// DEPRECATED, please use Entities.wolf
+  @deprecated
+  static const EntityType wolf = EntityType('minecraft:wolf');
+
+  /// DEPRECATED, please use Entities.zombie
+  @deprecated
+  static const EntityType zombie = EntityType('minecraft:zombie');
+
+  /// DEPRECATED, please use Entities.zombie_horse
+  @deprecated
+  static const EntityType zombie_horse = EntityType('minecraft:zombie_horse');
+
+  /// DEPRECATED, please use Entities.zombie_villager
+  @deprecated
+  static const EntityType zombie_villager =
+      EntityType('minecraft:zombie_villager');
+
+  /// DEPRECATED, please use Entities.phantom
+  @deprecated
+  static const EntityType phantom = EntityType('minecraft:phantom');
+
+  /// DEPRECATED, please use Entities.ravager
+  @deprecated
+  static const EntityType ravager = EntityType('minecraft:ravager');
+
+  /// DEPRECATED, please use Entities.lightning_bolt
+  @deprecated
+  static const EntityType lightning_bolt =
+      EntityType('minecraft:lightning_bolt');
+
+  /// DEPRECATED, please use Entities.player
+  @deprecated
+  static const EntityType player = EntityType('minecraft:player');
+
+  /// DEPRECATED, please use Entities.fishing_bobber
+  @deprecated
+  static const EntityType fishing_bobber =
+      EntityType('minecraft:fishing_bobber');
 }

@@ -1,4 +1,4 @@
-import 'package:objd/basic/location.dart';
+import 'package:objd/basic/types/location.dart';
 
 class Area {
   double dx, dy, dz = -1;
@@ -55,7 +55,7 @@ class Area {
   }
 
   Map getRanges() {
-    Map<String,double> ret = {};
+    Map<String, double> ret = {};
     if (loc1.x != null) ret["x"] = loc1.x;
     if (loc1.y != null) ret["y"] = loc1.y;
     if (loc1.z != null) ret["z"] = loc1.z;

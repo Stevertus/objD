@@ -3,7 +3,8 @@ import 'package:objd/basic/widget.dart';
 import 'package:objd/wrappers/data.dart';
 import 'package:objd/basic/command.dart';
 import 'package:objd/basic/for_list.dart';
-import 'package:objd/basic/entity.dart';
+import 'package:objd/basic/types/entity.dart';
+import 'package:objd/basic/types/condition.dart';
 import 'package:objd/basic/scoreboard.dart';
 import 'package:objd/build/build.dart';
 import 'package:objd/wrappers/if.dart';
@@ -37,7 +38,9 @@ class Score extends RestActionAble {
         Scoreboard(score),
       );
     }
-    if (Scoreboard.prefix != null && !score.contains(Scoreboard.prefix)) score = Scoreboard.prefix + score;
+    if (Scoreboard.prefix != null && !score.contains(Scoreboard.prefix)) {
+      score = Scoreboard.prefix + score;
+    }
   }
 
   /// same as Score() but with a predefined entity(Entity.Selected(),)
@@ -52,7 +55,9 @@ class Score extends RestActionAble {
         Scoreboard(score),
       );
     }
-    if (Scoreboard.prefix != null && !score.contains(Scoreboard.prefix)) score = Scoreboard.prefix + score;
+    if (Scoreboard.prefix != null && !score.contains(Scoreboard.prefix)) {
+      score = Scoreboard.prefix + score;
+    }
   }
   Score.str(this._strGen, {this.score = "", String match = "0"}) {
     _match = match;
@@ -74,7 +79,9 @@ class Score extends RestActionAble {
   /// ```
   Score.con(int number, {bool addNew = true}) {
     score = "objd_consts";
-    if (Scoreboard.prefix != null && !score.contains(Scoreboard.prefix)) score = Scoreboard.prefix + score;
+    if (Scoreboard.prefix != null && !score.contains(Scoreboard.prefix)) {
+      score = Scoreboard.prefix + score;
+    }
     entity = Entity.PlayerName(
       '#' + number.toString(),
     );
@@ -370,6 +377,20 @@ class Score extends RestActionAble {
             _getESStr() +
             " run " +
             command.toMap()['command'].toString(),
+      ),
+    );
+  }
+
+  /// sets the score to the success of the given condition result
+  Score setToCondition(Condition cond, {bool useSuccess = false}) {
+    return addCommandRet(
+      Command(
+        "execute store " +
+            (useSuccess ? "success" : "result") +
+            " score " +
+            _getESStr() +
+            " " +
+            Condition.getPrefixes(cond.getList())[0],
       ),
     );
   }

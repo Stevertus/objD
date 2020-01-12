@@ -1,10 +1,10 @@
 import 'package:meta/meta.dart';
 import 'package:objd/basic/command.dart';
-import 'package:objd/basic/entity.dart';
+import 'package:objd/basic/types/entity.dart';
 import 'dart:convert';
 
-import 'package:objd/basic/item.dart';
-import 'package:objd/basic/location.dart';
+import 'package:objd/basic/types/item.dart';
+import 'package:objd/basic/types/location.dart';
 import 'package:objd/basic/score.dart';
 
 class TextComponent {
@@ -151,7 +151,7 @@ class TextComponent {
   // translates from a key in the translations
   TextComponent.translate(
     String key, {
-    List<String> conversionFlags,
+    List<dynamic> conversionFlags,
     this.color,
     this.bold,
     this.italic,
@@ -164,7 +164,14 @@ class TextComponent {
   }) {
     value = {"translate": key};
     if (conversionFlags != null && conversionFlags.isNotEmpty) {
-      value['with'] = conversionFlags;
+      value['with'] = [];
+      conversionFlags.forEach((c) {
+        if (c is List<TextComponent>) {
+          value['with'].add(c.map((TextComponent x) => x.toMap()).toList());
+        }
+        if (c is TextComponent) value['with'].add(c.toMap());
+        if (c is String) value['with'].add(TextComponent(c).toMap());
+      });
     }
   }
 
@@ -403,8 +410,6 @@ class TextHoverEvent {
   }
 }
 
-/// Lists all availavle colors
-///
 /// See all available colors: https://minecraft.gamepedia.com/Formatting_codes#Color_codes
 class Color {
   final String _color;
