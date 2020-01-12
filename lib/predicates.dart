@@ -1,4 +1,3 @@
-
 export 'external/predicates/alternative.dart';
 export 'external/predicates/inverted.dart';
 export 'external/predicates/random.dart';

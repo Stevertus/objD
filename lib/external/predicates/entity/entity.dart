@@ -1,11 +1,9 @@
-
 class Entity {
+  final EntityValue _entity;
 
-  final EntityValue _entity; 
-
-  const Entity.This(): _entity = EntityValue.This;
-  const Entity.Killer(): _entity = EntityValue.Killer;
-  const Entity.Killer_player(): _entity = EntityValue.Killer_player;
+  const Entity.This() : _entity = EntityValue.This;
+  const Entity.Killer() : _entity = EntityValue.Killer;
+  const Entity.Killer_player() : _entity = EntityValue.Killer_player;
 
   @override
   String toString() {

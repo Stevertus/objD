@@ -1,4 +1,5 @@
 /.vscode
+/.dart_tool
 generatedoc.dart
 /webdoc
 /testing
