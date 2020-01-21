@@ -1162,8 +1162,8 @@ class Entity implements EntityClass {
       asStrait(run: (List<Widget> strait) => fn(Entity.Self(), strait));
 
   @override
-  String toString([Map arguments]) {
-    arguments ??= arguments;
+  String toString([Map args]) {
+    arguments ??= args;
     if (playerName != null && playerName.isNotEmpty) return playerName;
     var ret = '@' + selector;
 

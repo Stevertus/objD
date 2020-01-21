@@ -1,3 +1,11 @@
+## 0.3.2-beta.4
+* added support for Dart Web, enabling online generators powered by objD
+* added Zip Exporter that can be enabled with the --zip flag or by builing the project in production mode
+* added --no-zip flag to allow usual file generation
+* added an web example
+* added getArchive and saveAsZip methods to manually create and modify the Zip encoder
+* updated the gson library to also support Dart Web
+* fixed missing Particles export
 
 
 ## 0.3.2-beta.3

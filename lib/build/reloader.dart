@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:colorize/colorize.dart';
 import 'package:objd/build/buildPack.dart';
 import 'package:objd/build/buildProject.dart';
-import 'package:objd/build/io.dart';
+import 'package:objd/build/io_ex.dart';
 
 void reloadProject(BuildProject prj) {
   color('Doing Hotreload...', front: Styles.CYAN);

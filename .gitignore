@@ -1,9 +1,5 @@
-/.vscode
-/.dart_tool
-generatedoc.dart
-/webdoc
-/testing
+.vscode/
+.dart_tool/
 .packages
 pubspec.lock
-.packages
-/generators
+generators/

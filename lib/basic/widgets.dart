@@ -25,3 +25,4 @@ export 'types/rotation.dart';
 export 'types/area.dart';
 export 'types/condition.dart';
 export 'types/slot.dart';
+export 'types/particles.dart';

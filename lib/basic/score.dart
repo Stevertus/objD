@@ -97,9 +97,9 @@ class Score extends RestActionAble {
   }
 
   String _getESStr({Entity entity, String score}) {
-    entity ??= entity;
-    score ??= score;
-    return entity.toString() + ' ' + score;
+    this.entity ??= entity;
+    this.score ??= score;
+    return this.entity.toString() + ' ' + this.score;
   }
 
   Score addCommandRet(Command command) {

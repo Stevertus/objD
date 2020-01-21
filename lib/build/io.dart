@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'package:colorize/colorize.dart';
 
@@ -32,13 +33,15 @@ Future _createFile(String name, String content) async {
   dynamic path = name.split('/');
   path = path.sublist(0, path.length - 1).join('/');
   _ensureDirExists(path as String);
-  var logFile = File(name);
-  var sink = logFile.openWrite();
-  sink.write(content);
-  await sink.flush();
-  await sink.close();
+  await saveBytes(utf8.encode(content), name);
   color('Generated: ' + name, front: Styles.LIGHT_YELLOW);
-  return '';
+  return;
+}
+
+Future saveBytes(List<int> bytes, String path) async {
+  //_ensureDirExists(path);
+  final file = File(path);
+  return await file.writeAsBytes(bytes);
 }
 
 String readFile(String name) {

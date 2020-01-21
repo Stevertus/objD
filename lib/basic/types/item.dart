@@ -155,10 +155,10 @@ class Item {
     return result;
   }
 
+  String getId() => type.toString().replaceFirst('minecraft:', '');
+
   Map<String, dynamic> getMap() {
-    var map = <String, dynamic>{
-      'id': 'minecraft:' + type.toString().replaceFirst('minecraft:', '')
-    };
+    var map = <String, dynamic>{'id': 'minecraft:' + getId()};
     if (tag.isNotEmpty) map['tag'] = tag;
     if (count != null) map['Count'] = Byte(count);
     if (slot != null) {
