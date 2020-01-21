@@ -7,7 +7,7 @@ objD is a framework for developing Datapacks for Minecraft. It uses the [Dart](h
 
 ## Why a framework?
 A framework is a set of utilities to reduce the amount of repetitive work.
-I've tried many ways in the past to achieve a quick and easy way to generate Datapacks for Minecraft: A own programming language [mcscript](https://stevertus.com/mcscript), several graphical online generators at [stevertus.com](https://stevertus.com) or premade utilities.
+I've tried many ways in the past to achieve a quick and easy way to generate Datapacks for Minecraft: A own programming language [mcscript](https://mcscript.stevertus.com), several graphical online generators at [stevertus.com](https://stevertus.com) or premade utilities.
 
 Instead of developing a language, why not using the tools and parser an other language gives you?
 By building a custom frame around it you get the **reliability** and the **extensive** debugging tools in Editors.
