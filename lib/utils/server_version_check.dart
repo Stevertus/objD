@@ -7,6 +7,14 @@ class ServerVersionCheck extends Widget {
   final Widget Function(Score) then;
   final Score serverVersion;
 
+  /// Checks the used Minecraft Version and can give feedback on it(e.g. Errors).
+  ///
+  /// | constructor |  |
+  /// |--|--|
+  /// |minVersion| the aimed version number as int(1.15 = `15`) |
+  /// |versionTooLow| a List of Widgets that are executed if it detects that the version is lower that minVersion |
+  /// |then| a Function that takes in the used Score and reacts respectivly returning a Widget(optional) |
+  /// |serverVersion| change the scores name(optional) |
   ServerVersionCheck({
     this.minVersion,
     this.versionTooLow,

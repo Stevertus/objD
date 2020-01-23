@@ -9,6 +9,8 @@ import 'package:objd/wrappers/summon.dart';
 
 export 'items.dart';
 
+/// The Item class represents an item in an inventory in Minecraft. It is used in the [Give]() or Nbt Commands.
+
 class Item {
   ItemType type;
   int count;
@@ -16,7 +18,40 @@ class Item {
   Slot slot;
   Map<String, dynamic> tag = {};
 
-  /// The Item class represents an item in an inventory in Minecraft. It is used in the [Give] or Nbt Commands.
+  /// The Item class represents an item in an inventory in Minecraft. It is used in the [Give]() or Nbt Commands.
+  ///
+  /// |constructor | |
+  /// |--|--|
+  /// |ItemType \| Block \| String|the type of item(required, see example)|
+  /// |count|Integer value for the amount of stacked items|
+  /// |slot|The current Slot of the item(does not work for give)|
+  /// |damage|the used durability of the item|
+  /// |hideFlags|int from 1 to 63 describing which information to hide|
+  /// |model|int describing which model varient should be used|
+  /// |name|a TextComponent showing a name|
+  /// |lore| a  List of TextComponents giving extra information|
+  /// |nbt|addional NBT as Dart Map|
+  ///
+  /// **Example:**
+  /// ```dart
+  /// Give(Entity.Selected(),
+  /// 	item: Item(
+  /// 		Items.iron_axe, // OR Blocks.stone OR "whatever id"
+  /// 		count: 5,
+  /// 		name: TextComponent("My Item",color:Color.Black),
+  /// 		lore: [
+  /// 			TextComponent("My Description",color:Color.Blue),
+  /// 		],
+  /// 		damage: 40,
+  /// 		model: 3390001,
+  /// 		nbt: {
+  /// 			"customNBT":1
+  /// 		}
+  /// 	)
+  /// )
+  ///
+  /// ⇒ give  @s minecraft:iron_axe{"customNBT":1,"Damage":40,"CustomModelData":3390001,"display":{"Name":"{\"text\":\"My Item\",\"color\":\"black\"}","Lore":["{\"text\":\"My Description\",\"color\":\"blue\"}"]}} 5
+  /// ```
   Item(
     dynamic type, {
     this.count,
@@ -63,7 +98,7 @@ class Item {
 
     nbt.addAll({
       'EntityTag': {
-        'id': 'minecraft:' + entity.type.type,
+        'id': entity.type.type,
         ...entity.nbt,
       }
     });
@@ -167,7 +202,7 @@ class Item {
         print(
             'Please note that you are using Item with a negative slot. This is reserved for a selecteditem and can\'t be accessed within the Inventory propery!');
       }
-      map['Slot'] = slot.id;
+      map['Slot'] = Byte(slot.id);
     }
     return map;
   }
@@ -211,6 +246,8 @@ class BookPage {
 /// ItemType is like EntityType or Block a utility class to provide a list of all available items.
 class ItemType {
   final String _type;
+
+  /// Please consider using Items.[id] instead
   const ItemType(this._type);
 
   ItemType clone() {

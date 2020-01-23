@@ -13,8 +13,13 @@ import 'package:objd/build/context.dart';
 import 'package:objd/core.dart';
 import 'package:objd/wrappers/comment.dart';
 
-void scan(Widget wid,
-    {BuildFile file, BuildPack pack, BuildProject project, Context context}) {
+void scan(
+  Widget wid, {
+  BuildFile file,
+  BuildPack pack,
+  BuildProject project,
+  Context context,
+}) {
   file.add(_findText(wid, context));
   if (findFile(wid, context: context, pack: pack, project: project)) return;
 
@@ -91,8 +96,12 @@ String _findText(Widget wid, Context context) {
   return '';
 }
 
-bool findFile(Widget wid,
-    {BuildPack pack, BuildProject project, Context context}) {
+bool findFile(
+  Widget wid, {
+  BuildPack pack,
+  BuildProject project,
+  Context context,
+}) {
   if (wid is RawFile) {
     pack.addRawFile(wid, project);
     return true;

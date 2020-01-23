@@ -12,6 +12,7 @@ dependencies:
   meta: ^1.1.7
   colorize: ^2.0.0
   archive: ^2.0.13
-  gson: ^0.1.3
+  gson: 
+    path: C:\dev\Dart\dart-gson
 dev_dependencies:
   pedantic: ^1.9.0

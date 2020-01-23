@@ -1,4 +1,39 @@
+## 0.3.2
+* added setToCondition to the Score to allow values based on a condition
+* added an Item.SpawnEgg constructor to allow generating spawn eggs more quicker
+* added Predicates subpackage, that allows to create all major types of predicates right in objD
+* added Predicate Widget to register a new Predicate with content
+* added VersionCheck and ServerVersionCheck
+* added Storage.toData to convert to a Data Widget
+* added global Scoreboard.prefix and Tag.prefix that get applied to all created Scoreboards and Tags
+* added the [] operator to scoreboard to quickly retrieve its scores
+* added Comment.seperate to generate a comment line
+* added Comment.fileHeader to generate a file header with author, description, context and calledin
+* added header field to File to be able to add a header to a file directly
+* added Spectate and Gamemode Widgets
+* added a PassTrait widget, that uses the Context to provide Data across the successive widget tree
+* added support for Dart Web, enabling online generators powered by objD
+* added Zip Exporter that can be enabled with the --zip flag or by builing the project in production mode
+* added --no-zip flag to allow usual file generation
+* added an web example
+* added getArchive and saveAsZip methods to manually create and modify the Zip encoder
+* added HideFlags method that calculates the hideFlags for you
+* added getAllFiles and getJsonMap functions to allow 3rd party developers and the web to use objDs output
+* updated the gson library to also support Dart Web
+* updated Condition.predicate and If to allow for Predicates(and automatically register them)
+* updated Block class to allow public insight into nbt and states
+* **changed If Then and Else to `then` and `orElse`, old syntax is deprecated**
+* extended the ForEach widget to support translation location for each step
+* **moved Block, ItemType, EntityType and ParticleTypes constants to seperate Blocks, Items, Entities and Particle classes**
+* moved the file generator to a new file seperating it from the system io 
+* fixed the conversionFlags parameter for TextComponents, accepts TextComponents now
+* fixed crash when Scoreboard was used without any load File
+* fixed Tag toggle wrong negation
+* fixed text options with the conversionFlags in TextComponent.translate
+* refactoring code
+
 ## 0.3.2-beta.4
+* added a PassTrait widget, that uses the Context to provide Data across the successive widget tree
 * added support for Dart Web, enabling online generators powered by objD
 * added Zip Exporter that can be enabled with the --zip flag or by builing the project in production mode
 * added --no-zip flag to allow usual file generation
@@ -27,6 +62,7 @@
 * added VersionCheck and ServerVersionCheck
 * added Storage.toData to convert to a Data Widget
 * added global Scoreboard.prefix and Tag.prefix that get applied to all created Scoreboards and Tags
+* added the [] operator to scoreboard to quickly retrieve its scores
 * added Comment.seperate to generate a comment line
 * added Comment.fileHeader to generate a file header with author, description, context and calledin
 * added header field to File to be able to add a header to a file directly

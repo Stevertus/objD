@@ -110,7 +110,6 @@ class Team extends RestActionAble {
       modifiers.keys.forEach((key) =>
           wids.add(Command('team modify ${name} ${key} ${modifiers[key]}')));
     }
-    print(modifiers);
     return For.of(wids);
   }
 }

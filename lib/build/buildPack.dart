@@ -19,7 +19,7 @@ class BuildPack {
   bool isGenLoad = true;
   bool isGenMain = true;
 
-  BuildPack(Pack pack) {
+  BuildPack(Pack pack, {this.context}) {
     var stopwatch = Stopwatch()..start();
     name = pack.name;
     scoreboards = [];
@@ -37,7 +37,7 @@ class BuildPack {
       pack.files.forEach((file) => files[file.path] = BuildFile(file));
     }
 
-    context = Context(packId: name, loadFile: load, mainFile: main);
+    context ??= Context(packId: name, loadFile: load, mainFile: main);
     print('Compiled Pack ${name} in ${stopwatch.elapsedMilliseconds}ms');
   }
 

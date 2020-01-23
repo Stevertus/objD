@@ -13,3 +13,4 @@ export 'builder.dart';
 export 'storage.dart';
 export 'server_version_check.dart';
 export 'version_check.dart';
+export 'pass_trait.dart';

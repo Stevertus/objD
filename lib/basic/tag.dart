@@ -10,6 +10,7 @@ import 'package:objd/wrappers/if.dart';
 class Tag extends RestActionAble {
   // static prefix
 
+  /// Often you find yourself giving all tags a prefix espacially for your project. This can get very repetitive and anoying, so objD has this prefix built in.
   static String prefix;
 
   bool value;

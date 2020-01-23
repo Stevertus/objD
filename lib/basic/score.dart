@@ -200,7 +200,10 @@ class Score extends RestActionAble {
   Score operator >>(dynamic other) {
     if (other is int) return set(other);
     if (other is Score) return setEqual(other);
-    throw ('Please use either a Score or an Int in the operator >>');
+    if (other is Data) return setToData(other);
+    if (other is Condition) return setToCondition(other);
+    if (other is Command) return setToResult(other);
+    throw ('Please use either a Score, Data, Condition, Command or an Int in the operator >>');
   }
 
   /// sets the score to a given value of int
@@ -350,7 +353,7 @@ class Score extends RestActionAble {
 
   /// sets the score to an nbt value
   Score setToData(Data data) {
-    if (data.subcommand != 'get') {
+    if (!data.isGetting) {
       throw ('Please set a score to Data.get and not Data.' + data.subcommand);
     }
     return addCommandRet(

@@ -1,4 +1,5 @@
 import 'package:objd/basic/pack.dart';
+import 'package:objd/build/build.dart';
 import 'package:objd/build/buildPack.dart';
 import 'package:objd/build/project.dart';
 import 'package:objd/build/findPack.dart';
@@ -11,12 +12,20 @@ class BuildProject {
   bool prod;
   bool isGen = true;
   bool isGenMeta = true;
+  Context context;
 
   BuildProject(Project prj, {this.prod = false}) {
     path = prj.target;
     name = prj.name;
     description = prj.description;
-    packs = [BuildPack(findPack(prj.generate) as Pack)];
+    context = Context(prod: false);
+    packs = [
+      BuildPack(
+        findPack(prj.generate, context: context) as Pack,
+        context: context,
+      )
+    ];
+    context.prod = prod;
     packs.first.generate(prj: this);
   }
 

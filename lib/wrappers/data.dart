@@ -25,6 +25,7 @@ class Data extends RestActionAble {
 
   String get type => _type;
   String get typeValue => _typeValue;
+  bool get isGetting => subcommand == 'get';
 
   /// The Data Widgets allows you to edit nbt data of Entities or Blocks.
   /// ```dart

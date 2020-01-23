@@ -23,6 +23,9 @@ class Schedule extends RestActionAble {
   Schedule.append(this._name, {@required this.ticks}) : assert(ticks != null) {
     mode = ScheduleMode.append;
   }
+  Schedule.clear(this._name) {
+    mode = ScheduleMode.clear;
+  }
 
   /// Appends a Scheduled File to the current Schedule.
   Schedule.appendFile(this._file, {@required this.ticks})
@@ -40,10 +43,15 @@ class Schedule extends RestActionAble {
 
     if (_file != null) {
       return Group(
-          prefix: 'schedule',
-          children: [_file],
-          suffix: ' ' + ticks.toString() + 't' + getMode());
+        prefix: 'schedule',
+        children: [_file],
+        suffix: ' ' + ticks.toString() + 't' + getMode(),
+      );
     }
+    if (mode == ScheduleMode.clear) {
+      return Command('schedule clear ' + context.packId + ':' + _name);
+    }
+
     return Command('schedule function ' +
         context.packId +
         ':' +
@@ -58,4 +66,5 @@ class Schedule extends RestActionAble {
 enum ScheduleMode {
   append,
   replace,
+  clear,
 }

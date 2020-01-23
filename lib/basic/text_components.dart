@@ -151,6 +151,8 @@ class TextComponent {
   // translates from a key in the translations
   TextComponent.translate(
     String key, {
+
+    /// a List containing a String, TextComponent or another List of TextComponents that replace placeholder values(e.g $s)
     List<dynamic> conversionFlags,
     this.color,
     this.bold,

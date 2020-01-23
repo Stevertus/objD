@@ -1,3 +1,5 @@
+import 'package:objd/basic/widget.dart';
+
 /// Maybe you already wondered what this context argument here is.
 ///
 /// The Context is a way to get certain important information from the parents.
@@ -24,6 +26,7 @@ class Context {
   String file;
   String loadFile;
   String mainFile;
+  final Map<Type, dynamic> _heredityTraits;
 
   /// Maybe you already wondered what this context argument here is
   /// The Context is a way to get certain important information from the parents.
@@ -45,7 +48,8 @@ class Context {
     this.file = '',
     this.loadFile = 'load',
     this.mainFile = 'main',
-  }) {
+    Map<Type, dynamic> traits,
+  }) : _heredityTraits = traits ?? {} {
     prefixes ??= [];
     suffixes ??= [];
   }
@@ -59,6 +63,7 @@ class Context {
           file: context.file,
           loadFile: context.loadFile,
           mainFile: context.mainFile,
+          traits: context._heredityTraits,
         );
 
   Context addPrefix(String prev) {
@@ -71,5 +76,13 @@ class Context {
     if (suf == null) return this;
     suffixes.add(suf);
     return this;
+  }
+
+  void passTrait<T>(T t) {
+    _heredityTraits[T] = t;
+  }
+
+  T traitOf<T>() {
+    return (_heredityTraits[T] as T);
   }
 }

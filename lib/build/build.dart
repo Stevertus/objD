@@ -15,9 +15,12 @@ export 'package:objd/build/context.dart';
 ///
 /// Takes in a [Project]
 /// ```dart
-///main() {
-/// // create Project takes in one project and compiles it
-/// createProject()
+///void main(args) {
+///   // create Project takes in one project and compiles it
+///   createProject(
+///     Project(...),
+///     args
+///   )
 ///}
 ///```
 
@@ -48,11 +51,13 @@ void createProject(Project prj, [List<String> args = const []]) {
   }
 }
 
+/// This function gets a json representation(Map) of the tree structure before generating the files. This is the same that is used as the `objd.json` output in debug mode.
 Map getJsonMap(Project prj, [List<String> args = const []]) {
   var opt = GenOptions(args);
   return BuildProject(prj, prod: opt.prod).toMap();
 }
 
+/// `getAllFiles` accepts, just like createProject, your Project and optionally arguments. It then generates the widget tree and builds the files, but instead of saving them to your machine, returns them as a Dart Map(filename-content).
 Map<String, String> getAllFiles(Project prj, [List<String> args = const []]) {
   var opt = GenOptions(args);
   return _getFiles(BuildProject(prj, prod: opt.prod), opt);
@@ -120,8 +125,16 @@ Map<String, String> _getFiles(BuildProject prj, GenOptions options) {
     }
   }
 
+  // add objd.json
+  if (options.debugFile) {
+    files['objd.json'] = json.encode(prj.toMap());
+  }
+
   return files;
 }
+
+/// When you want to save it as any other Archive or want to implement own generation, you can get the Archive instance with all files added by calling getArchive with the files Map.
+/// Read the documentation of the archive package to see what you are able to do: https://pub.dev/documentation/archive
 
 Archive getArchive(Map<String, String> files) {
   final archive = Archive();
@@ -133,6 +146,7 @@ Archive getArchive(Map<String, String> files) {
   return archive;
 }
 
+/// Saves or downloads(depending on platform) the project as a zip archive. Accepts a file Map(filename-content), most likely from getAllFiles, and a path to save to(must include filename + `.zip` extension)
 void saveAsZip(Map<String, String> files, String path) {
   var stopwatch = Stopwatch()..start();
   final bytes = ZipEncoder().encode(getArchive(files));
