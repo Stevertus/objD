@@ -90,8 +90,14 @@ class Raycast extends RestActionAble {
       conds.add(Condition(_maxScore.matchesRange(Range(to: max))));
     }
 
-    children.add(Execute(If: Condition.and(conds), children: [File.recursive()])
-        .positioned(Location.local(z: step)));
+    children.add(
+      Execute(
+        If: Condition.and(conds),
+        children: [File.recursive()],
+      ).positioned(
+        Location.local(z: step),
+      ),
+    );
 
     onhit.insert(
       0,

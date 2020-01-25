@@ -302,7 +302,7 @@ class Execute extends RestActionAble {
       var add = <List<String>>[];
       args.forEach((e) => add.add(List<String>.from(e)));
       add.forEach((e) => e.add(p));
-      args.addAll(add);
+      _args.addAll(add);
     });
     return this;
   }

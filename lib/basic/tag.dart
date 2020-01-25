@@ -70,10 +70,7 @@ class Tag extends RestActionAble {
   }
 
   String getEntity() {
-    var args = Map.from(entity.arguments);
-    if (args['tag'] == null) args['tag'] = [];
-    args['tag'].add(tag);
-    return entity.toString(args);
+    return entity.copyWith(tags: [tag]).toString();
   }
 
   Command getCommand() {

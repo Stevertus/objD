@@ -30,6 +30,8 @@
 * fixed crash when Scoreboard was used without any load File
 * fixed Tag toggle wrong negation
 * fixed text options with the conversionFlags in TextComponent.translate
+* fixed that Execute.If generated nothing
+* fixed missing tags when using Condition.tag
 * refactoring code
 
 ## 0.3.2-beta.4
@@ -41,6 +43,8 @@
 * added getArchive and saveAsZip methods to manually create and modify the Zip encoder
 * updated the gson library to also support Dart Web
 * fixed that a score ignored the second parameter on an operation
+* fixed that Execute.If generated nothing
+* fixed missing tags when using Condition.tag
 * fixed missing Particles export
 
 
