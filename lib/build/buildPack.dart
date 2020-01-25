@@ -24,6 +24,12 @@ class BuildPack {
     name = pack.name;
     scoreboards = [];
 
+    context ??= Context();
+    context = Context.clone(context)
+      ..packId = name
+      ..loadFile = load
+      ..mainFile = main;
+
     if (pack.main != null) {
       main = pack.main.path;
       files[main] = BuildFile(pack.main);
@@ -36,8 +42,6 @@ class BuildPack {
     if (pack.files != null) {
       pack.files.forEach((file) => files[file.path] = BuildFile(file));
     }
-
-    context ??= Context(packId: name, loadFile: load, mainFile: main);
     print('Compiled Pack ${name} in ${stopwatch.elapsedMilliseconds}ms');
   }
 
