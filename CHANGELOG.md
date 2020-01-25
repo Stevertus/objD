@@ -40,6 +40,7 @@
 * added an web example
 * added getArchive and saveAsZip methods to manually create and modify the Zip encoder
 * updated the gson library to also support Dart Web
+* fixed that a score ignored the second parameter on an operation
 * fixed missing Particles export
 
 
