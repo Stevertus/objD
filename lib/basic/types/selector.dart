@@ -352,10 +352,10 @@ class Selector {
     }
     if (!range) return Range.exact(int.parse(number1));
     if (number1 != '' && number2 != '') {
-      return Range(from: num.parse(number1), to: num.parse(number2));
+      return Range(num.parse(number1), num.parse(number2));
     }
-    if (number1 != '' && number2 == '') return Range(from: num.parse(number1));
-    if (number1 == '' && number2 != '') return Range(to: num.parse(number2));
+    if (number1 != '' && number2 == '') return Range.from(num.parse(number1));
+    if (number1 == '' && number2 != '') return Range.to(num.parse(number2));
     throw p.error('Can\'t use range without number');
   }
 

@@ -103,6 +103,7 @@ class Entities {
     zombie_villager,
     phantom,
     ravager,
+    hoglin,
     lightning_bolt,
     player,
     fishing_bobber
@@ -625,6 +626,11 @@ class Entities {
   ///
   /// _(minecraft:ravager)_
   static const EntityType ravager = EntityType('minecraft:ravager');
+
+  /// [Hoglin](https://minecraft.gamepedia.com/hoglin)
+  ///
+  /// _(minecraft:hoglin)_
+  static const EntityType hoglin = EntityType('minecraft:hoglin');
 
   /// [Lightning Bolt](https://minecraft.gamepedia.com/lightning_bolt)
   ///

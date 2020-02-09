@@ -87,7 +87,7 @@ class Raycast extends RestActionAble {
     var conds = <Condition>[Condition.not(_isHit)];
     if (_useStop) conds.add(Condition.not(_isStopped));
     if (_maxScore != null) {
-      conds.add(Condition(_maxScore.matchesRange(Range(to: max))));
+      conds.add(Condition(_maxScore.matchesRange(Range.to(max))));
     }
 
     children.add(

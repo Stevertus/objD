@@ -146,6 +146,7 @@ class Blocks {
     torch,
     wall_torch,
     fire,
+    soul_fire,
     spawner,
     oak_stairs,
     chest,
@@ -196,6 +197,10 @@ class Blocks {
     pumpkin,
     netherrack,
     soul_sand,
+    soul_soil,
+    basalt,
+    soul_fire_torch,
+    soul_fire_wall_torch,
     glowstone,
     nether_portal,
     carved_pumpkin,
@@ -674,15 +679,55 @@ class Blocks {
     stonecutter,
     bell,
     lantern,
+    soul_fire_lantern,
     campfire,
     sweet_berry_bush,
+    warped_stem,
+    stripped_warped_stem,
+    warped_nylium,
+    warped_fungi,
+    warped_wart_block,
+    warped_roots,
+    nether_sprouts,
+    crimson_stem,
+    stripped_crimson_stem,
+    crimson_nylium,
+    crimson_fungi,
+    shroomlight,
+    weeping_vines,
+    weeping_vines_plant,
+    crimson_roots,
+    crimson_planks,
+    warped_planks,
+    crimson_slab,
+    warped_slab,
+    crimson_pressure_plate,
+    warped_pressure_plate,
+    crimson_fence,
+    warped_fence,
+    crimson_trapdoor,
+    warped_trapdoor,
+    crimson_fence_gate,
+    warped_fence_gate,
+    crimson_stairs,
+    warped_stairs,
+    crimson_button,
+    warped_button,
+    crimson_door,
+    warped_door,
+    crimson_sign,
+    warped_sign,
+    crimson_wall_sign,
+    warped_wall_sign,
     structure_block,
     jigsaw,
     composter,
     bee_nest,
     beehive,
     honey_block,
-    honeycomb_block
+    honeycomb_block,
+    netherite_block,
+    ancient_debris
   ];
 
   /// [Air](https://minecraft.gamepedia.com/air)
@@ -1409,6 +1454,11 @@ class Blocks {
   /// _(minecraft:fire)_
   static const Block fire = Block('minecraft:fire');
 
+  /// [Soul Fire](https://minecraft.gamepedia.com/soul_fire)
+  ///
+  /// _(minecraft:soul_fire)_
+  static const Block soul_fire = Block('minecraft:soul_fire');
+
   /// [Spawner](https://minecraft.gamepedia.com/spawner)
   ///
   /// _(minecraft:spawner)_
@@ -1665,6 +1715,27 @@ class Blocks {
   ///
   /// _(minecraft:soul_sand)_
   static const Block soul_sand = Block('minecraft:soul_sand');
+
+  /// [Soul Soil](https://minecraft.gamepedia.com/soul_soil)
+  ///
+  /// _(minecraft:soul_soil)_
+  static const Block soul_soil = Block('minecraft:soul_soil');
+
+  /// [Basalt](https://minecraft.gamepedia.com/basalt)
+  ///
+  /// _(minecraft:basalt)_
+  static const Block basalt = Block('minecraft:basalt');
+
+  /// [Soul Fire Torch](https://minecraft.gamepedia.com/soul_fire_torch)
+  ///
+  /// _(minecraft:soul_fire_torch)_
+  static const Block soul_fire_torch = Block('minecraft:soul_fire_torch');
+
+  /// [Soul Fire Wall Torch](https://minecraft.gamepedia.com/soul_fire_wall_torch)
+  ///
+  /// _(minecraft:soul_fire_wall_torch)_
+  static const Block soul_fire_wall_torch =
+      Block('minecraft:soul_fire_wall_torch');
 
   /// [Glowstone](https://minecraft.gamepedia.com/glowstone)
   ///
@@ -4204,6 +4275,11 @@ class Blocks {
   /// _(minecraft:lantern)_
   static const Block lantern = Block('minecraft:lantern');
 
+  /// [Soul Fire Lantern](https://minecraft.gamepedia.com/soul_fire_lantern)
+  ///
+  /// _(minecraft:soul_fire_lantern)_
+  static const Block soul_fire_lantern = Block('minecraft:soul_fire_lantern');
+
   /// [Campfire](https://minecraft.gamepedia.com/campfire)
   ///
   /// _(minecraft:campfire)_
@@ -4213,6 +4289,196 @@ class Blocks {
   ///
   /// _(minecraft:sweet_berry_bush)_
   static const Block sweet_berry_bush = Block('minecraft:sweet_berry_bush');
+
+  /// [Warped Stem](https://minecraft.gamepedia.com/warped_stem)
+  ///
+  /// _(minecraft:warped_stem)_
+  static const Block warped_stem = Block('minecraft:warped_stem');
+
+  /// [Stripped Warped Stem](https://minecraft.gamepedia.com/stripped_warped_stem)
+  ///
+  /// _(minecraft:stripped_warped_stem)_
+  static const Block stripped_warped_stem =
+      Block('minecraft:stripped_warped_stem');
+
+  /// [Warped Nylium](https://minecraft.gamepedia.com/warped_nylium)
+  ///
+  /// _(minecraft:warped_nylium)_
+  static const Block warped_nylium = Block('minecraft:warped_nylium');
+
+  /// [Warped Fungi](https://minecraft.gamepedia.com/warped_fungi)
+  ///
+  /// _(minecraft:warped_fungi)_
+  static const Block warped_fungi = Block('minecraft:warped_fungi');
+
+  /// [Warped Wart Block](https://minecraft.gamepedia.com/warped_wart_block)
+  ///
+  /// _(minecraft:warped_wart_block)_
+  static const Block warped_wart_block = Block('minecraft:warped_wart_block');
+
+  /// [Warped Roots](https://minecraft.gamepedia.com/warped_roots)
+  ///
+  /// _(minecraft:warped_roots)_
+  static const Block warped_roots = Block('minecraft:warped_roots');
+
+  /// [Nether Sprouts](https://minecraft.gamepedia.com/nether_sprouts)
+  ///
+  /// _(minecraft:nether_sprouts)_
+  static const Block nether_sprouts = Block('minecraft:nether_sprouts');
+
+  /// [Crimson Stem](https://minecraft.gamepedia.com/crimson_stem)
+  ///
+  /// _(minecraft:crimson_stem)_
+  static const Block crimson_stem = Block('minecraft:crimson_stem');
+
+  /// [Stripped Crimson Stem](https://minecraft.gamepedia.com/stripped_crimson_stem)
+  ///
+  /// _(minecraft:stripped_crimson_stem)_
+  static const Block stripped_crimson_stem =
+      Block('minecraft:stripped_crimson_stem');
+
+  /// [Crimson Nylium](https://minecraft.gamepedia.com/crimson_nylium)
+  ///
+  /// _(minecraft:crimson_nylium)_
+  static const Block crimson_nylium = Block('minecraft:crimson_nylium');
+
+  /// [Crimson Fungi](https://minecraft.gamepedia.com/crimson_fungi)
+  ///
+  /// _(minecraft:crimson_fungi)_
+  static const Block crimson_fungi = Block('minecraft:crimson_fungi');
+
+  /// [Shroomlight](https://minecraft.gamepedia.com/shroomlight)
+  ///
+  /// _(minecraft:shroomlight)_
+  static const Block shroomlight = Block('minecraft:shroomlight');
+
+  /// [Weeping Vines](https://minecraft.gamepedia.com/weeping_vines)
+  ///
+  /// _(minecraft:weeping_vines)_
+  static const Block weeping_vines = Block('minecraft:weeping_vines');
+
+  /// [Weeping Vines Plant](https://minecraft.gamepedia.com/weeping_vines_plant)
+  ///
+  /// _(minecraft:weeping_vines_plant)_
+  static const Block weeping_vines_plant =
+      Block('minecraft:weeping_vines_plant');
+
+  /// [Crimson Roots](https://minecraft.gamepedia.com/crimson_roots)
+  ///
+  /// _(minecraft:crimson_roots)_
+  static const Block crimson_roots = Block('minecraft:crimson_roots');
+
+  /// [Crimson Planks](https://minecraft.gamepedia.com/crimson_planks)
+  ///
+  /// _(minecraft:crimson_planks)_
+  static const Block crimson_planks = Block('minecraft:crimson_planks');
+
+  /// [Warped Planks](https://minecraft.gamepedia.com/warped_planks)
+  ///
+  /// _(minecraft:warped_planks)_
+  static const Block warped_planks = Block('minecraft:warped_planks');
+
+  /// [Crimson Slab](https://minecraft.gamepedia.com/crimson_slab)
+  ///
+  /// _(minecraft:crimson_slab)_
+  static const Block crimson_slab = Block('minecraft:crimson_slab');
+
+  /// [Warped Slab](https://minecraft.gamepedia.com/warped_slab)
+  ///
+  /// _(minecraft:warped_slab)_
+  static const Block warped_slab = Block('minecraft:warped_slab');
+
+  /// [Crimson Pressure Plate](https://minecraft.gamepedia.com/crimson_pressure_plate)
+  ///
+  /// _(minecraft:crimson_pressure_plate)_
+  static const Block crimson_pressure_plate =
+      Block('minecraft:crimson_pressure_plate');
+
+  /// [Warped Pressure Plate](https://minecraft.gamepedia.com/warped_pressure_plate)
+  ///
+  /// _(minecraft:warped_pressure_plate)_
+  static const Block warped_pressure_plate =
+      Block('minecraft:warped_pressure_plate');
+
+  /// [Crimson Fence](https://minecraft.gamepedia.com/crimson_fence)
+  ///
+  /// _(minecraft:crimson_fence)_
+  static const Block crimson_fence = Block('minecraft:crimson_fence');
+
+  /// [Warped Fence](https://minecraft.gamepedia.com/warped_fence)
+  ///
+  /// _(minecraft:warped_fence)_
+  static const Block warped_fence = Block('minecraft:warped_fence');
+
+  /// [Crimson Trapdoor](https://minecraft.gamepedia.com/crimson_trapdoor)
+  ///
+  /// _(minecraft:crimson_trapdoor)_
+  static const Block crimson_trapdoor = Block('minecraft:crimson_trapdoor');
+
+  /// [Warped Trapdoor](https://minecraft.gamepedia.com/warped_trapdoor)
+  ///
+  /// _(minecraft:warped_trapdoor)_
+  static const Block warped_trapdoor = Block('minecraft:warped_trapdoor');
+
+  /// [Crimson Fence Gate](https://minecraft.gamepedia.com/crimson_fence_gate)
+  ///
+  /// _(minecraft:crimson_fence_gate)_
+  static const Block crimson_fence_gate = Block('minecraft:crimson_fence_gate');
+
+  /// [Warped Fence Gate](https://minecraft.gamepedia.com/warped_fence_gate)
+  ///
+  /// _(minecraft:warped_fence_gate)_
+  static const Block warped_fence_gate = Block('minecraft:warped_fence_gate');
+
+  /// [Crimson Stairs](https://minecraft.gamepedia.com/crimson_stairs)
+  ///
+  /// _(minecraft:crimson_stairs)_
+  static const Block crimson_stairs = Block('minecraft:crimson_stairs');
+
+  /// [Warped Stairs](https://minecraft.gamepedia.com/warped_stairs)
+  ///
+  /// _(minecraft:warped_stairs)_
+  static const Block warped_stairs = Block('minecraft:warped_stairs');
+
+  /// [Crimson Button](https://minecraft.gamepedia.com/crimson_button)
+  ///
+  /// _(minecraft:crimson_button)_
+  static const Block crimson_button = Block('minecraft:crimson_button');
+
+  /// [Warped Button](https://minecraft.gamepedia.com/warped_button)
+  ///
+  /// _(minecraft:warped_button)_
+  static const Block warped_button = Block('minecraft:warped_button');
+
+  /// [Crimson Door](https://minecraft.gamepedia.com/crimson_door)
+  ///
+  /// _(minecraft:crimson_door)_
+  static const Block crimson_door = Block('minecraft:crimson_door');
+
+  /// [Warped Door](https://minecraft.gamepedia.com/warped_door)
+  ///
+  /// _(minecraft:warped_door)_
+  static const Block warped_door = Block('minecraft:warped_door');
+
+  /// [Crimson Sign](https://minecraft.gamepedia.com/crimson_sign)
+  ///
+  /// _(minecraft:crimson_sign)_
+  static const Block crimson_sign = Block('minecraft:crimson_sign');
+
+  /// [Warped Sign](https://minecraft.gamepedia.com/warped_sign)
+  ///
+  /// _(minecraft:warped_sign)_
+  static const Block warped_sign = Block('minecraft:warped_sign');
+
+  /// [Crimson Wall Sign](https://minecraft.gamepedia.com/crimson_wall_sign)
+  ///
+  /// _(minecraft:crimson_wall_sign)_
+  static const Block crimson_wall_sign = Block('minecraft:crimson_wall_sign');
+
+  /// [Warped Wall Sign](https://minecraft.gamepedia.com/warped_wall_sign)
+  ///
+  /// _(minecraft:warped_wall_sign)_
+  static const Block warped_wall_sign = Block('minecraft:warped_wall_sign');
 
   /// [Structure Block](https://minecraft.gamepedia.com/structure_block)
   ///
@@ -4248,4 +4514,14 @@ class Blocks {
   ///
   /// _(minecraft:honeycomb_block)_
   static const Block honeycomb_block = Block('minecraft:honeycomb_block');
+
+  /// [Netherite Block](https://minecraft.gamepedia.com/netherite_block)
+  ///
+  /// _(minecraft:netherite_block)_
+  static const Block netherite_block = Block('minecraft:netherite_block');
+
+  /// [Ancient Debris](https://minecraft.gamepedia.com/ancient_debris)
+  ///
+  /// _(minecraft:ancient_debris)_
+  static const Block ancient_debris = Block('minecraft:ancient_debris');
 }

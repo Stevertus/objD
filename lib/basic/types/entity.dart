@@ -455,7 +455,7 @@ class Entity implements EntityClass {
       arguments['predicate'] = n + predicate;
     }
     if (tags != null) {
-      arguments['tag'] = [];
+      arguments['tag'] ??= [];
       tags.forEach((tag) {
         if (tag is Tag) {
           arguments['tag'].add(n + tag.tag);
@@ -1201,7 +1201,9 @@ class Range {
   num from, to, exact;
 
   /// The Range class defines a range of values(e.g 3..10 in vanilla)
-  Range({this.from, this.to});
+  Range(this.from, this.to);
+  Range.to(this.to);
+  Range.from(this.from);
 
   /// Use Range.exact to get the exact Range(e.g 4)
   Range.exact(this.exact);

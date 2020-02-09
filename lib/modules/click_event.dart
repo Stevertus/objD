@@ -35,7 +35,7 @@ class ClickEvent extends Module {
           Entity.All(
               scores: [
                 _score.matchesRange(
-                  Range(from: 1),
+                  Range.from(1),
                 ),
               ],
               nbt: selectedItem != null

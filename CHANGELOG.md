@@ -1,3 +1,9 @@
+## 0.3.3-beta.1
+* added an optional bool property to Slot.chest to support Enderchests
+* BREAKING removed named parameters for Range. If you want to set a upper or lower limit use Range.to or Range.from now.
+* fixed that Entity.not used to reset all previous applied tags
+* updated Blocks, Items and Particles for 1.16
+
 ## 0.3.2
 * added setToCondition to the Score to allow values based on a condition
 * added an Item.SpawnEgg constructor to allow generating spawn eggs more quicker

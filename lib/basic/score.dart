@@ -153,7 +153,7 @@ class Score extends RestActionAble {
   Score operator >(dynamic other) {
     if (other is int) {
       return matchesRange(
-        Range(from: other + 1),
+        Range.from(other + 1),
       );
     }
     if (other is Score) return isBigger(other);
@@ -163,7 +163,7 @@ class Score extends RestActionAble {
   Score operator <(dynamic other) {
     if (other is int) {
       return matchesRange(
-        Range(to: other + -1),
+        Range.to(other + -1),
       );
     }
     if (other is Score) return isSmaller(other);
@@ -173,7 +173,7 @@ class Score extends RestActionAble {
   Score operator >=(dynamic other) {
     if (other is int) {
       return matchesRange(
-        Range(from: other),
+        Range.from(other),
       );
     }
     if (other is Score) return isBiggerOrEqual(other);
@@ -183,7 +183,7 @@ class Score extends RestActionAble {
   Score operator <=(dynamic other) {
     if (other is int) {
       return matchesRange(
-        Range(to: other),
+        Range.to(other),
       );
     }
     if (other is Score) return isSmallerOrEqual(other);
@@ -407,7 +407,7 @@ class Score extends RestActionAble {
           if (min != null) {
             return If(
               scores[i].matchesRange(
-                Range(from: min),
+                Range.from(min),
               ),
               then: [ret],
             );
@@ -425,7 +425,7 @@ class Score extends RestActionAble {
           if (max != null) {
             return If(
               scores[i].matchesRange(
-                Range(to: max),
+                Range.to(max),
               ),
               then: [ret],
             );

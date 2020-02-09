@@ -31,7 +31,7 @@ class Repeat extends RestActionAble {
             child,
             score.add(1),
             If(
-              score.matchesRange(Range(to: to)),
+              score.matchesRange(Range.to(to)),
               then: [
                 Schedule(filePath, ticks: ticks),
               ],

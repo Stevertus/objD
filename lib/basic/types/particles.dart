@@ -28,6 +28,7 @@ class Particles {
     firework,
     fishing,
     flame,
+    soul_fire_flame,
     flash,
     happy_villager,
     composter,
@@ -62,7 +63,10 @@ class Particles {
     dripping_honey,
     falling_honey,
     landing_honey,
-    falling_nectar
+    falling_nectar,
+    ash,
+    crimson_spore,
+    warped_spore
   ];
 
   /// _(minecraft:ambient_entity_effect)_
@@ -159,6 +163,10 @@ class Particles {
 
   /// _(minecraft:flame)_
   static const ParticleType flame = ParticleType('minecraft:flame');
+
+  /// _(minecraft:soul_fire_flame)_
+  static const ParticleType soul_fire_flame =
+      ParticleType('minecraft:soul_fire_flame');
 
   /// _(minecraft:flash)_
   static const ParticleType flash = ParticleType('minecraft:flash');
@@ -277,6 +285,17 @@ class Particles {
   /// _(minecraft:falling_nectar)_
   static const ParticleType falling_nectar =
       ParticleType('minecraft:falling_nectar');
+
+  /// _(minecraft:ash)_
+  static const ParticleType ash = ParticleType('minecraft:ash');
+
+  /// _(minecraft:crimson_spore)_
+  static const ParticleType crimson_spore =
+      ParticleType('minecraft:crimson_spore');
+
+  /// _(minecraft:warped_spore)_
+  static const ParticleType warped_spore =
+      ParticleType('minecraft:warped_spore');
 }
 
 class ParticleType {
