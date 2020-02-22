@@ -67,6 +67,11 @@ class Command extends RestActionAble {
   }
 
   @override
+  String toString() {
+    return _command;
+  }
+
+  @override
   Map<String, String> toMap() {
     return {'command': _command};
   }

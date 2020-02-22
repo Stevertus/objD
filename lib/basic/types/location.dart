@@ -5,21 +5,21 @@ import 'package:objd/basic/command.dart';
 /// This translates into Minecraft Coordinates.
 class Location {
   double x, y, z = 0;
-  String _location;
+  String location;
 
   /// takes in a string and translates it into coordinates
-  Location(this._location) {
+  Location(this.location) {
     x = y = z = 0;
   }
 
   /// The Location class provides a wrapper for global(9 9 9) coordinates:
   Location.glob({this.x = 0, this.y = 0, this.z = 0}) {
-    _location = x.toString() + ' ' + y.toString() + ' ' + z.toString();
+    location = x.toString() + ' ' + y.toString() + ' ' + z.toString();
   }
 
   /// The Location class provides a wrapper for relative(~ ~ ~) coordinates:
   Location.rel({this.x = 0, this.y = 0, this.z = 0}) {
-    _location = '~' +
+    location = '~' +
         (x == 0 ? '' : x.toString()) +
         ' ~' +
         (y == 0 ? '' : y.toString()) +
@@ -29,7 +29,7 @@ class Location {
 
   /// The Location class provides a wrapper for local(^ ^ ^) coordinates:
   Location.local({this.x = 0, this.y = 0, this.z = 0}) {
-    _location = '^' +
+    location = '^' +
         (x == 0 ? '' : x.toString()) +
         ' ^' +
         (y == 0 ? '' : y.toString()) +
@@ -41,7 +41,7 @@ class Location {
   ///
   /// This is a shortcut for `~ ~ ~`
   Location.here() {
-    _location = '~ ~ ~';
+    location = '~ ~ ~';
     x = y = z = 0;
   }
 
@@ -50,7 +50,7 @@ class Location {
     x = loc.x;
     y = loc.y;
     z = loc.z;
-    _location = loc.toString();
+    location = loc.toString();
   }
 
   /// This stores a result or success of a [command] in the nbt [path] of a location.
@@ -76,7 +76,7 @@ class Location {
           'store ' +
               (useSuccess ? 'success' : 'result') +
               ' block ' +
-              _location +
+              location +
               ' ' +
               path +
               ' ${datatype} ${scale}'
@@ -87,6 +87,6 @@ class Location {
 
   @override
   String toString() {
-    return (_location + ' ').replaceAll('.0 ', ' ').trim();
+    return (location + ' ').replaceAll('.0 ', ' ').trim();
   }
 }

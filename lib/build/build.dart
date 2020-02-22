@@ -65,7 +65,6 @@ Map<String, String> getAllFiles(Project prj, [List<String> args = const []]) {
 
 Map<String, String> _getFiles(BuildProject prj, GenOptions options) {
   var files = <String, String>{};
-
   // create mcmeta
   if (!options.minified && prj.isGenMeta) {
     Map mcmeta = <String, dynamic>{
