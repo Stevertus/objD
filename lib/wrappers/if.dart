@@ -40,15 +40,11 @@ class If extends RestActionAble {
     dynamic condition, {
     @required this.then,
     this.orElse,
-    @deprecated List<Widget> Then,
-    @deprecated List<Widget> Else,
     this.targetFilePath = 'objd',
     this.targetFileName,
     this.encapsulate = true,
     this.assignTag,
   }) {
-    if (Then != null) then = Then;
-    if (Else != null) orElse = Else;
     assert(then != null);
     getCondition(condition);
   }
@@ -66,15 +62,11 @@ class If extends RestActionAble {
     dynamic condition, {
     @required this.then,
     this.orElse,
-    @deprecated List<Widget> Then,
-    @deprecated List<Widget> Else,
     this.targetFilePath = 'objd',
     this.targetFileName,
     this.encapsulate = true,
     this.assignTag,
   }) {
-    if (Then != null) then = Then;
-    if (Else != null) orElse = Else;
     assert(then != null);
     assert(then.isNotEmpty);
     invert = true;

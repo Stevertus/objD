@@ -1,5 +1,5 @@
 name: objd
-version: 0.3.3-beta.1
+version: 0.3.3-beta.2
 
 homepage: https://objd.stevertus.com
 repository: https://github.com/Stevertus/objD
@@ -7,11 +7,11 @@ issue_tracker: https://github.com/Stevertus/objD/issues
 documentation: https://objd.stevertus.com/guide
 description: objd is an Object Oriented framework for Building Minecraft Datapacks with ease
 environment:
-    sdk: ">=2.3.0 <3.0.0"
+  sdk: ">=2.3.0 <3.0.0"
 dependencies:
   meta: ^1.1.7
   colorize: ^2.0.0
   archive: ^2.0.13
-  gson:  ^0.1.3
+  gson: ^0.1.3
 dev_dependencies:
   pedantic: ^1.9.0

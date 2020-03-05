@@ -60,7 +60,7 @@ class Entities {
     parrot,
     pig,
     pufferfish,
-    zombie_pigman,
+    zombified_piglin,
     polar_bear,
     tnt,
     rabbit,
@@ -104,6 +104,7 @@ class Entities {
     phantom,
     ravager,
     hoglin,
+    piglin,
     lightning_bolt,
     player,
     fishing_bobber
@@ -404,10 +405,11 @@ class Entities {
   /// _(minecraft:pufferfish)_
   static const EntityType pufferfish = EntityType('minecraft:pufferfish');
 
-  /// [Zombie Pigman](https://minecraft.gamepedia.com/zombie_pigman)
+  /// [Zombified Piglin](https://minecraft.gamepedia.com/zombified_piglin)
   ///
-  /// _(minecraft:zombie_pigman)_
-  static const EntityType zombie_pigman = EntityType('minecraft:zombie_pigman');
+  /// _(minecraft:zombified_piglin)_
+  static const EntityType zombified_piglin =
+      EntityType('minecraft:zombified_piglin');
 
   /// [Polar Bear](https://minecraft.gamepedia.com/polar_bear)
   ///
@@ -631,6 +633,11 @@ class Entities {
   ///
   /// _(minecraft:hoglin)_
   static const EntityType hoglin = EntityType('minecraft:hoglin');
+
+  /// [Piglin](https://minecraft.gamepedia.com/piglin)
+  ///
+  /// _(minecraft:piglin)_
+  static const EntityType piglin = EntityType('minecraft:piglin');
 
   /// [Lightning Bolt](https://minecraft.gamepedia.com/lightning_bolt)
   ///

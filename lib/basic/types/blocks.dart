@@ -684,15 +684,19 @@ class Blocks {
     sweet_berry_bush,
     warped_stem,
     stripped_warped_stem,
+    warped_hyphae,
+    stripped_warped_hyphae,
     warped_nylium,
-    warped_fungi,
+    warped_fungus,
     warped_wart_block,
     warped_roots,
     nether_sprouts,
     crimson_stem,
     stripped_crimson_stem,
+    crimson_hyphae,
+    stripped_crimson_hyphae,
     crimson_nylium,
-    crimson_fungi,
+    crimson_fungus,
     shroomlight,
     weeping_vines,
     weeping_vines_plant,
@@ -722,12 +726,18 @@ class Blocks {
     structure_block,
     jigsaw,
     composter,
+    target,
     bee_nest,
     beehive,
     honey_block,
     honeycomb_block,
     netherite_block,
-    ancient_debris
+    ancient_debris,
+    crying_obsidian,
+    potted_crimson_fungus,
+    potted_warped_fungus,
+    potted_crimson_roots,
+    potted_warped_roots
   ];
 
   /// [Air](https://minecraft.gamepedia.com/air)
@@ -4301,15 +4311,26 @@ class Blocks {
   static const Block stripped_warped_stem =
       Block('minecraft:stripped_warped_stem');
 
+  /// [Warped Hyphae](https://minecraft.gamepedia.com/warped_hyphae)
+  ///
+  /// _(minecraft:warped_hyphae)_
+  static const Block warped_hyphae = Block('minecraft:warped_hyphae');
+
+  /// [Stripped Warped Hyphae](https://minecraft.gamepedia.com/stripped_warped_hyphae)
+  ///
+  /// _(minecraft:stripped_warped_hyphae)_
+  static const Block stripped_warped_hyphae =
+      Block('minecraft:stripped_warped_hyphae');
+
   /// [Warped Nylium](https://minecraft.gamepedia.com/warped_nylium)
   ///
   /// _(minecraft:warped_nylium)_
   static const Block warped_nylium = Block('minecraft:warped_nylium');
 
-  /// [Warped Fungi](https://minecraft.gamepedia.com/warped_fungi)
+  /// [Warped Fungus](https://minecraft.gamepedia.com/warped_fungus)
   ///
-  /// _(minecraft:warped_fungi)_
-  static const Block warped_fungi = Block('minecraft:warped_fungi');
+  /// _(minecraft:warped_fungus)_
+  static const Block warped_fungus = Block('minecraft:warped_fungus');
 
   /// [Warped Wart Block](https://minecraft.gamepedia.com/warped_wart_block)
   ///
@@ -4337,15 +4358,26 @@ class Blocks {
   static const Block stripped_crimson_stem =
       Block('minecraft:stripped_crimson_stem');
 
+  /// [Crimson Hyphae](https://minecraft.gamepedia.com/crimson_hyphae)
+  ///
+  /// _(minecraft:crimson_hyphae)_
+  static const Block crimson_hyphae = Block('minecraft:crimson_hyphae');
+
+  /// [Stripped Crimson Hyphae](https://minecraft.gamepedia.com/stripped_crimson_hyphae)
+  ///
+  /// _(minecraft:stripped_crimson_hyphae)_
+  static const Block stripped_crimson_hyphae =
+      Block('minecraft:stripped_crimson_hyphae');
+
   /// [Crimson Nylium](https://minecraft.gamepedia.com/crimson_nylium)
   ///
   /// _(minecraft:crimson_nylium)_
   static const Block crimson_nylium = Block('minecraft:crimson_nylium');
 
-  /// [Crimson Fungi](https://minecraft.gamepedia.com/crimson_fungi)
+  /// [Crimson Fungus](https://minecraft.gamepedia.com/crimson_fungus)
   ///
-  /// _(minecraft:crimson_fungi)_
-  static const Block crimson_fungi = Block('minecraft:crimson_fungi');
+  /// _(minecraft:crimson_fungus)_
+  static const Block crimson_fungus = Block('minecraft:crimson_fungus');
 
   /// [Shroomlight](https://minecraft.gamepedia.com/shroomlight)
   ///
@@ -4495,6 +4527,11 @@ class Blocks {
   /// _(minecraft:composter)_
   static const Block composter = Block('minecraft:composter');
 
+  /// [Target](https://minecraft.gamepedia.com/target)
+  ///
+  /// _(minecraft:target)_
+  static const Block target = Block('minecraft:target');
+
   /// [Bee Nest](https://minecraft.gamepedia.com/bee_nest)
   ///
   /// _(minecraft:bee_nest)_
@@ -4524,4 +4561,33 @@ class Blocks {
   ///
   /// _(minecraft:ancient_debris)_
   static const Block ancient_debris = Block('minecraft:ancient_debris');
+
+  /// [Crying Obsidian](https://minecraft.gamepedia.com/crying_obsidian)
+  ///
+  /// _(minecraft:crying_obsidian)_
+  static const Block crying_obsidian = Block('minecraft:crying_obsidian');
+
+  /// [Potted Crimson Fungus](https://minecraft.gamepedia.com/potted_crimson_fungus)
+  ///
+  /// _(minecraft:potted_crimson_fungus)_
+  static const Block potted_crimson_fungus =
+      Block('minecraft:potted_crimson_fungus');
+
+  /// [Potted Warped Fungus](https://minecraft.gamepedia.com/potted_warped_fungus)
+  ///
+  /// _(minecraft:potted_warped_fungus)_
+  static const Block potted_warped_fungus =
+      Block('minecraft:potted_warped_fungus');
+
+  /// [Potted Crimson Roots](https://minecraft.gamepedia.com/potted_crimson_roots)
+  ///
+  /// _(minecraft:potted_crimson_roots)_
+  static const Block potted_crimson_roots =
+      Block('minecraft:potted_crimson_roots');
+
+  /// [Potted Warped Roots](https://minecraft.gamepedia.com/potted_warped_roots)
+  ///
+  /// _(minecraft:potted_warped_roots)_
+  static const Block potted_warped_roots =
+      Block('minecraft:potted_warped_roots');
 }
