@@ -1,3 +1,7 @@
+## 0.3.3-beta.3
+
+- fixed errors when trying to use gson component in a give command
+
 ## 0.3.3-beta.2
 
 - updated Blocks, Items and Particles for 20w10a

@@ -182,7 +182,7 @@ class Item {
   String getGiveNotation({bool withDamage = true}) {
     var result = type.toString();
     if (tag != null && tag.isNotEmpty) {
-      result += json.encode(tag);
+      result += gson.encode(tag);
     }
     result += ' ';
     if (count != null) result += count.toString();
