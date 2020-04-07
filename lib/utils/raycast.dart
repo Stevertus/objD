@@ -17,7 +17,7 @@ class Raycast extends RestActionAble {
   final _isHit = Tag('objd_ray_hit', entity: Entity.Selected());
   final _isStopped = Tag('objd_ray_stop', entity: Entity.Selected());
 
-  /// The Raycast Widget is one of the most powerful widgets by giving you many options to configure raytracing in Minecraft.
+  /// The Raycast Widget is one of the most powerful widgets by giving you many options to configure raycasting in Minecraft.
   /// Internally it uses local coordinates, a distance counter and recursion.
   ///
   /// |constructor|  |

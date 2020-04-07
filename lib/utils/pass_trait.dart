@@ -8,7 +8,7 @@ class PassTrait<T> extends Widget {
   final Widget child;
   final T trait;
 
-  /// The PassTrait Functionality allows you to pass data down your widget tree without struggles. Imagine having one unique value in your pack that special widgets below it regarless of their position or parent should know of.
+  /// The PassTrait Functionality allows you to pass data down your widget tree without struggles. Imagine having one unique value in your pack that special widgets below it regardless of their position or parent should know of.
   /// The PassTrait Widget injects your value in the Context, allowing you to access it everywhere.
   ///
   /// ```dart

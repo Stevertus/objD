@@ -120,7 +120,7 @@ class Condition {
 
     if (cond is Score) {
       if (cond.getString().isEmpty) {
-        throw ('Please insert a score condition method into a condidition!');
+        throw ('Please insert a score condition method into a condition!');
       }
       _generated = _ConditionUtil('score ' + cond.getString(), invert: invert);
       return;

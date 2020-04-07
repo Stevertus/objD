@@ -1,7 +1,7 @@
 import 'package:objd/core.dart';
 
 class MainFile extends Widget {
-  /// The main file is put in a seperate widget to split the code in several files
+  /// The main file is put in a separate widget to split the code in several files
   MainFile();
 
   @override

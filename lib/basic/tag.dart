@@ -10,7 +10,7 @@ import 'package:objd/wrappers/if.dart';
 class Tag extends RestActionAble {
   // static prefix
 
-  /// Often you find yourself giving all tags a prefix espacially for your project. This can get very repetitive and anoying, so objD has this prefix built in.
+  /// Often you find yourself giving all tags a prefix especially for your project. This can get very repetitive and annoying, so objD has this prefix built in.
   static String prefix;
 
   bool value;
@@ -63,7 +63,7 @@ class Tag extends RestActionAble {
     return Condition.not(Condition.tag(this));
   }
 
-  /// Assignes a new boolean value to the Tag(removes or adds the tag).
+  /// Assignees a new boolean value to the Tag(removes or adds the tag).
   Tag operator >>(bool other) {
     if (other != null && other) return Tag(tag, entity: entity, value: true);
     return Tag(tag, entity: entity, value: false);

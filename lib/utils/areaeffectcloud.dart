@@ -6,7 +6,7 @@ import 'package:objd/basic/widgets.dart';
 import 'package:objd/build/context.dart';
 import 'package:objd/wrappers/summon.dart';
 
-/// An areaeffectcloud can be created with the Summon Widget, but there is also a specific Widget with special properties for an AreaEffectCloud.
+/// An AreaEffectCloud can be created with the Summon Widget, but there is also a specific Widget with special properties for an AreaEffectCloud.
 class AreaEffectCloud extends RestActionAble {
   TextComponent name;
   Map<String, dynamic> nbt;
@@ -16,7 +16,7 @@ class AreaEffectCloud extends RestActionAble {
 
   List<String> tags;
 
-  /// An areaeffectcloud can be created with the Summon Widget, but there is also a specific Widget with special properties for an AreaEffectCloud.
+  /// An AreaEffectCloud can be created with the Summon Widget, but there is also a specific Widget with special properties for an AreaEffectCloud.
   AreaEffectCloud(
     this.location, {
     this.name,

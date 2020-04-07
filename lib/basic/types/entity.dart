@@ -684,7 +684,7 @@ class Entity implements EntityClass {
       ));
 
   ///
-  ///Crashes a player's game by sending him to many particles and forces the client to show them (Who ever wants to do that, propably for people who don't like your map or datapack 😉)
+  ///Crashes a player's game by sending him to many particles and forces the client to show them (Who ever wants to do that, probably for people who don't like your map or datapack 😉)
   ///```dart
   ///player.crash().queue()
   ///```

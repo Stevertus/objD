@@ -74,7 +74,7 @@ enum EffectType {
   speed,
   slowness,
   haste,
-  mining_fatique,
+  mining_fatigue,
   strength,
   instant_health,
   instant_damage,

@@ -16,7 +16,7 @@ class VersionCheck extends Widget {
   /// |int| the datapacks current version |
   /// |onDowndate| a List of Widgets that are executed if it detects that you have downgraded |
   /// |onUpdate| a List of Widgets that are executed if it detects that you have upgraded |
-  /// |then| a Function that takes in the used Score and reacts respectivly returning a Widget(optional) |
+  /// |then| a Function that takes in the used Score and reacts respectively returning a Widget(optional) |
   /// |score| change the scores name(optional) |
   ///
   /// **Example:**

@@ -22,7 +22,7 @@ class ArmorStand extends RestActionAble {
   Rotation rotation;
   List<Summon> passengers;
 
-  /// An armorstand can be created with the Summon Widget, but there is also a specific Widget with special properties for an ArmorStand.
+  /// An ArmorStand can be created with the Summon Widget, but there is also a specific Widget with special properties for an ArmorStand.
   ArmorStand(
     this.location, {
     this.name,
@@ -73,7 +73,7 @@ class ArmorStand extends RestActionAble {
     if (boots != null) nbt['ArmorItems'][0] = boots.getMap();
   }
 
-  /// Often times you need a static armorstand that just acts as a marker for a location, there is ArmorStand.staticMarker that sets properties automatically.
+  /// Often times you need a static ArmorStand that just acts as a marker for a location, there is ArmorStand.staticMarker that sets properties automatically.
   ArmorStand.staticMarker(
     this.location, {
     this.name,

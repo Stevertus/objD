@@ -6,7 +6,7 @@ class Advancement extends RestActionAble {
   bool revoke;
   String mode;
   String advancement;
-  String criterium;
+  String criteria;
 
   /// This gives the advancement to the player:
   ///
@@ -14,20 +14,20 @@ class Advancement extends RestActionAble {
   /// |--|--|
   /// |Entity| the target player |
   /// |String| your advancement |
-  /// |mode| the advancement mode(default = only, modes are also seperate constructors) |
-  /// |criterium| optional String criterium for an advancement|
+  /// |mode| the advancement mode(default = only, modes are also separate constructors) |
+  /// |criteria| optional String criteria for an advancement|
   Advancement.grant(this.entity, this.advancement,
-      {this.mode = 'only', this.criterium}) {
+      {this.mode = 'only', this.criteria}) {
     revoke = false;
   }
 
   /// You can also revoke an Advancement
   Advancement.revoke(this.entity, this.advancement,
-      {this.mode = 'only', this.criterium}) {
+      {this.mode = 'only', this.criteria}) {
     revoke = true;
   }
 
-  /// Every mode also has a seperated named constructor:
+  /// Every mode also has a separated named constructor:
   ///
   ///|Advancement.everything| Unlocks everything |
   ///|--|--|
@@ -37,16 +37,16 @@ class Advancement extends RestActionAble {
     mode = 'everything';
   }
 
-  /// Every mode also has a seperated named constructor:
+  /// Every mode also has a separated named constructor:
   ///
-  ///|Advancement.only| Only unlocks on Advancment |
+  ///|Advancement.only| Only unlocks on Advancement |
   ///|--|--|
   ///|Entity| the target player |
   ///|String | your advancement|
   ///|revoke| set true if you want to revoke |
-  ///|criterium|optional String for an advancement|
+  ///|criteria|optional String for an advancement|
   Advancement.only(this.entity, this.advancement,
-      {this.revoke = false, this.criterium}) {
+      {this.revoke = false, this.criteria}) {
     mode = 'only';
   }
   Advancement.from(this.entity, this.advancement, {this.revoke = false}) {
@@ -64,7 +64,7 @@ class Advancement extends RestActionAble {
     var res = 'advancement ';
     res += revoke ? 'revoke' : 'grant';
     res += ' ${entity.toString()} $mode $advancement';
-    if (criterium != null) res += ' $criterium';
+    if (criteria != null) res += ' $criteria';
     return Command(res);
   }
 }
