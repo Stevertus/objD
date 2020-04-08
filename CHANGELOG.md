@@ -1,3 +1,8 @@
+## 0.3.3-beta.4
+
+- updated Blocks, Items and Particles for 20w15a
+- divided Blocks.all and Items.all in 1.15 items and newer [snapshot] items
+
 ## 0.3.3-beta.3
 
 - fixed errors when trying to use gson component in a give command

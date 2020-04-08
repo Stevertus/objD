@@ -12,58 +12,67 @@ class Entities {
     boat,
     cat,
     cave_spider,
+    chest_minecart,
     chicken,
     cod,
+    command_block_minecart,
     cow,
     creeper,
-    donkey,
     dolphin,
+    donkey,
     dragon_fireball,
     drowned,
+    egg,
     elder_guardian,
     end_crystal,
     ender_dragon,
+    ender_pearl,
     enderman,
     endermite,
-    evoker_fangs,
     evoker,
+    evoker_fangs,
+    experience_bottle,
     experience_orb,
     eye_of_ender,
     falling_block,
+    fireball,
     firework_rocket,
+    fishing_bobber,
     fox,
+    furnace_minecart,
     ghast,
     giant,
     guardian,
+    hoglin,
+    hopper_minecart,
     horse,
     husk,
     illusioner,
+    iron_golem,
     item,
     item_frame,
-    fireball,
     leash_knot,
+    lightning_bolt,
     llama,
     llama_spit,
     magma_cube,
     minecart,
-    chest_minecart,
-    command_block_minecart,
-    furnace_minecart,
-    hopper_minecart,
-    spawner_minecart,
-    tnt_minecart,
-    mule,
     mooshroom,
+    mule,
     ocelot,
     painting,
     panda,
     parrot,
+    phantom,
     pig,
-    pufferfish,
-    zombified_piglin,
+    piglin,
+    pillager,
+    player,
     polar_bear,
-    tnt,
+    potion,
+    pufferfish,
     rabbit,
+    ravager,
     salmon,
     sheep,
     shulker,
@@ -75,39 +84,32 @@ class Entities {
     small_fireball,
     snow_golem,
     snowball,
+    spawner_minecart,
     spectral_arrow,
     spider,
     squid,
     stray,
+    strider,
+    tnt,
+    tnt_minecart,
     trader_llama,
+    trident,
     tropical_fish,
     turtle,
-    egg,
-    ender_pearl,
-    experience_bottle,
-    potion,
-    trident,
     vex,
     villager,
-    iron_golem,
     vindicator,
-    pillager,
     wandering_trader,
     witch,
     wither,
     wither_skeleton,
     wither_skull,
     wolf,
+    zoglin,
     zombie,
     zombie_horse,
     zombie_villager,
-    phantom,
-    ravager,
-    hoglin,
-    piglin,
-    lightning_bolt,
-    player,
-    fishing_bobber
+    zombified_piglin
   ];
 
   /// [Area Effect Cloud](https://minecraft.gamepedia.com/area_effect_cloud)
@@ -156,6 +158,12 @@ class Entities {
   /// _(minecraft:cave_spider)_
   static const EntityType cave_spider = EntityType('minecraft:cave_spider');
 
+  /// [Chest Minecart](https://minecraft.gamepedia.com/chest_minecart)
+  ///
+  /// _(minecraft:chest_minecart)_
+  static const EntityType chest_minecart =
+      EntityType('minecraft:chest_minecart');
+
   /// [Chicken](https://minecraft.gamepedia.com/chicken)
   ///
   /// _(minecraft:chicken)_
@@ -165,6 +173,12 @@ class Entities {
   ///
   /// _(minecraft:cod)_
   static const EntityType cod = EntityType('minecraft:cod');
+
+  /// [Command Block Minecart](https://minecraft.gamepedia.com/command_block_minecart)
+  ///
+  /// _(minecraft:command_block_minecart)_
+  static const EntityType command_block_minecart =
+      EntityType('minecraft:command_block_minecart');
 
   /// [Cow](https://minecraft.gamepedia.com/cow)
   ///
@@ -176,15 +190,15 @@ class Entities {
   /// _(minecraft:creeper)_
   static const EntityType creeper = EntityType('minecraft:creeper');
 
-  /// [Donkey](https://minecraft.gamepedia.com/donkey)
-  ///
-  /// _(minecraft:donkey)_
-  static const EntityType donkey = EntityType('minecraft:donkey');
-
   /// [Dolphin](https://minecraft.gamepedia.com/dolphin)
   ///
   /// _(minecraft:dolphin)_
   static const EntityType dolphin = EntityType('minecraft:dolphin');
+
+  /// [Donkey](https://minecraft.gamepedia.com/donkey)
+  ///
+  /// _(minecraft:donkey)_
+  static const EntityType donkey = EntityType('minecraft:donkey');
 
   /// [Dragon Fireball](https://minecraft.gamepedia.com/dragon_fireball)
   ///
@@ -196,6 +210,11 @@ class Entities {
   ///
   /// _(minecraft:drowned)_
   static const EntityType drowned = EntityType('minecraft:drowned');
+
+  /// [Egg](https://minecraft.gamepedia.com/egg)
+  ///
+  /// _(minecraft:egg)_
+  static const EntityType egg = EntityType('minecraft:egg');
 
   /// [Elder Guardian](https://minecraft.gamepedia.com/elder_guardian)
   ///
@@ -213,6 +232,11 @@ class Entities {
   /// _(minecraft:ender_dragon)_
   static const EntityType ender_dragon = EntityType('minecraft:ender_dragon');
 
+  /// [Ender Pearl](https://minecraft.gamepedia.com/ender_pearl)
+  ///
+  /// _(minecraft:ender_pearl)_
+  static const EntityType ender_pearl = EntityType('minecraft:ender_pearl');
+
   /// [Enderman](https://minecraft.gamepedia.com/enderman)
   ///
   /// _(minecraft:enderman)_
@@ -223,15 +247,21 @@ class Entities {
   /// _(minecraft:endermite)_
   static const EntityType endermite = EntityType('minecraft:endermite');
 
+  /// [Evoker](https://minecraft.gamepedia.com/evoker)
+  ///
+  /// _(minecraft:evoker)_
+  static const EntityType evoker = EntityType('minecraft:evoker');
+
   /// [Evoker Fangs](https://minecraft.gamepedia.com/evoker_fangs)
   ///
   /// _(minecraft:evoker_fangs)_
   static const EntityType evoker_fangs = EntityType('minecraft:evoker_fangs');
 
-  /// [Evoker](https://minecraft.gamepedia.com/evoker)
+  /// [Experience Bottle](https://minecraft.gamepedia.com/experience_bottle)
   ///
-  /// _(minecraft:evoker)_
-  static const EntityType evoker = EntityType('minecraft:evoker');
+  /// _(minecraft:experience_bottle)_
+  static const EntityType experience_bottle =
+      EntityType('minecraft:experience_bottle');
 
   /// [Experience Orb](https://minecraft.gamepedia.com/experience_orb)
   ///
@@ -249,16 +279,33 @@ class Entities {
   /// _(minecraft:falling_block)_
   static const EntityType falling_block = EntityType('minecraft:falling_block');
 
+  /// [Fireball](https://minecraft.gamepedia.com/fireball)
+  ///
+  /// _(minecraft:fireball)_
+  static const EntityType fireball = EntityType('minecraft:fireball');
+
   /// [Firework Rocket](https://minecraft.gamepedia.com/firework_rocket)
   ///
   /// _(minecraft:firework_rocket)_
   static const EntityType firework_rocket =
       EntityType('minecraft:firework_rocket');
 
+  /// [Fishing Bobber](https://minecraft.gamepedia.com/fishing_bobber)
+  ///
+  /// _(minecraft:fishing_bobber)_
+  static const EntityType fishing_bobber =
+      EntityType('minecraft:fishing_bobber');
+
   /// [Fox](https://minecraft.gamepedia.com/fox)
   ///
   /// _(minecraft:fox)_
   static const EntityType fox = EntityType('minecraft:fox');
+
+  /// [Furnace Minecart](https://minecraft.gamepedia.com/furnace_minecart)
+  ///
+  /// _(minecraft:furnace_minecart)_
+  static const EntityType furnace_minecart =
+      EntityType('minecraft:furnace_minecart');
 
   /// [Ghast](https://minecraft.gamepedia.com/ghast)
   ///
@@ -275,6 +322,17 @@ class Entities {
   /// _(minecraft:guardian)_
   static const EntityType guardian = EntityType('minecraft:guardian');
 
+  /// [Hoglin](https://minecraft.gamepedia.com/hoglin)
+  ///
+  /// _(minecraft:hoglin)_
+  static const EntityType hoglin = EntityType('minecraft:hoglin');
+
+  /// [Hopper Minecart](https://minecraft.gamepedia.com/hopper_minecart)
+  ///
+  /// _(minecraft:hopper_minecart)_
+  static const EntityType hopper_minecart =
+      EntityType('minecraft:hopper_minecart');
+
   /// [Horse](https://minecraft.gamepedia.com/horse)
   ///
   /// _(minecraft:horse)_
@@ -290,6 +348,11 @@ class Entities {
   /// _(minecraft:illusioner)_
   static const EntityType illusioner = EntityType('minecraft:illusioner');
 
+  /// [Iron Golem](https://minecraft.gamepedia.com/iron_golem)
+  ///
+  /// _(minecraft:iron_golem)_
+  static const EntityType iron_golem = EntityType('minecraft:iron_golem');
+
   /// [Item](https://minecraft.gamepedia.com/item)
   ///
   /// _(minecraft:item)_
@@ -300,15 +363,16 @@ class Entities {
   /// _(minecraft:item_frame)_
   static const EntityType item_frame = EntityType('minecraft:item_frame');
 
-  /// [Fireball](https://minecraft.gamepedia.com/fireball)
-  ///
-  /// _(minecraft:fireball)_
-  static const EntityType fireball = EntityType('minecraft:fireball');
-
   /// [Leash Knot](https://minecraft.gamepedia.com/leash_knot)
   ///
   /// _(minecraft:leash_knot)_
   static const EntityType leash_knot = EntityType('minecraft:leash_knot');
+
+  /// [Lightning Bolt](https://minecraft.gamepedia.com/lightning_bolt)
+  ///
+  /// _(minecraft:lightning_bolt)_
+  static const EntityType lightning_bolt =
+      EntityType('minecraft:lightning_bolt');
 
   /// [Llama](https://minecraft.gamepedia.com/llama)
   ///
@@ -330,50 +394,15 @@ class Entities {
   /// _(minecraft:minecart)_
   static const EntityType minecart = EntityType('minecraft:minecart');
 
-  /// [Chest Minecart](https://minecraft.gamepedia.com/chest_minecart)
+  /// [Mooshroom](https://minecraft.gamepedia.com/mooshroom)
   ///
-  /// _(minecraft:chest_minecart)_
-  static const EntityType chest_minecart =
-      EntityType('minecraft:chest_minecart');
-
-  /// [Command Block Minecart](https://minecraft.gamepedia.com/command_block_minecart)
-  ///
-  /// _(minecraft:command_block_minecart)_
-  static const EntityType command_block_minecart =
-      EntityType('minecraft:command_block_minecart');
-
-  /// [Furnace Minecart](https://minecraft.gamepedia.com/furnace_minecart)
-  ///
-  /// _(minecraft:furnace_minecart)_
-  static const EntityType furnace_minecart =
-      EntityType('minecraft:furnace_minecart');
-
-  /// [Hopper Minecart](https://minecraft.gamepedia.com/hopper_minecart)
-  ///
-  /// _(minecraft:hopper_minecart)_
-  static const EntityType hopper_minecart =
-      EntityType('minecraft:hopper_minecart');
-
-  /// [Spawner Minecart](https://minecraft.gamepedia.com/spawner_minecart)
-  ///
-  /// _(minecraft:spawner_minecart)_
-  static const EntityType spawner_minecart =
-      EntityType('minecraft:spawner_minecart');
-
-  /// [Tnt Minecart](https://minecraft.gamepedia.com/tnt_minecart)
-  ///
-  /// _(minecraft:tnt_minecart)_
-  static const EntityType tnt_minecart = EntityType('minecraft:tnt_minecart');
+  /// _(minecraft:mooshroom)_
+  static const EntityType mooshroom = EntityType('minecraft:mooshroom');
 
   /// [Mule](https://minecraft.gamepedia.com/mule)
   ///
   /// _(minecraft:mule)_
   static const EntityType mule = EntityType('minecraft:mule');
-
-  /// [Mooshroom](https://minecraft.gamepedia.com/mooshroom)
-  ///
-  /// _(minecraft:mooshroom)_
-  static const EntityType mooshroom = EntityType('minecraft:mooshroom');
 
   /// [Ocelot](https://minecraft.gamepedia.com/ocelot)
   ///
@@ -395,36 +424,55 @@ class Entities {
   /// _(minecraft:parrot)_
   static const EntityType parrot = EntityType('minecraft:parrot');
 
+  /// [Phantom](https://minecraft.gamepedia.com/phantom)
+  ///
+  /// _(minecraft:phantom)_
+  static const EntityType phantom = EntityType('minecraft:phantom');
+
   /// [Pig](https://minecraft.gamepedia.com/pig)
   ///
   /// _(minecraft:pig)_
   static const EntityType pig = EntityType('minecraft:pig');
 
-  /// [Pufferfish](https://minecraft.gamepedia.com/pufferfish)
+  /// [Piglin](https://minecraft.gamepedia.com/piglin)
   ///
-  /// _(minecraft:pufferfish)_
-  static const EntityType pufferfish = EntityType('minecraft:pufferfish');
+  /// _(minecraft:piglin)_
+  static const EntityType piglin = EntityType('minecraft:piglin');
 
-  /// [Zombified Piglin](https://minecraft.gamepedia.com/zombified_piglin)
+  /// [Pillager](https://minecraft.gamepedia.com/pillager)
   ///
-  /// _(minecraft:zombified_piglin)_
-  static const EntityType zombified_piglin =
-      EntityType('minecraft:zombified_piglin');
+  /// _(minecraft:pillager)_
+  static const EntityType pillager = EntityType('minecraft:pillager');
+
+  /// [Player](https://minecraft.gamepedia.com/player)
+  ///
+  /// _(minecraft:player)_
+  static const EntityType player = EntityType('minecraft:player');
 
   /// [Polar Bear](https://minecraft.gamepedia.com/polar_bear)
   ///
   /// _(minecraft:polar_bear)_
   static const EntityType polar_bear = EntityType('minecraft:polar_bear');
 
-  /// [Tnt](https://minecraft.gamepedia.com/tnt)
+  /// [Potion](https://minecraft.gamepedia.com/potion)
   ///
-  /// _(minecraft:tnt)_
-  static const EntityType tnt = EntityType('minecraft:tnt');
+  /// _(minecraft:potion)_
+  static const EntityType potion = EntityType('minecraft:potion');
+
+  /// [Pufferfish](https://minecraft.gamepedia.com/pufferfish)
+  ///
+  /// _(minecraft:pufferfish)_
+  static const EntityType pufferfish = EntityType('minecraft:pufferfish');
 
   /// [Rabbit](https://minecraft.gamepedia.com/rabbit)
   ///
   /// _(minecraft:rabbit)_
   static const EntityType rabbit = EntityType('minecraft:rabbit');
+
+  /// [Ravager](https://minecraft.gamepedia.com/ravager)
+  ///
+  /// _(minecraft:ravager)_
+  static const EntityType ravager = EntityType('minecraft:ravager');
 
   /// [Salmon](https://minecraft.gamepedia.com/salmon)
   ///
@@ -484,6 +532,12 @@ class Entities {
   /// _(minecraft:snowball)_
   static const EntityType snowball = EntityType('minecraft:snowball');
 
+  /// [Spawner Minecart](https://minecraft.gamepedia.com/spawner_minecart)
+  ///
+  /// _(minecraft:spawner_minecart)_
+  static const EntityType spawner_minecart =
+      EntityType('minecraft:spawner_minecart');
+
   /// [Spectral Arrow](https://minecraft.gamepedia.com/spectral_arrow)
   ///
   /// _(minecraft:spectral_arrow)_
@@ -505,10 +559,30 @@ class Entities {
   /// _(minecraft:stray)_
   static const EntityType stray = EntityType('minecraft:stray');
 
+  /// [Strider](https://minecraft.gamepedia.com/strider)
+  ///
+  /// _(minecraft:strider)_
+  static const EntityType strider = EntityType('minecraft:strider');
+
+  /// [Tnt](https://minecraft.gamepedia.com/tnt)
+  ///
+  /// _(minecraft:tnt)_
+  static const EntityType tnt = EntityType('minecraft:tnt');
+
+  /// [Tnt Minecart](https://minecraft.gamepedia.com/tnt_minecart)
+  ///
+  /// _(minecraft:tnt_minecart)_
+  static const EntityType tnt_minecart = EntityType('minecraft:tnt_minecart');
+
   /// [Trader Llama](https://minecraft.gamepedia.com/trader_llama)
   ///
   /// _(minecraft:trader_llama)_
   static const EntityType trader_llama = EntityType('minecraft:trader_llama');
+
+  /// [Trident](https://minecraft.gamepedia.com/trident)
+  ///
+  /// _(minecraft:trident)_
+  static const EntityType trident = EntityType('minecraft:trident');
 
   /// [Tropical Fish](https://minecraft.gamepedia.com/tropical_fish)
   ///
@@ -520,32 +594,6 @@ class Entities {
   /// _(minecraft:turtle)_
   static const EntityType turtle = EntityType('minecraft:turtle');
 
-  /// [Egg](https://minecraft.gamepedia.com/egg)
-  ///
-  /// _(minecraft:egg)_
-  static const EntityType egg = EntityType('minecraft:egg');
-
-  /// [Ender Pearl](https://minecraft.gamepedia.com/ender_pearl)
-  ///
-  /// _(minecraft:ender_pearl)_
-  static const EntityType ender_pearl = EntityType('minecraft:ender_pearl');
-
-  /// [Experience Bottle](https://minecraft.gamepedia.com/experience_bottle)
-  ///
-  /// _(minecraft:experience_bottle)_
-  static const EntityType experience_bottle =
-      EntityType('minecraft:experience_bottle');
-
-  /// [Potion](https://minecraft.gamepedia.com/potion)
-  ///
-  /// _(minecraft:potion)_
-  static const EntityType potion = EntityType('minecraft:potion');
-
-  /// [Trident](https://minecraft.gamepedia.com/trident)
-  ///
-  /// _(minecraft:trident)_
-  static const EntityType trident = EntityType('minecraft:trident');
-
   /// [Vex](https://minecraft.gamepedia.com/vex)
   ///
   /// _(minecraft:vex)_
@@ -556,20 +604,10 @@ class Entities {
   /// _(minecraft:villager)_
   static const EntityType villager = EntityType('minecraft:villager');
 
-  /// [Iron Golem](https://minecraft.gamepedia.com/iron_golem)
-  ///
-  /// _(minecraft:iron_golem)_
-  static const EntityType iron_golem = EntityType('minecraft:iron_golem');
-
   /// [Vindicator](https://minecraft.gamepedia.com/vindicator)
   ///
   /// _(minecraft:vindicator)_
   static const EntityType vindicator = EntityType('minecraft:vindicator');
-
-  /// [Pillager](https://minecraft.gamepedia.com/pillager)
-  ///
-  /// _(minecraft:pillager)_
-  static const EntityType pillager = EntityType('minecraft:pillager');
 
   /// [Wandering Trader](https://minecraft.gamepedia.com/wandering_trader)
   ///
@@ -603,6 +641,11 @@ class Entities {
   /// _(minecraft:wolf)_
   static const EntityType wolf = EntityType('minecraft:wolf');
 
+  /// [Zoglin](https://minecraft.gamepedia.com/zoglin)
+  ///
+  /// _(minecraft:zoglin)_
+  static const EntityType zoglin = EntityType('minecraft:zoglin');
+
   /// [Zombie](https://minecraft.gamepedia.com/zombie)
   ///
   /// _(minecraft:zombie)_
@@ -619,40 +662,9 @@ class Entities {
   static const EntityType zombie_villager =
       EntityType('minecraft:zombie_villager');
 
-  /// [Phantom](https://minecraft.gamepedia.com/phantom)
+  /// [Zombified Piglin](https://minecraft.gamepedia.com/zombified_piglin)
   ///
-  /// _(minecraft:phantom)_
-  static const EntityType phantom = EntityType('minecraft:phantom');
-
-  /// [Ravager](https://minecraft.gamepedia.com/ravager)
-  ///
-  /// _(minecraft:ravager)_
-  static const EntityType ravager = EntityType('minecraft:ravager');
-
-  /// [Hoglin](https://minecraft.gamepedia.com/hoglin)
-  ///
-  /// _(minecraft:hoglin)_
-  static const EntityType hoglin = EntityType('minecraft:hoglin');
-
-  /// [Piglin](https://minecraft.gamepedia.com/piglin)
-  ///
-  /// _(minecraft:piglin)_
-  static const EntityType piglin = EntityType('minecraft:piglin');
-
-  /// [Lightning Bolt](https://minecraft.gamepedia.com/lightning_bolt)
-  ///
-  /// _(minecraft:lightning_bolt)_
-  static const EntityType lightning_bolt =
-      EntityType('minecraft:lightning_bolt');
-
-  /// [Player](https://minecraft.gamepedia.com/player)
-  ///
-  /// _(minecraft:player)_
-  static const EntityType player = EntityType('minecraft:player');
-
-  /// [Fishing Bobber](https://minecraft.gamepedia.com/fishing_bobber)
-  ///
-  /// _(minecraft:fishing_bobber)_
-  static const EntityType fishing_bobber =
-      EntityType('minecraft:fishing_bobber');
+  /// _(minecraft:zombified_piglin)_
+  static const EntityType zombified_piglin =
+      EntityType('minecraft:zombified_piglin');
 }
