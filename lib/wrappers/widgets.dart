@@ -24,3 +24,6 @@ export 'clear.dart';
 export 'tp.dart';
 export 'gamemode.dart';
 export 'spectate.dart';
+export 'spawnpoint.dart';
+export 'spreadplayers.dart';
+export 'attribute.dart';

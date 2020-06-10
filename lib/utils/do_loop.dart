@@ -56,8 +56,9 @@ class Do extends RestActionAble {
     if (!_isWhile) {
       cond = Condition.not(cond);
     }
-    then.add(
-        Execute(If: cond, children: [File.recursive()]).positioned(translate));
+    var ex = Execute(If: cond, children: [File.recursive()]);
+    if (translate != null) ex = ex.positioned(translate);
+    then.add(ex);
     var gr = Group(filename: 'doloop', children: then, groupMin: 0);
     if (testBefore) return If(cond, then: [gr]);
     return gr;

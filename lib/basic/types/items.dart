@@ -897,10 +897,12 @@ class Items {
     blackstone_slab,
     blackstone_stairs,
     blackstone_wall,
+    chain,
     chiseled_nether_bricks,
     chiseled_polished_blackstone,
     cracked_nether_bricks,
-    cracked_polished_blackstone_brickscrimson_button,
+    cracked_polished_blackstone_bricks,
+    crimson_button,
     crimson_door,
     crimson_fence,
     crimson_fence_gate,
@@ -919,6 +921,7 @@ class Items {
     gilded_blackstone,
     hoglin_spawn_egg,
     lodestone,
+    music_disc_pigstep,
     nether_gold_ore,
     nether_sprouts,
     netherite_axe,
@@ -942,16 +945,17 @@ class Items {
     polished_blackstone_brick_wall,
     polished_blackstone_bricks,
     polished_blackstone_button,
-    polished_blackstone_pressure_platepolished_blackstone_slab,
+    polished_blackstone_pressure_plate,
+    polished_blackstone_slab,
     polished_blackstone_stairs,
     polished_blackstone_wall,
     quartz_bricks,
     respawn_anchor,
     shroomlight,
     soul_campfire,
-    soul_fire_lantern,
-    soul_fire_torch,
+    soul_lantern,
     soul_soil,
+    soul_torch,
     strider_spawn_egg,
     stripped_crimson_hyphae,
     stripped_crimson_stem,
@@ -5731,17 +5735,22 @@ class Items {
   /// _(minecraft:blackstone_wall)_
   static const ItemType blackstone_wall = ItemType('minecraft:blackstone_wall');
 
+  /// [Chain](https://minecraft.gamepedia.com/chain)
+  ///
+  /// _(minecraft:chain)_
+  static const ItemType chain = ItemType('minecraft:chain');
+
   /// [Chiseled Nether Bricks](https://minecraft.gamepedia.com/chiseled_nether_bricks)
   ///
   /// _(minecraft:chiseled_nether_bricks)_
   static const ItemType chiseled_nether_bricks =
       ItemType('minecraft:chiseled_nether_bricks');
 
-  /// [Chiseled Polished Blackstone      ](https://minecraft.gamepedia.com/chiseled_polished_blackstone      )
+  /// [Chiseled Polished Blackstone](https://minecraft.gamepedia.com/chiseled_polished_blackstone)
   ///
-  /// _(minecraft:chiseled_polished_blackstone      )_
+  /// _(minecraft:chiseled_polished_blackstone)_
   static const ItemType chiseled_polished_blackstone =
-      ItemType('minecraft:chiseled_polished_blackstone      ');
+      ItemType('minecraft:chiseled_polished_blackstone');
 
   /// [Cracked Nether Bricks](https://minecraft.gamepedia.com/cracked_nether_bricks)
   ///
@@ -5749,11 +5758,16 @@ class Items {
   static const ItemType cracked_nether_bricks =
       ItemType('minecraft:cracked_nether_bricks');
 
-  /// [Cracked Polished Blackstone Brickscrimson Button](https://minecraft.gamepedia.com/cracked_polished_blackstone_brickscrimson_button)
+  /// [Cracked Polished Blackstone Bricks](https://minecraft.gamepedia.com/cracked_polished_blackstone_bricks)
   ///
-  /// _(minecraft:cracked_polished_blackstone_brickscrimson_button)_
-  static const ItemType cracked_polished_blackstone_brickscrimson_button =
-      ItemType('minecraft:cracked_polished_blackstone_brickscrimson_button');
+  /// _(minecraft:cracked_polished_blackstone_bricks)_
+  static const ItemType cracked_polished_blackstone_bricks =
+      ItemType('minecraft:cracked_polished_blackstone_bricks');
+
+  /// [Crimson Button](https://minecraft.gamepedia.com/crimson_button)
+  ///
+  /// _(minecraft:crimson_button)_
+  static const ItemType crimson_button = ItemType('minecraft:crimson_button');
 
   /// [Crimson Door](https://minecraft.gamepedia.com/crimson_door)
   ///
@@ -5849,6 +5863,12 @@ class Items {
   ///
   /// _(minecraft:lodestone)_
   static const ItemType lodestone = ItemType('minecraft:lodestone');
+
+  /// [Music Disc Pigstep](https://minecraft.gamepedia.com/music_disc_pigstep)
+  ///
+  /// _(minecraft:music_disc_pigstep)_
+  static const ItemType music_disc_pigstep =
+      ItemType('minecraft:music_disc_pigstep');
 
   /// [Nether Gold Ore](https://minecraft.gamepedia.com/nether_gold_ore)
   ///
@@ -5948,48 +5968,53 @@ class Items {
   static const ItemType polished_blackstone =
       ItemType('minecraft:polished_blackstone');
 
-  /// [Polished Blackstone Brick Slab    ](https://minecraft.gamepedia.com/polished_blackstone_brick_slab    )
+  /// [Polished Blackstone Brick Slab](https://minecraft.gamepedia.com/polished_blackstone_brick_slab)
   ///
-  /// _(minecraft:polished_blackstone_brick_slab    )_
+  /// _(minecraft:polished_blackstone_brick_slab)_
   static const ItemType polished_blackstone_brick_slab =
-      ItemType('minecraft:polished_blackstone_brick_slab    ');
+      ItemType('minecraft:polished_blackstone_brick_slab');
 
-  /// [Polished Blackstone Brick Stairs  ](https://minecraft.gamepedia.com/polished_blackstone_brick_stairs  )
+  /// [Polished Blackstone Brick Stairs](https://minecraft.gamepedia.com/polished_blackstone_brick_stairs)
   ///
-  /// _(minecraft:polished_blackstone_brick_stairs  )_
+  /// _(minecraft:polished_blackstone_brick_stairs)_
   static const ItemType polished_blackstone_brick_stairs =
-      ItemType('minecraft:polished_blackstone_brick_stairs  ');
+      ItemType('minecraft:polished_blackstone_brick_stairs');
 
-  /// [Polished Blackstone Brick Wall    ](https://minecraft.gamepedia.com/polished_blackstone_brick_wall    )
+  /// [Polished Blackstone Brick Wall](https://minecraft.gamepedia.com/polished_blackstone_brick_wall)
   ///
-  /// _(minecraft:polished_blackstone_brick_wall    )_
+  /// _(minecraft:polished_blackstone_brick_wall)_
   static const ItemType polished_blackstone_brick_wall =
-      ItemType('minecraft:polished_blackstone_brick_wall    ');
+      ItemType('minecraft:polished_blackstone_brick_wall');
 
-  /// [Polished Blackstone Bricks        ](https://minecraft.gamepedia.com/polished_blackstone_bricks        )
+  /// [Polished Blackstone Bricks](https://minecraft.gamepedia.com/polished_blackstone_bricks)
   ///
-  /// _(minecraft:polished_blackstone_bricks        )_
+  /// _(minecraft:polished_blackstone_bricks)_
   static const ItemType polished_blackstone_bricks =
-      ItemType('minecraft:polished_blackstone_bricks        ');
+      ItemType('minecraft:polished_blackstone_bricks');
 
-  /// [Polished Blackstone Button        ](https://minecraft.gamepedia.com/polished_blackstone_button        )
+  /// [Polished Blackstone Button](https://minecraft.gamepedia.com/polished_blackstone_button)
   ///
-  /// _(minecraft:polished_blackstone_button        )_
+  /// _(minecraft:polished_blackstone_button)_
   static const ItemType polished_blackstone_button =
-      ItemType('minecraft:polished_blackstone_button        ');
+      ItemType('minecraft:polished_blackstone_button');
 
-  /// [Polished Blackstone Pressure Platepolished Blackstone Slab](https://minecraft.gamepedia.com/polished_blackstone_pressure_platepolished_blackstone_slab)
+  /// [Polished Blackstone Pressure Plate](https://minecraft.gamepedia.com/polished_blackstone_pressure_plate)
   ///
-  /// _(minecraft:polished_blackstone_pressure_platepolished_blackstone_slab)_
-  static const ItemType
-      polished_blackstone_pressure_platepolished_blackstone_slab = ItemType(
-          'minecraft:polished_blackstone_pressure_platepolished_blackstone_slab');
+  /// _(minecraft:polished_blackstone_pressure_plate)_
+  static const ItemType polished_blackstone_pressure_plate =
+      ItemType('minecraft:polished_blackstone_pressure_plate');
 
-  /// [Polished Blackstone Stairs        ](https://minecraft.gamepedia.com/polished_blackstone_stairs        )
+  /// [Polished Blackstone Slab](https://minecraft.gamepedia.com/polished_blackstone_slab)
   ///
-  /// _(minecraft:polished_blackstone_stairs        )_
+  /// _(minecraft:polished_blackstone_slab)_
+  static const ItemType polished_blackstone_slab =
+      ItemType('minecraft:polished_blackstone_slab');
+
+  /// [Polished Blackstone Stairs](https://minecraft.gamepedia.com/polished_blackstone_stairs)
+  ///
+  /// _(minecraft:polished_blackstone_stairs)_
   static const ItemType polished_blackstone_stairs =
-      ItemType('minecraft:polished_blackstone_stairs        ');
+      ItemType('minecraft:polished_blackstone_stairs');
 
   /// [Polished Blackstone Wall](https://minecraft.gamepedia.com/polished_blackstone_wall)
   ///
@@ -6017,21 +6042,20 @@ class Items {
   /// _(minecraft:soul_campfire)_
   static const ItemType soul_campfire = ItemType('minecraft:soul_campfire');
 
-  /// [Soul Fire Lantern](https://minecraft.gamepedia.com/soul_fire_lantern)
+  /// [Soul Lantern](https://minecraft.gamepedia.com/soul_lantern)
   ///
-  /// _(minecraft:soul_fire_lantern)_
-  static const ItemType soul_fire_lantern =
-      ItemType('minecraft:soul_fire_lantern');
-
-  /// [Soul Fire Torch](https://minecraft.gamepedia.com/soul_fire_torch)
-  ///
-  /// _(minecraft:soul_fire_torch)_
-  static const ItemType soul_fire_torch = ItemType('minecraft:soul_fire_torch');
+  /// _(minecraft:soul_lantern)_
+  static const ItemType soul_lantern = ItemType('minecraft:soul_lantern');
 
   /// [Soul Soil](https://minecraft.gamepedia.com/soul_soil)
   ///
   /// _(minecraft:soul_soil)_
   static const ItemType soul_soil = ItemType('minecraft:soul_soil');
+
+  /// [Soul Torch](https://minecraft.gamepedia.com/soul_torch)
+  ///
+  /// _(minecraft:soul_torch)_
+  static const ItemType soul_torch = ItemType('minecraft:soul_torch');
 
   /// [Strider Spawn Egg](https://minecraft.gamepedia.com/strider_spawn_egg)
   ///

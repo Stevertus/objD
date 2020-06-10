@@ -693,6 +693,7 @@ class Blocks {
     blackstone_slab,
     blackstone_stairs,
     blackstone_wall,
+    chain,
     chiseled_nether_bricks,
     chiseled_polished_blackstone,
     cracked_nether_bricks,
@@ -739,10 +740,10 @@ class Blocks {
     shroomlight,
     soul_campfire,
     soul_fire,
-    soul_fire_lantern,
-    soul_fire_torch,
-    soul_fire_wall_torch,
+    soul_lantern,
     soul_soil,
+    soul_torch,
+    soul_wall_torch,
     stripped_crimson_hyphae,
     stripped_crimson_stem,
     stripped_warped_hyphae,
@@ -4365,6 +4366,11 @@ class Blocks {
   /// _(minecraft:blackstone_wall)_
   static const Block blackstone_wall = Block('minecraft:blackstone_wall');
 
+  /// [Chain](https://minecraft.gamepedia.com/chain)
+  ///
+  /// _(minecraft:chain)_
+  static const Block chain = Block('minecraft:chain');
+
   /// [Chiseled Nether Bricks](https://minecraft.gamepedia.com/chiseled_nether_bricks)
   ///
   /// _(minecraft:chiseled_nether_bricks)_
@@ -4614,26 +4620,25 @@ class Blocks {
   /// _(minecraft:soul_fire)_
   static const Block soul_fire = Block('minecraft:soul_fire');
 
-  /// [Soul Fire Lantern](https://minecraft.gamepedia.com/soul_fire_lantern)
+  /// [Soul Lantern](https://minecraft.gamepedia.com/soul_lantern)
   ///
-  /// _(minecraft:soul_fire_lantern)_
-  static const Block soul_fire_lantern = Block('minecraft:soul_fire_lantern');
-
-  /// [Soul Fire Torch](https://minecraft.gamepedia.com/soul_fire_torch)
-  ///
-  /// _(minecraft:soul_fire_torch)_
-  static const Block soul_fire_torch = Block('minecraft:soul_fire_torch');
-
-  /// [Soul Fire Wall Torch](https://minecraft.gamepedia.com/soul_fire_wall_torch)
-  ///
-  /// _(minecraft:soul_fire_wall_torch)_
-  static const Block soul_fire_wall_torch =
-      Block('minecraft:soul_fire_wall_torch');
+  /// _(minecraft:soul_lantern)_
+  static const Block soul_lantern = Block('minecraft:soul_lantern');
 
   /// [Soul Soil](https://minecraft.gamepedia.com/soul_soil)
   ///
   /// _(minecraft:soul_soil)_
   static const Block soul_soil = Block('minecraft:soul_soil');
+
+  /// [Soul Torch](https://minecraft.gamepedia.com/soul_torch)
+  ///
+  /// _(minecraft:soul_torch)_
+  static const Block soul_torch = Block('minecraft:soul_torch');
+
+  /// [Soul Wall Torch](https://minecraft.gamepedia.com/soul_wall_torch)
+  ///
+  /// _(minecraft:soul_wall_torch)_
+  static const Block soul_wall_torch = Block('minecraft:soul_wall_torch');
 
   /// [Stripped Crimson Hyphae](https://minecraft.gamepedia.com/stripped_crimson_hyphae)
   ///

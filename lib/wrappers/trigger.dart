@@ -14,7 +14,7 @@ class Trigger extends RestActionAble {
   Trigger.add(this.objective, {@required int value, this.addNew = true}) {
     _mode = 'add ' + value.toString();
   }
-  Trigger.enable(this.enableScore) {
+  Trigger.enable(this.enableScore, {this.addNew = true}) {
     _mode = 'enable';
   }
 
@@ -29,7 +29,7 @@ class Trigger extends RestActionAble {
           enableScore.score);
     }
 
-    if (addNew) {
+    if (addNew != null && addNew) {
       return For.of([Scoreboard.trigger(objective), command]);
     }
     return command;

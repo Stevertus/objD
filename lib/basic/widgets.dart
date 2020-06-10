@@ -26,3 +26,4 @@ export 'types/area.dart';
 export 'types/condition.dart';
 export 'types/slot.dart';
 export 'types/particles.dart';
+export 'types/attribute.dart';

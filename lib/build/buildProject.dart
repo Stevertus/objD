@@ -20,10 +20,11 @@ class BuildProject {
     description = prj.description;
     context = Context(prod: false);
     packs = [
-      BuildPack(
-        findPack(prj.generate, context: context) as Pack,
-        context: context,
-      )
+      if (prj.generate != null)
+        BuildPack(
+          findPack(prj.generate, context: context) as Pack,
+          context: context,
+        )
     ];
     context.prod = prod;
     packs.first.generate(prj: this);

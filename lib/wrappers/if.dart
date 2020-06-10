@@ -15,6 +15,7 @@ class If extends RestActionAble {
   If elseWidget;
   bool invert = false;
   Entity assignTag;
+  final String useTag;
   bool encapsulate;
 
   String targetFilePath;
@@ -44,6 +45,7 @@ class If extends RestActionAble {
     this.targetFileName,
     this.encapsulate = true,
     this.assignTag,
+    this.useTag = 'objd_isTrue',
   }) {
     assert(then != null);
     getCondition(condition);
@@ -66,6 +68,7 @@ class If extends RestActionAble {
     this.targetFileName,
     this.encapsulate = true,
     this.assignTag,
+    this.useTag = 'objd_isTrue',
   }) {
     assert(then != null);
     assert(then.isNotEmpty);
@@ -119,21 +122,23 @@ class If extends RestActionAble {
 
   List<Widget> _getTagVersion(List<String> prefixes) {
     var children = <Widget>[];
-    var id = IndexedFile.getIndexed('if');
+    var tag = useTag ?? 'objd_isTrue';
+    var id = IndexedFile.getIndexedAndIncrease(tag);
+
+    tag += (id > 0 ? id.toString() : '');
+
     prefixes.forEach((prefix) {
       children.add(
         Group(
           prefix: 'execute ' + prefix + ' run',
-          children: [assignTag.addTag('objd_isTrue' + id.toString())],
+          children: [assignTag.addTag(tag)],
+          groupMin: encapsulate ? 3 : -1,
         ),
       );
     });
     children.add(Group(
-      prefix: 'execute as ' +
-          assignTag.toString() +
-          ' if entity @s[tag=objd_isTrue' +
-          id.toString() +
-          '] run',
+      prefix:
+          'execute as ' + assignTag.toString() + ' if entity @s[tag=$tag] run',
       path: targetFilePath,
       generateIDs: targetFileName == null,
       filename: targetFileName ?? 'if',
@@ -143,15 +148,14 @@ class If extends RestActionAble {
       children.add(Group(
         prefix: 'execute as ' +
             assignTag.toString() +
-            ' unless entity @s[tag=objd_isTrue' +
-            id.toString() +
-            '] run',
+            ' unless entity @s[tag=$tag] run',
         path: targetFilePath,
         filename: 'else',
+        groupMin: encapsulate ? 3 : -1,
         children: orElse,
       ));
     }
-    children.add(assignTag.removeTag('objd_isTrue' + id.toString()));
+    children.add(assignTag.removeTag(tag));
     return children;
   }
 }

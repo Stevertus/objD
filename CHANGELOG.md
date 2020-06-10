@@ -1,3 +1,17 @@
+## 0.3.3-beta.5
+
+- added new 1.16 blocks, items, particles and entities
+- added Spawnpoint Widget
+- added Attribute Widget
+- added Score.setToWidget to allow storing the result of Widgets in a Score
+- added Attribute Type and an Attribute List to support Minecraft attributes
+- added useTag argument in the If Widget to allow custom tags marking the else statement
+- fixed missing increment for Ifs objd_is_true tag
+- fixed if an else option is provided for If, encapsulate would not have an effect
+- fixed crash when leaving the generate parameter of Project empty
+- fixed bug with Trigger.enable
+- fixed Do Widget to also execept null as translate parameter
+
 ## 0.3.3-beta.4
 
 - updated Blocks, Items and Particles for 20w15a

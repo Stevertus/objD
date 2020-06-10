@@ -1,3 +1,4 @@
+import 'package:objd/basic/group.dart';
 import 'package:objd/basic/rest_action.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/wrappers/data.dart';
@@ -381,6 +382,19 @@ class Score extends RestActionAble {
             ' run ' +
             command.toMap()['command'].toString(),
       ),
+    );
+  }
+
+  /// sets the score to the result of the given Widget
+  /// JUST one Command should be the input
+  Group setToWidget(Widget widget, {bool useSuccess = false}) {
+    return Group(
+      prefix: 'execute store ' +
+          (useSuccess ? 'success' : 'result') +
+          ' score ' +
+          _getESStr() +
+          ' run',
+      children: [widget],
     );
   }
 
