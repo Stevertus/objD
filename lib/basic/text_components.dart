@@ -419,6 +419,20 @@ class Color {
   final String _color;
   const Color(this._color);
 
+  static Color fromInt(int color) =>
+      Color('#' + color.toRadixString(16).padLeft(4, '0'));
+  static Color fromRGB(int r, int g, int b) {
+    r = (r < 0) ? -r : r;
+    g = (g < 0) ? -g : g;
+    b = (b < 0) ? -b : b;
+    r = (r > 255) ? 255 : r;
+    g = (g > 255) ? 255 : g;
+    b = (b > 255) ? 255 : b;
+    return Color.fromInt(
+      ((r & 0x0ff) << 16) | ((g & 0x0ff) << 8) | (b & 0x0ff),
+    );
+  }
+
   static const Color White = Color('white');
   static const Color Black = Color('black');
   static const Color DarkBlue = Color('dark_blue');

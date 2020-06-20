@@ -5,8 +5,6 @@ import 'package:objd/external/predicates/entity/entity.dart';
 import 'package:objd/external/predicates/range.dart';
 import 'package:objd/external/predicates/tag.dart';
 
-// Hey, I'am building a predicate generator right now. I was wondering what the damage_source_properties tag is doing.
-
 class Properties extends Tag {
   final Entity entity;
   final e.EntityType type;
@@ -64,7 +62,6 @@ class Properties extends Tag {
     if (gamemode != null) player['gamemode'] = gamemode.toString();
     if (stats != null) player['stats'] = stats.map((s) => s.getJson()).toList();
     if (recipes != null) player['recipes'] = recipes;
-    if (advancements != null) player['advancements'] = advancements;
     if (advancements != null) player['advancements'] = advancements;
 
     if (player.isNotEmpty) ret['predicate']['player'] = player;

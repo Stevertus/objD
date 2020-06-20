@@ -181,7 +181,7 @@ class DataModify {
     _checkValue(value);
   }
   String _checkValue(dynamic value) {
-    if (value is Map) return this.value = gson.encode(value);
+    if (value is Map || value is List) return this.value = gson.encode(value);
     if (value is num || value is String) return this.value = value.toString();
     if (value is DataStorage) {
       fromType = 'storage';

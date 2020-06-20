@@ -6,7 +6,7 @@ import 'package:objd/wrappers/execute.dart';
 
 void _checkRangeOrDouble(dynamic val) {
   if (val != null) {
-    assert(val is Range || val is double,
+    assert(val is Range || val is num,
         'Please provide either a Range or a double value!');
   }
 }

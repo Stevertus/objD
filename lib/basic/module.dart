@@ -1,4 +1,5 @@
 import 'package:objd/basic/file.dart';
+import 'package:objd/basic/rest_action.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/build/context.dart';
 
@@ -28,7 +29,7 @@ import 'package:objd/build/context.dart';
 ///
 /// A Module can still be used as a widget everywhere and also handles conditions and groups.
 
-abstract class Module extends Widget {
+abstract class Module extends RestActionAble {
   @override
   Widget generate(Context context);
   List<File> registerFiles();

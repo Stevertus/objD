@@ -7,7 +7,7 @@ import 'package:objd/external/predicates/tag.dart';
 class Tool extends Tag {
   final Range count;
   final Range durability;
-  final ItemType item;
+  final Item item;
   final String potion;
   final String tag;
   final Map<String, dynamic> nbt;
@@ -44,7 +44,7 @@ class Tool extends Tag {
     if (durability != null) {
       ret['predicate']['durability'] = _getRangeMap(durability);
     }
-    if (item != null) ret['predicate']['item'] = item.toString();
+    if (item != null) ret['predicate']['item'] = item.getId();
     if (potion != null) ret['predicate']['potion'] = potion;
     if (potion != null) ret['predicate']['potion'] = potion;
     if (nbt != null) ret['predicate']['nbt'] = gson.encode(nbt);

@@ -109,18 +109,21 @@ class Score extends RestActionAble {
     return Score(entity, score, addNew: false, commands: commands);
   }
 
+  /// add
   Score operator +(dynamic other) {
     if (other is int) return add(other);
     if (other is Score) return addScore(other);
     throw ('Please use either a Score or an Int in the operator +');
   }
 
+  /// subtract
   Score operator -(dynamic other) {
     if (other is int) return subtract(other);
     if (other is Score) return subtractScore(other);
     throw ('Please use either a Score or an Int in the operator -');
   }
 
+  /// modulo by
   Score operator %(dynamic other) {
     if (other is int) {
       return modulo(
@@ -131,6 +134,7 @@ class Score extends RestActionAble {
     throw ('Please use either a Score or an Int in the operator %');
   }
 
+  /// divide by
   Score operator /(dynamic other) {
     if (other is int) {
       return divideByScore(
@@ -141,6 +145,7 @@ class Score extends RestActionAble {
     throw ('Please use either a Score or an Int in the operator /');
   }
 
+  /// multiply by
   Score operator *(dynamic other) {
     if (other is int) {
       return multiplyByScore(
@@ -151,6 +156,7 @@ class Score extends RestActionAble {
     throw ('Please use either a Score or an Int in the operator /');
   }
 
+  /// greater than
   Score operator >(dynamic other) {
     if (other is int) {
       return matchesRange(
@@ -161,6 +167,7 @@ class Score extends RestActionAble {
     throw ('Please use either a Score or an Int in the operator >');
   }
 
+  /// less than
   Score operator <(dynamic other) {
     if (other is int) {
       return matchesRange(
@@ -171,6 +178,7 @@ class Score extends RestActionAble {
     throw ('Please use either a Score or an Int in the operator >');
   }
 
+  /// bigger or equal
   Score operator >=(dynamic other) {
     if (other is int) {
       return matchesRange(
@@ -181,6 +189,7 @@ class Score extends RestActionAble {
     throw ('Please use either a Score or an Int in the operator >=');
   }
 
+  /// less or equal
   Score operator <=(dynamic other) {
     if (other is int) {
       return matchesRange(
@@ -191,6 +200,7 @@ class Score extends RestActionAble {
     throw ('Please use either a Score or an Int in the operator <=');
   }
 
+  /// matches
   Score operator &(dynamic other) {
     if (other is int) return matches(other);
     if (other is Range) return matchesRange(other);
@@ -198,6 +208,7 @@ class Score extends RestActionAble {
     throw ('Please use either a Score, Range or an Int in the operator &');
   }
 
+  /// assign value(int, Score, Data or Condition)
   Score operator >>(dynamic other) {
     if (other is int) return set(other);
     if (other is Score) return setEqual(other);

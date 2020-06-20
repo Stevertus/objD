@@ -76,15 +76,17 @@ class Particle extends RestActionAble {
   }
 
   /// For the Item particle(shows item break) there is a named constructor
-  Particle.item(ItemType item,
-      {@required Location location,
-      Location delta,
-      double speed = 0,
-      int count = 1,
-      bool force = false,
-      Entity player}) {
+  Particle.item(
+    Item item, {
+    @required Location location,
+    Location delta,
+    double speed = 0,
+    int count = 1,
+    bool force = false,
+    Entity player,
+  }) {
     _gen = 'minecraft:item ';
-    _gen += item.toString();
+    _gen += item.getId();
     if (location != null) _gen += ' ' + location.toString();
     if (delta != null) {
       if (speed == null || count == null) {

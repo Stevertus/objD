@@ -37,12 +37,13 @@ class Timer extends RestActionAble {
   int ticks;
   bool infinite;
 
-  Timer(this.name,
-      {@required this.children,
-      @required this.ticks,
-      this.path = 'timers',
-      this.infinite = true})
-      : assert(ticks != null);
+  Timer(
+    this.name, {
+    @required this.children,
+    @required this.ticks,
+    this.path = 'timers',
+    this.infinite = true,
+  }) : assert(ticks != null);
 
   Timer.stop(this.name) {
     _stop = true;
