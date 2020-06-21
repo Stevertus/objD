@@ -1,5 +1,3 @@
-import 'package:objd/basic/widget.dart';
-
 /// Maybe you already wondered what this context argument here is.
 ///
 /// The Context is a way to get certain important information from the parents.

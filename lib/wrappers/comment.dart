@@ -17,9 +17,9 @@ class Comment extends RestActionAble {
   /// The Comment features a simple line break.
   Comment.LineBreak() : _text = '';
 
-  /// Seperates parts of your code
-  Comment.Seperate([int length = 48]) {
-    _text = _seperate(length);
+  /// Separates parts of your code
+  Comment.Separate([int length = 48]) {
+    _text = _separate(length);
   }
 
   /// Used to describe
@@ -29,7 +29,7 @@ class Comment extends RestActionAble {
     String calledFrom,
     String context,
   }) {
-    _text = _seperate() +
+    _text = _separate() +
         '''
 \n#
 # Author:
@@ -49,14 +49,14 @@ class Comment extends RestActionAble {
       _text += '\n#  ' + context;
     }
 
-    _text += '\n#\n' + _seperate();
+    _text += '\n#\n' + _separate();
   }
 
   Comment.Null() {
     _text = '[null]';
   }
 
-  String _seperate([int length = 48]) {
+  String _separate([int length = 48]) {
     return List.generate(length, (i) => '#').join();
   }
 

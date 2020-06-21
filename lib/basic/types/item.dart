@@ -29,10 +29,10 @@ class Item {
   /// |slot|The current Slot of the item(does not work for give)|
   /// |damage|the used durability of the item|
   /// |hideFlags|int from 1 to 63 describing which information to hide|
-  /// |model|int describing which model varient should be used|
+  /// |model|int describing which model variant should be used|
   /// |name|a TextComponent showing a name|
   /// |lore| a  List of TextComponents giving extra information|
-  /// |nbt|addional NBT as Dart Map|
+  /// |nbt|additional NBT as Dart Map|
   ///
   /// **Example:**
   /// ```dart
@@ -219,7 +219,7 @@ class Item {
       if (slot.id == null) throw ('An Item needs the Slot id!');
       if (slot.id < 0) {
         print(
-            'Please note that you are using Item with a negative slot. This is reserved for a selecteditem and can\'t be accessed within the Inventory propery!');
+            'Please note that you are using Item with a negative slot. This is reserved for a selected item and can\'t be accessed within the Inventory property!');
       }
       map['Slot'] = Byte(slot.id);
     }

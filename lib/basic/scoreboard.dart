@@ -9,7 +9,7 @@ import 'package:objd/build/build.dart';
 import 'package:objd/wrappers/comment.dart';
 
 class Scoreboard extends RestActionAble {
-  /// Often you find yourself giving all scoreboards a prefix espacially for your project. This can get very repetitive and anoying, so objD has this prefix built in.
+  /// Often you find yourself giving all scoreboards a prefix especially for your project. This can get very repetitive and annoying, so objD has this prefix built in.
 
   static String prefix;
 

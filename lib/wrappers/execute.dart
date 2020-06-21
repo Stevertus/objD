@@ -26,7 +26,7 @@ class Execute extends RestActionAble {
   // The path of the file that is generated if it has to much content
   String targetFilePath;
 
-  // Generate at a file if execute command has to much gontent
+  // Generate at a file if execute command has to much content
   bool encapsulate = true;
 
   /// All Execute classes are also an Group, so they will group commands in seperate files and allow multiple children.
@@ -258,10 +258,10 @@ class Execute extends RestActionAble {
     return _addArgumentRet('align ' + axis);
   }
 
-  // centeres the alignment(middle of the block)
+  // Centers the alignment(middle of the block)
   Execute center() => align('xyz');
 
-  // centeres the alignment(vertical middle of the block)
+  // Centers the alignment(vertical middle of the block)
   Execute vcenter() => align('xz');
 
   /// Sets the execution position(^ ^ ^) to the eyes or the feet.

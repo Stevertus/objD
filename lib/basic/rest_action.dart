@@ -10,7 +10,7 @@ abstract class RestActionAble extends Widget {
   /// Contains the Information, if this RestAction is already called (and can't be called again)
   bool called = false;
 
-  ///Execute this method to add this to the WidgetList (can use default list or as paramieter given list)
+  ///Execute this method to add this to the WidgetList (can use default list or as parameter given list)
   ///This method can only be executed once, if it is executed multiple times you will get an Error. You can read out if it is already executed in the boolean Called
 
   ///Example for a queue method:
@@ -42,7 +42,7 @@ class RestAction extends RestActionAble {
   @override
   List<Widget> writable;
 
-  ///If autoQueue is enabled, you dont have to manually run the `queue()` method on your RestActions.
+  ///If autoQueue is enabled, you don't have to manually run the `queue()` method on your RestActions.
 
   ///Normal example without autoQueue
   ///```dart
@@ -54,9 +54,9 @@ class RestAction extends RestActionAble {
   ///Entity.Selected().kill();
   ///```
   ///-----
-  //I would not use this feature, because you dont always want everything to be queued automatically. Just use this feature, if you know what you're doing!**
+  //I would not use this feature, because you don't always want everything to be queued automatically. Just use this feature, if you know what you're doing!**
 
-  ///_Notice: This feature does not work everywhere, features like the execute command, that implement the RestAction and can be manipulated or Executed at the same time dont now when to Execute themselves, so this feature does not work in every case._
+  ///_Notice: This feature does not work everywhere, features like the execute command, that implement the RestAction and can be manipulated or Executed at the same time don't now when to Execute themselves, so this feature does not work in every case._
 
   static bool autoQueue = false;
 
@@ -64,7 +64,7 @@ class RestAction extends RestActionAble {
   ///```dart
   ///Entity.Selected().kill().queue();
   ///```
-  ///You can als use the queue function on a List, so the contents are writen inside it:
+  ///You can also use the queue function on a List, so the contents are written inside it:
   ///```dart
   ///List<Widget> widget = [];
   ///Entity.Selected().kill().queue(cont);
@@ -93,7 +93,7 @@ class RestAction extends RestActionAble {
   ///```dart
   ///Entity.Selected().kill().queue();
   ///```
-  ///You can als use the queue function on a List, so the contents are writen inside it:
+  ///You can also use the queue function on a List, so the contents are written inside it:
   ///```dart
   ///List<Widget> widget = [];
   ///Entity.Selected().kill().queue(cont);
@@ -126,7 +126,7 @@ class RestAction extends RestActionAble {
 class RestActionBuilder {
   List<Widget> writable;
 
-  /// Made for creating RestActions, usefull for APIs if you need to create multiple RestActions
+  /// Made for creating RestActions, useful for APIs if you need to create multiple RestActions
   RestActionBuilder(this.writable);
 
   // Creates a RestAction from a Widget

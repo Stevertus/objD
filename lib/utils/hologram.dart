@@ -47,7 +47,7 @@ class Hologram extends RestActionAble {
         .toList();
   }
 
-  /// If you wish you can assign each line a seperate TextComponent with `Hologram.multiple`
+  /// If you wish you can assign each line a separate TextComponent with `Hologram.multiple`
   Hologram.multiple(
     this.texts, {
     @required this.location,

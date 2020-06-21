@@ -4,7 +4,7 @@ import 'package:objd/build/context.dart';
 import 'package:objd/core.dart';
 import 'package:objd/wrappers/data.dart';
 
-//// The Storage Widget gives you easy tools to store and recieve nbt data globally.
+//// The Storage Widget gives you easy tools to store and receive nbt data globally.
 class Storage extends Widget {
   _StorageType _type;
   final String name;
@@ -17,7 +17,7 @@ class Storage extends Widget {
   double scale;
   String datatype;
 
-  /// The Storage Widget gives you easy tools to store and recieve nbt data globally.
+  /// The Storage Widget gives you easy tools to store and receive nbt data globally.
   /// A Store takes in a name, by default it already uses the current pack namespace.
 
   /// **Example:**

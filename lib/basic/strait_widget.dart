@@ -29,7 +29,7 @@ class StraitWidget extends Widget {
 
     dynamic ret = strait(content);
 
-    // Proccess return (if given)
+    // Process return (if given)
     if (ret != null) {
       if (ret is RestAction) {
         if (ret.called) ret.queue();

@@ -245,7 +245,7 @@ class Score extends RestActionAble {
     );
   }
 
-  /// substracts a value from the score
+  /// subtracts a value from the score
   Score subtract([int val = 1]) {
     return addCommandRet(
       Command(
@@ -315,7 +315,7 @@ class Score extends RestActionAble {
     );
   }
 
-  /// substracts another score from this one
+  /// subtracts another score from this one
   Score subtractScore(Score score) {
     return addCommandRet(
       Command(
@@ -351,7 +351,7 @@ class Score extends RestActionAble {
     );
   }
 
-  /// sets this score to the remainer of the division
+  /// sets this score to the remainder of the division
   Score modulo(Score score) {
     return addCommandRet(
       Command(

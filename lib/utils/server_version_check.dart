@@ -13,7 +13,7 @@ class ServerVersionCheck extends Widget {
   /// |--|--|
   /// |minVersion| the aimed version number as int(1.15 = `15`) |
   /// |versionTooLow| a List of Widgets that are executed if it detects that the version is lower that minVersion |
-  /// |then| a Function that takes in the used Score and reacts respectivly returning a Widget(optional) |
+  /// |then| a Function that takes in the used Score and reacts respectively returning a Widget(optional) |
   /// |serverVersion| change the scores name(optional) |
   ServerVersionCheck({
     this.minVersion,
