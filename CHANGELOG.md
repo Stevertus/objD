@@ -5,6 +5,8 @@
 - added Item.type replacing ItemType and made it unmutable
 - divided Blocks.all and Items.all in 1.15 items and newer [snapshot] items
 - removed named parameters for Range. If you want to set a upper or lower limit use Range.to or Range.from now on.
+- changed Comment.Seperate to Comment.Separate
+- changed Advancement cricterium to cricteria in Advancement.grant() parameters
 
 **Widgets**
 
@@ -31,6 +33,8 @@
 - fixed errors when trying to use gson component in a give command
 - fixed that Entity.not used to reset all previous applied tags
 - removed all deprecated and unessary parts
+
+Thanks to kadmuffin for contributing and fixing typos!
 
 ## 0.3.3-beta.5
 
