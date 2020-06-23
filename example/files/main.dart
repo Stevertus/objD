@@ -1,5 +1,4 @@
 import 'package:objd/core.dart';
-import 'package:objd/custom_block.dart';
 
 class MainFile extends Widget {
   /// The main file is put in a separate widget to split the code in several files

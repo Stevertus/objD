@@ -522,8 +522,8 @@ class Entity implements EntityClass {
   ///
   /// **Example:**
   /// ```dart
-  /// Entity ent1 = Entity(type:EntityType.sheep)
-  /// Entity ent2 = ent1.copyWith(distance:Range(to:1))
+  /// Entity ent1 = Entity(type:Entities.sheep)
+  /// Entity ent2 = ent1.copyWith(distance:Range.to(1))
   /// ```
   Entity copyWith({
     int limit,
@@ -1140,7 +1140,11 @@ class Range {
 
   /// The Range class defines a range of values(e.g 3..10 in vanilla)
   Range(this.from, this.to);
+
+  /// Use Range.to to define less than or equal
   Range.to(this.to);
+
+  /// Use Range.to to define greater than or equal
   Range.from(this.from);
 
   /// Use Range.exact to get the exact Range(e.g 4)
@@ -1163,7 +1167,7 @@ class Range {
 enum Gamemode { creative, adventure, survival, spectator }
 enum Sort { random, furthest, nearest, arbitrary }
 
-/// There is an EntityType for every type_id in minecraft with `EntityType.[type_id]`
+/// There is an EntityType for every type_id in minecraft with `Entities.[type_id]`
 class EntityType {
   final String type;
   const EntityType(this.type);

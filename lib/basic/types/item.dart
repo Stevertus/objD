@@ -24,7 +24,7 @@ class Item {
   ///
   /// |constructor | |
   /// |--|--|
-  /// |ItemType \| Block \| String|the type of item(required, see example)|
+  /// |Item \| Block \| String|the type of item(required, see example)|
   /// |count|Integer value for the amount of stacked items|
   /// |slot|The current Slot of the item(does not work for give)|
   /// |damage|the used durability of the item|

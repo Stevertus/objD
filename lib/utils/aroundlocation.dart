@@ -16,7 +16,7 @@ class AroundLocation extends RestActionAble {
   /// AroundLocation(
   /// 	1,
   /// 	build: (Location loc){
-  /// 		return Setblock(Block.stone,location:loc)
+  /// 		return Setblock(Blocks.stone,location:loc)
   /// 	}
   /// )
   /// ⇒ setblock ~1 ~ ~ stone

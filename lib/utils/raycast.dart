@@ -35,7 +35,7 @@ class Raycast extends RestActionAble {
   /// Raycast(
   /// 	Entity.All(),
   /// 	onhit: [
-  /// 		SetBlock(Block.sandstone,location:Location.here())
+  /// 		SetBlock(Blocks.sandstone,location:Location.here())
   /// 	],
   /// 	ray: (stop, hit) => If(...,then:[stop()]),
   /// 	max: 10, // set maximum distance to 10 blocks

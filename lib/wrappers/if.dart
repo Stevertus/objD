@@ -29,11 +29,11 @@ class If extends RestActionAble {
   /// ```dart
   /// If(
   /// 	Condition(Entity.Player()),
-  /// 	Then: [
-  /// 		Say(msg:'true')
+  /// 	then: [
+  /// 		Log('true')
   /// 	],
-  /// 	Else: [
-  /// 		Say(msg:'false')
+  /// 	orElse: [
+  /// 		Log('false')
   /// 	]
   /// )
   /// ```
@@ -55,8 +55,8 @@ class If extends RestActionAble {
   /// ```dart
   /// If.not(
   /// 	Condition(Entity.Player()),
-  /// 	Then: [
-  /// 		Say(msg:'true')
+  /// 	then: [
+  /// 		Log('true')
   /// 	]
   /// )
   /// ```

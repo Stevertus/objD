@@ -54,7 +54,7 @@ class Slot {
     return Slot(slot: 'container.$res', id: res);
   }
 
-  /// **Slot.chest** takes in numbers, like `5,6`
+  /// **Slot.chest** takes in numbers, like `5,6` and an optional boolean for using an enderchest
   /// And does exactly the same as slot.inv but with a container, like a chest.
   static Slot chest(int row, [int col, bool enderchest = false]) {
     var res = 0;

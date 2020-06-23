@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 import 'package:objd/core.dart';
 
+/// This Module allows you to create infinite new blocks in the game. It works by providing a [block] and an [item] that acts as a model for the new block.
 class CustomBlock extends Module {
   final String id;
   final Block block;
@@ -13,6 +14,45 @@ class CustomBlock extends Module {
   final bool generatePack;
   final bool useItemFrame;
   final bool fire;
+
+  /// This Module allows you to create infinite new blocks in the game. It works by providing a [block] and an [item] that acts as a model for the new block.
+  ///
+  /// | constructor  |                                                                                      |
+  /// | ------------ | ------------------------------------------------------------------------------------ |
+  /// | String       | unique id for your block                                                             |
+  /// | Item         | The item that should be used to place the block(you must use a spawnegg)             |
+  /// | block        | the Block giving your custom block a hitbox(required)                                |
+  /// | blockModel   | Item that overrides the item for the block Model                                     |
+  /// | main         | Widget that runs every tick in the block                                             |
+  /// | onPlaced     | Widget that gets executed when the block is placed                                   |
+  /// | onBreak      | Widget that gets executed when the block is broken                                   |
+  /// | tag          | List of Strings of Tags to apply to the block entity                                 |
+  /// | generatePack | whether to generate the custom block as pack(default = true)                         |
+  /// | useItemFrame | display the block in an invisible Item Frame(default = true)                         |
+  /// | fire         | set the entity on fire to hide graying out when using a solid block(default = false) |
+  ///
+  /// You can use `getItem()` on your created block to get the spawnegg with all the required nbt data. This can be used further.
+  ///
+  /// When using the spawnegg an invisible armorstand or itemframe will spawn displaying the block model. This gives the illusion that this is a new block.
+  ///
+  /// With CustomModelData (`model` in objD) you can make as many of these as you want.
+  ///
+  /// **Example:**
+  ///
+  /// ```dart
+  /// import 'package:objd/custom_block.dart';
+  ///
+  /// CustomBlock(
+  /// 	'creative_name',
+  /// 	Item(
+  /// 		Items.chicken_spawn_egg,model: 2,
+  /// 		name: TextComponent('Creative Block'),
+  /// 	),
+  /// 	block: Blocks.stone,
+  /// 	useItemFrame: false,
+  /// 	generatePack: false,
+  /// )
+  /// ```
 
   CustomBlock(
     this.id,

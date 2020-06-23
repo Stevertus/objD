@@ -6,6 +6,7 @@ import 'package:objd/basic/widget.dart';
 import 'package:objd/basic/types/entity.dart';
 import 'package:objd/build/build.dart';
 
+/// The Attribute Widget adds certain abilities to an entity. This Widget gives you a varienty of methods to modify speed, attack damage, health and more.
 class Attribute extends RestActionAble {
   final Entity target;
   final AttributeType attribute;
@@ -16,6 +17,7 @@ class Attribute extends RestActionAble {
   AttributeModifier modifyType;
   final _AttributeType _type;
 
+  /// adds a modifier with an uuid
   Attribute.add(
     this.target,
     this.attribute, {
@@ -26,28 +28,38 @@ class Attribute extends RestActionAble {
   })  : _type = _AttributeType.add,
         assert(uuid != null),
         assert(value != null);
+
+  /// sets the base modifier to a value
   Attribute.set(
     this.target,
     this.attribute, {
     @required this.value,
   })  : _type = _AttributeType.set,
         assert(value != null);
+
+  /// removes a modifier with an uuid again
   Attribute.remove(
     this.target,
     this.attribute, {
     @required this.uuid,
   })  : _type = _AttributeType.remove,
         assert(uuid != null);
+
+  ///gets the calculated modifier(with base, armor and custom)
   Attribute.get(
     this.target,
     this.attribute, {
     this.scale,
   }) : _type = _AttributeType.get;
+
+  /// gets the base modifier
   Attribute.get_base(
     this.target,
     this.attribute, {
     this.scale,
   }) : _type = _AttributeType.get_base;
+
+  /// gets the modifiers value by uuid
   Attribute.get_modifier(
     this.target,
     this.attribute, {

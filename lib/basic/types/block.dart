@@ -34,7 +34,7 @@ class Block {
   /// **Usage:**
   /// ```dart
   /// Block([minecraft_block_id]) // as string or
-  /// Block.[minecraft_block_id]
+  /// Blocks.[minecraft_block_id]
   /// ```
   const Block(this._id)
       : nbt = null,

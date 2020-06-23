@@ -417,6 +417,14 @@ class TextHoverEvent {
 /// See all available colors: https://minecraft.gamepedia.com/Formatting_codes#Color_codes
 class Color {
   final String _color;
+
+  ///   With 1.16 you can also use any rgb color now:
+  ///
+  /// ```dart
+  /// Color("#ff6a00")
+  /// Color.fromInt(16738816)
+  /// Color.fromRGB(255,106,0)
+  /// ```
   const Color(this._color);
 
   static Color fromInt(int color) =>
