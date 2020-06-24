@@ -12,6 +12,7 @@ class IndexedFile extends Widget {
         ? IndexedFile._indexed[name]
         : 0;
   }
+
   // get the id of a name and increase usage.
   static int getIndexedAndIncrease(String name) {
     final id = getIndexed(name);

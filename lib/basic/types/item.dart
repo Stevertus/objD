@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:collection/collection.dart';
 import 'package:gson/gson.dart';
 
 import 'package:objd/basic/text_components.dart';
@@ -139,7 +138,7 @@ class Item {
   }
 
   /// creates a new object based on a existing Item to modify properties.
-  Item clone(Item it) => Item(
+  static Item clone(Item it) => Item(
         it.type,
         count: it.count,
         slot: it.slot.clone(),
@@ -147,7 +146,7 @@ class Item {
       );
 
   /// creates an Item based on nbt or json data.
-  Item fromJson(Map<String, dynamic> json) {
+  static Item fromJson(Map<String, dynamic> json) {
     String type;
     Slot slot;
     int damage;
@@ -181,20 +180,23 @@ class Item {
     TextComponent name,
     List<TextComponent> lore,
     Map<String, dynamic> nbt,
+    Map<String, dynamic> t,
   ]) {
     // check item type
 
-    if (nbt != null && nbt.isNotEmpty) tag.addAll(nbt);
-    if (damage != null) tag['Damage'] = damage;
-    if (model != null) tag['CustomModelData'] = model;
-    if (hideFlags != null) tag['HideFlags'] = hideFlags;
+    t ??= tag;
+
+    if (nbt != null && nbt.isNotEmpty) t.addAll(nbt);
+    if (damage != null) t['Damage'] = damage;
+    if (model != null) t['CustomModelData'] = model;
+    if (hideFlags != null) t['HideFlags'] = hideFlags;
     if (name != null) {
-      tag['display'] = tag['display'] ?? {};
-      tag['display']['Name'] = name.toJson();
+      t['display'] = t['display'] ?? {};
+      t['display']['Name'] = name.toJson();
     }
     if (lore != null) {
-      tag['display'] = tag['display'] ?? {};
-      tag['display']['Lore'] = lore.map((lor) => lor.toJson()).toList();
+      t['display'] = t['display'] ?? {};
+      t['display']['Lore'] = lore.map((lor) => lor.toJson()).toList();
     }
   }
 
@@ -242,7 +244,8 @@ class Item {
     Map<String, dynamic> nbt,
   }) {
     final tag = this.tag ?? {};
-    if (nbt != null) tag.addAll(nbt);
+    _checkTags(model, type, hideFlags, name, lore, nbt, tag);
+
     return Item(
       type ?? this.type,
       count: count ?? this.count,
@@ -253,16 +256,18 @@ class Item {
   }
 
   @override
+  String toString() => type;
+
+  @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-    final mapEquals = const DeepCollectionEquality().equals;
 
     return o is Item &&
         o.type == type &&
         o.count == count &&
         o.damage == damage &&
         o.slot == slot &&
-        mapEquals(o.tag, tag);
+        o.tag == tag;
   }
 
   @override

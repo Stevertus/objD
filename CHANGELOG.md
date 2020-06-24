@@ -1,5 +1,14 @@
 ## 0.3.3
 
+### 0.3.3-1
+
+Sorry for the inconvenience with the newly reworked Item part. <3
+
+- fixed missing toString method for Item
+- fixed missing implementation for Item.copyWith with model, name, hideFlags, lore and nbt
+- fixed that fromJson and clone were not static
+- removed unnecessary collection package
+
 **BREAKING**
 
 - added Item.type replacing ItemType and made it unmutable

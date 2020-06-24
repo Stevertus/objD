@@ -31,7 +31,7 @@ Open the pubspec.yaml file and add
 ```yaml
 name: [unique_namespace]
 dependencies:
-  objd: ^0.3.3
+  objd: ^0.3.3-1
 ```
 
 Also remember to replace the `[unique_namespace]` with your own project name.
@@ -43,7 +43,7 @@ $  pub get
 
 with the console in the new folder(VS code does this automatically)
 
-> Tip: You can also generate a full project with a console command. [read more](https://stevertus.com/objD/documentation/Global%20Commands)
+> Tip: You can also generate a full project with a console command. [read more](https://objd.stevertus.com/cli/)
 
 ## Getting started
 
@@ -81,7 +81,7 @@ class CustomWidget extends Widget {
 }
 ```
 
-To get more details on why we build it like that, check out the [Widget]() documentation.
+To get more details on why we build it like that, check out the [Widget](https://objd.stevertus.com/basics/#widget) documentation.
 
 Like we can see the generate method, which is called on build, has to return another Widget, in our case an instance of the Pack class.
 
