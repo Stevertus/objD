@@ -68,7 +68,7 @@ Map<String, String> _getFiles(BuildProject prj, GenOptions options) {
   // create mcmeta
   if (!options.minified && prj.isGenMeta) {
     Map mcmeta = <String, dynamic>{
-      'pack': {'pack_format': 1, 'description': prj.description}
+      'pack': {'pack_format': prj.version, 'description': prj.description}
     };
     files['pack.mcmeta'] = json.encode(mcmeta);
   }

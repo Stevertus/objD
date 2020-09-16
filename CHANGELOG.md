@@ -1,13 +1,17 @@
-## 0.3.3
+## 0.3.4
 
-### 0.3.3-1
-
-Sorry for the inconvenience with the newly reworked Item part. <3
-
+- added the ability to change the minecraft version by adding Project.version(changes mcmeta pack_format)
+- added spawnegg check for CustomBlock
+- added CustomBlock onPlaced and onBreak
+- added a way to override TextComponents with null -> TextComponent(null)
+- fixed issues with copying dicts
 - fixed missing toString method for Item
 - fixed missing implementation for Item.copyWith with model, name, hideFlags, lore and nbt
 - fixed that fromJson and clone were not static
+- fixed Execute.center targeting the corner of the block
 - removed unnecessary collection package
+
+## 0.3.3
 
 **BREAKING**
 

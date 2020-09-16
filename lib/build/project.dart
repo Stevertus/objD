@@ -6,6 +6,7 @@ class Project {
   String target = './';
   final String name;
   final String description;
+  final int version;
   Widget generate;
 
   /// The project is a special Widget which is just defined once.
@@ -25,6 +26,7 @@ class Project {
   Project({
     @required this.name,
     @required this.generate,
+    this.version = 16,
     this.target = './',
     this.description = 'This is a datapack generated with objd by Stevertus',
   });
@@ -32,9 +34,16 @@ class Project {
   Map toMap() => {
         'Project': {
           'name': name,
+          'version': version,
           'generate': generate
               .generate(Context(prefixes: [], suffixes: [], packId: ''))
               .toMap()
         }
       };
+
+  int getPackFormat() {
+    if (version >= 16) return 6;
+    if (version == 15) return 5;
+    return 4;
+  }
 }

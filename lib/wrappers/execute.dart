@@ -259,7 +259,7 @@ class Execute extends RestActionAble {
   }
 
   // Centers the alignment(middle of the block)
-  Execute center() => align('xyz');
+  Execute center() => align('xyz positioned ~0.5 ~0.5 ~0.5');
 
   // Centers the alignment(vertical middle of the block)
   Execute vcenter() => align('xz');

@@ -191,8 +191,16 @@ class Item {
     if (model != null) t['CustomModelData'] = model;
     if (hideFlags != null) t['HideFlags'] = hideFlags;
     if (name != null) {
+      final n = name.toJson();
+
       t['display'] = t['display'] ?? {};
-      t['display']['Name'] = name.toJson();
+
+      // check if the value is even represented in json
+      if (n != null) {
+        t['display']['Name'] = n;
+      } else {
+        t['display'].remove('Name');
+      }
     }
     if (lore != null) {
       t['display'] = t['display'] ?? {};
@@ -243,15 +251,15 @@ class Item {
     List<TextComponent> lore,
     Map<String, dynamic> nbt,
   }) {
-    final tag = this.tag ?? {};
-    _checkTags(model, type, hideFlags, name, lore, nbt, tag);
+    final t = tag != null ? _copyDeepMap(tag) : <String, dynamic>{};
+    _checkTags(model, type, hideFlags, name, lore, nbt, t);
 
     return Item(
       type ?? this.type,
       count: count ?? this.count,
       damage: damage ?? this.damage,
       slot: slot ?? this.slot,
-      nbt: tag,
+      nbt: t,
     );
   }
 
@@ -309,4 +317,16 @@ class BookPage {
   BookPage.customFont(String char) {
     list = [TextComponent.customFont(char)];
   }
+}
+
+Map<String, dynamic> _copyDeepMap(Map<String, dynamic> map) {
+  final newMap = <String, dynamic>{};
+
+  map.forEach((key, value) {
+    print(value);
+    newMap[key] =
+        (value is Map) ? _copyDeepMap(value.cast<String, dynamic>()) : value;
+  });
+
+  return newMap;
 }

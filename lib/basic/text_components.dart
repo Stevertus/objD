@@ -315,6 +315,8 @@ class TextComponent {
   }
 
   Map toMap() {
+    if (value.containsKey('text') && value['text'] == null) return null;
+
     var ret = {};
     ret.addAll(value);
     if (color != null) ret['color'] = color.toString();
@@ -330,7 +332,8 @@ class TextComponent {
   }
 
   String toJson() {
-    return json.encode(toMap()).replaceAll('\\[repl]\\', '\\');
+    final m = toMap();
+    return m != null ? json.encode(m).replaceAll('\\[repl]\\', '\\') : null;
   }
 }
 

@@ -13,13 +13,15 @@ class ExamplePack extends Widget {
       name: 'mypack', // name of the subpack
       modules: [],
       main: File(
-          // defining a file that runs every tick
-          'main',
-          child: MainFile()),
+        // defining a file that runs every tick
+        'main',
+        child: MainFile(),
+      ),
       load: File(
-          // defining a file that runs on reload
-          'load',
-          child: LoadFile()),
+        // defining a file that runs on reload
+        'load',
+        child: LoadFile(),
+      ),
       files: [],
     );
   }

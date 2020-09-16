@@ -9,6 +9,7 @@ class BuildProject {
   String path;
   String name;
   String description;
+  int version;
   bool prod;
   bool isGen = true;
   bool isGenMeta = true;
@@ -18,6 +19,7 @@ class BuildProject {
     path = prj.target;
     name = prj.name;
     description = prj.description;
+    version = prj.getPackFormat();
     context = Context(prod: false);
     packs = [
       if (prj.generate != null)
@@ -41,6 +43,7 @@ class BuildProject {
   Map toMap() => {
         'name': name,
         'path': path,
+        'version': version,
         'packs': packs.map((pack) => pack.toMap()).toList(),
         'description': description
       };

@@ -3,17 +3,19 @@ import 'package:objd/core.dart';
 
 /// This Module allows you to create infinite new blocks in the game. It works by providing a [block] and an [item] that acts as a model for the new block.
 class CustomBlock extends Module {
-  final String id;
-  final Block block;
-  final Item item;
-  final Item blockModel;
-  final Widget main;
-  final Widget onBreak;
-  final Widget onPlaced;
-  final List<String> tags;
-  final bool generatePack;
-  final bool useItemFrame;
-  final bool fire;
+  String id;
+  String name;
+  Block block;
+  Item item;
+  Item blockModel;
+  Widget main;
+  Widget onBreak;
+  Widget onPlaced;
+  List<String> tags;
+  bool generatePack;
+  bool useItemFrame;
+  bool fire;
+  double yOffset;
 
   /// This Module allows you to create infinite new blocks in the game. It works by providing a [block] and an [item] that acts as a model for the new block.
   ///
@@ -65,7 +67,9 @@ class CustomBlock extends Module {
     this.tags = const [],
     this.generatePack = true,
     this.fire = false,
-    this.useItemFrame = true,
+    this.name,
+    this.useItemFrame = false,
+    this.yOffset = 1,
   })  : assert(id != null),
         assert(block != null),
         assert(item != null),
@@ -84,9 +88,11 @@ class CustomBlock extends Module {
             'Radius': 0,
           }
         },
+        count: item.count ?? 1,
+        name: name != null ? TextComponent(name, italic: false) : null,
       );
 
-  Widget _setblock() {
+  Widget _setblock({Widget fireTimer}) {
     final headItem = (blockModel ?? item).copyWith(count: 1);
     return For.of([
       SetBlock(block, location: Location.here()),
@@ -97,25 +103,27 @@ class CustomBlock extends Module {
       useItemFrame != null && useItemFrame
           ? Summon(
               Entities.item_frame,
-              location: Location.rel(y: 1),
+              location: Location.rel(y: yOffset),
               tags: ['objd_$id', ...tags],
               nbt: {
                 'Invisible': 1,
                 'Fixed': 1,
-                'Item': headItem.getMap(),
+                'Item': headItem.copyWith(name: TextComponent(null)).getMap(),
                 'Facing': 1,
                 'Invulnerable': 1,
               },
             )
           : ArmorStand.staticMarker(
-              Location.here(),
+              Location.rel(y: yOffset - 0.5),
               tags: ['objd_$id', ...tags],
               head: headItem,
             ),
+      onPlaced,
+      if (fire != null && fire) fireTimer,
     ]);
   }
 
-  Widget _blockLogic({Widget onbreak, Widget fireTimer}) => For.of([
+  Widget _blockLogic({Widget onbreak}) => For.of([
         If(
           Condition.and([
             Condition(Entity.Player(distance: Range.to(6))),
@@ -128,37 +136,35 @@ class CustomBlock extends Module {
           ]),
           then: [onbreak],
         ),
-        if (fire != null && fire) fireTimer,
         if (main != null) main,
       ]);
 
   Widget _break() => For.of([
+        Kill(
+          Entity(distance: Range.to(1), type: Entities.item).not(
+            tags: ['item_$id'],
+          ),
+        ),
         Summon(
           Entities.item,
           location: Location.rel(y: useItemFrame ? 0 : 0.5),
           nbt: {'Item': getItem().getMap()},
           tags: ['item_$id'],
         ),
-        Kill(
-          Entity(distance: Range.to(1), type: Entities.item).not(
-            tags: ['item_$id'],
-          ),
-        ),
+        onBreak,
         Kill(Entity.Self()),
       ]);
 
   @override
   Widget generate(Context context) {
+    assert(id != null && id.isNotEmpty);
+    assert(block != null && block.toString().isNotEmpty);
+
     final path = generatePack ? '' : 'objd_blocks/$id';
 
+    print(getItem().getMap());
+
     final res = For.of([
-      Execute.asat(
-        Entity(
-          type: Entities.area_effect_cloud,
-          tags: ['summon_$id'],
-        ),
-        children: [File.execute('$path/set', child: _setblock())],
-      ),
       Execute.asat(Entity(tags: ['objd_$id']), children: [
         File.execute(
           '$path/block',
@@ -167,20 +173,33 @@ class CustomBlock extends Module {
               '$path/break',
               child: _break(),
             ),
-            fireTimer: Timer(
-              'fire_timer',
-              path: path,
-              ticks: 1200,
-              children: [
-                Data.merge(
-                  Entity.Self(),
-                  nbt: {'Fire': 1300},
-                )
-              ],
-            ),
           ),
         ),
       ]),
+      Execute.asat(
+        Entity(
+          type: Entities.area_effect_cloud,
+          tags: ['summon_$id'],
+        ),
+        children: [
+          File.execute(
+            '$path/set',
+            child: _setblock(
+              fireTimer: Timer(
+                'fire_timer',
+                path: path,
+                ticks: 1200,
+                children: [
+                  Data.merge(
+                    Entity.Self(),
+                    nbt: {'Fire': 1300},
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     ]);
 
     if (generatePack) return Pack(name: id, main: File('main', child: res));
