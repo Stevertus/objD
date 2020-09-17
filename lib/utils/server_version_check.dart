@@ -102,8 +102,7 @@ class ServerVersionCheck extends Widget {
         ],
       ),
 
-      if (then != null)
-        then(s),
+      if (then != null) then(s),
 
       if (minVersion != null && versionTooLow != null)
         If(
