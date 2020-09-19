@@ -66,10 +66,13 @@ class Storage extends Widget {
   /// Modifies Nbt Data(look at [Data Widget](/basics#data)).
   Storage.modify(
     this.name, {
+    @required String toPath,
     this.autoNamespace = true,
     @required DataModify modify,
   })  : assert(modify != null),
+        assert(toPath != null),
         _modify = modify,
+        key = toPath,
         _type = _StorageType.modify;
 
   /// Copies Nbt Data from a **Data.get** Widget.

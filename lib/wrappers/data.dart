@@ -46,7 +46,7 @@ class Data extends RestActionAble {
     handleTarget(target);
     _subcommand = 'merge';
   }
-  Data.get(this.target, {@required this.path, this.scale = 1}) {
+  Data.get(this.target, {@required this.path, this.scale}) {
     handleTarget(target);
     _subcommand = 'get';
   }
@@ -128,20 +128,24 @@ class Data extends RestActionAble {
       case 'merge':
         return Command('data merge ' + getTarget() + ' ' + _getNbt());
       case 'get':
-        return Command('data get ' +
-            getTarget() +
-            ' ' +
-            path +
-            ' ' +
-            (scale < 0.000001 ? scale.toStringAsFixed(10) : scale.toString()));
+        final cmd = ['data get', getTarget(), path];
+
+        if (scale != null) {
+          cmd.add(
+              scale < 0.000001 ? scale.toStringAsFixed(10) : scale.toString());
+        }
+
+        return Command(cmd.join(' '));
       case 'remove':
         return Command('data remove ' + getTarget() + ' ' + path);
       case 'modify':
         return Command('data modify ' + getTarget() + ' ${path} ${modify}');
       case 'score':
-        return Command('execute store result ' +
-            getTarget() +
-            ' ${path} ${datatype} ${scale} run scoreboard players get ${score.entity.toString()} ${score.score}');
+        return Command(
+          'execute store result ' +
+              getTarget() +
+              ' ${path} ${datatype} ${scale} run scoreboard players get ${score.entity.toString()} ${score.score}',
+        );
     }
     throw ('Invalid subcommand!');
   }

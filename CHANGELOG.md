@@ -1,5 +1,11 @@
 ## 0.3.4
 
+- added missing toPath property to Storage.modify
+- fixed Effect nbt Generator not using the Byte Generator correctly
+- removed default scale value from Data.get
+
+## 0.3.4
+
 - added the ability to change the minecraft version by adding Project.version(changes mcmeta pack_format)
 - added spawnegg check for CustomBlock
 - added CustomBlock onPlaced and onBreak

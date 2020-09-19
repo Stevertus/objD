@@ -3,6 +3,7 @@ import 'package:objd/basic/types/entity.dart';
 import 'package:objd/basic/rest_action.dart';
 import 'package:objd/basic/widget.dart';
 import 'package:objd/build/context.dart';
+import 'package:objd/core.dart';
 
 class Effect extends RestActionAble {
   EffectType effect;
@@ -45,9 +46,9 @@ class Effect extends RestActionAble {
   Map getMap() {
     var ret = {};
     ret['Id'] = EffectType.values.indexOf(effect) + 1;
-    ret['Amplifier'] = amplifier != null ? amplifier - 1 : 0;
+    ret['Amplifier'] = Byte(amplifier != null ? amplifier - 1 : 0);
     ret['Duration'] = duration != null ? duration * 20 : 0;
-    ret['ShowParticles'] = showParticles != null && showParticles ? 1 : 0;
+    ret['ShowParticles'] = Byte(showParticles != null && showParticles ? 1 : 0);
     return ret;
   }
 
