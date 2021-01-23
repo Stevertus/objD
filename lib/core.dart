@@ -1,9 +1,12 @@
 // all build functions
-export 'build/build.dart';
+export 'src/build/build.dart';
+
+// Annotations
+export 'annotations.dart';
 
 // basic widgets
-export 'basic/widgets.dart';
-export 'modules/modules.dart';
-export 'wrappers/widgets.dart';
-export 'utils/widgets.dart';
+export 'src/basic/widgets.dart';
+export 'src/modules/modules.dart';
+export 'src/wrappers/widgets.dart';
+export 'src/utils/widgets.dart';
 export 'package:gson/gson.dart';

@@ -1,7 +1,16 @@
-## 0.3.4
+## 0.3.5
 
+- added Annotation classes to be used with objd_gen, which drastically lowers code complexity
+- added ReplaceItem.copy, ReplaceItem.clear and ReplaceItem.modify implementing 1.17 item command
+- added a version parameter to context to allow widget to generate version specific code
+- added Particle.dust and Particle.copyWith alongside with major rework of the Particle command and simplification of code
+- added Recipe Widget with ability to generate Minecraft Recipe Files of any type
+- added the possibility to use a String as an Argument for Dimensions to support custom dimensions
 - added missing toPath property to Storage.modify
+- updated ReplaceItem to adapt automatically to the projects version
+- updated blocks, items, particles and entities to include content from 21w03a
 - fixed Effect nbt Generator not using the Byte Generator correctly
+- fixed issues with having two Packs at the top level of the tree
 - removed default scale value from Data.get
 
 ## 0.3.4
