@@ -404,7 +404,7 @@ class TextHoverEvent {
   // Todo: add item model
   TextHoverEvent.item(Item item) {
     action = 'show_item';
-    value = item.toString();
+    value = item.getNbt();
   }
   // shows a dummy entity presentation in chat
   TextHoverEvent.entity(String name, String type, String id) {

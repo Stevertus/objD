@@ -1,63 +1,103 @@
 import 'package:objd/src/basic/types/entity.dart';
 import 'package:objd/src/basic/types/item.dart';
 import 'package:objd/src/basic/types/location.dart';
+import 'package:objd/src/basic/types/pose.dart';
 import 'package:objd/src/basic/types/rotation.dart';
 import 'package:objd/src/basic/text_components.dart';
-import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/basic/widgets.dart';
-import 'package:objd/src/build/context.dart';
 import 'package:objd/src/wrappers/summon.dart';
 
-class ArmorStand extends RestActionAble {
-  TextComponent name;
-  Map<String, dynamic> nbt;
-  Location location;
-
-  bool invulnerable, gravity, small, nameVisible, glowing;
+class ArmorStand extends Summon {
+  bool marker, hasArms, basePlate, invisible;
 
   Item mainHand, offHand, head, chest, legs, boots;
-
-  List<String> tags;
-  int fire;
-  Rotation rotation;
-  List<Summon> passengers;
+  final Pose pose;
 
   /// An ArmorStand can be created with the Summon Widget, but there is also a specific Widget with special properties for an ArmorStand.
   ArmorStand(
-    this.location, {
-    this.name,
-    this.nameVisible,
-    this.nbt,
-    bool invisible,
-    this.invulnerable,
-    bool marker,
-    bool hasArms,
-    bool basePlate,
+    Location location, {
+    TextComponent name,
+    bool nameVisible,
+    Map<String, dynamic> nbt,
+    List<String> tags,
+    this.invisible,
+    bool invulnerable,
+    this.marker,
+    this.hasArms,
+    this.basePlate,
     this.mainHand,
     this.offHand,
     this.head,
     this.chest,
     this.legs,
     this.boots,
-    this.gravity,
-    this.glowing,
-    this.fire,
-    this.small,
-    this.passengers,
-    this.tags,
-    this.rotation,
-  }) {
-    nbt ??= {};
+    bool gravity,
+    bool glowing,
+    int fire,
+    bool small,
+    List<Summon> passengers,
+    Rotation rotation,
+    this.pose,
+  }) : super(
+          Entities.armor_stand,
+          location: location,
+          nbt: nbt,
+          tags: tags,
+          name: name,
+          nameVisible: nameVisible,
+          invulnerable: invulnerable,
+          glowing: glowing,
+          gravity: gravity,
+          small: small,
+          passengers: passengers,
+          rotation: rotation,
+          fire: fire,
+        );
 
-    _addBoolNbt(marker, 'Marker');
-    _addBoolNbt(hasArms, 'ShowArms');
-    _addBoolNbt(invisible, 'Invisible');
-    if (basePlate != null) _addBoolNbt(!basePlate, 'NoBasePlate');
-    _addSlots();
+  /// Often times you need a static ArmorStand that just acts as a marker for a location, there is ArmorStand.staticMarker that sets properties automatically.
+  ArmorStand.staticMarker(
+    Location location, {
+    TextComponent name,
+    bool nameVisible,
+    Map<String, dynamic> nbt,
+    this.invisible = true,
+    bool invulnerable = true,
+    bool gravity = false,
+    this.mainHand,
+    this.offHand,
+    this.head,
+    this.chest,
+    this.legs,
+    this.boots,
+    bool glowing,
+    int fire,
+    bool small,
+    List<Summon> passengers,
+    Rotation rotation,
+    List<String> tags,
+    this.pose,
+  })  : marker = true,
+        super(
+          Entities.armor_stand,
+          location: location,
+          nbt: nbt,
+          tags: tags,
+          name: name,
+          nameVisible: nameVisible,
+          invulnerable: invulnerable,
+          glowing: glowing,
+          gravity: gravity,
+          small: small,
+          passengers: passengers,
+          rotation: rotation,
+          fire: fire,
+        );
 
-    // TODO: Pose
+  void _addBoolNbt(Map<String, dynamic> nbt, bool value, String path) {
+    if (value != null) nbt[path] = value ? 1 : 0;
   }
-  void _addSlots() {
+
+  void _addSlots(Map<String, dynamic> nbt) {
     if ((mainHand != null || offHand != null) && nbt['HandItems'] == null) {
       nbt['HandItems'] = [{}, {}];
     }
@@ -71,54 +111,19 @@ class ArmorStand extends RestActionAble {
     if (chest != null) nbt['ArmorItems'][2] = chest.getMap();
     if (legs != null) nbt['ArmorItems'][1] = legs.getMap();
     if (boots != null) nbt['ArmorItems'][0] = boots.getMap();
-  }
-
-  /// Often times you need a static ArmorStand that just acts as a marker for a location, there is ArmorStand.staticMarker that sets properties automatically.
-  ArmorStand.staticMarker(
-    this.location, {
-    this.name,
-    this.nameVisible,
-    this.nbt,
-    bool invisible = true,
-    this.invulnerable = true,
-    this.gravity = false,
-    this.mainHand,
-    this.offHand,
-    this.head,
-    this.chest,
-    this.legs,
-    this.boots,
-    this.glowing,
-    this.fire,
-    this.small,
-    this.passengers,
-    this.tags,
-    this.rotation,
-  }) {
-    nbt ??= {};
-
-    _addBoolNbt(true, 'Marker');
-    _addBoolNbt(invisible, 'Invisible');
-    _addSlots();
-  }
-
-  void _addBoolNbt(bool value, String path) {
-    if (value != null) nbt[path] = value ? 1 : 0;
+    if (pose != null) nbt['Pose'] = pose.getMap();
   }
 
   @override
-  Widget generate(Context context) {
-    return Summon(Entities.armor_stand,
-        location: location,
-        tags: tags,
-        name: name,
-        nameVisible: nameVisible,
-        nbt: nbt,
-        invulnerable: invulnerable,
-        glowing: glowing,
-        gravity: gravity,
-        small: small,
-        passengers: passengers,
-        rotation: rotation);
+  Map<String, dynamic> getNbt([bool useId = true]) {
+    final nbt = super.getNbt(useId);
+
+    _addBoolNbt(nbt, marker, 'Marker');
+    _addBoolNbt(nbt, hasArms, 'ShowArms');
+    _addBoolNbt(nbt, invisible, 'Invisible');
+    if (basePlate != null) _addBoolNbt(nbt, !basePlate, 'NoBasePlate');
+    _addSlots(nbt);
+
+    return nbt;
   }
 }

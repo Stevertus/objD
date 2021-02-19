@@ -71,9 +71,13 @@ class BuildPack {
     myfile.generate(context: context, pack: this, prj: prj);
 
     if (front) {
-      files[file.path].commands.insertAll(0, myfile.commands);
+      final str = files[file.path].commands.toString();
+      files[file.path].commands.clear();
+      // switch order
+      files[file.path].commands.write(myfile.commands);
+      files[file.path].commands.write(str);
     } else {
-      files[file.path].commands.addAll(myfile.commands);
+      files[file.path].commands.write(myfile.commands);
     }
   }
 

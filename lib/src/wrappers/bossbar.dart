@@ -1,42 +1,40 @@
 import 'dart:convert';
+
 import 'package:objd/src/basic/command.dart';
-import 'package:objd/src/basic/types/entity.dart';
 import 'package:objd/src/basic/for_list.dart';
 import 'package:objd/src/basic/rest_action.dart';
 import 'package:objd/src/basic/text_components.dart';
+import 'package:objd/src/basic/types/entity.dart';
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/build/context.dart';
 import 'package:objd/src/wrappers/execute.dart';
 
 class Bossbar extends RestActionAble {
-  String _type;
+  final BossbarType type;
+  final String id;
 
-  String id;
   String name;
   List<TextComponent> nameTexts;
-  BossbarOption _option;
+  BossbarOption option;
   Map<String, String> modifiers = {};
 
-  Bossbar(this.id, {this.name}) {
+  Bossbar(this.id, {this.name, this.type = BossbarType.add}) {
     name ??= id;
-    _type = 'add';
   }
 
-  Bossbar remove() {
-    _type = 'remove';
-    return this;
-  }
+  Bossbar remove() => copyWith(type: BossbarType.remove);
 
   Bossbar get(BossbarOption option) {
-    _option = option;
-    _type = 'get';
-    return this;
+    final b = copyWith(type: BossbarType.get);
+    b.option = option;
+    return b;
   }
 
   Bossbar show(Entity player) {
-    modifiers['players'] = player.toString();
-    return this;
+    final b = copyWith(type: BossbarType.get);
+    b.modifiers['players'] = player.toString();
+    return b;
   }
 
   Bossbar set({
@@ -49,28 +47,29 @@ class Bossbar extends RestActionAble {
     bool visible,
     Entity players,
   }) {
-    if (name != null) this.nameTexts = [TextComponent(name)];
-    if (nameTexts != null) this.nameTexts = nameTexts;
-    if (color != null) modifiers['color'] = color.toString();
-    if (style != null) modifiers['style'] = style;
-    if (value != null) modifiers['value'] = value.toString();
-    if (max != null) modifiers['max'] = max.toString();
-    if (visible != null) modifiers['visible'] = visible.toString();
-    if (players != null) modifiers['players'] = players.toString();
-    _type = 'set';
-    return this;
+    final b = copyWith(type: BossbarType.set);
+
+    if (name != null) b.nameTexts = [TextComponent(name)];
+    if (nameTexts != null) b.nameTexts = nameTexts;
+    if (color != null) b.modifiers['color'] = color.toString();
+    if (style != null) b.modifiers['style'] = style;
+    if (value != null) b.modifiers['value'] = value.toString();
+    if (max != null) b.modifiers['max'] = max.toString();
+    if (visible != null) b.modifiers['visible'] = visible.toString();
+    if (players != null) b.modifiers['players'] = players.toString();
+    return b;
   }
 
   @override
   Widget generate(Context context) {
-    switch (_type) {
-      case 'add':
+    switch (type) {
+      case BossbarType.add:
         return Command('bossbar add ${id} {"text":"${name}"}');
-      case 'remove':
+      case BossbarType.remove:
         return Command('bossbar remove ${id}');
-      case 'get':
-        return Command('bossbar get ${id} ${_option.toString().split('.')[1]}');
-      case 'set':
+      case BossbarType.get:
+        return Command('bossbar get ${id} ${option.toString().split('.')[1]}');
+      case BossbarType.set:
         {
           var widgets = <Widget>[];
           if (nameTexts != null) {
@@ -91,8 +90,11 @@ class Bossbar extends RestActionAble {
     return json.encode(nameTexts.map((text) => text.toMap()).toList());
   }
 
-  Execute storeResult(Command command, BossbarOption option,
-      {bool useSuccess = false}) {
+  Group storeResult(
+    Widget w,
+    BossbarOption option, {
+    bool useSuccess = false,
+  }) {
     String strOption;
     switch (option) {
       case BossbarOption.max:
@@ -105,18 +107,24 @@ class Bossbar extends RestActionAble {
         throw ('Please use BossbarOption.max or BossbarOption.value with storeResult!');
     }
     ;
-    return Execute(
-      children: [command],
-      encapsulate: false,
-      args: [
-        [
-          'store ' +
-              (useSuccess ? 'success' : 'result') +
-              ' bossbar ${id} ${strOption}'
-        ],
-      ],
+    return Execute.internal_store_command(
+      'bossbar $id $strOption',
+      w,
+      useSuccess,
+    );
+  }
+
+  Bossbar copyWith({
+    BossbarType type,
+    String id,
+  }) {
+    return Bossbar(
+      id ?? this.id,
+      name: name,
+      type: type ?? this.type,
     );
   }
 }
 
 enum BossbarOption { max, players, value, visible }
+enum BossbarType { add, set, get, remove }

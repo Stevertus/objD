@@ -1,92 +1,71 @@
 import 'package:meta/meta.dart';
+import 'package:objd/core.dart';
 import 'package:objd/src/wrappers/execute.dart';
 import 'package:objd/src/basic/command.dart';
 
 /// This translates into Minecraft Coordinates.
 class Location {
-  double x, y, z = 0;
-  String location;
+  final double x, y, z;
+  final String location;
 
   /// takes in a string and translates it into coordinates
-  Location(this.location) {
-    x = y = z = 0;
-  }
+  const Location(this.location)
+      : x = 0,
+        y = 0,
+        z = 0;
 
   /// The Location class provides a wrapper for global(9 9 9) coordinates:
-  Location.glob({this.x = 0, this.y = 0, this.z = 0}) {
-    location = x.toString() + ' ' + y.toString() + ' ' + z.toString();
-  }
+  const Location.glob({this.x = 0, this.y = 0, this.z = 0})
+      : location = '$x $y $z';
 
   /// The Location class provides a wrapper for relative(~ ~ ~) coordinates:
-  Location.rel({this.x = 0, this.y = 0, this.z = 0}) {
-    location = '~' +
-        (x == 0 ? '' : x.toString()) +
-        ' ~' +
-        (y == 0 ? '' : y.toString()) +
-        ' ~' +
-        (z == 0 ? '' : z.toString());
-  }
+  const Location.rel({this.x = 0, this.y = 0, this.z = 0})
+      : location = '~$x ~$y ~$z';
 
   /// The Location class provides a wrapper for local(^ ^ ^) coordinates:
-  Location.local({this.x = 0, this.y = 0, this.z = 0}) {
-    location = '^' +
-        (x == 0 ? '' : x.toString()) +
-        ' ^' +
-        (y == 0 ? '' : y.toString()) +
-        ' ^' +
-        (z == 0 ? '' : z.toString());
-  }
+  const Location.local({this.x = 0, this.y = 0, this.z = 0})
+      : location = '^$x ^$y ^$z';
 
   /// Selects the current Position
   ///
   /// This is a shortcut for `~ ~ ~`
-  Location.here() {
-    location = '~ ~ ~';
-    x = y = z = 0;
-  }
+  const Location.here()
+      : location = '~ ~ ~',
+        x = 0,
+        y = 0,
+        z = 0;
 
   /// Clones a Location:
-  Location.clone(Location loc) {
-    x = loc.x;
-    y = loc.y;
-    z = loc.z;
-    location = loc.toString();
-  }
+  factory Location.clone(Location loc) => Location(loc.location);
 
-  /// This stores a result or success of a [command] in the nbt [path] of a location.
+  /// This stores a result or success of a Widget in the nbt [path] of a location.
   /// **Example:**
   /// ```dart
   ///Location.here().storeResult(Command('say hello'),path: 'Items[0].tag.command',useSuccess:true)
 
   ///⇒ execute store success block ~ ~ ~ Items[0].tag.command run say hello
   ///```
-  Execute storeResult(
-    Command command, {
+  Group storeResult(
+    Widget w, {
     @required String path,
     String datatype = 'double',
     double scale = 1,
     bool useSuccess = false,
   }) {
     assert(path == null && path.isEmpty);
-    return Execute(
-      children: [command],
-      encapsulate: false,
-      args: [
-        [
-          'store ' +
-              (useSuccess ? 'success' : 'result') +
-              ' block ' +
-              location +
-              ' ' +
-              path +
-              ' ${datatype} ${scale}'
-        ],
-      ],
+    return Execute.internal_store_command(
+      'block $location $path $datatype $scale',
+      w,
+      useSuccess,
     );
   }
 
   @override
   String toString() {
-    return (location + ' ').replaceAll('.0 ', ' ').trim();
+    return (location + ' ')
+        .replaceAll('.0 ', ' ')
+        .replaceAll('~0', '~')
+        .replaceAll('^0', '^')
+        .trim();
   }
 }

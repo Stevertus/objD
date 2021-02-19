@@ -15,20 +15,21 @@ import 'package:objd/src/wrappers/comment.dart';
 
 void scan(
   Widget wid, {
-  BuildFile file,
+  StringBuffer commands,
   BuildPack pack,
   BuildProject project,
   Context context,
 }) {
-  file.add(_findText(wid, context));
-  if (findFile(wid, context: context, pack: pack, project: project)) return;
+  if (wid is Text) commands.writeln(_findText(wid, context));
+  if (project != null &&
+      findFile(wid, context: context, pack: pack, project: project)) return;
 
   if (wid is Group) {
     scan(
       wid.generate(context),
       context:
           Context.clone(context).addPrefix(wid.prefix).addSuffix(wid.suffix),
-      file: file,
+      commands: commands,
       pack: pack,
       project: project,
     );
@@ -57,7 +58,7 @@ void scan(
     if (child is Widget) {
       scan(
         child,
-        file: file,
+        commands: commands,
         pack: pack,
         project: project,
         context: context,
@@ -70,7 +71,7 @@ void scan(
       child.forEach((x) {
         scan(
           x,
-          file: file,
+          commands: commands,
           pack: pack,
           project: project,
           context: context,
@@ -81,19 +82,16 @@ void scan(
   }
 }
 
-String _findText(Widget wid, Context context) {
-  if (wid is Text) {
-    var suffixes = '';
-    var prefixes = '';
-    if (context.prefixes.isNotEmpty) {
-      prefixes = context.prefixes.join(' ') + ' ';
-    }
-    if (context.suffixes.isNotEmpty) {
-      suffixes = context.suffixes.join(' ') + ' ';
-    }
-    return prefixes + wid.generate(context) + suffixes;
+String _findText(Text wid, Context context) {
+  var suffixes = '';
+  var prefixes = '';
+  if (context.prefixes.isNotEmpty) {
+    prefixes = context.prefixes.join(' ') + ' ';
   }
-  return '';
+  if (context.suffixes.isNotEmpty) {
+    suffixes = context.suffixes.join(' ') + ' ';
+  }
+  return prefixes + wid.generate(context) + suffixes;
 }
 
 bool findFile(

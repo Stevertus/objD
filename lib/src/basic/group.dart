@@ -1,5 +1,6 @@
 import 'package:objd/src/basic/indexed_file.dart';
 import 'package:objd/src/basic/rest_action.dart';
+import 'package:objd/src/basic/strait_widget.dart';
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/basic/for_list.dart';
 import 'package:objd/src/build/build.dart';
@@ -42,14 +43,21 @@ class Group extends RestActionAble {
   @override
   Widget generate(Context context) {
     // check if new file is needed
-    if (groupMin > -1 && children.isNotEmpty && children.length >= groupMin) {
-      return IndexedFile(
-        generateIDs && filename != null ? filename : 'group',
-        execute: true,
-        child: For.of(children),
-        custom: generateIDs && filename != null ? null : filename,
-        path: path,
-      );
+    if (groupMin > -1 && children.isNotEmpty) {
+      var childrenNum = children.length;
+      // add all widget generated from a strait widget
+      if (children.first is StraitWidget) {
+        childrenNum += (children.first as StraitWidget).result.length;
+      }
+      if (childrenNum >= groupMin) {
+        return IndexedFile(
+          generateIDs && filename != null ? filename : 'group',
+          execute: true,
+          child: For.of(children),
+          custom: generateIDs && filename != null ? null : filename,
+          path: path,
+        );
+      }
     }
     return For.of(children);
   }

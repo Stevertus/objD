@@ -772,6 +772,11 @@ class Blocks {
   static const List<Block> snapshot = [
     amethyst_block,
     amethyst_cluster,
+    azalea,
+    azalea_leaves,
+    azalea_leaves_flowers,
+    big_dripleaf,
+    big_dripleaf_stem,
     black_candle,
     black_candle_cake,
     blue_candle,
@@ -782,6 +787,8 @@ class Blocks {
     calcite,
     candle,
     candle_cake,
+    cave_vines_body,
+    cave_vines_head,
     copper_block,
     copper_ore,
     cut_copper,
@@ -791,28 +798,37 @@ class Blocks {
     cyan_candle_cake,
     dirt_path,
     dripstone_block,
+    exposed_copper,
+    exposed_cut_copper,
+    exposed_cut_copper_slab,
+    exposed_cut_copper_stairs,
+    flowering_azalea,
+    glow_lichen,
     gray_candle,
     gray_candle_cake,
     green_candle,
     green_candle_cake,
+    hanging_roots,
     large_amethyst_bud,
     lava_cauldron,
     light_blue_candle,
     light_blue_candle_cake,
     light_gray_candle,
     light_gray_candle_cake,
-    lightly_weathered_copper_block,
-    lightly_weathered_cut_copper,
-    lightly_weathered_cut_copper_slab,
-    lightly_weathered_cut_copper_stairs,
     lightning_rod,
     lime_candle,
     lime_candle_cake,
     magenta_candle,
     magenta_candle_cake,
     medium_amethyst_bud,
+    moss_block,
+    moss_carpet,
     orange_candle,
     orange_candle_cake,
+    oxidized_copper,
+    oxidized_cut_copper,
+    oxidized_cut_copper_slab,
+    oxidized_cut_copper_stairs,
     pink_candle,
     pink_candle_cake,
     pointed_dripstone,
@@ -822,28 +838,27 @@ class Blocks {
     purple_candle_cake,
     red_candle,
     red_candle_cake,
+    rooted_dirt,
     sculk_sensor,
-    semi_weathered_copper_block,
-    semi_weathered_cut_copper,
-    semi_weathered_cut_copper_slab,
-    semi_weathered_cut_copper_stairs,
     small_amethyst_bud,
+    small_dripleaf,
+    spore_blossom,
     tinted_glass,
     tuff,
     water_cauldron,
-    waxed_copper,
+    waxed_copper_block,
     waxed_cut_copper,
     waxed_cut_copper_slab,
     waxed_cut_copper_stairs,
-    waxed_lightly_weathered_copper,
-    waxed_lightly_weathered_cut_copper,
-    waxed_lightly_weathered_cut_copper_slab,
-    waxed_lightly_weathered_cut_copper_stairs,
-    waxed_semi_weathered_copper,
-    waxed_semi_weathered_cut_copper,
-    waxed_semi_weathered_cut_copper_slab,
-    waxed_semi_weathered_cut_copper_stairs,
-    weathered_copper_block,
+    waxed_exposed_copper,
+    waxed_exposed_cut_copper,
+    waxed_exposed_cut_copper_slab,
+    waxed_exposed_cut_copper_stairs,
+    waxed_weathered_copper,
+    waxed_weathered_cut_copper,
+    waxed_weathered_cut_copper_slab,
+    waxed_weathered_cut_copper_stairs,
+    weathered_copper,
     weathered_cut_copper,
     weathered_cut_copper_slab,
     weathered_cut_copper_stairs,
@@ -851,7 +866,23 @@ class Blocks {
     white_candle_cake,
     yellow_candle,
     yellow_candle_cake,
-    glow_lichen
+    grimstone,
+    grimstone_bricks,
+    grimstone_brick_stairs,
+    grimstone_brick_slab,
+    grimstone_brick_wall,
+    grimstone_wall,
+    grimstone_stairs,
+    grimstone_slab,
+    grimstone_tiles,
+    grimstone_tile_stairs,
+    grimstone_tile_slab,
+    grimstone_tile_wall,
+    chiseled_grimstone,
+    polished_grimstone,
+    polished_grimstone_stairs,
+    polished_grimstone_slab,
+    polished_grimstone_wall
   ];
 
   /// [Acacia Button](https://minecraft.gamepedia.com/acacia_button)
@@ -4869,6 +4900,32 @@ class Blocks {
   /// _(minecraft:amethyst_cluster)_
   static const Block amethyst_cluster = Block('minecraft:amethyst_cluster');
 
+  /// [Azalea](https://minecraft.gamepedia.com/azalea)
+  ///
+  /// _(minecraft:azalea)_
+  static const Block azalea = Block('minecraft:azalea');
+
+  /// [Azalea Leaves](https://minecraft.gamepedia.com/azalea_leaves)
+  ///
+  /// _(minecraft:azalea_leaves)_
+  static const Block azalea_leaves = Block('minecraft:azalea_leaves');
+
+  /// [Azalea Leaves Flowers](https://minecraft.gamepedia.com/azalea_leaves_flowers)
+  ///
+  /// _(minecraft:azalea_leaves_flowers)_
+  static const Block azalea_leaves_flowers =
+      Block('minecraft:azalea_leaves_flowers');
+
+  /// [Big Dripleaf](https://minecraft.gamepedia.com/big_dripleaf)
+  ///
+  /// _(minecraft:big_dripleaf)_
+  static const Block big_dripleaf = Block('minecraft:big_dripleaf');
+
+  /// [Big Dripleaf Stem](https://minecraft.gamepedia.com/big_dripleaf_stem)
+  ///
+  /// _(minecraft:big_dripleaf_stem)_
+  static const Block big_dripleaf_stem = Block('minecraft:big_dripleaf_stem');
+
   /// [Black Candle](https://minecraft.gamepedia.com/black_candle)
   ///
   /// _(minecraft:black_candle)_
@@ -4919,6 +4976,16 @@ class Blocks {
   /// _(minecraft:candle_cake)_
   static const Block candle_cake = Block('minecraft:candle_cake');
 
+  /// [Cave Vines Body](https://minecraft.gamepedia.com/cave_vines_body)
+  ///
+  /// _(minecraft:cave_vines_body)_
+  static const Block cave_vines_body = Block('minecraft:cave_vines_body');
+
+  /// [Cave Vines Head](https://minecraft.gamepedia.com/cave_vines_head)
+  ///
+  /// _(minecraft:cave_vines_head)_
+  static const Block cave_vines_head = Block('minecraft:cave_vines_head');
+
   /// [Copper Block](https://minecraft.gamepedia.com/copper_block)
   ///
   /// _(minecraft:copper_block)_
@@ -4964,6 +5031,38 @@ class Blocks {
   /// _(minecraft:dripstone_block)_
   static const Block dripstone_block = Block('minecraft:dripstone_block');
 
+  /// [Exposed Copper](https://minecraft.gamepedia.com/exposed_copper)
+  ///
+  /// _(minecraft:exposed_copper)_
+  static const Block exposed_copper = Block('minecraft:exposed_copper');
+
+  /// [Exposed Cut Copper](https://minecraft.gamepedia.com/exposed_cut_copper)
+  ///
+  /// _(minecraft:exposed_cut_copper)_
+  static const Block exposed_cut_copper = Block('minecraft:exposed_cut_copper');
+
+  /// [Exposed Cut Copper Slab](https://minecraft.gamepedia.com/exposed_cut_copper_slab)
+  ///
+  /// _(minecraft:exposed_cut_copper_slab)_
+  static const Block exposed_cut_copper_slab =
+      Block('minecraft:exposed_cut_copper_slab');
+
+  /// [Exposed Cut Copper Stairs](https://minecraft.gamepedia.com/exposed_cut_copper_stairs)
+  ///
+  /// _(minecraft:exposed_cut_copper_stairs)_
+  static const Block exposed_cut_copper_stairs =
+      Block('minecraft:exposed_cut_copper_stairs');
+
+  /// [Flowering Azalea](https://minecraft.gamepedia.com/flowering_azalea)
+  ///
+  /// _(minecraft:flowering_azalea)_
+  static const Block flowering_azalea = Block('minecraft:flowering_azalea');
+
+  /// [Glow Lichen](https://minecraft.gamepedia.com/glow_lichen)
+  ///
+  /// _(minecraft:glow_lichen)_
+  static const Block glow_lichen = Block('minecraft:glow_lichen');
+
   /// [Gray Candle](https://minecraft.gamepedia.com/gray_candle)
   ///
   /// _(minecraft:gray_candle)_
@@ -4983,6 +5082,11 @@ class Blocks {
   ///
   /// _(minecraft:green_candle_cake)_
   static const Block green_candle_cake = Block('minecraft:green_candle_cake');
+
+  /// [Hanging Roots](https://minecraft.gamepedia.com/hanging_roots)
+  ///
+  /// _(minecraft:hanging_roots)_
+  static const Block hanging_roots = Block('minecraft:hanging_roots');
 
   /// [Large Amethyst Bud](https://minecraft.gamepedia.com/large_amethyst_bud)
   ///
@@ -5016,30 +5120,6 @@ class Blocks {
   static const Block light_gray_candle_cake =
       Block('minecraft:light_gray_candle_cake');
 
-  /// [Lightly Weathered Copper Block](https://minecraft.gamepedia.com/lightly_weathered_copper_block)
-  ///
-  /// _(minecraft:lightly_weathered_copper_block)_
-  static const Block lightly_weathered_copper_block =
-      Block('minecraft:lightly_weathered_copper_block');
-
-  /// [Lightly Weathered Cut Copper](https://minecraft.gamepedia.com/lightly_weathered_cut_copper)
-  ///
-  /// _(minecraft:lightly_weathered_cut_copper)_
-  static const Block lightly_weathered_cut_copper =
-      Block('minecraft:lightly_weathered_cut_copper');
-
-  /// [Lightly Weathered Cut Copper Slab](https://minecraft.gamepedia.com/lightly_weathered_cut_copper_slab)
-  ///
-  /// _(minecraft:lightly_weathered_cut_copper_slab)_
-  static const Block lightly_weathered_cut_copper_slab =
-      Block('minecraft:lightly_weathered_cut_copper_slab');
-
-  /// [Lightly Weathered Cut Copper Stairs](https://minecraft.gamepedia.com/lightly_weathered_cut_copper_stairs)
-  ///
-  /// _(minecraft:lightly_weathered_cut_copper_stairs)_
-  static const Block lightly_weathered_cut_copper_stairs =
-      Block('minecraft:lightly_weathered_cut_copper_stairs');
-
   /// [Lightning Rod](https://minecraft.gamepedia.com/lightning_rod)
   ///
   /// _(minecraft:lightning_rod)_
@@ -5072,6 +5152,16 @@ class Blocks {
   static const Block medium_amethyst_bud =
       Block('minecraft:medium_amethyst_bud');
 
+  /// [Moss Block](https://minecraft.gamepedia.com/moss_block)
+  ///
+  /// _(minecraft:moss_block)_
+  static const Block moss_block = Block('minecraft:moss_block');
+
+  /// [Moss Carpet](https://minecraft.gamepedia.com/moss_carpet)
+  ///
+  /// _(minecraft:moss_carpet)_
+  static const Block moss_carpet = Block('minecraft:moss_carpet');
+
   /// [Orange Candle](https://minecraft.gamepedia.com/orange_candle)
   ///
   /// _(minecraft:orange_candle)_
@@ -5081,6 +5171,29 @@ class Blocks {
   ///
   /// _(minecraft:orange_candle_cake)_
   static const Block orange_candle_cake = Block('minecraft:orange_candle_cake');
+
+  /// [Oxidized Copper](https://minecraft.gamepedia.com/oxidized_copper)
+  ///
+  /// _(minecraft:oxidized_copper)_
+  static const Block oxidized_copper = Block('minecraft:oxidized_copper');
+
+  /// [Oxidized Cut Copper](https://minecraft.gamepedia.com/oxidized_cut_copper)
+  ///
+  /// _(minecraft:oxidized_cut_copper)_
+  static const Block oxidized_cut_copper =
+      Block('minecraft:oxidized_cut_copper');
+
+  /// [Oxidized Cut Copper Slab](https://minecraft.gamepedia.com/oxidized_cut_copper_slab)
+  ///
+  /// _(minecraft:oxidized_cut_copper_slab)_
+  static const Block oxidized_cut_copper_slab =
+      Block('minecraft:oxidized_cut_copper_slab');
+
+  /// [Oxidized Cut Copper Stairs](https://minecraft.gamepedia.com/oxidized_cut_copper_stairs)
+  ///
+  /// _(minecraft:oxidized_cut_copper_stairs)_
+  static const Block oxidized_cut_copper_stairs =
+      Block('minecraft:oxidized_cut_copper_stairs');
 
   /// [Pink Candle](https://minecraft.gamepedia.com/pink_candle)
   ///
@@ -5128,39 +5241,30 @@ class Blocks {
   /// _(minecraft:red_candle_cake)_
   static const Block red_candle_cake = Block('minecraft:red_candle_cake');
 
+  /// [Rooted Dirt](https://minecraft.gamepedia.com/rooted_dirt)
+  ///
+  /// _(minecraft:rooted_dirt)_
+  static const Block rooted_dirt = Block('minecraft:rooted_dirt');
+
   /// [Sculk Sensor](https://minecraft.gamepedia.com/sculk_sensor)
   ///
   /// _(minecraft:sculk_sensor)_
   static const Block sculk_sensor = Block('minecraft:sculk_sensor');
 
-  /// [Semi Weathered Copper Block](https://minecraft.gamepedia.com/semi_weathered_copper_block)
-  ///
-  /// _(minecraft:semi_weathered_copper_block)_
-  static const Block semi_weathered_copper_block =
-      Block('minecraft:semi_weathered_copper_block');
-
-  /// [Semi Weathered Cut Copper](https://minecraft.gamepedia.com/semi_weathered_cut_copper)
-  ///
-  /// _(minecraft:semi_weathered_cut_copper)_
-  static const Block semi_weathered_cut_copper =
-      Block('minecraft:semi_weathered_cut_copper');
-
-  /// [Semi Weathered Cut Copper Slab](https://minecraft.gamepedia.com/semi_weathered_cut_copper_slab)
-  ///
-  /// _(minecraft:semi_weathered_cut_copper_slab)_
-  static const Block semi_weathered_cut_copper_slab =
-      Block('minecraft:semi_weathered_cut_copper_slab');
-
-  /// [Semi Weathered Cut Copper Stairs](https://minecraft.gamepedia.com/semi_weathered_cut_copper_stairs)
-  ///
-  /// _(minecraft:semi_weathered_cut_copper_stairs)_
-  static const Block semi_weathered_cut_copper_stairs =
-      Block('minecraft:semi_weathered_cut_copper_stairs');
-
   /// [Small Amethyst Bud](https://minecraft.gamepedia.com/small_amethyst_bud)
   ///
   /// _(minecraft:small_amethyst_bud)_
   static const Block small_amethyst_bud = Block('minecraft:small_amethyst_bud');
+
+  /// [Small Dripleaf](https://minecraft.gamepedia.com/small_dripleaf)
+  ///
+  /// _(minecraft:small_dripleaf)_
+  static const Block small_dripleaf = Block('minecraft:small_dripleaf');
+
+  /// [Spore Blossom](https://minecraft.gamepedia.com/spore_blossom)
+  ///
+  /// _(minecraft:spore_blossom)_
+  static const Block spore_blossom = Block('minecraft:spore_blossom');
 
   /// [Tinted Glass](https://minecraft.gamepedia.com/tinted_glass)
   ///
@@ -5177,10 +5281,10 @@ class Blocks {
   /// _(minecraft:water_cauldron)_
   static const Block water_cauldron = Block('minecraft:water_cauldron');
 
-  /// [Waxed Copper](https://minecraft.gamepedia.com/waxed_copper)
+  /// [Waxed Copper Block](https://minecraft.gamepedia.com/waxed_copper_block)
   ///
-  /// _(minecraft:waxed_copper)_
-  static const Block waxed_copper = Block('minecraft:waxed_copper');
+  /// _(minecraft:waxed_copper_block)_
+  static const Block waxed_copper_block = Block('minecraft:waxed_copper_block');
 
   /// [Waxed Cut Copper](https://minecraft.gamepedia.com/waxed_cut_copper)
   ///
@@ -5199,59 +5303,58 @@ class Blocks {
   static const Block waxed_cut_copper_stairs =
       Block('minecraft:waxed_cut_copper_stairs');
 
-  /// [Waxed Lightly Weathered Copper](https://minecraft.gamepedia.com/waxed_lightly_weathered_copper)
+  /// [Waxed Exposed Copper](https://minecraft.gamepedia.com/waxed_exposed_copper)
   ///
-  /// _(minecraft:waxed_lightly_weathered_copper)_
-  static const Block waxed_lightly_weathered_copper =
-      Block('minecraft:waxed_lightly_weathered_copper');
+  /// _(minecraft:waxed_exposed_copper)_
+  static const Block waxed_exposed_copper =
+      Block('minecraft:waxed_exposed_copper');
 
-  /// [Waxed Lightly Weathered Cut Copper](https://minecraft.gamepedia.com/waxed_lightly_weathered_cut_copper)
+  /// [Waxed Exposed Cut Copper](https://minecraft.gamepedia.com/waxed_exposed_cut_copper)
   ///
-  /// _(minecraft:waxed_lightly_weathered_cut_copper)_
-  static const Block waxed_lightly_weathered_cut_copper =
-      Block('minecraft:waxed_lightly_weathered_cut_copper');
+  /// _(minecraft:waxed_exposed_cut_copper)_
+  static const Block waxed_exposed_cut_copper =
+      Block('minecraft:waxed_exposed_cut_copper');
 
-  /// [Waxed Lightly Weathered Cut Copper Slab](https://minecraft.gamepedia.com/waxed_lightly_weathered_cut_copper_slab)
+  /// [Waxed Exposed Cut Copper Slab](https://minecraft.gamepedia.com/waxed_exposed_cut_copper_slab)
   ///
-  /// _(minecraft:waxed_lightly_weathered_cut_copper_slab)_
-  static const Block waxed_lightly_weathered_cut_copper_slab =
-      Block('minecraft:waxed_lightly_weathered_cut_copper_slab');
+  /// _(minecraft:waxed_exposed_cut_copper_slab)_
+  static const Block waxed_exposed_cut_copper_slab =
+      Block('minecraft:waxed_exposed_cut_copper_slab');
 
-  /// [Waxed Lightly Weathered Cut Copper Stairs](https://minecraft.gamepedia.com/waxed_lightly_weathered_cut_copper_stairs)
+  /// [Waxed Exposed Cut Copper Stairs](https://minecraft.gamepedia.com/waxed_exposed_cut_copper_stairs)
   ///
-  /// _(minecraft:waxed_lightly_weathered_cut_copper_stairs)_
-  static const Block waxed_lightly_weathered_cut_copper_stairs =
-      Block('minecraft:waxed_lightly_weathered_cut_copper_stairs');
+  /// _(minecraft:waxed_exposed_cut_copper_stairs)_
+  static const Block waxed_exposed_cut_copper_stairs =
+      Block('minecraft:waxed_exposed_cut_copper_stairs');
 
-  /// [Waxed Semi Weathered Copper](https://minecraft.gamepedia.com/waxed_semi_weathered_copper)
+  /// [Waxed Weathered Copper](https://minecraft.gamepedia.com/waxed_weathered_copper)
   ///
-  /// _(minecraft:waxed_semi_weathered_copper)_
-  static const Block waxed_semi_weathered_copper =
-      Block('minecraft:waxed_semi_weathered_copper');
+  /// _(minecraft:waxed_weathered_copper)_
+  static const Block waxed_weathered_copper =
+      Block('minecraft:waxed_weathered_copper');
 
-  /// [Waxed Semi Weathered Cut Copper](https://minecraft.gamepedia.com/waxed_semi_weathered_cut_copper)
+  /// [Waxed Weathered Cut Copper](https://minecraft.gamepedia.com/waxed_weathered_cut_copper)
   ///
-  /// _(minecraft:waxed_semi_weathered_cut_copper)_
-  static const Block waxed_semi_weathered_cut_copper =
-      Block('minecraft:waxed_semi_weathered_cut_copper');
+  /// _(minecraft:waxed_weathered_cut_copper)_
+  static const Block waxed_weathered_cut_copper =
+      Block('minecraft:waxed_weathered_cut_copper');
 
-  /// [Waxed Semi Weathered Cut Copper Slab](https://minecraft.gamepedia.com/waxed_semi_weathered_cut_copper_slab)
+  /// [Waxed Weathered Cut Copper Slab](https://minecraft.gamepedia.com/waxed_weathered_cut_copper_slab)
   ///
-  /// _(minecraft:waxed_semi_weathered_cut_copper_slab)_
-  static const Block waxed_semi_weathered_cut_copper_slab =
-      Block('minecraft:waxed_semi_weathered_cut_copper_slab');
+  /// _(minecraft:waxed_weathered_cut_copper_slab)_
+  static const Block waxed_weathered_cut_copper_slab =
+      Block('minecraft:waxed_weathered_cut_copper_slab');
 
-  /// [Waxed Semi Weathered Cut Copper Stairs](https://minecraft.gamepedia.com/waxed_semi_weathered_cut_copper_stairs)
+  /// [Waxed Weathered Cut Copper Stairs](https://minecraft.gamepedia.com/waxed_weathered_cut_copper_stairs)
   ///
-  /// _(minecraft:waxed_semi_weathered_cut_copper_stairs)_
-  static const Block waxed_semi_weathered_cut_copper_stairs =
-      Block('minecraft:waxed_semi_weathered_cut_copper_stairs');
+  /// _(minecraft:waxed_weathered_cut_copper_stairs)_
+  static const Block waxed_weathered_cut_copper_stairs =
+      Block('minecraft:waxed_weathered_cut_copper_stairs');
 
-  /// [Weathered Copper Block](https://minecraft.gamepedia.com/weathered_copper_block)
+  /// [Weathered Copper](https://minecraft.gamepedia.com/weathered_copper)
   ///
-  /// _(minecraft:weathered_copper_block)_
-  static const Block weathered_copper_block =
-      Block('minecraft:weathered_copper_block');
+  /// _(minecraft:weathered_copper)_
+  static const Block weathered_copper = Block('minecraft:weathered_copper');
 
   /// [Weathered Cut Copper](https://minecraft.gamepedia.com/weathered_cut_copper)
   ///
@@ -5291,8 +5394,97 @@ class Blocks {
   /// _(minecraft:yellow_candle_cake)_
   static const Block yellow_candle_cake = Block('minecraft:yellow_candle_cake');
 
-  /// [Glow Lichen](https://minecraft.gamepedia.com/glow_lichen)
+  /// [Grimstone](https://minecraft.gamepedia.com/grimstone)
   ///
-  /// _(minecraft:glow_lichen)_
-  static const Block glow_lichen = Block('minecraft:glow_lichen');
+  /// _(minecraft:grimstone)_
+  static const Block grimstone = Block('minecraft:grimstone');
+
+  /// [Grimstone Bricks](https://minecraft.gamepedia.com/grimstone_bricks)
+  ///
+  /// _(minecraft:grimstone_bricks)_
+  static const Block grimstone_bricks = Block('minecraft:grimstone_bricks');
+
+  /// [Grimstone Brick Stairs](https://minecraft.gamepedia.com/grimstone_brick_stairs)
+  ///
+  /// _(minecraft:grimstone_brick_stairs)_
+  static const Block grimstone_brick_stairs =
+      Block('minecraft:grimstone_brick_stairs');
+
+  /// [Grimstone Brick Slab](https://minecraft.gamepedia.com/grimstone_brick_slab)
+  ///
+  /// _(minecraft:grimstone_brick_slab)_
+  static const Block grimstone_brick_slab =
+      Block('minecraft:grimstone_brick_slab');
+
+  /// [Grimstone Brick Wall](https://minecraft.gamepedia.com/grimstone_brick_wall)
+  ///
+  /// _(minecraft:grimstone_brick_wall)_
+  static const Block grimstone_brick_wall =
+      Block('minecraft:grimstone_brick_wall');
+
+  /// [Grimstone Wall](https://minecraft.gamepedia.com/grimstone_wall)
+  ///
+  /// _(minecraft:grimstone_wall)_
+  static const Block grimstone_wall = Block('minecraft:grimstone_wall');
+
+  /// [Grimstone Stairs](https://minecraft.gamepedia.com/grimstone_stairs)
+  ///
+  /// _(minecraft:grimstone_stairs)_
+  static const Block grimstone_stairs = Block('minecraft:grimstone_stairs');
+
+  /// [Grimstone Slab](https://minecraft.gamepedia.com/grimstone_slab)
+  ///
+  /// _(minecraft:grimstone_slab)_
+  static const Block grimstone_slab = Block('minecraft:grimstone_slab');
+
+  /// [Grimstone Tiles](https://minecraft.gamepedia.com/grimstone_tiles)
+  ///
+  /// _(minecraft:grimstone_tiles)_
+  static const Block grimstone_tiles = Block('minecraft:grimstone_tiles');
+
+  /// [Grimstone Tile Stairs](https://minecraft.gamepedia.com/grimstone_tile_stairs)
+  ///
+  /// _(minecraft:grimstone_tile_stairs)_
+  static const Block grimstone_tile_stairs =
+      Block('minecraft:grimstone_tile_stairs');
+
+  /// [Grimstone Tile Slab](https://minecraft.gamepedia.com/grimstone_tile_slab)
+  ///
+  /// _(minecraft:grimstone_tile_slab)_
+  static const Block grimstone_tile_slab =
+      Block('minecraft:grimstone_tile_slab');
+
+  /// [Grimstone Tile Wall](https://minecraft.gamepedia.com/grimstone_tile_wall)
+  ///
+  /// _(minecraft:grimstone_tile_wall)_
+  static const Block grimstone_tile_wall =
+      Block('minecraft:grimstone_tile_wall');
+
+  /// [Chiseled Grimstone](https://minecraft.gamepedia.com/chiseled_grimstone)
+  ///
+  /// _(minecraft:chiseled_grimstone)_
+  static const Block chiseled_grimstone = Block('minecraft:chiseled_grimstone');
+
+  /// [Polished Grimstone](https://minecraft.gamepedia.com/polished_grimstone)
+  ///
+  /// _(minecraft:polished_grimstone)_
+  static const Block polished_grimstone = Block('minecraft:polished_grimstone');
+
+  /// [Polished Grimstone Stairs](https://minecraft.gamepedia.com/polished_grimstone_stairs)
+  ///
+  /// _(minecraft:polished_grimstone_stairs)_
+  static const Block polished_grimstone_stairs =
+      Block('minecraft:polished_grimstone_stairs');
+
+  /// [Polished Grimstone Slab](https://minecraft.gamepedia.com/polished_grimstone_slab)
+  ///
+  /// _(minecraft:polished_grimstone_slab)_
+  static const Block polished_grimstone_slab =
+      Block('minecraft:polished_grimstone_slab');
+
+  /// [Polished Grimstone Wall](https://minecraft.gamepedia.com/polished_grimstone_wall)
+  ///
+  /// _(minecraft:polished_grimstone_wall)_
+  static const Block polished_grimstone_wall =
+      Block('minecraft:polished_grimstone_wall');
 }

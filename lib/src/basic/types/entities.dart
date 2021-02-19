@@ -43,6 +43,8 @@ class Entities {
     furnace_minecart,
     ghast,
     giant,
+    glow_item_frame,
+    glow_squid,
     guardian,
     hoglin,
     hopper_minecart,
@@ -111,9 +113,7 @@ class Entities {
     zombie,
     zombie_horse,
     zombie_villager,
-    zombified_piglin,
-    glow_item_frame,
-    glow_squid
+    zombified_piglin
   ];
 
   /// [Area Effect Cloud](https://minecraft.gamepedia.com/area_effect_cloud)
@@ -325,6 +325,17 @@ class Entities {
   ///
   /// _(minecraft:giant)_
   static const EntityType giant = EntityType('minecraft:giant');
+
+  /// [Glow Item Frame](https://minecraft.gamepedia.com/glow_item_frame)
+  ///
+  /// _(minecraft:glow_item_frame)_
+  static const EntityType glow_item_frame =
+      EntityType('minecraft:glow_item_frame');
+
+  /// [Glow Squid](https://minecraft.gamepedia.com/glow_squid)
+  ///
+  /// _(minecraft:glow_squid)_
+  static const EntityType glow_squid = EntityType('minecraft:glow_squid');
 
   /// [Guardian](https://minecraft.gamepedia.com/guardian)
   ///
@@ -681,15 +692,4 @@ class Entities {
   /// _(minecraft:zombified_piglin)_
   static const EntityType zombified_piglin =
       EntityType('minecraft:zombified_piglin');
-
-  /// [Glow Item Frame](https://minecraft.gamepedia.com/glow_item_frame)
-  ///
-  /// _(minecraft:glow_item_frame)_
-  static const EntityType glow_item_frame =
-      EntityType('minecraft:glow_item_frame');
-
-  /// [Glow Squid](https://minecraft.gamepedia.com/glow_squid)
-  ///
-  /// _(minecraft:glow_squid)_
-  static const EntityType glow_squid = EntityType('minecraft:glow_squid');
 }

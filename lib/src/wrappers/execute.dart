@@ -307,29 +307,41 @@ class Execute extends RestActionAble {
     return this;
   }
 
-  void storeBlock(
-          {ExecuteStoreResultType result = ExecuteStoreResultType.result,
-          @required Location location,
-          @required String path,
-          int scale = 1,
-          ExecuteStoreVarType varType = ExecuteStoreVarType.int}) =>
-      _addArgumentRet('store ' +
-          result.toString().split('.')[1] +
-          ' block ' +
-          location.toString() +
-          ' ' +
-          path +
-          ' ' +
-          varType.toString().split('.')[1] +
-          ' ' +
-          scale.toString());
+  /// just for internal use
+  static Group internal_store_command(String type, Widget w, bool useSuccess) =>
+      Group(
+        prefix: 'execute store ' +
+            (useSuccess ? 'success ' : 'result ') +
+            type +
+            ' run',
+        groupMin: 1000,
+        children: [w],
+      );
 
-  void storeEntity(
-          {ExecuteStoreResultType result = ExecuteStoreResultType.result,
-          @required Entity entity,
-          @required String path,
-          int scale = 1,
-          ExecuteStoreVarType varType = ExecuteStoreVarType.int}) =>
+  void storeBlock({
+    ExecuteStoreResultType result = ExecuteStoreResultType.result,
+    @required Location location,
+    @required String path,
+    int scale = 1,
+    ExecuteStoreVarType varType = ExecuteStoreVarType.int,
+  }) =>
+      _addArgumentRet([
+        'store',
+        result.toString().split('.')[1],
+        'block',
+        location.toString(),
+        path,
+        varType.toString().split('.')[1],
+        scale.toString()
+      ].join(' '));
+
+  void storeEntity({
+    ExecuteStoreResultType result = ExecuteStoreResultType.result,
+    @required Entity entity,
+    @required String path,
+    int scale = 1,
+    ExecuteStoreVarType varType = ExecuteStoreVarType.int,
+  }) =>
       _addArgumentRet('store ' +
           result.toString().split('.')[1] +
           ' entity ' +
@@ -341,21 +353,24 @@ class Execute extends RestActionAble {
           ' ' +
           scale.toString());
 
-  void storeScore(
-          {ExecuteStoreResultType result = ExecuteStoreResultType.result,
-          @required Entity entity,
-          @required String score}) =>
-      _addArgumentRet('store ' +
-          result.toString().split('.')[1] +
-          ' score ' +
-          entity.toString() +
-          ' ' +
-          score);
+  void storeScore({
+    ExecuteStoreResultType result = ExecuteStoreResultType.result,
+    @required Score score,
+  }) =>
+      _addArgumentRet(
+        'store ' +
+            result.toString().split('.')[1] +
+            ' score ' +
+            score.entity.toString() +
+            ' ' +
+            score.score,
+      );
 
-  void storeBossbar(
-          {ExecuteStoreResultType result = ExecuteStoreResultType.result,
-          @required String name,
-          BossbarOption setting = BossbarOption.value}) =>
+  void storeBossbar({
+    ExecuteStoreResultType result = ExecuteStoreResultType.result,
+    @required String name,
+    BossbarOption setting = BossbarOption.value,
+  }) =>
       _addArgumentRet('store ' +
           result.toString().split('.')[1] +
           ' score ' +

@@ -1,3 +1,24 @@
+## 0.3.6
+
+- added Pose class and corresponding pose argument in ArmorStand
+- added Summon.select method to easily get an entity selector
+- added a getCommands method which generates the commands of a given Widget
+- added JsonFile Widget to easily generate json files
+- added further checks for encapsulating groups when using strait functionality
+- changed Location to be immutable and providing const constructors
+- changed Summon parameters to be class fields
+- changed ArmorStand and AreaEffectCloud to inherit Summon, you can now use all possibilites of Summon
+- changed Execute.storeScore to use Score instead of two seperate parameters
+- changed Bossbar.storeResult, Entity.storeResult and Location.storeResult to accept any Widget
+- changed Command generation behaviour from List to StringBuffer
+- updated blocks, items, particles and entities to include content from 21w07a
+- fixed TextHoverEvent.item using the id as value instead of whole nbt
+- fixed giving a negative `from` value to RandomScore would only generate positive numbers
+- fixed Bossbar methods would override previous uses of the same object
+- fixed Item.getMap returning the id in `item` instead of `id`, added optional parameter
+
+Thanks White Blizzard and Bonesdog for making suggestions for this version.
+
 ## 0.3.5
 
 - added Annotation classes to be used with objd_gen, which drastically lowers code complexity

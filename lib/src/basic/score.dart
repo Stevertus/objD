@@ -382,16 +382,15 @@ class Score extends RestActionAble {
     );
   }
 
-  /// sets the score to the success of the given command
-  Score setToResult(Command command, {bool useSuccess = false}) {
+  /// sets the score to the success of the given Command
+  Score setToResult(Command commmand, {bool useSuccess = false}) {
     return addCommandRet(
       Command(
         'execute store ' +
             (useSuccess ? 'success' : 'result') +
             ' score ' +
             _getESStr() +
-            ' run ' +
-            command.toMap()['command'].toString(),
+            ' run $commmand',
       ),
     );
   }

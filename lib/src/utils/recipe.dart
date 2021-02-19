@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:objd/core.dart';
+import 'package:objd/src/utils/json_file.dart';
 
 const _CHARS = '#PSVXBJFA';
 
@@ -255,10 +256,9 @@ class Recipe extends Widget {
     var n = IndexedFile.getIndexedAndIncrease(name).toString();
     if (n == '0') n = '';
     if (!name.contains('.json')) n += '.json';
-    return RawFile(
-      name + n,
-      json.encode(toJson()),
-      path: '/recipes/',
+    return JsonFile(
+      'recipes/' + name + n,
+      toJson(),
     );
   }
 
@@ -325,29 +325,29 @@ class Recipe extends Widget {
           dat['type'] = 'crafting_shaped';
           final p = getPattern();
           dat['pattern'] = p.key;
-          dat['key'] = p.value.map((k, v) => MapEntry(k, v.getMap()));
+          dat['key'] = p.value.map((k, v) => MapEntry(k, v.getMap(false)));
           break;
         }
       case RecipeType.shapeless:
         {
           dat['type'] = 'crafting_shapeless';
           dat['ingredients'] =
-              ingredients.values.map((i) => i.getMap()).toList();
+              ingredients.values.map((i) => i.getMap(false)).toList();
           break;
         }
       case RecipeType.smithing:
         {
           dat['type'] = 'smithing';
-          dat['base'] = ingredients.values.first.getMap();
+          dat['base'] = ingredients.values.first.getMap(false);
           if (ingredients.length > 1) {
-            dat['add'] = ingredients.values.toList()[1].getMap();
+            dat['add'] = ingredients.values.toList()[1].getMap(false);
           }
           break;
         }
       default:
         {
           dat['type'] = type.toString().split('.')[1];
-          dat['ingredient'] = ingredients.values.first.getMap();
+          dat['ingredient'] = ingredients.values.first.getMap(false);
           dat['result'] = 'minecraft:' + result.getId();
         }
     }

@@ -495,26 +495,18 @@ class Entity implements EntityClass {
   }
 
   /// stores the result or success of a [command] in a nbt [path] in your entity
-  Execute storeResult(Command command,
-      {@required String path,
-      String datatype = 'double',
-      double scale = 1,
-      bool useSuccess = false}) {
+  Group storeResult(
+    Widget w, {
+    @required String path,
+    String datatype = 'double',
+    double scale = 1,
+    bool useSuccess = false,
+  }) {
     assert(path != null || path.isNotEmpty);
-    return Execute(
-      children: [command],
-      encapsulate: false,
-      args: [
-        [
-          'store ' +
-              (useSuccess ? 'success' : 'result') +
-              ' entity ' +
-              toString() +
-              ' ' +
-              path +
-              ' ${datatype} ${scale}'
-        ],
-      ],
+    return Execute.internal_store_command(
+      'entity $this $path $datatype $scale',
+      w,
+      useSuccess,
     );
   }
 

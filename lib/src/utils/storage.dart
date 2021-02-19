@@ -126,9 +126,15 @@ class Storage extends Widget {
 
   ///Modifies Nbt Data(look at [Data Widget](/basics#data)).
   Storage modify(
+    String toPath,
     DataModify modify,
   ) =>
-      Storage.modify(name, autoNamespace: autoNamespace, modify: modify);
+      Storage.modify(
+        name,
+        autoNamespace: autoNamespace,
+        modify: modify,
+        toPath: toPath,
+      );
 
   ///Copies Nbt Data from a **Data.get** Widget.
   Storage copyData(

@@ -13,30 +13,70 @@ class Summon extends RestActionAble {
   Map<String, dynamic> nbt;
   Location location;
   EntityType type;
+  TextComponent name;
+  bool nameVisible,
+      invulnerable,
+      persistent,
+      noAI,
+      silent,
+      gravity,
+      glowing,
+      small;
+  int fire, age;
+  Rotation rotation;
+  List<Effect> effects;
+  List<Summon> passengers;
+  List<String> tags;
 
   /// The summon class creates a new entity at a given location.
   Summon(
     this.type, {
-    TextComponent name,
-    bool nameVisible,
+    this.name,
+    this.nameVisible,
     this.nbt,
-    this.location,
-    bool invulnerable,
-    bool persistent,
-    bool noAI,
-    bool silent,
-    bool gravity,
-    bool glowing,
-    List<Summon> passengers,
-    List<Effect> effects,
-    List<String> tags,
-    int fire,
-    bool small,
-    int age,
-    Rotation rotation,
-  }) {
-    location ??= Location.here();
-    nbt ??= {};
+    this.location = const Location.here(),
+    this.invulnerable,
+    this.persistent,
+    this.noAI,
+    this.silent,
+    this.gravity,
+    this.glowing,
+    this.passengers,
+    this.effects,
+    this.tags,
+    this.fire,
+    this.small,
+    this.age,
+    this.rotation,
+  });
+
+  /// If you have an existing Summon object(or Armorstand) you can invoke `.select` to give you a corresponding `Entity` selector.
+  ///
+  /// ```dart
+  /// Summon(Entities.chicken, tags: ['sel']).select(limit: 1)
+  /// ⇒ @e[type=chicken, tag: sel, limit: 1]
+  /// ```
+  ///
+  /// For the options you can also set the used selector and whether to use tags or type.
+  Entity select({
+    String selector = 'e',
+    bool useType = true,
+    bool useTags = true,
+    int limit,
+  }) =>
+      Entity(
+        selector: selector,
+        tags: useTags ? tags : null,
+        type: useType ? type : null,
+        limit: limit,
+      );
+
+  Map<String, dynamic> getNbt([bool useId = true]) {
+    var nbt = Map<String, dynamic>.from(this.nbt ?? {});
+
+    void _addBoolNbt(bool value, String path) {
+      if (value != null) nbt[path] = value ? 1 : 0;
+    }
 
     if (name != null) nbt['CustomName'] = name.toJson();
     _addBoolNbt(invulnerable, 'Invulnerable');
@@ -58,30 +98,29 @@ class Summon extends RestActionAble {
       nbt['ActiveEffects'] = effects.map((effect) => effect.getMap()).toList();
     }
     if (passengers != null) {
-      nbt['Passengers'] = passengers.map((pass) => pass.getMap()).toList();
+      nbt['Passengers'] = passengers.map((pass) => pass.getNbt()).toList();
     }
     if (fire != null && fire > 0) nbt['Fire'] = fire;
     if (rotation != null) nbt['Rotation'] = [rotation.x, rotation.y];
     if (age != null) nbt['Age'] = age;
+
+    if (useId) nbt['id'] = type.type;
+    return nbt;
   }
 
-  Map getMap() {
-    var ret = Map.from(nbt);
-    ret['id'] = type.type;
-    return ret;
-  }
-
-  void _addBoolNbt(bool value, String path) {
-    if (value != null) nbt[path] = value ? 1 : 0;
-  }
+  Map getMap() => getNbt();
 
   @override
   Widget generate(Context context) {
-    return Command('summon ' +
-        type.toString() +
-        ' ' +
-        location.toString() +
-        ' ' +
-        gson.encode(nbt));
+    return Command(
+      'summon ' +
+          type.toString() +
+          ' ' +
+          location.toString() +
+          ' ' +
+          gson.encode(
+            getNbt(false),
+          ),
+    );
   }
 }

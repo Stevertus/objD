@@ -42,11 +42,14 @@ class Particles {
     falling_lava,
     falling_nectar,
     falling_obsidian_tear,
+    falling_spore_blossom,
     falling_water,
     firework,
     fishing,
     flame,
     flash,
+    glow,
+    glow_squid_ink,
     happy_villager,
     heart,
     instant_effect,
@@ -73,6 +76,7 @@ class Particles {
     soul_fire_flame,
     spit,
     splash,
+    spore_blossom_air,
     squid_ink,
     sweep_attack,
     totem_of_undying,
@@ -80,9 +84,7 @@ class Particles {
     vibration,
     warped_spore,
     white_ash,
-    witch,
-    glow,
-    glow_squid_ink
+    witch
   ];
 
   /// _(minecraft:ambient_entity_effect)_
@@ -235,6 +237,10 @@ class Particles {
   static const ParticleType falling_obsidian_tear =
       ParticleType('minecraft:falling_obsidian_tear');
 
+  /// _(minecraft:falling_spore_blossom)_
+  static const ParticleType falling_spore_blossom =
+      ParticleType('minecraft:falling_spore_blossom');
+
   /// _(minecraft:falling_water)_
   static const ParticleType falling_water =
       ParticleType('minecraft:falling_water');
@@ -250,6 +256,13 @@ class Particles {
 
   /// _(minecraft:flash)_
   static const ParticleType flash = ParticleType('minecraft:flash');
+
+  /// _(minecraft:glow)_
+  static const ParticleType glow = ParticleType('minecraft:glow');
+
+  /// _(minecraft:glow_squid_ink)_
+  static const ParticleType glow_squid_ink =
+      ParticleType('minecraft:glow_squid_ink');
 
   /// _(minecraft:happy_villager)_
   static const ParticleType happy_villager =
@@ -337,6 +350,10 @@ class Particles {
   /// _(minecraft:splash)_
   static const ParticleType splash = ParticleType('minecraft:splash');
 
+  /// _(minecraft:spore_blossom_air)_
+  static const ParticleType spore_blossom_air =
+      ParticleType('minecraft:spore_blossom_air');
+
   /// _(minecraft:squid_ink)_
   static const ParticleType squid_ink = ParticleType('minecraft:squid_ink');
 
@@ -363,13 +380,6 @@ class Particles {
 
   /// _(minecraft:witch)_
   static const ParticleType witch = ParticleType('minecraft:witch');
-
-  /// _(minecraft:glow)_
-  static const ParticleType glow = ParticleType('minecraft:glow');
-
-  /// _(minecraft:glow_squid_ink)_
-  static const ParticleType glow_squid_ink =
-      ParticleType('minecraft:glow_squid_ink');
 }
 
 class ParticleType {

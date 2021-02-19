@@ -30,25 +30,29 @@ class RandomScore extends RestActionAble {
   Widget generate(Context context) {
     final s = Scoreboard(objective);
 
-    return For.of(
-      [
-        Score(Entity.PlayerName('#max'), objective).set(_diff),
-        Group(
-          path: targetFilePath,
-          filename: targetFileName ?? 'random',
-          generateIDs: targetFileName == null,
-          children: [
-            Comment('Random UUID Generator from ${context.file}'),
-            AreaEffectCloud(Location.here(), tags: ['objd_random']),
-            s[entity].setToResult(Command(
-                'data get entity @e[tag=objd_random,sort=nearest,limit=1] UUIDMost 0.0000000001')),
-            s[entity].modulo(
-              s['#max'],
+    return For.of([
+      Score(Entity.PlayerName('#max'), objective).set(_diff),
+      Group(
+        path: targetFilePath,
+        filename: targetFileName ?? 'random',
+        generateIDs: targetFileName == null,
+        children: [
+          Comment('Random UUID Generator from ${context.file}'),
+          AreaEffectCloud(Location.here(), tags: ['objd_random']),
+          s[entity].setToWidget(
+            Data.get(
+              Entity(tags: ['objd_random'], limit: 1).sort(Sort.nearest),
+              path: 'UUIDMost',
+              scale: 0.0000000001,
             ),
-          ],
-        ),
-        from > 0 ? score.add(from) : null,
-      ],
-    );
+          ),
+          s[entity].modulo(
+            s['#max'],
+          ),
+        ],
+      ),
+      if (from > 0) score.add(from),
+      if (from < 0) score.subtract(-from),
+    ]);
   }
 }

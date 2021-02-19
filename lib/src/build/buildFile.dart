@@ -12,7 +12,7 @@ List addAndReturn(List list, dynamic item) {
 }
 
 class BuildFile {
-  List<String> commands;
+  StringBuffer commands;
   String path;
   Widget child;
 
@@ -21,26 +21,37 @@ class BuildFile {
   BuildFile(File file) {
     path = file.path;
     child = file.child;
-    commands = [];
-    if (file.header != null) commands.add(file.header.text);
+    commands = StringBuffer();
+    if (file.header != null) commands.writeln(file.header.text);
   }
+
+  BuildFile.fromWidget(this.child, this.path) {
+    commands = StringBuffer();
+  }
+
   BuildFile.extended(Extend file) {
     path = file.path;
     child = file.child;
-    commands = [];
+    commands = StringBuffer();
   }
 
   void add(String str) {
     if (str != null && str.isNotEmpty) {
-      commands.add(str);
+      commands.writeln(str);
     }
   }
 
-  List toMap() {
-    return commands;
+  String toMap() {
+    return commands.toString();
   }
 
   void generate({Context context, BuildPack pack, BuildProject prj}) {
-    scanner.scan(child, context: context, file: this, pack: pack, project: prj);
+    scanner.scan(
+      child,
+      context: context,
+      commands: commands,
+      pack: pack,
+      project: prj,
+    );
   }
 }
