@@ -31,7 +31,7 @@ Open the pubspec.yaml file and add
 ```yaml
 name: [unique_namespace]
 dependencies:
-  objd: ^0.3.5
+  objd: ^0.3.6
 ```
 
 Also remember to replace the `[unique_namespace]` with your own project name.

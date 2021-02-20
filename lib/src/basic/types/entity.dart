@@ -1,5 +1,4 @@
 import 'package:objd/src/basic/types/area.dart';
-import 'package:objd/src/basic/command.dart';
 import 'package:objd/src/basic/for_list.dart';
 import 'package:objd/src/basic/types/block.dart';
 import 'package:objd/src/basic/types/location.dart';

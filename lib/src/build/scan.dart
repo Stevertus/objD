@@ -6,7 +6,6 @@ import 'package:objd/src/basic/pack.dart';
 import 'package:objd/src/basic/scoreboard.dart';
 import 'package:objd/src/basic/text.dart';
 import 'package:objd/src/basic/widget.dart';
-import 'package:objd/src/build/buildFile.dart';
 import 'package:objd/src/build/buildPack.dart';
 import 'package:objd/src/build/buildProject.dart';
 import 'package:objd/src/build/context.dart';
