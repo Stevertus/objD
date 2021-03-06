@@ -168,16 +168,12 @@ class Recipe extends Widget {
     RecipeType type = RecipeType.shaped,
   }) {
     var ingredients = <int, Item>{};
-    var patt = <int, String>{};
     var i = 1;
     pattern.forEach((String row) {
-      if (row.isNotEmpty && row[0] != ' ') pattern[i] = row[0];
-      if (row.length > 1 && row[1] != ' ') pattern[i + 1] = row[1];
-      if (row.length > 2 && row[2] != ' ') pattern[i + 2] = row[2];
+      if (row.isNotEmpty && row[0] != ' ') ingredients[i] = keys[row[0]];
+      if (row.length > 1 && row[1] != ' ') ingredients[i + 1] = keys[row[1]];
+      if (row.length > 2 && row[2] != ' ') ingredients[i + 2] = keys[row[2]];
       i += 3;
-    });
-    patt.forEach((int i, String key) {
-      ingredients[i] = keys[key];
     });
 
     return Recipe(

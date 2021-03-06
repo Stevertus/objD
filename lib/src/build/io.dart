@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:colorize/colorize.dart';
+import 'package:ansicolor/ansicolor.dart';
 
 Future<List> generateIO(Map<String, String> files, String path) async {
   var futures = <Future>[];
@@ -34,7 +34,8 @@ Future _createFile(String name, String content) async {
   path = path.sublist(0, path.length - 1).join('/');
   _ensureDirExists(path as String);
   await saveBytes(utf8.encode(content), name);
-  color('Generated: ' + name, front: Styles.LIGHT_YELLOW);
+  final yellow = AnsiPen()..yellow();
+  print(yellow('Generated: ' + name));
   return;
 }
 
@@ -44,7 +45,7 @@ Future saveBytes(List<int> bytes, String path) async {
   return await file.writeAsBytes(bytes);
 }
 
-String readFile(String name) {
+String /*?*/ readFile(String name) {
   var myfile = File(name);
   if (!myfile.existsSync()) return null;
   return myfile.readAsStringSync();

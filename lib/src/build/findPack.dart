@@ -3,7 +3,7 @@ import 'package:objd/src/basic/pack.dart';
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/build/context.dart';
 
-List<Pack> findPacks(Widget wid, {Context context}) {
+List<Pack> findPacks(Widget/*!*//*?*//*?*/ wid, {Context context}) {
   if (wid is Pack) return [wid];
   if (wid is For) {
     var packs = <Pack>[];

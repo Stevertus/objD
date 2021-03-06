@@ -9,9 +9,10 @@ description: objd is an Object Oriented framework for Building Minecraft Datapac
 environment:
   sdk: ">=2.3.0 <3.0.0"
 dependencies:
-  meta: ^1.2.4
-  colorize: ^2.0.0
-  archive: ">=2.0.13"
-  gson: ^0.1.4
+  meta:
+  ansicolor: ^2.0.0-nullsafety.0
+  archive: ^3.1.2
+  gson:
+    path: C:\dev\Dart\dart-gson
 dev_dependencies:
-  pedantic: ^1.9.2
+  pedantic: ^1.11.0
