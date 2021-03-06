@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:objd/src/basic/command.dart';
 import 'package:objd/src/basic/types/location.dart';
 import 'package:objd/src/basic/rest_action.dart';
@@ -21,18 +20,18 @@ class Clone extends RestActionAble {
   /// )
   /// ⇒ clone 0 0 0 10 10 10 ~ ~ ~
   /// ```
-  Clone(this.area, {@required this.to});
+  Clone(this.area, {required this.to});
 
   Clone.filtered(this.area,
-      {@required this.to, Block block = Blocks.air, String mode}) {
+      {required this.to, Block block = Blocks.air, String mode}) {
     type = 'filtered ' + block.toString();
     if (mode != null && mode.isNotEmpty) type += ' ' + mode;
   }
-  Clone.masked(this.area, {@required this.to, String mode}) {
+  Clone.masked(this.area, {required this.to, String mode}) {
     type = 'masked';
     if (mode != null && mode.isNotEmpty) type += ' ' + mode;
   }
-  Clone.replace(this.area, {@required this.to, String mode}) {
+  Clone.replace(this.area, {required this.to, String mode}) {
     type = 'replace';
     if (mode != null && mode.isNotEmpty) type += ' ' + mode;
   }

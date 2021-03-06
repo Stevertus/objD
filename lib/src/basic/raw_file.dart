@@ -28,6 +28,6 @@ class RawFile extends Widget {
 
   @override
   Widget generate(Context context) {
-    return null;
+    return Comment.Null();
   }
 }

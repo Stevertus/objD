@@ -1,5 +1,5 @@
 import 'package:objd/src/basic/command.dart';
-import 'package:meta/meta.dart';
+
 import 'package:objd/src/basic/types/location.dart';
 import 'package:objd/src/basic/rest_action.dart';
 import 'package:objd/src/basic/types/slot.dart';
@@ -23,9 +23,9 @@ class ReplaceItem extends RestActionAble {
   /// Sets a specific container slot to a item for Entities.
   ReplaceItem(
     this.entity, {
-    @required this.item,
-    @required this.slot,
-  })  : assert(entity != null),
+    required this.item,
+    required this.slot,
+  })   : assert(entity != null),
         assert(item != null),
         _type = _ReplaceItemType.replace;
 
@@ -38,9 +38,9 @@ class ReplaceItem extends RestActionAble {
   /// | slot              | a Slot Object with the slot set(required) |
   ReplaceItem.block(
     this.loc, {
-    @required this.item,
-    @required this.slot,
-  })  : assert(loc != null),
+    required this.item,
+    required this.slot,
+  })   : assert(loc != null),
         assert(item != null),
         _type = _ReplaceItemType.replace;
 
@@ -48,7 +48,7 @@ class ReplaceItem extends RestActionAble {
   ReplaceItem.modify(
     dynamic target,
     this.modifier, {
-    @required this.slot,
+    required this.slot,
   }) : _type = _ReplaceItemType.modify {
     _setTarget(target);
   }
@@ -77,9 +77,9 @@ class ReplaceItem extends RestActionAble {
   /// ```
   ReplaceItem.copy(
     dynamic target, {
-    @required dynamic from,
-    @required this.fromSlot,
-    @required this.slot,
+    required dynamic from,
+    required this.fromSlot,
+    required this.slot,
     this.modifier,
   }) : _type = _ReplaceItemType.copy {
     _setTarget(target);

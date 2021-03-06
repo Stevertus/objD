@@ -1,7 +1,7 @@
 import 'package:objd/src/basic/command.dart';
 import 'package:objd/src/basic/file.dart';
 import 'package:objd/src/basic/group.dart';
-import 'package:meta/meta.dart';
+
 import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/build/build.dart';
 
@@ -12,15 +12,15 @@ class Schedule extends RestActionAble {
 
   int ticks;
 
-  Schedule(this._name, {@required this.ticks, this.mode})
+  Schedule(this._name, {required this.ticks, this.mode})
       : assert(ticks != null);
-  Schedule.file(this._file, {@required this.ticks, this.mode})
+  Schedule.file(this._file, {required this.ticks, this.mode})
       : assert(ticks != null) {
     _file.execute = true;
   }
 
   /// Appends a Scheduled Function to the current Schedule.
-  Schedule.append(this._name, {@required this.ticks}) : assert(ticks != null) {
+  Schedule.append(this._name, {required this.ticks}) : assert(ticks != null) {
     mode = ScheduleMode.append;
   }
   Schedule.clear(this._name) {
@@ -28,7 +28,7 @@ class Schedule extends RestActionAble {
   }
 
   /// Appends a Scheduled File to the current Schedule.
-  Schedule.appendFile(this._file, {@required this.ticks})
+  Schedule.appendFile(this._file, {required this.ticks})
       : assert(ticks != null) {
     mode = ScheduleMode.append;
   }

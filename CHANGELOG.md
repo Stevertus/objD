@@ -1,3 +1,8 @@
+## 0.4.0
+
+- migrated to null safety, read more here: https://dart.dev/null-safety
+- fixed Area generating NULL instead of 0 by default
+
 ## 0.3.6
 
 - added Pose class and corresponding pose argument in ArmorStand

@@ -2,7 +2,7 @@ import 'package:objd/src/basic/types/condition.dart';
 import 'package:objd/src/basic/types/entity.dart';
 import 'package:objd/src/basic/file.dart';
 import 'package:objd/src/basic/for_list.dart';
-import 'package:meta/meta.dart';
+
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/build/build.dart';
@@ -16,7 +16,7 @@ class Timeout extends RestActionAble {
   int ticks;
 
   Timeout(this.name,
-      {@required this.children, @required this.ticks, this.path = 'timers'})
+      {required this.children, required this.ticks, this.path = 'timers'})
       : assert(ticks != null);
 
   @override
@@ -39,8 +39,8 @@ class Timer extends RestActionAble {
 
   Timer(
     this.name, {
-    @required this.children,
-    @required this.ticks,
+    required this.children,
+    required this.ticks,
     this.path = 'timers',
     this.infinite = true,
   }) : assert(ticks != null);

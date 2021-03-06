@@ -6,7 +6,6 @@ import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/build/build.dart';
 import 'package:objd/src/basic/types/entity.dart';
 import 'package:objd/src/basic/text_components.dart';
-import 'package:meta/meta.dart';
 
 class Title extends RestActionAble {
   String type;
@@ -16,18 +15,18 @@ class Title extends RestActionAble {
   /// To display our TextComponent, we need the `/title` command and the Title class wrapper.
   Title(
     Entity selector, {
-    @required List<TextComponent> show,
+    required List<TextComponent> show,
   }) {
     type = 'title';
     entity = selector.toString();
     jsonText = json.encode(show.map((text) => text.toMap()).toList());
   }
-  Title.subtitle(Entity selector, {@required List<TextComponent> show}) {
+  Title.subtitle(Entity selector, {required List<TextComponent> show}) {
     type = 'subtitle';
     entity = selector.toString();
     jsonText = json.encode(show.map((text) => text.toMap()).toList());
   }
-  Title.actionbar(Entity selector, {@required List<TextComponent> show}) {
+  Title.actionbar(Entity selector, {required List<TextComponent> show}) {
     type = 'actionbar';
     entity = selector.toString();
     jsonText = json.encode(show.map((text) => text.toMap()).toList());

@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/build/context.dart';
 
@@ -24,8 +23,8 @@ class Project {
   ///}
   ///```
   Project({
-    @required this.name,
-    @required this.generate,
+    required this.name,
+    required this.generate,
     this.version = 16,
     this.target = './',
     this.description = 'This is a datapack generated with objd by Stevertus',

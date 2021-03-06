@@ -1,5 +1,5 @@
 import 'package:gson/gson.dart';
-import 'package:meta/meta.dart';
+
 import 'package:objd/src/basic/types/entity.dart' as e;
 import 'package:objd/src/external/predicates/entity/entity.dart';
 import 'package:objd/src/external/predicates/range.dart';
@@ -81,7 +81,7 @@ class Stat {
   final String stat;
   final Range<int> value;
 
-  Stat(this.stat, {@required this.type, @required this.value});
+  Stat(this.stat, {required this.type, required this.value});
 
   Map<String, dynamic> getJson() => {
         'type': type,

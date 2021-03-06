@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:objd/core.dart';
 
 /// Allows you to specify what should happen if a player joins. This can be triggered every time or just once with PlayerJoin.inital
@@ -18,7 +17,7 @@ class PlayerJoin extends Widget {
   /// | score       | The scoreboard that is used(default = `objd_join`)           |
 
   PlayerJoin({
-    @required this.then,
+    required this.then,
     this.target,
     this.score = 'objd_join',
   })  : _isInitial = false,

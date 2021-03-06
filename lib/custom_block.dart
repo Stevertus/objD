@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:objd/core.dart';
 
 /// This Module allows you to create infinite new blocks in the game. It works by providing a [block] and an [item] that acts as a model for the new block.
@@ -59,7 +58,7 @@ class CustomBlock extends Module {
   CustomBlock(
     this.id,
     this.item, {
-    @required this.block,
+    required this.block,
     this.blockModel,
     this.main,
     this.onBreak,

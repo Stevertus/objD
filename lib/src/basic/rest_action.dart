@@ -5,7 +5,7 @@ import 'package:objd/src/build/build.dart';
 
 abstract class RestActionAble extends Widget {
   /// The writable list the RestAction writes it's contents on
-  List<Widget> writable;
+  List<Widget>? writable;
 
   /// Contains the Information, if this RestAction is already called (and can't be called again)
   bool called = false;
@@ -24,7 +24,7 @@ abstract class RestActionAble extends Widget {
   ///Entity.Selected().kill().queue(cont);
   ///```
 
-  void queue([List<Widget> writable]) {
+  void queue([List<Widget>? writable]) {
     if (called) {
       throw ('Rest action is already executed, cant execute it again');
     }
@@ -40,7 +40,7 @@ class RestAction extends RestActionAble {
   Widget _rest;
 
   @override
-  List<Widget> writable;
+  List<Widget>? writable;
 
   ///If autoQueue is enabled, you don't have to manually run the `queue()` method on your RestActions.
 

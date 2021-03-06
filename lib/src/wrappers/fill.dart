@@ -1,5 +1,5 @@
 import 'package:objd/src/basic/command.dart';
-import 'package:meta/meta.dart';
+
 import 'package:objd/src/basic/rest_action.dart';
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/basic/types/block.dart';
@@ -12,20 +12,20 @@ class Fill extends RestActionAble {
   String type = '';
 
   /// Fill acts similar to setblock, but fills a whole area instead.
-  Fill(this.block, {@required this.area});
-  Fill.destroy(this.block, {@required this.area}) {
+  Fill(this.block, {required this.area});
+  Fill.destroy(this.block, {required this.area}) {
     type = 'destroy';
   }
-  Fill.hollow(this.block, {@required this.area}) {
+  Fill.hollow(this.block, {required this.area}) {
     type = 'hollow';
   }
-  Fill.outline(this.block, {@required this.area}) {
+  Fill.outline(this.block, {required this.area}) {
     type = 'outline';
   }
-  Fill.keep(this.block, {@required this.area}) {
+  Fill.keep(this.block, {required this.area}) {
     type = 'keep';
   }
-  Fill.replace(this.block, {@required this.area, Block replace}) {
+  Fill.replace(this.block, {required this.area, Block replace}) {
     if (replace != null) type = 'replace ' + replace.toString();
   }
 

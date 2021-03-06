@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:objd/src/basic/types/location.dart';
 import 'package:objd/src/basic/rest_action.dart';
 import 'package:objd/src/basic/text_components.dart';
@@ -29,7 +28,7 @@ class Hologram extends RestActionAble {
   /// ```
   Hologram(
     String str, {
-    @required this.location,
+    required this.location,
     Color color,
     this.tags,
     this.space = 0.25,
@@ -50,7 +49,7 @@ class Hologram extends RestActionAble {
   /// If you wish you can assign each line a separate TextComponent with `Hologram.multiple`
   Hologram.multiple(
     this.texts, {
-    @required this.location,
+    required this.location,
     this.tags,
     this.space = 0.25,
   }) {

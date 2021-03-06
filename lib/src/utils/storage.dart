@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/build/context.dart';
 import 'package:objd/core.dart';
@@ -33,17 +32,17 @@ class Storage extends Widget {
   Storage.set(
     this.name, {
     this.autoNamespace = true,
-    @required this.key,
-    @required dynamic value,
-  })  : nbt = {key: value},
+    required this.key,
+    required dynamic value,
+  })   : nbt = {key: value},
         _type = _StorageType.merge;
 
   /// But of course you can also insert a Map with multiple keys and values.
   Storage.merge(
     this.name, {
     this.autoNamespace = true,
-    @required this.nbt,
-  })  : assert(nbt != null),
+    required this.nbt,
+  })   : assert(nbt != null),
         _type = _StorageType.merge;
 
   /// To get a value back, use Storage.get.
@@ -51,25 +50,25 @@ class Storage extends Widget {
     this.name, {
     this.autoNamespace = true,
     this.scale = 1,
-    @required this.key,
-  })  : assert(key != null),
+    required this.key,
+  })   : assert(key != null),
         _type = _StorageType.get;
 
   /// Removes certain Nbt Data.
   Storage.remove(
     this.name, {
     this.autoNamespace = true,
-    @required this.key,
-  })  : assert(key != null),
+    required this.key,
+  })   : assert(key != null),
         _type = _StorageType.remove;
 
   /// Modifies Nbt Data(look at [Data Widget](/basics#data)).
   Storage.modify(
     this.name, {
-    @required String toPath,
+    required String toPath,
     this.autoNamespace = true,
-    @required DataModify modify,
-  })  : assert(modify != null),
+    required DataModify modify,
+  })   : assert(modify != null),
         assert(toPath != null),
         _modify = modify,
         key = toPath,
@@ -79,9 +78,9 @@ class Storage extends Widget {
   Storage.copyData(
     this.name, {
     this.autoNamespace = true,
-    @required this.key,
-    @required this.data,
-  })  : assert(data != null),
+    required this.key,
+    required this.data,
+  })   : assert(data != null),
         assert(key != null),
         assert(data.subcommand == 'get',
             'You have to insert a Data.get into copyData!'),
@@ -93,9 +92,9 @@ class Storage extends Widget {
     this.autoNamespace = true,
     this.scale = 1,
     this.datatype = 'byte',
-    @required this.key,
-    @required this.score,
-  })  : assert(score != null),
+    required this.key,
+    required this.score,
+  })   : assert(score != null),
         assert(key != null),
         _type = _StorageType.score;
 

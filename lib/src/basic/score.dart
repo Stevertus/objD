@@ -15,7 +15,7 @@ class Score extends RestActionAble {
 
   /// Get commands
   List<Widget> get commands => _commands;
-  Entity entity;
+  final Entity entity;
   String score;
   String _strGen = '';
 
@@ -32,15 +32,15 @@ class Score extends RestActionAble {
   /// Score(Entity.Selected(),'score',addNew: true)
   ///```
 
-  Score(this.entity, this.score, {bool addNew = true, List<Widget> commands}) {
+  Score(this.entity, this.score, {bool addNew = true, List<Widget>? commands}) {
     if (commands != null) _commands = commands;
     if (addNew) {
       _commands.add(
         Scoreboard(score),
       );
     }
-    if (Scoreboard.prefix != null && !score.contains(Scoreboard.prefix)) {
-      score = Scoreboard.prefix + score;
+    if (Scoreboard.prefix != null && !score.contains(Scoreboard.prefix!)) {
+      score = Scoreboard.prefix! + score;
     }
   }
 
@@ -49,18 +49,19 @@ class Score extends RestActionAble {
   /// Score.fromSelected('objective').set(3)
   /// ⇒ scoreboard players set @s objective 3
   /// ```
-  Score.fromSelected(this.score, {bool addNew = true}) {
-    entity = Entity.Selected();
+  Score.fromSelected(this.score, {bool addNew = true})
+      : entity = Entity.Self() {
     if (addNew) {
       _commands.add(
         Scoreboard(score),
       );
     }
-    if (Scoreboard.prefix != null && !score.contains(Scoreboard.prefix)) {
-      score = Scoreboard.prefix + score;
+    if (Scoreboard.prefix != null && !score.contains(Scoreboard.prefix!)) {
+      score = Scoreboard.prefix! + score;
     }
   }
-  Score.str(this._strGen, {this.score = '', String match = '0'}) {
+  Score.str(this._strGen, {this.score = '', String match = '0'})
+      : entity = Entity.Self() {
     _match = match;
   }
 
@@ -78,14 +79,14 @@ class Score extends RestActionAble {
   /// Score.con(5)
   /// ⇒ scoreboard players set #5 objd_consts 5
   /// ```
-  Score.con(int number, {bool addNew = true}) {
-    score = 'objd_consts';
-    if (Scoreboard.prefix != null && !score.contains(Scoreboard.prefix)) {
-      score = Scoreboard.prefix + score;
+  Score.con(int number, {bool addNew = true})
+      : score = 'objd_consts',
+        entity = Entity.PlayerName(
+          '#' + number.toString(),
+        ) {
+    if (Scoreboard.prefix != null && !score.contains(Scoreboard.prefix!)) {
+      score = Scoreboard.prefix! + score;
     }
-    entity = Entity.PlayerName(
-      '#' + number.toString(),
-    );
 
     if (addNew) {
       _commands.add(
@@ -97,7 +98,7 @@ class Score extends RestActionAble {
     );
   }
 
-  String _getESStr({Entity entity, String score}) {
+  String _getESStr({Entity? entity, String? score}) {
     entity ??= this.entity;
     score ??= this.score;
     return entity.toString() + ' ' + score;
@@ -423,7 +424,7 @@ class Score extends RestActionAble {
   }
 
   /// finds the smallest value in a list of scores
-  Widget findSmallest(List<Score> scores, {int min}) {
+  Widget findSmallest(List<Score> scores, {int? min}) {
     return For(
         to: scores.length - 1,
         create: (int i) {
@@ -441,7 +442,7 @@ class Score extends RestActionAble {
   }
 
   /// finds the biggest value in a list of scores
-  Widget findBiggest(List<Score> scores, {int max}) {
+  Widget findBiggest(List<Score> scores, {int? max}) {
     return For(
         to: scores.length - 1,
         create: (int i) {

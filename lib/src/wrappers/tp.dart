@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:objd/src/basic/command.dart';
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/basic/types/entity.dart';
@@ -12,7 +11,7 @@ class Tp extends RestActionAble {
   String to;
 
   /// Sets the location of an Entity to a new Location and Rotation(optional).
-  Tp(this.entity, {@required Location to, dynamic facing, Rotation rot}) {
+  Tp(this.entity, {required Location to, dynamic facing, Rotation rot}) {
     this.to = to.toString();
     if (rot != null) this.to += ' ' + rot.toString();
     _setFacing(facing);

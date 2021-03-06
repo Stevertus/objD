@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:objd/src/basic/types/entity.dart';
 import 'package:objd/src/basic/file.dart';
 import 'package:objd/src/basic/for_list.dart';
@@ -33,7 +32,7 @@ class ForEach extends RestActionAble {
   /// |step| how much to increase or decrease the counter each time(default = 1) |
   ForEach(
     this.score, {
-    @required this.then,
+    required this.then,
     this.from = 0,
     this.counter,
     this.step = 1,

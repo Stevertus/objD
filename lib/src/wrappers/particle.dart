@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import 'package:objd/src/basic/command.dart';
 import 'package:objd/src/basic/rest_action.dart';
 import 'package:objd/src/basic/types/block.dart';
@@ -81,7 +79,7 @@ class Particle extends RestActionAble {
     double r,
     double g,
     double b, {
-    @required double size,
+    required double size,
     this.location,
     this.delta,
     this.speed = 0,

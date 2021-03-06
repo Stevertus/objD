@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:objd/src/external/predicates/range.dart';
 import 'package:objd/src/external/predicates/tag.dart';
 
@@ -18,7 +17,7 @@ class EnchantmentData {
   final String enchantment;
   final Range levels;
 
-  EnchantmentData(this.enchantment, {@required this.levels})
+  EnchantmentData(this.enchantment, {required this.levels})
       : assert(levels != null);
 
   Map<String, dynamic> getJson() => {

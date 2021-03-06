@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:objd/src/basic/command.dart';
 import 'package:objd/src/basic/score.dart';
 import 'package:objd/src/basic/widget.dart';
@@ -10,18 +9,18 @@ import 'package:gson/gson.dart';
 
 class Data extends RestActionAble {
   dynamic target;
-  String _type;
-  String _typeValue;
-  String _subcommand;
+  late String _type;
+  late String _typeValue;
+  final String _subcommand;
   String get subcommand => _subcommand;
   String path = '';
-  num scale;
-  String datatype;
-  Score score;
-  DataModify modify;
+  num? scale;
+  String? datatype;
+  Score? score;
+  DataModify? modify;
 
-  Map<String, dynamic> nbt;
-  String strNbt;
+  Map<String, dynamic>? nbt;
+  String? strNbt;
 
   String get type => _type;
   String get typeValue => _typeValue;
@@ -38,21 +37,20 @@ class Data extends RestActionAble {
   /// )
   /// ⇒ data merge entity @s {'Invisible':1,'NoGravity':1}
   /// ```
-  Data(this.target, {this.nbt = const {}, String type = 'merge'}) {
+  Data(this.target, {this.nbt = const {}, String type = 'merge'})
+      : _subcommand = type {
     handleTarget(target);
-    _subcommand = type;
   }
-  Data.merge(this.target, {this.nbt = const {}, this.strNbt}) {
+  Data.merge(this.target, {this.nbt = const {}, this.strNbt})
+      : _subcommand = 'merge' {
     handleTarget(target);
-    _subcommand = 'merge';
   }
-  Data.get(this.target, {@required this.path, this.scale}) {
+  Data.get(this.target, {required this.path, this.scale})
+      : _subcommand = 'get' {
     handleTarget(target);
-    _subcommand = 'get';
   }
-  Data.remove(this.target, {@required this.path}) {
+  Data.remove(this.target, {required this.path}) : _subcommand = 'remove' {
     handleTarget(target);
-    _subcommand = 'remove';
   }
 
   /// You can also convert a score directly to a nbt field with Data.fromScore:
@@ -67,13 +65,12 @@ class Data extends RestActionAble {
 
   Data.fromScore(
     this.target, {
-    @required this.path,
-    @required this.score,
+    required this.path,
+    required this.score,
     this.scale = 1,
     this.datatype = 'byte',
-  }) {
+  }) : _subcommand = 'score' {
     handleTarget(target);
-    _subcommand = 'score';
   }
 
   /// The modify operation is also available, yet a bit more complex.
@@ -89,20 +86,19 @@ class Data extends RestActionAble {
   /// )
   /// ⇒ data modify @s my_Custom_Path set value 'hey'
   /// ```
-  Data.modify(this.target, {@required this.path, @required this.modify}) {
+  Data.modify(this.target, {required this.path, required this.modify})
+      : _subcommand = 'modify' {
     handleTarget(target);
-    _subcommand = 'modify';
   }
 
   /// A handy shortcut to copy data quickly is the Data.copy constructor, which just copies a property from one path to another.
   Data.copy(
     this.target, {
-    @required this.path,
-    @required dynamic from,
-    @required String fromPath,
-  }) {
+    required this.path,
+    required dynamic from,
+    required String fromPath,
+  }) : _subcommand = 'modify' {
     handleTarget(target);
-    _subcommand = 'modify';
     modify = DataModify.set(from, fromPath: fromPath);
   }
   void handleTarget(dynamic target) {
@@ -132,26 +128,27 @@ class Data extends RestActionAble {
 
         if (scale != null) {
           cmd.add(
-              scale < 0.000001 ? scale.toStringAsFixed(10) : scale.toString());
+            scale! < 0.000001 ? scale!.toStringAsFixed(10) : scale.toString(),
+          );
         }
 
         return Command(cmd.join(' '));
       case 'remove':
         return Command('data remove ' + getTarget() + ' ' + path);
       case 'modify':
-        return Command('data modify ' + getTarget() + ' ${path} ${modify}');
+        return Command('data modify ' + getTarget() + ' $path $modify');
       case 'score':
         return Command(
           'execute store result ' +
               getTarget() +
-              ' ${path} ${datatype} ${scale} run scoreboard players get ${score.entity.toString()} ${score.score}',
+              ' $path $datatype $scale run scoreboard players get ${score?.entity.toString()} ${score?.score}',
         );
     }
     throw ('Invalid subcommand!');
   }
 
   String _getNbt() {
-    if (strNbt != null && strNbt.isNotEmpty) return strNbt;
+    if (strNbt != null && strNbt!.isNotEmpty) return strNbt!;
     return gson.encode(nbt);
   }
 }
@@ -159,29 +156,25 @@ class Data extends RestActionAble {
 /// There are five sub operations again: set, merge, prepend, append and insert.
 class DataModify {
   String type;
-  String value;
-  String fromSource;
-  String fromType;
+  late String value;
+  late String fromSource;
+  String? fromType;
   String fromPath;
-  int index;
-  DataModify.set(dynamic value, {this.fromPath = ''}) {
-    type = 'set';
+  int? index;
+  DataModify.set(dynamic value, {this.fromPath = ''}) : type = 'set' {
     _checkValue(value);
   }
-  DataModify.merge(dynamic value, {this.fromPath = ''}) {
-    type = 'merge';
+  DataModify.merge(dynamic value, {this.fromPath = ''}) : type = 'merge' {
     _checkValue(value);
   }
-  DataModify.prepend(dynamic value, {this.fromPath = ''}) {
-    type = 'prepend';
+  DataModify.prepend(dynamic value, {this.fromPath = ''}) : type = 'prepend' {
     _checkValue(value);
   }
-  DataModify.append(dynamic value, {this.fromPath = ''}) {
-    type = 'append';
+  DataModify.append(dynamic value, {this.fromPath = ''}) : type = 'append' {
     _checkValue(value);
   }
-  DataModify.insert(dynamic value, {this.fromPath = '', this.index = 0}) {
-    type = 'insert';
+  DataModify.insert(dynamic value, {this.fromPath = '', this.index = 0})
+      : type = 'insert' {
     _checkValue(value);
   }
   String _checkValue(dynamic value) {
@@ -208,7 +201,7 @@ class DataModify {
     if (index != null) str += ' ' + index.toString();
     if (fromType != null) {
       str += ' from ';
-      str += fromType + ' ' + fromSource + ' ' + fromPath;
+      str += fromType! + ' ' + fromSource + ' ' + fromPath;
     } else {
       str += ' value ' + value;
     }

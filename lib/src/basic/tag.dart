@@ -11,16 +11,16 @@ class Tag extends RestActionAble {
   // static prefix
 
   /// Often you find yourself giving all tags a prefix especially for your project. This can get very repetitive and annoying, so objD has this prefix built in.
-  static String prefix;
+  static String? prefix;
 
   bool value;
-  Entity entity;
+  late Entity entity;
   String tag;
 
   ///A tag saves a boolean value with an entity inside the game.
-  Tag(this.tag, {this.entity, this.value = true}) {
-    entity ??= Entity.Selected();
-    if (prefix != null && !tag.contains(prefix)) tag = prefix + tag;
+  Tag(this.tag, {Entity? entity, this.value = true}) {
+    this.entity = entity ?? Entity.Selected();
+    if (prefix != null && !tag.contains(prefix!)) tag = prefix! + tag;
   }
 
   Tag add() => Tag(tag, entity: entity, value: true);
@@ -53,19 +53,19 @@ class Tag extends RestActionAble {
   /// ⇒ execute if entity @s[tag=mytag] run say removed
   /// ⇒ execute if entity @s[tag=mytag] run tag @s remove mytag
   /// ```
-  If removeIfExists({Widget then}) {
-    return If(this, then: [then, remove()]);
+  If removeIfExists({Widget? then}) {
+    return If(this, then: [if (then != null) then, remove()]);
   }
 
   /// Checks if the Tag is a certain value and returns a Condition to use in If.
   Condition operator &(bool other) {
-    if (other != null && other) return Condition.tag(this);
+    if (other) return Condition.tag(this);
     return Condition.not(Condition.tag(this));
   }
 
   /// Assignees a new boolean value to the Tag(removes or adds the tag).
   Tag operator >>(bool other) {
-    if (other != null && other) return Tag(tag, entity: entity, value: true);
+    if (other) return Tag(tag, entity: entity, value: true);
     return Tag(tag, entity: entity, value: false);
   }
 

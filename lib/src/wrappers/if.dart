@@ -4,7 +4,7 @@ import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/wrappers/comment.dart';
 import 'package:objd/src/basic/group.dart';
 import 'package:objd/src/basic/for_list.dart';
-import 'package:meta/meta.dart';
+
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/build/build.dart';
 
@@ -39,7 +39,7 @@ class If extends RestActionAble {
   /// ```
   If(
     dynamic condition, {
-    @required this.then,
+    required this.then,
     this.orElse,
     this.targetFilePath = 'objd',
     this.targetFileName,
@@ -62,7 +62,7 @@ class If extends RestActionAble {
   /// ```
   If.not(
     dynamic condition, {
-    @required this.then,
+    required this.then,
     this.orElse,
     this.targetFilePath = 'objd',
     this.targetFileName,

@@ -2,17 +2,17 @@ import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/basic/command.dart';
 import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/build/build.dart';
-import 'package:meta/meta.dart';
+
 import 'package:objd/src/wrappers/comment.dart';
 
 class File extends Widget {
-  Widget child;
+  Widget? child;
   String path;
-  String pack;
+  String? pack;
   bool execute;
   bool create;
-  bool isRecursive;
-  Comment header;
+  bool? isRecursive;
+  Comment? header;
 
   /// The file class simply generates a new mcfunction file with content and a path.
   ///
@@ -45,16 +45,15 @@ class File extends Widget {
     this.pack,
     this.create = true,
     this.header,
-  }) {
+  }) : execute = true {
     path.replaceAll('.mcfunction', '');
     if (path.substring(0, 1) == '/') path = path.substring(1);
-    execute = true;
   }
-  File.recursive() {
-    isRecursive = true;
-    execute = true;
-    create = false;
-  }
+  File.recursive()
+      : isRecursive = true,
+        execute = true,
+        path = '',
+        create = false;
 
   ///  File.strait generates the child strait through a method you give using a StraitWidget. You need a StraitWidget on around every strait content
   ///  ```dart
@@ -64,11 +63,11 @@ class File extends Widget {
   ///  ```
   factory File.strait(
     String path, {
-    @required Function(List<Widget>) child,
+    required Function(List<Widget>) child,
     bool execute = false,
-    String pack,
+    String? pack,
     bool create = true,
-    Comment header,
+    Comment? header,
   }) =>
       File(
         path,
@@ -81,10 +80,10 @@ class File extends Widget {
 
   factory File.executeStrait(
     String path, {
-    @required Function(List<Widget>) child,
-    String pack,
+    required Function(List<Widget>) child,
+    String? pack,
     bool create = true,
-    Comment header,
+    Comment? header,
   }) =>
       File(
         path,
@@ -97,14 +96,14 @@ class File extends Widget {
 
   @override
   Widget generate(Context context) {
-    if (isRecursive != null && isRecursive) path = context.file;
+    if (isRecursive != null && isRecursive!) path = context.file;
 
     pack ??= context.packId;
-    return Command('function ${pack}:' + path);
+    return Command('function $pack:' + path);
   }
 
   @override
   Map toMap() => {
-        'File': {'path': path, 'child': child.toMap(), 'execute': execute}
+        'File': {'path': path, 'child': child?.toMap(), 'execute': execute}
       };
 }

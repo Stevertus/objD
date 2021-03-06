@@ -13,7 +13,7 @@ class StraitWidget extends Widget {
   static RestActionBuilder builder = RestActionBuilder([]);
 
   /// The result of the StraitWidget generation
-  List<Widget> result;
+  late List<Widget> result;
 
   ///A StraitWidget is as Strait running widget, it executes your Method and gets the output. You need a StraitWidget around every strait content
   ///```dart

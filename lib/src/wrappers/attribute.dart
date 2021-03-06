@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:objd/src/basic/command.dart';
 import 'package:objd/src/basic/rest_action.dart';
 import 'package:objd/src/basic/types/attribute.dart';
@@ -21,9 +20,9 @@ class Attribute extends RestActionAble {
   Attribute.add(
     this.target,
     this.attribute, {
-    @required this.uuid,
-    @required this.value,
-    @required this.name,
+    required this.uuid,
+    required this.value,
+    required this.name,
     this.modifyType = AttributeModifier.add,
   })  : _type = _AttributeType.add,
         assert(uuid != null),
@@ -33,16 +32,16 @@ class Attribute extends RestActionAble {
   Attribute.set(
     this.target,
     this.attribute, {
-    @required this.value,
-  })  : _type = _AttributeType.set,
+    required this.value,
+  })   : _type = _AttributeType.set,
         assert(value != null);
 
   /// removes a modifier with an uuid again
   Attribute.remove(
     this.target,
     this.attribute, {
-    @required this.uuid,
-  })  : _type = _AttributeType.remove,
+    required this.uuid,
+  })   : _type = _AttributeType.remove,
         assert(uuid != null);
 
   ///gets the calculated modifier(with base, armor and custom)
@@ -63,7 +62,7 @@ class Attribute extends RestActionAble {
   Attribute.get_modifier(
     this.target,
     this.attribute, {
-    @required this.uuid,
+    required this.uuid,
     this.scale,
   })  : _type = _AttributeType.get_modifier,
         assert(uuid != null);

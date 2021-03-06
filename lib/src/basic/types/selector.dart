@@ -8,24 +8,24 @@ import 'package:objd/src/basic/tag.dart';
 import 'package:objd/src/wrappers/team.dart';
 
 class Selector {
-  String selector;
-  int limit;
-  List<dynamic> tags;
-  Team team;
-  List<Score> scores;
-  Map<String, dynamic> nbt;
-  String strNbt;
-  EntityType type;
-  Area area;
-  Range distance;
-  Range level;
-  Gamemode gamemode;
-  String name;
-  Rotation isRotated;
-  Range horizontalRotation;
-  Range verticalRotation;
-  Sort sorting;
-  String playerName;
+  late String selector;
+  int? limit;
+  List<dynamic>? tags;
+  Team? team;
+  List<Score>? scores;
+  Map<String, dynamic>? nbt;
+  String? strNbt;
+  EntityType? type;
+  Area? area;
+  Range? distance;
+  Range? level;
+  Gamemode? gamemode;
+  String? name;
+  Rotation? isRotated;
+  Range? horizontalRotation;
+  Range? verticalRotation;
+  Sort? sorting;
+  String? playerName;
 
   /// Create entity selector (default selector: @e)
   Selector({
@@ -70,8 +70,7 @@ class Selector {
     this.verticalRotation,
     this.sorting,
     this.playerName,
-  }) {
-    selector = 's';
+  }) : selector = 's' {
     _fix();
   }
 
@@ -94,8 +93,7 @@ class Selector {
     this.verticalRotation,
     this.sorting,
     this.playerName,
-  }) {
-    selector = 'p';
+  }) : selector = 'p' {
     _fix();
   }
 
@@ -118,8 +116,7 @@ class Selector {
     this.verticalRotation,
     this.sorting,
     this.playerName,
-  }) {
-    selector = 'a';
+  }) : selector = 'a' {
     _fix();
   }
 
@@ -142,27 +139,27 @@ class Selector {
     this.verticalRotation,
     this.sorting,
     this.playerName,
-  }) {
-    selector = 'r';
+  }) : selector = 'r' {
     _fix();
   }
 
   /// Copy a selector
   Selector.clone(Selector s) {
-    List<Score> scores;
+    List<Score>? scores;
     if (s.scores != null) {
-      var scores = s.scores;
-      s.scores = [];
-      scores.forEach((score) {
-        s.scores.add(Score(score.entity, score.score,
-            addNew: false, commands: score.commands));
+      scores = [];
+      s.scores!.forEach((score) {
+        scores!.add(
+          Score(score.entity, score.score,
+              addNew: false, commands: score.commands),
+        );
       });
     }
 
     selector = s.selector;
     playerName = s.playerName;
     limit = s.limit;
-    tags = List<dynamic>.from(s.tags);
+    tags = List<dynamic>.from(s.tags ?? []);
     team = s.team;
     scores = scores;
     nbt = gson.decode(gson.encode(s.nbt)) as Map<String, dynamic>;
@@ -226,7 +223,7 @@ class Selector {
               if (p.next() != '=') throw p.error('Expecting \'=\'');
               var r = _parseRange(p);
               scores ??= [];
-              scores.add(Score.fromSelected(score).matchesRange(r));
+              scores!.add(Score.fromSelected(score).matchesRange(r));
               if (p.actual() == ',') {
                 comma = true;
                 p.skip();
@@ -272,14 +269,14 @@ class Selector {
             if (nbt == null) {
               nbt = gson.decoder.decode(p) as Map<String, dynamic>;
             } else {
-              nbt.addAll(gson.decoder.decode(p) as Map<String, dynamic>);
+              nbt!.addAll(gson.decoder.decode(p) as Map<String, dynamic>);
             }
             break;
           case 'tag':
             if (tags == null) {
               tags = [_parseString(p)];
             } else {
-              tags.add(_parseString(p));
+              tags!.add(_parseString(p));
             }
             break;
           case 'name':
@@ -324,7 +321,7 @@ class Selector {
 
   T _parseKeyword<T>(Parsable p, Map<String, T> keywordmap) {
     var keyword = _parseString(p);
-    T ret;
+    T? ret;
     keywordmap.forEach((k, v) {
       if (keyword == k) ret = v;
     });
@@ -332,7 +329,7 @@ class Selector {
       p.goBack(1);
       throw p.error('Unexpected value \'$keyword\'', from: keyword.length - 1);
     }
-    return ret;
+    return ret!;
   }
 
   Range _parseRange(Parsable p) {
@@ -362,11 +359,11 @@ class Selector {
   void _fix() {
     var tags = this.tags;
     this.tags = [];
-    tags.forEach((tag) {
+    tags?.forEach((tag) {
       if (tag is Tag) {
-        this.tags.add(tag.tag);
+        this.tags?.add(tag.tag);
       } else if (tag is String) {
-        this.tags.add(tag);
+        this.tags?.add(tag);
       } else {
         throw ('Please insert a Tag or String as tag into Entity!');
       }

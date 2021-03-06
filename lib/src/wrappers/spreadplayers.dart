@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:objd/src/basic/command.dart';
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/basic/types/entity.dart';
@@ -16,9 +15,9 @@ class SpreadPlayers extends RestActionAble {
   /// The Spawnpoint Widget sets a players spawnpoint to the current or specified [position]
   SpreadPlayers(
     this.center, {
-    @required this.target,
-    @required this.distance,
-    @required this.maxRange,
+    required this.target,
+    required this.distance,
+    required this.maxRange,
     this.maximumHeight,
     this.respectTeams = false,
   })  : assert(center != null),

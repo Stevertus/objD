@@ -11,11 +11,11 @@ import 'package:objd/src/wrappers/comment.dart';
 class Scoreboard extends RestActionAble {
   /// Often you find yourself giving all scoreboards a prefix especially for your project. This can get very repetitive and annoying, so objD has this prefix built in.
 
-  static String prefix;
+  static String? prefix;
 
-  String subcommand;
+  late String subcommand;
   String name;
-  String type;
+  late String type;
 
   /// A scoreboard objective holds values, kind a like a Variable inside Minecraft.
   ///
@@ -25,42 +25,42 @@ class Scoreboard extends RestActionAble {
   Scoreboard(
     this.name, {
     this.type = 'dummy',
-    TextComponent display,
+    TextComponent? display,
     bool addIntoLoad = true,
   }) {
     subcommand = addIntoLoad ? 'add' : 'addHere';
-    if (display != null) type += ' ' + display.toJson();
+    if (display != null) type += ' ' + display.toJson()!;
     prefixName();
   }
 
   /// The `Scoreboard.click` constructor adds a carrot on a stick click event objective
   Scoreboard.click(
     this.name, {
-    TextComponent display,
+    TextComponent? display,
     bool addIntoLoad = true,
   }) {
     type = 'minecraft.used:minecraft.carrot_on_a_stick';
     subcommand = addIntoLoad ? 'add' : 'addHere';
-    if (display != null) type += ' ' + display.toJson();
+    if (display != null) type += ' ' + display.toJson()!;
     prefixName();
   }
 
   /// The `Scoreboard.trigger` constructor adds a trigger objective
   Scoreboard.trigger(
     this.name, {
-    TextComponent display,
+    TextComponent? display,
     bool addIntoLoad = true,
   }) {
     type = 'trigger';
     subcommand = addIntoLoad ? 'add' : 'addHere';
-    if (display != null) type += ' ' + display.toJson();
+    if (display != null) type += ' ' + display.toJson()!;
     prefixName();
   }
 
   /// The `Scoreboard.add` constructor does exactly the same as Scoreboard but puts the result without checking in the current file.
-  Scoreboard.add(this.name, {this.type = 'dummy', TextComponent display}) {
+  Scoreboard.add(this.name, {this.type = 'dummy', TextComponent? display}) {
     subcommand = 'addHere';
-    if (display != null) type += ' ' + display.toJson();
+    if (display != null) type += ' ' + display.toJson()!;
     prefixName();
   }
 
@@ -85,7 +85,7 @@ class Scoreboard extends RestActionAble {
   // TODO: modify
 
   void prefixName() {
-    if (prefix != null && !name.contains(prefix)) name = prefix + name;
+    if (prefix != null && !name.contains(prefix!)) name = prefix! + name;
   }
 
   @override

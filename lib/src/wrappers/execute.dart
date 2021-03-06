@@ -1,6 +1,6 @@
 import 'package:objd/src/basic/types/condition.dart';
 import 'package:objd/src/basic/group.dart';
-import 'package:meta/meta.dart';
+
 import 'package:objd/src/basic/rest_action.dart';
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/basic/types/entity.dart';
@@ -66,7 +66,7 @@ class Execute extends RestActionAble {
   }
 
   Execute.strait({
-    @required Function(List<Widget>) run,
+    required Function(List<Widget>) run,
     Entity as,
     Entity at,
     dynamic location,
@@ -100,12 +100,10 @@ class Execute extends RestActionAble {
           writable: writable,
         );
 
-  Execute.as(Entity entity,
-      {@required this.children, this.encapsulate = true}) {
+  Execute.as(Entity entity, {required this.children, this.encapsulate = true}) {
     _args = as(entity).args;
   }
-  Execute.at(Entity entity,
-      {@required this.children, this.encapsulate = true}) {
+  Execute.at(Entity entity, {required this.children, this.encapsulate = true}) {
     _args = at(entity).args;
   }
 
@@ -121,7 +119,7 @@ class Execute extends RestActionAble {
   /// ⇒ execute as @p at @s run say I get executed
   /// ```
   Execute.asat(Entity entity,
-      {@required this.children, this.encapsulate = true}) {
+      {required this.children, this.encapsulate = true}) {
     _args = asat(entity).args;
   }
 
@@ -137,31 +135,31 @@ class Execute extends RestActionAble {
   /// ⇒ execute positioned as @p run say I get executed
   /// ```
   Execute.positioned(dynamic loc,
-      {@required this.children, this.encapsulate = true}) {
+      {required this.children, this.encapsulate = true}) {
     _args = positioned(loc).args;
   }
 
   /// Aligns the position to the corners of the block grid.
   Execute.align(String axis,
-      {@required this.children, this.encapsulate = true}) {
+      {required this.children, this.encapsulate = true}) {
     _args = align(axis).args;
   }
 
   /// Sets the execution position(^ ^ ^) to the eyes or the feet.
   Execute.anchored(Facing anchor,
-      {@required this.children, this.encapsulate = true}) {
+      {required this.children, this.encapsulate = true}) {
     _args = anchored(anchor).args;
   }
 
   /// Sets the execution rotation to the given rotation.
   Execute.rotated(dynamic rot,
-      {@required this.children, this.encapsulate = true}) {
+      {required this.children, this.encapsulate = true}) {
     _args = rotated(rot).args;
   }
 
   ///Sets the execution dimension(execute in) to either `Dimension.overworld`, `Dimension.the_end` or `Dimension.the_nether`.
   Execute.dimension(dynamic dimension,
-      {@required this.children, this.encapsulate = true}) {
+      {required this.children, this.encapsulate = true}) {
     _args = this.dimension(dimension).args;
   }
 
@@ -179,7 +177,7 @@ class Execute extends RestActionAble {
   /// ```
   Execute.facing(
     dynamic target, {
-    @required this.children,
+    required this.children,
     this.encapsulate = true,
     Facing facing = Facing.eyes,
   }) {
@@ -320,8 +318,8 @@ class Execute extends RestActionAble {
 
   void storeBlock({
     ExecuteStoreResultType result = ExecuteStoreResultType.result,
-    @required Location location,
-    @required String path,
+    required Location location,
+    required String path,
     int scale = 1,
     ExecuteStoreVarType varType = ExecuteStoreVarType.int,
   }) =>
@@ -337,8 +335,8 @@ class Execute extends RestActionAble {
 
   void storeEntity({
     ExecuteStoreResultType result = ExecuteStoreResultType.result,
-    @required Entity entity,
-    @required String path,
+    required Entity entity,
+    required String path,
     int scale = 1,
     ExecuteStoreVarType varType = ExecuteStoreVarType.int,
   }) =>
@@ -355,7 +353,7 @@ class Execute extends RestActionAble {
 
   void storeScore({
     ExecuteStoreResultType result = ExecuteStoreResultType.result,
-    @required Score score,
+    required Score score,
   }) =>
       _addArgumentRet(
         'store ' +
@@ -368,7 +366,7 @@ class Execute extends RestActionAble {
 
   void storeBossbar({
     ExecuteStoreResultType result = ExecuteStoreResultType.result,
-    @required String name,
+    required String name,
     BossbarOption setting = BossbarOption.value,
   }) =>
       _addArgumentRet('store ' +

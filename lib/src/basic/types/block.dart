@@ -12,9 +12,9 @@ String _getId(val) => (val is Block) ? val.toString() : (val as String);
 class Block {
   final String _id;
   String get id => _id;
-  final String tag;
-  final Map<String, dynamic> states;
-  final Map<String, dynamic> nbt;
+  final String? tag;
+  final Map<String, dynamic>? states;
+  final Map<String, dynamic>? nbt;
   @override
   String toString() {
     var strState = '';
@@ -22,7 +22,7 @@ class Block {
     var id = tag ?? _id;
     if (states != null) {
       var liState = <String>[];
-      states.forEach((String key, dynamic val) {
+      states?.forEach((String key, dynamic val) {
         liState.add('$key=$val');
       });
       strState = '[${liState.join(',')}]';

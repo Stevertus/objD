@@ -22,8 +22,8 @@ class Context {
   bool prod;
   String packId;
   String file;
-  String loadFile;
-  String mainFile;
+  String? loadFile;
+  String? mainFile;
   int version;
   final Map<Type, dynamic> _heredityTraits;
 
@@ -40,18 +40,18 @@ class Context {
   /// }
   /// ```
   Context({
-    this.prefixes,
+    this.prefixes = const [],
     this.prod = false,
-    this.suffixes,
+    this.suffixes = const [],
     this.packId = '',
     this.file = '',
     this.loadFile = 'load',
     this.mainFile = 'main',
     this.version = 17,
-    Map<Type, dynamic> traits,
+    Map<Type, dynamic>? traits,
   }) : _heredityTraits = traits ?? {} {
-    prefixes ??= [];
-    suffixes ??= [];
+    // prefixes ??= [];
+    // suffixes ??= [];
   }
 
   Context.clone(Context context)
@@ -67,13 +67,13 @@ class Context {
           version: context.version,
         );
 
-  Context addPrefix(String prev) {
+  Context addPrefix(String? prev) {
     if (prev == null) return this;
     prefixes.add(prev);
     return this;
   }
 
-  Context addSuffix(String suf) {
+  Context addSuffix(String? suf) {
     if (suf == null) return this;
     suffixes.add(suf);
     return this;

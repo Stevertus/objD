@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:objd/core.dart';
 
 class Trigger extends RestActionAble {
@@ -8,10 +7,10 @@ class Trigger extends RestActionAble {
   bool addNew;
 
   Trigger(this.objective, {this.addNew = true});
-  Trigger.set(this.objective, {@required int value, this.addNew = true}) {
+  Trigger.set(this.objective, {required int value, this.addNew = true}) {
     _mode = 'set ' + value.toString();
   }
-  Trigger.add(this.objective, {@required int value, this.addNew = true}) {
+  Trigger.add(this.objective, {required int value, this.addNew = true}) {
     _mode = 'add ' + value.toString();
   }
   Trigger.enable(this.enableScore, {this.addNew = true}) {
