@@ -5,7 +5,7 @@ import 'package:objd/src/build/project.dart';
 import 'package:objd/src/build/findPack.dart';
 
 class BuildProject {
-  List<BuildPack> packs;
+  late List<BuildPack> packs;
   String path;
   String name;
   String description;
@@ -15,12 +15,12 @@ class BuildProject {
   bool isGenMeta = true;
   Context context;
 
-  BuildProject(Project prj, {this.prod = false}) {
-    path = prj.target;
-    name = prj.name;
-    description = prj.description;
-    pack_format = prj.getPackFormat();
-    context = Context(prod: false, version: prj.version);
+  BuildProject(Project prj, {this.prod = false})
+      : path = prj.target,
+        name = prj.name,
+        description = prj.description,
+        pack_format = prj.getPackFormat(),
+        context = Context(prod: false, version: prj.version) {
     packs = findPacks(prj.generate, context: context)
         .map(
           (pack) => BuildPack(

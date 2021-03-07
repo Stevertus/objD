@@ -25,7 +25,7 @@ void reloadProject(BuildProject prj) {
   prj.packs.forEach((pack) {
     var i = prj.packs.indexOf(pack);
     var newPack = newPrj['packs'][i] as Map;
-    var oldPack = (old['packs'] as List)[i] as Map<String, dynamic> /*?*/;
+    var oldPack = (old['packs'] as List)[i] as Map<String, dynamic>?;
     if (oldPack == null) return;
 
     reloadPack(pack, oldPack, newPack);
@@ -49,7 +49,7 @@ void reloadPack(BuildPack pack, Map<String, dynamic> old, Map newPack) {
         if (old['files'][file] != null &&
             old['files'][file].toString() ==
                 newPack['files'][file].toString()) {
-          pack.files[file] /*!*/ .isGen = false;
+          pack.files[file]!.isGen = false;
         }
       }
     }

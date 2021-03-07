@@ -14,10 +14,10 @@ import 'package:objd/src/wrappers/comment.dart';
 
 void scan(
   Widget wid, {
-  StringBuffer commands,
-  BuildPack pack,
-  BuildProject project,
-  Context context,
+  required StringBuffer commands,
+  required BuildPack pack,
+  BuildProject? project,
+  required Context context,
 }) {
   if (wid is Text) commands.writeln(_findText(wid, context));
   if (project != null &&
@@ -48,8 +48,8 @@ void scan(
     if (wid is Module) {
       var files = wid.registerFiles();
       // add files to child
-      if (files != null && files.isNotEmpty && child is Widget) {
-        child = <Widget>[(child as Widget), ...files];
+      if (files.isNotEmpty && child is Widget) {
+        child = <Widget>[child, ...files];
       }
     }
 
@@ -95,9 +95,9 @@ String _findText(Text wid, Context context) {
 
 bool findFile(
   Widget wid, {
-  BuildPack pack,
-  BuildProject project,
-  Context context,
+  required BuildPack pack,
+  required BuildProject project,
+  required Context context,
 }) {
   if (wid is RawFile) {
     pack.addRawFile(wid, project);
@@ -108,7 +108,7 @@ bool findFile(
     return !wid.execute;
   }
   if (wid is Extend) {
-    pack.extendFile(wid, front: wid.first);
+    pack.extendFile(wid, front: wid.first, prj: project);
     return true;
   }
 

@@ -11,38 +11,37 @@ class BuildPack {
   Map<String, BuildFile> files = {};
   Map<String, String> rawFiles = {};
   List<String> scoreboards;
-  String main;
-  String load;
-  Context context;
+  String? main;
+  String? load;
+  late Context context;
 
   bool isGen = true;
   bool isGenLoad = true;
   bool isGenMain = true;
 
-  BuildPack(Pack pack, {this.context}) {
+  BuildPack(Pack pack, {Context? context})
+      : name = pack.name,
+        scoreboards = [] {
     var stopwatch = Stopwatch()..start();
-    name = pack.name;
-    scoreboards = [];
 
-    context ??= Context();
-    context = Context.clone(context)
+    this.context = Context.clone(context ?? Context())
       ..packId = name
       ..loadFile = load
       ..mainFile = main;
 
     if (pack.main != null) {
-      main = pack.main.path;
-      files[main] = BuildFile(pack.main);
+      main = pack.main!.path;
+      files[main!] = BuildFile(pack.main!);
     }
     if (pack.load != null) {
-      load = pack.load.path;
-      files[load] = BuildFile(pack.load);
+      load = pack.load!.path;
+      files[load!] = BuildFile(pack.load!);
     }
 
     if (pack.files != null) {
-      pack.files.forEach((file) => files[file.path] = BuildFile(file));
+      pack.files!.forEach((file) => files[file.path] = BuildFile(file));
     }
-    print('Compiled Pack ${name} in ${stopwatch.elapsedMilliseconds}ms');
+    print('Compiled Pack $name in ${stopwatch.elapsedMilliseconds}ms');
   }
 
   bool addScoreboard(String name) {
@@ -61,27 +60,32 @@ class BuildPack {
     files[file.path] = BuildFile(file);
   }
 
-  void extendFile(Extend file, {bool front, BuildProject prj}) {
+  void extendFile(
+    Extend file, {
+    bool front = false,
+    required BuildProject prj,
+  }) {
     var myfile = BuildFile.extended(file);
-    if (files[file.path] == null) {
-      files[file.path] = myfile;
+    final path = file.path;
+    if (files[path] == null) {
+      files[path] = myfile;
       return;
     }
 
     myfile.generate(context: context, pack: this, prj: prj);
 
     if (front) {
-      final str = files[file.path].commands.toString();
-      files[file.path].commands.clear();
+      final str = files[path]!.commands.toString();
+      files[path]!.commands.clear();
       // switch order
-      files[file.path].commands.write(myfile.commands);
-      files[file.path].commands.write(str);
+      files[path]!.commands.write(myfile.commands);
+      files[path]!.commands.write(str);
     } else {
-      files[file.path].commands.write(myfile.commands);
+      files[path]!.commands.write(myfile.commands);
     }
   }
 
-  void generate({BuildProject prj}) {
+  void generate({required BuildProject prj}) {
     if (prj.prod) context.prod = true;
     for (var i = 0; i < files.length; i++) {
       context.file = files.values.toList()[i].path;

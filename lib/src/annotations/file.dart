@@ -1,10 +1,10 @@
 /// Writing Minecrafts functions annotations becomes really easy. Just annotate a Widget variable that should be inside of your function with `@Func()`:
 class Func {
-  final String name;
-  final String path;
-  final String pack;
-  final bool execute;
-  final bool create;
+  final String? name;
+  final String? path;
+  final String? pack;
+  final bool? execute;
+  final bool? create;
 
   /// Writing Minecrafts functions annotations becomes really easy. Just annotate a Widget variable that should be inside of your function with `@Func()`:
   /// ```dart
