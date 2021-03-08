@@ -104,7 +104,7 @@ class Item {
     nbt.addAll({
       'EntityTag': {
         'id': entity.type.type,
-        ...entity.nbt,
+        ...entity.nbt ?? {},
       }
     });
 

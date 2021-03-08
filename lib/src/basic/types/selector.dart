@@ -26,6 +26,7 @@ class Selector {
   Range? verticalRotation;
   Sort? sorting;
   String? playerName;
+  String? predicate;
 
   /// Create entity selector (default selector: @e)
   Selector({
@@ -47,6 +48,7 @@ class Selector {
     this.verticalRotation,
     this.sorting,
     this.playerName,
+    this.predicate,
   }) {
     _fix();
   }
@@ -70,6 +72,7 @@ class Selector {
     this.verticalRotation,
     this.sorting,
     this.playerName,
+    this.predicate,
   }) : selector = 's' {
     _fix();
   }
@@ -93,6 +96,7 @@ class Selector {
     this.verticalRotation,
     this.sorting,
     this.playerName,
+    this.predicate,
   }) : selector = 'p' {
     _fix();
   }
@@ -116,6 +120,7 @@ class Selector {
     this.verticalRotation,
     this.sorting,
     this.playerName,
+    this.predicate,
   }) : selector = 'a' {
     _fix();
   }
@@ -139,6 +144,7 @@ class Selector {
     this.verticalRotation,
     this.sorting,
     this.playerName,
+    this.predicate,
   }) : selector = 'r' {
     _fix();
   }
@@ -174,6 +180,7 @@ class Selector {
     horizontalRotation = s.horizontalRotation;
     verticalRotation = s.verticalRotation;
     sorting = s.sorting;
+    predicate = s.predicate;
   }
 
   /// Parse a Selector, for example:
@@ -285,6 +292,9 @@ class Selector {
           case 'team':
             team = Team(_parseString(p));
             break;
+          case 'predicate':
+            predicate = _parseString(p);
+            break;
           case 'type':
             type = EntityType(_parseString(p));
             break;
@@ -306,7 +316,6 @@ class Selector {
           default:
             p.goBack(2);
             throw p.error('Unknown key \'$key\'', from: key.length - 1);
-            break;
         }
         if (p.actual() == ',') {
           foundComma = true;

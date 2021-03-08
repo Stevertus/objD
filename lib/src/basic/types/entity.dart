@@ -245,7 +245,7 @@ class Entity implements EntityClass {
       selector.isRotated,
       selector.horizontalRotation,
       selector.verticalRotation,
-      null, //TODO: Predicate
+      selector.predicate,
       false,
     );
     if (selector.sorting != null) {
@@ -493,7 +493,7 @@ class Entity implements EntityClass {
     double scale = 1,
     bool useSuccess = false,
   }) {
-    assert(path != null || path.isNotEmpty);
+    assert(path.isNotEmpty);
     return Execute.internal_store_command(
       'entity $this $path $datatype $scale',
       w,
@@ -696,7 +696,7 @@ class Entity implements EntityClass {
   ///---
   ///Uses `StraitPlayer.particle()` and `StraitEntity.at()`
 
-  RestActionAble tellraw({List<TextComponent>? show}) =>
+  RestActionAble tellraw(List<TextComponent> show) =>
       StraitWidget.builder.create(Tellraw(this, show: show));
 
   ///
@@ -827,7 +827,7 @@ class Entity implements EntityClass {
   ///```
 
   RestActionAble execute({
-    List<Widget>? children,
+    List<Widget> children = const [],
     String targetFilePath = 'objd',
     String? targetFileName,
     bool encapsulate = true,
@@ -847,7 +847,7 @@ class Entity implements EntityClass {
   ///short form for `entity.execute()`
 
   RestActionAble exec({
-    List<Widget>? children,
+    List<Widget> children = const [],
     String targetFilePath = 'objd',
     String? targetFileName,
     bool encapsulate = true,
@@ -909,7 +909,7 @@ class Entity implements EntityClass {
   ///```
 
   RestActionAble asat({
-    List<Widget>? children,
+    List<Widget> children = const [],
     String targetFilePath = 'objd',
     String? targetFileName,
     bool encapsulate = true,
@@ -949,7 +949,7 @@ class Entity implements EntityClass {
   ///```
 
   RestActionAble as({
-    List<Widget>? children,
+    List<Widget> children = const [],
     String targetFilePath = 'objd',
     String? targetFileName,
     bool encapsulate = true,
@@ -989,9 +989,9 @@ class Entity implements EntityClass {
   ///```
 
   RestActionAble at({
-    List<Widget> children,
+    List<Widget> children = const [],
     String targetFilePath = 'objd',
-    String targetFileName,
+    String? targetFileName,
     bool encapsulate = true,
   }) =>
       StraitWidget.builder.create(Execute(

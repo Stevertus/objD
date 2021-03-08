@@ -8,18 +8,16 @@ import 'package:objd/src/basic/text_components.dart';
 
 class Tellraw extends RestActionAble {
   String jsonText;
-  String entity;
+  Entity selector;
 
   /// The Tellraw class is very similar to the Title class, but shows its texts in the chat.
-  Tellraw(Entity selector, {List<TextComponent> show}) {
-    entity = selector.toString();
-    jsonText = json
-        .encode(show.map((text) => text.toMap()).toList())
-        .replaceAll('\\', '\u005C');
-    ;
-  }
+  Tellraw(this.selector, {required List<TextComponent> show})
+      : jsonText = json
+            .encode(show.map((text) => text.toMap()).toList())
+            .replaceAll('\\', '\u005C');
+
   @override
   Widget generate(Context context) {
-    return Command('tellraw ' + entity + ' ' + jsonText);
+    return Command('tellraw $selector $jsonText');
   }
 }

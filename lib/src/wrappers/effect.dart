@@ -6,12 +6,12 @@ import 'package:objd/src/build/context.dart';
 import 'package:objd/core.dart';
 
 class Effect extends RestActionAble {
-  EffectType effect;
-  Entity entity;
-  int duration;
-  int amplifier;
-  bool showParticles;
-  String _type;
+  EffectType? effect;
+  Entity? entity;
+  int? duration;
+  int? amplifier;
+  bool? showParticles;
+  final String _type;
 
   /// This command is used to give an entity a specific effect and affect their gameplay.
   /// ```dart
@@ -30,9 +30,8 @@ class Effect extends RestActionAble {
     this.duration = 30,
     this.amplifier = 1,
     this.showParticles = true,
-  }) {
+  }) : _type = 'give' {
     entity ??= Entity.Selected();
-    _type = 'give';
   }
 
   /// You can clear an effect again.
@@ -40,15 +39,16 @@ class Effect extends RestActionAble {
   /// Effect.clear(Entity.Player(),EffectType.jump_boost)
   /// ⇒ effect clear @p minecraft:jump_boost
   /// ```
-  Effect.clear(this.entity, [this.effect]) {
-    _type = 'clear';
-  }
+  Effect.clear(this.entity, [this.effect]) : _type = 'clear';
+
   Map getMap() {
     var ret = {};
-    ret['Id'] = EffectType.values.indexOf(effect) + 1;
-    ret['Amplifier'] = Byte(amplifier != null ? amplifier - 1 : 0);
-    ret['Duration'] = duration != null ? duration * 20 : 0;
-    ret['ShowParticles'] = Byte(showParticles != null && showParticles ? 1 : 0);
+    if (effect != null) ret['Id'] = EffectType.values.indexOf(effect!) + 1;
+    ret['Amplifier'] = Byte(amplifier != null ? amplifier! - 1 : 0);
+    ret['Duration'] = duration != null ? duration! * 20 : 0;
+    ret['ShowParticles'] = Byte(
+      showParticles != null && showParticles! ? 1 : 0,
+    );
     return ret;
   }
 
@@ -56,16 +56,16 @@ class Effect extends RestActionAble {
   Widget generate(Context context) {
     if (_type == 'clear') {
       return Command(
-        'effect clear ${entity}' +
+        'effect clear $entity' +
             (effect != null
                 ? ' minecraft:' + effect.toString().split('.')[1]
                 : ''),
       );
     } else {
       return Command(
-        'effect give ${entity} minecraft:' +
+        'effect give $entity minecraft:' +
             effect.toString().split('.')[1] +
-            ' ${duration} ${amplifier} ${!showParticles}',
+            ' $duration $amplifier ${!showParticles!}',
       );
     }
   }

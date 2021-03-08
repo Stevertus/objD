@@ -10,16 +10,14 @@ import 'package:gson/gson.dart';
 class SetBlock extends RestActionAble {
   Location location;
   Block block;
-  Map<String, dynamic> nbt;
+  Map<String, dynamic>? nbt;
 
   /// The SetBlock Command Class sets a Block at the specified location.
   SetBlock(
     this.block, {
-    this.location,
+    this.location = const Location.here(),
     this.nbt,
-  }) {
-    location ??= Location.here();
-  }
+  });
 
   @override
   Widget generate(Context context) {

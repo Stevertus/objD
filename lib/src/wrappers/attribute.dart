@@ -9,11 +9,11 @@ import 'package:objd/src/build/build.dart';
 class Attribute extends RestActionAble {
   final Entity target;
   final AttributeType attribute;
-  String uuid;
-  String name;
-  double scale;
-  double value;
-  AttributeModifier modifyType;
+  String? uuid;
+  String? name;
+  double? scale;
+  double? value;
+  AttributeModifier? modifyType;
   final _AttributeType _type;
 
   /// adds a modifier with an uuid
@@ -25,6 +25,7 @@ class Attribute extends RestActionAble {
     required this.name,
     this.modifyType = AttributeModifier.add,
   })  : _type = _AttributeType.add,
+        assert(name != null),
         assert(uuid != null),
         assert(value != null);
 

@@ -3,13 +3,13 @@ import 'package:objd/core.dart';
 /// This Module allows you to create infinite new blocks in the game. It works by providing a [block] and an [item] that acts as a model for the new block.
 class CustomBlock extends Module {
   String id;
-  String name;
+  String? name;
   Block block;
   Item item;
-  Item blockModel;
-  Widget main;
-  Widget onBreak;
-  Widget onPlaced;
+  Item? blockModel;
+  Widget? main;
+  Widget? onBreak;
+  Widget? onPlaced;
   List<String> tags;
   bool generatePack;
   bool useItemFrame;
@@ -69,10 +69,7 @@ class CustomBlock extends Module {
     this.name,
     this.useItemFrame = false,
     this.yOffset = 1,
-  })  : assert(id != null),
-        assert(block != null),
-        assert(item != null),
-        assert(
+  }) : assert(
           item.getId().contains('spawn_egg'),
           'You have to provide a spawn egg.',
         );
@@ -88,10 +85,10 @@ class CustomBlock extends Module {
           }
         },
         count: item.count ?? 1,
-        name: name != null ? TextComponent(name, italic: false) : null,
+        name: name != null ? TextComponent(name!, italic: false) : null,
       );
 
-  Widget _setblock({Widget fireTimer}) {
+  Widget _setblock({Widget? fireTimer}) {
     final headItem = (blockModel ?? item).copyWith(count: 1);
     return For.of([
       SetBlock(block, location: Location.here()),
@@ -99,7 +96,7 @@ class CustomBlock extends Module {
         Entity.Player(gamemode: Gamemode.creative, distance: Range.to(6)),
         item.copyWith(count: 1),
       ),
-      useItemFrame != null && useItemFrame
+      useItemFrame
           ? Summon(
               Entities.item_frame,
               location: Location.rel(y: yOffset),
@@ -107,7 +104,7 @@ class CustomBlock extends Module {
               nbt: {
                 'Invisible': 1,
                 'Fixed': 1,
-                'Item': headItem.copyWith(name: TextComponent(null)).getMap(),
+                'Item': headItem.copyWith(name: TextComponent.None()).getMap(),
                 'Facing': 1,
                 'Invulnerable': 1,
               },
@@ -118,11 +115,11 @@ class CustomBlock extends Module {
               head: headItem,
             ),
       onPlaced,
-      if (fire != null && fire) fireTimer,
+      if (fire) fireTimer,
     ]);
   }
 
-  Widget _blockLogic({Widget onbreak}) => For.of([
+  Widget _blockLogic({required Widget onbreak}) => For.of([
         If(
           Condition.and([
             Condition(Entity.Player(distance: Range.to(6))),

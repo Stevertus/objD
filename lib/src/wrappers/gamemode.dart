@@ -11,7 +11,7 @@ import 'package:objd/src/build/context.dart';
 /// ⇒ gamemode creative @a
 /// ```
 class SetGamemode extends RestActionAble {
-  final Entity target;
+  final Entity? target;
   final Gamemode mode;
 
   SetGamemode(this.mode, {this.target});

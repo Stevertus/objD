@@ -22,16 +22,28 @@ class Clone extends RestActionAble {
   /// ```
   Clone(this.area, {required this.to});
 
-  Clone.filtered(this.area,
-      {required this.to, Block block = Blocks.air, String mode}) {
+  Clone.filtered(
+    this.area, {
+    required this.to,
+    Block block = Blocks.air,
+    String? mode,
+  }) {
     type = 'filtered ' + block.toString();
     if (mode != null && mode.isNotEmpty) type += ' ' + mode;
   }
-  Clone.masked(this.area, {required this.to, String mode}) {
+  Clone.masked(
+    this.area, {
+    required this.to,
+    String? mode,
+  }) {
     type = 'masked';
     if (mode != null && mode.isNotEmpty) type += ' ' + mode;
   }
-  Clone.replace(this.area, {required this.to, String mode}) {
+  Clone.replace(
+    this.area, {
+    required this.to,
+    String? mode,
+  }) {
     type = 'replace';
     if (mode != null && mode.isNotEmpty) type += ' ' + mode;
   }

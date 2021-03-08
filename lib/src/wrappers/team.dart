@@ -8,65 +8,61 @@ import 'package:objd/src/build/context.dart';
 
 class Team extends RestActionAble {
   String name;
-  Entity entity;
+  Entity? entity;
   Map<String, dynamic> modifiers = {};
-  _TeamAction _action;
+  final _TeamAction _action;
 
-  Team(this.name) {
-    _action = _TeamAction.add;
-  }
+  Team(this.name) : _action = _TeamAction.add;
+
   Team.add(
     this.name, {
-    TextComponent display,
-    Color color,
-    ModifyTeam nametag,
-    ModifyTeam collision,
-    ModifyTeam deathMessage,
-    bool friendlyFire,
-    String prefix,
-    String suffix,
-    bool seeInvisible,
-  }) {
-    _action = _TeamAction.add;
+    TextComponent? display,
+    Color? color,
+    ModifyTeam? nametag,
+    ModifyTeam? collision,
+    ModifyTeam? deathMessage,
+    bool? friendlyFire,
+    String? prefix,
+    String? suffix,
+    bool? seeInvisible,
+  }) : _action = _TeamAction.add {
     _setModifiers(display, color, nametag, collision, deathMessage,
         friendlyFire, prefix, suffix, seeInvisible);
   }
 
-  Team.empty(this.name) {
-    _action = _TeamAction.empty;
-  }
-  Team.join(this.name, this.entity) {
-    _action = _TeamAction.join;
-  }
-  Team.leave(this.entity) {
-    _action = _TeamAction.leave;
-  }
+  Team.empty(this.name) : _action = _TeamAction.empty;
+
+  Team.join(this.name, this.entity) : _action = _TeamAction.join;
+
+  Team.leave(this.entity)
+      : _action = _TeamAction.leave,
+        name = '';
+
   Team.modify(
     this.name, {
-    TextComponent display,
-    Color color,
-    ModifyTeam nametag,
-    ModifyTeam collision,
-    ModifyTeam deathMessage,
-    bool friendlyFire,
-    String prefix,
-    String suffix,
-    bool seeInvisible,
-  }) {
-    _action = _TeamAction.modify;
+    TextComponent? display,
+    Color? color,
+    ModifyTeam? nametag,
+    ModifyTeam? collision,
+    ModifyTeam? deathMessage,
+    bool? friendlyFire,
+    String? prefix,
+    String? suffix,
+    bool? seeInvisible,
+  }) : _action = _TeamAction.modify {
     _setModifiers(display, color, nametag, collision, deathMessage,
         friendlyFire, prefix, suffix, seeInvisible);
   }
   void _setModifiers(
-    TextComponent display,
-    Color color,
-    ModifyTeam nametag,
-    ModifyTeam collision,
-    ModifyTeam deathMessage,
-    bool friendlyFire,
-    String prefix,
-    String suffix,
-    bool seeInvisible,
+    TextComponent? display,
+    Color? color,
+    ModifyTeam? nametag,
+    ModifyTeam? collision,
+    ModifyTeam? deathMessage,
+    bool? friendlyFire,
+    String? prefix,
+    String? suffix,
+    bool? seeInvisible,
   ) {
     if (display != null) modifiers['displayName'] = display.toJson();
     if (color != null) modifiers['color'] = color.toString();
@@ -90,25 +86,25 @@ class Team extends RestActionAble {
     var wids = <Widget>[];
     switch (_action) {
       case _TeamAction.add:
-        wids.add(Command('team add ${name}'));
+        wids.add(Command('team add $name'));
         break;
       case _TeamAction.empty:
-        wids.add(Command('team empty ${name}'));
+        wids.add(Command('team empty $name'));
         break;
       case _TeamAction.remove:
-        wids.add(Command('team remove ${name}'));
+        wids.add(Command('team remove $name'));
         break;
       case _TeamAction.join:
-        wids.add(Command('team join ${name} ${entity}'));
+        wids.add(Command('team join $name $entity'));
         break;
       case _TeamAction.leave:
-        wids.add(Command('team leave ${entity}'));
+        wids.add(Command('team leave $entity'));
         break;
       default:
     }
     if (modifiers.isNotEmpty) {
       modifiers.keys.forEach((key) =>
-          wids.add(Command('team modify ${name} ${key} ${modifiers[key]}')));
+          wids.add(Command('team modify $name $key ${modifiers[key]}')));
     }
     return For.of(wids);
   }

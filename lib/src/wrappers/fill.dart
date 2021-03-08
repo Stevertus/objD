@@ -6,6 +6,7 @@ import 'package:objd/src/basic/types/block.dart';
 import 'package:objd/src/basic/types/area.dart';
 import 'package:objd/src/build/build.dart';
 
+/// Fill acts similar to setblock, but fills a whole area instead.
 class Fill extends RestActionAble {
   Area area;
   Block block;
@@ -25,7 +26,7 @@ class Fill extends RestActionAble {
   Fill.keep(this.block, {required this.area}) {
     type = 'keep';
   }
-  Fill.replace(this.block, {required this.area, Block replace}) {
+  Fill.replace(this.block, {required this.area, Block? replace}) {
     if (replace != null) type = 'replace ' + replace.toString();
   }
 

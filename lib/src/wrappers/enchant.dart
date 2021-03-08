@@ -8,7 +8,7 @@ import 'package:objd/src/build/build.dart';
 class Enchant extends RestActionAble {
   final Entity target;
   final String enchantment;
-  final int level;
+  final int? level;
 
   /// The Enchant Widget gives the currently holding item of a [target] an [enchantment]
   Enchant(this.target, this.enchantment, {this.level});

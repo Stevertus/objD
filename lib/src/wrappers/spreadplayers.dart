@@ -9,7 +9,7 @@ class SpreadPlayers extends RestActionAble {
   final Location center;
   final double distance;
   final double maxRange;
-  final double maximumHeight;
+  final double? maximumHeight;
   final bool respectTeams;
 
   /// The Spawnpoint Widget sets a players spawnpoint to the current or specified [position]
@@ -20,10 +20,7 @@ class SpreadPlayers extends RestActionAble {
     required this.maxRange,
     this.maximumHeight,
     this.respectTeams = false,
-  })  : assert(center != null),
-        assert(distance != null),
-        assert(target != null),
-        assert(maxRange != null);
+  });
 
   @override
   Widget generate(Context context) {
@@ -31,7 +28,7 @@ class SpreadPlayers extends RestActionAble {
     locations.removeAt(1);
 
     return Command(
-      'spreadplayers ${locations.join(' ')} $distance $maxRange${maximumHeight == null ? '' : ' under ' + maximumHeight.toString()} $respectTeams $target',
+      'spreadplayers ${locations.join(' ')} $distance $maxRange ${maximumHeight == null ? '' : 'under ' + maximumHeight.toString()} $respectTeams $target',
     );
   }
 }

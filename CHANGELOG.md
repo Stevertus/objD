@@ -1,7 +1,13 @@
 ## 0.4.0
 
+- added Textcomponent.None for the edge case that you want to clear a previous set text
+- added predicate parameter to Selector
 - migrated to null safety, read more here: https://dart.dev/null-safety
+- refactored apis, arrangement of required values and nullable types
+- changed dependencies (removed meta and changed colorize to ansicolor)
 - fixed Area generating NULL instead of 0 by default
+
+You need at least Dart 1.12 for this version of objD and most likely have to migrate to null safety yourself (which is easy with the provided tools: https://dart.dev/go/null-safety-migration)
 
 ## 0.3.6
 

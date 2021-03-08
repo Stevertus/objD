@@ -18,26 +18,22 @@ class Comment extends RestActionAble {
   Comment.LineBreak() : _text = '';
 
   /// Separates parts of your code
-  Comment.Separate([int length = 48]) {
-    _text = _separate(length);
-  }
+  Comment.Separate([int length = 48]) : _text = _separate(length);
 
   /// Used to describe
   Comment.FileHeader(
     String desc, {
-    String author,
-    String calledFrom,
-    String context,
-  }) {
-    _text = _separate() +
-        '''
+    String? author,
+    String? calledFrom,
+    String? context,
+  }) : _text = _separate() +
+            '''
 \n#
 # Author:
 #  ${author ?? Author}
 #
 # Description:    
-''';
-
+''' {
     _text += desc.split('\n').map((s) => '#  ' + s).join('\n');
 
     if (calledFrom != null) {
@@ -52,16 +48,14 @@ class Comment extends RestActionAble {
     _text += '\n#\n' + _separate();
   }
 
-  Comment.Null() {
-    _text = '[null]';
-  }
+  Comment.Null() : _text = '[null]';
 
-  String _separate([int length = 48]) {
+  static String _separate([int length = 48]) {
     return List.generate(length, (i) => '#').join();
   }
 
   @override
   Widget generate(Context context) {
-    return Text(_text ?? '');
+    return Text(_text);
   }
 }

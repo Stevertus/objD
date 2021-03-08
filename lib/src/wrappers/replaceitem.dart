@@ -9,14 +9,14 @@ import 'package:objd/src/basic/types/entity.dart';
 import 'package:objd/src/build/build.dart';
 
 class ReplaceItem extends RestActionAble {
-  Entity entity;
-  Location loc;
+  Entity? entity;
+  Location? loc;
   Slot slot;
-  Entity fromEntity;
-  Location fromLoc;
-  Slot fromSlot;
-  Item item;
-  String modifier;
+  Entity? fromEntity;
+  Location? fromLoc;
+  Slot? fromSlot;
+  Item? item;
+  String? modifier;
 
   final _ReplaceItemType _type;
 
@@ -25,9 +25,7 @@ class ReplaceItem extends RestActionAble {
     this.entity, {
     required this.item,
     required this.slot,
-  })   : assert(entity != null),
-        assert(item != null),
-        _type = _ReplaceItemType.replace;
+  }) : _type = _ReplaceItemType.replace;
 
   /// To set items inside a block use ReplaceItem.block:
   ///
@@ -40,9 +38,7 @@ class ReplaceItem extends RestActionAble {
     this.loc, {
     required this.item,
     required this.slot,
-  })   : assert(loc != null),
-        assert(item != null),
-        _type = _ReplaceItemType.replace;
+  }) : _type = _ReplaceItemType.replace;
 
   /// ReplaceItem.modify takes a modifier path and applies it to an slot.
   ReplaceItem.modify(
@@ -114,17 +110,17 @@ class ReplaceItem extends RestActionAble {
 
   Widget _pre117() {
     assert(
-      _type == _ReplaceItemType.replace,
+      _type == _ReplaceItemType.replace && item != null,
       'Pre 1.17 ReplaceItem must use replace',
     );
 
     if (entity != null) {
       return Command(
-        'replaceitem entity $entity ${slot.slot} ${item.getGiveNotation()}',
+        'replaceitem entity $entity ${slot.slot} ${item!.getGiveNotation()}',
       );
     }
     return Command(
-      'replaceitem block $loc ${slot.slot} ${item.getGiveNotation()}',
+      'replaceitem block $loc ${slot.slot} ${item!.getGiveNotation()}',
     );
   }
 
@@ -139,21 +135,21 @@ class ReplaceItem extends RestActionAble {
     var cmd = ['item'];
     cmd.add(entity != null ? 'entity $entity' : 'block $loc');
 
-    cmd.add(slot.slot);
+    cmd.add(slot.slot!);
 
     cmd.add(_type.toString().split('.')[1]);
 
-    if (_type == _ReplaceItemType.replace) {
-      cmd.add(item.getGiveNotation());
+    if (_type == _ReplaceItemType.replace && item != null) {
+      cmd.add(item!.getGiveNotation());
     }
 
-    if (_type == _ReplaceItemType.copy) {
+    if (_type == _ReplaceItemType.copy && fromSlot != null) {
       cmd.add(fromEntity != null ? 'entity $fromEntity' : 'block $fromLoc');
-      cmd.add(fromSlot.slot);
+      cmd.add(fromSlot!.slot!);
     }
 
     if (modifier != null) {
-      cmd.add(modifier);
+      cmd.add(modifier!);
     }
 
     return Command(cmd.join(' '));
