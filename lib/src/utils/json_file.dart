@@ -7,8 +7,8 @@ import 'package:objd/src/build/context.dart';
 
 class JsonFile extends Widget {
   final String path;
-  final Map<String, dynamic> contents;
-  final List<dynamic> contentsList;
+  final Map<String, dynamic>? contents;
+  final List<dynamic>? contentsList;
   final bool useGson;
 
   /// As a way to easily generate .json files, you can use the JsonFile wrapper. Just provide a map and a path

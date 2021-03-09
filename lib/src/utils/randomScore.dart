@@ -3,13 +3,13 @@ import 'package:objd/core.dart';
 /// The RandomScore Widget assigns a random value to a score using the UUID of an AreaEffectCloud.
 class RandomScore extends RestActionAble {
   String targetFilePath;
-  String targetFileName;
+  String? targetFileName;
 
   Entity entity;
   String objective;
   int to;
   int from;
-  int _diff;
+  final int _diff;
 
   /// The RandomScore Widget assigns a random value to a score using the UUID of an AreaEffectCloud.
   RandomScore(
@@ -19,9 +19,7 @@ class RandomScore extends RestActionAble {
     this.objective = 'objd_random',
     this.targetFilePath = 'objd',
     this.targetFileName,
-  }) {
-    _diff = to - from + 1;
-  }
+  }) : _diff = to - from + 1;
 
   Score get score => Score(entity, objective);
 

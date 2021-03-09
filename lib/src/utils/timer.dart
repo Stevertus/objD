@@ -15,9 +15,12 @@ class Timeout extends RestActionAble {
   List<Widget> children;
   int ticks;
 
-  Timeout(this.name,
-      {required this.children, required this.ticks, this.path = 'timers'})
-      : assert(ticks != null);
+  Timeout(
+    this.name, {
+    required this.children,
+    required this.ticks,
+    this.path = 'timers',
+  });
 
   @override
   Widget generate(Context context) {
@@ -29,7 +32,7 @@ class Timeout extends RestActionAble {
 }
 
 class Timer extends RestActionAble {
-  bool _stop;
+  final bool _stop;
 
   String name;
   String path;
@@ -43,11 +46,15 @@ class Timer extends RestActionAble {
     required this.ticks,
     this.path = 'timers',
     this.infinite = true,
-  }) : assert(ticks != null);
+  }) : _stop = false;
 
-  Timer.stop(this.name) {
-    _stop = true;
-  }
+  Timer.stop(this.name)
+      : _stop = true,
+        path = 'timers',
+        ticks = 0,
+        infinite = true,
+        children = const [];
+
   @override
   Widget generate(Context context) {
     if (_stop == true) return Entity.All().addTag('objd_' + name);

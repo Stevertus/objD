@@ -465,23 +465,24 @@ class Entity implements EntityClass {
     String? predicate,
   }) {
     _setArguments(
-        limit,
-        tags,
-        team,
-        scores,
-        nbt,
-        strNbt,
-        type,
-        area,
-        distance,
-        level,
-        gamemode,
-        name,
-        isRotated,
-        horizontalRotation,
-        verticalRotation,
-        predicate,
-        true);
+      limit,
+      tags,
+      team,
+      scores,
+      nbt,
+      strNbt,
+      type,
+      area,
+      distance,
+      level,
+      gamemode,
+      name,
+      isRotated,
+      horizontalRotation,
+      verticalRotation,
+      predicate,
+      true,
+    );
     return this;
   }
 
@@ -528,23 +529,24 @@ class Entity implements EntityClass {
   }) {
     var temp = Entity.clone(this);
     temp._setArguments(
-        limit,
-        tags,
-        team,
-        scores,
-        nbt,
-        strNbt,
-        type,
-        area,
-        distance,
-        level,
-        gamemode,
-        name,
-        isRotated,
-        horizontalRotation,
-        verticalRotation,
-        predicate,
-        false);
+      limit,
+      tags,
+      team,
+      scores,
+      nbt,
+      strNbt,
+      type,
+      area,
+      distance,
+      level,
+      gamemode,
+      name,
+      isRotated,
+      horizontalRotation,
+      verticalRotation,
+      predicate,
+      false,
+    );
     return temp;
   }
 
@@ -569,16 +571,20 @@ class Entity implements EntityClass {
     double step = 1,
     Block through = Blocks.air,
     Widget Function(Function, Function)? ray,
-    List<Widget>? onhit,
+    List<Widget> onhit = const [],
     String scoreName = 'objd_count',
   }) =>
-      StraitWidget.builder.create(Raycast(this,
+      StraitWidget.builder.create(
+        Raycast(
+          this,
           max: max,
           step: step,
           through: through,
           ray: ray,
           onhit: onhit,
-          scoreName: scoreName));
+          scoreName: scoreName,
+        ),
+      );
 
   ///
   ///Generates a Teleport Widget

@@ -4,8 +4,8 @@ import 'package:objd/core.dart';
 class ClickEvent extends Module {
   String path;
   String name;
-  Widget onClick;
-  Item selectedItem;
+  Widget? onClick;
+  Item? selectedItem;
   final Score _score = Score.fromSelected('objd_click');
 
   /// The ClickEvent Module uses the trigger of a carrot on a stick to register right clicks with a scoreboard and execute a [onClick] Widget.
@@ -32,16 +32,19 @@ class ClickEvent extends Module {
       Scoreboard('objd_click',
           type: 'minecraft.used:minecraft.carrot_on_a_stick'),
       Execute.asat(
-          Entity.All(
-              scores: [
-                _score.matchesRange(
-                  Range.from(1),
-                ),
-              ],
-              nbt: selectedItem != null
-                  ? {'SelectedItem': selectedItem.getMap()}
-                  : null),
-          children: [File.execute(path + name, create: false)]),
+        Entity.All(
+            scores: [
+              _score.matchesRange(
+                Range.from(1),
+              ),
+            ],
+            nbt: selectedItem != null
+                ? {'SelectedItem': selectedItem!.getMap()}
+                : null),
+        children: [
+          File.execute(path + name, create: false),
+        ],
+      ),
     ]);
   }
 

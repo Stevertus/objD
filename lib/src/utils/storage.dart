@@ -5,16 +5,16 @@ import 'package:objd/src/wrappers/data.dart';
 
 //// The Storage Widget gives you easy tools to store and receive nbt data globally.
 class Storage extends Widget {
-  _StorageType _type;
+  _StorageType? _type;
   final String name;
   final bool autoNamespace;
-  Map<String, dynamic> nbt;
-  String key;
-  DataModify _modify;
-  Data data;
-  Score score;
-  double scale;
-  String datatype;
+  Map<String, dynamic>? nbt;
+  String? key;
+  DataModify? _modify;
+  Data? data;
+  Score? score;
+  double? scale;
+  String? datatype;
 
   /// The Storage Widget gives you easy tools to store and receive nbt data globally.
   /// A Store takes in a name, by default it already uses the current pack namespace.
@@ -32,9 +32,10 @@ class Storage extends Widget {
   Storage.set(
     this.name, {
     this.autoNamespace = true,
-    required this.key,
+    required String key,
     required dynamic value,
   })   : nbt = {key: value},
+        key = key,
         _type = _StorageType.merge;
 
   /// But of course you can also insert a Map with multiple keys and values.
@@ -68,9 +69,7 @@ class Storage extends Widget {
     required String toPath,
     this.autoNamespace = true,
     required DataModify modify,
-  })   : assert(modify != null),
-        assert(toPath != null),
-        _modify = modify,
+  })   : _modify = modify,
         key = toPath,
         _type = _StorageType.modify;
 
@@ -79,11 +78,11 @@ class Storage extends Widget {
     this.name, {
     this.autoNamespace = true,
     required this.key,
-    required this.data,
-  })   : assert(data != null),
-        assert(key != null),
+    required Data data,
+  })   : assert(key != null),
         assert(data.subcommand == 'get',
             'You have to insert a Data.get into copyData!'),
+        data = data,
         _type = _StorageType.data;
 
   /// Similar to copyData is copyScore which copies the value of a score into a nbt path.
@@ -138,17 +137,21 @@ class Storage extends Widget {
   ///Copies Nbt Data from a **Data.get** Widget.
   Storage copyData(
     String key, {
-    Data data,
+    required Data data,
   }) =>
-      Storage.copyData(name,
-          autoNamespace: autoNamespace, key: key, data: data);
+      Storage.copyData(
+        name,
+        autoNamespace: autoNamespace,
+        key: key,
+        data: data,
+      );
 
   ///Similar to copyData is copyScore which copies the value of a score into a nbt path.
   Storage copyScore(
     String key, {
     double scale = 1,
     String datatype = 'byte',
-    Score score,
+    Score? score,
   }) =>
       Storage.copyScore(name,
           autoNamespace: autoNamespace,
@@ -156,32 +159,32 @@ class Storage extends Widget {
           datatype: datatype,
           score: score);
 
-  Data toData([DataStorage target]) {
+  Data? toData([DataStorage? target]) {
     target ??= DataStorage(name);
 
     if (_type == _StorageType.merge) return Data.merge(target, nbt: nbt);
     if (_type == _StorageType.get) {
-      return Data.get(target, path: key, scale: scale);
+      return Data.get(target, path: key!, scale: scale);
     }
-    if (_type == _StorageType.remove) return Data.remove(target, path: key);
+    if (_type == _StorageType.remove) return Data.remove(target, path: key!);
     if (_type == _StorageType.modify) {
       return Data.modify(
         target,
-        path: key,
+        path: key!,
         modify: _modify,
       );
     }
-    if (_type == _StorageType.data) {
+    if (_type == _StorageType.data && data != null) {
       return Data.modify(
         target,
-        path: key,
-        modify: DataModify.set(data.target, fromPath: data.path),
+        path: key!,
+        modify: DataModify.set(data!.target, fromPath: data!.path),
       );
     }
     if (_type == _StorageType.score) {
       return Data.fromScore(
         target,
-        path: key,
+        path: key!,
         score: score,
         scale: 1,
         datatype: datatype,
@@ -192,9 +195,7 @@ class Storage extends Widget {
 
   @override
   Widget generate(Context context) {
-    var target = DataStorage(autoNamespace != null && autoNamespace
-        ? context.packId + ':$name'
-        : name);
+    var target = DataStorage(autoNamespace ? context.packId + ':$name' : name);
 
     var data = toData(target);
 

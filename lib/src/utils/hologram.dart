@@ -9,8 +9,8 @@ import 'package:objd/src/wrappers/execute.dart';
 
 /// A Hologram shows a floating text at a specific Location using Armorstands.
 class Hologram extends RestActionAble {
-  List<TextComponent> texts;
-  List<String> tags;
+  late List<TextComponent> texts;
+  List<String>? tags;
   Location location;
   double space;
 
@@ -29,20 +29,20 @@ class Hologram extends RestActionAble {
   Hologram(
     String str, {
     required this.location,
-    Color color,
+    Color? color,
     this.tags,
     this.space = 0.25,
   }) {
     if (tags == null) {
       tags = ['objd_hologram'];
     } else {
-      tags.add('objd_hologram');
+      tags!.add('objd_hologram');
     }
 
     texts = str
         .split('\n')
-        .map((line) =>
-            line.isNotEmpty ? TextComponent(line, color: color) : null)
+        .where((line) => line.isNotEmpty)
+        .map((line) => TextComponent(line, color: color))
         .toList();
   }
 
@@ -56,7 +56,7 @@ class Hologram extends RestActionAble {
     if (tags == null) {
       tags = ['objd_hologram'];
     } else {
-      tags.add('objd_hologram');
+      tags!.add('objd_hologram');
     }
   }
 
@@ -71,17 +71,17 @@ class Hologram extends RestActionAble {
         tags: tags,
       );
     }
-    return Execute.positioned(location,
-        children: (texts.map((text) {
-          i--;
-          if (text != null) {
-            return ArmorStand.staticMarker(
-                Location.rel(x: 0, y: i * space, z: 0),
-                name: text,
-                nameVisible: true,
-                tags: tags);
-          }
-          return Comment.Null();
-        }).toList()));
+    return Execute.positioned(
+      location,
+      children: (texts.map((text) {
+        i--;
+        return ArmorStand.staticMarker(
+          Location.rel(x: 0, y: i * space, z: 0),
+          name: text,
+          nameVisible: true,
+          tags: tags,
+        );
+      }).toList()),
+    );
   }
 }

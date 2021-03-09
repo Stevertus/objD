@@ -2,10 +2,10 @@ import 'package:objd/core.dart';
 
 /// checks the server version (e.g. 1.14) - increments, such as 1.14.1, aren't and can't be detected
 class ServerVersionCheck extends Widget {
-  final int minVersion;
-  final List<Widget> versionTooLow;
-  final Widget Function(Score) then;
-  final Score serverVersion;
+  final int? minVersion;
+  final List<Widget>? versionTooLow;
+  final Widget Function(Score)? then;
+  final Score? serverVersion;
 
   /// Checks the used Minecraft Version and can give feedback on it(e.g. Errors).
   ///
@@ -64,7 +64,7 @@ class ServerVersionCheck extends Widget {
           'HandItems': [
             {
               'tag': {
-                'fard': {'update': 13}
+                'objd': {'update': 13}
               }
             }
           ]
@@ -78,7 +78,7 @@ class ServerVersionCheck extends Widget {
           'HandItems': [
             {
               'tag': {
-                'fard': {'update': 14}
+                'objd': {'update': 14}
               }
             }
           ]
@@ -92,7 +92,7 @@ class ServerVersionCheck extends Widget {
           'ArmorItems': [
             {
               'tag': {
-                'fard': {'update': 14}
+                'objd': {'update': 15}
               }
             }
           ]
@@ -102,12 +102,12 @@ class ServerVersionCheck extends Widget {
         ],
       ),
 
-      if (then != null) then(s),
+      if (then != null) then!(s),
 
       if (minVersion != null && versionTooLow != null)
         If(
           Condition.not(s >= 15),
-          then: versionTooLow,
+          then: versionTooLow!,
         ),
 
       Kill(e),

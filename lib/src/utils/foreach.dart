@@ -13,12 +13,12 @@ import 'package:objd/src/wrappers/if.dart';
 /// Therefore a file is called recursively and a counter score is increased.
 class ForEach extends RestActionAble {
   Score score;
-  Score _countScore;
+  late Score _countScore;
   int from;
   int step;
-  Entity counter;
+  Entity? counter;
   Widget Function(Score) then;
-  Location translate;
+  Location? translate;
 
   /// The ForEach Loop repeats a set of commands for each value in a Score.
   /// Therefore a file is called recursively and a counter score is increased.
@@ -39,7 +39,7 @@ class ForEach extends RestActionAble {
     this.translate,
   }) {
     counter ??= Entity.PlayerName('#objd_foreach');
-    _countScore = Score(counter, 'objd_count');
+    _countScore = Score(counter!, 'objd_count');
   }
 
   @override

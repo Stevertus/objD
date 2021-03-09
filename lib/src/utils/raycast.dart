@@ -1,19 +1,18 @@
 import 'package:objd/core.dart';
-import 'package:objd/core.dart' as prefix0;
 
 /// The Raycast Widget is one of the most powerful widgets by giving you many options to configure raytracing in Minecraft.
 /// Internally it uses local coordinates, a distance counter and recursion.
 class Raycast extends RestActionAble {
-  int id;
+  int? id;
   Entity entity;
-  int max;
+  int? max;
   double step;
   Block through;
-  Widget Function(Function, Function) ray;
+  Widget Function(Function, Function)? ray;
   List<Widget> onhit;
   bool _useStop = false;
+  String scoreName;
 
-  Score _maxScore;
   final _isHit = Tag('objd_ray_hit', entity: Entity.Selected());
   final _isStopped = Tag('objd_ray_stop', entity: Entity.Selected());
 
@@ -50,15 +49,9 @@ class Raycast extends RestActionAble {
     this.step = 1,
     this.through = Blocks.air,
     this.ray,
-    this.onhit,
-    String scoreName = 'objd_count',
-  }) {
-    if (max != null && max > 0) {
-      _maxScore = Score(entity, scoreName);
-      max = max ~/ step;
-    }
-    onhit ??= [];
-  }
+    this.onhit = const [],
+    this.scoreName = 'objd_count',
+  });
 
   Widget _hit() {
     return _isHit.add();
@@ -71,23 +64,26 @@ class Raycast extends RestActionAble {
 
   @override
   Widget generate(Context context) {
-    id = prefix0.IndexedFile.getIndexed('ray') + 1;
+    Score? _maxScore;
+    int? maxStep;
+    id = IndexedFile.getIndexed('ray') + 1;
+
+    if (max != null && max! > 0) {
+      _maxScore = Score(Entity.Self(), scoreName);
+      maxStep = max! ~/ step;
+    }
 
     var children = <Widget>[
       If.not(through, then: [_isHit.add()])
     ];
-    if (ray != null) children.insert(0, ray(_stop, _hit));
-    if (_maxScore != null) {
-      _maxScore.entity = Entity.Selected();
-      children.add(_maxScore.add());
-    }
-    ;
+    if (ray != null) children.insert(0, ray!(_stop, _hit));
 
     /// all and conditions
     var conds = <Condition>[Condition.not(_isHit)];
     if (_useStop) conds.add(Condition.not(_isStopped));
     if (_maxScore != null) {
-      conds.add(Condition(_maxScore.matchesRange(Range.to(max))));
+      children.add(_maxScore.add());
+      conds.add(Condition(_maxScore.matchesRange(Range.to(maxStep))));
     }
 
     children.add(
@@ -109,7 +105,7 @@ class Raycast extends RestActionAble {
       If(Condition.and([_isHit, _useStop ? Condition.not(_isStopped) : null]),
           then: [
             File.execute(
-              'objd/rayhit${id}',
+              'objd/rayhit$id',
               child: For.of(onhit),
             ),
           ]),
