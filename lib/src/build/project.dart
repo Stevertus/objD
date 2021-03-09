@@ -28,7 +28,7 @@ class Project {
     this.version = 16,
     this.target = './',
     this.description = 'This is a datapack generated with objd by Stevertus',
-  }) : assert(generate != null, 'Please provide something to generate');
+  });
 
   Map toMap() => {
         'Project': {

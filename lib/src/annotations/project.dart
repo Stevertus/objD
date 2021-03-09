@@ -1,4 +1,5 @@
 /// This can automatically generate a main function with all necessary pieces to actually generate all packs and files.
+
 class Prj {
   final String? name;
   final int? version;

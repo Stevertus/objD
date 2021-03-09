@@ -1,8 +1,8 @@
 import 'package:objd/src/external/predicates/tag.dart';
 
 class Weather extends Tag {
-  final bool raining;
-  final bool thundering;
+  final bool? raining;
+  final bool? thundering;
 
   Weather({this.raining, this.thundering});
 

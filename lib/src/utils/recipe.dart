@@ -60,8 +60,7 @@ class Recipe extends Widget {
     this.type = RecipeType.shaped,
     this.experience = 0.1,
     this.cookingtime = 200,
-  })  : assert(name != null),
-        assert(type != null);
+  });
 
   /// The API also supports shapeless crafting. That means you can set the ingredients in any shape and it would be the same result.
   ///

@@ -39,7 +39,6 @@ class Condition {
 
   /// checks whether an area matches another area of blocks
   Condition.blocks(Area cond, {required Location compare}) {
-    assert(compare != null);
     _setCond(cond, target: compare);
   }
 

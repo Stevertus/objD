@@ -11,7 +11,7 @@ class Give extends RestActionAble {
   Item item;
 
   /// Gives a item to a player.
-  Give(this.entity, {required this.item}) : assert(item != null);
+  Give(this.entity, {required this.item});
 
   @override
   Widget generate(Context context) {

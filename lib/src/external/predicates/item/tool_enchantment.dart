@@ -17,8 +17,7 @@ class EnchantmentData {
   final String enchantment;
   final Range levels;
 
-  EnchantmentData(this.enchantment, {required this.levels})
-      : assert(levels != null);
+  EnchantmentData(this.enchantment, {required this.levels});
 
   Map<String, dynamic> getJson() => {
         'enchantment': enchantment,

@@ -153,8 +153,8 @@ class CustomBlock extends Module {
 
   @override
   Widget generate(Context context) {
-    assert(id != null && id.isNotEmpty);
-    assert(block != null && block.toString().isNotEmpty);
+    assert(id.isNotEmpty);
+    assert(block.toString().isNotEmpty);
 
     final path = generatePack ? '' : 'objd_blocks/$id';
 

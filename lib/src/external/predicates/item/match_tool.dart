@@ -5,14 +5,14 @@ import 'package:objd/src/external/predicates/range.dart';
 import 'package:objd/src/external/predicates/tag.dart';
 
 class Tool extends Tag {
-  final Range count;
-  final Range durability;
-  final Item item;
-  final String potion;
-  final String tag;
-  final Map<String, dynamic> nbt;
-  final List<EnchantmentData> storedEnchantments;
-  final Tag predicate;
+  final Range? count;
+  final Range? durability;
+  final Item? item;
+  final String? potion;
+  final String? tag;
+  final Map<String, dynamic>? nbt;
+  final List<EnchantmentData>? storedEnchantments;
+  final Tag? predicate;
 
   Tool({
     this.predicate,
@@ -44,13 +44,13 @@ class Tool extends Tag {
     if (durability != null) {
       ret['predicate']['durability'] = _getRangeMap(durability);
     }
-    if (item != null) ret['predicate']['item'] = item.getId();
+    if (item != null) ret['predicate']['item'] = item!.getId();
     if (potion != null) ret['predicate']['potion'] = potion;
     if (potion != null) ret['predicate']['potion'] = potion;
     if (nbt != null) ret['predicate']['nbt'] = gson.encode(nbt);
-    if (storedEnchantments != null && storedEnchantments.isNotEmpty) {
+    if (storedEnchantments != null && storedEnchantments!.isNotEmpty) {
       ret['predicate']['stored_enchantments'] =
-          storedEnchantments.map((e) => e.getJson()).toList();
+          storedEnchantments!.map((e) => e.getJson()).toList();
     }
     return ret;
   }

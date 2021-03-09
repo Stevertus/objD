@@ -16,6 +16,7 @@ class Scoreboard extends RestActionAble {
   late String subcommand;
   String name;
   late String type;
+  bool? useHearts;
 
   /// A scoreboard objective holds values, kind a like a Variable inside Minecraft.
   ///
@@ -40,6 +41,18 @@ class Scoreboard extends RestActionAble {
     bool addIntoLoad = true,
   }) {
     type = 'minecraft.used:minecraft.carrot_on_a_stick';
+    subcommand = addIntoLoad ? 'add' : 'addHere';
+    if (display != null) type += ' ' + display.toJson()!;
+    prefixName();
+  }
+
+  /// The `Scoreboard.click` constructor adds a carrot on a stick click event objective
+  Scoreboard.villager(
+    this.name, {
+    TextComponent? display,
+    bool addIntoLoad = true,
+  }) {
+    type = 'minecraft.custom:minecraft.talked_to_villager';
     subcommand = addIntoLoad ? 'add' : 'addHere';
     if (display != null) type += ' ' + display.toJson()!;
     prefixName();
@@ -82,7 +95,11 @@ class Scoreboard extends RestActionAble {
     type = display;
     prefixName();
   }
-  // TODO: modify
+  Scoreboard.modify(
+    this.name, {
+    bool useHearts = false,
+  })  : useHearts = useHearts,
+        subcommand = 'modify';
 
   void prefixName() {
     if (prefix != null && !name.contains(prefix!)) name = prefix! + name;
@@ -101,6 +118,13 @@ class Scoreboard extends RestActionAble {
         return Command('scoreboard objectives add ' + name + ' ' + type);
       case 'remove':
         return Command('scoreboard objectives remove ' + name);
+      case 'modify':
+        return Command(
+          'scoreboard objectives modify ' +
+              name +
+              ' rendertype ' +
+              (useHearts! ? 'hearts' : 'integer'),
+        );
       case 'setdisplay':
         return Command('scoreboard objectives setdisplay ' + type + ' ' + name);
     }

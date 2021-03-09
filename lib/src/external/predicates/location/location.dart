@@ -12,18 +12,18 @@ void _checkRangeOrDouble(dynamic val) {
 }
 
 class Location extends Tag {
-  final String biome;
-  final String feature;
-  final Block block;
-  final Block fluid;
-  final Map<String, dynamic> blockState;
+  final String? biome;
+  final String? feature;
+  final Block? block;
+  final Block? fluid;
+  final Map<String, dynamic>? blockState;
   final dynamic light;
   final dynamic x;
   final dynamic y;
   final dynamic z;
-  final l.Location offset;
+  final l.Location? offset;
   final dynamic dimension;
-  final Tag predicate;
+  final Tag? predicate;
 
   Location({
     this.predicate,
@@ -47,7 +47,7 @@ class Location extends Tag {
 
   Map<String, dynamic> _convertBlock(Block block, [bool isFluid = false]) {
     var ret = <String, dynamic>{};
-    if (block.id != null && block.id.isNotEmpty) {
+    if (block.id.isNotEmpty) {
       if (isFluid) {
         ret['fluid'] = block.id;
       } else {
@@ -57,8 +57,8 @@ class Location extends Tag {
     if (block.tag != null) ret['tag'] = block.tag;
     if (block.nbt != null) ret['nbt'] = block.nbt;
     if (block.states != null) ret['state'] = block.states;
-    if (blockState != null && blockState.isNotEmpty) {
-      ret['state'] = blockState.map(
+    if (blockState != null && blockState!.isNotEmpty) {
+      ret['state'] = blockState!.map(
         (key, val) {
           _checkRangeOrDouble(val);
           if (val is Range) return MapEntry(key, val.getJson());
@@ -77,8 +77,8 @@ class Location extends Tag {
       'predicate': predicate?.getJson() ?? {},
     };
 
-    if (block != null) ret['predicate']['block'] = _convertBlock(block);
-    if (fluid != null) ret['predicate']['fluid'] = _convertBlock(fluid);
+    if (block != null) ret['predicate']['block'] = _convertBlock(block!);
+    if (fluid != null) ret['predicate']['fluid'] = _convertBlock(fluid!);
     if (biome != null) ret['predicate']['biome'] = biome;
     if (dimension != null) {
       if (dimension is Dimension) {
@@ -105,9 +105,9 @@ class Location extends Tag {
     }
 
     if (offset != null) {
-      if (offset.x != 0) ret['predicate']['offsetX'] = offset.x;
-      if (offset.y != 0) ret['predicate']['offsetY'] = offset.y;
-      if (offset.z != 0) ret['predicate']['offsetZ'] = offset.z;
+      if (offset!.x != 0) ret['predicate']['offsetX'] = offset!.x;
+      if (offset!.y != 0) ret['predicate']['offsetY'] = offset!.y;
+      if (offset!.z != 0) ret['predicate']['offsetZ'] = offset!.z;
     }
 
     return ret;

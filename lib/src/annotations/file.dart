@@ -1,4 +1,5 @@
 /// Writing Minecrafts functions annotations becomes really easy. Just annotate a Widget variable that should be inside of your function with `@Func()`:
+
 class Func {
   final String? name;
   final String? path;

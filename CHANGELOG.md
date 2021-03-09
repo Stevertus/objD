@@ -2,6 +2,7 @@
 
 - added Textcomponent.None for the edge case that you want to clear a previous set text
 - added predicate parameter to Selector
+- added Scoreboard.modify(whoever uses that)
 - migrated to null safety, read more here: https://dart.dev/null-safety
 - refactored apis, arrangement of required values and nullable types
 - changed dependencies (removed meta and changed colorize to ansicolor)

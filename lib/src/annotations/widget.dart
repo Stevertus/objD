@@ -6,6 +6,7 @@
 ///  Log('Hello $name $lastname!'),
 ///]);
 ///```
+
 const Wdg = WidgetAnnotation();
 
 /// Writing a Widget becomes much simpler with the `@WidgetAnnotation()` annotation. You can just give it a function with needed parameters which returns a new Widget and the generators will figure out a Widget class to go along with it.

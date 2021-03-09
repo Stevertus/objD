@@ -2,7 +2,6 @@ import 'package:objd/src/basic/types/location.dart';
 import 'package:objd/src/basic/rest_action.dart';
 import 'package:objd/src/basic/text_components.dart';
 import 'package:objd/src/basic/widget.dart';
-import 'package:objd/src/wrappers/comment.dart';
 import 'package:objd/src/build/context.dart';
 import 'package:objd/src/utils/armorstand.dart';
 import 'package:objd/src/wrappers/execute.dart';
