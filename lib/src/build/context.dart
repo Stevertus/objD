@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+
 /// Maybe you already wondered what this context argument here is.
 ///
 /// The Context is a way to get certain important information from the parents.
@@ -26,6 +28,7 @@ class Context {
   String? loadFile;
   String? mainFile;
   int version;
+  Path path;
   final Map<Type, dynamic> _heredityTraits;
 
   /// Maybe you already wondered what this context argument here is
@@ -49,11 +52,9 @@ class Context {
     this.loadFile = 'load',
     this.mainFile = 'main',
     this.version = 17,
+    this.path = const Path([]),
     Map<Type, dynamic>? traits,
-  }) : _heredityTraits = traits ?? {} {
-    // prefixes ??= [];
-    // suffixes ??= [];
-  }
+  }) : _heredityTraits = traits ?? {};
 
   Context.clone(Context context)
       : this(
@@ -66,6 +67,7 @@ class Context {
           mainFile: context.mainFile,
           traits: context._heredityTraits,
           version: context.version,
+          path: context.path.copyWith(),
         );
 
   Context addPrefix(String? prev) {
@@ -80,6 +82,11 @@ class Context {
     return this;
   }
 
+  Context addPath(Path p) {
+    path.join(p);
+    return this;
+  }
+
   void passTrait<T>(T t) {
     _heredityTraits[T] = t;
   }
@@ -87,4 +94,71 @@ class Context {
   T traitOf<T>() {
     return (_heredityTraits[T] as T);
   }
+}
+
+// A simple utility to collect path segments and generate a String
+class Path {
+  final List<String> segments;
+  final String? filename;
+  final String? filetype;
+
+  const Path(this.segments, {this.filename, this.filetype});
+
+  Path join(Path p) => Path(
+        segments + p.segments,
+        filename: p.filename ?? filename,
+        filetype: p.filetype ?? filetype,
+      );
+  Path append(String path, {String? type}) => join(Path.from(path, type: type));
+
+  factory Path.from(String path, {String? type}) {
+    final segs = path.split('/');
+    segs.removeWhere((s) => s.isEmpty);
+
+    String? name;
+    if (segs.isNotEmpty) {
+      final file = segs.last.split('.');
+      if (file.length == 2 && file.last.isNotEmpty || type != null) {
+        type ??= file.last;
+        name = file.first;
+        segs.removeLast();
+      }
+    }
+    return Path(segs, filename: name, filetype: type);
+  }
+
+  bool get isEmpty => segments.isEmpty && filename == null;
+  bool get isNotEmpty => !isEmpty;
+
+  Path copyWith({
+    List<String>? segments,
+    String? filename,
+    String? filetype,
+  }) {
+    return Path(
+      segments ?? this.segments,
+      filename: filename ?? this.filename,
+      filetype: filetype ?? this.filetype,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    final listEquals = const DeepCollectionEquality().equals;
+
+    return other is Path &&
+        listEquals(other.segments, segments) &&
+        other.filename == filename &&
+        other.filetype == filetype;
+  }
+
+  @override
+  int get hashCode => segments.hashCode ^ filename.hashCode ^ filetype.hashCode;
+
+  @override
+  String toString() => [
+        ...segments,
+        if (filename != null) filename! + '.' + (filetype ?? 'json'),
+      ].join('/');
 }

@@ -1,5 +1,6 @@
 import 'package:objd/src/basic/extend.dart';
 import 'package:objd/src/basic/file.dart';
+import 'package:objd/src/basic/folder.dart';
 import 'package:objd/src/basic/group.dart';
 import 'package:objd/src/basic/module.dart';
 import 'package:objd/src/basic/pack.dart';
@@ -19,20 +20,31 @@ void scan(
   BuildProject? project,
   required Context context,
 }) {
+  // scans Widget recursivly with defaults or with provided context and widget
+  void scanWith([Context? c, Widget? w]) => scan(
+        w ?? (wid.generate(context) as Widget),
+        context: c ?? context,
+        commands: commands,
+        pack: pack,
+        project: project,
+      );
+
   if (wid is Text) commands.writeln(_findText(wid, context));
+
+  if (wid is Folder) {
+    return scanWith(
+      Context.clone(context).addPath(Path.from(wid.path)),
+    );
+  }
+
+  // check for files and packs
   if (project != null &&
       findFile(wid, context: context, pack: pack, project: project)) return;
 
   if (wid is Group) {
-    scan(
-      wid.generate(context),
-      context:
-          Context.clone(context).addPrefix(wid.prefix).addSuffix(wid.suffix),
-      commands: commands,
-      pack: pack,
-      project: project,
+    return scanWith(
+      Context.clone(context).addPrefix(wid.prefix).addSuffix(wid.suffix),
     );
-    return;
   }
   if (wid is Comment && !wid.force && (wid.text == '[null]' || context.prod)) {
     return;
@@ -55,26 +67,13 @@ void scan(
 
     // is single widget
     if (child is Widget) {
-      scan(
-        child,
-        commands: commands,
-        pack: pack,
-        project: project,
-        context: context,
-      );
-      return;
+      return scanWith(context, child);
     }
 
     // is list widget
     if (child is List<Widget>) {
       child.forEach((x) {
-        scan(
-          x,
-          commands: commands,
-          pack: pack,
-          project: project,
-          context: context,
-        );
+        scanWith(context, x);
       });
     }
     //throw 'Cannot build Widget: ' + wid.toString();
@@ -100,15 +99,20 @@ bool findFile(
   required Context context,
 }) {
   if (wid is RawFile) {
-    pack.addRawFile(wid, project);
+    pack.addRawFile(context.path, wid, project);
     return true;
   }
   if (wid is File) {
-    if (wid.create) pack.addFile(wid, project);
+    if (wid.create) pack.addFile(context.path, wid, project);
     return !wid.execute;
   }
   if (wid is Extend) {
-    pack.extendFile(wid, front: wid.first, prj: project);
+    pack.extendFile(
+      context.path,
+      wid,
+      project,
+      front: wid.first,
+    );
     return true;
   }
 

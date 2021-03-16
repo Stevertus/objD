@@ -5,6 +5,7 @@ class RawFile extends Widget {
   final String name;
   final String content;
   final String path;
+  final bool inheritFolder;
 
   /// The RawFile Widget enables you to generate your own Files right in the Widget tree. Here you can define your own file extension, the file path and the content.
   ///
@@ -22,9 +23,16 @@ class RawFile extends Widget {
   /// 	path: "/predicates",
   /// )
   /// ```
-  RawFile(this.name, this.content, {this.path = '/'});
+  RawFile(
+    this.name,
+    this.content, {
+    this.path = '/',
+    this.inheritFolder = true,
+  });
 
-  String get fullPath => path + name;
+  Path fullPath([Path? p]) => inheritFolder && p != null
+      ? p.append(path + name)
+      : Path.from(path + name);
 
   @override
   Widget generate(Context context) {

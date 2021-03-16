@@ -13,6 +13,7 @@ class File extends Widget {
   bool create;
   bool? isRecursive;
   Comment? header;
+  bool inheritFolder;
 
   /// The file class simply generates a new mcfunction file with content and a path.
   ///
@@ -32,6 +33,7 @@ class File extends Widget {
     this.execute = false,
     this.pack,
     this.create = true,
+    this.inheritFolder = true,
     this.header,
   }) {
     path.replaceAll('.mcfunction', '');
@@ -45,6 +47,7 @@ class File extends Widget {
     this.pack,
     this.create = true,
     this.header,
+    this.inheritFolder = true,
   }) : execute = true {
     path.replaceAll('.mcfunction', '');
     if (path.substring(0, 1) == '/') path = path.substring(1);
@@ -53,7 +56,8 @@ class File extends Widget {
       : isRecursive = true,
         execute = true,
         path = '',
-        create = false;
+        create = false,
+        inheritFolder = true;
 
   ///  File.strait generates the child strait through a method you give using a StraitWidget. You need a StraitWidget on around every strait content
   ///  ```dart
@@ -93,6 +97,10 @@ class File extends Widget {
         create: create,
         header: header,
       );
+
+  Path fullPath([Path? p]) => inheritFolder && p != null
+      ? p.append(path, type: 'mcfunction')
+      : Path.from(path, type: 'mcfunction');
 
   @override
   Widget generate(Context context) {

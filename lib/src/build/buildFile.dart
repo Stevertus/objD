@@ -13,23 +13,19 @@ List addAndReturn(List list, dynamic item) {
 
 class BuildFile {
   StringBuffer commands;
-  String path;
   Widget? child;
 
   bool isGen = true;
 
-  BuildFile(File file)
-      : commands = StringBuffer(),
-        path = file.path {
+  BuildFile(File file) : commands = StringBuffer() {
     child = file.child;
     if (file.header != null) commands.writeln(file.header!.text);
   }
 
-  BuildFile.fromWidget(this.child, this.path) : commands = StringBuffer();
+  BuildFile.fromWidget(this.child) : commands = StringBuffer();
 
   BuildFile.extended(Extend file)
-      : path = file.path,
-        child = file.child,
+      : child = file.child,
         commands = StringBuffer();
 
   void add(String? str) {

@@ -8,38 +8,40 @@ import 'package:objd/src/build/context.dart';
 
 class BuildPack {
   String name;
-  Map<String, BuildFile> files = {};
-  Map<String, String> rawFiles = {};
+  Map<Path, BuildFile> files = {};
+  Map<Path, String> rawFiles = {};
   List<String> scoreboards;
-  String? main;
-  String? load;
+  Path? main;
+  Path? load;
   late Context context;
 
   bool isGen = true;
   bool isGenLoad = true;
   bool isGenMain = true;
 
-  BuildPack(Pack pack, {Context? context})
+  BuildPack(Pack pack, {Context? c})
       : name = pack.name,
         scoreboards = [] {
     var stopwatch = Stopwatch()..start();
 
-    this.context = Context.clone(context ?? Context())
+    context = Context.clone(c ?? Context())
       ..packId = name
-      ..loadFile = load
-      ..mainFile = main;
+      ..loadFile = load?.toString()
+      ..mainFile = main?.toString();
 
     if (pack.main != null) {
-      main = pack.main!.path;
+      main = pack.main!.fullPath(context.path);
       files[main!] = BuildFile(pack.main!);
     }
     if (pack.load != null) {
-      load = pack.load!.path;
+      load = pack.main!.fullPath(context.path);
       files[load!] = BuildFile(pack.load!);
     }
 
     if (pack.files != null) {
-      pack.files!.forEach((file) => files[file.path] = BuildFile(file));
+      pack.files!.forEach(
+        (file) => files[file.fullPath(context.path)] = BuildFile(file),
+      );
     }
     print('Compiled Pack $name in ${stopwatch.elapsedMilliseconds}ms');
   }
@@ -52,21 +54,22 @@ class BuildPack {
     return false;
   }
 
-  void addRawFile(RawFile file, BuildProject prj) {
-    rawFiles[file.fullPath] = file.content;
+  void addRawFile(Path folder, RawFile file, BuildProject prj) {
+    rawFiles[file.fullPath(folder)] = file.content;
   }
 
-  void addFile(File file, BuildProject prj) {
-    files[file.path] = BuildFile(file);
+  void addFile(Path folder, File file, BuildProject prj) {
+    files[file.fullPath(folder)] = BuildFile(file);
   }
 
   void extendFile(
-    Extend file, {
+    Path folder,
+    Extend file,
+    BuildProject prj, {
     bool front = false,
-    required BuildProject prj,
   }) {
     var myfile = BuildFile.extended(file);
-    final path = file.path;
+    final path = file.fullPath(folder);
     if (files[path] == null) {
       files[path] = myfile;
       return;
@@ -87,10 +90,14 @@ class BuildPack {
 
   void generate({required BuildProject prj}) {
     if (prj.prod) context.prod = true;
-    for (var i = 0; i < files.length; i++) {
-      context.file = files.values.toList()[i].path;
-      files.values.toList()[i].generate(context: context, pack: this, prj: prj);
-    }
+    files.forEach((path, file) {
+      context.file = path.toString();
+      file.generate(
+        context: context,
+        pack: this,
+        prj: prj,
+      );
+    });
   }
 
   Map toMap() {

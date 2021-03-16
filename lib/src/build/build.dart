@@ -85,10 +85,10 @@ Map<String, String> _getFiles(BuildProject prj, GenOptions options) {
         if (!options.minified) {
           // add load and main
           if (pack.load != null && pack.load!.isNotEmpty && pack.isGenLoad) {
-            loadJson['values'].add(pack.name + ':' + pack.load!);
+            loadJson['values'].add(pack.name + ':' + pack.load!.toString());
           }
           if (pack.main != null && pack.main!.isNotEmpty && pack.isGenMain) {
-            tickJson['values'].add(pack.name + ':' + pack.main!);
+            tickJson['values'].add(pack.name + ':' + pack.main!.toString());
           }
         }
         // add all pack relevant files
@@ -96,7 +96,7 @@ Map<String, String> _getFiles(BuildProject prj, GenOptions options) {
         // add raw files
         if (pack.rawFiles.isNotEmpty) {
           pack.rawFiles.forEach((filepath, file) {
-            files['data/' + pack.name + filepath] = file;
+            files['data/${pack.name}/$filepath'] = file;
           });
         }
 
@@ -104,11 +104,8 @@ Map<String, String> _getFiles(BuildProject prj, GenOptions options) {
         if (pack.files.isNotEmpty) {
           pack.files.forEach((filepath, file) {
             if (file.isGen) {
-              files['data/' +
-                  pack.name +
-                  '/functions/' +
-                  filepath +
-                  '.mcfunction'] = file.commands.toString();
+              files['data/${pack.name}/functions/$filepath'] =
+                  file.commands.toString();
             }
           });
         }
@@ -138,7 +135,7 @@ Map<String, String> _getFiles(BuildProject prj, GenOptions options) {
 /// Caution with all Widgets providing not only command functionality, like File, Pack, Execute, If and more
 List<String> getCommands(Widget w, {Context? context}) {
   context ??= Context();
-  final file = BuildFile.fromWidget(w, context.file);
+  final file = BuildFile.fromWidget(w);
   file.generate(
     context: context,
     pack: BuildPack(Pack(name: context.packId)),
