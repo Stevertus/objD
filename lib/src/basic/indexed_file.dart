@@ -26,6 +26,7 @@ class IndexedFile extends Widget {
   final String? pack;
   final Widget? child;
   final bool execute;
+  bool inheritFolder;
 
   /// The IndexedFile behaves similar to File. Additionally it makes sure that each File, created with IndexedFile, is unique and does not get overwritten.
   /// In order to do that IndexedFile saves for each inputted name an id, which gets incremented after each use.
@@ -36,6 +37,7 @@ class IndexedFile extends Widget {
     this.path,
     this.execute = false,
     this.pack,
+    this.inheritFolder = false,
   });
 
   // gets the File id.
@@ -53,6 +55,12 @@ class IndexedFile extends Widget {
       _name = name + getId().toString();
     }
     if (path != null) _name = path!.trim() + '/' + _name;
-    return File(_name, child: child, execute: execute, pack: pack);
+    return File(
+      _name,
+      child: child,
+      execute: execute,
+      pack: pack,
+      inheritFolder: inheritFolder,
+    );
   }
 }

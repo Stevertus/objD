@@ -29,12 +29,13 @@ void scan(
         project: project,
       );
 
-  if (wid is Text) commands.writeln(_findText(wid, context));
+  if (wid is Text) return commands.writeln(_findText(wid, context));
 
   if (wid is Folder) {
-    return scanWith(
+    final ret = scanWith(
       Context.clone(context).addPath(Path.from(wid.path)),
     );
+    return ret;
   }
 
   // check for files and packs
@@ -71,12 +72,13 @@ void scan(
     }
 
     // is list widget
-    if (child is List<Widget>) {
+    if (child is List<Widget?>) {
       child.forEach((x) {
         scanWith(context, x);
       });
+      return;
     }
-    //throw 'Cannot build Widget: ' + wid.toString();
+    throw 'Cannot build Widget: ' + wid.toString();
   }
 }
 

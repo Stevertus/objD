@@ -26,10 +26,14 @@ export 'package:objd/src/build/context.dart';
 ///}
 ///```
 
-void createProject(Project prj, [List<String> args = const []]) {
+Future<void> createProject(Project prj, [List<String> args = const []]) async {
   var stopwatchAll = Stopwatch()..start();
   var opt = GenOptions(args);
   var bPrj = BuildProject(prj, prod: opt.prod);
+
+  print(
+    'Compiled Project ${prj.name} in ${stopwatchAll.elapsedMilliseconds}ms',
+  );
 
   if (opt.hotreload) hotreload.reloadProject(bPrj);
 
@@ -38,19 +42,21 @@ void createProject(Project prj, [List<String> args = const []]) {
       _getFiles(bPrj, opt),
       opt.output ?? bPrj.path + bPrj.name + '.zip',
     );
-  } else {
+  } else if (bPrj.isGen) {
     var path = opt.output != null
         ? io.getPath(opt.output!, '')
         : io.getPath(bPrj.path, bPrj.name);
     var stopwatchFiles = Stopwatch()..start();
 
-    io.generateIO(_getFiles(bPrj, opt), path).then((v) {
-      print(
-        'Finished saving ${v.length} files in: ${stopwatchFiles.elapsedMilliseconds}ms',
-      );
-      print('Total Time: ${stopwatchAll.elapsedMilliseconds}ms');
-    });
+    final saved = await io.generateIO(_getFiles(bPrj, opt), path);
+    print(
+      'Finished saving ${saved.length} files in ${stopwatchFiles.elapsedMilliseconds}ms',
+    );
+    stopwatchFiles.stop();
   }
+
+  print('Total Time: ${stopwatchAll.elapsedMilliseconds}ms');
+  stopwatchAll.stop();
 }
 
 /// This function gets a json representation(Map) of the tree structure before generating the files. This is the same that is used as the `objd.json` output in debug mode.

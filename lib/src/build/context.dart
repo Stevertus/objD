@@ -83,7 +83,7 @@ class Context {
   }
 
   Context addPath(Path p) {
-    path.join(p);
+    path = path.join(p);
     return this;
   }
 

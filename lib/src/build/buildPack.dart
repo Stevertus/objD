@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+
 import 'package:objd/src/basic/extend.dart';
 import 'package:objd/src/basic/file.dart';
 import 'package:objd/src/basic/pack.dart';
@@ -19,8 +21,10 @@ class BuildPack {
   bool isGenLoad = true;
   bool isGenMain = true;
 
-  BuildPack(Pack pack, {Context? c})
-      : name = pack.name,
+  BuildPack(
+    Pack pack, {
+    Context? c,
+  })  : name = pack.name,
         scoreboards = [] {
     var stopwatch = Stopwatch()..start();
 
@@ -34,7 +38,7 @@ class BuildPack {
       files[main!] = BuildFile(pack.main!);
     }
     if (pack.load != null) {
-      load = pack.main!.fullPath(context.path);
+      load = pack.load!.fullPath(context.path);
       files[load!] = BuildFile(pack.load!);
     }
 
@@ -44,6 +48,7 @@ class BuildPack {
       );
     }
     print('Compiled Pack $name in ${stopwatch.elapsedMilliseconds}ms');
+    stopwatch.stop();
   }
 
   bool addScoreboard(String name) {
@@ -90,22 +95,23 @@ class BuildPack {
 
   void generate({required BuildProject prj}) {
     if (prj.prod) context.prod = true;
-    files.forEach((path, file) {
+    final keys = List.from(files.keys);
+    for (var path in keys) {
       context.file = path.toString();
-      file.generate(
+      files[path]!.generate(
         context: context,
         pack: this,
         prj: prj,
       );
-    });
+    }
   }
 
   Map toMap() {
     return {
       'name': name,
-      'files': files.map((key, file) => MapEntry(key, file.toMap())),
-      'main': main,
-      'load': load
+      'files': files.map((key, file) => MapEntry(key.toString(), file.toMap())),
+      'main': main.toString(),
+      'load': load.toString()
     };
   }
 }

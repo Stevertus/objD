@@ -103,6 +103,10 @@ class Scoreboard extends RestActionAble {
 
   void prefixName() {
     if (prefix != null && !name.contains(prefix!)) name = prefix! + name;
+    assert(
+      name.length <= 16,
+      'A scoreboard can not be longer than 16 characters',
+    );
   }
 
   @override
@@ -111,22 +115,20 @@ class Scoreboard extends RestActionAble {
       case 'add':
         return Extend(
           context.loadFile ?? 'load',
-          child: Command('scoreboard objectives add ' + name + ' ' + type),
+          child: Command('scoreboard objectives add $name $type'),
           first: true,
         );
       case 'addHere':
-        return Command('scoreboard objectives add ' + name + ' ' + type);
+        return Command('scoreboard objectives add $name $type');
       case 'remove':
-        return Command('scoreboard objectives remove ' + name);
+        return Command('scoreboard objectives remove $name');
       case 'modify':
         return Command(
-          'scoreboard objectives modify ' +
-              name +
-              ' rendertype ' +
+          'scoreboard objectives modify $name rendertype ' +
               (useHearts! ? 'hearts' : 'integer'),
         );
       case 'setdisplay':
-        return Command('scoreboard objectives setdisplay ' + type + ' ' + name);
+        return Command('scoreboard objectives setdisplay $type $name');
     }
     return Comment.Null();
   }
