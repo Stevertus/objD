@@ -29,6 +29,7 @@ class Particles {
     dust_color_transition,
     effect,
     elder_guardian,
+    electric_spark,
     enchant,
     enchanted_hit,
     end_rod,
@@ -68,6 +69,7 @@ class Particles {
     portal,
     rain,
     reverse_portal,
+    scrape,
     small_flame,
     smoke,
     sneeze,
@@ -83,6 +85,8 @@ class Particles {
     underwater,
     vibration,
     warped_spore,
+    wax_off,
+    wax_on,
     white_ash,
     witch
   ];
@@ -187,6 +191,10 @@ class Particles {
   /// _(minecraft:elder_guardian)_
   static const ParticleType elder_guardian =
       ParticleType('minecraft:elder_guardian');
+
+  /// _(minecraft:electric_spark)_
+  static const ParticleType electric_spark =
+      ParticleType('minecraft:electric_spark');
 
   /// _(minecraft:enchant)_
   static const ParticleType enchant = ParticleType('minecraft:enchant');
@@ -325,6 +333,9 @@ class Particles {
   static const ParticleType reverse_portal =
       ParticleType('minecraft:reverse_portal');
 
+  /// _(minecraft:scrape)_
+  static const ParticleType scrape = ParticleType('minecraft:scrape');
+
   /// _(minecraft:small_flame)_
   static const ParticleType small_flame = ParticleType('minecraft:small_flame');
 
@@ -374,6 +385,12 @@ class Particles {
   /// _(minecraft:warped_spore)_
   static const ParticleType warped_spore =
       ParticleType('minecraft:warped_spore');
+
+  /// _(minecraft:wax_off)_
+  static const ParticleType wax_off = ParticleType('minecraft:wax_off');
+
+  /// _(minecraft:wax_on)_
+  static const ParticleType wax_on = ParticleType('minecraft:wax_on');
 
   /// _(minecraft:white_ash)_
   static const ParticleType white_ash = ParticleType('minecraft:white_ash');

@@ -7,6 +7,7 @@
 - added path argument to Context to retrieve the current path set by Folders
 - added a check to help to not exceed the 16 char limit on scoreboards
 - added additional metrics to measure project generation
+- updated all blocks, items and particles to include additions in 21w11a
 - migrated to null safety, read more here: https://dart.dev/null-safety
 - refactored apis, arrangement of required values and nullable types
 - refactored filepaths and path concatenation
