@@ -9,9 +9,9 @@ import 'package:objd/src/wrappers/tellraw.dart';
 
 class Log extends RestActionAble {
   dynamic msg;
-  Entity to;
+  Entity? to;
   Color color;
-  String desc;
+  String? desc;
 
   /// The log widgets displays a console logging in the players chat. That way you can quickly check execution times, score values and entities.
   Log(this.msg, {this.to, this.desc, this.color = Color.DarkAqua}) {
@@ -27,7 +27,7 @@ class Log extends RestActionAble {
     if (msg is String) text = TextComponent(msg as String);
     if (msg is Score) text = TextComponent.score(msg as Score);
     if (msg is Entity) text = TextComponent.selector(msg as Entity);
-    return Tellraw(to, show: [
+    return Tellraw(to!, show: [
       TextComponent('Console > ', color: color),
       if (desc != null) TextComponent('$desc '),
       text

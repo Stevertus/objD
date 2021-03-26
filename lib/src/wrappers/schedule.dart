@@ -1,37 +1,37 @@
 import 'package:objd/src/basic/command.dart';
 import 'package:objd/src/basic/file.dart';
 import 'package:objd/src/basic/group.dart';
-import 'package:meta/meta.dart';
+
 import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/build/build.dart';
 
 class Schedule extends RestActionAble {
-  String _name;
-  File _file;
-  ScheduleMode mode;
+  final String _name;
+  File? _file;
+  ScheduleMode? mode;
 
   int ticks;
 
-  Schedule(this._name, {@required this.ticks, this.mode})
-      : assert(ticks != null);
-  Schedule.file(this._file, {@required this.ticks, this.mode})
-      : assert(ticks != null) {
-    _file.execute = true;
+  Schedule(this._name, {required this.ticks, this.mode});
+  Schedule.file(this._file, {required this.ticks, this.mode})
+      : assert(_file != null),
+        _name = _file!.path {
+    _file!.execute = true;
   }
 
   /// Appends a Scheduled Function to the current Schedule.
-  Schedule.append(this._name, {@required this.ticks}) : assert(ticks != null) {
-    mode = ScheduleMode.append;
-  }
-  Schedule.clear(this._name) {
-    mode = ScheduleMode.clear;
-  }
+  Schedule.append(this._name, {required this.ticks})
+      : mode = ScheduleMode.append;
+
+  Schedule.clear(this._name)
+      : ticks = 0,
+        mode = ScheduleMode.clear;
 
   /// Appends a Scheduled File to the current Schedule.
-  Schedule.appendFile(this._file, {@required this.ticks})
-      : assert(ticks != null) {
-    mode = ScheduleMode.append;
-  }
+  Schedule.appendFile(this._file, {required this.ticks})
+      : assert(_file != null),
+        mode = ScheduleMode.append,
+        _name = _file!.path;
 
   @override
   Widget generate(Context context) {
@@ -44,7 +44,7 @@ class Schedule extends RestActionAble {
     if (_file != null) {
       return Group(
         prefix: 'schedule',
-        children: [_file],
+        children: [_file!],
         suffix: ' ' + ticks.toString() + 't' + getMode(),
       );
     }
@@ -52,14 +52,16 @@ class Schedule extends RestActionAble {
       return Command('schedule clear ' + context.packId + ':' + _name);
     }
 
-    return Command('schedule function ' +
-        context.packId +
-        ':' +
-        _name +
-        ' ' +
-        ticks.toString() +
-        't' +
-        getMode());
+    return Command(
+      'schedule function ' +
+          context.packId +
+          ':' +
+          _name +
+          ' ' +
+          ticks.toString() +
+          't' +
+          getMode(),
+    );
   }
 }
 

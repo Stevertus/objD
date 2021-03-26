@@ -3,15 +3,16 @@ import 'package:objd/core.dart';
 /// The Clear Widget removes Items from the inventory of an specified Entity.
 class Clear extends RestActionAble {
   Entity target;
-  Item item;
+  Item? item;
 
   /// The Clear Widget removes Items from the inventory of an specified Entity.
-  Clear(this.target, this.item);
+  Clear(this.target, [this.item]);
 
   @override
   Widget generate(Context context) {
     return Command(
-      'clear ${target.toString()} ${item.getGiveNotation(withDamage: false)}',
+      'clear ${target.toString()} ' +
+          (item != null ? item!.getGiveNotation(withDamage: false) : ''),
     );
   }
 }

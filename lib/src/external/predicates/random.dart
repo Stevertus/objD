@@ -2,17 +2,15 @@ import 'package:objd/src/external/predicates/tag.dart';
 
 class RandomChance extends Tag {
   final double chance;
-  final double looting_multiplier;
+  final double? looting_multiplier;
 
   RandomChance(this.chance)
       : looting_multiplier = null,
-        assert(chance != null),
         assert(
             chance >= 0 && chance <= 1, 'The chance must be between 0 and 1');
 
   RandomChance.withLooting(this.chance, this.looting_multiplier)
-      : assert(chance != null),
-        assert(
+      : assert(
             chance >= 0 && chance <= 1, 'The chance must be between 0 and 1');
 
   @override

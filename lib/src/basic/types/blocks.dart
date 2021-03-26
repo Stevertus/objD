@@ -787,15 +787,39 @@ class Blocks {
     calcite,
     candle,
     candle_cake,
-    cave_vines_body,
-    cave_vines_head,
+    cave_vines,
+    cave_vines_plant,
+    chiseled_deepslate,
+    cobbled_deepslate,
+    cobbled_deepslate_slab,
+    cobbled_deepslate_stairs,
+    cobbled_deepslate_wall,
     copper_block,
     copper_ore,
+    cracked_deepslate_bricks,
+    cracked_deepslate_tiles,
     cut_copper,
     cut_copper_slab,
     cut_copper_stairs,
     cyan_candle,
     cyan_candle_cake,
+    deepslate,
+    deepslate_brick_slab,
+    deepslate_brick_stairs,
+    deepslate_brick_wall,
+    deepslate_bricks,
+    deepslate_coal_ore,
+    deepslate_copper_ore,
+    deepslate_diamond_ore,
+    deepslate_emerald_ore,
+    deepslate_gold_ore,
+    deepslate_iron_ore,
+    deepslate_lapis_ore,
+    deepslate_redstone_ore,
+    deepslate_tile_slab,
+    deepslate_tile_stairs,
+    deepslate_tile_wall,
+    deepslate_tiles,
     dirt_path,
     dripstone_block,
     exposed_copper,
@@ -809,6 +833,7 @@ class Blocks {
     green_candle,
     green_candle_cake,
     hanging_roots,
+    infested_deepslate,
     large_amethyst_bud,
     lava_cauldron,
     light_blue_candle,
@@ -832,6 +857,10 @@ class Blocks {
     pink_candle,
     pink_candle_cake,
     pointed_dripstone,
+    polished_deepslate,
+    polished_deepslate_slab,
+    polished_deepslate_stairs,
+    polished_deepslate_wall,
     powder_snow,
     powder_snow_cauldron,
     purple_candle,
@@ -842,6 +871,7 @@ class Blocks {
     sculk_sensor,
     small_amethyst_bud,
     small_dripleaf,
+    smooth_basalt,
     spore_blossom,
     tinted_glass,
     tuff,
@@ -865,24 +895,7 @@ class Blocks {
     white_candle,
     white_candle_cake,
     yellow_candle,
-    yellow_candle_cake,
-    grimstone,
-    grimstone_bricks,
-    grimstone_brick_stairs,
-    grimstone_brick_slab,
-    grimstone_brick_wall,
-    grimstone_wall,
-    grimstone_stairs,
-    grimstone_slab,
-    grimstone_tiles,
-    grimstone_tile_stairs,
-    grimstone_tile_slab,
-    grimstone_tile_wall,
-    chiseled_grimstone,
-    polished_grimstone,
-    polished_grimstone_stairs,
-    polished_grimstone_slab,
-    polished_grimstone_wall
+    yellow_candle_cake
   ];
 
   /// [Acacia Button](https://minecraft.gamepedia.com/acacia_button)
@@ -4976,15 +4989,43 @@ class Blocks {
   /// _(minecraft:candle_cake)_
   static const Block candle_cake = Block('minecraft:candle_cake');
 
-  /// [Cave Vines Body](https://minecraft.gamepedia.com/cave_vines_body)
+  /// [Cave Vines](https://minecraft.gamepedia.com/cave_vines)
   ///
-  /// _(minecraft:cave_vines_body)_
-  static const Block cave_vines_body = Block('minecraft:cave_vines_body');
+  /// _(minecraft:cave_vines)_
+  static const Block cave_vines = Block('minecraft:cave_vines');
 
-  /// [Cave Vines Head](https://minecraft.gamepedia.com/cave_vines_head)
+  /// [Cave Vines Plant](https://minecraft.gamepedia.com/cave_vines_plant)
   ///
-  /// _(minecraft:cave_vines_head)_
-  static const Block cave_vines_head = Block('minecraft:cave_vines_head');
+  /// _(minecraft:cave_vines_plant)_
+  static const Block cave_vines_plant = Block('minecraft:cave_vines_plant');
+
+  /// [Chiseled Deepslate](https://minecraft.gamepedia.com/chiseled_deepslate)
+  ///
+  /// _(minecraft:chiseled_deepslate)_
+  static const Block chiseled_deepslate = Block('minecraft:chiseled_deepslate');
+
+  /// [Cobbled Deepslate](https://minecraft.gamepedia.com/cobbled_deepslate)
+  ///
+  /// _(minecraft:cobbled_deepslate)_
+  static const Block cobbled_deepslate = Block('minecraft:cobbled_deepslate');
+
+  /// [Cobbled Deepslate Slab](https://minecraft.gamepedia.com/cobbled_deepslate_slab)
+  ///
+  /// _(minecraft:cobbled_deepslate_slab)_
+  static const Block cobbled_deepslate_slab =
+      Block('minecraft:cobbled_deepslate_slab');
+
+  /// [Cobbled Deepslate Stairs](https://minecraft.gamepedia.com/cobbled_deepslate_stairs)
+  ///
+  /// _(minecraft:cobbled_deepslate_stairs)_
+  static const Block cobbled_deepslate_stairs =
+      Block('minecraft:cobbled_deepslate_stairs');
+
+  /// [Cobbled Deepslate Wall](https://minecraft.gamepedia.com/cobbled_deepslate_wall)
+  ///
+  /// _(minecraft:cobbled_deepslate_wall)_
+  static const Block cobbled_deepslate_wall =
+      Block('minecraft:cobbled_deepslate_wall');
 
   /// [Copper Block](https://minecraft.gamepedia.com/copper_block)
   ///
@@ -4995,6 +5036,18 @@ class Blocks {
   ///
   /// _(minecraft:copper_ore)_
   static const Block copper_ore = Block('minecraft:copper_ore');
+
+  /// [Cracked Deepslate Bricks](https://minecraft.gamepedia.com/cracked_deepslate_bricks)
+  ///
+  /// _(minecraft:cracked_deepslate_bricks)_
+  static const Block cracked_deepslate_bricks =
+      Block('minecraft:cracked_deepslate_bricks');
+
+  /// [Cracked Deepslate Tiles](https://minecraft.gamepedia.com/cracked_deepslate_tiles)
+  ///
+  /// _(minecraft:cracked_deepslate_tiles)_
+  static const Block cracked_deepslate_tiles =
+      Block('minecraft:cracked_deepslate_tiles');
 
   /// [Cut Copper](https://minecraft.gamepedia.com/cut_copper)
   ///
@@ -5020,6 +5073,102 @@ class Blocks {
   ///
   /// _(minecraft:cyan_candle_cake)_
   static const Block cyan_candle_cake = Block('minecraft:cyan_candle_cake');
+
+  /// [Deepslate](https://minecraft.gamepedia.com/deepslate)
+  ///
+  /// _(minecraft:deepslate)_
+  static const Block deepslate = Block('minecraft:deepslate');
+
+  /// [Deepslate Brick Slab](https://minecraft.gamepedia.com/deepslate_brick_slab)
+  ///
+  /// _(minecraft:deepslate_brick_slab)_
+  static const Block deepslate_brick_slab =
+      Block('minecraft:deepslate_brick_slab');
+
+  /// [Deepslate Brick Stairs](https://minecraft.gamepedia.com/deepslate_brick_stairs)
+  ///
+  /// _(minecraft:deepslate_brick_stairs)_
+  static const Block deepslate_brick_stairs =
+      Block('minecraft:deepslate_brick_stairs');
+
+  /// [Deepslate Brick Wall](https://minecraft.gamepedia.com/deepslate_brick_wall)
+  ///
+  /// _(minecraft:deepslate_brick_wall)_
+  static const Block deepslate_brick_wall =
+      Block('minecraft:deepslate_brick_wall');
+
+  /// [Deepslate Bricks](https://minecraft.gamepedia.com/deepslate_bricks)
+  ///
+  /// _(minecraft:deepslate_bricks)_
+  static const Block deepslate_bricks = Block('minecraft:deepslate_bricks');
+
+  /// [Deepslate Coal Ore](https://minecraft.gamepedia.com/deepslate_coal_ore)
+  ///
+  /// _(minecraft:deepslate_coal_ore)_
+  static const Block deepslate_coal_ore = Block('minecraft:deepslate_coal_ore');
+
+  /// [Deepslate Copper Ore](https://minecraft.gamepedia.com/deepslate_copper_ore)
+  ///
+  /// _(minecraft:deepslate_copper_ore)_
+  static const Block deepslate_copper_ore =
+      Block('minecraft:deepslate_copper_ore');
+
+  /// [Deepslate Diamond Ore](https://minecraft.gamepedia.com/deepslate_diamond_ore)
+  ///
+  /// _(minecraft:deepslate_diamond_ore)_
+  static const Block deepslate_diamond_ore =
+      Block('minecraft:deepslate_diamond_ore');
+
+  /// [Deepslate Emerald Ore](https://minecraft.gamepedia.com/deepslate_emerald_ore)
+  ///
+  /// _(minecraft:deepslate_emerald_ore)_
+  static const Block deepslate_emerald_ore =
+      Block('minecraft:deepslate_emerald_ore');
+
+  /// [Deepslate Gold Ore](https://minecraft.gamepedia.com/deepslate_gold_ore)
+  ///
+  /// _(minecraft:deepslate_gold_ore)_
+  static const Block deepslate_gold_ore = Block('minecraft:deepslate_gold_ore');
+
+  /// [Deepslate Iron Ore](https://minecraft.gamepedia.com/deepslate_iron_ore)
+  ///
+  /// _(minecraft:deepslate_iron_ore)_
+  static const Block deepslate_iron_ore = Block('minecraft:deepslate_iron_ore');
+
+  /// [Deepslate Lapis Ore](https://minecraft.gamepedia.com/deepslate_lapis_ore)
+  ///
+  /// _(minecraft:deepslate_lapis_ore)_
+  static const Block deepslate_lapis_ore =
+      Block('minecraft:deepslate_lapis_ore');
+
+  /// [Deepslate Redstone Ore](https://minecraft.gamepedia.com/deepslate_redstone_ore)
+  ///
+  /// _(minecraft:deepslate_redstone_ore)_
+  static const Block deepslate_redstone_ore =
+      Block('minecraft:deepslate_redstone_ore');
+
+  /// [Deepslate Tile Slab](https://minecraft.gamepedia.com/deepslate_tile_slab)
+  ///
+  /// _(minecraft:deepslate_tile_slab)_
+  static const Block deepslate_tile_slab =
+      Block('minecraft:deepslate_tile_slab');
+
+  /// [Deepslate Tile Stairs](https://minecraft.gamepedia.com/deepslate_tile_stairs)
+  ///
+  /// _(minecraft:deepslate_tile_stairs)_
+  static const Block deepslate_tile_stairs =
+      Block('minecraft:deepslate_tile_stairs');
+
+  /// [Deepslate Tile Wall](https://minecraft.gamepedia.com/deepslate_tile_wall)
+  ///
+  /// _(minecraft:deepslate_tile_wall)_
+  static const Block deepslate_tile_wall =
+      Block('minecraft:deepslate_tile_wall');
+
+  /// [Deepslate Tiles](https://minecraft.gamepedia.com/deepslate_tiles)
+  ///
+  /// _(minecraft:deepslate_tiles)_
+  static const Block deepslate_tiles = Block('minecraft:deepslate_tiles');
 
   /// [Dirt Path](https://minecraft.gamepedia.com/dirt_path)
   ///
@@ -5087,6 +5236,11 @@ class Blocks {
   ///
   /// _(minecraft:hanging_roots)_
   static const Block hanging_roots = Block('minecraft:hanging_roots');
+
+  /// [Infested Deepslate](https://minecraft.gamepedia.com/infested_deepslate)
+  ///
+  /// _(minecraft:infested_deepslate)_
+  static const Block infested_deepslate = Block('minecraft:infested_deepslate');
 
   /// [Large Amethyst Bud](https://minecraft.gamepedia.com/large_amethyst_bud)
   ///
@@ -5210,6 +5364,29 @@ class Blocks {
   /// _(minecraft:pointed_dripstone)_
   static const Block pointed_dripstone = Block('minecraft:pointed_dripstone');
 
+  /// [Polished Deepslate](https://minecraft.gamepedia.com/polished_deepslate)
+  ///
+  /// _(minecraft:polished_deepslate)_
+  static const Block polished_deepslate = Block('minecraft:polished_deepslate');
+
+  /// [Polished Deepslate Slab](https://minecraft.gamepedia.com/polished_deepslate_slab)
+  ///
+  /// _(minecraft:polished_deepslate_slab)_
+  static const Block polished_deepslate_slab =
+      Block('minecraft:polished_deepslate_slab');
+
+  /// [Polished Deepslate Stairs](https://minecraft.gamepedia.com/polished_deepslate_stairs)
+  ///
+  /// _(minecraft:polished_deepslate_stairs)_
+  static const Block polished_deepslate_stairs =
+      Block('minecraft:polished_deepslate_stairs');
+
+  /// [Polished Deepslate Wall](https://minecraft.gamepedia.com/polished_deepslate_wall)
+  ///
+  /// _(minecraft:polished_deepslate_wall)_
+  static const Block polished_deepslate_wall =
+      Block('minecraft:polished_deepslate_wall');
+
   /// [Powder Snow](https://minecraft.gamepedia.com/powder_snow)
   ///
   /// _(minecraft:powder_snow)_
@@ -5260,6 +5437,11 @@ class Blocks {
   ///
   /// _(minecraft:small_dripleaf)_
   static const Block small_dripleaf = Block('minecraft:small_dripleaf');
+
+  /// [Smooth Basalt](https://minecraft.gamepedia.com/smooth_basalt)
+  ///
+  /// _(minecraft:smooth_basalt)_
+  static const Block smooth_basalt = Block('minecraft:smooth_basalt');
 
   /// [Spore Blossom](https://minecraft.gamepedia.com/spore_blossom)
   ///
@@ -5393,98 +5575,4 @@ class Blocks {
   ///
   /// _(minecraft:yellow_candle_cake)_
   static const Block yellow_candle_cake = Block('minecraft:yellow_candle_cake');
-
-  /// [Grimstone](https://minecraft.gamepedia.com/grimstone)
-  ///
-  /// _(minecraft:grimstone)_
-  static const Block grimstone = Block('minecraft:grimstone');
-
-  /// [Grimstone Bricks](https://minecraft.gamepedia.com/grimstone_bricks)
-  ///
-  /// _(minecraft:grimstone_bricks)_
-  static const Block grimstone_bricks = Block('minecraft:grimstone_bricks');
-
-  /// [Grimstone Brick Stairs](https://minecraft.gamepedia.com/grimstone_brick_stairs)
-  ///
-  /// _(minecraft:grimstone_brick_stairs)_
-  static const Block grimstone_brick_stairs =
-      Block('minecraft:grimstone_brick_stairs');
-
-  /// [Grimstone Brick Slab](https://minecraft.gamepedia.com/grimstone_brick_slab)
-  ///
-  /// _(minecraft:grimstone_brick_slab)_
-  static const Block grimstone_brick_slab =
-      Block('minecraft:grimstone_brick_slab');
-
-  /// [Grimstone Brick Wall](https://minecraft.gamepedia.com/grimstone_brick_wall)
-  ///
-  /// _(minecraft:grimstone_brick_wall)_
-  static const Block grimstone_brick_wall =
-      Block('minecraft:grimstone_brick_wall');
-
-  /// [Grimstone Wall](https://minecraft.gamepedia.com/grimstone_wall)
-  ///
-  /// _(minecraft:grimstone_wall)_
-  static const Block grimstone_wall = Block('minecraft:grimstone_wall');
-
-  /// [Grimstone Stairs](https://minecraft.gamepedia.com/grimstone_stairs)
-  ///
-  /// _(minecraft:grimstone_stairs)_
-  static const Block grimstone_stairs = Block('minecraft:grimstone_stairs');
-
-  /// [Grimstone Slab](https://minecraft.gamepedia.com/grimstone_slab)
-  ///
-  /// _(minecraft:grimstone_slab)_
-  static const Block grimstone_slab = Block('minecraft:grimstone_slab');
-
-  /// [Grimstone Tiles](https://minecraft.gamepedia.com/grimstone_tiles)
-  ///
-  /// _(minecraft:grimstone_tiles)_
-  static const Block grimstone_tiles = Block('minecraft:grimstone_tiles');
-
-  /// [Grimstone Tile Stairs](https://minecraft.gamepedia.com/grimstone_tile_stairs)
-  ///
-  /// _(minecraft:grimstone_tile_stairs)_
-  static const Block grimstone_tile_stairs =
-      Block('minecraft:grimstone_tile_stairs');
-
-  /// [Grimstone Tile Slab](https://minecraft.gamepedia.com/grimstone_tile_slab)
-  ///
-  /// _(minecraft:grimstone_tile_slab)_
-  static const Block grimstone_tile_slab =
-      Block('minecraft:grimstone_tile_slab');
-
-  /// [Grimstone Tile Wall](https://minecraft.gamepedia.com/grimstone_tile_wall)
-  ///
-  /// _(minecraft:grimstone_tile_wall)_
-  static const Block grimstone_tile_wall =
-      Block('minecraft:grimstone_tile_wall');
-
-  /// [Chiseled Grimstone](https://minecraft.gamepedia.com/chiseled_grimstone)
-  ///
-  /// _(minecraft:chiseled_grimstone)_
-  static const Block chiseled_grimstone = Block('minecraft:chiseled_grimstone');
-
-  /// [Polished Grimstone](https://minecraft.gamepedia.com/polished_grimstone)
-  ///
-  /// _(minecraft:polished_grimstone)_
-  static const Block polished_grimstone = Block('minecraft:polished_grimstone');
-
-  /// [Polished Grimstone Stairs](https://minecraft.gamepedia.com/polished_grimstone_stairs)
-  ///
-  /// _(minecraft:polished_grimstone_stairs)_
-  static const Block polished_grimstone_stairs =
-      Block('minecraft:polished_grimstone_stairs');
-
-  /// [Polished Grimstone Slab](https://minecraft.gamepedia.com/polished_grimstone_slab)
-  ///
-  /// _(minecraft:polished_grimstone_slab)_
-  static const Block polished_grimstone_slab =
-      Block('minecraft:polished_grimstone_slab');
-
-  /// [Polished Grimstone Wall](https://minecraft.gamepedia.com/polished_grimstone_wall)
-  ///
-  /// _(minecraft:polished_grimstone_wall)_
-  static const Block polished_grimstone_wall =
-      Block('minecraft:polished_grimstone_wall');
 }

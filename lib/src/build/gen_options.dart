@@ -4,7 +4,7 @@ class GenOptions {
   bool debugFile = false;
   bool hotreload = false;
   bool generateZip = false;
-  String output;
+  String? output;
 
   GenOptions(List<String> args) {
     if (args.contains('--hotreload') || args.contains('-r')) {

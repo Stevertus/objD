@@ -2,7 +2,7 @@ import 'package:objd/src/basic/types/condition.dart';
 import 'package:objd/src/basic/types/entity.dart';
 import 'package:objd/src/basic/file.dart';
 import 'package:objd/src/basic/for_list.dart';
-import 'package:meta/meta.dart';
+
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/build/build.dart';
@@ -15,9 +15,12 @@ class Timeout extends RestActionAble {
   List<Widget> children;
   int ticks;
 
-  Timeout(this.name,
-      {@required this.children, @required this.ticks, this.path = 'timers'})
-      : assert(ticks != null);
+  Timeout(
+    this.name, {
+    required this.children,
+    required this.ticks,
+    this.path = 'timers',
+  });
 
   @override
   Widget generate(Context context) {
@@ -29,7 +32,7 @@ class Timeout extends RestActionAble {
 }
 
 class Timer extends RestActionAble {
-  bool _stop;
+  final bool _stop;
 
   String name;
   String path;
@@ -39,15 +42,19 @@ class Timer extends RestActionAble {
 
   Timer(
     this.name, {
-    @required this.children,
-    @required this.ticks,
+    required this.children,
+    required this.ticks,
     this.path = 'timers',
     this.infinite = true,
-  }) : assert(ticks != null);
+  }) : _stop = false;
 
-  Timer.stop(this.name) {
-    _stop = true;
-  }
+  Timer.stop(this.name)
+      : _stop = true,
+        path = 'timers',
+        ticks = 0,
+        infinite = true,
+        children = const [];
+
   @override
   Widget generate(Context context) {
     if (_stop == true) return Entity.All().addTag('objd_' + name);

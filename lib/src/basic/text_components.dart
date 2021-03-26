@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:objd/src/basic/command.dart';
 import 'package:objd/src/basic/types/entity.dart';
 import 'dart:convert';
@@ -8,12 +7,12 @@ import 'package:objd/src/basic/types/location.dart';
 import 'package:objd/src/basic/score.dart';
 
 class TextComponent {
-  Map<String, dynamic> value;
-  Color color;
-  bool bold, underlined, strikethrough, obfuscated, italic;
-  TextClickEvent clickEvent;
-  TextHoverEvent hoverEvent;
-  String insertion;
+  late Map<String, dynamic> value;
+  Color? color;
+  bool? bold, underlined, strikethrough, obfuscated, italic;
+  TextClickEvent? clickEvent;
+  TextHoverEvent? hoverEvent;
+  String? insertion;
   // default text display
   /// In Minecraft text in the chat or as title is defined with JSON-data. objD makes the JSON part of it easier by utilizing the TextComponent Class:
   TextComponent(
@@ -27,14 +26,11 @@ class TextComponent {
     this.clickEvent,
     this.hoverEvent,
     this.insertion,
-  }) {
-    value = {'text': text};
-  }
+  }) : value = {'text': text};
 
   /// This inserts a simple line break
-  TextComponent.lineBreak() {
-    value = {'text': '\n'};
-  }
+  TextComponent.lineBreak() : value = {'text': '\n'};
+  TextComponent.none() : value = {};
 
   /// |TextComponent.customFont||
   /// |--|--|
@@ -47,7 +43,7 @@ class TextComponent {
   /// ```
   TextComponent.customFont(
     String char, {
-    this.color,
+    this.color = Color.White,
     this.bold,
     this.underlined,
     this.italic,
@@ -56,10 +52,7 @@ class TextComponent {
     this.clickEvent,
     this.hoverEvent,
     this.insertion,
-  }) {
-    color ??= Color.White;
-    value = {'text': char};
-  }
+  }) : value = {'text': char};
 
   ///**Attention: This requires a custom negative spaces font by AmberW installed(https://cdn.discordapp.com/attachments/157097006500806656/486915349569208322/NegativeSpaceFont3.zip)**
   ///
@@ -133,14 +126,14 @@ class TextComponent {
     if (pixels > 0) {
       for (var value in nums.keys.toList().reversed) {
         while (pixels >= value) {
-          res += nums[value];
+          res += nums[value]!;
           pixels -= value;
         }
       }
     } else {
       for (var value in negnums.keys) {
         while (pixels <= value) {
-          res += negnums[value];
+          res += negnums[value]!;
           pixels -= value;
         }
       }
@@ -153,7 +146,7 @@ class TextComponent {
     String key, {
 
     /// a List containing a String, TextComponent or another List of TextComponents that replace placeholder values(e.g $s)
-    List<dynamic> conversionFlags,
+    List<dynamic>? conversionFlags,
     this.color,
     this.bold,
     this.italic,
@@ -219,8 +212,8 @@ class TextComponent {
   /// ```
   TextComponent.entityNbt(
     Entity entity, {
-    @required String path,
-    bool interpret,
+    required String path,
+    bool? interpret,
     this.color,
     this.bold,
     this.underlined,
@@ -251,8 +244,8 @@ class TextComponent {
   /// ```
   TextComponent.blockNbt(
     Location location, {
-    @required String path,
-    bool interpret,
+    required String path,
+    bool? interpret,
     this.color,
     this.bold,
     this.underlined,
@@ -283,8 +276,8 @@ class TextComponent {
   /// ```
   TextComponent.storageNbt(
     String name, {
-    @required String path,
-    bool interpret,
+    required String path,
+    bool? interpret,
     this.color,
     this.bold,
     this.underlined,
@@ -314,7 +307,7 @@ class TextComponent {
     value = {'selector': entity.toString()};
   }
 
-  Map toMap() {
+  Map? toMap() {
     if (value.containsKey('text') && value['text'] == null) return null;
 
     var ret = {};
@@ -325,13 +318,13 @@ class TextComponent {
     if (underlined != null) ret['underlined'] = underlined;
     if (strikethrough != null) ret['strikethrough'] = strikethrough;
     if (obfuscated != null) ret['obfuscated'] = obfuscated;
-    if (clickEvent != null) ret['clickEvent'] = clickEvent.toMap();
-    if (hoverEvent != null) ret['hoverEvent'] = hoverEvent.toMap();
+    if (clickEvent != null) ret['clickEvent'] = clickEvent?.toMap();
+    if (hoverEvent != null) ret['hoverEvent'] = hoverEvent?.toMap();
     if (insertion != null) ret['insertion'] = insertion;
     return ret;
   }
 
-  String toJson() {
+  String? toJson() {
     final m = toMap();
     return m != null ? json.encode(m).replaceAll('\\[repl]\\', '\\') : null;
   }
@@ -339,39 +332,34 @@ class TextComponent {
 
 /// Fires on left click, Part of TextComponent.
 class TextClickEvent {
-  String action;
-  String value;
+  final String action;
+  final String value;
 
   /// Fires on left click, Part of TextComponent.
   TextClickEvent({
-    @required this.action,
-    @required this.value,
-  })  : assert(value != null),
-        assert(action != null);
+    required this.action,
+    required this.value,
+  });
 
   /// Opens the specified web url
-  TextClickEvent.open_url(String url) {
-    action = 'open_url';
-    value = url;
-  }
+  TextClickEvent.open_url(String url)
+      : action = 'open_url',
+        value = url;
 
   /// runs given command
-  TextClickEvent.run_command(Command command) {
-    action = 'run_command';
-    value = '/' + (command.toMap()['command'] ?? '');
-  }
+  TextClickEvent.run_command(Command command)
+      : action = 'run_command',
+        value = '/' + (command.toMap()['command'] ?? '');
 
   /// copies command in chat
-  TextClickEvent.suggest(String text) {
-    action = 'suggest_command';
-    value = text;
-  }
+  TextClickEvent.suggest(String text)
+      : action = 'suggest_command',
+        value = text;
 
   /// changes book page
-  TextClickEvent.change_page(int to) {
-    action = 'change_page';
-    value = to.toString();
-  }
+  TextClickEvent.change_page(int to)
+      : action = 'change_page',
+        value = to.toString();
 
   Map<String, String> toMap() {
     return {'action': action, 'value': value};
@@ -380,37 +368,31 @@ class TextClickEvent {
 
 /// Fires on mouse over, Part of TextComponent.
 class TextHoverEvent {
-  String action;
-  dynamic value;
+  final String action;
+  final dynamic value;
 
   /// Fires on mouse over, Part of TextComponent.
-  TextHoverEvent({@required this.action, @required this.value})
-      : assert(value != null),
-        assert(action != null);
+  TextHoverEvent({required this.action, required this.value});
 
   /// Accepts a new List of TextComponents to display
-  TextHoverEvent.text(List<TextComponent> texts) {
-    action = 'show_text';
-    // ToDo: catch if score, selector or event listener
-    value = texts.map((item) => item.toMap()).toList();
-  }
+  TextHoverEvent.text(List<TextComponent> texts)
+      : action = 'show_text',
+        // ToDo: catch if score, selector or event listener
+        value = texts.map((item) => item.toMap()).toList();
 
   /// shows an achievement
-  TextHoverEvent.achievement(String name) {
-    action = 'show_achievement';
-    value = name;
-  }
+  TextHoverEvent.achievement(String name)
+      : action = 'show_achievement',
+        value = name;
   // displays item
   // Todo: add item model
-  TextHoverEvent.item(Item item) {
-    action = 'show_item';
-    value = item.getNbt();
-  }
+  TextHoverEvent.item(Item item)
+      : action = 'show_item',
+        value = item.getNbt();
   // shows a dummy entity presentation in chat
-  TextHoverEvent.entity(String name, String type, String id) {
-    action = 'show_entity';
-    value = json.encode({'name': name, 'type': type, 'id': id});
-  }
+  TextHoverEvent.entity(String name, String type, String id)
+      : action = 'show_entity',
+        value = json.encode({'name': name, 'type': type, 'id': id});
 
   Map<String, dynamic> toMap() {
     return {'action': action, 'value': value};

@@ -8,8 +8,8 @@ class IndexedFile extends Widget {
 
   // get the id of a name.
   static int getIndexed(String name) {
-    return IndexedFile._indexed[name] != null && IndexedFile._indexed[name] > 0
-        ? IndexedFile._indexed[name]
+    return IndexedFile._indexed[name] != null && IndexedFile._indexed[name]! > 0
+        ? IndexedFile._indexed[name]!
         : 0;
   }
 
@@ -21,11 +21,12 @@ class IndexedFile extends Widget {
   }
 
   final String name;
-  final String custom;
-  final String path;
-  final String pack;
-  final Widget child;
+  final String? custom;
+  final String? path;
+  final String? pack;
+  final Widget? child;
   final bool execute;
+  bool inheritFolder;
 
   /// The IndexedFile behaves similar to File. Additionally it makes sure that each File, created with IndexedFile, is unique and does not get overwritten.
   /// In order to do that IndexedFile saves for each inputted name an id, which gets incremented after each use.
@@ -36,6 +37,7 @@ class IndexedFile extends Widget {
     this.path,
     this.execute = false,
     this.pack,
+    this.inheritFolder = false,
   });
 
   // gets the File id.
@@ -47,12 +49,18 @@ class IndexedFile extends Widget {
   Widget generate(Context context) {
     String _name;
     if (custom != null) {
-      _name = custom;
+      _name = custom!;
     } else {
       IndexedFile._indexed[name] = getId() + 1;
       _name = name + getId().toString();
     }
-    if (path != null) _name = path.trim() + '/' + _name;
-    return File(_name, child: child, execute: execute, pack: pack);
+    if (path != null) _name = path!.trim() + '/' + _name;
+    return File(
+      _name,
+      child: child,
+      execute: execute,
+      pack: pack,
+      inheritFolder: inheritFolder,
+    );
   }
 }

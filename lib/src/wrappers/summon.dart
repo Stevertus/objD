@@ -10,11 +10,11 @@ import 'package:objd/src/wrappers/effect.dart';
 import 'package:gson/gson.dart';
 
 class Summon extends RestActionAble {
-  Map<String, dynamic> nbt;
+  Map<String, dynamic>? nbt;
   Location location;
   EntityType type;
-  TextComponent name;
-  bool nameVisible,
+  TextComponent? name;
+  bool? nameVisible,
       invulnerable,
       persistent,
       noAI,
@@ -22,11 +22,11 @@ class Summon extends RestActionAble {
       gravity,
       glowing,
       small;
-  int fire, age;
-  Rotation rotation;
-  List<Effect> effects;
-  List<Summon> passengers;
-  List<String> tags;
+  int? fire, age;
+  Rotation? rotation;
+  List<Effect>? effects;
+  List<Summon>? passengers;
+  List<String>? tags;
 
   /// The summon class creates a new entity at a given location.
   Summon(
@@ -62,7 +62,7 @@ class Summon extends RestActionAble {
     String selector = 'e',
     bool useType = true,
     bool useTags = true,
-    int limit,
+    int? limit,
   }) =>
       Entity(
         selector: selector,
@@ -74,11 +74,11 @@ class Summon extends RestActionAble {
   Map<String, dynamic> getNbt([bool useId = true]) {
     var nbt = Map<String, dynamic>.from(this.nbt ?? {});
 
-    void _addBoolNbt(bool value, String path) {
+    void _addBoolNbt(bool? value, String path) {
       if (value != null) nbt[path] = value ? 1 : 0;
     }
 
-    if (name != null) nbt['CustomName'] = name.toJson();
+    if (name != null) nbt['CustomName'] = name!.toJson();
     _addBoolNbt(invulnerable, 'Invulnerable');
     _addBoolNbt(silent, 'Silent');
     _addBoolNbt(small, 'Small');
@@ -86,22 +86,22 @@ class Summon extends RestActionAble {
     _addBoolNbt(nameVisible, 'CustomNameVisible');
     _addBoolNbt(persistent, 'PersistenceRequired');
     _addBoolNbt(noAI, 'NoAI');
-    if (gravity != null) _addBoolNbt(!gravity, 'NoGravity');
-    if (tags != null && tags.isNotEmpty) {
+    if (gravity != null) _addBoolNbt(!gravity!, 'NoGravity');
+    if (tags != null && tags!.isNotEmpty) {
       nbt['Tags'] = Tag.prefix != null
-          ? tags
-              .map((String t) => t.contains(Tag.prefix) ? t : Tag.prefix + t)
+          ? tags!
+              .map((String t) => t.contains(Tag.prefix!) ? t : Tag.prefix! + t)
               .toList()
           : tags;
     }
-    if (effects != null && effects.isNotEmpty) {
-      nbt['ActiveEffects'] = effects.map((effect) => effect.getMap()).toList();
+    if (effects != null && effects!.isNotEmpty) {
+      nbt['ActiveEffects'] = effects!.map((effect) => effect.getMap()).toList();
     }
     if (passengers != null) {
-      nbt['Passengers'] = passengers.map((pass) => pass.getNbt()).toList();
+      nbt['Passengers'] = passengers!.map((pass) => pass.getNbt()).toList();
     }
-    if (fire != null && fire > 0) nbt['Fire'] = fire;
-    if (rotation != null) nbt['Rotation'] = [rotation.x, rotation.y];
+    if (fire != null && fire! > 0) nbt['Fire'] = fire;
+    if (rotation != null) nbt['Rotation'] = [rotation!.x, rotation!.y];
     if (age != null) nbt['Age'] = age;
 
     if (useId) nbt['id'] = type.type;

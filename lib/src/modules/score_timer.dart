@@ -1,13 +1,12 @@
-import 'package:meta/meta.dart';
 import 'package:objd/core.dart';
 
 /// The ScoreTimerModule implements a continuous timer with a delay of a number of ticks. It therefore uses a Score to count up or down in steps and resets to the start value afterwards.
 class ScoreTimerModule extends Module {
-  Score _score;
+  late Score _score;
   String name;
   String path;
-  Widget child;
-  Entity selector;
+  Widget? child;
+  Entity? selector;
   int steps;
   int ticks;
   int start;
@@ -44,12 +43,11 @@ class ScoreTimerModule extends Module {
     this.selector,
     this.steps = 1,
     this.path = 'timers/',
-    @required this.ticks,
+    required this.ticks,
     this.start = 0,
   }) {
     selector ??= Entity.PlayerName(name);
-    _score = Score(selector, name);
-    assert(ticks != null);
+    _score = Score(selector!, name);
   }
   @override
   Widget generate(Context context) {

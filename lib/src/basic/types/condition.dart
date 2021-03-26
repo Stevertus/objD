@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:objd/src/basic/types/area.dart';
 import 'package:objd/src/basic/types/block.dart';
 import 'package:objd/src/basic/types/entity.dart';
@@ -11,8 +10,8 @@ import 'package:objd/src/wrappers/data.dart';
 /// The Condition class defines conditions for the if widget and more. It can also combines conditions and generates an argument list.
 class Condition {
   final List<Condition> _children = [];
-  _ConditionType type;
-  _ConditionUtil _generated;
+  late _ConditionType type;
+  _ConditionUtil? _generated;
 
   /// The Condition class defines conditions for the if widget and more. It can also combines conditions and generates an argument list.
   ///  A condition can accept many values and this makes the Condition very complex.
@@ -34,13 +33,12 @@ class Condition {
   }
 
   /// checks whether a block is at a given location
-  Condition.block(Location cond, {@required Block block}) {
+  Condition.block(Location cond, {required Block block}) {
     _setCond(cond, block: block);
   }
 
   /// checks whether an area matches another area of blocks
-  Condition.blocks(Area cond, {@required Location compare}) {
-    assert(compare != null);
+  Condition.blocks(Area cond, {required Location compare}) {
     _setCond(cond, target: compare);
   }
 
@@ -98,8 +96,8 @@ class Condition {
   void _setCond(
     dynamic cond, {
     bool invert = false,
-    Block block,
-    Location target,
+    Block? block,
+    Location? target,
   }) {
     if (cond == null) return;
     if (cond is Condition) {
@@ -171,10 +169,8 @@ class Condition {
   }
 
   void _invertGenerated() {
-    if (_generated != null) _generated.invert = !_generated.invert;
-    if (_children != null) {
-      _children.forEach((child) => child._invertGenerated());
-    }
+    if (_generated != null) _generated!.invert = !_generated!.invert;
+    _children.forEach((child) => child._invertGenerated());
   }
 
   List<List<_ConditionUtil>> getList() {
@@ -198,7 +194,7 @@ class Condition {
     });
     if (_generated != null) {
       list.forEach((outer) {
-        outer.insert(0, _generated);
+        outer.insert(0, _generated!);
       });
     }
 

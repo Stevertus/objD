@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:objd/core.dart';
 import 'package:objd/src/wrappers/execute.dart';
 
@@ -46,12 +45,12 @@ class Location {
   ///```
   Group storeResult(
     Widget w, {
-    @required String path,
+    required String path,
     String datatype = 'double',
     double scale = 1,
     bool useSuccess = false,
   }) {
-    assert(path == null && path.isEmpty);
+    assert(path.isEmpty);
     return Execute.internal_store_command(
       'block $location $path $datatype $scale',
       w,

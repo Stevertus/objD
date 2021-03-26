@@ -6,7 +6,7 @@ class Advancement extends RestActionAble {
   bool revoke;
   String mode;
   String advancement;
-  String criteria;
+  String? criteria;
 
   /// This gives the advancement to the player:
   ///
@@ -16,16 +16,20 @@ class Advancement extends RestActionAble {
   /// |String| your advancement |
   /// |mode| the advancement mode(default = only, modes are also separate constructors) |
   /// |criteria| optional String criteria for an advancement|
-  Advancement.grant(this.entity, this.advancement,
-      {this.mode = 'only', this.criteria}) {
-    revoke = false;
-  }
+  Advancement.grant(
+    this.entity,
+    this.advancement, {
+    this.mode = 'only',
+    this.criteria,
+  }) : revoke = false;
 
   /// You can also revoke an Advancement
-  Advancement.revoke(this.entity, this.advancement,
-      {this.mode = 'only', this.criteria}) {
-    revoke = true;
-  }
+  Advancement.revoke(
+    this.entity,
+    this.advancement, {
+    this.mode = 'only',
+    this.criteria,
+  }) : revoke = true;
 
   /// Every mode also has a separated named constructor:
   ///
@@ -33,9 +37,9 @@ class Advancement extends RestActionAble {
   ///|--|--|
   ///|Entity| the target player |
   ///|revoke| set true if you want to revoke |
-  Advancement.everything(this.entity, {this.revoke = false}) {
-    mode = 'everything';
-  }
+  Advancement.everything(this.entity, {this.revoke = false})
+      : mode = 'everything',
+        advancement = '';
 
   /// Every mode also has a separated named constructor:
   ///
@@ -46,18 +50,17 @@ class Advancement extends RestActionAble {
   ///|revoke| set true if you want to revoke |
   ///|criteria|optional String for an advancement|
   Advancement.only(this.entity, this.advancement,
-      {this.revoke = false, this.criteria}) {
-    mode = 'only';
-  }
-  Advancement.from(this.entity, this.advancement, {this.revoke = false}) {
-    mode = 'from';
-  }
-  Advancement.until(this.entity, this.advancement, {this.revoke = false}) {
-    mode = 'until';
-  }
-  Advancement.through(this.entity, this.advancement, {this.revoke = false}) {
-    mode = 'through';
-  }
+      {this.revoke = false, this.criteria})
+      : mode = 'only';
+
+  Advancement.from(this.entity, this.advancement, {this.revoke = false})
+      : mode = 'from';
+
+  Advancement.until(this.entity, this.advancement, {this.revoke = false})
+      : mode = 'until';
+
+  Advancement.through(this.entity, this.advancement, {this.revoke = false})
+      : mode = 'through';
 
   @override
   Widget generate(Context context) {

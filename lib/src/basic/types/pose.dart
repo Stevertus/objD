@@ -2,12 +2,12 @@ import 'package:gson/values.dart';
 
 /// An armorstand Pose describing rotations of all body parts
 class Pose {
-  final List<double> head;
-  final List<double> body;
-  final List<double> lleg;
-  final List<double> rleg;
-  final List<double> larm;
-  final List<double> rarm;
+  final List<double>? head;
+  final List<double>? body;
+  final List<double>? lleg;
+  final List<double>? rleg;
+  final List<double>? larm;
+  final List<double>? rarm;
 
   /// An armorstand Pose describing rotations of all body parts
   ///
@@ -30,22 +30,22 @@ class Pose {
 
   Pose setHead(List<double> values) => copyWith(head: values);
   Pose setBody(List<double> values) => copyWith(body: values);
-  Pose setLegs(List<double> l, [List<double> r]) => copyWith(
+  Pose setLegs(List<double> l, [List<double>? r]) => copyWith(
         lleg: l,
         rleg: r ?? l,
       );
-  Pose setArms(List<double> l, [List<double> r]) => copyWith(
+  Pose setArms(List<double> l, [List<double>? r]) => copyWith(
         larm: l,
         rarm: r ?? l,
       );
 
   Pose copyWith({
-    List<double> head,
-    List<double> body,
-    List<double> lleg,
-    List<double> rleg,
-    List<double> larm,
-    List<double> rarm,
+    List<double>? head,
+    List<double>? body,
+    List<double>? lleg,
+    List<double>? rleg,
+    List<double>? larm,
+    List<double>? rarm,
   }) {
     return Pose(
       head: head ?? this.head,
@@ -59,7 +59,7 @@ class Pose {
 
   List<Float> _getFloats(List<double> v) {
     if (v.length < 3) v.addAll([0, 0, 0]);
-    final res = List<Float>(3);
+    final res = <Float>[];
     for (var i = 0; i < 3; i++) {
       res[i] = Float(v[i]);
     }
@@ -68,18 +68,16 @@ class Pose {
 
   Map<String, dynamic> getMap() {
     final ret = <String, dynamic>{};
-    if (head != null && head.isNotEmpty) ret['Head'] = _getFloats(head);
-    if (body != null && body.isNotEmpty) ret['Body'] = _getFloats(body);
-    if (lleg != null && lleg.isNotEmpty) ret['LeftLeg'] = _getFloats(lleg);
-    if (rleg != null && rleg.isNotEmpty) ret['RightLeg'] = _getFloats(rleg);
-    if (larm != null && larm.isNotEmpty) ret['LeftArm'] = _getFloats(larm);
-    if (rarm != null && rarm.isNotEmpty) ret['RightArm'] = _getFloats(rarm);
+    if (head != null && head!.isNotEmpty) ret['Head'] = _getFloats(head!);
+    if (body != null && body!.isNotEmpty) ret['Body'] = _getFloats(body!);
+    if (lleg != null && lleg!.isNotEmpty) ret['LeftLeg'] = _getFloats(lleg!);
+    if (rleg != null && rleg!.isNotEmpty) ret['RightLeg'] = _getFloats(rleg!);
+    if (larm != null && larm!.isNotEmpty) ret['LeftArm'] = _getFloats(larm!);
+    if (rarm != null && rarm!.isNotEmpty) ret['RightArm'] = _getFloats(rarm!);
     return ret;
   }
 
   factory Pose.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     /// gets double values from Float list
     List<double> _fromFloats(v) =>
         (v as List<Float>).map((f) => f.value).toList();

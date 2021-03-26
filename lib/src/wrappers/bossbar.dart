@@ -14,9 +14,9 @@ class Bossbar extends RestActionAble {
   final BossbarType type;
   final String id;
 
-  String name;
-  List<TextComponent> nameTexts;
-  BossbarOption option;
+  String? name;
+  List<TextComponent>? nameTexts;
+  BossbarOption? option;
   Map<String, String> modifiers = {};
 
   Bossbar(this.id, {this.name, this.type = BossbarType.add}) {
@@ -38,14 +38,14 @@ class Bossbar extends RestActionAble {
   }
 
   Bossbar set({
-    String name,
-    List<TextComponent> nameTexts,
-    Color color,
-    String style,
-    int value,
-    int max,
-    bool visible,
-    Entity players,
+    String? name,
+    List<TextComponent>? nameTexts,
+    Color? color,
+    String? style,
+    int? value,
+    int? max,
+    bool? visible,
+    Entity? players,
   }) {
     final b = copyWith(type: BossbarType.set);
 
@@ -61,22 +61,22 @@ class Bossbar extends RestActionAble {
   }
 
   @override
-  Widget generate(Context context) {
+  Widget? generate(Context context) {
     switch (type) {
       case BossbarType.add:
-        return Command('bossbar add ${id} {"text":"${name}"}');
+        return Command('bossbar add $id {"text":"$name}"');
       case BossbarType.remove:
-        return Command('bossbar remove ${id}');
+        return Command('bossbar remove $id');
       case BossbarType.get:
-        return Command('bossbar get ${id} ${option.toString().split('.')[1]}');
+        return Command('bossbar get $id ${option.toString().split('.')[1]}');
       case BossbarType.set:
         {
           var widgets = <Widget>[];
           if (nameTexts != null) {
-            widgets.add(Command('bossbar set ${id} name ${_getNameJson()}'));
+            widgets.add(Command('bossbar set $id name ${_getNameJson()}'));
           }
           modifiers.forEach((key, value) {
-            widgets.add(Command('bossbar set ${id} ${key} ${value}'));
+            widgets.add(Command('bossbar set $id $key $value'));
           });
           return For.of(widgets);
         }
@@ -86,8 +86,8 @@ class Bossbar extends RestActionAble {
   }
 
   String _getNameJson() {
-    if (nameTexts.length == 1) return nameTexts[0].toJson();
-    return json.encode(nameTexts.map((text) => text.toMap()).toList());
+    if (nameTexts!.length == 1) return nameTexts![0].toJson()!;
+    return json.encode(nameTexts!.map((text) => text.toMap()).toList());
   }
 
   Group storeResult(
@@ -115,8 +115,8 @@ class Bossbar extends RestActionAble {
   }
 
   Bossbar copyWith({
-    BossbarType type,
-    String id,
+    BossbarType? type,
+    String? id,
   }) {
     return Bossbar(
       id ?? this.id,

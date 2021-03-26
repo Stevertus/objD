@@ -8,6 +8,7 @@ export 'score.dart';
 export 'tag.dart';
 export 'text_components.dart';
 export 'file.dart';
+export 'folder.dart';
 export 'extend.dart';
 export 'for_list.dart';
 export 'rest_action.dart';

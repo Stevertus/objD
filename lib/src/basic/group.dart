@@ -4,12 +4,11 @@ import 'package:objd/src/basic/strait_widget.dart';
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/basic/for_list.dart';
 import 'package:objd/src/build/build.dart';
-import 'package:meta/meta.dart';
 
 class Group extends RestActionAble {
-  String prefix;
-  String suffix;
-  String filename;
+  String? prefix;
+  String? suffix;
+  String? filename;
   String path;
   List<Widget> children;
   int groupMin;
@@ -32,13 +31,13 @@ class Group extends RestActionAble {
   /// ```
   Group({
     this.prefix,
-    @required this.children,
+    required this.children,
     this.suffix,
     this.path = 'objd',
     this.groupMin = 3,
     this.filename,
     this.generateIDs = true,
-  }) : assert(children != null);
+  });
 
   @override
   Widget generate(Context context) {
@@ -51,7 +50,7 @@ class Group extends RestActionAble {
       }
       if (childrenNum >= groupMin) {
         return IndexedFile(
-          generateIDs && filename != null ? filename : 'group',
+          generateIDs && filename != null ? filename! : 'group',
           execute: true,
           child: For.of(children),
           custom: generateIDs && filename != null ? null : filename,

@@ -1,5 +1,6 @@
 import 'package:objd/src/basic/extend.dart';
 import 'package:objd/src/basic/file.dart';
+import 'package:objd/src/basic/folder.dart';
 import 'package:objd/src/basic/group.dart';
 import 'package:objd/src/basic/module.dart';
 import 'package:objd/src/basic/pack.dart';
@@ -14,25 +15,37 @@ import 'package:objd/src/wrappers/comment.dart';
 
 void scan(
   Widget wid, {
-  StringBuffer commands,
-  BuildPack pack,
-  BuildProject project,
-  Context context,
+  required StringBuffer commands,
+  required BuildPack pack,
+  BuildProject? project,
+  required Context context,
 }) {
-  if (wid is Text) commands.writeln(_findText(wid, context));
+  // scans Widget recursivly with defaults or with provided context and widget
+  void scanWith([Context? c, Widget? w]) => scan(
+        w ?? (wid.generate(context) as Widget),
+        context: c ?? context,
+        commands: commands,
+        pack: pack,
+        project: project,
+      );
+
+  if (wid is Text) return commands.writeln(_findText(wid, context));
+
+  if (wid is Folder) {
+    final ret = scanWith(
+      Context.clone(context).addPath(Path.from(wid.path)),
+    );
+    return ret;
+  }
+
+  // check for files and packs
   if (project != null &&
       findFile(wid, context: context, pack: pack, project: project)) return;
 
   if (wid is Group) {
-    scan(
-      wid.generate(context),
-      context:
-          Context.clone(context).addPrefix(wid.prefix).addSuffix(wid.suffix),
-      commands: commands,
-      pack: pack,
-      project: project,
+    return scanWith(
+      Context.clone(context).addPrefix(wid.prefix).addSuffix(wid.suffix),
     );
-    return;
   }
   if (wid is Comment && !wid.force && (wid.text == '[null]' || context.prod)) {
     return;
@@ -48,36 +61,24 @@ void scan(
     if (wid is Module) {
       var files = wid.registerFiles();
       // add files to child
-      if (files != null && files.isNotEmpty && child is Widget) {
-        child = <Widget>[(child as Widget), ...files];
+      if (files.isNotEmpty && child is Widget) {
+        child = <Widget>[child, ...files];
       }
     }
 
     // is single widget
     if (child is Widget) {
-      scan(
-        child,
-        commands: commands,
-        pack: pack,
-        project: project,
-        context: context,
-      );
-      return;
+      return scanWith(context, child);
     }
 
     // is list widget
-    if (child is List<Widget>) {
+    if (child is List<Widget?>) {
       child.forEach((x) {
-        scan(
-          x,
-          commands: commands,
-          pack: pack,
-          project: project,
-          context: context,
-        );
+        scanWith(context, x);
       });
+      return;
     }
-    //throw 'Cannot build Widget: ' + wid.toString();
+    throw 'Cannot build Widget: ' + wid.toString();
   }
 }
 
@@ -95,20 +96,25 @@ String _findText(Text wid, Context context) {
 
 bool findFile(
   Widget wid, {
-  BuildPack pack,
-  BuildProject project,
-  Context context,
+  required BuildPack pack,
+  required BuildProject project,
+  required Context context,
 }) {
   if (wid is RawFile) {
-    pack.addRawFile(wid, project);
+    pack.addRawFile(context.path, wid, project);
     return true;
   }
   if (wid is File) {
-    if (wid.create) pack.addFile(wid, project);
+    if (wid.create) pack.addFile(context.path, wid, project);
     return !wid.execute;
   }
   if (wid is Extend) {
-    pack.extendFile(wid, front: wid.first);
+    pack.extendFile(
+      context.path,
+      wid,
+      project,
+      front: wid.first,
+    );
     return true;
   }
 

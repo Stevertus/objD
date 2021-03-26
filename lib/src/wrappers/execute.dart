@@ -1,6 +1,6 @@
 import 'package:objd/src/basic/types/condition.dart';
 import 'package:objd/src/basic/group.dart';
-import 'package:meta/meta.dart';
+
 import 'package:objd/src/basic/rest_action.dart';
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/basic/types/entity.dart';
@@ -21,7 +21,7 @@ class Execute extends RestActionAble {
   List<Widget> children = [];
 
   // The name of the file that is generated if it has to much content
-  String targetFileName;
+  String? targetFileName;
 
   // The path of the file that is generated if it has to much content
   String targetFilePath;
@@ -31,22 +31,22 @@ class Execute extends RestActionAble {
 
   /// All Execute classes are also an Group, so they will group commands in seperate files and allow multiple children.
   Execute({
-    this.children,
-    Entity as,
-    Entity at,
-    dynamic location,
-    String align,
+    this.children = const [],
+    Entity? as,
+    Entity? at,
+    dynamic? location,
+    String? align,
     this.targetFilePath = 'objd',
     this.targetFileName,
-    Facing anchor,
-    Condition If,
-    Condition unless,
+    Facing? anchor,
+    Condition? If,
+    Condition? unless,
     dynamic facing,
-    Rotation rotation,
+    Rotation? rotation,
     dynamic dimension,
     this.encapsulate = true,
-    List<List<String>> args,
-    List<Widget> writable,
+    List<List<String>>? args,
+    List<Widget>? writable,
   }) {
     if (args != null) _args = args;
 
@@ -61,27 +61,26 @@ class Execute extends RestActionAble {
     if (If != null) _args = this.If(If).args;
     if (unless != null) _args = this.unless(unless).args;
 
-    children ??= [];
     this.writable = writable;
   }
 
   Execute.strait({
-    @required Function(List<Widget>) run,
-    Entity as,
-    Entity at,
-    dynamic location,
-    String align,
+    required Function(List<Widget>) run,
+    Entity? as,
+    Entity? at,
+    dynamic? location,
+    String? align,
     String targetFilePath = 'objd',
-    String targetFileName,
-    Facing anchor,
-    Condition If,
-    Condition unless,
+    String? targetFileName,
+    Facing? anchor,
+    Condition? If,
+    Condition? unless,
     dynamic facing,
-    Rotation rotation,
+    Rotation? rotation,
     dynamic dimension,
     bool encapsulate = true,
-    List<List<String>> args,
-    List<Widget> writable,
+    List<List<String>>? args,
+    List<Widget>? writable,
   }) : this(
           children: [StraitWidget(run)],
           as: as,
@@ -100,12 +99,22 @@ class Execute extends RestActionAble {
           writable: writable,
         );
 
-  Execute.as(Entity entity,
-      {@required this.children, this.encapsulate = true}) {
+  Execute.as(
+    Entity entity, {
+    required this.children,
+    this.encapsulate = true,
+    this.targetFilePath = 'objd',
+    this.targetFileName,
+  }) {
     _args = as(entity).args;
   }
-  Execute.at(Entity entity,
-      {@required this.children, this.encapsulate = true}) {
+  Execute.at(
+    Entity entity, {
+    required this.children,
+    this.encapsulate = true,
+    this.targetFilePath = 'objd',
+    this.targetFileName,
+  }) {
     _args = at(entity).args;
   }
 
@@ -120,8 +129,13 @@ class Execute extends RestActionAble {
   ///
   /// ⇒ execute as @p at @s run say I get executed
   /// ```
-  Execute.asat(Entity entity,
-      {@required this.children, this.encapsulate = true}) {
+  Execute.asat(
+    Entity entity, {
+    required this.children,
+    this.encapsulate = true,
+    this.targetFilePath = 'objd',
+    this.targetFileName,
+  }) {
     _args = asat(entity).args;
   }
 
@@ -136,32 +150,57 @@ class Execute extends RestActionAble {
   ///
   /// ⇒ execute positioned as @p run say I get executed
   /// ```
-  Execute.positioned(dynamic loc,
-      {@required this.children, this.encapsulate = true}) {
+  Execute.positioned(
+    dynamic loc, {
+    required this.children,
+    this.encapsulate = true,
+    this.targetFilePath = 'objd',
+    this.targetFileName,
+  }) {
     _args = positioned(loc).args;
   }
 
   /// Aligns the position to the corners of the block grid.
-  Execute.align(String axis,
-      {@required this.children, this.encapsulate = true}) {
+  Execute.align(
+    String axis, {
+    required this.children,
+    this.encapsulate = true,
+    this.targetFilePath = 'objd',
+    this.targetFileName,
+  }) {
     _args = align(axis).args;
   }
 
   /// Sets the execution position(^ ^ ^) to the eyes or the feet.
-  Execute.anchored(Facing anchor,
-      {@required this.children, this.encapsulate = true}) {
+  Execute.anchored(
+    Facing anchor, {
+    required this.children,
+    this.encapsulate = true,
+    this.targetFilePath = 'objd',
+    this.targetFileName,
+  }) {
     _args = anchored(anchor).args;
   }
 
   /// Sets the execution rotation to the given rotation.
-  Execute.rotated(dynamic rot,
-      {@required this.children, this.encapsulate = true}) {
+  Execute.rotated(
+    dynamic rot, {
+    required this.children,
+    this.encapsulate = true,
+    this.targetFilePath = 'objd',
+    this.targetFileName,
+  }) {
     _args = rotated(rot).args;
   }
 
   ///Sets the execution dimension(execute in) to either `Dimension.overworld`, `Dimension.the_end` or `Dimension.the_nether`.
-  Execute.dimension(dynamic dimension,
-      {@required this.children, this.encapsulate = true}) {
+  Execute.dimension(
+    dynamic dimension, {
+    required this.children,
+    this.encapsulate = true,
+    this.targetFilePath = 'objd',
+    this.targetFileName,
+  }) {
     _args = this.dimension(dimension).args;
   }
 
@@ -179,8 +218,10 @@ class Execute extends RestActionAble {
   /// ```
   Execute.facing(
     dynamic target, {
-    @required this.children,
+    required this.children,
     this.encapsulate = true,
+    this.targetFilePath = 'objd',
+    this.targetFileName,
     Facing facing = Facing.eyes,
   }) {
     _args = this.facing(target, facing: facing).args;
@@ -194,7 +235,7 @@ class Execute extends RestActionAble {
               prefix: 'execute ' + subargs.join(' ') + ' run',
               groupMin: encapsulate ? 3 : -1,
               generateIDs: targetFileName == null,
-              path: targetFilePath ?? 'objd',
+              path: targetFilePath,
               filename: targetFileName ?? 'execute',
             ))
         .toList();
@@ -206,7 +247,7 @@ class Execute extends RestActionAble {
     var args = _resolve(_args);
     args.forEach((e) => e.add(arg));
     return Execute(
-      children: List<Widget>.from(children ?? []),
+      children: List<Widget>.from(children),
       encapsulate: encapsulate,
       args: args,
       writable: writable,
@@ -320,8 +361,8 @@ class Execute extends RestActionAble {
 
   void storeBlock({
     ExecuteStoreResultType result = ExecuteStoreResultType.result,
-    @required Location location,
-    @required String path,
+    required Location location,
+    required String path,
     int scale = 1,
     ExecuteStoreVarType varType = ExecuteStoreVarType.int,
   }) =>
@@ -337,8 +378,8 @@ class Execute extends RestActionAble {
 
   void storeEntity({
     ExecuteStoreResultType result = ExecuteStoreResultType.result,
-    @required Entity entity,
-    @required String path,
+    required Entity entity,
+    required String path,
     int scale = 1,
     ExecuteStoreVarType varType = ExecuteStoreVarType.int,
   }) =>
@@ -355,7 +396,7 @@ class Execute extends RestActionAble {
 
   void storeScore({
     ExecuteStoreResultType result = ExecuteStoreResultType.result,
-    @required Score score,
+    required Score score,
   }) =>
       _addArgumentRet(
         'store ' +
@@ -368,7 +409,7 @@ class Execute extends RestActionAble {
 
   void storeBossbar({
     ExecuteStoreResultType result = ExecuteStoreResultType.result,
-    @required String name,
+    required String name,
     BossbarOption setting = BossbarOption.value,
   }) =>
       _addArgumentRet('store ' +

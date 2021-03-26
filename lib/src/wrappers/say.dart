@@ -5,7 +5,7 @@ import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/build/build.dart';
 
 class Say extends RestActionAble {
-  String message;
+  late String message;
 
   /// The Say Class writes a simple message or an entity in the chat.
   ///

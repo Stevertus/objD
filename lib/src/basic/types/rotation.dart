@@ -1,40 +1,34 @@
 class Rotation {
-  double x, y = 0;
+  double x = 0, y = 0;
   String _rotation;
 
   /// The Rotation Widget is very similar to Location but takes in just two directions for an entities rotation:
   Rotation(this._rotation);
-  Rotation.glob({this.x = 0, this.y = 0}) {
-    _rotation = x.toString() + ' ' + y.toString();
-  }
-  Rotation.rel({this.x = 0, this.y = 0}) {
-    _rotation = '~' +
-        (x == 0 ? '' : x.toString()) +
-        ' ~' +
-        (y == 0 ? '' : y.toString());
-  }
-  Rotation.here() {
-    _rotation = '~ ~';
-    x = y = 0;
-  }
+  Rotation.glob({this.x = 0, this.y = 0})
+      : _rotation = x.toString() + ' ' + y.toString();
+  Rotation.rel({this.x = 0, this.y = 0})
+      : _rotation = '~' +
+            (x == 0 ? '' : x.toString()) +
+            ' ~' +
+            (y == 0 ? '' : y.toString());
+  Rotation.here()
+      : _rotation = '~ ~',
+        x = 0,
+        y = 0;
 
   static int n = 180;
   static int s = 0;
   static int e = -90;
   static int w = 90;
 
-  Rotation.north({double dx = 0, this.y = 0}) {
-    x = Rotation.n + dx;
-  }
-  Rotation.south({double dx = 0, this.y = 0}) {
-    x = Rotation.s + dx;
-  }
-  Rotation.east({double dx = 0, this.y = 0}) {
-    x = Rotation.e + dx;
-  }
-  Rotation.west({double dx = 0, this.y = 0}) {
-    x = Rotation.w + dx;
-  }
+  factory Rotation.north({double dx = 0, double y = 0}) =>
+      Rotation.glob(x: Rotation.n + dx, y: y);
+  factory Rotation.south({double dx = 0, double y = 0}) =>
+      Rotation.glob(x: Rotation.s + dx, y: y);
+  factory Rotation.east({double dx = 0, double y = 0}) =>
+      Rotation.glob(x: Rotation.e + dx, y: y);
+  factory Rotation.west({double dx = 0, double y = 0}) =>
+      Rotation.glob(x: Rotation.w + dx, y: y);
 
   String getDirection() {
     var dir = x ~/ 90;

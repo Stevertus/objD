@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/build/context.dart';
 
@@ -27,7 +26,7 @@ class PassTrait<T> extends Widget {
   ///     return ...;
   ///   }
   /// ```
-  PassTrait(this.trait, {@required this.child});
+  PassTrait(this.trait, {required this.child});
 
   /// You can retrieve the value by using PassTrait.of. The values are passed by type, so you can just get one value per type(of course custom classes are also valid):
   static T of<T>(Context c) => c.traitOf<T>();

@@ -5,9 +5,9 @@ import 'package:objd/core.dart';
 class VersionCheck extends Widget {
   String score;
   int currentVersion;
-  List<Widget> onUpdate;
-  List<Widget> onDowndate;
-  Widget Function(Score) then;
+  List<Widget>? onUpdate;
+  List<Widget>? onDowndate;
+  Widget Function(Score)? then;
 
   /// Checks whether the player updated or downdated your datapack.
   ///
@@ -48,16 +48,16 @@ class VersionCheck extends Widget {
       if (onUpdate != null)
         If(
           prev < current,
-          then: onUpdate,
+          then: onUpdate!,
         ),
       If(
         prev > current,
         then: [
-          if (onDowndate != null) ...onDowndate,
+          if (onDowndate != null) ...onDowndate!,
           current >> prev,
         ],
       ),
-      if (then != null) then(current),
+      if (then != null) then!(current),
       prev.reset(),
     ]);
   }

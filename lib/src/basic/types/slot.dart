@@ -1,7 +1,7 @@
 /// The Slot object gives you certain utils to manipulate Inventories and Containers with the Item, Replaceitem or Data.
 class Slot {
-  final int id;
-  final String slot;
+  final int? id;
+  final String? slot;
 
   /// The Slot object gives you certain utils to manipulate Inventories and Containers with the Item, Replaceitem or Data.
   /// Every Slot has a String(slot) like `inventory.10` used in replaceitem and an id like `19` that is used with nbt data.
@@ -15,7 +15,7 @@ class Slot {
   /// objD calculates the corresponding Slot. In this case `inventory.14`.
   /// > Notice: also the hotbar can be calculated with this. It is the 4th row
 
-  static Slot inv(int row, [int col]) {
+  static Slot inv(int row, [int? col]) {
     var res = 0;
 
     if (col != null) {
@@ -34,7 +34,7 @@ class Slot {
 
   ///used to mark a 3x3 space inside a conventional container.
   ///takes in two numbers, like Slot.inv or one number from 1-9. The start options marks the upper left.
-  static Slot craft(int row, [int col, int start = 1]) {
+  static Slot craft(int row, [int? col, int start = 1]) {
     var res = 0;
     if (col != null) {
       if (col > 0) res = col - 1;
@@ -56,7 +56,7 @@ class Slot {
 
   /// **Slot.chest** takes in numbers, like `5,6` and an optional boolean for using an enderchest
   /// And does exactly the same as slot.inv but with a container, like a chest.
-  static Slot chest(int row, [int col, bool enderchest = false]) {
+  static Slot chest(int row, [int? col, bool enderchest = false]) {
     var res = 0;
 
     if (col != null) {
@@ -76,7 +76,7 @@ class Slot {
   /// **Slot.drop** takes in numbers, like `1,3`
   /// This calculates the rows and columns for a 3x3 Container like a Dropper or a Dispenser.
   ///Therefore just values from 1 to 3 are allowed.
-  static Slot drop(int row, [int col]) {
+  static Slot drop(int row, [int? col]) {
     var res = 0;
 
     if (col != null) {

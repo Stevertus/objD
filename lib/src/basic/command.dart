@@ -5,7 +5,7 @@ import 'package:objd/src/basic/text.dart';
 import 'package:objd/src/basic/for_list.dart';
 
 class CommandList<T> extends RestActionAble {
-  List<Command> _commands;
+  late List<Command> _commands;
 
   /// There is a more efficient way to list raw Minecraft commands.
   ///
@@ -28,14 +28,14 @@ class CommandList<T> extends RestActionAble {
       throw ('Please insert a string or a list into CommandList');
     }
   }
-  CommandList.str(String str) {
-    _commands = str
-        .replaceAll(RegExp(r'[ \t]{2,}'), '')
-        .split('\n')
-        .where((i) => i.isNotEmpty && i != ' ')
-        .map((x) => Command(x))
-        .toList();
-  }
+  CommandList.str(String str)
+      : _commands = str
+            .replaceAll(RegExp(r'[ \t]{2,}'), '')
+            .split('\n')
+            .where((i) => i.isNotEmpty && i != ' ')
+            .map((x) => Command(x))
+            .toList();
+
   @override
   Widget generate(Context context) {
     return For.of(_commands);

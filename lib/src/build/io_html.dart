@@ -8,9 +8,9 @@ Future<List> generateIO(Map<String, String> files, String path) =>
 String getPath(String path, String name) =>
     throw UnsupportedError('objd web mode');
 
-String readFile(String name) => throw UnsupportedError('objd web mode');
+String? readFile(String name) => throw UnsupportedError('objd web mode');
 
-Future saveBytes(List<int> bytes, String path) async {
+Future<bool> saveBytes(List<int> bytes, String path) async {
   final blob = Blob(
     [bytes],
     'application/octet-stream',

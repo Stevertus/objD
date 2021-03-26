@@ -14,7 +14,7 @@ class Recipe extends Widget {
   final String name;
   final RecipeType type;
   final bool exactlyPlaced;
-  final int exactResult;
+  final int? exactResult;
 
   final Item result;
   final Map<int, Item> ingredients;
@@ -22,7 +22,7 @@ class Recipe extends Widget {
   final double experience;
   final int cookingtime;
 
-  final int id;
+  final int? id;
   static int recipeId = 0;
 
   /// A basic recipe takes in ingredient Items with the slot and a result Item.
@@ -60,8 +60,7 @@ class Recipe extends Widget {
     this.type = RecipeType.shaped,
     this.experience = 0.1,
     this.cookingtime = 200,
-  })  : assert(name != null),
-        assert(type != null);
+  });
 
   /// The API also supports shapeless crafting. That means you can set the ingredients in any shape and it would be the same result.
   ///
@@ -85,9 +84,9 @@ class Recipe extends Widget {
     List<Item> ingreds,
     Item result, {
     String name = 'recipe',
-    int id,
+    int? id,
     bool exactlyPlaced = false,
-    int exactResult,
+    int? exactResult,
   }) {
     var ingredients = <int, Item>{};
     for (var i = 0; i < ingreds.length; i++) {
@@ -137,14 +136,14 @@ class Recipe extends Widget {
   Recipe.smithing(
     Item base,
     this.result, {
-    Item addition,
+    Item? addition,
     this.name = 'recipe',
     this.id,
     this.exactlyPlaced = false,
     this.exactResult,
     this.type = RecipeType.smithing,
-  })  : experience = null,
-        cookingtime = null,
+  })  : experience = 0.1,
+        cookingtime = 200,
         ingredients = {
           1: base,
           ...(addition != null ? {2: addition} : {})
@@ -161,23 +160,19 @@ class Recipe extends Widget {
     List<String> pattern,
     Map<String, Item> keys,
     Item result, {
-    int id,
+    int? id,
     String name = 'recipe',
     bool exactlyPlaced = false,
-    int exactResult,
+    int? exactResult,
     RecipeType type = RecipeType.shaped,
   }) {
     var ingredients = <int, Item>{};
-    var patt = <int, String>{};
     var i = 1;
     pattern.forEach((String row) {
-      if (row.isNotEmpty && row[0] != ' ') pattern[i] = row[0];
-      if (row.length > 1 && row[1] != ' ') pattern[i + 1] = row[1];
-      if (row.length > 2 && row[2] != ' ') pattern[i + 2] = row[2];
+      if (row.isNotEmpty && row[0] != ' ') ingredients[i] = keys[row[0]]!;
+      if (row.length > 1 && row[1] != ' ') ingredients[i + 1] = keys[row[1]]!;
+      if (row.length > 2 && row[2] != ' ') ingredients[i + 2] = keys[row[2]]!;
       i += 3;
-    });
-    patt.forEach((int i, String key) {
-      ingredients[i] = keys[key];
     });
 
     return Recipe(
@@ -194,9 +189,9 @@ class Recipe extends Widget {
   /// With objD you can also import usual minecraft recipes in json data. objD automatically parses that and converts it to a command.
   factory Recipe.fromJson(
     Map<String, dynamic> json, {
-    int id,
+    int? id,
     bool exactlyPlaced = false,
-    int exactResult,
+    int? exactResult,
   }) {
     bool exists(String key, [value]) {
       if (value != null) return json[key] != null && json[key] == value;
@@ -204,7 +199,7 @@ class Recipe extends Widget {
     }
 
     var ingredients = <int, Item>{};
-    RecipeType type;
+    RecipeType? type;
 
     if (exists('type')) {
       if (json['type'] == 'minecraft:crafting_shapeless') {
@@ -224,10 +219,12 @@ class Recipe extends Widget {
       });
     }
 
-    Item result;
+    late Item result;
 
     if (exists('result')) {
       result = Item.fromJson(json['result'] as Map<String, dynamic>);
+    } else {
+      throw 'Recipe without result field detected';
     }
     // key-item paired items
     var items = <String, Item>{};
@@ -273,7 +270,7 @@ class Recipe extends Widget {
 
       k--;
 
-      pattern[k ~/ 3] = _replaceCharAt(pattern[k ~/ 3], k % 3, items[item]);
+      pattern[k ~/ 3] = _replaceCharAt(pattern[k ~/ 3], k % 3, items[item]!);
     });
 
     if (!exactlyPlaced) {

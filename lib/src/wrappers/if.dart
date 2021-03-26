@@ -4,23 +4,23 @@ import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/wrappers/comment.dart';
 import 'package:objd/src/basic/group.dart';
 import 'package:objd/src/basic/for_list.dart';
-import 'package:meta/meta.dart';
+
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/build/build.dart';
 
 class If extends RestActionAble {
-  List<List<dynamic>> conds;
+  late List<List<dynamic>> conds;
   List<Widget> then;
-  List<Widget> orElse;
-  If elseWidget;
+  List<Widget>? orElse;
+  If? elseWidget;
   bool invert = false;
-  Entity assignTag;
+  Entity? assignTag;
   final String useTag;
   bool encapsulate;
 
   String targetFilePath;
-  String targetFileName;
-  Predicate predicate;
+  String? targetFileName;
+  Predicate? predicate;
 
   /// The if widget accepts a Condition and runs the children if the condition is true.
   ///
@@ -39,7 +39,7 @@ class If extends RestActionAble {
   /// ```
   If(
     dynamic condition, {
-    @required this.then,
+    required this.then,
     this.orElse,
     this.targetFilePath = 'objd',
     this.targetFileName,
@@ -47,7 +47,6 @@ class If extends RestActionAble {
     this.assignTag,
     this.useTag = 'objd_isTrue',
   }) {
-    assert(then != null);
     getCondition(condition);
   }
 
@@ -62,7 +61,7 @@ class If extends RestActionAble {
   /// ```
   If.not(
     dynamic condition, {
-    @required this.then,
+    required this.then,
     this.orElse,
     this.targetFilePath = 'objd',
     this.targetFileName,
@@ -70,7 +69,6 @@ class If extends RestActionAble {
     this.assignTag,
     this.useTag = 'objd_isTrue',
   }) {
-    assert(then != null);
     assert(then.isNotEmpty);
     invert = true;
     getCondition(condition);
@@ -96,8 +94,8 @@ class If extends RestActionAble {
         then.insert(0, Comment('If statement from file: ' + context.file));
       }
 
-      if (orElse != null && orElse.length > 2 && context.file.isNotEmpty) {
-        orElse.insert(0, Comment('Else statement from file: ' + context.file));
+      if (orElse != null && orElse!.length > 2 && context.file.isNotEmpty) {
+        orElse!.insert(0, Comment('Else statement from file: ' + context.file));
       }
 
       children = _getTagVersion(prefixes);
@@ -114,15 +112,15 @@ class If extends RestActionAble {
         ));
       });
     }
-    if (elseWidget != null) children.add(elseWidget);
-    if (predicate != null) children.add(predicate);
+    if (elseWidget != null) children.add(elseWidget!);
+    if (predicate != null) children.add(predicate!);
 
     return For.of(children);
   }
 
   List<Widget> _getTagVersion(List<String> prefixes) {
     var children = <Widget>[];
-    var tag = useTag ?? 'objd_isTrue';
+    var tag = useTag;
     var id = IndexedFile.getIndexedAndIncrease(tag);
 
     tag += (id > 0 ? id.toString() : '');
@@ -131,7 +129,7 @@ class If extends RestActionAble {
       children.add(
         Group(
           prefix: 'execute ' + prefix + ' run',
-          children: [assignTag.addTag(tag)],
+          children: [assignTag!.addTag(tag)],
           groupMin: encapsulate ? 3 : -1,
         ),
       );
@@ -145,17 +143,19 @@ class If extends RestActionAble {
       children: then,
     ));
     if (orElse != null) {
-      children.add(Group(
-        prefix: 'execute as ' +
-            assignTag.toString() +
-            ' unless entity @s[tag=$tag] run',
-        path: targetFilePath,
-        filename: 'else',
-        groupMin: encapsulate ? 3 : -1,
-        children: orElse,
-      ));
+      children.add(
+        Group(
+          prefix: 'execute as ' +
+              assignTag.toString() +
+              ' unless entity @s[tag=$tag] run',
+          path: targetFilePath,
+          filename: 'else',
+          groupMin: encapsulate ? 3 : -1,
+          children: orElse!,
+        ),
+      );
     }
-    children.add(assignTag.removeTag(tag));
+    children.add(assignTag!.removeTag(tag));
     return children;
   }
 }

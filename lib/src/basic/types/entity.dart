@@ -11,14 +11,14 @@ import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/basic/types/selector.dart';
 import 'package:objd/core.dart';
 import 'package:objd/src/wrappers/execute.dart';
-import 'package:meta/meta.dart';
+
 import 'package:objd/src/wrappers/team.dart';
 
 import 'item.dart';
 export 'entities.dart';
 
 abstract class EntityClass {
-  String selector;
+  abstract String selector;
   @override
   String toString();
 }
@@ -26,25 +26,26 @@ abstract class EntityClass {
 class Entity implements EntityClass {
   @override
   String selector;
+  Map arguments = {};
+  String? playerName;
 
   /// creates an entity with @p
   Entity.Player({
-    Range distance,
-    List<dynamic> tags,
-    Team team,
-    String strNbt,
-    Map<String, dynamic> nbt,
-    List<Score> scores,
-    Range level,
-    Gamemode gamemode,
-    Area area,
-    String name,
-    Rotation isRotated,
-    Range horizontalRotation,
-    Range verticalRotation,
-    String predicate,
-  }) {
-    selector = 'p';
+    Range? distance,
+    List<dynamic>? tags,
+    Team? team,
+    String? strNbt,
+    Map<String, dynamic>? nbt,
+    List<Score>? scores,
+    Range? level,
+    Gamemode? gamemode,
+    Area? area,
+    String? name,
+    Rotation? isRotated,
+    Range? horizontalRotation,
+    Range? verticalRotation,
+    String? predicate,
+  }) : selector = 'p' {
     _setArguments(
       null,
       tags,
@@ -71,23 +72,22 @@ class Entity implements EntityClass {
 
   /// creates an entity with @a
   Entity.All({
-    Range distance,
-    List<dynamic> tags,
-    Team team,
-    String strNbt,
-    Map<String, dynamic> nbt,
-    int limit,
-    List<Score> scores,
-    Range level,
-    Gamemode gamemode,
-    Area area,
-    String name,
-    Rotation isRotated,
-    Range horizontalRotation,
-    Range verticalRotation,
-    String predicate,
-  }) {
-    selector = 'a';
+    Range? distance,
+    List<dynamic>? tags,
+    Team? team,
+    String? strNbt,
+    Map<String, dynamic>? nbt,
+    int? limit,
+    List<Score>? scores,
+    Range? level,
+    Gamemode? gamemode,
+    Area? area,
+    String? name,
+    Rotation? isRotated,
+    Range? horizontalRotation,
+    Range? verticalRotation,
+    String? predicate,
+  }) : selector = 'a' {
     _setArguments(
       limit,
       tags,
@@ -111,24 +111,23 @@ class Entity implements EntityClass {
 
   /// creates an entity with @r
   Entity.Random({
-    EntityType type,
-    Range distance,
-    List<dynamic> tags,
-    Team team,
-    String strNbt,
-    Map<String, dynamic> nbt,
-    int limit,
-    List<Score> scores,
-    Range level,
-    Gamemode gamemode,
-    Area area,
-    String name,
-    Rotation isRotated,
-    Range horizontalRotation,
-    Range verticalRotation,
-    String predicate,
-  }) {
-    selector = 'r';
+    EntityType? type,
+    Range? distance,
+    List<dynamic>? tags,
+    Team? team,
+    String? strNbt,
+    Map<String, dynamic>? nbt,
+    int? limit,
+    List<Score>? scores,
+    Range? level,
+    Gamemode? gamemode,
+    Area? area,
+    String? name,
+    Rotation? isRotated,
+    Range? horizontalRotation,
+    Range? verticalRotation,
+    String? predicate,
+  }) : selector = 'r' {
     _setArguments(
       limit,
       tags,
@@ -152,23 +151,22 @@ class Entity implements EntityClass {
 
   /// creates an entity with @s
   Entity.Selected({
-    EntityType type,
-    Range distance,
-    List<dynamic> tags,
-    Team team,
-    String strNbt,
-    Map<String, dynamic> nbt,
-    List<Score> scores,
-    Range level,
-    Gamemode gamemode,
-    Area area,
-    String name,
-    Rotation isRotated,
-    Range horizontalRotation,
-    Range verticalRotation,
-    String predicate,
-  }) {
-    selector = 's';
+    EntityType? type,
+    Range? distance,
+    List<dynamic>? tags,
+    Team? team,
+    String? strNbt,
+    Map<String, dynamic>? nbt,
+    List<Score>? scores,
+    Range? level,
+    Gamemode? gamemode,
+    Area? area,
+    String? name,
+    Rotation? isRotated,
+    Range? horizontalRotation,
+    Range? verticalRotation,
+    String? predicate,
+  }) : selector = 's' {
     _setArguments(
       null,
       tags,
@@ -192,23 +190,22 @@ class Entity implements EntityClass {
 
   /// creates an entity with @s
   Entity.Self({
-    EntityType type,
-    Range distance,
-    List<dynamic> tags,
-    Team team,
-    String strNbt,
-    Map<String, dynamic> nbt,
-    List<Score> scores,
-    Range level,
-    Gamemode gamemode,
-    Area area,
-    String name,
-    Rotation isRotated,
-    Range horizontalRotation,
-    Range verticalRotation,
-    String predicate,
-  }) {
-    selector = 's';
+    EntityType? type,
+    Range? distance,
+    List<dynamic>? tags,
+    Team? team,
+    String? strNbt,
+    Map<String, dynamic>? nbt,
+    List<Score>? scores,
+    Range? level,
+    Gamemode? gamemode,
+    Area? area,
+    String? name,
+    Rotation? isRotated,
+    Range? horizontalRotation,
+    Range? verticalRotation,
+    String? predicate,
+  }) : selector = 's' {
     _setArguments(
       null,
       tags,
@@ -231,8 +228,7 @@ class Entity implements EntityClass {
   }
 
   /// creates an entity from a prepared selector
-  Entity.Select(Selector selector) {
-    this.selector = selector.selector;
+  Entity.Select(Selector selector) : selector = selector.selector {
     _setArguments(
       selector.limit,
       selector.tags,
@@ -249,40 +245,39 @@ class Entity implements EntityClass {
       selector.isRotated,
       selector.horizontalRotation,
       selector.verticalRotation,
-      null, //TODO: Predicate
+      selector.predicate,
       false,
     );
     if (selector.sorting != null) {
-      sort(selector.sorting);
+      sort(selector.sorting!);
     }
   }
 
   /// creates a new instance of an already existing Entity object
-  Entity.clone(Entity ent) {
-    selector = ent.selector;
-    playerName = ent.playerName;
-    arguments = Map.from(ent.arguments);
-  }
+  Entity.clone(Entity ent)
+      : selector = ent.selector,
+        playerName = ent.playerName,
+        arguments = Map.from(ent.arguments);
 
   /// Entity is an util class to convert an argument list into the Minecraft Entity format(@p...)
   Entity({
     this.selector = 'e',
-    int limit,
-    List<dynamic> tags,
-    Team team,
-    List<Score> scores,
-    Map<String, dynamic> nbt,
-    String strNbt,
-    EntityType type,
-    String predicate,
-    Area area,
-    Range distance,
-    Range level,
-    Gamemode gamemode,
-    String name,
-    Rotation isRotated,
-    Range horizontalRotation,
-    Range verticalRotation,
+    int? limit,
+    List<dynamic>? tags,
+    Team? team,
+    List<Score>? scores,
+    Map<String, dynamic>? nbt,
+    String? strNbt,
+    EntityType? type,
+    String? predicate,
+    Area? area,
+    Range? distance,
+    Range? level,
+    Gamemode? gamemode,
+    String? name,
+    Rotation? isRotated,
+    Range? horizontalRotation,
+    Range? verticalRotation,
     this.playerName,
   }) {
     _setArguments(
@@ -308,22 +303,22 @@ class Entity implements EntityClass {
 
   /// Modifies the properties of the existing Entity and applies new arguments(same as constructors)
   void setValues({
-    int limit,
-    List<dynamic> tags,
-    Team team,
-    List<Score> scores,
-    Map<String, dynamic> nbt,
-    String strNbt,
-    EntityType type,
-    Area area,
-    Range distance,
-    Range level,
-    Gamemode gamemode,
-    String name,
-    Rotation isRotated,
-    Range horizontalRotation,
-    Range verticalRotation,
-    String predicate,
+    int? limit,
+    List<dynamic>? tags,
+    Team? team,
+    List<Score>? scores,
+    Map<String, dynamic>? nbt,
+    String? strNbt,
+    EntityType? type,
+    Area? area,
+    Range? distance,
+    Range? level,
+    Gamemode? gamemode,
+    String? name,
+    Rotation? isRotated,
+    Range? horizontalRotation,
+    Range? verticalRotation,
+    String? predicate,
   }) {
     _setArguments(
       limit,
@@ -347,23 +342,23 @@ class Entity implements EntityClass {
   }
 
   void _setArguments(
-    int limit,
-    List<dynamic> tags,
-    Team team,
-    List<Score> scores,
-    Map<String, dynamic> nbt,
-    String strNbt,
-    EntityType type,
-    Area area,
-    Range distance,
-    Range level,
-    Gamemode gamemode,
-    String name,
-    Rotation isRotated,
-    Range horizontalRotation,
-    Range verticalRotation,
-    String predicate,
-    bool not,
+    int? limit,
+    List<dynamic>? tags,
+    Team? team,
+    List<Score>? scores,
+    Map<String, dynamic>? nbt,
+    String? strNbt,
+    EntityType? type,
+    Area? area,
+    Range? distance,
+    Range? level,
+    Gamemode? gamemode,
+    String? name,
+    Rotation? isRotated,
+    Range? horizontalRotation,
+    Range? verticalRotation,
+    String? predicate,
+    bool? not,
   ) {
     var n = '';
     if (not != null && not) {
@@ -418,10 +413,10 @@ class Entity implements EntityClass {
         if (tag is Tag) {
           arguments['tag'].add(n + tag.tag);
         } else if (tag is String) {
-          if (Tag.prefix != null && !(tag as String).contains(Tag.prefix)) {
-            tag = Tag.prefix + (tag as String);
+          if (Tag.prefix != null && !tag.contains(Tag.prefix!)) {
+            tag = Tag.prefix! + tag;
           }
-          arguments['tag'].add(n + (tag as String));
+          arguments['tag'].add(n + tag);
         } else {
           throw ('Please insert a Tag or String as tag into Entity!');
         }
@@ -439,9 +434,6 @@ class Entity implements EntityClass {
     }
   }
 
-  Map arguments = {};
-  String playerName;
-
   Entity sort(Sort sort) {
     arguments['sort'] = sort.toString().split('.').last;
     return this;
@@ -455,53 +447,54 @@ class Entity implements EntityClass {
   /// ⇒ say @e[tag=!mytag,nbt=!{'istrue':1}]
   /// ```
   Entity not({
-    int limit,
-    List<dynamic> tags,
-    Team team,
-    List<Score> scores,
-    Map<String, dynamic> nbt,
-    String strNbt,
-    EntityType type,
-    Area area,
-    Range distance,
-    Range level,
-    Gamemode gamemode,
-    String name,
-    Rotation isRotated,
-    Range horizontalRotation,
-    Range verticalRotation,
-    String predicate,
+    int? limit,
+    List<dynamic>? tags,
+    Team? team,
+    List<Score>? scores,
+    Map<String, dynamic>? nbt,
+    String? strNbt,
+    EntityType? type,
+    Area? area,
+    Range? distance,
+    Range? level,
+    Gamemode? gamemode,
+    String? name,
+    Rotation? isRotated,
+    Range? horizontalRotation,
+    Range? verticalRotation,
+    String? predicate,
   }) {
     _setArguments(
-        limit,
-        tags,
-        team,
-        scores,
-        nbt,
-        strNbt,
-        type,
-        area,
-        distance,
-        level,
-        gamemode,
-        name,
-        isRotated,
-        horizontalRotation,
-        verticalRotation,
-        predicate,
-        true);
+      limit,
+      tags,
+      team,
+      scores,
+      nbt,
+      strNbt,
+      type,
+      area,
+      distance,
+      level,
+      gamemode,
+      name,
+      isRotated,
+      horizontalRotation,
+      verticalRotation,
+      predicate,
+      true,
+    );
     return this;
   }
 
   /// stores the result or success of a [command] in a nbt [path] in your entity
   Group storeResult(
     Widget w, {
-    @required String path,
+    required String path,
     String datatype = 'double',
     double scale = 1,
     bool useSuccess = false,
   }) {
-    assert(path != null || path.isNotEmpty);
+    assert(path.isNotEmpty);
     return Execute.internal_store_command(
       'entity $this $path $datatype $scale',
       w,
@@ -517,42 +510,43 @@ class Entity implements EntityClass {
   /// Entity ent2 = ent1.copyWith(distance:Range.to(1))
   /// ```
   Entity copyWith({
-    int limit,
-    List<dynamic> tags,
-    Team team,
-    List<Score> scores,
-    Map<String, dynamic> nbt,
-    String strNbt,
-    EntityType type,
-    Area area,
-    Range distance,
-    Range level,
-    Gamemode gamemode,
-    String name,
-    Rotation isRotated,
-    Range horizontalRotation,
-    Range verticalRotation,
-    String predicate,
+    int? limit,
+    List<dynamic>? tags,
+    Team? team,
+    List<Score>? scores,
+    Map<String, dynamic>? nbt,
+    String? strNbt,
+    EntityType? type,
+    Area? area,
+    Range? distance,
+    Range? level,
+    Gamemode? gamemode,
+    String? name,
+    Rotation? isRotated,
+    Range? horizontalRotation,
+    Range? verticalRotation,
+    String? predicate,
   }) {
     var temp = Entity.clone(this);
     temp._setArguments(
-        limit,
-        tags,
-        team,
-        scores,
-        nbt,
-        strNbt,
-        type,
-        area,
-        distance,
-        level,
-        gamemode,
-        name,
-        isRotated,
-        horizontalRotation,
-        verticalRotation,
-        predicate,
-        false);
+      limit,
+      tags,
+      team,
+      scores,
+      nbt,
+      strNbt,
+      type,
+      area,
+      distance,
+      level,
+      gamemode,
+      name,
+      isRotated,
+      horizontalRotation,
+      verticalRotation,
+      predicate,
+      false,
+    );
     return temp;
   }
 
@@ -573,20 +567,24 @@ class Entity implements EntityClass {
   ///```
 
   RestActionAble raycast({
-    int max,
+    int? max,
     double step = 1,
     Block through = Blocks.air,
-    Widget Function(Function, Function) ray,
-    List<Widget> onhit,
+    Widget Function(Function, Function)? ray,
+    List<Widget> onhit = const [],
     String scoreName = 'objd_count',
   }) =>
-      StraitWidget.builder.create(Raycast(this,
+      StraitWidget.builder.create(
+        Raycast(
+          this,
           max: max,
           step: step,
           through: through,
           ray: ray,
           onhit: onhit,
-          scoreName: scoreName));
+          scoreName: scoreName,
+        ),
+      );
 
   ///
   ///Generates a Teleport Widget
@@ -595,10 +593,10 @@ class Entity implements EntityClass {
   ///```
 
   RestActionAble teleport({
-    Location location,
-    Entity entity,
+    Location? location,
+    Entity? entity,
     dynamic facing,
-    Rotation rot,
+    Rotation? rot,
   }) {
     //Teleport to entity
     if (entity != null && facing != null) {
@@ -647,7 +645,7 @@ class Entity implements EntityClass {
   ///player.replaceitem(item: item, slot: slot).queue()
   ///```
 
-  RestActionAble replaceitem({@required Item item, @required Slot slot}) =>
+  RestActionAble replaceitem({required Item item, required Slot slot}) =>
       StraitWidget.builder.create(ReplaceItem(this, item: item, slot: slot));
 
   ///
@@ -657,9 +655,9 @@ class Entity implements EntityClass {
   ///```
 
   RestActionAble particle({
-    @required ParticleType particle,
-    @required Location location,
-    Location delta,
+    required ParticleType particle,
+    required Location location,
+    Location? delta,
     double speed = 1,
     int count = 1,
     bool force = false,
@@ -691,7 +689,7 @@ class Entity implements EntityClass {
         ),
       ]);
 
-  RestActionAble clear([Item item]) =>
+  RestActionAble clear([Item? item]) =>
       StraitWidget.builder.create(Clear(this, item));
 
   ///
@@ -704,7 +702,7 @@ class Entity implements EntityClass {
   ///---
   ///Uses `StraitPlayer.particle()` and `StraitEntity.at()`
 
-  RestActionAble tellraw({List<TextComponent> show}) =>
+  RestActionAble tellraw(List<TextComponent> show) =>
       StraitWidget.builder.create(Tellraw(this, show: show));
 
   ///
@@ -713,8 +711,12 @@ class Entity implements EntityClass {
   ///entity.tp(Location.here()).queue()
   ///```
 
-  RestActionAble tp(
-      {Location location, Entity entity, dynamic facing, Rotation rot}) {
+  RestActionAble tp({
+    Location? location,
+    Entity? entity,
+    dynamic facing,
+    Rotation? rot,
+  }) {
     //Teleport to entity
     if (entity != null && facing != null) {
       return StraitWidget.builder
@@ -749,7 +751,7 @@ class Entity implements EntityClass {
   ///entity.dataMerge(nbt: {'CustomNameVisible':true}).queue()
   ///```
 
-  RestActionAble dataMerge({Map<String, dynamic> nbt, String strNbt}) {
+  RestActionAble dataMerge({Map<String, dynamic>? nbt, String? strNbt}) {
     if ((selector == 'a' ||
         selector == 'r' ||
         selector == 'p' ||
@@ -771,7 +773,7 @@ class Entity implements EntityClass {
   ///entity.dataGet(path: 'CustomName').queue()
   ///```
 
-  RestActionAble dataGet({@required String path, num scale = 1}) {
+  RestActionAble dataGet({required String path, num scale = 1}) {
     if ((selector == 'a' || selector == 'e') &&
         (arguments['limit'] == null || arguments['limit'] != '1')) {
       throw ('Cannot work with data of multiple entities in data command');
@@ -786,7 +788,7 @@ class Entity implements EntityClass {
   ///entity.dataRemove(path: 'CustomName').queue()
   ///```
 
-  RestActionAble dataRemove({@required String path}) {
+  RestActionAble dataRemove({required String path}) {
     if ((selector == 'a' ||
         selector == 'r' ||
         selector == 'p' ||
@@ -808,7 +810,7 @@ class Entity implements EntityClass {
   ///```
 
   RestActionAble dataModify(
-      {@required String path, @required DataModify modify}) {
+      {required String path, required DataModify modify}) {
     if ((selector == 'a' ||
         selector == 'r' ||
         selector == 'p' ||
@@ -831,9 +833,9 @@ class Entity implements EntityClass {
   ///```
 
   RestActionAble execute({
-    List<Widget> children,
+    List<Widget> children = const [],
     String targetFilePath = 'objd',
-    String targetFileName,
+    String? targetFileName,
     bool encapsulate = true,
   }) =>
       as(
@@ -851,9 +853,9 @@ class Entity implements EntityClass {
   ///short form for `entity.execute()`
 
   RestActionAble exec({
-    List<Widget> children,
+    List<Widget> children = const [],
     String targetFilePath = 'objd',
-    String targetFileName,
+    String? targetFileName,
     bool encapsulate = true,
   }) =>
       as(
@@ -872,9 +874,9 @@ class Entity implements EntityClass {
   ///```
 
   RestActionAble executeStrait({
-    @required Function(List<Widget>) run,
+    required Function(List<Widget>) run,
     String targetFilePath = 'objd',
-    String targetFileName,
+    String? targetFileName,
     bool encapsulate = true,
   }) =>
       asStrait(
@@ -894,9 +896,9 @@ class Entity implements EntityClass {
   ///short form for `entity.executeStrait()`
 
   RestActionAble execStrait({
-    @required Function(List<Widget>) run,
+    required Function(List<Widget>) run,
     String targetFilePath = 'objd',
-    String targetFileName,
+    String? targetFileName,
     bool encapsulate = true,
   }) =>
       asStrait(
@@ -913,9 +915,9 @@ class Entity implements EntityClass {
   ///```
 
   RestActionAble asat({
-    List<Widget> children,
+    List<Widget> children = const [],
     String targetFilePath = 'objd',
-    String targetFileName,
+    String? targetFileName,
     bool encapsulate = true,
   }) =>
       StraitWidget.builder.create(Execute(
@@ -934,9 +936,9 @@ class Entity implements EntityClass {
   ///```
 
   RestActionAble asatStrait({
-    @required Function(List<Widget>) run,
+    required Function(List<Widget>) run,
     String targetFilePath = 'objd',
-    String targetFileName,
+    String? targetFileName,
     bool encapsulate = true,
   }) =>
       StraitWidget.builder.create(Execute.strait(
@@ -953,9 +955,9 @@ class Entity implements EntityClass {
   ///```
 
   RestActionAble as({
-    List<Widget> children,
+    List<Widget> children = const [],
     String targetFilePath = 'objd',
-    String targetFileName,
+    String? targetFileName,
     bool encapsulate = true,
   }) =>
       StraitWidget.builder.create(Execute(
@@ -974,9 +976,9 @@ class Entity implements EntityClass {
   ///```
 
   RestActionAble asStrait({
-    @required Function(List<Widget>) run,
+    required Function(List<Widget>) run,
     String targetFilePath = 'objd',
-    String targetFileName,
+    String? targetFileName,
     bool encapsulate = true,
   }) =>
       StraitWidget.builder.create(Execute.strait(
@@ -993,9 +995,9 @@ class Entity implements EntityClass {
   ///```
 
   RestActionAble at({
-    List<Widget> children,
+    List<Widget> children = const [],
     String targetFilePath = 'objd',
-    String targetFileName,
+    String? targetFileName,
     bool encapsulate = true,
   }) =>
       StraitWidget.builder.create(Execute(
@@ -1014,9 +1016,9 @@ class Entity implements EntityClass {
   ///```
 
   RestActionAble atStrait({
-    @required Function(List<Widget>) run,
+    required Function(List<Widget>) run,
     String targetFilePath = 'objd',
-    String targetFileName,
+    String? targetFileName,
     bool encapsulate = true,
   }) =>
       StraitWidget.builder.create(Execute.strait(
@@ -1091,9 +1093,9 @@ class Entity implements EntityClass {
       asStrait(run: (List<Widget> strait) => fn(Entity.Self(), strait));
 
   @override
-  String toString([Map args]) {
-    arguments ??= args;
-    if (playerName != null && playerName.isNotEmpty) return playerName;
+  String toString([Map? args]) {
+    //arguments ??= args;
+    if (playerName != null && playerName!.isNotEmpty) return playerName!;
     var ret = '@' + selector;
 
     if (arguments.isNotEmpty) {
@@ -1127,7 +1129,7 @@ class Entity implements EntityClass {
 }
 
 class Range {
-  num from, to, exact;
+  num? from, to, exact;
 
   /// The Range class defines a range of values(e.g 3..10 in vanilla)
   Range(this.from, this.to);

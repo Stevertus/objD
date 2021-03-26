@@ -1,5 +1,5 @@
 class Range<T> {
-  final T min, max;
+  final T? min, max;
 
   Range(this.min, this.max);
 
@@ -7,8 +7,8 @@ class Range<T> {
 
   Range.min(this.min) : max = null;
 
-  Map<String, T> getJson() {
-    var ret = <String, T>{};
+  Map<String, T?> getJson() {
+    var ret = <String, T?>{};
     if (max != null) ret['max'] = max;
     if (min != null) ret['min'] = min;
     return ret;

@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:objd/core.dart';
 
 /// The Repeat Widget repeats a given action multiple times with a tick delay.
@@ -13,8 +12,8 @@ class Repeat extends RestActionAble {
   /// The Repeat Widget repeats a given action multiple times with a tick delay.
   Repeat(
     this.name, {
-    @required this.child,
-    @required this.to,
+    required this.child,
+    required this.to,
     this.counter = 'objd_repeat',
     this.path = 'timers',
     this.ticks = 1,

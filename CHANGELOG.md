@@ -1,3 +1,30 @@
+## 0.4.0
+
+- added Folder Widget to dynamically create folders. All Files and Rawfiles in the child marked with inheritFolder will choose this folder as a default
+- added Textcomponent.none for the edge case that you want to clear a previous set text
+- added predicate parameter to Selector
+- added Scoreboard.modify(whoever uses that)
+- added self, all and player getters on a Scoreboard to easily use the most common score entities
+- added path argument to Context to retrieve the current path set by Folders
+- added a check to help to not exceed the 16 char limit on scoreboards
+- added additional metrics to measure project generation
+- updated all blocks, items and particles to include additions in 21w11a
+- migrated to null safety, read more here: https://dart.dev/null-safety
+- refactored apis, arrangement of required values and nullable types
+- refactored filepaths and path concatenation
+- changed dependencies (removed meta and changed colorize to ansicolor)
+- fixed Area generating NULL instead of 0 by default
+- fixed triggering hotreload if only properties on project changed and refactored mechanics
+
+You need at least Dart 1.12 for this version of objD and most likely have to migrate to null safety yourself (which is easy with the provided tools: https://dart.dev/go/null-safety-migration)
+
+After doing so, ensure your version constaint is set to this to ensure all features are active:
+
+```yaml
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+```
+
 ## 0.3.6
 
 - added Pose class and corresponding pose argument in ArmorStand
@@ -85,39 +112,6 @@ Thanks White Blizzard and Bonesdog for making suggestions for this version.
 
 Thanks to kadmuffin for contributing and fixing typos!
 
-## 0.3.3-beta.5
-
-- added new 1.16 blocks, items, particles and entities
-- added Spawnpoint Widget
-- added Attribute Widget
-- added Score.setToWidget to allow storing the result of Widgets in a Score
-- added Attribute Type and an Attribute List to support Minecraft attributes
-- added useTag argument in the If Widget to allow custom tags marking the else statement
-- fixed missing increment for Ifs objd_is_true tag
-- fixed if an else option is provided for If, encapsulate would not have an effect
-- fixed crash when leaving the generate parameter of Project empty
-- fixed bug with Trigger.enable
-- fixed Do Widget to also execept null as translate parameter
-
-## 0.3.3-beta.4
-
-- updated Blocks, Items and Particles for 20w15a
-
-## 0.3.3-beta.3
-
-- fixed errors when trying to use gson component in a give command
-
-## 0.3.3-beta.2
-
-- updated Blocks, Items and Particles for 20w10a
-- removed all deprecated and unessary parts
-
-## 0.3.3-beta.1
-
-- added an optional bool property to Slot.chest to support Enderchests
-- fixed that Entity.not used to reset all previous applied tags
-- updated Blocks, Items and Particles for 1.16
-
 ## 0.3.2
 
 - added setToCondition to the Score to allow values based on a condition
@@ -154,52 +148,6 @@ Thanks to kadmuffin for contributing and fixing typos!
 - fixed that Execute.If generated nothing
 - fixed missing tags when using Condition.tag
 - refactoring code
-
-## 0.3.2-beta.4
-
-- added a PassTrait widget, that uses the Context to provide Data across the successive widget tree
-- added support for Dart Web, enabling online generators powered by objD
-- added Zip Exporter that can be enabled with the --zip flag or by builing the project in production mode
-- added --no-zip flag to allow usual file generation
-- added an web example
-- added getArchive and saveAsZip methods to manually create and modify the Zip encoder
-- updated the gson library to also support Dart Web
-- fixed that a score ignored the second parameter on an operation
-- fixed that Execute.If generated nothing
-- fixed missing tags when using Condition.tag
-- fixed missing Particles export
-
-## 0.3.2-beta.3
-
-- added HideFlags method that calculates the hideFlags for you
-- added getAllFiles and getJsonMap functions to allow 3rd party developers and the web to use objDs output
-- added setToCondition to the Score to allow values based on a condition
-- added an Item.SpawnEgg constructor to allow generating spawn eggs more quicker
-- moved Block, ItemType, EntityType and ParticleTypes constants to seperate Blocks, Items, Entities and Particle classes
-- moved the file generator to a new file seperating it from the system io
-- fixed the conversionFlags parameter for TextComponents, accepts TextComponents now
-- fixed crash when Scoreboard was used without any load File
-- fixed Tag toggle wrong negation
-- fixed text options with the conversionFlags in TextComponent.translate
-- refactoring code
-
-## 0.3.2-beta.2
-
-- added Predicates subpackage, that allows to create all major types of predicates right in objD
-- added Predicate Widget to register a new Predicate with content
-- added VersionCheck and ServerVersionCheck
-- added Storage.toData to convert to a Data Widget
-- added global Scoreboard.prefix and Tag.prefix that get applied to all created Scoreboards and Tags
-- added the [] operator to scoreboard to quickly retrieve its scores
-- added Comment.seperate to generate a comment line
-- added Comment.fileHeader to generate a file header with author, description, context and calledin
-- added header field to File to be able to add a header to a file directly
-- added Spectate and Gamemode Widgets
-- updated Condition.predicate and If to allow for Predicates(and automatically register them)
-- updated Block class to allow public insight into nbt and states
-- changed If Then and Else to `then` and `orElse`, old syntax is deprecated
-- extended the ForEach widget to support translation location for each step
-- further code refactoring and formatting
 
 ## 0.3.1
 

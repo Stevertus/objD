@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import 'package:objd/src/basic/command.dart';
 import 'package:objd/src/basic/rest_action.dart';
 import 'package:objd/src/basic/types/block.dart';
@@ -13,13 +11,13 @@ import 'package:objd/src/build/context.dart';
 /// The particle command spawns particles in the world to enhance certain graphics.
 class Particle extends RestActionAble {
   final ParticleType particle;
-  final String texture;
-  final Location location;
-  final Location delta;
+  final String? texture;
+  final Location? location;
+  final Location? delta;
   final double speed;
   final int count;
   final bool force;
-  final Entity player;
+  final Entity? player;
 
   /// The particle command spawns particles in the world to enhance certain graphics.
   ///
@@ -81,7 +79,7 @@ class Particle extends RestActionAble {
     double r,
     double g,
     double b, {
-    @required double size,
+    required double size,
     this.location,
     this.delta,
     this.speed = 0,
@@ -93,14 +91,14 @@ class Particle extends RestActionAble {
 
   /// use copyWith to create a new instance with some values changed
   Particle copyWith({
-    ParticleType particle,
-    String texture,
-    Location location,
-    Location delta,
-    double speed,
-    int count,
-    bool force,
-    Entity player,
+    ParticleType? particle,
+    String? texture,
+    Location? location,
+    Location? delta,
+    double? speed,
+    int? count,
+    bool? force,
+    Entity? player,
   }) {
     return Particle(
       particle ?? this.particle,
@@ -117,13 +115,13 @@ class Particle extends RestActionAble {
   @override
   Widget generate(Context context) {
     var _gen = particle.toString();
-    if (texture != null) _gen += ' ' + texture;
+    if (texture != null) _gen += ' ' + texture!;
     if (location != null) _gen += ' ' + location.toString();
     if (delta != null) {
-      if (speed == null || count == null || location == null) {
+      if (location == null) {
         throw ('If you decide to use the full particle command add a delta, location, speed and count property!');
       }
-      _gen += ' ${delta} ${speed} ${count} ';
+      _gen += ' $delta $speed $count ';
       _gen += force ? 'force' : 'normal';
       if (player != null) _gen += ' ' + player.toString();
     }

@@ -13,29 +13,22 @@ List addAndReturn(List list, dynamic item) {
 
 class BuildFile {
   StringBuffer commands;
-  String path;
-  Widget child;
+  Widget? child;
 
   bool isGen = true;
 
-  BuildFile(File file) {
-    path = file.path;
+  BuildFile(File file) : commands = StringBuffer() {
     child = file.child;
-    commands = StringBuffer();
-    if (file.header != null) commands.writeln(file.header.text);
+    if (file.header != null) commands.writeln(file.header!.text);
   }
 
-  BuildFile.fromWidget(this.child, this.path) {
-    commands = StringBuffer();
-  }
+  BuildFile.fromWidget(this.child) : commands = StringBuffer();
 
-  BuildFile.extended(Extend file) {
-    path = file.path;
-    child = file.child;
-    commands = StringBuffer();
-  }
+  BuildFile.extended(Extend file)
+      : child = file.child,
+        commands = StringBuffer();
 
-  void add(String str) {
+  void add(String? str) {
     if (str != null && str.isNotEmpty) {
       commands.writeln(str);
     }
@@ -45,13 +38,19 @@ class BuildFile {
     return commands.toString();
   }
 
-  void generate({Context context, BuildPack pack, BuildProject prj}) {
-    scanner.scan(
-      child,
-      context: context,
-      commands: commands,
-      pack: pack,
-      project: prj,
-    );
+  void generate({
+    required Context context,
+    required BuildPack pack,
+    BuildProject? prj,
+  }) {
+    if (child != null) {
+      scanner.scan(
+        child!,
+        context: context,
+        commands: commands,
+        pack: pack,
+        project: prj,
+      );
+    }
   }
 }

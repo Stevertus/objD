@@ -6,7 +6,7 @@ import 'package:objd/src/build/build.dart';
 
 /// Kills an Entity. It defaults to Entity.Self.
 class Kill extends RestActionAble {
-  Entity target;
+  Entity? target;
 
   /// Kills an Entity. It defaults to Entity.Self.
   Kill([this.target]);

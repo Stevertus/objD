@@ -6,8 +6,8 @@ import 'package:objd/src/build/build.dart';
 
 /// The Spawnpoint Widget sets a players spawnpoint to the current or specified [position]
 class Spawnpoint extends RestActionAble {
-  final Entity entity;
-  final Location position;
+  final Entity? entity;
+  final Location? position;
 
   /// Sets the respawn point of a player to a certain position.
   ///

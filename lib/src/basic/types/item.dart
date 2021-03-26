@@ -14,10 +14,10 @@ export 'items.dart';
 
 class Item {
   final String type;
-  final int count;
-  final int damage;
-  final Slot slot;
-  final Map<String, dynamic> tag;
+  final int? count;
+  final int? damage;
+  final Slot? slot;
+  final Map<String, dynamic>? tag;
 
   /// The Item class represents an item in an inventory in Minecraft. It is used in the [Give]() or Nbt Commands.
   ///
@@ -58,13 +58,13 @@ class Item {
     this.count,
     this.slot,
     this.damage,
-    int model,
+    int? model,
 
     /// Used to hide flags, VALUE ranges from 1 to 63
-    int hideFlags,
-    TextComponent name,
-    List<TextComponent> lore,
-    Map<String, dynamic> nbt,
+    int? hideFlags,
+    TextComponent? name,
+    List<TextComponent>? lore,
+    Map<String, dynamic>? nbt,
   })  : assert(
           type is String || type is Item || type is Block,
           'Please provide either a String, Item or Block',
@@ -88,24 +88,23 @@ class Item {
     this.count,
     this.slot,
     this.damage,
-    int model,
-    int hideFlags,
-    TextComponent name,
-    List<TextComponent> lore,
-    Map<String, dynamic> nbt,
+    int? model,
+    int? hideFlags,
+    TextComponent? name,
+    List<TextComponent>? lore,
+    Map<String, dynamic>? nbt,
   })  : assert(
           type is String || type is Item || type is Block,
           'Please provide either a String, Item or Block',
         ),
         tag = {},
         type = type.toString() {
-    assert(entity != null, 'Please provide an entity to spawn!');
     nbt ??= {};
 
     nbt.addAll({
       'EntityTag': {
         'id': entity.type.type,
-        ...entity.nbt,
+        ...entity.nbt ?? {},
       }
     });
 
@@ -119,11 +118,11 @@ class Item {
     this.count,
     this.slot,
     this.damage,
-    int model,
-    int hideFlags,
-    TextComponent name,
-    List<TextComponent> lore,
-    Map<String, dynamic> nbt,
+    int? model,
+    int? hideFlags,
+    TextComponent? name,
+    List<TextComponent>? lore,
+    Map<String, dynamic>? nbt,
   })  : type = Items.written_book.toString(),
         tag = {} {
     nbt ??= {};
@@ -141,16 +140,16 @@ class Item {
   static Item clone(Item it) => Item(
         it.type,
         count: it.count,
-        slot: it.slot.clone(),
-        nbt: it.tag != null ? Map.from(it.tag) : null,
+        slot: it.slot?.clone(),
+        nbt: it.tag != null ? Map.from(it.tag ?? {}) : null,
       );
 
   /// creates an Item based on nbt or json data.
   static Item fromJson(Map<String, dynamic> json) {
-    String type;
-    Slot slot;
-    int damage;
-    Map<String, dynamic> tag;
+    var type = '';
+    Slot? slot;
+    int? damage;
+    Map<String, dynamic>? tag;
     if (json['item'] != null) type = json['item'].toString();
     if (json['id'] != null) type = json['id'].toString();
     if (json['Slot'] != null) {
@@ -174,17 +173,17 @@ class Item {
   }
 
   void _checkTags(
-    int model, [
+    int? model, [
     dynamic type,
-    int hideFlags,
-    TextComponent name,
-    List<TextComponent> lore,
-    Map<String, dynamic> nbt,
-    Map<String, dynamic> t,
+    int? hideFlags,
+    TextComponent? name,
+    List<TextComponent>? lore,
+    Map<String, dynamic>? nbt,
+    Map<String, dynamic>? tg,
   ]) {
     // check item type
 
-    t ??= tag;
+    final t = tg ?? tag ?? {};
 
     if (nbt != null && nbt.isNotEmpty) t.addAll(nbt);
     if (damage != null) t['Damage'] = damage;
@@ -210,7 +209,7 @@ class Item {
 
   String getGiveNotation({bool withDamage = true}) {
     var result = type;
-    if (tag != null && tag.isNotEmpty) {
+    if (tag != null && tag!.isNotEmpty) {
       result += gson.encode(tag);
     }
     result += ' ';
@@ -225,15 +224,16 @@ class Item {
     final map = <String, dynamic>{};
     final id = useId ? 'id' : 'item';
     map[id] = 'minecraft:' + getId();
-    if (tag.isNotEmpty) map['tag'] = tag;
-    if (count != null) map['Count'] = Byte(count);
+    if (tag != null && tag!.isNotEmpty) map['tag'] = tag;
+    if (count != null) map['Count'] = Byte(count!);
     if (slot != null) {
-      if (slot.id == null) throw ('An Item needs the Slot id!');
-      if (slot.id < 0) {
+      if (slot!.id == null) throw ('An Item needs the Slot id!');
+      if (slot!.id! < 0) {
         print(
-            'Please note that you are using Item with a negative slot. This is reserved for a selected item and can\'t be accessed within the Inventory property!');
+          'Please note that you are using Item with a negative slot. This is reserved for a selected item and can\'t be accessed within the Inventory property!',
+        );
       }
-      map['Slot'] = Byte(slot.id);
+      map['Slot'] = Byte(slot!.id ?? 0);
     }
     return map;
   }
@@ -243,15 +243,15 @@ class Item {
   }
 
   Item copyWith({
-    String type,
-    int count,
-    int damage,
-    Slot slot,
-    int model,
-    int hideFlags,
-    TextComponent name,
-    List<TextComponent> lore,
-    Map<String, dynamic> nbt,
+    String? type,
+    int? count,
+    int? damage,
+    Slot? slot,
+    int? model,
+    int? hideFlags,
+    TextComponent? name,
+    List<TextComponent>? lore,
+    Map<String, dynamic>? nbt,
   }) {
     final t = tag != null ? _copyDeepMap(tag) : <String, dynamic>{};
     _checkTags(model, type, hideFlags, name, lore, nbt, t);
@@ -291,12 +291,12 @@ class Item {
 }
 
 int HideFlags({
-  bool enchantments,
-  bool attributes,
-  bool unbreakable,
-  bool canDestroy,
-  bool canPlaceOn,
-  bool others,
+  bool enchantments = false,
+  bool attributes = false,
+  bool unbreakable = false,
+  bool canDestroy = false,
+  bool canPlaceOn = false,
+  bool others = false,
 }) {
   var res = 0;
   if (enchantments) res += 1;
@@ -309,7 +309,7 @@ int HideFlags({
 }
 
 class BookPage {
-  List<TextComponent> list;
+  late List<TextComponent> list;
   BookPage(dynamic content) {
     if (content is TextComponent) list = [content];
     if (content is String) list = [TextComponent(content)];
@@ -321,10 +321,10 @@ class BookPage {
   }
 }
 
-Map<String, dynamic> _copyDeepMap(Map<String, dynamic> map) {
+Map<String, dynamic> _copyDeepMap(Map<String, dynamic>? map) {
   final newMap = <String, dynamic>{};
 
-  map.forEach((key, value) {
+  map?.forEach((key, value) {
     print(value);
     newMap[key] =
         (value is Map) ? _copyDeepMap(value.cast<String, dynamic>()) : value;

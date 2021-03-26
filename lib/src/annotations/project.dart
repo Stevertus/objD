@@ -1,9 +1,10 @@
 /// This can automatically generate a main function with all necessary pieces to actually generate all packs and files.
+
 class Prj {
-  final String name;
-  final int version;
-  final String target;
-  final String description;
+  final String? name;
+  final int? version;
+  final String? target;
+  final String? description;
   final bool genMain;
 
   /// This can automatically generate a main function with all necessary pieces to actually generate all packs and files.
@@ -30,5 +31,5 @@ class Prj {
     this.target,
     this.description,
     this.genMain = true,
-  }) : assert(genMain != null);
+  });
 }

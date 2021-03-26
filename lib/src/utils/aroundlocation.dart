@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:objd/src/basic/for_list.dart';
 import 'package:objd/src/basic/types/location.dart';
 import 'package:objd/src/basic/rest_action.dart';
@@ -28,7 +27,7 @@ class AroundLocation extends RestActionAble {
   /// ```
   AroundLocation(
     this.rel, {
-    @required this.build,
+    required this.build,
     this.top = true,
     this.bottom = true,
     this.left = true,

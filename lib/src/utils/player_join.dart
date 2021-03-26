@@ -1,12 +1,11 @@
-import 'package:meta/meta.dart';
 import 'package:objd/core.dart';
 
 /// Allows you to specify what should happen if a player joins. This can be triggered every time or just once with PlayerJoin.inital
 class PlayerJoin extends Widget {
-  final Entity target;
+  final Entity? target;
   final String score;
-  final Widget then;
-  final Widget Function(Score) _then_v;
+  final Widget? then;
+  final Widget Function(Score)? _then_v;
   final bool _isInitial;
 
   /// This will create a [score] that counts leave_game stats and thus detects if a player rejoins.
@@ -18,7 +17,7 @@ class PlayerJoin extends Widget {
   /// | score       | The scoreboard that is used(default = `objd_join`)           |
 
   PlayerJoin({
-    @required this.then,
+    required this.then,
     this.target,
     this.score = 'objd_join',
   })  : _isInitial = false,
@@ -34,7 +33,7 @@ class PlayerJoin extends Widget {
 
   PlayerJoin.initial({
     /// A Function accepting a Score that gets executed by the player that joins
-    Widget Function(Score) then,
+    Widget Function(Score)? then,
     this.target,
     this.score = 'objd_join',
   })  : _isInitial = true,
@@ -50,13 +49,13 @@ class PlayerJoin extends Widget {
     final current = s[Entity.PlayerName('#current')];
     final self = s[Entity.Self()];
     final t = target ?? Entity.All();
-    if (_isInitial) {
+    if (_isInitial && _then_v != null) {
       return Execute(
         as: t,
         If: Condition.not(self >= 0),
         children: [
           current.add(1),
-          _then_v(current),
+          _then_v!(current),
           self >> current,
         ],
       );
@@ -65,7 +64,7 @@ class PlayerJoin extends Widget {
     return Execute.as(
       t.copyWith(scores: [self > 0]),
       children: [
-        then,
+        then!,
         self >> 0,
       ],
     );
