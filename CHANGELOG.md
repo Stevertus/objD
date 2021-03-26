@@ -1,9 +1,10 @@
 ## 0.4.0
 
 - added Folder Widget to dynamically create folders. All Files and Rawfiles in the child marked with inheritFolder will choose this folder as a default
-- added Textcomponent.None for the edge case that you want to clear a previous set text
+- added Textcomponent.none for the edge case that you want to clear a previous set text
 - added predicate parameter to Selector
 - added Scoreboard.modify(whoever uses that)
+- added self, all and player getters on a Scoreboard to easily use the most common score entities
 - added path argument to Context to retrieve the current path set by Folders
 - added a check to help to not exceed the 16 char limit on scoreboards
 - added additional metrics to measure project generation

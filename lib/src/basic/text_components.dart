@@ -30,7 +30,7 @@ class TextComponent {
 
   /// This inserts a simple line break
   TextComponent.lineBreak() : value = {'text': '\n'};
-  TextComponent.None() : value = {};
+  TextComponent.none() : value = {};
 
   /// |TextComponent.customFont||
   /// |--|--|

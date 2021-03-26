@@ -139,6 +139,15 @@ class Scoreboard extends RestActionAble {
     throw ('The operator [] just accepts Entity or String!');
   }
 
+  /// Scoreboard.self is a shortcut for Scoreboard[Entity.Self()]
+  Score get self => Score(Entity.Self(), name);
+
+  /// Scoreboard.all is a shortcut for Scoreboard[Entity.All()]
+  Score get all => Score(Entity.All(), name);
+
+  /// Scoreboard.player is a shortcut for Scoreboard[Entity.Player()]
+  Score get player => Score(Entity.Player(), name);
+
   @override
   Map toMap() {
     return {

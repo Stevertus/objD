@@ -104,7 +104,7 @@ class CustomBlock extends Module {
               nbt: {
                 'Invisible': 1,
                 'Fixed': 1,
-                'Item': headItem.copyWith(name: TextComponent.None()).getMap(),
+                'Item': headItem.copyWith(name: TextComponent.none()).getMap(),
                 'Facing': 1,
                 'Invulnerable': 1,
               },

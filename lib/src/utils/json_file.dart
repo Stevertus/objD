@@ -10,6 +10,7 @@ class JsonFile extends Widget {
   final Map<String, dynamic>? contents;
   final List<dynamic>? contentsList;
   final bool useGson;
+  final bool inheritFolder;
 
   /// As a way to easily generate .json files, you can use the JsonFile wrapper. Just provide a map and a path
   ///
@@ -18,8 +19,12 @@ class JsonFile extends Widget {
   /// | String      | path of the file(without .json extension) |
   /// | Map         | the content of the file                   |
   /// | useGson     | whether to generate gson or plain json    |
-  JsonFile(this.path, this.contents, {this.useGson = false})
-      : contentsList = null;
+  JsonFile(
+    this.path,
+    this.contents, {
+    this.useGson = false,
+    this.inheritFolder = false,
+  }) : contentsList = null;
 
   /// As a way to easily generate .json files, you can use the JsonFile wrapper. Just provide a list and a path
   ///
@@ -28,8 +33,12 @@ class JsonFile extends Widget {
   /// | String      | path of the file(without .json extension) |
   /// | Map         | the content of the file                   |
   /// | useGson     | whether to generate gson or plain json    |
-  JsonFile.list(this.path, this.contentsList, {this.useGson = false})
-      : contents = null;
+  JsonFile.list(
+    this.path,
+    this.contentsList, {
+    this.useGson = false,
+    this.inheritFolder = false,
+  }) : contents = null;
 
   @override
   Widget generate(Context context) {
@@ -38,6 +47,7 @@ class JsonFile extends Widget {
       useGson
           ? gsonEncode(contents ?? contentsList)
           : jsonEncode(contents ?? contentsList),
+      inheritFolder: inheritFolder,
     );
   }
 }
