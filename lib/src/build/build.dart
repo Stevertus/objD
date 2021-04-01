@@ -91,10 +91,14 @@ Map<String, String> _getFiles(BuildProject prj, GenOptions options) {
         if (!options.minified) {
           // add load and main
           if (pack.load != null && pack.load!.isNotEmpty && pack.isGenLoad) {
-            loadJson['values'].add(pack.name + ':' + pack.load!.toString());
+            loadJson['values'].add(
+              pack.name + ':' + pack.load!.toString(false),
+            );
           }
           if (pack.main != null && pack.main!.isNotEmpty && pack.isGenMain) {
-            tickJson['values'].add(pack.name + ':' + pack.main!.toString());
+            tickJson['values'].add(
+              pack.name + ':' + pack.main!.toString(false),
+            );
           }
         }
         // add all pack relevant files

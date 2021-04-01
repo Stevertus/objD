@@ -1,5 +1,3 @@
-import 'package:collection/collection.dart';
-
 import 'package:objd/src/basic/extend.dart';
 import 'package:objd/src/basic/file.dart';
 import 'package:objd/src/basic/pack.dart';
@@ -33,13 +31,14 @@ class BuildPack {
       ..loadFile = load?.toString()
       ..mainFile = main?.toString();
 
-    if (pack.main != null) {
-      main = pack.main!.fullPath(context.path);
-      files[main!] = BuildFile(pack.main!);
-    }
     if (pack.load != null) {
       load = pack.load!.fullPath(context.path);
       files[load!] = BuildFile(pack.load!);
+    }
+
+    if (pack.main != null) {
+      main = pack.main!.fullPath(context.path);
+      files[main!] = BuildFile(pack.main!);
     }
 
     if (pack.files != null) {
@@ -75,12 +74,13 @@ class BuildPack {
   }) {
     var myfile = BuildFile.extended(file);
     final path = file.fullPath(folder);
+
+    myfile.generate(context: context, pack: this, prj: prj);
+
     if (files[path] == null) {
       files[path] = myfile;
       return;
     }
-
-    myfile.generate(context: context, pack: this, prj: prj);
 
     if (front) {
       final str = files[path]!.commands.toString();

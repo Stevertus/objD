@@ -1,3 +1,12 @@
+## 0.4.1
+
+- updated RandomScore to support 1.16 UUIDs
+- changed order of generation: load gets generated before anything else
+- fixed empty file when extending a file that does not exist before
+- fixed path comparison (which resulted in Extend not working)
+- fixed duplicate scoreboard when using addIntoLoad
+- fixed load and tick tags being generated with .mcfunction
+
 ## 0.4.0
 
 - added Folder Widget to dynamically create folders. All Files and Rawfiles in the child marked with inheritFolder will choose this folder as a default

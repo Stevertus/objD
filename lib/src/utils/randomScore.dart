@@ -39,8 +39,8 @@ class RandomScore extends RestActionAble {
           s[entity].setToWidget(
             Data.get(
               Entity(tags: ['objd_random'], limit: 1).sort(Sort.nearest),
-              path: 'UUIDMost',
-              scale: 0.0000000001,
+              path: context.version > 15 ? 'UUID[0]' : 'UUIDMost',
+              scale: (context.version > 15 ? 1000 : 1) * 0.0000000001,
             ),
           ),
           s[entity].modulo(

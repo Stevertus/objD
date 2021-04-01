@@ -1,5 +1,3 @@
-import 'package:collection/collection.dart';
-
 /// Maybe you already wondered what this context argument here is.
 ///
 /// The Context is a way to get certain important information from the parents.
@@ -145,20 +143,23 @@ class Path {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    final listEquals = const DeepCollectionEquality().equals;
 
-    return other is Path &&
-        listEquals(other.segments, segments) &&
-        other.filename == filename &&
-        other.filetype == filetype;
+    return other is Path && other.hashCode == hashCode;
   }
 
   @override
-  int get hashCode => segments.hashCode ^ filename.hashCode ^ filetype.hashCode;
+  int get hashCode {
+    return segments.fold<int>(
+          filename.hashCode,
+          (acc, s) => acc ^ s.hashCode,
+        ) ^
+        filetype.hashCode;
+  }
 
   @override
-  String toString() => [
+  String toString([bool withExtension = true]) => [
         ...segments,
-        if (filename != null) filename! + '.' + (filetype ?? 'json'),
+        if (filename != null)
+          filename! + (withExtension ? '.' + (filetype ?? 'json') : ''),
       ].join('/');
 }

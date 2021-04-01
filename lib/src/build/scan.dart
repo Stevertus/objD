@@ -51,7 +51,7 @@ void scan(
     return;
   }
 
-  if (wid is Scoreboard && wid.subcommand == 'add') {
+  if (wid is Scoreboard && wid.subcommand.contains('add')) {
     if (!pack.addScoreboard(wid.name)) return;
   }
 
