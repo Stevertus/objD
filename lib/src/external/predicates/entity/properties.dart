@@ -60,7 +60,9 @@ class Properties extends Tag {
 
     if (level != null) player['level'] = level!.getJson();
     if (gamemode != null) player['gamemode'] = gamemode.toString();
-    if (stats != null) player['stats'] = stats!.map((s) => s.getJson()).toList();
+    if (stats != null) {
+      player['stats'] = stats!.map((s) => s.getJson()).toList();
+    }
     if (recipes != null) player['recipes'] = recipes;
     if (advancements != null) player['advancements'] = advancements;
 
