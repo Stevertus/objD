@@ -95,8 +95,10 @@ class BuildPack {
 
   void generate({required BuildProject prj}) {
     if (prj.prod) context.prod = true;
-    final keys = List.from(files.keys);
-    for (var path in keys) {
+
+    // goes through all files (also considering added files while generating previous)
+    for (var i = 0; i < files.length; i++) {
+      final path = files.keys.toList()[i];
       context.file = path.toString();
       files[path]!.generate(
         context: context,

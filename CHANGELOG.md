@@ -2,6 +2,7 @@
 
 - updated RandomScore to support 1.16 UUIDs
 - changed order of generation: load gets generated before anything else
+- fixed files not getting generated when being registered inside another file
 - fixed empty file when extending a file that does not exist before
 - fixed path comparison (which resulted in Extend not working)
 - fixed duplicate scoreboard when using addIntoLoad
