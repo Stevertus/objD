@@ -774,7 +774,6 @@ class Blocks {
     amethyst_cluster,
     azalea,
     azalea_leaves,
-    azalea_leaves_flowers,
     big_dripleaf,
     big_dripleaf_stem,
     black_candle,
@@ -827,6 +826,7 @@ class Blocks {
     exposed_cut_copper_slab,
     exposed_cut_copper_stairs,
     flowering_azalea,
+    flowering_azalea_leaves,
     glow_lichen,
     gray_candle,
     gray_candle_cake,
@@ -836,6 +836,7 @@ class Blocks {
     infested_deepslate,
     large_amethyst_bud,
     lava_cauldron,
+    light,
     light_blue_candle,
     light_blue_candle_cake,
     light_gray_candle,
@@ -861,10 +862,15 @@ class Blocks {
     polished_deepslate_slab,
     polished_deepslate_stairs,
     polished_deepslate_wall,
+    potted_azalea_bush,
+    potted_flowering_azalea_bush,
     powder_snow,
     powder_snow_cauldron,
     purple_candle,
     purple_candle_cake,
+    raw_copper_block,
+    raw_gold_block,
+    raw_iron_block,
     red_candle,
     red_candle_cake,
     rooted_dirt,
@@ -884,6 +890,10 @@ class Blocks {
     waxed_exposed_cut_copper,
     waxed_exposed_cut_copper_slab,
     waxed_exposed_cut_copper_stairs,
+    waxed_oxidized_copper,
+    waxed_oxidized_cut_copper,
+    waxed_oxidized_cut_copper_slab,
+    waxed_oxidized_cut_copper_stairs,
     waxed_weathered_copper,
     waxed_weathered_cut_copper,
     waxed_weathered_cut_copper_slab,
@@ -4923,12 +4933,6 @@ class Blocks {
   /// _(minecraft:azalea_leaves)_
   static const Block azalea_leaves = Block('minecraft:azalea_leaves');
 
-  /// [Azalea Leaves Flowers](https://minecraft.gamepedia.com/azalea_leaves_flowers)
-  ///
-  /// _(minecraft:azalea_leaves_flowers)_
-  static const Block azalea_leaves_flowers =
-      Block('minecraft:azalea_leaves_flowers');
-
   /// [Big Dripleaf](https://minecraft.gamepedia.com/big_dripleaf)
   ///
   /// _(minecraft:big_dripleaf)_
@@ -5207,6 +5211,12 @@ class Blocks {
   /// _(minecraft:flowering_azalea)_
   static const Block flowering_azalea = Block('minecraft:flowering_azalea');
 
+  /// [Flowering Azalea Leaves](https://minecraft.gamepedia.com/flowering_azalea_leaves)
+  ///
+  /// _(minecraft:flowering_azalea_leaves)_
+  static const Block flowering_azalea_leaves =
+      Block('minecraft:flowering_azalea_leaves');
+
   /// [Glow Lichen](https://minecraft.gamepedia.com/glow_lichen)
   ///
   /// _(minecraft:glow_lichen)_
@@ -5251,6 +5261,11 @@ class Blocks {
   ///
   /// _(minecraft:lava_cauldron)_
   static const Block lava_cauldron = Block('minecraft:lava_cauldron');
+
+  /// [Light](https://minecraft.gamepedia.com/light)
+  ///
+  /// _(minecraft:light)_
+  static const Block light = Block('minecraft:light');
 
   /// [Light Blue Candle](https://minecraft.gamepedia.com/light_blue_candle)
   ///
@@ -5387,6 +5402,17 @@ class Blocks {
   static const Block polished_deepslate_wall =
       Block('minecraft:polished_deepslate_wall');
 
+  /// [Potted Azalea Bush](https://minecraft.gamepedia.com/potted_azalea_bush)
+  ///
+  /// _(minecraft:potted_azalea_bush)_
+  static const Block potted_azalea_bush = Block('minecraft:potted_azalea_bush');
+
+  /// [Potted Flowering Azalea Bush](https://minecraft.gamepedia.com/potted_flowering_azalea_bush)
+  ///
+  /// _(minecraft:potted_flowering_azalea_bush)_
+  static const Block potted_flowering_azalea_bush =
+      Block('minecraft:potted_flowering_azalea_bush');
+
   /// [Powder Snow](https://minecraft.gamepedia.com/powder_snow)
   ///
   /// _(minecraft:powder_snow)_
@@ -5407,6 +5433,21 @@ class Blocks {
   ///
   /// _(minecraft:purple_candle_cake)_
   static const Block purple_candle_cake = Block('minecraft:purple_candle_cake');
+
+  /// [Raw Copper Block](https://minecraft.gamepedia.com/raw_copper_block)
+  ///
+  /// _(minecraft:raw_copper_block)_
+  static const Block raw_copper_block = Block('minecraft:raw_copper_block');
+
+  /// [Raw Gold Block](https://minecraft.gamepedia.com/raw_gold_block)
+  ///
+  /// _(minecraft:raw_gold_block)_
+  static const Block raw_gold_block = Block('minecraft:raw_gold_block');
+
+  /// [Raw Iron Block](https://minecraft.gamepedia.com/raw_iron_block)
+  ///
+  /// _(minecraft:raw_iron_block)_
+  static const Block raw_iron_block = Block('minecraft:raw_iron_block');
 
   /// [Red Candle](https://minecraft.gamepedia.com/red_candle)
   ///
@@ -5508,6 +5549,30 @@ class Blocks {
   /// _(minecraft:waxed_exposed_cut_copper_stairs)_
   static const Block waxed_exposed_cut_copper_stairs =
       Block('minecraft:waxed_exposed_cut_copper_stairs');
+
+  /// [Waxed Oxidized Copper](https://minecraft.gamepedia.com/waxed_oxidized_copper)
+  ///
+  /// _(minecraft:waxed_oxidized_copper)_
+  static const Block waxed_oxidized_copper =
+      Block('minecraft:waxed_oxidized_copper');
+
+  /// [Waxed Oxidized Cut Copper](https://minecraft.gamepedia.com/waxed_oxidized_cut_copper)
+  ///
+  /// _(minecraft:waxed_oxidized_cut_copper)_
+  static const Block waxed_oxidized_cut_copper =
+      Block('minecraft:waxed_oxidized_cut_copper');
+
+  /// [Waxed Oxidized Cut Copper Slab](https://minecraft.gamepedia.com/waxed_oxidized_cut_copper_slab)
+  ///
+  /// _(minecraft:waxed_oxidized_cut_copper_slab)_
+  static const Block waxed_oxidized_cut_copper_slab =
+      Block('minecraft:waxed_oxidized_cut_copper_slab');
+
+  /// [Waxed Oxidized Cut Copper Stairs](https://minecraft.gamepedia.com/waxed_oxidized_cut_copper_stairs)
+  ///
+  /// _(minecraft:waxed_oxidized_cut_copper_stairs)_
+  static const Block waxed_oxidized_cut_copper_stairs =
+      Block('minecraft:waxed_oxidized_cut_copper_stairs');
 
   /// [Waxed Weathered Copper](https://minecraft.gamepedia.com/waxed_weathered_copper)
   ///

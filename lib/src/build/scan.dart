@@ -74,7 +74,7 @@ void scan(
     // is list widget
     if (child is List<Widget?>) {
       child.forEach((x) {
-        scanWith(context, x);
+        if (x != null) scanWith(context, x);
       });
       return;
     }

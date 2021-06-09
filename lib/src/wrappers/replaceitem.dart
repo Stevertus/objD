@@ -49,9 +49,9 @@ class ReplaceItem extends RestActionAble {
     _setTarget(target);
   }
 
-  /// To copy an Item from one slot to another use `ReplaceItem.copy`:
+  /// To copy an Item from one slot to another use `ReplaceItem.from`:
   ///
-  /// | ReplaceItem.copy   |                                                   |
+  /// | ReplaceItem.from   |                                                   |
   /// | ------------------ | ------------------------------------------------- |
   /// | Location or Entity | the target container to copy to                   |
   /// | slot               | the slot to copy to(required)                     |
@@ -62,7 +62,7 @@ class ReplaceItem extends RestActionAble {
   /// **Example:**
   ///
   /// ```dart
-  /// ReplaceItem.copy(
+  /// ReplaceItem.from(
   /// 	Entity.Player(),
   /// 	slot: Slot.Hotbar5,
   /// 	from: Location.here(),
@@ -71,13 +71,13 @@ class ReplaceItem extends RestActionAble {
   ///
   /// ⇒ item entity @p hotbar.5 copy block ~ ~ ~ container.1
   /// ```
-  ReplaceItem.copy(
+  ReplaceItem.from(
     dynamic target, {
     required dynamic from,
     required this.fromSlot,
     required this.slot,
     this.modifier,
-  }) : _type = _ReplaceItemType.copy {
+  }) : _type = _ReplaceItemType.from {
     _setTarget(target);
 
     if (from is Entity) {
@@ -133,18 +133,22 @@ class ReplaceItem extends RestActionAble {
     if (context.version < 17) return _pre117();
 
     var cmd = ['item'];
+
+    cmd.add(_type == _ReplaceItemType.modify ? 'modify' : 'replace');
+
     cmd.add(entity != null ? 'entity $entity' : 'block $loc');
 
     cmd.add(slot.slot!);
 
-    cmd.add(_type.toString().split('.')[1]);
-
     if (_type == _ReplaceItemType.replace && item != null) {
+      cmd.add('with');
       cmd.add(item!.getGiveNotation());
     }
 
-    if (_type == _ReplaceItemType.copy && fromSlot != null) {
-      cmd.add(fromEntity != null ? 'entity $fromEntity' : 'block $fromLoc');
+    if (_type == _ReplaceItemType.from && fromSlot != null) {
+      cmd.add(
+        fromEntity != null ? 'from entity $fromEntity' : 'from block $fromLoc',
+      );
       cmd.add(fromSlot!.slot!);
     }
 
@@ -156,4 +160,4 @@ class ReplaceItem extends RestActionAble {
   }
 }
 
-enum _ReplaceItemType { replace, copy, modify }
+enum _ReplaceItemType { replace, from, modify }

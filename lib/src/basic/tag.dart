@@ -25,6 +25,11 @@ class Tag extends RestActionAble {
 
   Tag add() => Tag(tag, entity: entity, value: true);
   Tag remove() => Tag(tag, entity: entity, value: false);
+  Tag not() => Tag(
+        tag[0] == '!' ? tag.substring(1) : '!$tag',
+        entity: entity,
+        value: value,
+      );
 
   /// With the toggle method you can toggle the value(invert the tag). This is done with a temporary tag:
   /// ```dart

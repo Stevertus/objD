@@ -15,10 +15,11 @@ class Block {
   final String? tag;
   final Map<String, dynamic>? states;
   final Map<String, dynamic>? nbt;
+  final String strNbt;
   @override
   String toString() {
     var strState = '';
-    var strNbt = '';
+    var strnbt = strNbt;
     var id = tag ?? _id;
     if (states != null) {
       var liState = <String>[];
@@ -27,8 +28,8 @@ class Block {
       });
       strState = '[${liState.join(',')}]';
     }
-    if (nbt != null) strNbt = gson.encode(nbt);
-    return id + strState + strNbt;
+    if (nbt != null) strnbt = gson.encode(nbt);
+    return id + strState + strnbt;
   }
 
   /// **Usage:**
@@ -38,6 +39,7 @@ class Block {
   /// ```
   const Block(this._id)
       : nbt = null,
+        strNbt = '',
         states = null,
         tag = null;
 
@@ -46,7 +48,7 @@ class Block {
     this.states,
     this.tag,
     this.nbt,
-    String strNbt = '',
+    this.strNbt = '',
   })  : assert(block is String || block is Block,
             'Please insert a block or string into Block.nbt!'),
         _id = _getId(block);

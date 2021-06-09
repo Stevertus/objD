@@ -89,7 +89,7 @@ class If extends RestActionAble {
     var children = <Widget>[];
     // group into seperate file(and get if id)
     if (orElse != null || prefixes.length >= 2 || assignTag != null) {
-      assignTag ??= Entity.Player();
+      assignTag ??= Entity.Self();
       if (then.length > 2 && context.file.isNotEmpty) {
         then.insert(0, Comment('If statement from file: ' + context.file));
       }

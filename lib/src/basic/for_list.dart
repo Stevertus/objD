@@ -4,10 +4,10 @@ import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/build/build.dart';
 
 class For extends RestActionAble {
-  final List<Widget?> _list;
+  final List<Widget> _list;
 
   int get length => _list.length;
-  List<Widget?> get children => _list;
+  List<Widget> get children => _list;
 
   /// The For class enables you to add multiple endpoints to one Widget.
   ///
@@ -44,12 +44,12 @@ class For extends RestActionAble {
   For.of(this._list);
 
   @override
-  List<Widget?> generate(Context context) {
+  List<Widget> generate(Context context) {
     return _list;
   }
 
   @override
   Map toMap() => {
-        'For': _list.map((x) => x?.toMap()),
+        'For': _list.map((x) => x.toMap()),
       };
 }

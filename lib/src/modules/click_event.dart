@@ -53,7 +53,7 @@ class ClickEvent extends Module {
         File(
           path + name,
           child: For.of([
-            onClick,
+            if (onClick != null) onClick!,
             _score.reset(),
           ]),
         ),

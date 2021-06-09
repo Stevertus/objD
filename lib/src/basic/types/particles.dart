@@ -62,6 +62,7 @@ class Particles {
     landing_obsidian_tear,
     large_smoke,
     lava,
+    light,
     mycelium,
     nautilus,
     note,
@@ -310,6 +311,9 @@ class Particles {
 
   /// _(minecraft:lava)_
   static const ParticleType lava = ParticleType('minecraft:lava');
+
+  /// _(minecraft:light)_
+  static const ParticleType light = ParticleType('minecraft:light');
 
   /// _(minecraft:mycelium)_
   static const ParticleType mycelium = ParticleType('minecraft:mycelium');

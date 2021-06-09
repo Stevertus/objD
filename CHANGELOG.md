@@ -1,3 +1,16 @@
+## 0.4.2
+
+- added new Marker Widget to easily create new Markers(you can use it where ever Summon can be used)
+- added `Entity.Marker` selector that selects all markers with an optional data field
+- added `breakItem` to CustomBlock to manually specify the item that should be killed if player breaks the block
+- updated all blocks, items and particles to include changes in 1.17
+- updated ReplaceItem to reflect all the changes to the /item command
+- changed the list in For to be non nullable
+- changed CustomBlock break distance to 0.5(instead of 1)
+- changed the default for If.assignTag to Entity.Self as this is more common than Entity.Player
+- changed behaviour of Condition.not when used with a tag, this will generate [tag=!name] now instead of unless
+- fixed `List<Widget?>` is not a subtype of type `Widget`
+
 ## 0.4.1
 
 - updated RandomScore to support 1.16 UUIDs

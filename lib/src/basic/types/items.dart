@@ -990,7 +990,6 @@ class Items {
     axolotl_spawn_egg,
     azalea,
     azalea_leaves,
-    azalea_leaves_flowers,
     big_dripleaf,
     black_candle,
     blue_candle,
@@ -1037,16 +1036,19 @@ class Items {
     exposed_cut_copper_slab,
     exposed_cut_copper_stairs,
     flowering_azalea,
+    flowering_azalea_leaves,
     glow_berries,
     glow_ink_sac,
     glow_item_frame,
     glow_lichen,
     glow_squid_spawn_egg,
+    goat_spawn_egg,
     gray_candle,
     green_candle,
     hanging_roots,
     infested_deepslate,
     large_amethyst_bud,
+    light,
     light_blue_candle,
     light_gray_candle,
     lightning_rod,
@@ -1068,6 +1070,12 @@ class Items {
     polished_deepslate_wall,
     powder_snow_bucket,
     purple_candle,
+    raw_copper,
+    raw_copper_block,
+    raw_gold,
+    raw_gold_block,
+    raw_iron,
+    raw_iron_block,
     red_candle,
     rooted_dirt,
     sculk_sensor,
@@ -1086,6 +1094,10 @@ class Items {
     waxed_exposed_cut_copper,
     waxed_exposed_cut_copper_slab,
     waxed_exposed_cut_copper_stairs,
+    waxed_oxidized_copper,
+    waxed_oxidized_cut_copper,
+    waxed_oxidized_cut_copper_slab,
+    waxed_oxidized_cut_copper_stairs,
     waxed_weathered_copper,
     waxed_weathered_cut_copper,
     waxed_weathered_cut_copper_slab,
@@ -6294,12 +6306,6 @@ class Items {
   /// _(minecraft:azalea_leaves)_
   static const Item azalea_leaves = Item.type('minecraft:azalea_leaves');
 
-  /// [Azalea Leaves Flowers](https://minecraft.gamepedia.com/azalea_leaves_flowers)
-  ///
-  /// _(minecraft:azalea_leaves_flowers)_
-  static const Item azalea_leaves_flowers =
-      Item.type('minecraft:azalea_leaves_flowers');
-
   /// [Big Dripleaf](https://minecraft.gamepedia.com/big_dripleaf)
   ///
   /// _(minecraft:big_dripleaf)_
@@ -6555,6 +6561,12 @@ class Items {
   /// _(minecraft:flowering_azalea)_
   static const Item flowering_azalea = Item.type('minecraft:flowering_azalea');
 
+  /// [Flowering Azalea Leaves](https://minecraft.gamepedia.com/flowering_azalea_leaves)
+  ///
+  /// _(minecraft:flowering_azalea_leaves)_
+  static const Item flowering_azalea_leaves =
+      Item.type('minecraft:flowering_azalea_leaves');
+
   /// [Glow Berries](https://minecraft.gamepedia.com/glow_berries)
   ///
   /// _(minecraft:glow_berries)_
@@ -6580,6 +6592,11 @@ class Items {
   /// _(minecraft:glow_squid_spawn_egg)_
   static const Item glow_squid_spawn_egg =
       Item.type('minecraft:glow_squid_spawn_egg');
+
+  /// [Goat Spawn Egg](https://minecraft.gamepedia.com/goat_spawn_egg)
+  ///
+  /// _(minecraft:goat_spawn_egg)_
+  static const Item goat_spawn_egg = Item.type('minecraft:goat_spawn_egg');
 
   /// [Gray Candle](https://minecraft.gamepedia.com/gray_candle)
   ///
@@ -6607,6 +6624,11 @@ class Items {
   /// _(minecraft:large_amethyst_bud)_
   static const Item large_amethyst_bud =
       Item.type('minecraft:large_amethyst_bud');
+
+  /// [Light](https://minecraft.gamepedia.com/light)
+  ///
+  /// _(minecraft:light)_
+  static const Item light = Item.type('minecraft:light');
 
   /// [Light Blue Candle](https://minecraft.gamepedia.com/light_blue_candle)
   ///
@@ -6725,6 +6747,36 @@ class Items {
   /// _(minecraft:purple_candle)_
   static const Item purple_candle = Item.type('minecraft:purple_candle');
 
+  /// [Raw Copper](https://minecraft.gamepedia.com/raw_copper)
+  ///
+  /// _(minecraft:raw_copper)_
+  static const Item raw_copper = Item.type('minecraft:raw_copper');
+
+  /// [Raw Copper Block](https://minecraft.gamepedia.com/raw_copper_block)
+  ///
+  /// _(minecraft:raw_copper_block)_
+  static const Item raw_copper_block = Item.type('minecraft:raw_copper_block');
+
+  /// [Raw Gold](https://minecraft.gamepedia.com/raw_gold)
+  ///
+  /// _(minecraft:raw_gold)_
+  static const Item raw_gold = Item.type('minecraft:raw_gold');
+
+  /// [Raw Gold Block](https://minecraft.gamepedia.com/raw_gold_block)
+  ///
+  /// _(minecraft:raw_gold_block)_
+  static const Item raw_gold_block = Item.type('minecraft:raw_gold_block');
+
+  /// [Raw Iron](https://minecraft.gamepedia.com/raw_iron)
+  ///
+  /// _(minecraft:raw_iron)_
+  static const Item raw_iron = Item.type('minecraft:raw_iron');
+
+  /// [Raw Iron Block](https://minecraft.gamepedia.com/raw_iron_block)
+  ///
+  /// _(minecraft:raw_iron_block)_
+  static const Item raw_iron_block = Item.type('minecraft:raw_iron_block');
+
   /// [Red Candle](https://minecraft.gamepedia.com/red_candle)
   ///
   /// _(minecraft:red_candle)_
@@ -6822,6 +6874,30 @@ class Items {
   /// _(minecraft:waxed_exposed_cut_copper_stairs)_
   static const Item waxed_exposed_cut_copper_stairs =
       Item.type('minecraft:waxed_exposed_cut_copper_stairs');
+
+  /// [Waxed Oxidized Copper](https://minecraft.gamepedia.com/waxed_oxidized_copper)
+  ///
+  /// _(minecraft:waxed_oxidized_copper)_
+  static const Item waxed_oxidized_copper =
+      Item.type('minecraft:waxed_oxidized_copper');
+
+  /// [Waxed Oxidized Cut Copper](https://minecraft.gamepedia.com/waxed_oxidized_cut_copper)
+  ///
+  /// _(minecraft:waxed_oxidized_cut_copper)_
+  static const Item waxed_oxidized_cut_copper =
+      Item.type('minecraft:waxed_oxidized_cut_copper');
+
+  /// [Waxed Oxidized Cut Copper Slab](https://minecraft.gamepedia.com/waxed_oxidized_cut_copper_slab)
+  ///
+  /// _(minecraft:waxed_oxidized_cut_copper_slab)_
+  static const Item waxed_oxidized_cut_copper_slab =
+      Item.type('minecraft:waxed_oxidized_cut_copper_slab');
+
+  /// [Waxed Oxidized Cut Copper Stairs](https://minecraft.gamepedia.com/waxed_oxidized_cut_copper_stairs)
+  ///
+  /// _(minecraft:waxed_oxidized_cut_copper_stairs)_
+  static const Item waxed_oxidized_cut_copper_stairs =
+      Item.type('minecraft:waxed_oxidized_cut_copper_stairs');
 
   /// [Waxed Weathered Copper](https://minecraft.gamepedia.com/waxed_weathered_copper)
   ///

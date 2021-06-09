@@ -35,14 +35,20 @@ class Pack extends Widget {
       if (main == null) {
         main = File('main', child: For.of(modules!));
       } else {
-        main!.child = For.of([...modules!, main!.child]);
+        main!.child = For.of([
+          ...modules!,
+          if (main!.child != null) main!.child!,
+        ]);
       }
     }
   }
 
   @override
   Widget generate(Context context) {
-    return For.of([main, load]);
+    return For.of([
+      if (main != null) main!,
+      if (load != null) load!,
+    ]);
   }
 
   @override

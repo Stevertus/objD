@@ -45,6 +45,7 @@ class Entities {
     giant,
     glow_item_frame,
     glow_squid,
+    goat,
     guardian,
     hoglin,
     hopper_minecart,
@@ -59,6 +60,7 @@ class Entities {
     llama,
     llama_spit,
     magma_cube,
+    marker,
     minecart,
     mooshroom,
     mule,
@@ -337,6 +339,11 @@ class Entities {
   /// _(minecraft:glow_squid)_
   static const EntityType glow_squid = EntityType('minecraft:glow_squid');
 
+  /// [Goat](https://minecraft.gamepedia.com/goat)
+  ///
+  /// _(minecraft:goat)_
+  static const EntityType goat = EntityType('minecraft:goat');
+
   /// [Guardian](https://minecraft.gamepedia.com/guardian)
   ///
   /// _(minecraft:guardian)_
@@ -408,6 +415,11 @@ class Entities {
   ///
   /// _(minecraft:magma_cube)_
   static const EntityType magma_cube = EntityType('minecraft:magma_cube');
+
+  /// [Marker](https://minecraft.gamepedia.com/marker)
+  ///
+  /// _(minecraft:marker)_
+  static const EntityType marker = EntityType('minecraft:marker');
 
   /// [Minecart](https://minecraft.gamepedia.com/minecart)
   ///

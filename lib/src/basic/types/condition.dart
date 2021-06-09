@@ -10,7 +10,7 @@ import 'package:objd/src/wrappers/data.dart';
 /// The Condition class defines conditions for the if widget and more. It can also combines conditions and generates an argument list.
 class Condition {
   final List<Condition> _children = [];
-  late _ConditionType type;
+  _ConditionType? type;
   _ConditionUtil? _generated;
 
   /// The Condition class defines conditions for the if widget and more. It can also combines conditions and generates an argument list.
@@ -65,8 +65,12 @@ class Condition {
   /// accepts same dynamic condition types as Condition but negates them
   ///(if ⇒ unless, unless ⇒  if)
   Condition.not(dynamic cond) {
-    type = _ConditionType.invert;
-    _setCond(cond, invert: true);
+    if (cond is Tag) {
+      _setCond(cond.not());
+    } else {
+      type = _ConditionType.invert;
+      _setCond(cond, invert: true);
+    }
   }
 
   /// accepts a list of dynamic condition types, that all have to be true to trigger
@@ -180,7 +184,7 @@ class Condition {
         list = child.getList();
       }
       // is and
-      else if (type == _ConditionType.and) {
+      else if (type != null && type == _ConditionType.and) {
         list = child.getList().map((inner) {
           list.forEach((inner2) {
             inner.insertAll(0, inner2);

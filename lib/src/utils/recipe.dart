@@ -351,6 +351,30 @@ class Recipe extends Widget {
 
     return dat;
   }
+
+  Recipe copyWith({
+    String? name,
+    RecipeType? type,
+    bool? exactlyPlaced,
+    int? exactResult,
+    Item? result,
+    Map<int, Item>? ingredients,
+    double? experience,
+    int? cookingtime,
+    int? id,
+  }) {
+    return Recipe(
+      ingredients ?? this.ingredients,
+      result ?? this.result,
+      name: name ?? this.name,
+      type: type ?? this.type,
+      exactlyPlaced: exactlyPlaced ?? this.exactlyPlaced,
+      exactResult: exactResult ?? this.exactResult,
+      experience: experience ?? this.experience,
+      cookingtime: cookingtime ?? this.cookingtime,
+      id: id ?? this.id,
+    );
+  }
 }
 
 enum RecipeType {

@@ -7,6 +7,7 @@ class CustomBlock extends Module {
   Block block;
   Item item;
   Item? blockModel;
+  Item breakItem;
   Widget? main;
   Widget? onBreak;
   Widget? onPlaced;
@@ -24,6 +25,7 @@ class CustomBlock extends Module {
   /// | Item         | The item that should be used to place the block(you must use a spawnegg)             |
   /// | block        | the Block giving your custom block a hitbox(required)                                |
   /// | blockModel   | Item that overrides the item for the block Model                                     |
+  /// | breakItem    | The Item to kill if a player breaks the item(default = provided block)                                     |
   /// | main         | Widget that runs every tick in the block                                             |
   /// | onPlaced     | Widget that gets executed when the block is placed                                   |
   /// | onBreak      | Widget that gets executed when the block is broken                                   |
@@ -60,6 +62,7 @@ class CustomBlock extends Module {
     this.item, {
     required this.block,
     this.blockModel,
+    Item? breakItem,
     this.main,
     this.onBreak,
     this.onPlaced,
@@ -69,7 +72,8 @@ class CustomBlock extends Module {
     this.name,
     this.useItemFrame = false,
     this.yOffset = 1,
-  }) : assert(
+  })  : breakItem = breakItem ?? Item(block),
+        assert(
           item.getId().contains('spawn_egg'),
           'You have to provide a spawn egg.',
         );
@@ -88,7 +92,7 @@ class CustomBlock extends Module {
         name: name != null ? TextComponent(name!, italic: false) : null,
       );
 
-  Widget _setblock({Widget? fireTimer}) {
+  Widget _setblock({required Widget fireTimer}) {
     final headItem = (blockModel ?? item).copyWith(count: 1);
     return For.of([
       SetBlock(block, location: Location.here()),
@@ -114,7 +118,7 @@ class CustomBlock extends Module {
               tags: ['objd_$id', ...tags],
               head: headItem,
             ),
-      onPlaced,
+      if (onPlaced != null) onPlaced!,
       if (fire) fireTimer,
     ]);
   }
@@ -132,12 +136,16 @@ class CustomBlock extends Module {
           ]),
           then: [onbreak],
         ),
-        if (main != null) main,
+        if (main != null) main!,
       ]);
 
   Widget _break() => For.of([
         Kill(
-          Entity(distance: Range.to(1), type: Entities.item).not(
+          Entity(
+            distance: Range.to(0.5),
+            type: Entities.item,
+            nbt: {'Item': breakItem.getMap()},
+          ).not(
             tags: ['item_$id'],
           ),
         ),
@@ -147,7 +155,7 @@ class CustomBlock extends Module {
           nbt: {'Item': getItem().getMap()},
           tags: ['item_$id'],
         ),
-        onBreak,
+        if (onBreak != null) onBreak!,
         Kill(Entity.Self()),
       ]);
 
@@ -157,8 +165,6 @@ class CustomBlock extends Module {
     assert(block.toString().isNotEmpty);
 
     final path = generatePack ? '' : 'objd_blocks/$id';
-
-    print(getItem().getMap());
 
     final res = For.of([
       Execute.asat(Entity(tags: ['objd_$id']), children: [

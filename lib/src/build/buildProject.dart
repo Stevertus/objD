@@ -31,7 +31,7 @@ class BuildProject {
         .toList();
     context.prod = prod;
     // generate all the packs that were initially found
-    packs.forEach((p) => p.generate(prj: this));
+    List.from(packs).forEach((p) => p.generate(prj: this));
   }
 
   void addPack(Pack pack) {

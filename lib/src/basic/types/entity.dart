@@ -188,6 +188,50 @@ class Entity implements EntityClass {
     );
   }
 
+  // creates an entity selector with @e[type=minecraft:marker]
+  Entity.Marker({
+    Range? distance,
+    List<dynamic>? tags,
+    Team? team,
+    String? strNbt,
+    Map<String, dynamic>? nbt,
+    Map<String, dynamic>? data,
+    List<Score>? scores,
+    Range? level,
+    Gamemode? gamemode,
+    Area? area,
+    String? name,
+    Rotation? isRotated,
+    Range? horizontalRotation,
+    Range? verticalRotation,
+    String? predicate,
+  }) : selector = 'e' {
+    _setArguments(
+      null,
+      tags,
+      team,
+      scores,
+      nbt != null || data != null
+          ? {
+              ...nbt ?? {},
+              if (data != null) ...{'data': data}
+            }
+          : null,
+      strNbt,
+      Entities.marker,
+      area,
+      distance,
+      level,
+      gamemode,
+      name,
+      isRotated,
+      horizontalRotation,
+      verticalRotation,
+      predicate,
+      false,
+    );
+  }
+
   /// creates an entity with @s
   Entity.Self({
     EntityType? type,

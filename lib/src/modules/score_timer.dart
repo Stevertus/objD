@@ -66,7 +66,7 @@ class ScoreTimerModule extends Module {
           path + name,
           child: For.of(
             [
-              child,
+              if (child != null) child!,
               _score.set(start),
             ],
           ),
