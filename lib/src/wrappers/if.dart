@@ -134,9 +134,13 @@ class If extends RestActionAble {
         ),
       );
     });
+    final prefix = 'execute' +
+        (assignTag == null || assignTag!.selector == 's'
+            ? ''
+            : ' as $assignTag');
+
     children.add(Group(
-      prefix:
-          'execute as ' + assignTag.toString() + ' if entity @s[tag=$tag] run',
+      prefix: '$prefix if entity @s[tag=$tag] run',
       path: targetFilePath,
       generateIDs: targetFileName == null,
       filename: targetFileName ?? 'if',
@@ -145,9 +149,7 @@ class If extends RestActionAble {
     if (orElse != null) {
       children.add(
         Group(
-          prefix: 'execute as ' +
-              assignTag.toString() +
-              ' unless entity @s[tag=$tag] run',
+          prefix: '$prefix unless entity @s[tag=$tag] run',
           path: targetFilePath,
           filename: 'else',
           groupMin: encapsulate ? 3 : -1,

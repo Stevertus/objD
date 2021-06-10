@@ -1,6 +1,5 @@
 import 'package:objd/src/basic/types/entity.dart';
 import 'package:objd/src/basic/types/location.dart';
-import 'package:objd/src/basic/text_components.dart';
 import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/wrappers/summon.dart';
 

@@ -34,7 +34,7 @@ class Storage extends Widget {
     this.autoNamespace = true,
     required String key,
     required dynamic value,
-  })   : nbt = {key: value},
+  })  : nbt = {key: value},
         key = key,
         _type = _StorageType.merge;
 
@@ -43,7 +43,7 @@ class Storage extends Widget {
     this.name, {
     this.autoNamespace = true,
     required this.nbt,
-  })   : assert(nbt != null),
+  })  : assert(nbt != null),
         _type = _StorageType.merge;
 
   /// To get a value back, use Storage.get.
@@ -52,7 +52,7 @@ class Storage extends Widget {
     this.autoNamespace = true,
     this.scale = 1,
     required this.key,
-  })   : assert(key != null),
+  })  : assert(key != null),
         _type = _StorageType.get;
 
   /// Removes certain Nbt Data.
@@ -60,7 +60,7 @@ class Storage extends Widget {
     this.name, {
     this.autoNamespace = true,
     required this.key,
-  })   : assert(key != null),
+  })  : assert(key != null),
         _type = _StorageType.remove;
 
   /// Modifies Nbt Data(look at [Data Widget](/basics#data)).
@@ -69,7 +69,7 @@ class Storage extends Widget {
     required String toPath,
     this.autoNamespace = true,
     required DataModify modify,
-  })   : _modify = modify,
+  })  : _modify = modify,
         key = toPath,
         _type = _StorageType.modify;
 
@@ -79,7 +79,7 @@ class Storage extends Widget {
     this.autoNamespace = true,
     required this.key,
     required Data data,
-  })   : assert(key != null),
+  })  : assert(key != null),
         assert(data.subcommand == 'get',
             'You have to insert a Data.get into copyData!'),
         data = data,
@@ -93,7 +93,7 @@ class Storage extends Widget {
     this.datatype = 'byte',
     required this.key,
     required this.score,
-  })   : assert(score != null),
+  })  : assert(score != null),
         assert(key != null),
         _type = _StorageType.score;
 

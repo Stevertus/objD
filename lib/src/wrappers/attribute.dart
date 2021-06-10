@@ -34,7 +34,7 @@ class Attribute extends RestActionAble {
     this.target,
     this.attribute, {
     required this.value,
-  })   : _type = _AttributeType.set,
+  })  : _type = _AttributeType.set,
         assert(value != null);
 
   /// removes a modifier with an uuid again
@@ -42,7 +42,7 @@ class Attribute extends RestActionAble {
     this.target,
     this.attribute, {
     required this.uuid,
-  })   : _type = _AttributeType.remove,
+  })  : _type = _AttributeType.remove,
         assert(uuid != null);
 
   ///gets the calculated modifier(with base, armor and custom)
