@@ -40,6 +40,7 @@ class RestAction extends RestActionAble {
   Widget _rest;
 
   @override
+  // ignore: overridden_fields
   List<Widget>? writable;
 
   ///If autoQueue is enabled, you don't have to manually run the `queue()` method on your RestActions.

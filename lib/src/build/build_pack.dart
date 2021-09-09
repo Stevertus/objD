@@ -2,8 +2,8 @@ import 'package:objd/src/basic/extend.dart';
 import 'package:objd/src/basic/file.dart';
 import 'package:objd/src/basic/pack.dart';
 import 'package:objd/src/basic/raw_file.dart';
-import 'package:objd/src/build/buildFile.dart';
-import 'package:objd/src/build/buildProject.dart';
+import 'package:objd/src/build/build_file.dart';
+import 'package:objd/src/build/build_project.dart';
 import 'package:objd/src/build/context.dart';
 
 class BuildPack {
@@ -42,9 +42,9 @@ class BuildPack {
     }
 
     if (pack.files != null) {
-      pack.files!.forEach(
-        (file) => files[file.fullPath(context.path)] = BuildFile(file),
-      );
+      for (var file in pack.files!) {
+        files[file.fullPath(context.path)] = BuildFile(file);
+      }
     }
     print('Compiled Pack $name in ${stopwatch.elapsedMilliseconds}ms');
     stopwatch.stop();

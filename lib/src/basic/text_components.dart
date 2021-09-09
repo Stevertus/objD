@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, constant_identifier_names
+
 import 'package:objd/src/basic/command.dart';
 import 'package:objd/src/basic/types/entity.dart';
 import 'dart:convert';
@@ -160,13 +162,13 @@ class TextComponent {
     value = {'translate': key};
     if (conversionFlags != null && conversionFlags.isNotEmpty) {
       value['with'] = [];
-      conversionFlags.forEach((c) {
+      for (var c in conversionFlags) {
         if (c is List<TextComponent>) {
           value['with'].add(c.map((TextComponent x) => x.toMap()).toList());
         }
         if (c is TextComponent) value['with'].add(c.toMap());
         if (c is String) value['with'].add(TextComponent(c).toMap());
-      });
+      }
     }
   }
 

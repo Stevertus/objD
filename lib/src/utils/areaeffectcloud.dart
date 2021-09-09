@@ -23,6 +23,7 @@ class AreaEffectCloud extends Summon {
     this.waitTime,
   }) : super(
           Entities.area_effect_cloud,
+          location: location,
           name: name,
           nbt: nbt,
           age: age,
@@ -41,6 +42,7 @@ class AreaEffectCloud extends Summon {
         waitTime = inf,
         super(
           Entities.area_effect_cloud,
+          location: location,
           name: name,
           nbt: nbt,
           age: inf,

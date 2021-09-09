@@ -76,25 +76,25 @@ class Condition {
   /// accepts a list of dynamic condition types, that all have to be true to trigger
   Condition.and(List<dynamic> conds) {
     type = _ConditionType.and;
-    conds.forEach((cond) {
+    for (var cond in conds) {
       if (cond is Condition) {
         _children.add(cond);
       } else {
         _children.add(Condition(cond));
       }
-    });
+    }
   }
 
   /// accepts a list of dynamic condition types, but just one has to be true to trigger
   Condition.or(List<dynamic> conds) {
     type = _ConditionType.or;
-    conds.forEach((cond) {
+    for (var cond in conds) {
       if (cond is Condition) {
         _children.add(cond);
       } else {
         _children.add(Condition(cond));
       }
-    });
+    }
   }
 
   void _setCond(
@@ -106,7 +106,11 @@ class Condition {
     if (cond == null) return;
     if (cond is Condition) {
       _children.add(cond);
-      if (invert) _children.forEach((child) => child._invertGenerated());
+      if (invert) {
+        for (var child in _children) {
+          child._invertGenerated();
+        }
+      }
       return;
     }
     if (cond is Entity) {
@@ -174,32 +178,34 @@ class Condition {
 
   void _invertGenerated() {
     if (_generated != null) _generated!.invert = !_generated!.invert;
-    _children.forEach((child) => child._invertGenerated());
+    for (var child in _children) {
+      child._invertGenerated();
+    }
   }
 
   List<List<_ConditionUtil>> getList() {
     var list = <List<_ConditionUtil>>[[]];
-    _children.forEach((child) {
+    for (var child in _children) {
       if (list.length == 1 && list[0].isEmpty) {
         list = child.getList();
       }
       // is and
       else if (type != null && type == _ConditionType.and) {
         list = child.getList().map((inner) {
-          list.forEach((inner2) {
+          for (var inner2 in list) {
             inner.insertAll(0, inner2);
-          });
+          }
           return inner;
         }).toList();
       } else {
         // is or
         list.addAll(child.getList());
       }
-    });
+    }
     if (_generated != null) {
-      list.forEach((outer) {
+      for (var outer in list) {
         outer.insert(0, _generated!);
-      });
+      }
     }
 
     return list;

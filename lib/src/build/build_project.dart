@@ -1,8 +1,8 @@
 import 'package:objd/src/basic/pack.dart';
 import 'package:objd/src/build/build.dart';
-import 'package:objd/src/build/buildPack.dart';
+import 'package:objd/src/build/build_pack.dart';
 import 'package:objd/src/build/project.dart';
-import 'package:objd/src/build/findPack.dart';
+import 'package:objd/src/build/find_pack.dart';
 
 class BuildProject {
   late List<BuildPack> packs;
@@ -31,7 +31,9 @@ class BuildProject {
         .toList();
     context.prod = prod;
     // generate all the packs that were initially found
-    List.from(packs).forEach((p) => p.generate(prj: this));
+    for (var p in List.from(packs)) {
+      p.generate(prj: this);
+    }
   }
 
   void addPack(Pack pack) {

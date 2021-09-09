@@ -2,7 +2,7 @@
 
 import 'package:objd/core.dart';
 // import the custom pack:
-import './packs/examplePack.dart';
+import 'packs/example_pack.dart';
 
 void main(List<String> args) {
   createProject(

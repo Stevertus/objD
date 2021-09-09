@@ -422,4 +422,7 @@ class ParticleType {
   String toString() {
     return type;
   }
+
+  @override
+  int get hashCode => type.hashCode;
 }

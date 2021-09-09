@@ -97,9 +97,8 @@ class Scoreboard extends RestActionAble {
   }
   Scoreboard.modify(
     this.name, {
-    bool useHearts = false,
-  })  : useHearts = useHearts,
-        subcommand = 'modify';
+    this.useHearts = false,
+  }) : subcommand = 'modify';
 
   void prefixName() {
     if (prefix != null && !name.contains(prefix!)) name = prefix! + name;

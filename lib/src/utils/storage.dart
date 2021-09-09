@@ -35,6 +35,7 @@ class Storage extends Widget {
     required String key,
     required dynamic value,
   })  : nbt = {key: value},
+        // ignore: prefer_initializing_formals
         key = key,
         _type = _StorageType.merge;
 
@@ -82,6 +83,7 @@ class Storage extends Widget {
   })  : assert(key != null),
         assert(data.subcommand == 'get',
             'You have to insert a Data.get into copyData!'),
+        // ignore: prefer_initializing_formals
         data = data,
         _type = _StorageType.data;
 

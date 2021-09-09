@@ -34,12 +34,14 @@ class StraitWidget extends Widget {
       if (ret is RestAction) {
         if (ret.called) ret.queue();
       } else if (ret is List<RestAction>) {
-        ret.forEach((e) {
+        for (var e in ret) {
           if (!e.called) e.queue();
-        });
+        }
       } else if (ret is Widget) {
         content.add(ret);
-      } else if (ret is List<Widget>) content.addAll(ret);
+      } else if (ret is List<Widget>) {
+        content.addAll(ret);
+      }
     }
 
     StraitWidget.builder = b;

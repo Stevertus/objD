@@ -9,7 +9,7 @@ class SpreadPlayers extends RestActionAble {
   final Location center;
   final double distance;
   final double maxRange;
-  final double? maximumHeight;
+  final int? maximumHeight;
   final bool respectTeams;
 
   /// The Spawnpoint Widget sets a players spawnpoint to the current or specified [position]

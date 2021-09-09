@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 class Attributes {
   /// A List of all AttributeTypes
   static const List<AttributeType> all = [
@@ -101,4 +103,7 @@ class AttributeType {
   String toString() {
     return type;
   }
+
+  @override
+  int get hashCode => type.hashCode;
 }

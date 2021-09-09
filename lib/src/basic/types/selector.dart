@@ -154,12 +154,12 @@ class Selector {
     List<Score>? scores;
     if (s.scores != null) {
       scores = [];
-      s.scores!.forEach((score) {
-        scores!.add(
+      for (var score in s.scores!) {
+        scores.add(
           Score(score.entity, score.score,
               addNew: false, commands: score.commands),
         );
-      });
+      }
     }
 
     selector = s.selector;

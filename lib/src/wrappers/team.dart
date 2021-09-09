@@ -103,8 +103,9 @@ class Team extends RestActionAble {
       default:
     }
     if (modifiers.isNotEmpty) {
-      modifiers.keys.forEach((key) =>
-          wids.add(Command('team modify $name $key ${modifiers[key]}')));
+      for (var key in modifiers.keys) {
+        wids.add(Command('team modify $name $key ${modifiers[key]}'));
+      }
     }
     return For.of(wids);
   }

@@ -3,18 +3,19 @@ import 'package:objd/src/basic/types/location.dart';
 import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/wrappers/summon.dart';
 
-/// An AreaEffectCloud can be created with the Summon Widget, but there is also a specific Widget with special properties for an AreaEffectCloud.
+/// Added in Minecraft 1.17 this entity only exists serversides and thus has no performance constraints for the client.
 class Marker extends Summon {
   Map<String, dynamic>? data;
 
-  /// An AreaEffectCloud can be created with the Summon Widget, but there is also a specific Widget with special properties for an AreaEffectCloud.
+  /// Added in Minecraft 1.17 this entity only exists serversides and thus has no performance constraints for the client. Best used to save locations and even custom nbt data with the data field.
   Marker(
     Location location, {
     Map<String, dynamic>? nbt,
     this.data,
     List<String>? tags,
   }) : super(
-          Entities.area_effect_cloud,
+          Entities.marker,
+          location: location,
           nbt: nbt,
           tags: tags,
         );

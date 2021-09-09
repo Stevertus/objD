@@ -245,7 +245,9 @@ class Execute extends RestActionAble {
 
   Execute _addArgumentRet(String arg) {
     var args = _resolve(_args);
-    args.forEach((e) => e.add(arg));
+    for (var e in args) {
+      e.add(arg);
+    }
     return Execute(
       children: List<Widget>.from(children),
       encapsulate: encapsulate,
@@ -339,12 +341,16 @@ class Execute extends RestActionAble {
     var prefixes = Condition.getPrefixes(c.getList());
     var args = this.args;
     _args = [];
-    prefixes.forEach((p) {
+    for (var p in prefixes) {
       var add = <List<String>>[];
-      args.forEach((e) => add.add(List<String>.from(e)));
-      add.forEach((e) => e.add(p));
+      for (var e in args) {
+        add.add(List<String>.from(e));
+      }
+      for (var e in add) {
+        e.add(p);
+      }
       _args.addAll(add);
-    });
+    }
     return this;
   }
 

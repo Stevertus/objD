@@ -106,7 +106,7 @@ class Bossbar extends RestActionAble {
       default:
         throw ('Please use BossbarOption.max or BossbarOption.value with storeResult!');
     }
-    ;
+
     return Execute.internal_store_command(
       'bossbar $id $strOption',
       w,

@@ -7,8 +7,8 @@ import 'package:objd/src/basic/pack.dart';
 import 'package:objd/src/basic/scoreboard.dart';
 import 'package:objd/src/basic/text.dart';
 import 'package:objd/src/basic/widget.dart';
-import 'package:objd/src/build/buildPack.dart';
-import 'package:objd/src/build/buildProject.dart';
+import 'package:objd/src/build/build_pack.dart';
+import 'package:objd/src/build/build_project.dart';
 import 'package:objd/src/build/context.dart';
 import 'package:objd/core.dart';
 import 'package:objd/src/wrappers/comment.dart';
@@ -73,9 +73,9 @@ void scan(
 
     // is list widget
     if (child is List<Widget?>) {
-      child.forEach((x) {
+      for (var x in child) {
         if (x != null) scanWith(context, x);
-      });
+      }
       return;
     }
     throw 'Cannot build Widget: ' + wid.toString();

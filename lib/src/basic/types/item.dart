@@ -269,15 +269,15 @@ class Item {
   String toString() => type;
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is Item &&
-        o.type == type &&
-        o.count == count &&
-        o.damage == damage &&
-        o.slot == slot &&
-        o.tag == tag;
+    return other is Item &&
+        other.type == type &&
+        other.count == count &&
+        other.damage == damage &&
+        other.slot == slot &&
+        other.tag == tag;
   }
 
   @override

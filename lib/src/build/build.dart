@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:archive/archive.dart';
-import 'package:objd/src/build/buildFile.dart';
-import 'package:objd/src/build/buildPack.dart';
-import 'package:objd/src/build/buildProject.dart';
+import 'package:objd/src/build/build_file.dart';
+import 'package:objd/src/build/build_pack.dart';
+import 'package:objd/src/build/build_project.dart';
 import 'package:objd/src/build/gen_options.dart';
 import 'package:objd/src/build/project.dart';
 import 'package:objd/src/build/reloader.dart' as hotreload;
@@ -85,7 +85,7 @@ Map<String, String> _getFiles(BuildProject prj, GenOptions options) {
   Map loadJson = <String, dynamic>{'values': []};
 
   if (prj.packs.isNotEmpty) {
-    prj.packs.forEach((pack) {
+    for (var pack in prj.packs) {
       if (pack.isGen) {
         // only run if should generate
         if (!options.minified) {
@@ -120,7 +120,7 @@ Map<String, String> _getFiles(BuildProject prj, GenOptions options) {
           });
         }
       }
-    });
+    }
   }
 
   // add minecraft relevant stuff

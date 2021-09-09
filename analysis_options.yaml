@@ -1,5 +1,8 @@
-include: package:pedantic/analysis_options.yaml
-
+include: package:lints/recommended.yaml
+linter:
+  rules:
+    non_constant_identifier_names: false
+    constant_identifier_names: false
 analyzer:
   exclude: [build/**]
   strong-mode:

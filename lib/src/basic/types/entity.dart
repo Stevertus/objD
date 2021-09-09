@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:objd/src/basic/types/area.dart';
 import 'package:objd/src/basic/for_list.dart';
 import 'package:objd/src/basic/types/block.dart';
@@ -453,7 +455,7 @@ class Entity implements EntityClass {
     }
     if (tags != null) {
       arguments['tag'] ??= [];
-      tags.forEach((tag) {
+      for (var tag in tags) {
         if (tag is Tag) {
           arguments['tag'].add(n + tag.tag);
         } else if (tag is String) {
@@ -464,16 +466,16 @@ class Entity implements EntityClass {
         } else {
           throw ('Please insert a Tag or String as tag into Entity!');
         }
-      });
+      }
     }
     if (scores != null) {
       var ret = <String>[];
-      scores.forEach((score) {
+      for (var score in scores) {
         if (score.getMatch().isEmpty) {
           throw ('Please insert a match method in the scores value for an entity!');
         }
         ret.add(score.score + '=' + score.getMatch());
-      });
+      }
       arguments['scores'] = n + '{' + ret.join(',') + '}';
     }
   }
@@ -1144,7 +1146,7 @@ class Entity implements EntityClass {
 
     if (arguments.isNotEmpty) {
       ret += '[';
-      arguments.keys.forEach((key) {
+      for (var key in arguments.keys) {
         if (arguments[key] is List) {
           arguments[key].forEach((item) {
             ret += _addArg(item, key);
@@ -1155,7 +1157,7 @@ class Entity implements EntityClass {
           ret += _addArg(arguments[key], key);
           if (key != arguments.keys.last) ret += ',';
         }
-      });
+      }
       ret += ']';
     }
     return ret;
@@ -1196,7 +1198,9 @@ class Range {
       ret = '$from..';
     } else if (from == null && to != null) {
       ret = '..$to';
-    } else if (from != null && to != null) ret = '$from..$to';
+    } else if (from != null && to != null) {
+      ret = '$from..$to';
+    }
     return ret.replaceAll(r'[0-9].0', '');
   }
 }
@@ -1224,4 +1228,7 @@ class EntityType {
   String toString() {
     return type;
   }
+
+  @override
+  int get hashCode => type.hashCode;
 }

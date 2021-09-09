@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:ansicolor/ansicolor.dart';
-import 'package:objd/src/build/buildPack.dart';
-import 'package:objd/src/build/buildProject.dart';
+import 'package:objd/src/build/build_pack.dart';
+import 'package:objd/src/build/build_project.dart';
 import 'package:objd/src/build/io_ex.dart';
 
 void reloadProject(BuildProject prj) {
@@ -33,7 +33,6 @@ void reloadProject(BuildProject prj) {
 
     reloadPack(prj.packs[i], oldPack, newPack);
   }
-  ;
 }
 
 void reloadPack(BuildPack pack, Map<String, dynamic> old, Map newPack) {

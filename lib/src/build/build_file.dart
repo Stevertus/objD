@@ -1,8 +1,8 @@
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/basic/file.dart';
 import 'package:objd/src/basic/extend.dart';
-import 'package:objd/src/build/buildPack.dart';
-import 'package:objd/src/build/buildProject.dart';
+import 'package:objd/src/build/build_pack.dart';
+import 'package:objd/src/build/build_project.dart';
 import 'context.dart';
 import 'scan.dart' as scanner;
 

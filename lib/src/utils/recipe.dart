@@ -168,12 +168,12 @@ class Recipe extends Widget {
   }) {
     var ingredients = <int, Item>{};
     var i = 1;
-    pattern.forEach((String row) {
+    for (var row in pattern) {
       if (row.isNotEmpty && row[0] != ' ') ingredients[i] = keys[row[0]]!;
       if (row.length > 1 && row[1] != ' ') ingredients[i + 1] = keys[row[1]]!;
       if (row.length > 2 && row[2] != ' ') ingredients[i + 2] = keys[row[2]]!;
       i += 3;
-    });
+    }
 
     return Recipe(
       ingredients,

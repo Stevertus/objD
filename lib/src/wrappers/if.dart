@@ -101,7 +101,7 @@ class If extends RestActionAble {
       children = _getTagVersion(prefixes);
     } else {
       // insert Then inline
-      prefixes.forEach((prefix) {
+      for (var prefix in prefixes) {
         children.add(Group(
           prefix: 'execute ' + prefix + ' run',
           path: targetFilePath,
@@ -110,7 +110,7 @@ class If extends RestActionAble {
           groupMin: encapsulate ? 3 : -1,
           children: then,
         ));
-      });
+      }
     }
     if (elseWidget != null) children.add(elseWidget!);
     if (predicate != null) children.add(predicate!);
@@ -125,7 +125,7 @@ class If extends RestActionAble {
 
     tag += (id > 0 ? id.toString() : '');
 
-    prefixes.forEach((prefix) {
+    for (var prefix in prefixes) {
       children.add(
         Group(
           prefix: 'execute ' + prefix + ' run',
@@ -133,7 +133,7 @@ class If extends RestActionAble {
           groupMin: encapsulate ? 3 : -1,
         ),
       );
-    });
+    }
     final prefix = 'execute' +
         (assignTag == null || assignTag!.selector == 's'
             ? ''
