@@ -33,12 +33,12 @@ class BuildPack {
 
     if (pack.load != null) {
       load = pack.load!.fullPath(context.path);
-      files[load!] = BuildFile(pack.load!);
+      if (pack.load!.create) files[load!] = BuildFile(pack.load!);
     }
 
     if (pack.main != null) {
       main = pack.main!.fullPath(context.path);
-      files[main!] = BuildFile(pack.main!);
+      if (pack.main!.create) files[main!] = BuildFile(pack.main!);
     }
 
     if (pack.files != null) {

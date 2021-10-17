@@ -1,3 +1,5 @@
+import 'package:objd/src/basic/types/entity.dart' show Range;
+
 class Rotation {
   double x = 0, y = 0;
   String _rotation;
@@ -16,19 +18,19 @@ class Rotation {
         x = 0,
         y = 0;
 
-  static int n = 180;
-  static int s = 0;
-  static int e = -90;
-  static int w = 90;
-
   factory Rotation.north({double dx = 0, double y = 0}) =>
-      Rotation.glob(x: Rotation.n + dx, y: y);
+      Rotation.glob(x: 180 + dx, y: y);
   factory Rotation.south({double dx = 0, double y = 0}) =>
-      Rotation.glob(x: Rotation.s + dx, y: y);
+      Rotation.glob(x: 0 + dx, y: y);
   factory Rotation.east({double dx = 0, double y = 0}) =>
-      Rotation.glob(x: Rotation.e + dx, y: y);
+      Rotation.glob(x: -90 + dx, y: y);
   factory Rotation.west({double dx = 0, double y = 0}) =>
-      Rotation.glob(x: Rotation.w + dx, y: y);
+      Rotation.glob(x: 90 + dx, y: y);
+
+  static Range get checkNorth => Range(135, -134);
+  static Range get checkEast => Range(-135, -44);
+  static Range get checkSouth => Range(-45, 45);
+  static Range get checkWest => Range(45, 135);
 
   String getDirection() {
     var dir = x ~/ 90;

@@ -1,3 +1,19 @@
+## 0.4.3
+
+**Breaking:** Changed default behaviour of `@Func()` annotation to generate a function directly in `functions/` instead of reading the path of the source file. This can be enabled again by setting `path = null`.
+
+- added InitScore Widget for initializing scoreboard values, thanks MrPlayerYork for the implementation
+- added `masked` argument for Condition.blocks making it generate valid code
+- added Rotation.checkNorth, Rotation.checkEast... which can be used as Range to check rotation in a specific direction
+- added run method to File to execute an existing File object
+- added Tag.add and Tag.remove constructors to make code more readable
+- updated Execute center method to optionally take a y value
+- updated ServerVersionCheck to also recognize 1.16 and 1.17 (thanks MrPlayerYork for the implementation)
+- updated Log Widget with suggestions to add Log.debug and Log.info
+- fixed Predicate requireing contents (Thanks to MrPlayerYork for reporting that!)
+- fixed main and load files generating even if create was set to false(used in objd_gen)
+- Removed length limits for scoreboard, score holder and team names for 1.18
+
 ## 0.4.2
 
 **BREAKING**

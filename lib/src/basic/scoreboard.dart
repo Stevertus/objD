@@ -102,14 +102,16 @@ class Scoreboard extends RestActionAble {
 
   void prefixName() {
     if (prefix != null && !name.contains(prefix!)) name = prefix! + name;
-    assert(
-      name.length <= 16,
-      'A scoreboard can not be longer than 16 characters',
-    );
   }
 
   @override
   Widget generate(Context context) {
+    if (context.version < 18) {
+      assert(
+        name.length <= 16,
+        'A scoreboard can not be longer than 16 characters',
+      );
+    }
     switch (subcommand) {
       case 'add':
         return Extend(

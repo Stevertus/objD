@@ -5,15 +5,15 @@ import 'package:objd/src/utils/json_file.dart';
 
 class Predicate extends Widget {
   final String name;
-  final Tag contents;
+  final Tag? contents;
 
-  Predicate(this.name, {required this.contents});
+  Predicate(this.name, {this.contents});
 
   @override
   Widget generate(Context context) {
     return JsonFile(
       'predicates/' + name,
-      contents.getJson(),
+      contents?.getJson() ?? {},
     );
   }
 }

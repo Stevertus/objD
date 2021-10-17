@@ -24,7 +24,8 @@ class ServerVersionCheck extends Widget {
 
   @override
   Widget generate(Context context) {
-    var e = Entity(type: Entities.armor_stand, tags: ['objd_version_check']);
+    var e1 = Entity(type: Entities.armor_stand, tags: ['objd_vers_1315']);
+    var e2 = Entity(type: Entities.armor_stand, tags: ['objd_vers_1617']);
 
     var s = serverVersion ??
         Score(Entity.PlayerName('server_version'), 'objd_data');
@@ -33,7 +34,7 @@ class ServerVersionCheck extends Widget {
       ArmorStand.staticMarker(
         Location('~ 0 ~'),
         small: true,
-        tags: ['objd_version_check'],
+        tags: ['objd_vers_1315'],
         mainHand: Item(
           Items.trident,
           count: 1,
@@ -56,61 +57,69 @@ class ServerVersionCheck extends Widget {
           },
         ),
       ),
+      ArmorStand.staticMarker(
+        Location.rel(y: 0),
+        small: true,
+        tags: ['objd_vers_1617'],
+        mainHand: Item(
+          Items.hoglin_spawn_egg,
+          count: 1,
+          nbt: {
+            'objd': {'update': 16}
+          },
+        ),
+        offHand: Item(
+          Items.glow_ink_sac,
+          count: 1,
+          nbt: {
+            'objd': {'update': 17}
+          },
+        ),
+      ),
 
-      // check items
-
-      If(
-        e.copyWith(nbt: {
-          'HandItems': [
-            {
-              'tag': {
-                'objd': {'update': 13}
+      // check items e1
+      for (var i in [13, 14, 15])
+        If(
+          e1.copyWith(nbt: {
+            'HandItems': [
+              {
+                'tag': {
+                  'objd': {'update': i}
+                }
               }
-            }
-          ]
-        }),
-        then: [
-          s >> 13,
-        ],
-      ),
-      If(
-        e.copyWith(nbt: {
-          'HandItems': [
-            {
-              'tag': {
-                'objd': {'update': 14}
+            ]
+          }),
+          then: [
+            s >> i,
+          ],
+        ),
+      // check items e2
+      for (var i in [16, 17])
+        If(
+          e2.copyWith(nbt: {
+            'HandItems': [
+              {
+                'tag': {
+                  'objd': {'update': i}
+                }
               }
-            }
-          ]
-        }),
-        then: [
-          s >> 14,
-        ],
-      ),
-      If(
-        e.copyWith(nbt: {
-          'ArmorItems': [
-            {
-              'tag': {
-                'objd': {'update': 15}
-              }
-            }
-          ]
-        }),
-        then: [
-          s >> 15,
-        ],
-      ),
+            ]
+          }),
+          then: [
+            s >> i,
+          ],
+        ),
 
       if (then != null) then!(s),
 
       if (minVersion != null && versionTooLow != null)
         If(
-          Condition.not(s >= 15),
+          Condition.not(s >= minVersion),
           then: versionTooLow!,
         ),
 
-      Kill(e),
+      Kill(e1),
+      Kill(e2),
     ]);
   }
 }

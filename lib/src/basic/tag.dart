@@ -19,7 +19,19 @@ class Tag extends RestActionAble {
 
   ///A tag saves a boolean value with an entity inside the game.
   Tag(this.tag, {Entity? entity, this.value = true}) {
-    this.entity = entity ?? Entity.Selected();
+    this.entity = entity ?? Entity.Self();
+    if (prefix != null && !tag.contains(prefix!)) tag = prefix! + tag;
+  }
+
+  /// adds Tag to Entity
+  Tag.add(this.tag, {Entity? entity}) : value = true {
+    this.entity = entity ?? Entity.Self();
+    if (prefix != null && !tag.contains(prefix!)) tag = prefix! + tag;
+  }
+
+  /// adds Tag to Entity
+  Tag.remove(this.tag, {Entity? entity}) : value = false {
+    this.entity = entity ?? Entity.Self();
     if (prefix != null && !tag.contains(prefix!)) tag = prefix! + tag;
   }
 

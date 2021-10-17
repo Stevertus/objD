@@ -23,7 +23,7 @@ class Func {
   const Func({
     this.name,
     this.pack,
-    this.path,
+    this.path = '/',
     this.execute,
     this.create,
   });

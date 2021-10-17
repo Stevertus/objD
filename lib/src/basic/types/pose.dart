@@ -59,10 +59,7 @@ class Pose {
 
   List<Float> _getFloats(List<double> v) {
     if (v.length < 3) v.addAll([0, 0, 0]);
-    final res = <Float>[];
-    for (var i = 0; i < 3; i++) {
-      res[i] = Float(v[i]);
-    }
+    final res = List.generate(3, (i) => Float(v[i]));
     return res;
   }
 

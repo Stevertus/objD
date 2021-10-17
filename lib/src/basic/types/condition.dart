@@ -38,7 +38,11 @@ class Condition {
   }
 
   /// checks whether an area matches another area of blocks
-  Condition.blocks(Area cond, {required Location compare}) {
+  Condition.blocks(
+    Area cond, {
+    required Location compare,
+    bool masked = false,
+  }) {
     _setCond(cond, target: compare);
   }
 
@@ -102,6 +106,7 @@ class Condition {
     bool invert = false,
     Block? block,
     Location? target,
+    bool? parameter,
   }) {
     if (cond == null) return;
     if (cond is Condition) {
@@ -159,12 +164,17 @@ class Condition {
     }
 
     if (cond is Area) {
-      if (target != null) {
+      if (target == null) {
         throw ('Please use Condition.blocks to test for an area of blocks!');
       }
       _generated = _ConditionUtil(
-          'blocks ' + cond.getCoordinates() + ' ' + target.toString(),
-          invert: invert);
+        'blocks ' +
+            cond.getCoordinates() +
+            ' ' +
+            target.toString() +
+            (parameter ?? false ? ' masked' : ' all'),
+        invert: invert,
+      );
       return;
     }
 

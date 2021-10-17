@@ -13,7 +13,6 @@ class ExamplePack extends Widget {
       name: 'mypack', // name of the subpack
       modules: [],
       main: File(
-        // defining a file that runs every tick
         'main',
         child: MainFile(),
       ),
