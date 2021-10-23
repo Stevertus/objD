@@ -24,80 +24,46 @@ class ServerVersionCheck extends Widget {
 
   @override
   Widget generate(Context context) {
-    var e1 = Entity(type: Entities.armor_stand, tags: ['objd_vers_1315']);
-    var e2 = Entity(type: Entities.armor_stand, tags: ['objd_vers_1617']);
+    var e = Entity(
+        type: Entities.chest_minecart, tags: ['objd_version_check'], limit: 1);
 
-    var s = serverVersion ??
+    final s = serverVersion ??
         Score(Entity.PlayerName('server_version'), 'objd_data');
 
+    final items = {
+      13: Items.trident,
+      14: Items.lectern,
+      15: Items.bee_spawn_egg,
+      16: Items.hoglin_spawn_egg,
+      17: Items.glow_ink_sac,
+      18: Items.music_disc_otherside,
+    };
+
     return For.of([
-      ArmorStand.staticMarker(
-        Location('~ 0 ~'),
-        small: true,
-        tags: ['objd_vers_1315'],
-        mainHand: Item(
-          Items.trident,
-          count: 1,
-          nbt: {
-            'objd': {'update': 13}
-          },
-        ),
-        offHand: Item(
-          Items.lectern,
-          count: 1,
-          nbt: {
-            'objd': {'update': 14}
-          },
-        ),
-        head: Item(
-          Items.bee_spawn_egg,
-          count: 1,
-          nbt: {
-            'objd': {'update': 15}
-          },
-        ),
-      ),
-      ArmorStand.staticMarker(
-        Location.rel(y: 0),
-        small: true,
-        tags: ['objd_vers_1617'],
-        mainHand: Item(
-          Items.hoglin_spawn_egg,
-          count: 1,
-          nbt: {
-            'objd': {'update': 16}
-          },
-        ),
-        offHand: Item(
-          Items.glow_ink_sac,
-          count: 1,
-          nbt: {
-            'objd': {'update': 17}
-          },
-        ),
+      Summon(
+        Entities.chest_minecart,
+        tags: ['objd_version_check'],
+        location: Location('~ 0 ~'),
+        nbt: {
+          'Items': items.keys
+              .where((v) => v >= (minVersion ?? 0))
+              .map((v) => Item(
+                    items[v],
+                    count: 1,
+                    slot: Slot.chest(v - 12),
+                    nbt: {
+                      'objd': {'update': v}
+                    },
+                  ).getMap())
+              .toList(),
+        },
       ),
 
       // check items e1
-      for (var i in [13, 14, 15])
+      for (var i in items.keys.where((v) => v >= (minVersion ?? 0)))
         If(
-          e1.copyWith(nbt: {
-            'HandItems': [
-              {
-                'tag': {
-                  'objd': {'update': i}
-                }
-              }
-            ]
-          }),
-          then: [
-            s >> i,
-          ],
-        ),
-      // check items e2
-      for (var i in [16, 17])
-        If(
-          e2.copyWith(nbt: {
-            'HandItems': [
+          e.copyWith(nbt: {
+            'Items': [
               {
                 'tag': {
                   'objd': {'update': i}
@@ -118,8 +84,8 @@ class ServerVersionCheck extends Widget {
           then: versionTooLow!,
         ),
 
-      Kill(e1),
-      Kill(e2),
+      Data.merge(e, nbt: {'Items': []}),
+      Kill(e),
     ]);
   }
 }

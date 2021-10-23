@@ -30,6 +30,8 @@ Open the pubspec.yaml file and add
 
 ```yaml
 name: [unique_namespace]
+environment:
+  sdk: ">=2.12.0 <3.0.0"
 dependencies:
   objd: ^0.4.3
 ```

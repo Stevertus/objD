@@ -1,11 +1,13 @@
 class Particles {
   /// A List of all Particles
   static const List<ParticleType> all = [
+    barrier,
+    light,
     ambient_entity_effect,
     angry_villager,
     ash,
-    barrier,
     block,
+    block_marker,
     bubble,
     bubble_column_up,
     bubble_pop,
@@ -62,7 +64,6 @@ class Particles {
     landing_obsidian_tear,
     large_smoke,
     lava,
-    light,
     mycelium,
     nautilus,
     note,
@@ -92,6 +93,12 @@ class Particles {
     witch
   ];
 
+  /// _(minecraft:barrier)_
+  static const ParticleType barrier = ParticleType('minecraft:barrier');
+
+  /// _(minecraft:light)_
+  static const ParticleType light = ParticleType('minecraft:light');
+
   /// _(minecraft:ambient_entity_effect)_
   static const ParticleType ambient_entity_effect =
       ParticleType('minecraft:ambient_entity_effect');
@@ -103,11 +110,12 @@ class Particles {
   /// _(minecraft:ash)_
   static const ParticleType ash = ParticleType('minecraft:ash');
 
-  /// _(minecraft:barrier)_
-  static const ParticleType barrier = ParticleType('minecraft:barrier');
-
   /// _(minecraft:block)_
   static const ParticleType block = ParticleType('minecraft:block');
+
+  /// _(minecraft:block_marker)_
+  static const ParticleType block_marker =
+      ParticleType('minecraft:block_marker');
 
   /// _(minecraft:bubble)_
   static const ParticleType bubble = ParticleType('minecraft:bubble');
@@ -311,9 +319,6 @@ class Particles {
 
   /// _(minecraft:lava)_
   static const ParticleType lava = ParticleType('minecraft:lava');
-
-  /// _(minecraft:light)_
-  static const ParticleType light = ParticleType('minecraft:light');
 
   /// _(minecraft:mycelium)_
   static const ParticleType mycelium = ParticleType('minecraft:mycelium');

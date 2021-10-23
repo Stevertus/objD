@@ -86,7 +86,8 @@ String _findText(Text wid, Context context) {
   var suffixes = '';
   var prefixes = '';
   if (context.prefixes.isNotEmpty) {
-    prefixes = context.prefixes.join(' ') + ' ';
+    // join all prefixes and remove run execute
+    prefixes = context.prefixes.join(' ').replaceAll('run execute ', '') + ' ';
   }
   if (context.suffixes.isNotEmpty) {
     suffixes = context.suffixes.join(' ') + ' ';

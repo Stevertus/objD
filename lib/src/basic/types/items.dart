@@ -21,6 +21,9 @@ class Items {
     activator_rail,
     air,
     allium,
+    amethyst_block,
+    amethyst_cluster,
+    amethyst_shard,
     ancient_debris,
     andesite,
     andesite_slab,
@@ -30,6 +33,10 @@ class Items {
     apple,
     armor_stand,
     arrow,
+    axolotl_bucket,
+    axolotl_spawn_egg,
+    azalea,
+    azalea_leaves,
     azure_bluet,
     baked_potato,
     bamboo,
@@ -47,6 +54,7 @@ class Items {
     beetroot_seeds,
     beetroot_soup,
     bell,
+    big_dripleaf,
     birch_boat,
     birch_button,
     birch_door,
@@ -64,6 +72,7 @@ class Items {
     birch_wood,
     black_banner,
     black_bed,
+    black_candle,
     black_carpet,
     black_concrete,
     black_concrete_powder,
@@ -84,6 +93,7 @@ class Items {
     blaze_spawn_egg,
     blue_banner,
     blue_bed,
+    blue_candle,
     blue_carpet,
     blue_concrete,
     blue_concrete_powder,
@@ -115,6 +125,7 @@ class Items {
     bricks,
     brown_banner,
     brown_bed,
+    brown_candle,
     brown_carpet,
     brown_concrete,
     brown_concrete_powder,
@@ -131,9 +142,13 @@ class Items {
     bubble_coral_block,
     bubble_coral_fan,
     bucket,
+    budding_amethyst,
+    bundle,
     cactus,
     cake,
+    calcite,
     campfire,
+    candle,
     carrot,
     carrot_on_a_stick,
     cartography_table,
@@ -153,6 +168,7 @@ class Items {
     chicken,
     chicken_spawn_egg,
     chipped_anvil,
+    chiseled_deepslate,
     chiseled_nether_bricks,
     chiseled_polished_blackstone,
     chiseled_quartz_block,
@@ -169,6 +185,10 @@ class Items {
     coal_block,
     coal_ore,
     coarse_dirt,
+    cobbled_deepslate,
+    cobbled_deepslate_slab,
+    cobbled_deepslate_stairs,
+    cobbled_deepslate_wall,
     cobblestone,
     cobblestone_slab,
     cobblestone_stairs,
@@ -192,8 +212,13 @@ class Items {
     cooked_rabbit,
     cooked_salmon,
     cookie,
+    copper_block,
+    copper_ingot,
+    copper_ore,
     cornflower,
     cow_spawn_egg,
+    cracked_deepslate_bricks,
+    cracked_deepslate_tiles,
     cracked_nether_bricks,
     cracked_polished_blackstone_bricks,
     cracked_stone_bricks,
@@ -218,12 +243,16 @@ class Items {
     crimson_trapdoor,
     crossbow,
     crying_obsidian,
+    cut_copper,
+    cut_copper_slab,
+    cut_copper_stairs,
     cut_red_sandstone,
     cut_red_sandstone_slab,
     cut_sandstone,
     cut_sandstone_slab,
     cyan_banner,
     cyan_bed,
+    cyan_candle,
     cyan_carpet,
     cyan_concrete,
     cyan_concrete_powder,
@@ -272,6 +301,23 @@ class Items {
     dead_tube_coral_block,
     dead_tube_coral_fan,
     debug_stick,
+    deepslate,
+    deepslate_brick_slab,
+    deepslate_brick_stairs,
+    deepslate_brick_wall,
+    deepslate_bricks,
+    deepslate_coal_ore,
+    deepslate_copper_ore,
+    deepslate_diamond_ore,
+    deepslate_emerald_ore,
+    deepslate_gold_ore,
+    deepslate_iron_ore,
+    deepslate_lapis_ore,
+    deepslate_redstone_ore,
+    deepslate_tile_slab,
+    deepslate_tile_stairs,
+    deepslate_tile_wall,
+    deepslate_tiles,
     detector_rail,
     diamond,
     diamond_axe,
@@ -291,6 +337,7 @@ class Items {
     diorite_stairs,
     diorite_wall,
     dirt,
+    dirt_path,
     dispenser,
     dolphin_spawn_egg,
     donkey_spawn_egg,
@@ -299,6 +346,7 @@ class Items {
     dragon_head,
     dried_kelp,
     dried_kelp_block,
+    dripstone_block,
     dropper,
     drowned_spawn_egg,
     egg,
@@ -325,6 +373,10 @@ class Items {
     endermite_spawn_egg,
     evoker_spawn_egg,
     experience_bottle,
+    exposed_copper,
+    exposed_cut_copper,
+    exposed_cut_copper_slab,
+    exposed_cut_copper_stairs,
     farmland,
     feather,
     fermented_spider_eye,
@@ -342,6 +394,8 @@ class Items {
     flint_and_steel,
     flower_banner_pattern,
     flower_pot,
+    flowering_azalea,
+    flowering_azalea_leaves,
     fox_spawn_egg,
     furnace,
     furnace_minecart,
@@ -353,8 +407,14 @@ class Items {
     glass_pane,
     glistering_melon_slice,
     globe_banner_pattern,
+    glow_berries,
+    glow_ink_sac,
+    glow_item_frame,
+    glow_lichen,
+    glow_squid_spawn_egg,
     glowstone,
     glowstone_dust,
+    goat_spawn_egg,
     gold_block,
     gold_ingot,
     gold_nugget,
@@ -377,10 +437,10 @@ class Items {
     granite_wall,
     grass,
     grass_block,
-    grass_path,
     gravel,
     gray_banner,
     gray_bed,
+    gray_candle,
     gray_carpet,
     gray_concrete,
     gray_concrete_powder,
@@ -393,6 +453,7 @@ class Items {
     gray_wool,
     green_banner,
     green_bed,
+    green_candle,
     green_carpet,
     green_concrete,
     green_concrete_powder,
@@ -406,6 +467,7 @@ class Items {
     grindstone,
     guardian_spawn_egg,
     gunpowder,
+    hanging_roots,
     hay_block,
     heart_of_the_sea,
     heavy_weighted_pressure_plate,
@@ -425,6 +487,7 @@ class Items {
     infested_chiseled_stone_bricks,
     infested_cobblestone,
     infested_cracked_stone_bricks,
+    infested_deepslate,
     infested_mossy_stone_bricks,
     infested_stone,
     infested_stone_bricks,
@@ -472,6 +535,7 @@ class Items {
     lapis_block,
     lapis_lazuli,
     lapis_ore,
+    large_amethyst_bud,
     large_fern,
     lava_bucket,
     lead,
@@ -483,8 +547,10 @@ class Items {
     leather_leggings,
     lectern,
     lever,
+    light,
     light_blue_banner,
     light_blue_bed,
+    light_blue_candle,
     light_blue_carpet,
     light_blue_concrete,
     light_blue_concrete_powder,
@@ -497,6 +563,7 @@ class Items {
     light_blue_wool,
     light_gray_banner,
     light_gray_bed,
+    light_gray_candle,
     light_gray_carpet,
     light_gray_concrete,
     light_gray_concrete_powder,
@@ -508,11 +575,13 @@ class Items {
     light_gray_terracotta,
     light_gray_wool,
     light_weighted_pressure_plate,
+    lightning_rod,
     lilac,
     lily_of_the_valley,
     lily_pad,
     lime_banner,
     lime_bed,
+    lime_candle,
     lime_carpet,
     lime_concrete,
     lime_concrete_powder,
@@ -529,6 +598,7 @@ class Items {
     loom,
     magenta_banner,
     magenta_bed,
+    magenta_candle,
     magenta_carpet,
     magenta_concrete,
     magenta_concrete_powder,
@@ -543,6 +613,7 @@ class Items {
     magma_cream,
     magma_cube_spawn_egg,
     map,
+    medium_amethyst_bud,
     melon,
     melon_seeds,
     melon_slice,
@@ -550,6 +621,8 @@ class Items {
     minecart,
     mojang_banner_pattern,
     mooshroom_spawn_egg,
+    moss_block,
+    moss_carpet,
     mossy_cobblestone,
     mossy_cobblestone_slab,
     mossy_cobblestone_stairs,
@@ -624,6 +697,7 @@ class Items {
     ocelot_spawn_egg,
     orange_banner,
     orange_bed,
+    orange_candle,
     orange_carpet,
     orange_concrete,
     orange_concrete_powder,
@@ -636,6 +710,10 @@ class Items {
     orange_tulip,
     orange_wool,
     oxeye_daisy,
+    oxidized_copper,
+    oxidized_cut_copper,
+    oxidized_cut_copper_slab,
+    oxidized_cut_copper_stairs,
     packed_ice,
     painting,
     panda_spawn_egg,
@@ -652,6 +730,7 @@ class Items {
     pillager_spawn_egg,
     pink_banner,
     pink_bed,
+    pink_candle,
     pink_carpet,
     pink_concrete,
     pink_concrete_powder,
@@ -666,6 +745,7 @@ class Items {
     piston,
     player_head,
     podzol,
+    pointed_dripstone,
     poisonous_potato,
     polar_bear_spawn_egg,
     polished_andesite,
@@ -682,6 +762,10 @@ class Items {
     polished_blackstone_slab,
     polished_blackstone_stairs,
     polished_blackstone_wall,
+    polished_deepslate,
+    polished_deepslate_slab,
+    polished_deepslate_stairs,
+    polished_deepslate_wall,
     polished_diorite,
     polished_diorite_slab,
     polished_diorite_stairs,
@@ -693,6 +777,7 @@ class Items {
     porkchop,
     potato,
     potion,
+    powder_snow_bucket,
     powered_rail,
     prismarine,
     prismarine_brick_slab,
@@ -711,6 +796,7 @@ class Items {
     pumpkin_seeds,
     purple_banner,
     purple_bed,
+    purple_candle,
     purple_carpet,
     purple_concrete,
     purple_concrete_powder,
@@ -738,8 +824,15 @@ class Items {
     rabbit_stew,
     rail,
     ravager_spawn_egg,
+    raw_copper,
+    raw_copper_block,
+    raw_gold,
+    raw_gold_block,
+    raw_iron,
+    raw_iron_block,
     red_banner,
     red_bed,
+    red_candle,
     red_carpet,
     red_concrete,
     red_concrete_powder,
@@ -770,6 +863,7 @@ class Items {
     repeater,
     repeating_command_block,
     respawn_anchor,
+    rooted_dirt,
     rose_bush,
     rotten_flesh,
     saddle,
@@ -782,6 +876,7 @@ class Items {
     sandstone_stairs,
     sandstone_wall,
     scaffolding,
+    sculk_sensor,
     scute,
     sea_lantern,
     sea_pickle,
@@ -801,8 +896,11 @@ class Items {
     slime_ball,
     slime_block,
     slime_spawn_egg,
+    small_amethyst_bud,
+    small_dripleaf,
     smithing_table,
     smoker,
+    smooth_basalt,
     smooth_quartz,
     smooth_quartz_slab,
     smooth_quartz_stairs,
@@ -828,6 +926,7 @@ class Items {
     spider_spawn_egg,
     splash_potion,
     sponge,
+    spore_blossom,
     spruce_boat,
     spruce_button,
     spruce_door,
@@ -843,6 +942,7 @@ class Items {
     spruce_stairs,
     spruce_trapdoor,
     spruce_wood,
+    spyglass,
     squid_spawn_egg,
     stick,
     sticky_piston,
@@ -890,6 +990,7 @@ class Items {
     tall_grass,
     target,
     terracotta,
+    tinted_glass,
     tipped_arrow,
     tnt,
     tnt_minecart,
@@ -905,6 +1006,7 @@ class Items {
     tube_coral,
     tube_coral_block,
     tube_coral_fan,
+    tuff,
     turtle_egg,
     turtle_helmet,
     turtle_spawn_egg,
@@ -932,12 +1034,33 @@ class Items {
     warped_trapdoor,
     warped_wart_block,
     water_bucket,
+    waxed_copper_block,
+    waxed_cut_copper,
+    waxed_cut_copper_slab,
+    waxed_cut_copper_stairs,
+    waxed_exposed_copper,
+    waxed_exposed_cut_copper,
+    waxed_exposed_cut_copper_slab,
+    waxed_exposed_cut_copper_stairs,
+    waxed_oxidized_copper,
+    waxed_oxidized_cut_copper,
+    waxed_oxidized_cut_copper_slab,
+    waxed_oxidized_cut_copper_stairs,
+    waxed_weathered_copper,
+    waxed_weathered_cut_copper,
+    waxed_weathered_cut_copper_slab,
+    waxed_weathered_cut_copper_stairs,
+    weathered_copper,
+    weathered_cut_copper,
+    weathered_cut_copper_slab,
+    weathered_cut_copper_stairs,
     weeping_vines,
     wet_sponge,
     wheat,
     wheat_seeds,
     white_banner,
     white_bed,
+    white_candle,
     white_carpet,
     white_concrete,
     white_concrete_powder,
@@ -963,6 +1086,7 @@ class Items {
     written_book,
     yellow_banner,
     yellow_bed,
+    yellow_candle,
     yellow_carpet,
     yellow_concrete,
     yellow_concrete_powder,
@@ -982,133 +1106,7 @@ class Items {
   ];
 
   /// A List of newer experimental items introduced in the next minecraft version
-  static const List<Item> snapshot = [
-    amethyst_block,
-    amethyst_cluster,
-    amethyst_shard,
-    axolotl_bucket,
-    axolotl_spawn_egg,
-    azalea,
-    azalea_leaves,
-    big_dripleaf,
-    black_candle,
-    blue_candle,
-    brown_candle,
-    budding_amethyst,
-    bundle,
-    calcite,
-    candle,
-    chiseled_deepslate,
-    cobbled_deepslate,
-    cobbled_deepslate_slab,
-    cobbled_deepslate_stairs,
-    cobbled_deepslate_wall,
-    copper_block,
-    copper_ingot,
-    copper_ore,
-    cracked_deepslate_bricks,
-    cracked_deepslate_tiles,
-    cut_copper,
-    cut_copper_slab,
-    cut_copper_stairs,
-    cyan_candle,
-    deepslate,
-    deepslate_brick_slab,
-    deepslate_brick_stairs,
-    deepslate_brick_wall,
-    deepslate_bricks,
-    deepslate_coal_ore,
-    deepslate_copper_ore,
-    deepslate_diamond_ore,
-    deepslate_emerald_ore,
-    deepslate_gold_ore,
-    deepslate_iron_ore,
-    deepslate_lapis_ore,
-    deepslate_redstone_ore,
-    deepslate_tile_slab,
-    deepslate_tile_stairs,
-    deepslate_tile_wall,
-    deepslate_tiles,
-    dirt_path,
-    dripstone_block,
-    exposed_copper,
-    exposed_cut_copper,
-    exposed_cut_copper_slab,
-    exposed_cut_copper_stairs,
-    flowering_azalea,
-    flowering_azalea_leaves,
-    glow_berries,
-    glow_ink_sac,
-    glow_item_frame,
-    glow_lichen,
-    glow_squid_spawn_egg,
-    goat_spawn_egg,
-    gray_candle,
-    green_candle,
-    hanging_roots,
-    infested_deepslate,
-    large_amethyst_bud,
-    light,
-    light_blue_candle,
-    light_gray_candle,
-    lightning_rod,
-    lime_candle,
-    magenta_candle,
-    medium_amethyst_bud,
-    moss_block,
-    moss_carpet,
-    orange_candle,
-    oxidized_copper,
-    oxidized_cut_copper,
-    oxidized_cut_copper_slab,
-    oxidized_cut_copper_stairs,
-    pink_candle,
-    pointed_dripstone,
-    polished_deepslate,
-    polished_deepslate_slab,
-    polished_deepslate_stairs,
-    polished_deepslate_wall,
-    powder_snow_bucket,
-    purple_candle,
-    raw_copper,
-    raw_copper_block,
-    raw_gold,
-    raw_gold_block,
-    raw_iron,
-    raw_iron_block,
-    red_candle,
-    rooted_dirt,
-    sculk_sensor,
-    small_amethyst_bud,
-    small_dripleaf,
-    smooth_basalt,
-    spore_blossom,
-    spyglass,
-    tinted_glass,
-    tuff,
-    waxed_copper_block,
-    waxed_cut_copper,
-    waxed_cut_copper_slab,
-    waxed_cut_copper_stairs,
-    waxed_exposed_copper,
-    waxed_exposed_cut_copper,
-    waxed_exposed_cut_copper_slab,
-    waxed_exposed_cut_copper_stairs,
-    waxed_oxidized_copper,
-    waxed_oxidized_cut_copper,
-    waxed_oxidized_cut_copper_slab,
-    waxed_oxidized_cut_copper_stairs,
-    waxed_weathered_copper,
-    waxed_weathered_cut_copper,
-    waxed_weathered_cut_copper_slab,
-    waxed_weathered_cut_copper_stairs,
-    weathered_copper,
-    weathered_cut_copper,
-    weathered_cut_copper_slab,
-    weathered_cut_copper_stairs,
-    white_candle,
-    yellow_candle
-  ];
+  static const List<Item> snapshot = [music_disc_otherside];
 
   /// [Acacia Boat](https://minecraft.gamepedia.com/acacia_boat)
   ///
@@ -1202,6 +1200,21 @@ class Items {
   /// _(minecraft:allium)_
   static const Item allium = Item.type('minecraft:allium');
 
+  /// [Amethyst Block](https://minecraft.gamepedia.com/amethyst_block)
+  ///
+  /// _(minecraft:amethyst_block)_
+  static const Item amethyst_block = Item.type('minecraft:amethyst_block');
+
+  /// [Amethyst Cluster](https://minecraft.gamepedia.com/amethyst_cluster)
+  ///
+  /// _(minecraft:amethyst_cluster)_
+  static const Item amethyst_cluster = Item.type('minecraft:amethyst_cluster');
+
+  /// [Amethyst Shard](https://minecraft.gamepedia.com/amethyst_shard)
+  ///
+  /// _(minecraft:amethyst_shard)_
+  static const Item amethyst_shard = Item.type('minecraft:amethyst_shard');
+
   /// [Ancient Debris](https://minecraft.gamepedia.com/ancient_debris)
   ///
   /// _(minecraft:ancient_debris)_
@@ -1246,6 +1259,27 @@ class Items {
   ///
   /// _(minecraft:arrow)_
   static const Item arrow = Item.type('minecraft:arrow');
+
+  /// [Axolotl Bucket](https://minecraft.gamepedia.com/axolotl_bucket)
+  ///
+  /// _(minecraft:axolotl_bucket)_
+  static const Item axolotl_bucket = Item.type('minecraft:axolotl_bucket');
+
+  /// [Axolotl Spawn Egg](https://minecraft.gamepedia.com/axolotl_spawn_egg)
+  ///
+  /// _(minecraft:axolotl_spawn_egg)_
+  static const Item axolotl_spawn_egg =
+      Item.type('minecraft:axolotl_spawn_egg');
+
+  /// [Azalea](https://minecraft.gamepedia.com/azalea)
+  ///
+  /// _(minecraft:azalea)_
+  static const Item azalea = Item.type('minecraft:azalea');
+
+  /// [Azalea Leaves](https://minecraft.gamepedia.com/azalea_leaves)
+  ///
+  /// _(minecraft:azalea_leaves)_
+  static const Item azalea_leaves = Item.type('minecraft:azalea_leaves');
 
   /// [Azure Bluet](https://minecraft.gamepedia.com/azure_bluet)
   ///
@@ -1332,6 +1366,11 @@ class Items {
   /// _(minecraft:bell)_
   static const Item bell = Item.type('minecraft:bell');
 
+  /// [Big Dripleaf](https://minecraft.gamepedia.com/big_dripleaf)
+  ///
+  /// _(minecraft:big_dripleaf)_
+  static const Item big_dripleaf = Item.type('minecraft:big_dripleaf');
+
   /// [Birch Boat](https://minecraft.gamepedia.com/birch_boat)
   ///
   /// _(minecraft:birch_boat)_
@@ -1417,6 +1456,11 @@ class Items {
   ///
   /// _(minecraft:black_bed)_
   static const Item black_bed = Item.type('minecraft:black_bed');
+
+  /// [Black Candle](https://minecraft.gamepedia.com/black_candle)
+  ///
+  /// _(minecraft:black_candle)_
+  static const Item black_candle = Item.type('minecraft:black_candle');
 
   /// [Black Carpet](https://minecraft.gamepedia.com/black_carpet)
   ///
@@ -1523,6 +1567,11 @@ class Items {
   ///
   /// _(minecraft:blue_bed)_
   static const Item blue_bed = Item.type('minecraft:blue_bed');
+
+  /// [Blue Candle](https://minecraft.gamepedia.com/blue_candle)
+  ///
+  /// _(minecraft:blue_candle)_
+  static const Item blue_candle = Item.type('minecraft:blue_candle');
 
   /// [Blue Carpet](https://minecraft.gamepedia.com/blue_carpet)
   ///
@@ -1684,6 +1733,11 @@ class Items {
   /// _(minecraft:brown_bed)_
   static const Item brown_bed = Item.type('minecraft:brown_bed');
 
+  /// [Brown Candle](https://minecraft.gamepedia.com/brown_candle)
+  ///
+  /// _(minecraft:brown_candle)_
+  static const Item brown_candle = Item.type('minecraft:brown_candle');
+
   /// [Brown Carpet](https://minecraft.gamepedia.com/brown_carpet)
   ///
   /// _(minecraft:brown_carpet)_
@@ -1771,6 +1825,16 @@ class Items {
   /// _(minecraft:bucket)_
   static const Item bucket = Item.type('minecraft:bucket');
 
+  /// [Budding Amethyst](https://minecraft.gamepedia.com/budding_amethyst)
+  ///
+  /// _(minecraft:budding_amethyst)_
+  static const Item budding_amethyst = Item.type('minecraft:budding_amethyst');
+
+  /// [Bundle](https://minecraft.gamepedia.com/bundle)
+  ///
+  /// _(minecraft:bundle)_
+  static const Item bundle = Item.type('minecraft:bundle');
+
   /// [Cactus](https://minecraft.gamepedia.com/cactus)
   ///
   /// _(minecraft:cactus)_
@@ -1781,10 +1845,20 @@ class Items {
   /// _(minecraft:cake)_
   static const Item cake = Item.type('minecraft:cake');
 
+  /// [Calcite](https://minecraft.gamepedia.com/calcite)
+  ///
+  /// _(minecraft:calcite)_
+  static const Item calcite = Item.type('minecraft:calcite');
+
   /// [Campfire](https://minecraft.gamepedia.com/campfire)
   ///
   /// _(minecraft:campfire)_
   static const Item campfire = Item.type('minecraft:campfire');
+
+  /// [Candle](https://minecraft.gamepedia.com/candle)
+  ///
+  /// _(minecraft:candle)_
+  static const Item candle = Item.type('minecraft:candle');
 
   /// [Carrot](https://minecraft.gamepedia.com/carrot)
   ///
@@ -1888,6 +1962,12 @@ class Items {
   /// _(minecraft:chipped_anvil)_
   static const Item chipped_anvil = Item.type('minecraft:chipped_anvil');
 
+  /// [Chiseled Deepslate](https://minecraft.gamepedia.com/chiseled_deepslate)
+  ///
+  /// _(minecraft:chiseled_deepslate)_
+  static const Item chiseled_deepslate =
+      Item.type('minecraft:chiseled_deepslate');
+
   /// [Chiseled Nether Bricks](https://minecraft.gamepedia.com/chiseled_nether_bricks)
   ///
   /// _(minecraft:chiseled_nether_bricks)_
@@ -1973,6 +2053,30 @@ class Items {
   ///
   /// _(minecraft:coarse_dirt)_
   static const Item coarse_dirt = Item.type('minecraft:coarse_dirt');
+
+  /// [Cobbled Deepslate](https://minecraft.gamepedia.com/cobbled_deepslate)
+  ///
+  /// _(minecraft:cobbled_deepslate)_
+  static const Item cobbled_deepslate =
+      Item.type('minecraft:cobbled_deepslate');
+
+  /// [Cobbled Deepslate Slab](https://minecraft.gamepedia.com/cobbled_deepslate_slab)
+  ///
+  /// _(minecraft:cobbled_deepslate_slab)_
+  static const Item cobbled_deepslate_slab =
+      Item.type('minecraft:cobbled_deepslate_slab');
+
+  /// [Cobbled Deepslate Stairs](https://minecraft.gamepedia.com/cobbled_deepslate_stairs)
+  ///
+  /// _(minecraft:cobbled_deepslate_stairs)_
+  static const Item cobbled_deepslate_stairs =
+      Item.type('minecraft:cobbled_deepslate_stairs');
+
+  /// [Cobbled Deepslate Wall](https://minecraft.gamepedia.com/cobbled_deepslate_wall)
+  ///
+  /// _(minecraft:cobbled_deepslate_wall)_
+  static const Item cobbled_deepslate_wall =
+      Item.type('minecraft:cobbled_deepslate_wall');
 
   /// [Cobblestone](https://minecraft.gamepedia.com/cobblestone)
   ///
@@ -2091,6 +2195,21 @@ class Items {
   /// _(minecraft:cookie)_
   static const Item cookie = Item.type('minecraft:cookie');
 
+  /// [Copper Block](https://minecraft.gamepedia.com/copper_block)
+  ///
+  /// _(minecraft:copper_block)_
+  static const Item copper_block = Item.type('minecraft:copper_block');
+
+  /// [Copper Ingot](https://minecraft.gamepedia.com/copper_ingot)
+  ///
+  /// _(minecraft:copper_ingot)_
+  static const Item copper_ingot = Item.type('minecraft:copper_ingot');
+
+  /// [Copper Ore](https://minecraft.gamepedia.com/copper_ore)
+  ///
+  /// _(minecraft:copper_ore)_
+  static const Item copper_ore = Item.type('minecraft:copper_ore');
+
   /// [Cornflower](https://minecraft.gamepedia.com/cornflower)
   ///
   /// _(minecraft:cornflower)_
@@ -2100,6 +2219,18 @@ class Items {
   ///
   /// _(minecraft:cow_spawn_egg)_
   static const Item cow_spawn_egg = Item.type('minecraft:cow_spawn_egg');
+
+  /// [Cracked Deepslate Bricks](https://minecraft.gamepedia.com/cracked_deepslate_bricks)
+  ///
+  /// _(minecraft:cracked_deepslate_bricks)_
+  static const Item cracked_deepslate_bricks =
+      Item.type('minecraft:cracked_deepslate_bricks');
+
+  /// [Cracked Deepslate Tiles](https://minecraft.gamepedia.com/cracked_deepslate_tiles)
+  ///
+  /// _(minecraft:cracked_deepslate_tiles)_
+  static const Item cracked_deepslate_tiles =
+      Item.type('minecraft:cracked_deepslate_tiles');
 
   /// [Cracked Nether Bricks](https://minecraft.gamepedia.com/cracked_nether_bricks)
   ///
@@ -2228,6 +2359,22 @@ class Items {
   /// _(minecraft:crying_obsidian)_
   static const Item crying_obsidian = Item.type('minecraft:crying_obsidian');
 
+  /// [Cut Copper](https://minecraft.gamepedia.com/cut_copper)
+  ///
+  /// _(minecraft:cut_copper)_
+  static const Item cut_copper = Item.type('minecraft:cut_copper');
+
+  /// [Cut Copper Slab](https://minecraft.gamepedia.com/cut_copper_slab)
+  ///
+  /// _(minecraft:cut_copper_slab)_
+  static const Item cut_copper_slab = Item.type('minecraft:cut_copper_slab');
+
+  /// [Cut Copper Stairs](https://minecraft.gamepedia.com/cut_copper_stairs)
+  ///
+  /// _(minecraft:cut_copper_stairs)_
+  static const Item cut_copper_stairs =
+      Item.type('minecraft:cut_copper_stairs');
+
   /// [Cut Red Sandstone](https://minecraft.gamepedia.com/cut_red_sandstone)
   ///
   /// _(minecraft:cut_red_sandstone)_
@@ -2260,6 +2407,11 @@ class Items {
   ///
   /// _(minecraft:cyan_bed)_
   static const Item cyan_bed = Item.type('minecraft:cyan_bed');
+
+  /// [Cyan Candle](https://minecraft.gamepedia.com/cyan_candle)
+  ///
+  /// _(minecraft:cyan_candle)_
+  static const Item cyan_candle = Item.type('minecraft:cyan_candle');
 
   /// [Cyan Carpet](https://minecraft.gamepedia.com/cyan_carpet)
   ///
@@ -2522,6 +2674,105 @@ class Items {
   /// _(minecraft:debug_stick)_
   static const Item debug_stick = Item.type('minecraft:debug_stick');
 
+  /// [Deepslate](https://minecraft.gamepedia.com/deepslate)
+  ///
+  /// _(minecraft:deepslate)_
+  static const Item deepslate = Item.type('minecraft:deepslate');
+
+  /// [Deepslate Brick Slab](https://minecraft.gamepedia.com/deepslate_brick_slab)
+  ///
+  /// _(minecraft:deepslate_brick_slab)_
+  static const Item deepslate_brick_slab =
+      Item.type('minecraft:deepslate_brick_slab');
+
+  /// [Deepslate Brick Stairs](https://minecraft.gamepedia.com/deepslate_brick_stairs)
+  ///
+  /// _(minecraft:deepslate_brick_stairs)_
+  static const Item deepslate_brick_stairs =
+      Item.type('minecraft:deepslate_brick_stairs');
+
+  /// [Deepslate Brick Wall](https://minecraft.gamepedia.com/deepslate_brick_wall)
+  ///
+  /// _(minecraft:deepslate_brick_wall)_
+  static const Item deepslate_brick_wall =
+      Item.type('minecraft:deepslate_brick_wall');
+
+  /// [Deepslate Bricks](https://minecraft.gamepedia.com/deepslate_bricks)
+  ///
+  /// _(minecraft:deepslate_bricks)_
+  static const Item deepslate_bricks = Item.type('minecraft:deepslate_bricks');
+
+  /// [Deepslate Coal Ore](https://minecraft.gamepedia.com/deepslate_coal_ore)
+  ///
+  /// _(minecraft:deepslate_coal_ore)_
+  static const Item deepslate_coal_ore =
+      Item.type('minecraft:deepslate_coal_ore');
+
+  /// [Deepslate Copper Ore](https://minecraft.gamepedia.com/deepslate_copper_ore)
+  ///
+  /// _(minecraft:deepslate_copper_ore)_
+  static const Item deepslate_copper_ore =
+      Item.type('minecraft:deepslate_copper_ore');
+
+  /// [Deepslate Diamond Ore](https://minecraft.gamepedia.com/deepslate_diamond_ore)
+  ///
+  /// _(minecraft:deepslate_diamond_ore)_
+  static const Item deepslate_diamond_ore =
+      Item.type('minecraft:deepslate_diamond_ore');
+
+  /// [Deepslate Emerald Ore](https://minecraft.gamepedia.com/deepslate_emerald_ore)
+  ///
+  /// _(minecraft:deepslate_emerald_ore)_
+  static const Item deepslate_emerald_ore =
+      Item.type('minecraft:deepslate_emerald_ore');
+
+  /// [Deepslate Gold Ore](https://minecraft.gamepedia.com/deepslate_gold_ore)
+  ///
+  /// _(minecraft:deepslate_gold_ore)_
+  static const Item deepslate_gold_ore =
+      Item.type('minecraft:deepslate_gold_ore');
+
+  /// [Deepslate Iron Ore](https://minecraft.gamepedia.com/deepslate_iron_ore)
+  ///
+  /// _(minecraft:deepslate_iron_ore)_
+  static const Item deepslate_iron_ore =
+      Item.type('minecraft:deepslate_iron_ore');
+
+  /// [Deepslate Lapis Ore](https://minecraft.gamepedia.com/deepslate_lapis_ore)
+  ///
+  /// _(minecraft:deepslate_lapis_ore)_
+  static const Item deepslate_lapis_ore =
+      Item.type('minecraft:deepslate_lapis_ore');
+
+  /// [Deepslate Redstone Ore](https://minecraft.gamepedia.com/deepslate_redstone_ore)
+  ///
+  /// _(minecraft:deepslate_redstone_ore)_
+  static const Item deepslate_redstone_ore =
+      Item.type('minecraft:deepslate_redstone_ore');
+
+  /// [Deepslate Tile Slab](https://minecraft.gamepedia.com/deepslate_tile_slab)
+  ///
+  /// _(minecraft:deepslate_tile_slab)_
+  static const Item deepslate_tile_slab =
+      Item.type('minecraft:deepslate_tile_slab');
+
+  /// [Deepslate Tile Stairs](https://minecraft.gamepedia.com/deepslate_tile_stairs)
+  ///
+  /// _(minecraft:deepslate_tile_stairs)_
+  static const Item deepslate_tile_stairs =
+      Item.type('minecraft:deepslate_tile_stairs');
+
+  /// [Deepslate Tile Wall](https://minecraft.gamepedia.com/deepslate_tile_wall)
+  ///
+  /// _(minecraft:deepslate_tile_wall)_
+  static const Item deepslate_tile_wall =
+      Item.type('minecraft:deepslate_tile_wall');
+
+  /// [Deepslate Tiles](https://minecraft.gamepedia.com/deepslate_tiles)
+  ///
+  /// _(minecraft:deepslate_tiles)_
+  static const Item deepslate_tiles = Item.type('minecraft:deepslate_tiles');
+
   /// [Detector Rail](https://minecraft.gamepedia.com/detector_rail)
   ///
   /// _(minecraft:detector_rail)_
@@ -2619,6 +2870,11 @@ class Items {
   /// _(minecraft:dirt)_
   static const Item dirt = Item.type('minecraft:dirt');
 
+  /// [Dirt Path](https://minecraft.gamepedia.com/dirt_path)
+  ///
+  /// _(minecraft:dirt_path)_
+  static const Item dirt_path = Item.type('minecraft:dirt_path');
+
   /// [Dispenser](https://minecraft.gamepedia.com/dispenser)
   ///
   /// _(minecraft:dispenser)_
@@ -2659,6 +2915,11 @@ class Items {
   ///
   /// _(minecraft:dried_kelp_block)_
   static const Item dried_kelp_block = Item.type('minecraft:dried_kelp_block');
+
+  /// [Dripstone Block](https://minecraft.gamepedia.com/dripstone_block)
+  ///
+  /// _(minecraft:dripstone_block)_
+  static const Item dripstone_block = Item.type('minecraft:dripstone_block');
 
   /// [Dropper](https://minecraft.gamepedia.com/dropper)
   ///
@@ -2799,6 +3060,29 @@ class Items {
   static const Item experience_bottle =
       Item.type('minecraft:experience_bottle');
 
+  /// [Exposed Copper](https://minecraft.gamepedia.com/exposed_copper)
+  ///
+  /// _(minecraft:exposed_copper)_
+  static const Item exposed_copper = Item.type('minecraft:exposed_copper');
+
+  /// [Exposed Cut Copper](https://minecraft.gamepedia.com/exposed_cut_copper)
+  ///
+  /// _(minecraft:exposed_cut_copper)_
+  static const Item exposed_cut_copper =
+      Item.type('minecraft:exposed_cut_copper');
+
+  /// [Exposed Cut Copper Slab](https://minecraft.gamepedia.com/exposed_cut_copper_slab)
+  ///
+  /// _(minecraft:exposed_cut_copper_slab)_
+  static const Item exposed_cut_copper_slab =
+      Item.type('minecraft:exposed_cut_copper_slab');
+
+  /// [Exposed Cut Copper Stairs](https://minecraft.gamepedia.com/exposed_cut_copper_stairs)
+  ///
+  /// _(minecraft:exposed_cut_copper_stairs)_
+  static const Item exposed_cut_copper_stairs =
+      Item.type('minecraft:exposed_cut_copper_stairs');
+
   /// [Farmland](https://minecraft.gamepedia.com/farmland)
   ///
   /// _(minecraft:farmland)_
@@ -2886,6 +3170,17 @@ class Items {
   /// _(minecraft:flower_pot)_
   static const Item flower_pot = Item.type('minecraft:flower_pot');
 
+  /// [Flowering Azalea](https://minecraft.gamepedia.com/flowering_azalea)
+  ///
+  /// _(minecraft:flowering_azalea)_
+  static const Item flowering_azalea = Item.type('minecraft:flowering_azalea');
+
+  /// [Flowering Azalea Leaves](https://minecraft.gamepedia.com/flowering_azalea_leaves)
+  ///
+  /// _(minecraft:flowering_azalea_leaves)_
+  static const Item flowering_azalea_leaves =
+      Item.type('minecraft:flowering_azalea_leaves');
+
   /// [Fox Spawn Egg](https://minecraft.gamepedia.com/fox_spawn_egg)
   ///
   /// _(minecraft:fox_spawn_egg)_
@@ -2944,6 +3239,32 @@ class Items {
   static const Item globe_banner_pattern =
       Item.type('minecraft:globe_banner_pattern');
 
+  /// [Glow Berries](https://minecraft.gamepedia.com/glow_berries)
+  ///
+  /// _(minecraft:glow_berries)_
+  static const Item glow_berries = Item.type('minecraft:glow_berries');
+
+  /// [Glow Ink Sac](https://minecraft.gamepedia.com/glow_ink_sac)
+  ///
+  /// _(minecraft:glow_ink_sac)_
+  static const Item glow_ink_sac = Item.type('minecraft:glow_ink_sac');
+
+  /// [Glow Item Frame](https://minecraft.gamepedia.com/glow_item_frame)
+  ///
+  /// _(minecraft:glow_item_frame)_
+  static const Item glow_item_frame = Item.type('minecraft:glow_item_frame');
+
+  /// [Glow Lichen](https://minecraft.gamepedia.com/glow_lichen)
+  ///
+  /// _(minecraft:glow_lichen)_
+  static const Item glow_lichen = Item.type('minecraft:glow_lichen');
+
+  /// [Glow Squid Spawn Egg](https://minecraft.gamepedia.com/glow_squid_spawn_egg)
+  ///
+  /// _(minecraft:glow_squid_spawn_egg)_
+  static const Item glow_squid_spawn_egg =
+      Item.type('minecraft:glow_squid_spawn_egg');
+
   /// [Glowstone](https://minecraft.gamepedia.com/glowstone)
   ///
   /// _(minecraft:glowstone)_
@@ -2953,6 +3274,11 @@ class Items {
   ///
   /// _(minecraft:glowstone_dust)_
   static const Item glowstone_dust = Item.type('minecraft:glowstone_dust');
+
+  /// [Goat Spawn Egg](https://minecraft.gamepedia.com/goat_spawn_egg)
+  ///
+  /// _(minecraft:goat_spawn_egg)_
+  static const Item goat_spawn_egg = Item.type('minecraft:goat_spawn_egg');
 
   /// [Gold Block](https://minecraft.gamepedia.com/gold_block)
   ///
@@ -3066,11 +3392,6 @@ class Items {
   /// _(minecraft:grass_block)_
   static const Item grass_block = Item.type('minecraft:grass_block');
 
-  /// [Grass Path](https://minecraft.gamepedia.com/grass_path)
-  ///
-  /// _(minecraft:grass_path)_
-  static const Item grass_path = Item.type('minecraft:grass_path');
-
   /// [Gravel](https://minecraft.gamepedia.com/gravel)
   ///
   /// _(minecraft:gravel)_
@@ -3085,6 +3406,11 @@ class Items {
   ///
   /// _(minecraft:gray_bed)_
   static const Item gray_bed = Item.type('minecraft:gray_bed');
+
+  /// [Gray Candle](https://minecraft.gamepedia.com/gray_candle)
+  ///
+  /// _(minecraft:gray_candle)_
+  static const Item gray_candle = Item.type('minecraft:gray_candle');
 
   /// [Gray Carpet](https://minecraft.gamepedia.com/gray_carpet)
   ///
@@ -3149,6 +3475,11 @@ class Items {
   ///
   /// _(minecraft:green_bed)_
   static const Item green_bed = Item.type('minecraft:green_bed');
+
+  /// [Green Candle](https://minecraft.gamepedia.com/green_candle)
+  ///
+  /// _(minecraft:green_candle)_
+  static const Item green_candle = Item.type('minecraft:green_candle');
 
   /// [Green Carpet](https://minecraft.gamepedia.com/green_carpet)
   ///
@@ -3220,6 +3551,11 @@ class Items {
   ///
   /// _(minecraft:gunpowder)_
   static const Item gunpowder = Item.type('minecraft:gunpowder');
+
+  /// [Hanging Roots](https://minecraft.gamepedia.com/hanging_roots)
+  ///
+  /// _(minecraft:hanging_roots)_
+  static const Item hanging_roots = Item.type('minecraft:hanging_roots');
 
   /// [Hay Block](https://minecraft.gamepedia.com/hay_block)
   ///
@@ -3319,6 +3655,12 @@ class Items {
   /// _(minecraft:infested_cracked_stone_bricks)_
   static const Item infested_cracked_stone_bricks =
       Item.type('minecraft:infested_cracked_stone_bricks');
+
+  /// [Infested Deepslate](https://minecraft.gamepedia.com/infested_deepslate)
+  ///
+  /// _(minecraft:infested_deepslate)_
+  static const Item infested_deepslate =
+      Item.type('minecraft:infested_deepslate');
 
   /// [Infested Mossy Stone Bricks](https://minecraft.gamepedia.com/infested_mossy_stone_bricks)
   ///
@@ -3559,6 +3901,12 @@ class Items {
   /// _(minecraft:lapis_ore)_
   static const Item lapis_ore = Item.type('minecraft:lapis_ore');
 
+  /// [Large Amethyst Bud](https://minecraft.gamepedia.com/large_amethyst_bud)
+  ///
+  /// _(minecraft:large_amethyst_bud)_
+  static const Item large_amethyst_bud =
+      Item.type('minecraft:large_amethyst_bud');
+
   /// [Large Fern](https://minecraft.gamepedia.com/large_fern)
   ///
   /// _(minecraft:large_fern)_
@@ -3616,6 +3964,11 @@ class Items {
   /// _(minecraft:lever)_
   static const Item lever = Item.type('minecraft:lever');
 
+  /// [Light](https://minecraft.gamepedia.com/light)
+  ///
+  /// _(minecraft:light)_
+  static const Item light = Item.type('minecraft:light');
+
   /// [Light Blue Banner](https://minecraft.gamepedia.com/light_blue_banner)
   ///
   /// _(minecraft:light_blue_banner)_
@@ -3626,6 +3979,12 @@ class Items {
   ///
   /// _(minecraft:light_blue_bed)_
   static const Item light_blue_bed = Item.type('minecraft:light_blue_bed');
+
+  /// [Light Blue Candle](https://minecraft.gamepedia.com/light_blue_candle)
+  ///
+  /// _(minecraft:light_blue_candle)_
+  static const Item light_blue_candle =
+      Item.type('minecraft:light_blue_candle');
 
   /// [Light Blue Carpet](https://minecraft.gamepedia.com/light_blue_carpet)
   ///
@@ -3696,6 +4055,12 @@ class Items {
   /// _(minecraft:light_gray_bed)_
   static const Item light_gray_bed = Item.type('minecraft:light_gray_bed');
 
+  /// [Light Gray Candle](https://minecraft.gamepedia.com/light_gray_candle)
+  ///
+  /// _(minecraft:light_gray_candle)_
+  static const Item light_gray_candle =
+      Item.type('minecraft:light_gray_candle');
+
   /// [Light Gray Carpet](https://minecraft.gamepedia.com/light_gray_carpet)
   ///
   /// _(minecraft:light_gray_carpet)_
@@ -3760,6 +4125,11 @@ class Items {
   static const Item light_weighted_pressure_plate =
       Item.type('minecraft:light_weighted_pressure_plate');
 
+  /// [Lightning Rod](https://minecraft.gamepedia.com/lightning_rod)
+  ///
+  /// _(minecraft:lightning_rod)_
+  static const Item lightning_rod = Item.type('minecraft:lightning_rod');
+
   /// [Lilac](https://minecraft.gamepedia.com/lilac)
   ///
   /// _(minecraft:lilac)_
@@ -3785,6 +4155,11 @@ class Items {
   ///
   /// _(minecraft:lime_bed)_
   static const Item lime_bed = Item.type('minecraft:lime_bed');
+
+  /// [Lime Candle](https://minecraft.gamepedia.com/lime_candle)
+  ///
+  /// _(minecraft:lime_candle)_
+  static const Item lime_candle = Item.type('minecraft:lime_candle');
 
   /// [Lime Carpet](https://minecraft.gamepedia.com/lime_carpet)
   ///
@@ -3870,6 +4245,11 @@ class Items {
   /// _(minecraft:magenta_bed)_
   static const Item magenta_bed = Item.type('minecraft:magenta_bed');
 
+  /// [Magenta Candle](https://minecraft.gamepedia.com/magenta_candle)
+  ///
+  /// _(minecraft:magenta_candle)_
+  static const Item magenta_candle = Item.type('minecraft:magenta_candle');
+
   /// [Magenta Carpet](https://minecraft.gamepedia.com/magenta_carpet)
   ///
   /// _(minecraft:magenta_carpet)_
@@ -3947,6 +4327,12 @@ class Items {
   /// _(minecraft:map)_
   static const Item map = Item.type('minecraft:map');
 
+  /// [Medium Amethyst Bud](https://minecraft.gamepedia.com/medium_amethyst_bud)
+  ///
+  /// _(minecraft:medium_amethyst_bud)_
+  static const Item medium_amethyst_bud =
+      Item.type('minecraft:medium_amethyst_bud');
+
   /// [Melon](https://minecraft.gamepedia.com/melon)
   ///
   /// _(minecraft:melon)_
@@ -3983,6 +4369,16 @@ class Items {
   /// _(minecraft:mooshroom_spawn_egg)_
   static const Item mooshroom_spawn_egg =
       Item.type('minecraft:mooshroom_spawn_egg');
+
+  /// [Moss Block](https://minecraft.gamepedia.com/moss_block)
+  ///
+  /// _(minecraft:moss_block)_
+  static const Item moss_block = Item.type('minecraft:moss_block');
+
+  /// [Moss Carpet](https://minecraft.gamepedia.com/moss_carpet)
+  ///
+  /// _(minecraft:moss_carpet)_
+  static const Item moss_carpet = Item.type('minecraft:moss_carpet');
 
   /// [Mossy Cobblestone](https://minecraft.gamepedia.com/mossy_cobblestone)
   ///
@@ -4375,6 +4771,11 @@ class Items {
   /// _(minecraft:orange_bed)_
   static const Item orange_bed = Item.type('minecraft:orange_bed');
 
+  /// [Orange Candle](https://minecraft.gamepedia.com/orange_candle)
+  ///
+  /// _(minecraft:orange_candle)_
+  static const Item orange_candle = Item.type('minecraft:orange_candle');
+
   /// [Orange Carpet](https://minecraft.gamepedia.com/orange_carpet)
   ///
   /// _(minecraft:orange_carpet)_
@@ -4440,6 +4841,29 @@ class Items {
   ///
   /// _(minecraft:oxeye_daisy)_
   static const Item oxeye_daisy = Item.type('minecraft:oxeye_daisy');
+
+  /// [Oxidized Copper](https://minecraft.gamepedia.com/oxidized_copper)
+  ///
+  /// _(minecraft:oxidized_copper)_
+  static const Item oxidized_copper = Item.type('minecraft:oxidized_copper');
+
+  /// [Oxidized Cut Copper](https://minecraft.gamepedia.com/oxidized_cut_copper)
+  ///
+  /// _(minecraft:oxidized_cut_copper)_
+  static const Item oxidized_cut_copper =
+      Item.type('minecraft:oxidized_cut_copper');
+
+  /// [Oxidized Cut Copper Slab](https://minecraft.gamepedia.com/oxidized_cut_copper_slab)
+  ///
+  /// _(minecraft:oxidized_cut_copper_slab)_
+  static const Item oxidized_cut_copper_slab =
+      Item.type('minecraft:oxidized_cut_copper_slab');
+
+  /// [Oxidized Cut Copper Stairs](https://minecraft.gamepedia.com/oxidized_cut_copper_stairs)
+  ///
+  /// _(minecraft:oxidized_cut_copper_stairs)_
+  static const Item oxidized_cut_copper_stairs =
+      Item.type('minecraft:oxidized_cut_copper_stairs');
 
   /// [Packed Ice](https://minecraft.gamepedia.com/packed_ice)
   ///
@@ -4526,6 +4950,11 @@ class Items {
   /// _(minecraft:pink_bed)_
   static const Item pink_bed = Item.type('minecraft:pink_bed');
 
+  /// [Pink Candle](https://minecraft.gamepedia.com/pink_candle)
+  ///
+  /// _(minecraft:pink_candle)_
+  static const Item pink_candle = Item.type('minecraft:pink_candle');
+
   /// [Pink Carpet](https://minecraft.gamepedia.com/pink_carpet)
   ///
   /// _(minecraft:pink_carpet)_
@@ -4599,6 +5028,12 @@ class Items {
   ///
   /// _(minecraft:podzol)_
   static const Item podzol = Item.type('minecraft:podzol');
+
+  /// [Pointed Dripstone](https://minecraft.gamepedia.com/pointed_dripstone)
+  ///
+  /// _(minecraft:pointed_dripstone)_
+  static const Item pointed_dripstone =
+      Item.type('minecraft:pointed_dripstone');
 
   /// [Poisonous Potato](https://minecraft.gamepedia.com/poisonous_potato)
   ///
@@ -4694,6 +5129,30 @@ class Items {
   static const Item polished_blackstone_wall =
       Item.type('minecraft:polished_blackstone_wall');
 
+  /// [Polished Deepslate](https://minecraft.gamepedia.com/polished_deepslate)
+  ///
+  /// _(minecraft:polished_deepslate)_
+  static const Item polished_deepslate =
+      Item.type('minecraft:polished_deepslate');
+
+  /// [Polished Deepslate Slab](https://minecraft.gamepedia.com/polished_deepslate_slab)
+  ///
+  /// _(minecraft:polished_deepslate_slab)_
+  static const Item polished_deepslate_slab =
+      Item.type('minecraft:polished_deepslate_slab');
+
+  /// [Polished Deepslate Stairs](https://minecraft.gamepedia.com/polished_deepslate_stairs)
+  ///
+  /// _(minecraft:polished_deepslate_stairs)_
+  static const Item polished_deepslate_stairs =
+      Item.type('minecraft:polished_deepslate_stairs');
+
+  /// [Polished Deepslate Wall](https://minecraft.gamepedia.com/polished_deepslate_wall)
+  ///
+  /// _(minecraft:polished_deepslate_wall)_
+  static const Item polished_deepslate_wall =
+      Item.type('minecraft:polished_deepslate_wall');
+
   /// [Polished Diorite](https://minecraft.gamepedia.com/polished_diorite)
   ///
   /// _(minecraft:polished_diorite)_
@@ -4753,6 +5212,12 @@ class Items {
   ///
   /// _(minecraft:potion)_
   static const Item potion = Item.type('minecraft:potion');
+
+  /// [Powder Snow Bucket](https://minecraft.gamepedia.com/powder_snow_bucket)
+  ///
+  /// _(minecraft:powder_snow_bucket)_
+  static const Item powder_snow_bucket =
+      Item.type('minecraft:powder_snow_bucket');
 
   /// [Powered Rail](https://minecraft.gamepedia.com/powered_rail)
   ///
@@ -4850,6 +5315,11 @@ class Items {
   ///
   /// _(minecraft:purple_bed)_
   static const Item purple_bed = Item.type('minecraft:purple_bed');
+
+  /// [Purple Candle](https://minecraft.gamepedia.com/purple_candle)
+  ///
+  /// _(minecraft:purple_candle)_
+  static const Item purple_candle = Item.type('minecraft:purple_candle');
 
   /// [Purple Carpet](https://minecraft.gamepedia.com/purple_carpet)
   ///
@@ -4993,6 +5463,36 @@ class Items {
   static const Item ravager_spawn_egg =
       Item.type('minecraft:ravager_spawn_egg');
 
+  /// [Raw Copper](https://minecraft.gamepedia.com/raw_copper)
+  ///
+  /// _(minecraft:raw_copper)_
+  static const Item raw_copper = Item.type('minecraft:raw_copper');
+
+  /// [Raw Copper Block](https://minecraft.gamepedia.com/raw_copper_block)
+  ///
+  /// _(minecraft:raw_copper_block)_
+  static const Item raw_copper_block = Item.type('minecraft:raw_copper_block');
+
+  /// [Raw Gold](https://minecraft.gamepedia.com/raw_gold)
+  ///
+  /// _(minecraft:raw_gold)_
+  static const Item raw_gold = Item.type('minecraft:raw_gold');
+
+  /// [Raw Gold Block](https://minecraft.gamepedia.com/raw_gold_block)
+  ///
+  /// _(minecraft:raw_gold_block)_
+  static const Item raw_gold_block = Item.type('minecraft:raw_gold_block');
+
+  /// [Raw Iron](https://minecraft.gamepedia.com/raw_iron)
+  ///
+  /// _(minecraft:raw_iron)_
+  static const Item raw_iron = Item.type('minecraft:raw_iron');
+
+  /// [Raw Iron Block](https://minecraft.gamepedia.com/raw_iron_block)
+  ///
+  /// _(minecraft:raw_iron_block)_
+  static const Item raw_iron_block = Item.type('minecraft:raw_iron_block');
+
   /// [Red Banner](https://minecraft.gamepedia.com/red_banner)
   ///
   /// _(minecraft:red_banner)_
@@ -5002,6 +5502,11 @@ class Items {
   ///
   /// _(minecraft:red_bed)_
   static const Item red_bed = Item.type('minecraft:red_bed');
+
+  /// [Red Candle](https://minecraft.gamepedia.com/red_candle)
+  ///
+  /// _(minecraft:red_candle)_
+  static const Item red_candle = Item.type('minecraft:red_candle');
 
   /// [Red Carpet](https://minecraft.gamepedia.com/red_carpet)
   ///
@@ -5166,6 +5671,11 @@ class Items {
   /// _(minecraft:respawn_anchor)_
   static const Item respawn_anchor = Item.type('minecraft:respawn_anchor');
 
+  /// [Rooted Dirt](https://minecraft.gamepedia.com/rooted_dirt)
+  ///
+  /// _(minecraft:rooted_dirt)_
+  static const Item rooted_dirt = Item.type('minecraft:rooted_dirt');
+
   /// [Rose Bush](https://minecraft.gamepedia.com/rose_bush)
   ///
   /// _(minecraft:rose_bush)_
@@ -5225,6 +5735,11 @@ class Items {
   ///
   /// _(minecraft:scaffolding)_
   static const Item scaffolding = Item.type('minecraft:scaffolding');
+
+  /// [Sculk Sensor](https://minecraft.gamepedia.com/sculk_sensor)
+  ///
+  /// _(minecraft:sculk_sensor)_
+  static const Item sculk_sensor = Item.type('minecraft:sculk_sensor');
 
   /// [Scute](https://minecraft.gamepedia.com/scute)
   ///
@@ -5326,6 +5841,17 @@ class Items {
   /// _(minecraft:slime_spawn_egg)_
   static const Item slime_spawn_egg = Item.type('minecraft:slime_spawn_egg');
 
+  /// [Small Amethyst Bud](https://minecraft.gamepedia.com/small_amethyst_bud)
+  ///
+  /// _(minecraft:small_amethyst_bud)_
+  static const Item small_amethyst_bud =
+      Item.type('minecraft:small_amethyst_bud');
+
+  /// [Small Dripleaf](https://minecraft.gamepedia.com/small_dripleaf)
+  ///
+  /// _(minecraft:small_dripleaf)_
+  static const Item small_dripleaf = Item.type('minecraft:small_dripleaf');
+
   /// [Smithing Table](https://minecraft.gamepedia.com/smithing_table)
   ///
   /// _(minecraft:smithing_table)_
@@ -5335,6 +5861,11 @@ class Items {
   ///
   /// _(minecraft:smoker)_
   static const Item smoker = Item.type('minecraft:smoker');
+
+  /// [Smooth Basalt](https://minecraft.gamepedia.com/smooth_basalt)
+  ///
+  /// _(minecraft:smooth_basalt)_
+  static const Item smooth_basalt = Item.type('minecraft:smooth_basalt');
 
   /// [Smooth Quartz](https://minecraft.gamepedia.com/smooth_quartz)
   ///
@@ -5469,6 +6000,11 @@ class Items {
   /// _(minecraft:sponge)_
   static const Item sponge = Item.type('minecraft:sponge');
 
+  /// [Spore Blossom](https://minecraft.gamepedia.com/spore_blossom)
+  ///
+  /// _(minecraft:spore_blossom)_
+  static const Item spore_blossom = Item.type('minecraft:spore_blossom');
+
   /// [Spruce Boat](https://minecraft.gamepedia.com/spruce_boat)
   ///
   /// _(minecraft:spruce_boat)_
@@ -5545,6 +6081,11 @@ class Items {
   ///
   /// _(minecraft:spruce_wood)_
   static const Item spruce_wood = Item.type('minecraft:spruce_wood');
+
+  /// [Spyglass](https://minecraft.gamepedia.com/spyglass)
+  ///
+  /// _(minecraft:spyglass)_
+  static const Item spyglass = Item.type('minecraft:spyglass');
 
   /// [Squid Spawn Egg](https://minecraft.gamepedia.com/squid_spawn_egg)
   ///
@@ -5799,6 +6340,11 @@ class Items {
   /// _(minecraft:terracotta)_
   static const Item terracotta = Item.type('minecraft:terracotta');
 
+  /// [Tinted Glass](https://minecraft.gamepedia.com/tinted_glass)
+  ///
+  /// _(minecraft:tinted_glass)_
+  static const Item tinted_glass = Item.type('minecraft:tinted_glass');
+
   /// [Tipped Arrow](https://minecraft.gamepedia.com/tipped_arrow)
   ///
   /// _(minecraft:tipped_arrow)_
@@ -5876,6 +6422,11 @@ class Items {
   ///
   /// _(minecraft:tube_coral_fan)_
   static const Item tube_coral_fan = Item.type('minecraft:tube_coral_fan');
+
+  /// [Tuff](https://minecraft.gamepedia.com/tuff)
+  ///
+  /// _(minecraft:tuff)_
+  static const Item tuff = Item.type('minecraft:tuff');
 
   /// [Turtle Egg](https://minecraft.gamepedia.com/turtle_egg)
   ///
@@ -6019,6 +6570,124 @@ class Items {
   /// _(minecraft:water_bucket)_
   static const Item water_bucket = Item.type('minecraft:water_bucket');
 
+  /// [Waxed Copper Block](https://minecraft.gamepedia.com/waxed_copper_block)
+  ///
+  /// _(minecraft:waxed_copper_block)_
+  static const Item waxed_copper_block =
+      Item.type('minecraft:waxed_copper_block');
+
+  /// [Waxed Cut Copper](https://minecraft.gamepedia.com/waxed_cut_copper)
+  ///
+  /// _(minecraft:waxed_cut_copper)_
+  static const Item waxed_cut_copper = Item.type('minecraft:waxed_cut_copper');
+
+  /// [Waxed Cut Copper Slab](https://minecraft.gamepedia.com/waxed_cut_copper_slab)
+  ///
+  /// _(minecraft:waxed_cut_copper_slab)_
+  static const Item waxed_cut_copper_slab =
+      Item.type('minecraft:waxed_cut_copper_slab');
+
+  /// [Waxed Cut Copper Stairs](https://minecraft.gamepedia.com/waxed_cut_copper_stairs)
+  ///
+  /// _(minecraft:waxed_cut_copper_stairs)_
+  static const Item waxed_cut_copper_stairs =
+      Item.type('minecraft:waxed_cut_copper_stairs');
+
+  /// [Waxed Exposed Copper](https://minecraft.gamepedia.com/waxed_exposed_copper)
+  ///
+  /// _(minecraft:waxed_exposed_copper)_
+  static const Item waxed_exposed_copper =
+      Item.type('minecraft:waxed_exposed_copper');
+
+  /// [Waxed Exposed Cut Copper](https://minecraft.gamepedia.com/waxed_exposed_cut_copper)
+  ///
+  /// _(minecraft:waxed_exposed_cut_copper)_
+  static const Item waxed_exposed_cut_copper =
+      Item.type('minecraft:waxed_exposed_cut_copper');
+
+  /// [Waxed Exposed Cut Copper Slab](https://minecraft.gamepedia.com/waxed_exposed_cut_copper_slab)
+  ///
+  /// _(minecraft:waxed_exposed_cut_copper_slab)_
+  static const Item waxed_exposed_cut_copper_slab =
+      Item.type('minecraft:waxed_exposed_cut_copper_slab');
+
+  /// [Waxed Exposed Cut Copper Stairs](https://minecraft.gamepedia.com/waxed_exposed_cut_copper_stairs)
+  ///
+  /// _(minecraft:waxed_exposed_cut_copper_stairs)_
+  static const Item waxed_exposed_cut_copper_stairs =
+      Item.type('minecraft:waxed_exposed_cut_copper_stairs');
+
+  /// [Waxed Oxidized Copper](https://minecraft.gamepedia.com/waxed_oxidized_copper)
+  ///
+  /// _(minecraft:waxed_oxidized_copper)_
+  static const Item waxed_oxidized_copper =
+      Item.type('minecraft:waxed_oxidized_copper');
+
+  /// [Waxed Oxidized Cut Copper](https://minecraft.gamepedia.com/waxed_oxidized_cut_copper)
+  ///
+  /// _(minecraft:waxed_oxidized_cut_copper)_
+  static const Item waxed_oxidized_cut_copper =
+      Item.type('minecraft:waxed_oxidized_cut_copper');
+
+  /// [Waxed Oxidized Cut Copper Slab](https://minecraft.gamepedia.com/waxed_oxidized_cut_copper_slab)
+  ///
+  /// _(minecraft:waxed_oxidized_cut_copper_slab)_
+  static const Item waxed_oxidized_cut_copper_slab =
+      Item.type('minecraft:waxed_oxidized_cut_copper_slab');
+
+  /// [Waxed Oxidized Cut Copper Stairs](https://minecraft.gamepedia.com/waxed_oxidized_cut_copper_stairs)
+  ///
+  /// _(minecraft:waxed_oxidized_cut_copper_stairs)_
+  static const Item waxed_oxidized_cut_copper_stairs =
+      Item.type('minecraft:waxed_oxidized_cut_copper_stairs');
+
+  /// [Waxed Weathered Copper](https://minecraft.gamepedia.com/waxed_weathered_copper)
+  ///
+  /// _(minecraft:waxed_weathered_copper)_
+  static const Item waxed_weathered_copper =
+      Item.type('minecraft:waxed_weathered_copper');
+
+  /// [Waxed Weathered Cut Copper](https://minecraft.gamepedia.com/waxed_weathered_cut_copper)
+  ///
+  /// _(minecraft:waxed_weathered_cut_copper)_
+  static const Item waxed_weathered_cut_copper =
+      Item.type('minecraft:waxed_weathered_cut_copper');
+
+  /// [Waxed Weathered Cut Copper Slab](https://minecraft.gamepedia.com/waxed_weathered_cut_copper_slab)
+  ///
+  /// _(minecraft:waxed_weathered_cut_copper_slab)_
+  static const Item waxed_weathered_cut_copper_slab =
+      Item.type('minecraft:waxed_weathered_cut_copper_slab');
+
+  /// [Waxed Weathered Cut Copper Stairs](https://minecraft.gamepedia.com/waxed_weathered_cut_copper_stairs)
+  ///
+  /// _(minecraft:waxed_weathered_cut_copper_stairs)_
+  static const Item waxed_weathered_cut_copper_stairs =
+      Item.type('minecraft:waxed_weathered_cut_copper_stairs');
+
+  /// [Weathered Copper](https://minecraft.gamepedia.com/weathered_copper)
+  ///
+  /// _(minecraft:weathered_copper)_
+  static const Item weathered_copper = Item.type('minecraft:weathered_copper');
+
+  /// [Weathered Cut Copper](https://minecraft.gamepedia.com/weathered_cut_copper)
+  ///
+  /// _(minecraft:weathered_cut_copper)_
+  static const Item weathered_cut_copper =
+      Item.type('minecraft:weathered_cut_copper');
+
+  /// [Weathered Cut Copper Slab](https://minecraft.gamepedia.com/weathered_cut_copper_slab)
+  ///
+  /// _(minecraft:weathered_cut_copper_slab)_
+  static const Item weathered_cut_copper_slab =
+      Item.type('minecraft:weathered_cut_copper_slab');
+
+  /// [Weathered Cut Copper Stairs](https://minecraft.gamepedia.com/weathered_cut_copper_stairs)
+  ///
+  /// _(minecraft:weathered_cut_copper_stairs)_
+  static const Item weathered_cut_copper_stairs =
+      Item.type('minecraft:weathered_cut_copper_stairs');
+
   /// [Weeping Vines](https://minecraft.gamepedia.com/weeping_vines)
   ///
   /// _(minecraft:weeping_vines)_
@@ -6048,6 +6717,11 @@ class Items {
   ///
   /// _(minecraft:white_bed)_
   static const Item white_bed = Item.type('minecraft:white_bed');
+
+  /// [White Candle](https://minecraft.gamepedia.com/white_candle)
+  ///
+  /// _(minecraft:white_candle)_
+  static const Item white_candle = Item.type('minecraft:white_candle');
 
   /// [White Carpet](https://minecraft.gamepedia.com/white_carpet)
   ///
@@ -6181,6 +6855,11 @@ class Items {
   /// _(minecraft:yellow_bed)_
   static const Item yellow_bed = Item.type('minecraft:yellow_bed');
 
+  /// [Yellow Candle](https://minecraft.gamepedia.com/yellow_candle)
+  ///
+  /// _(minecraft:yellow_candle)_
+  static const Item yellow_candle = Item.type('minecraft:yellow_candle');
+
   /// [Yellow Carpet](https://minecraft.gamepedia.com/yellow_carpet)
   ///
   /// _(minecraft:yellow_carpet)_
@@ -6270,689 +6949,9 @@ class Items {
   static const Item zombified_piglin_spawn_egg =
       Item.type('minecraft:zombified_piglin_spawn_egg');
 
-  /// [Amethyst Block](https://minecraft.gamepedia.com/amethyst_block)
-  ///
-  /// _(minecraft:amethyst_block)_
-  static const Item amethyst_block = Item.type('minecraft:amethyst_block');
-
-  /// [Amethyst Cluster](https://minecraft.gamepedia.com/amethyst_cluster)
-  ///
-  /// _(minecraft:amethyst_cluster)_
-  static const Item amethyst_cluster = Item.type('minecraft:amethyst_cluster');
-
-  /// [Amethyst Shard](https://minecraft.gamepedia.com/amethyst_shard)
-  ///
-  /// _(minecraft:amethyst_shard)_
-  static const Item amethyst_shard = Item.type('minecraft:amethyst_shard');
-
-  /// [Axolotl Bucket](https://minecraft.gamepedia.com/axolotl_bucket)
-  ///
-  /// _(minecraft:axolotl_bucket)_
-  static const Item axolotl_bucket = Item.type('minecraft:axolotl_bucket');
-
-  /// [Axolotl Spawn Egg](https://minecraft.gamepedia.com/axolotl_spawn_egg)
-  ///
-  /// _(minecraft:axolotl_spawn_egg)_
-  static const Item axolotl_spawn_egg =
-      Item.type('minecraft:axolotl_spawn_egg');
-
-  /// [Azalea](https://minecraft.gamepedia.com/azalea)
-  ///
-  /// _(minecraft:azalea)_
-  static const Item azalea = Item.type('minecraft:azalea');
-
-  /// [Azalea Leaves](https://minecraft.gamepedia.com/azalea_leaves)
-  ///
-  /// _(minecraft:azalea_leaves)_
-  static const Item azalea_leaves = Item.type('minecraft:azalea_leaves');
-
-  /// [Big Dripleaf](https://minecraft.gamepedia.com/big_dripleaf)
-  ///
-  /// _(minecraft:big_dripleaf)_
-  static const Item big_dripleaf = Item.type('minecraft:big_dripleaf');
-
-  /// [Black Candle](https://minecraft.gamepedia.com/black_candle)
-  ///
-  /// _(minecraft:black_candle)_
-  static const Item black_candle = Item.type('minecraft:black_candle');
-
-  /// [Blue Candle](https://minecraft.gamepedia.com/blue_candle)
-  ///
-  /// _(minecraft:blue_candle)_
-  static const Item blue_candle = Item.type('minecraft:blue_candle');
-
-  /// [Brown Candle](https://minecraft.gamepedia.com/brown_candle)
-  ///
-  /// _(minecraft:brown_candle)_
-  static const Item brown_candle = Item.type('minecraft:brown_candle');
-
-  /// [Budding Amethyst](https://minecraft.gamepedia.com/budding_amethyst)
-  ///
-  /// _(minecraft:budding_amethyst)_
-  static const Item budding_amethyst = Item.type('minecraft:budding_amethyst');
-
-  /// [Bundle](https://minecraft.gamepedia.com/bundle)
-  ///
-  /// _(minecraft:bundle)_
-  static const Item bundle = Item.type('minecraft:bundle');
-
-  /// [Calcite](https://minecraft.gamepedia.com/calcite)
-  ///
-  /// _(minecraft:calcite)_
-  static const Item calcite = Item.type('minecraft:calcite');
-
-  /// [Candle](https://minecraft.gamepedia.com/candle)
-  ///
-  /// _(minecraft:candle)_
-  static const Item candle = Item.type('minecraft:candle');
-
-  /// [Chiseled Deepslate](https://minecraft.gamepedia.com/chiseled_deepslate)
-  ///
-  /// _(minecraft:chiseled_deepslate)_
-  static const Item chiseled_deepslate =
-      Item.type('minecraft:chiseled_deepslate');
-
-  /// [Cobbled Deepslate](https://minecraft.gamepedia.com/cobbled_deepslate)
-  ///
-  /// _(minecraft:cobbled_deepslate)_
-  static const Item cobbled_deepslate =
-      Item.type('minecraft:cobbled_deepslate');
-
-  /// [Cobbled Deepslate Slab](https://minecraft.gamepedia.com/cobbled_deepslate_slab)
-  ///
-  /// _(minecraft:cobbled_deepslate_slab)_
-  static const Item cobbled_deepslate_slab =
-      Item.type('minecraft:cobbled_deepslate_slab');
-
-  /// [Cobbled Deepslate Stairs](https://minecraft.gamepedia.com/cobbled_deepslate_stairs)
-  ///
-  /// _(minecraft:cobbled_deepslate_stairs)_
-  static const Item cobbled_deepslate_stairs =
-      Item.type('minecraft:cobbled_deepslate_stairs');
-
-  /// [Cobbled Deepslate Wall](https://minecraft.gamepedia.com/cobbled_deepslate_wall)
-  ///
-  /// _(minecraft:cobbled_deepslate_wall)_
-  static const Item cobbled_deepslate_wall =
-      Item.type('minecraft:cobbled_deepslate_wall');
-
-  /// [Copper Block](https://minecraft.gamepedia.com/copper_block)
-  ///
-  /// _(minecraft:copper_block)_
-  static const Item copper_block = Item.type('minecraft:copper_block');
-
-  /// [Copper Ingot](https://minecraft.gamepedia.com/copper_ingot)
-  ///
-  /// _(minecraft:copper_ingot)_
-  static const Item copper_ingot = Item.type('minecraft:copper_ingot');
-
-  /// [Copper Ore](https://minecraft.gamepedia.com/copper_ore)
-  ///
-  /// _(minecraft:copper_ore)_
-  static const Item copper_ore = Item.type('minecraft:copper_ore');
-
-  /// [Cracked Deepslate Bricks](https://minecraft.gamepedia.com/cracked_deepslate_bricks)
-  ///
-  /// _(minecraft:cracked_deepslate_bricks)_
-  static const Item cracked_deepslate_bricks =
-      Item.type('minecraft:cracked_deepslate_bricks');
-
-  /// [Cracked Deepslate Tiles](https://minecraft.gamepedia.com/cracked_deepslate_tiles)
-  ///
-  /// _(minecraft:cracked_deepslate_tiles)_
-  static const Item cracked_deepslate_tiles =
-      Item.type('minecraft:cracked_deepslate_tiles');
-
-  /// [Cut Copper](https://minecraft.gamepedia.com/cut_copper)
-  ///
-  /// _(minecraft:cut_copper)_
-  static const Item cut_copper = Item.type('minecraft:cut_copper');
-
-  /// [Cut Copper Slab](https://minecraft.gamepedia.com/cut_copper_slab)
-  ///
-  /// _(minecraft:cut_copper_slab)_
-  static const Item cut_copper_slab = Item.type('minecraft:cut_copper_slab');
-
-  /// [Cut Copper Stairs](https://minecraft.gamepedia.com/cut_copper_stairs)
-  ///
-  /// _(minecraft:cut_copper_stairs)_
-  static const Item cut_copper_stairs =
-      Item.type('minecraft:cut_copper_stairs');
-
-  /// [Cyan Candle](https://minecraft.gamepedia.com/cyan_candle)
-  ///
-  /// _(minecraft:cyan_candle)_
-  static const Item cyan_candle = Item.type('minecraft:cyan_candle');
-
-  /// [Deepslate](https://minecraft.gamepedia.com/deepslate)
-  ///
-  /// _(minecraft:deepslate)_
-  static const Item deepslate = Item.type('minecraft:deepslate');
-
-  /// [Deepslate Brick Slab](https://minecraft.gamepedia.com/deepslate_brick_slab)
-  ///
-  /// _(minecraft:deepslate_brick_slab)_
-  static const Item deepslate_brick_slab =
-      Item.type('minecraft:deepslate_brick_slab');
-
-  /// [Deepslate Brick Stairs](https://minecraft.gamepedia.com/deepslate_brick_stairs)
-  ///
-  /// _(minecraft:deepslate_brick_stairs)_
-  static const Item deepslate_brick_stairs =
-      Item.type('minecraft:deepslate_brick_stairs');
-
-  /// [Deepslate Brick Wall](https://minecraft.gamepedia.com/deepslate_brick_wall)
-  ///
-  /// _(minecraft:deepslate_brick_wall)_
-  static const Item deepslate_brick_wall =
-      Item.type('minecraft:deepslate_brick_wall');
-
-  /// [Deepslate Bricks](https://minecraft.gamepedia.com/deepslate_bricks)
-  ///
-  /// _(minecraft:deepslate_bricks)_
-  static const Item deepslate_bricks = Item.type('minecraft:deepslate_bricks');
-
-  /// [Deepslate Coal Ore](https://minecraft.gamepedia.com/deepslate_coal_ore)
-  ///
-  /// _(minecraft:deepslate_coal_ore)_
-  static const Item deepslate_coal_ore =
-      Item.type('minecraft:deepslate_coal_ore');
-
-  /// [Deepslate Copper Ore](https://minecraft.gamepedia.com/deepslate_copper_ore)
-  ///
-  /// _(minecraft:deepslate_copper_ore)_
-  static const Item deepslate_copper_ore =
-      Item.type('minecraft:deepslate_copper_ore');
-
-  /// [Deepslate Diamond Ore](https://minecraft.gamepedia.com/deepslate_diamond_ore)
-  ///
-  /// _(minecraft:deepslate_diamond_ore)_
-  static const Item deepslate_diamond_ore =
-      Item.type('minecraft:deepslate_diamond_ore');
-
-  /// [Deepslate Emerald Ore](https://minecraft.gamepedia.com/deepslate_emerald_ore)
-  ///
-  /// _(minecraft:deepslate_emerald_ore)_
-  static const Item deepslate_emerald_ore =
-      Item.type('minecraft:deepslate_emerald_ore');
-
-  /// [Deepslate Gold Ore](https://minecraft.gamepedia.com/deepslate_gold_ore)
-  ///
-  /// _(minecraft:deepslate_gold_ore)_
-  static const Item deepslate_gold_ore =
-      Item.type('minecraft:deepslate_gold_ore');
-
-  /// [Deepslate Iron Ore](https://minecraft.gamepedia.com/deepslate_iron_ore)
-  ///
-  /// _(minecraft:deepslate_iron_ore)_
-  static const Item deepslate_iron_ore =
-      Item.type('minecraft:deepslate_iron_ore');
-
-  /// [Deepslate Lapis Ore](https://minecraft.gamepedia.com/deepslate_lapis_ore)
-  ///
-  /// _(minecraft:deepslate_lapis_ore)_
-  static const Item deepslate_lapis_ore =
-      Item.type('minecraft:deepslate_lapis_ore');
-
-  /// [Deepslate Redstone Ore](https://minecraft.gamepedia.com/deepslate_redstone_ore)
-  ///
-  /// _(minecraft:deepslate_redstone_ore)_
-  static const Item deepslate_redstone_ore =
-      Item.type('minecraft:deepslate_redstone_ore');
-
-  /// [Deepslate Tile Slab](https://minecraft.gamepedia.com/deepslate_tile_slab)
-  ///
-  /// _(minecraft:deepslate_tile_slab)_
-  static const Item deepslate_tile_slab =
-      Item.type('minecraft:deepslate_tile_slab');
-
-  /// [Deepslate Tile Stairs](https://minecraft.gamepedia.com/deepslate_tile_stairs)
-  ///
-  /// _(minecraft:deepslate_tile_stairs)_
-  static const Item deepslate_tile_stairs =
-      Item.type('minecraft:deepslate_tile_stairs');
-
-  /// [Deepslate Tile Wall](https://minecraft.gamepedia.com/deepslate_tile_wall)
-  ///
-  /// _(minecraft:deepslate_tile_wall)_
-  static const Item deepslate_tile_wall =
-      Item.type('minecraft:deepslate_tile_wall');
-
-  /// [Deepslate Tiles](https://minecraft.gamepedia.com/deepslate_tiles)
-  ///
-  /// _(minecraft:deepslate_tiles)_
-  static const Item deepslate_tiles = Item.type('minecraft:deepslate_tiles');
-
-  /// [Dirt Path](https://minecraft.gamepedia.com/dirt_path)
-  ///
-  /// _(minecraft:dirt_path)_
-  static const Item dirt_path = Item.type('minecraft:dirt_path');
-
-  /// [Dripstone Block](https://minecraft.gamepedia.com/dripstone_block)
-  ///
-  /// _(minecraft:dripstone_block)_
-  static const Item dripstone_block = Item.type('minecraft:dripstone_block');
-
-  /// [Exposed Copper](https://minecraft.gamepedia.com/exposed_copper)
-  ///
-  /// _(minecraft:exposed_copper)_
-  static const Item exposed_copper = Item.type('minecraft:exposed_copper');
-
-  /// [Exposed Cut Copper](https://minecraft.gamepedia.com/exposed_cut_copper)
-  ///
-  /// _(minecraft:exposed_cut_copper)_
-  static const Item exposed_cut_copper =
-      Item.type('minecraft:exposed_cut_copper');
-
-  /// [Exposed Cut Copper Slab](https://minecraft.gamepedia.com/exposed_cut_copper_slab)
-  ///
-  /// _(minecraft:exposed_cut_copper_slab)_
-  static const Item exposed_cut_copper_slab =
-      Item.type('minecraft:exposed_cut_copper_slab');
-
-  /// [Exposed Cut Copper Stairs](https://minecraft.gamepedia.com/exposed_cut_copper_stairs)
-  ///
-  /// _(minecraft:exposed_cut_copper_stairs)_
-  static const Item exposed_cut_copper_stairs =
-      Item.type('minecraft:exposed_cut_copper_stairs');
-
-  /// [Flowering Azalea](https://minecraft.gamepedia.com/flowering_azalea)
-  ///
-  /// _(minecraft:flowering_azalea)_
-  static const Item flowering_azalea = Item.type('minecraft:flowering_azalea');
-
-  /// [Flowering Azalea Leaves](https://minecraft.gamepedia.com/flowering_azalea_leaves)
-  ///
-  /// _(minecraft:flowering_azalea_leaves)_
-  static const Item flowering_azalea_leaves =
-      Item.type('minecraft:flowering_azalea_leaves');
-
-  /// [Glow Berries](https://minecraft.gamepedia.com/glow_berries)
-  ///
-  /// _(minecraft:glow_berries)_
-  static const Item glow_berries = Item.type('minecraft:glow_berries');
-
-  /// [Glow Ink Sac](https://minecraft.gamepedia.com/glow_ink_sac)
-  ///
-  /// _(minecraft:glow_ink_sac)_
-  static const Item glow_ink_sac = Item.type('minecraft:glow_ink_sac');
-
-  /// [Glow Item Frame](https://minecraft.gamepedia.com/glow_item_frame)
-  ///
-  /// _(minecraft:glow_item_frame)_
-  static const Item glow_item_frame = Item.type('minecraft:glow_item_frame');
-
-  /// [Glow Lichen](https://minecraft.gamepedia.com/glow_lichen)
-  ///
-  /// _(minecraft:glow_lichen)_
-  static const Item glow_lichen = Item.type('minecraft:glow_lichen');
-
-  /// [Glow Squid Spawn Egg](https://minecraft.gamepedia.com/glow_squid_spawn_egg)
-  ///
-  /// _(minecraft:glow_squid_spawn_egg)_
-  static const Item glow_squid_spawn_egg =
-      Item.type('minecraft:glow_squid_spawn_egg');
-
-  /// [Goat Spawn Egg](https://minecraft.gamepedia.com/goat_spawn_egg)
-  ///
-  /// _(minecraft:goat_spawn_egg)_
-  static const Item goat_spawn_egg = Item.type('minecraft:goat_spawn_egg');
-
-  /// [Gray Candle](https://minecraft.gamepedia.com/gray_candle)
-  ///
-  /// _(minecraft:gray_candle)_
-  static const Item gray_candle = Item.type('minecraft:gray_candle');
-
-  /// [Green Candle](https://minecraft.gamepedia.com/green_candle)
-  ///
-  /// _(minecraft:green_candle)_
-  static const Item green_candle = Item.type('minecraft:green_candle');
-
-  /// [Hanging Roots](https://minecraft.gamepedia.com/hanging_roots)
-  ///
-  /// _(minecraft:hanging_roots)_
-  static const Item hanging_roots = Item.type('minecraft:hanging_roots');
-
-  /// [Infested Deepslate](https://minecraft.gamepedia.com/infested_deepslate)
-  ///
-  /// _(minecraft:infested_deepslate)_
-  static const Item infested_deepslate =
-      Item.type('minecraft:infested_deepslate');
-
-  /// [Large Amethyst Bud](https://minecraft.gamepedia.com/large_amethyst_bud)
-  ///
-  /// _(minecraft:large_amethyst_bud)_
-  static const Item large_amethyst_bud =
-      Item.type('minecraft:large_amethyst_bud');
-
-  /// [Light](https://minecraft.gamepedia.com/light)
-  ///
-  /// _(minecraft:light)_
-  static const Item light = Item.type('minecraft:light');
-
-  /// [Light Blue Candle](https://minecraft.gamepedia.com/light_blue_candle)
-  ///
-  /// _(minecraft:light_blue_candle)_
-  static const Item light_blue_candle =
-      Item.type('minecraft:light_blue_candle');
-
-  /// [Light Gray Candle](https://minecraft.gamepedia.com/light_gray_candle)
-  ///
-  /// _(minecraft:light_gray_candle)_
-  static const Item light_gray_candle =
-      Item.type('minecraft:light_gray_candle');
-
-  /// [Lightning Rod](https://minecraft.gamepedia.com/lightning_rod)
-  ///
-  /// _(minecraft:lightning_rod)_
-  static const Item lightning_rod = Item.type('minecraft:lightning_rod');
-
-  /// [Lime Candle](https://minecraft.gamepedia.com/lime_candle)
-  ///
-  /// _(minecraft:lime_candle)_
-  static const Item lime_candle = Item.type('minecraft:lime_candle');
-
-  /// [Magenta Candle](https://minecraft.gamepedia.com/magenta_candle)
-  ///
-  /// _(minecraft:magenta_candle)_
-  static const Item magenta_candle = Item.type('minecraft:magenta_candle');
-
-  /// [Medium Amethyst Bud](https://minecraft.gamepedia.com/medium_amethyst_bud)
-  ///
-  /// _(minecraft:medium_amethyst_bud)_
-  static const Item medium_amethyst_bud =
-      Item.type('minecraft:medium_amethyst_bud');
-
-  /// [Moss Block](https://minecraft.gamepedia.com/moss_block)
-  ///
-  /// _(minecraft:moss_block)_
-  static const Item moss_block = Item.type('minecraft:moss_block');
-
-  /// [Moss Carpet](https://minecraft.gamepedia.com/moss_carpet)
-  ///
-  /// _(minecraft:moss_carpet)_
-  static const Item moss_carpet = Item.type('minecraft:moss_carpet');
-
-  /// [Orange Candle](https://minecraft.gamepedia.com/orange_candle)
-  ///
-  /// _(minecraft:orange_candle)_
-  static const Item orange_candle = Item.type('minecraft:orange_candle');
-
-  /// [Oxidized Copper](https://minecraft.gamepedia.com/oxidized_copper)
-  ///
-  /// _(minecraft:oxidized_copper)_
-  static const Item oxidized_copper = Item.type('minecraft:oxidized_copper');
-
-  /// [Oxidized Cut Copper](https://minecraft.gamepedia.com/oxidized_cut_copper)
-  ///
-  /// _(minecraft:oxidized_cut_copper)_
-  static const Item oxidized_cut_copper =
-      Item.type('minecraft:oxidized_cut_copper');
-
-  /// [Oxidized Cut Copper Slab](https://minecraft.gamepedia.com/oxidized_cut_copper_slab)
-  ///
-  /// _(minecraft:oxidized_cut_copper_slab)_
-  static const Item oxidized_cut_copper_slab =
-      Item.type('minecraft:oxidized_cut_copper_slab');
-
-  /// [Oxidized Cut Copper Stairs](https://minecraft.gamepedia.com/oxidized_cut_copper_stairs)
-  ///
-  /// _(minecraft:oxidized_cut_copper_stairs)_
-  static const Item oxidized_cut_copper_stairs =
-      Item.type('minecraft:oxidized_cut_copper_stairs');
-
-  /// [Pink Candle](https://minecraft.gamepedia.com/pink_candle)
-  ///
-  /// _(minecraft:pink_candle)_
-  static const Item pink_candle = Item.type('minecraft:pink_candle');
-
-  /// [Pointed Dripstone](https://minecraft.gamepedia.com/pointed_dripstone)
-  ///
-  /// _(minecraft:pointed_dripstone)_
-  static const Item pointed_dripstone =
-      Item.type('minecraft:pointed_dripstone');
-
-  /// [Polished Deepslate](https://minecraft.gamepedia.com/polished_deepslate)
-  ///
-  /// _(minecraft:polished_deepslate)_
-  static const Item polished_deepslate =
-      Item.type('minecraft:polished_deepslate');
-
-  /// [Polished Deepslate Slab](https://minecraft.gamepedia.com/polished_deepslate_slab)
-  ///
-  /// _(minecraft:polished_deepslate_slab)_
-  static const Item polished_deepslate_slab =
-      Item.type('minecraft:polished_deepslate_slab');
-
-  /// [Polished Deepslate Stairs](https://minecraft.gamepedia.com/polished_deepslate_stairs)
-  ///
-  /// _(minecraft:polished_deepslate_stairs)_
-  static const Item polished_deepslate_stairs =
-      Item.type('minecraft:polished_deepslate_stairs');
-
-  /// [Polished Deepslate Wall](https://minecraft.gamepedia.com/polished_deepslate_wall)
-  ///
-  /// _(minecraft:polished_deepslate_wall)_
-  static const Item polished_deepslate_wall =
-      Item.type('minecraft:polished_deepslate_wall');
-
-  /// [Powder Snow Bucket](https://minecraft.gamepedia.com/powder_snow_bucket)
-  ///
-  /// _(minecraft:powder_snow_bucket)_
-  static const Item powder_snow_bucket =
-      Item.type('minecraft:powder_snow_bucket');
-
-  /// [Purple Candle](https://minecraft.gamepedia.com/purple_candle)
-  ///
-  /// _(minecraft:purple_candle)_
-  static const Item purple_candle = Item.type('minecraft:purple_candle');
-
-  /// [Raw Copper](https://minecraft.gamepedia.com/raw_copper)
-  ///
-  /// _(minecraft:raw_copper)_
-  static const Item raw_copper = Item.type('minecraft:raw_copper');
-
-  /// [Raw Copper Block](https://minecraft.gamepedia.com/raw_copper_block)
-  ///
-  /// _(minecraft:raw_copper_block)_
-  static const Item raw_copper_block = Item.type('minecraft:raw_copper_block');
-
-  /// [Raw Gold](https://minecraft.gamepedia.com/raw_gold)
-  ///
-  /// _(minecraft:raw_gold)_
-  static const Item raw_gold = Item.type('minecraft:raw_gold');
-
-  /// [Raw Gold Block](https://minecraft.gamepedia.com/raw_gold_block)
-  ///
-  /// _(minecraft:raw_gold_block)_
-  static const Item raw_gold_block = Item.type('minecraft:raw_gold_block');
-
-  /// [Raw Iron](https://minecraft.gamepedia.com/raw_iron)
-  ///
-  /// _(minecraft:raw_iron)_
-  static const Item raw_iron = Item.type('minecraft:raw_iron');
-
-  /// [Raw Iron Block](https://minecraft.gamepedia.com/raw_iron_block)
-  ///
-  /// _(minecraft:raw_iron_block)_
-  static const Item raw_iron_block = Item.type('minecraft:raw_iron_block');
-
-  /// [Red Candle](https://minecraft.gamepedia.com/red_candle)
-  ///
-  /// _(minecraft:red_candle)_
-  static const Item red_candle = Item.type('minecraft:red_candle');
-
-  /// [Rooted Dirt](https://minecraft.gamepedia.com/rooted_dirt)
-  ///
-  /// _(minecraft:rooted_dirt)_
-  static const Item rooted_dirt = Item.type('minecraft:rooted_dirt');
-
-  /// [Sculk Sensor](https://minecraft.gamepedia.com/sculk_sensor)
-  ///
-  /// _(minecraft:sculk_sensor)_
-  static const Item sculk_sensor = Item.type('minecraft:sculk_sensor');
-
-  /// [Small Amethyst Bud](https://minecraft.gamepedia.com/small_amethyst_bud)
-  ///
-  /// _(minecraft:small_amethyst_bud)_
-  static const Item small_amethyst_bud =
-      Item.type('minecraft:small_amethyst_bud');
-
-  /// [Small Dripleaf](https://minecraft.gamepedia.com/small_dripleaf)
-  ///
-  /// _(minecraft:small_dripleaf)_
-  static const Item small_dripleaf = Item.type('minecraft:small_dripleaf');
-
-  /// [Smooth Basalt](https://minecraft.gamepedia.com/smooth_basalt)
-  ///
-  /// _(minecraft:smooth_basalt)_
-  static const Item smooth_basalt = Item.type('minecraft:smooth_basalt');
-
-  /// [Spore Blossom](https://minecraft.gamepedia.com/spore_blossom)
-  ///
-  /// _(minecraft:spore_blossom)_
-  static const Item spore_blossom = Item.type('minecraft:spore_blossom');
-
-  /// [Spyglass](https://minecraft.gamepedia.com/spyglass)
-  ///
-  /// _(minecraft:spyglass)_
-  static const Item spyglass = Item.type('minecraft:spyglass');
-
-  /// [Tinted Glass](https://minecraft.gamepedia.com/tinted_glass)
-  ///
-  /// _(minecraft:tinted_glass)_
-  static const Item tinted_glass = Item.type('minecraft:tinted_glass');
-
-  /// [Tuff](https://minecraft.gamepedia.com/tuff)
-  ///
-  /// _(minecraft:tuff)_
-  static const Item tuff = Item.type('minecraft:tuff');
-
-  /// [Waxed Copper Block](https://minecraft.gamepedia.com/waxed_copper_block)
-  ///
-  /// _(minecraft:waxed_copper_block)_
-  static const Item waxed_copper_block =
-      Item.type('minecraft:waxed_copper_block');
-
-  /// [Waxed Cut Copper](https://minecraft.gamepedia.com/waxed_cut_copper)
-  ///
-  /// _(minecraft:waxed_cut_copper)_
-  static const Item waxed_cut_copper = Item.type('minecraft:waxed_cut_copper');
-
-  /// [Waxed Cut Copper Slab](https://minecraft.gamepedia.com/waxed_cut_copper_slab)
-  ///
-  /// _(minecraft:waxed_cut_copper_slab)_
-  static const Item waxed_cut_copper_slab =
-      Item.type('minecraft:waxed_cut_copper_slab');
-
-  /// [Waxed Cut Copper Stairs](https://minecraft.gamepedia.com/waxed_cut_copper_stairs)
-  ///
-  /// _(minecraft:waxed_cut_copper_stairs)_
-  static const Item waxed_cut_copper_stairs =
-      Item.type('minecraft:waxed_cut_copper_stairs');
-
-  /// [Waxed Exposed Copper](https://minecraft.gamepedia.com/waxed_exposed_copper)
-  ///
-  /// _(minecraft:waxed_exposed_copper)_
-  static const Item waxed_exposed_copper =
-      Item.type('minecraft:waxed_exposed_copper');
-
-  /// [Waxed Exposed Cut Copper](https://minecraft.gamepedia.com/waxed_exposed_cut_copper)
-  ///
-  /// _(minecraft:waxed_exposed_cut_copper)_
-  static const Item waxed_exposed_cut_copper =
-      Item.type('minecraft:waxed_exposed_cut_copper');
-
-  /// [Waxed Exposed Cut Copper Slab](https://minecraft.gamepedia.com/waxed_exposed_cut_copper_slab)
-  ///
-  /// _(minecraft:waxed_exposed_cut_copper_slab)_
-  static const Item waxed_exposed_cut_copper_slab =
-      Item.type('minecraft:waxed_exposed_cut_copper_slab');
-
-  /// [Waxed Exposed Cut Copper Stairs](https://minecraft.gamepedia.com/waxed_exposed_cut_copper_stairs)
-  ///
-  /// _(minecraft:waxed_exposed_cut_copper_stairs)_
-  static const Item waxed_exposed_cut_copper_stairs =
-      Item.type('minecraft:waxed_exposed_cut_copper_stairs');
-
-  /// [Waxed Oxidized Copper](https://minecraft.gamepedia.com/waxed_oxidized_copper)
-  ///
-  /// _(minecraft:waxed_oxidized_copper)_
-  static const Item waxed_oxidized_copper =
-      Item.type('minecraft:waxed_oxidized_copper');
-
-  /// [Waxed Oxidized Cut Copper](https://minecraft.gamepedia.com/waxed_oxidized_cut_copper)
-  ///
-  /// _(minecraft:waxed_oxidized_cut_copper)_
-  static const Item waxed_oxidized_cut_copper =
-      Item.type('minecraft:waxed_oxidized_cut_copper');
-
-  /// [Waxed Oxidized Cut Copper Slab](https://minecraft.gamepedia.com/waxed_oxidized_cut_copper_slab)
-  ///
-  /// _(minecraft:waxed_oxidized_cut_copper_slab)_
-  static const Item waxed_oxidized_cut_copper_slab =
-      Item.type('minecraft:waxed_oxidized_cut_copper_slab');
-
-  /// [Waxed Oxidized Cut Copper Stairs](https://minecraft.gamepedia.com/waxed_oxidized_cut_copper_stairs)
-  ///
-  /// _(minecraft:waxed_oxidized_cut_copper_stairs)_
-  static const Item waxed_oxidized_cut_copper_stairs =
-      Item.type('minecraft:waxed_oxidized_cut_copper_stairs');
-
-  /// [Waxed Weathered Copper](https://minecraft.gamepedia.com/waxed_weathered_copper)
-  ///
-  /// _(minecraft:waxed_weathered_copper)_
-  static const Item waxed_weathered_copper =
-      Item.type('minecraft:waxed_weathered_copper');
-
-  /// [Waxed Weathered Cut Copper](https://minecraft.gamepedia.com/waxed_weathered_cut_copper)
-  ///
-  /// _(minecraft:waxed_weathered_cut_copper)_
-  static const Item waxed_weathered_cut_copper =
-      Item.type('minecraft:waxed_weathered_cut_copper');
-
-  /// [Waxed Weathered Cut Copper Slab](https://minecraft.gamepedia.com/waxed_weathered_cut_copper_slab)
-  ///
-  /// _(minecraft:waxed_weathered_cut_copper_slab)_
-  static const Item waxed_weathered_cut_copper_slab =
-      Item.type('minecraft:waxed_weathered_cut_copper_slab');
-
-  /// [Waxed Weathered Cut Copper Stairs](https://minecraft.gamepedia.com/waxed_weathered_cut_copper_stairs)
-  ///
-  /// _(minecraft:waxed_weathered_cut_copper_stairs)_
-  static const Item waxed_weathered_cut_copper_stairs =
-      Item.type('minecraft:waxed_weathered_cut_copper_stairs');
-
-  /// [Weathered Copper](https://minecraft.gamepedia.com/weathered_copper)
-  ///
-  /// _(minecraft:weathered_copper)_
-  static const Item weathered_copper = Item.type('minecraft:weathered_copper');
-
-  /// [Weathered Cut Copper](https://minecraft.gamepedia.com/weathered_cut_copper)
-  ///
-  /// _(minecraft:weathered_cut_copper)_
-  static const Item weathered_cut_copper =
-      Item.type('minecraft:weathered_cut_copper');
-
-  /// [Weathered Cut Copper Slab](https://minecraft.gamepedia.com/weathered_cut_copper_slab)
-  ///
-  /// _(minecraft:weathered_cut_copper_slab)_
-  static const Item weathered_cut_copper_slab =
-      Item.type('minecraft:weathered_cut_copper_slab');
-
-  /// [Weathered Cut Copper Stairs](https://minecraft.gamepedia.com/weathered_cut_copper_stairs)
-  ///
-  /// _(minecraft:weathered_cut_copper_stairs)_
-  static const Item weathered_cut_copper_stairs =
-      Item.type('minecraft:weathered_cut_copper_stairs');
-
-  /// [White Candle](https://minecraft.gamepedia.com/white_candle)
-  ///
-  /// _(minecraft:white_candle)_
-  static const Item white_candle = Item.type('minecraft:white_candle');
-
-  /// [Yellow Candle](https://minecraft.gamepedia.com/yellow_candle)
-  ///
-  /// _(minecraft:yellow_candle)_
-  static const Item yellow_candle = Item.type('minecraft:yellow_candle');
+  /// [Music Disc Otherside](https://minecraft.gamepedia.com/music_disc_otherside)
+  ///
+  /// _(minecraft:music_disc_otherside)_
+  static const Item music_disc_otherside =
+      Item.type('minecraft:music_disc_otherside');
 }

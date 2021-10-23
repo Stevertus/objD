@@ -8,9 +8,11 @@
 - added run method to File to execute an existing File object
 - added Tag.add and Tag.remove constructors to make code more readable
 - updated Execute center method to optionally take a y value
-- updated ServerVersionCheck to also recognize 1.16 and 1.17 (thanks MrPlayerYork for the implementation)
+- updated ServerVersionCheck to also recognize 1.16 - 1.18 (thanks MrPlayerYork for the suggestion)
 - updated Log Widget with suggestions to add Log.debug and Log.info
-- fixed Predicate requireing contents (Thanks to MrPlayerYork for reporting that!)
+- updated blocks, items, particles and entities to include content from 21w42a
+- fixed Predicate requiring contents (Thanks to MrPlayerYork for reporting that!)
+- fixed nested Execute or If not generating a single execute command
 - fixed main and load files generating even if create was set to false(used in objd_gen)
 - Removed length limits for scoreboard, score holder and team names for 1.18
 
