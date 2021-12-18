@@ -99,7 +99,7 @@ class BuildPack {
     // goes through all files (also considering added files while generating previous)
     for (var i = 0; i < files.length; i++) {
       final path = files.keys.toList()[i];
-      context.file = path.toString();
+      context.file = path.toString(false);
       files[path]!.generate(
         context: context,
         pack: this,

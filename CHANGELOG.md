@@ -1,3 +1,8 @@
+## 0.4.4
+
+- fixed `.mcfunction` extension appearing in context's file path(used by File.recursive and others)
+- fixed JsonFile not being exported
+
 ## 0.4.3
 
 **Breaking:** Changed default behaviour of `@Func()` annotation to generate a function directly in `functions/` instead of reading the path of the source file. This can be enabled again by setting `path = null`.

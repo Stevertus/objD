@@ -17,3 +17,4 @@ export 'pass_trait.dart';
 export 'player_join.dart';
 export 'recipe.dart';
 export 'marker.dart';
+export 'json_file.dart';
