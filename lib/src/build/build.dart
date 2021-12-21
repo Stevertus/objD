@@ -5,7 +5,6 @@ import 'package:objd/src/build/build_file.dart';
 import 'package:objd/src/build/build_pack.dart';
 import 'package:objd/src/build/build_project.dart';
 import 'package:objd/src/build/gen_options.dart';
-import 'package:objd/src/build/project.dart';
 import 'package:objd/src/build/reloader.dart' as hotreload;
 import 'package:objd/core.dart';
 import 'io_ex.dart' as io;
@@ -48,7 +47,11 @@ Future<void> createProject(Project prj, [List<String> args = const []]) async {
         : io.getPath(bPrj.path, bPrj.name);
     var stopwatchFiles = Stopwatch()..start();
 
-    final saved = await io.generateIO(_getFiles(bPrj, opt), path);
+    final saved = await io.generateIO(
+      _getFiles(bPrj, opt),
+      path,
+      useIsolates: opt.useIsolates,
+    );
     print(
       'Finished saving ${saved.length} files in ${stopwatchFiles.elapsedMilliseconds}ms',
     );

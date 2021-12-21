@@ -44,7 +44,7 @@ class Log extends RestActionAble {
     if (msg is Entity) text = TextComponent.selector(msg as Entity);
     return Tellraw(to!, show: [
       TextComponent(
-        '[${_type.toString().split('.')[1]}] ',
+        '[${_type.name}] ',
         color: color,
         bold: _type == _LogType.DEBUG ? true : null,
       ),

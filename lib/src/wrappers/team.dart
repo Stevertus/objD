@@ -1,8 +1,3 @@
-import 'package:objd/src/basic/command.dart';
-import 'package:objd/src/basic/types/entity.dart';
-import 'package:objd/src/basic/for_list.dart';
-import 'package:objd/src/basic/text_components.dart';
-import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/build/context.dart';
 
@@ -77,8 +72,8 @@ class Team extends RestActionAble {
     if (seeInvisible != null) modifiers['seeFriendlyInvisible'] = seeInvisible;
   }
 
-  String _genEnum(dynamic en) {
-    return en.toString().split('.')[1];
+  String _genEnum(ModifyTeam en) {
+    return en.name;
   }
 
   @override

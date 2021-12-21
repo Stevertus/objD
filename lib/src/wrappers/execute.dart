@@ -1,11 +1,3 @@
-import 'package:objd/src/basic/types/condition.dart';
-import 'package:objd/src/basic/group.dart';
-
-import 'package:objd/src/basic/rest_action.dart';
-import 'package:objd/src/basic/widget.dart';
-import 'package:objd/src/basic/types/entity.dart';
-import 'package:objd/src/basic/types/location.dart';
-import 'package:objd/src/basic/types/rotation.dart';
 import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/build/build.dart';
 import 'package:objd/src/wrappers/widgets.dart';
@@ -309,7 +301,7 @@ class Execute extends RestActionAble {
 
   /// Sets the execution position(^ ^ ^) to the eyes or the feet.
   Execute anchored(Facing anchor) {
-    return _addArgumentRet('anchored ' + anchor.toString().split('.')[1]);
+    return _addArgumentRet('anchored ' + anchor.name);
   }
 
   ///Sets the execution rotation so that it faces a location or an entity's feet or eyes.
@@ -329,10 +321,8 @@ class Execute extends RestActionAble {
       return _addArgumentRet('facing ' + target.toString());
     }
     if (target is Entity) {
-      return _addArgumentRet('facing entity ' +
-          target.toString() +
-          ' ' +
-          facing.toString().split('.')[1]);
+      return _addArgumentRet(
+          'facing entity ' + target.toString() + ' ' + facing.name);
     }
     throw ('Please insert either a Location or an Entity into Execute.facing');
   }
@@ -374,11 +364,11 @@ class Execute extends RestActionAble {
   }) =>
       _addArgumentRet([
         'store',
-        result.toString().split('.')[1],
+        result.name,
         'block',
         location.toString(),
         path,
-        varType.toString().split('.')[1],
+        varType.name,
         scale.toString()
       ].join(' '));
 
@@ -390,13 +380,13 @@ class Execute extends RestActionAble {
     ExecuteStoreVarType varType = ExecuteStoreVarType.int,
   }) =>
       _addArgumentRet('store ' +
-          result.toString().split('.')[1] +
+          result.name +
           ' entity ' +
           entity.toString() +
           ' ' +
           path +
           ' ' +
-          varType.toString().split('.')[1] +
+          varType.name +
           ' ' +
           scale.toString());
 
@@ -406,7 +396,7 @@ class Execute extends RestActionAble {
   }) =>
       _addArgumentRet(
         'store ' +
-            result.toString().split('.')[1] +
+            result.name +
             ' score ' +
             score.entity.toString() +
             ' ' +
@@ -418,12 +408,8 @@ class Execute extends RestActionAble {
     required String name,
     BossbarOption setting = BossbarOption.value,
   }) =>
-      _addArgumentRet('store ' +
-          result.toString().split('.')[1] +
-          ' score ' +
-          name +
-          ' ' +
-          setting.toString().split('.')[1]);
+      _addArgumentRet(
+          'store ' + result.name + ' score ' + name + ' ' + setting.name);
 
   Execute unless(Condition c) => If(Condition.not(c));
 

@@ -1,9 +1,3 @@
-import 'package:objd/src/basic/types/condition.dart';
-import 'package:objd/src/basic/types/entity.dart';
-import 'package:objd/src/basic/file.dart';
-import 'package:objd/src/basic/for_list.dart';
-
-import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/build/build.dart';
 import 'package:objd/src/wrappers/if.dart';

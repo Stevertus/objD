@@ -1,7 +1,4 @@
-import 'package:objd/src/basic/widget.dart';
-import 'package:objd/src/build/context.dart';
 import 'package:objd/core.dart';
-import 'package:objd/src/wrappers/data.dart';
 
 //// The Storage Widget gives you easy tools to store and receive nbt data globally.
 class Storage extends Widget {

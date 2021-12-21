@@ -1,5 +1,4 @@
 import 'package:objd/core.dart';
-import 'package:objd/src/wrappers/execute.dart';
 
 /// This translates into Minecraft Coordinates.
 class Location {

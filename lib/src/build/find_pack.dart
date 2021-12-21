@@ -10,7 +10,7 @@ List<Pack> findPacks(Widget? wid, {required Context context}) {
     var packs = <Pack>[];
     for (var child in wid.children) {
       var res = findPacks(child, context: context);
-      if (res is List<Pack>) packs.addAll(res);
+      packs.addAll(res);
     }
     if (packs.isNotEmpty) return packs;
   }

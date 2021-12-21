@@ -1,5 +1,4 @@
 import 'package:objd/core.dart';
-import 'package:objd/src/utils/json_file.dart';
 
 const _CHARS = '#PSVXBJFA';
 
@@ -205,8 +204,8 @@ class Recipe extends Widget {
       if (json['type'] == 'minecraft:crafting_shapeless') {
         type = RecipeType.shapeless;
       } else {
-        type = RecipeType.values.firstWhere((t) =>
-            (json['type'] as String).contains(t.toString().split('.')[1]));
+        type = RecipeType.values
+            .firstWhere((t) => (json['type'] as String).contains(t.name));
       }
     }
     type ??= RecipeType.shaped;
@@ -341,7 +340,7 @@ class Recipe extends Widget {
         }
       default:
         {
-          dat['type'] = type.toString().split('.')[1];
+          dat['type'] = type.name;
           dat['ingredient'] = ingredients.values.first.getMap(false);
           dat['result'] = 'minecraft:' + result.getId();
         }

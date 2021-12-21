@@ -1,11 +1,5 @@
 import 'dart:convert';
 
-import 'package:objd/src/basic/command.dart';
-import 'package:objd/src/basic/for_list.dart';
-import 'package:objd/src/basic/rest_action.dart';
-import 'package:objd/src/basic/text_components.dart';
-import 'package:objd/src/basic/types/entity.dart';
-import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/build/context.dart';
 import 'package:objd/src/wrappers/execute.dart';
@@ -68,7 +62,7 @@ class Bossbar extends RestActionAble {
       case BossbarType.remove:
         return Command('bossbar remove $id');
       case BossbarType.get:
-        return Command('bossbar get $id ${option.toString().split('.')[1]}');
+        return Command('bossbar get $id ${option!.name}');
       case BossbarType.set:
         {
           var widgets = <Widget>[];

@@ -1,7 +1,6 @@
 import 'package:objd/src/basic/pack.dart';
 import 'package:objd/src/build/build.dart';
 import 'package:objd/src/build/build_pack.dart';
-import 'package:objd/src/build/project.dart';
 import 'package:objd/src/build/find_pack.dart';
 
 class BuildProject {

@@ -1,10 +1,6 @@
 import 'dart:convert';
 
 import 'package:gson/gson.dart';
-
-import 'package:objd/src/basic/text_components.dart';
-import 'package:objd/src/basic/types/block.dart';
-import 'package:objd/src/basic/types/slot.dart';
 import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/wrappers/summon.dart';
 

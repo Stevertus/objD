@@ -1,11 +1,7 @@
 import 'dart:convert';
 
-import 'package:objd/src/basic/widget.dart';
-import 'package:objd/src/basic/command.dart';
 import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/build/build.dart';
-import 'package:objd/src/basic/types/entity.dart';
-import 'package:objd/src/basic/text_components.dart';
 
 class Title extends RestActionAble {
   String type;
@@ -16,7 +12,7 @@ class Title extends RestActionAble {
   Title(
     Entity selector, {
     required List<TextComponent> show,
-  })   : type = 'title',
+  })  : type = 'title',
         entity = selector.toString(),
         jsonText = json.encode(show.map((text) => text.toMap()).toList());
 

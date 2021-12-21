@@ -2,7 +2,11 @@ import 'dart:async';
 
 import 'dart:html';
 
-Future<List> generateIO(Map<String, String> files, String path) =>
+Future<List> generateIO(
+  Map<String, String> files,
+  String path, {
+  bool useIsolates = false,
+}) =>
     throw UnsupportedError('objd web mode');
 
 String getPath(String path, String name) =>

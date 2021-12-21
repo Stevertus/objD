@@ -82,7 +82,7 @@ class Location extends Tag {
     if (biome != null) ret['predicate']['biome'] = biome;
     if (dimension != null) {
       if (dimension is Dimension) {
-        ret['predicate']['dimension'] = dimension.toString().split('.')[1];
+        ret['predicate']['dimension'] = dimension.name;
       } else {
         ret['predicate'] = dimension.toString();
       }

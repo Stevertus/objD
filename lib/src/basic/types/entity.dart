@@ -1,22 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:objd/src/basic/types/area.dart';
-import 'package:objd/src/basic/for_list.dart';
-import 'package:objd/src/basic/types/block.dart';
-import 'package:objd/src/basic/types/location.dart';
-import 'package:objd/src/basic/types/particles.dart';
-import 'package:objd/src/basic/types/rotation.dart';
-import 'package:objd/src/basic/score.dart';
-import 'package:objd/src/basic/tag.dart';
-import 'package:objd/src/basic/types/slot.dart';
-import 'package:objd/src/basic/widgets.dart';
-import 'package:objd/src/basic/types/selector.dart';
 import 'package:objd/core.dart';
-import 'package:objd/src/wrappers/execute.dart';
-
-import 'package:objd/src/wrappers/team.dart';
-
-import 'item.dart';
 export 'entities.dart';
 
 abstract class EntityClass {
@@ -423,7 +407,7 @@ class Entity implements EntityClass {
       arguments['type'] = n + type.toString();
     }
     if (gamemode != null) {
-      arguments['gamemode'] = n + gamemode.toString().split('.').last;
+      arguments['gamemode'] = n + gamemode.name;
     }
     if (name != null) {
       arguments['name'] = n + name;
@@ -481,7 +465,7 @@ class Entity implements EntityClass {
   }
 
   Entity sort(Sort sort) {
-    arguments['sort'] = sort.toString().split('.').last;
+    arguments['sort'] = sort.name;
     return this;
   }
 

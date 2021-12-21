@@ -7,7 +7,7 @@ class Entity {
 
   @override
   String toString() {
-    return _entity.toString().split('.')[1].toLowerCase();
+    return _entity.name.toLowerCase();
   }
 }
 

@@ -19,10 +19,7 @@ class SetGamemode extends RestActionAble {
   @override
   Command generate(Context context) {
     return Command(
-      'gamemode ' +
-          mode.toString().split('.')[1] +
-          ' ' +
-          (target ?? Entity.Self()).toString(),
+      'gamemode ' + mode.name + ' ' + (target ?? Entity.Self()).toString(),
     );
   }
 }

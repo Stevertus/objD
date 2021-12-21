@@ -1,7 +1,9 @@
 ## 0.4.4
 
-- fixed `.mcfunction` extension appearing in context's file path(used by File.recursive and others)
+- added experimental Multithreading option `--useIsolates` for saving files, let me know if you see performance improvements using it
+- fixed `.mcfunction` extension appearing in Context's file path(used by File.recursive and others)
 - fixed JsonFile not being exported
+- removed unnessary imports
 
 ## 0.4.3
 

@@ -1,17 +1,7 @@
-import 'package:objd/src/basic/extend.dart';
-import 'package:objd/src/basic/file.dart';
-import 'package:objd/src/basic/folder.dart';
-import 'package:objd/src/basic/group.dart';
-import 'package:objd/src/basic/module.dart';
-import 'package:objd/src/basic/pack.dart';
-import 'package:objd/src/basic/scoreboard.dart';
 import 'package:objd/src/basic/text.dart';
-import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/build/build_pack.dart';
 import 'package:objd/src/build/build_project.dart';
-import 'package:objd/src/build/context.dart';
 import 'package:objd/core.dart';
-import 'package:objd/src/wrappers/comment.dart';
 
 void scan(
   Widget wid, {
@@ -55,31 +45,30 @@ void scan(
     if (!pack.addScoreboard(wid.name)) return;
   }
 
-  if (wid is Widget) {
-    dynamic child = wid.generate(context);
-    // is module
-    if (wid is Module) {
-      var files = wid.registerFiles();
-      // add files to child
-      if (files.isNotEmpty && child is Widget) {
-        child = <Widget>[child, ...files];
-      }
+  // Other Widget
+  dynamic child = wid.generate(context);
+  // is module
+  if (wid is Module) {
+    var files = wid.registerFiles();
+    // add files to child
+    if (files.isNotEmpty && child is Widget) {
+      child = <Widget>[child, ...files];
     }
-
-    // is single widget
-    if (child is Widget) {
-      return scanWith(context, child);
-    }
-
-    // is list widget
-    if (child is List<Widget?>) {
-      for (var x in child) {
-        if (x != null) scanWith(context, x);
-      }
-      return;
-    }
-    throw 'Cannot build Widget: ' + wid.toString();
   }
+
+  // is single widget
+  if (child is Widget) {
+    return scanWith(context, child);
+  }
+
+  // is list widget
+  if (child is List<Widget?>) {
+    for (var x in child) {
+      if (x != null) scanWith(context, x);
+    }
+    return;
+  }
+  throw 'Cannot build Widget: ' + wid.toString();
 }
 
 String _findText(Text wid, Context context) {

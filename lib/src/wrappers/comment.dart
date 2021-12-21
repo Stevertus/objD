@@ -1,5 +1,4 @@
 import 'package:objd/src/basic/text.dart';
-import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/build/build.dart';
 

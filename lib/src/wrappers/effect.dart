@@ -1,8 +1,3 @@
-import 'package:objd/src/basic/command.dart';
-import 'package:objd/src/basic/types/entity.dart';
-import 'package:objd/src/basic/rest_action.dart';
-import 'package:objd/src/basic/widget.dart';
-import 'package:objd/src/build/context.dart';
 import 'package:objd/core.dart';
 
 class Effect extends RestActionAble {
@@ -57,14 +52,12 @@ class Effect extends RestActionAble {
     if (_type == 'clear') {
       return Command(
         'effect clear $entity' +
-            (effect != null
-                ? ' minecraft:' + effect.toString().split('.')[1]
-                : ''),
+            (effect != null ? ' minecraft:' + effect!.name : ''),
       );
     } else {
       return Command(
         'effect give $entity minecraft:' +
-            effect.toString().split('.')[1] +
+            effect!.name +
             ' $duration $amplifier ${!showParticles!}',
       );
     }

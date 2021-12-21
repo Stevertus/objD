@@ -1,0 +1,7 @@
+.vscode/
+.dart_tool/
+.packages
+.gitignore
+web_example
+pubspec.lock
+generators/
