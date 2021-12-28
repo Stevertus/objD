@@ -53,13 +53,16 @@ class Particle extends RestActionAble {
   Particle.block(
     Block block, {
     bool falling = false,
+    bool marker = false,
     this.location,
     this.delta,
     this.speed = 0,
     this.count = 1,
     this.force = false,
     this.player,
-  })  : particle = falling ? Particles.falling_dust : Particles.block,
+  })  : particle = falling
+            ? Particles.falling_dust
+            : (marker ? Particles.block_marker : Particles.block),
         texture = block.toString();
 
   /// For the Item particle(shows item break) there is a named constructor
@@ -115,15 +118,21 @@ class Particle extends RestActionAble {
   @override
   Widget generate(Context context) {
     var _gen = particle.toString();
-    if (texture != null) _gen += ' ' + texture!;
-    if (location != null) _gen += ' ' + location.toString();
+
+    if (context.version >= 18 &&
+        ["minecraft:barrier", "minecraft:light"].contains(particle.type)) {
+      _gen = "${Particles.block_marker} ${particle.type}";
+    }
+
+    if (texture != null) _gen += ' $texture';
+    if (location != null) _gen += ' $location';
     if (delta != null) {
       if (location == null) {
         throw ('If you decide to use the full particle command add a delta, location, speed and count property!');
       }
       _gen += ' $delta $speed $count ';
       _gen += force ? 'force' : 'normal';
-      if (player != null) _gen += ' ' + player.toString();
+      if (player != null) _gen += ' $player';
     }
     return Command('particle ' + _gen);
   }

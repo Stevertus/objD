@@ -355,7 +355,7 @@ class Execute extends RestActionAble {
         children: [w],
       );
 
-  void storeBlock({
+  Execute storeBlock({
     ExecuteStoreResultType result = ExecuteStoreResultType.result,
     required Location location,
     required String path,
@@ -372,7 +372,7 @@ class Execute extends RestActionAble {
         scale.toString()
       ].join(' '));
 
-  void storeEntity({
+  Execute storeEntity({
     ExecuteStoreResultType result = ExecuteStoreResultType.result,
     required Entity entity,
     required String path,
@@ -390,7 +390,7 @@ class Execute extends RestActionAble {
           ' ' +
           scale.toString());
 
-  void storeScore({
+  Execute storeScore({
     ExecuteStoreResultType result = ExecuteStoreResultType.result,
     required Score score,
   }) =>
@@ -403,7 +403,7 @@ class Execute extends RestActionAble {
             score.score,
       );
 
-  void storeBossbar({
+  Execute storeBossbar({
     ExecuteStoreResultType result = ExecuteStoreResultType.result,
     required String name,
     BossbarOption setting = BossbarOption.value,

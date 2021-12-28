@@ -1,8 +1,12 @@
 ## 0.4.4
 
+- added version aware translation of barrier and light particles when setting version to 18
 - added experimental Multithreading option `--useIsolates` for saving files, let me know if you see performance improvements using it
+- updated enums to use latest Dart 2.15 features
+- updated blocks and items to 1.18.1
 - fixed `.mcfunction` extension appearing in Context's file path(used by File.recursive and others)
 - fixed JsonFile not being exported
+- fixed Team Widget wrongly generate seeFriendlyInvisible when seeInvisible is set
 - removed unnessary imports
 
 ## 0.4.3

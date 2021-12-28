@@ -69,7 +69,7 @@ class Team extends RestActionAble {
     if (collision != null) modifiers['collisionRule'] = _genEnum(collision);
     if (prefix != null) modifiers['prefix'] = prefix;
     if (suffix != null) modifiers['suffix'] = suffix;
-    if (seeInvisible != null) modifiers['seeFriendlyInvisible'] = seeInvisible;
+    if (seeInvisible != null) modifiers['seeFriendlyInvisibles'] = seeInvisible;
   }
 
   String _genEnum(ModifyTeam en) {

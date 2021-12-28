@@ -642,6 +642,7 @@ class Items {
     music_disc_far,
     music_disc_mall,
     music_disc_mellohi,
+    music_disc_otherside,
     music_disc_pigstep,
     music_disc_stal,
     music_disc_strad,
@@ -1106,7 +1107,7 @@ class Items {
   ];
 
   /// A List of newer experimental items introduced in the next minecraft version
-  static const List<Item> snapshot = [music_disc_otherside];
+  static const List<Item> snapshot = [];
 
   /// [Acacia Boat](https://minecraft.gamepedia.com/acacia_boat)
   ///
@@ -4485,6 +4486,12 @@ class Items {
   static const Item music_disc_mellohi =
       Item.type('minecraft:music_disc_mellohi');
 
+  /// [Music Disc Otherside](https://minecraft.gamepedia.com/music_disc_otherside)
+  ///
+  /// _(minecraft:music_disc_otherside)_
+  static const Item music_disc_otherside =
+      Item.type('minecraft:music_disc_otherside');
+
   /// [Music Disc Pigstep](https://minecraft.gamepedia.com/music_disc_pigstep)
   ///
   /// _(minecraft:music_disc_pigstep)_
@@ -6948,10 +6955,4 @@ class Items {
   /// _(minecraft:zombified_piglin_spawn_egg)_
   static const Item zombified_piglin_spawn_egg =
       Item.type('minecraft:zombified_piglin_spawn_egg');
-
-  /// [Music Disc Otherside](https://minecraft.gamepedia.com/music_disc_otherside)
-  ///
-  /// _(minecraft:music_disc_otherside)_
-  static const Item music_disc_otherside =
-      Item.type('minecraft:music_disc_otherside');
 }

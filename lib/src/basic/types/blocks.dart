@@ -21,6 +21,8 @@ class Blocks {
     activator_rail,
     air,
     allium,
+    amethyst_block,
+    amethyst_cluster,
     ancient_debris,
     andesite,
     andesite_slab,
@@ -29,6 +31,8 @@ class Blocks {
     anvil,
     attached_melon_stem,
     attached_pumpkin_stem,
+    azalea,
+    azalea_leaves,
     azure_bluet,
     bamboo,
     bamboo_sapling,
@@ -41,6 +45,8 @@ class Blocks {
     beehive,
     beetroots,
     bell,
+    big_dripleaf,
+    big_dripleaf_stem,
     birch_button,
     birch_door,
     birch_fence,
@@ -58,6 +64,8 @@ class Blocks {
     birch_wood,
     black_banner,
     black_bed,
+    black_candle,
+    black_candle_cake,
     black_carpet,
     black_concrete,
     black_concrete_powder,
@@ -75,6 +83,8 @@ class Blocks {
     blast_furnace,
     blue_banner,
     blue_bed,
+    blue_candle,
+    blue_candle_cake,
     blue_carpet,
     blue_concrete,
     blue_concrete_powder,
@@ -100,6 +110,8 @@ class Blocks {
     bricks,
     brown_banner,
     brown_bed,
+    brown_candle,
+    brown_candle_cake,
     brown_carpet,
     brown_concrete,
     brown_concrete_powder,
@@ -117,18 +129,25 @@ class Blocks {
     bubble_coral_block,
     bubble_coral_fan,
     bubble_coral_wall_fan,
+    budding_amethyst,
     cactus,
     cake,
+    calcite,
     campfire,
+    candle,
+    candle_cake,
     carrots,
     cartography_table,
     carved_pumpkin,
     cauldron,
     cave_air,
+    cave_vines,
+    cave_vines_plant,
     chain,
     chain_command_block,
     chest,
     chipped_anvil,
+    chiseled_deepslate,
     chiseled_nether_bricks,
     chiseled_polished_blackstone,
     chiseled_quartz_block,
@@ -141,6 +160,10 @@ class Blocks {
     coal_block,
     coal_ore,
     coarse_dirt,
+    cobbled_deepslate,
+    cobbled_deepslate_slab,
+    cobbled_deepslate_stairs,
+    cobbled_deepslate_wall,
     cobblestone,
     cobblestone_slab,
     cobblestone_stairs,
@@ -151,7 +174,11 @@ class Blocks {
     comparator,
     composter,
     conduit,
+    copper_block,
+    copper_ore,
     cornflower,
+    cracked_deepslate_bricks,
+    cracked_deepslate_tiles,
     cracked_nether_bricks,
     cracked_polished_blackstone_bricks,
     cracked_stone_bricks,
@@ -175,12 +202,17 @@ class Blocks {
     crimson_trapdoor,
     crimson_wall_sign,
     crying_obsidian,
+    cut_copper,
+    cut_copper_slab,
+    cut_copper_stairs,
     cut_red_sandstone,
     cut_red_sandstone_slab,
     cut_sandstone,
     cut_sandstone_slab,
     cyan_banner,
     cyan_bed,
+    cyan_candle,
+    cyan_candle_cake,
     cyan_carpet,
     cyan_concrete,
     cyan_concrete_powder,
@@ -233,6 +265,23 @@ class Blocks {
     dead_tube_coral_block,
     dead_tube_coral_fan,
     dead_tube_coral_wall_fan,
+    deepslate,
+    deepslate_brick_slab,
+    deepslate_brick_stairs,
+    deepslate_brick_wall,
+    deepslate_bricks,
+    deepslate_coal_ore,
+    deepslate_copper_ore,
+    deepslate_diamond_ore,
+    deepslate_emerald_ore,
+    deepslate_gold_ore,
+    deepslate_iron_ore,
+    deepslate_lapis_ore,
+    deepslate_redstone_ore,
+    deepslate_tile_slab,
+    deepslate_tile_stairs,
+    deepslate_tile_wall,
+    deepslate_tiles,
     detector_rail,
     diamond_block,
     diamond_ore,
@@ -241,11 +290,13 @@ class Blocks {
     diorite_stairs,
     diorite_wall,
     dirt,
+    dirt_path,
     dispenser,
     dragon_egg,
     dragon_head,
     dragon_wall_head,
     dried_kelp_block,
+    dripstone_block,
     dropper,
     emerald_block,
     emerald_ore,
@@ -260,6 +311,10 @@ class Blocks {
     end_stone_brick_wall,
     end_stone_bricks,
     ender_chest,
+    exposed_copper,
+    exposed_cut_copper,
+    exposed_cut_copper_slab,
+    exposed_cut_copper_stairs,
     farmland,
     fern,
     fire,
@@ -269,11 +324,14 @@ class Blocks {
     fire_coral_wall_fan,
     fletching_table,
     flower_pot,
+    flowering_azalea,
+    flowering_azalea_leaves,
     frosted_ice,
     furnace,
     gilded_blackstone,
     glass,
     glass_pane,
+    glow_lichen,
     glowstone,
     gold_block,
     gold_ore,
@@ -283,10 +341,11 @@ class Blocks {
     granite_wall,
     grass,
     grass_block,
-    grass_path,
     gravel,
     gray_banner,
     gray_bed,
+    gray_candle,
+    gray_candle_cake,
     gray_carpet,
     gray_concrete,
     gray_concrete_powder,
@@ -299,6 +358,8 @@ class Blocks {
     gray_wool,
     green_banner,
     green_bed,
+    green_candle,
+    green_candle_cake,
     green_carpet,
     green_concrete,
     green_concrete_powder,
@@ -310,6 +371,7 @@ class Blocks {
     green_wall_banner,
     green_wool,
     grindstone,
+    hanging_roots,
     hay_block,
     heavy_weighted_pressure_plate,
     honey_block,
@@ -323,6 +385,7 @@ class Blocks {
     infested_chiseled_stone_bricks,
     infested_cobblestone,
     infested_cracked_stone_bricks,
+    infested_deepslate,
     infested_mossy_stone_bricks,
     infested_stone,
     infested_stone_bricks,
@@ -355,12 +418,17 @@ class Blocks {
     lantern,
     lapis_block,
     lapis_ore,
+    large_amethyst_bud,
     large_fern,
     lava,
+    lava_cauldron,
     lectern,
     lever,
+    light,
     light_blue_banner,
     light_blue_bed,
+    light_blue_candle,
+    light_blue_candle_cake,
     light_blue_carpet,
     light_blue_concrete,
     light_blue_concrete_powder,
@@ -373,6 +441,8 @@ class Blocks {
     light_blue_wool,
     light_gray_banner,
     light_gray_bed,
+    light_gray_candle,
+    light_gray_candle_cake,
     light_gray_carpet,
     light_gray_concrete,
     light_gray_concrete_powder,
@@ -384,11 +454,14 @@ class Blocks {
     light_gray_wall_banner,
     light_gray_wool,
     light_weighted_pressure_plate,
+    lightning_rod,
     lilac,
     lily_of_the_valley,
     lily_pad,
     lime_banner,
     lime_bed,
+    lime_candle,
+    lime_candle_cake,
     lime_carpet,
     lime_concrete,
     lime_concrete_powder,
@@ -403,6 +476,8 @@ class Blocks {
     loom,
     magenta_banner,
     magenta_bed,
+    magenta_candle,
+    magenta_candle_cake,
     magenta_carpet,
     magenta_concrete,
     magenta_concrete_powder,
@@ -414,8 +489,11 @@ class Blocks {
     magenta_wall_banner,
     magenta_wool,
     magma_block,
+    medium_amethyst_bud,
     melon,
     melon_stem,
+    moss_block,
+    moss_carpet,
     mossy_cobblestone,
     mossy_cobblestone_slab,
     mossy_cobblestone_stairs,
@@ -460,6 +538,8 @@ class Blocks {
     obsidian,
     orange_banner,
     orange_bed,
+    orange_candle,
+    orange_candle_cake,
     orange_carpet,
     orange_concrete,
     orange_concrete_powder,
@@ -472,11 +552,17 @@ class Blocks {
     orange_wall_banner,
     orange_wool,
     oxeye_daisy,
+    oxidized_copper,
+    oxidized_cut_copper,
+    oxidized_cut_copper_slab,
+    oxidized_cut_copper_stairs,
     packed_ice,
     peony,
     petrified_oak_slab,
     pink_banner,
     pink_bed,
+    pink_candle,
+    pink_candle_cake,
     pink_carpet,
     pink_concrete,
     pink_concrete_powder,
@@ -493,6 +579,7 @@ class Blocks {
     player_head,
     player_wall_head,
     podzol,
+    pointed_dripstone,
     polished_andesite,
     polished_andesite_slab,
     polished_andesite_stairs,
@@ -507,6 +594,10 @@ class Blocks {
     polished_blackstone_slab,
     polished_blackstone_stairs,
     polished_blackstone_wall,
+    polished_deepslate,
+    polished_deepslate_slab,
+    polished_deepslate_stairs,
+    polished_deepslate_wall,
     polished_diorite,
     polished_diorite_slab,
     polished_diorite_stairs,
@@ -517,6 +608,7 @@ class Blocks {
     potatoes,
     potted_acacia_sapling,
     potted_allium,
+    potted_azalea_bush,
     potted_azure_bluet,
     potted_bamboo,
     potted_birch_sapling,
@@ -530,6 +622,7 @@ class Blocks {
     potted_dark_oak_sapling,
     potted_dead_bush,
     potted_fern,
+    potted_flowering_azalea_bush,
     potted_jungle_sapling,
     potted_lily_of_the_valley,
     potted_oak_sapling,
@@ -544,6 +637,8 @@ class Blocks {
     potted_warped_roots,
     potted_white_tulip,
     potted_wither_rose,
+    powder_snow,
+    powder_snow_cauldron,
     powered_rail,
     prismarine,
     prismarine_brick_slab,
@@ -556,6 +651,8 @@ class Blocks {
     pumpkin_stem,
     purple_banner,
     purple_bed,
+    purple_candle,
+    purple_candle_cake,
     purple_carpet,
     purple_concrete,
     purple_concrete_powder,
@@ -576,8 +673,13 @@ class Blocks {
     quartz_slab,
     quartz_stairs,
     rail,
+    raw_copper_block,
+    raw_gold_block,
+    raw_iron_block,
     red_banner,
     red_bed,
+    red_candle,
+    red_candle_cake,
     red_carpet,
     red_concrete,
     red_concrete_powder,
@@ -609,6 +711,7 @@ class Blocks {
     repeater,
     repeating_command_block,
     respawn_anchor,
+    rooted_dirt,
     rose_bush,
     sand,
     sandstone,
@@ -616,6 +719,7 @@ class Blocks {
     sandstone_stairs,
     sandstone_wall,
     scaffolding,
+    sculk_sensor,
     sea_lantern,
     sea_pickle,
     seagrass,
@@ -624,8 +728,11 @@ class Blocks {
     skeleton_skull,
     skeleton_wall_skull,
     slime_block,
+    small_amethyst_bud,
+    small_dripleaf,
     smithing_table,
     smoker,
+    smooth_basalt,
     smooth_quartz,
     smooth_quartz_slab,
     smooth_quartz_stairs,
@@ -648,6 +755,7 @@ class Blocks {
     soul_wall_torch,
     spawner,
     sponge,
+    spore_blossom,
     spruce_button,
     spruce_door,
     spruce_fence,
@@ -699,6 +807,7 @@ class Blocks {
     tall_seagrass,
     target,
     terracotta,
+    tinted_glass,
     tnt,
     torch,
     trapped_chest,
@@ -708,6 +817,7 @@ class Blocks {
     tube_coral_block,
     tube_coral_fan,
     tube_coral_wall_fan,
+    tuff,
     turtle_egg,
     twisting_vines,
     twisting_vines_plant,
@@ -732,155 +842,6 @@ class Blocks {
     warped_wall_sign,
     warped_wart_block,
     water,
-    weeping_vines,
-    weeping_vines_plant,
-    wet_sponge,
-    wheat,
-    white_banner,
-    white_bed,
-    white_carpet,
-    white_concrete,
-    white_concrete_powder,
-    white_glazed_terracotta,
-    white_shulker_box,
-    white_stained_glass,
-    white_stained_glass_pane,
-    white_terracotta,
-    white_tulip,
-    white_wall_banner,
-    white_wool,
-    wither_rose,
-    wither_skeleton_skull,
-    wither_skeleton_wall_skull,
-    yellow_banner,
-    yellow_bed,
-    yellow_carpet,
-    yellow_concrete,
-    yellow_concrete_powder,
-    yellow_glazed_terracotta,
-    yellow_shulker_box,
-    yellow_stained_glass,
-    yellow_stained_glass_pane,
-    yellow_terracotta,
-    yellow_wall_banner,
-    yellow_wool,
-    zombie_head,
-    zombie_wall_head
-  ];
-
-  /// A List of newer experimental blocks introduced in the next minecraft version
-  static const List<Block> snapshot = [
-    amethyst_block,
-    amethyst_cluster,
-    azalea,
-    azalea_leaves,
-    big_dripleaf,
-    big_dripleaf_stem,
-    black_candle,
-    black_candle_cake,
-    blue_candle,
-    blue_candle_cake,
-    brown_candle,
-    brown_candle_cake,
-    budding_amethyst,
-    calcite,
-    candle,
-    candle_cake,
-    cave_vines,
-    cave_vines_plant,
-    chiseled_deepslate,
-    cobbled_deepslate,
-    cobbled_deepslate_slab,
-    cobbled_deepslate_stairs,
-    cobbled_deepslate_wall,
-    copper_block,
-    copper_ore,
-    cracked_deepslate_bricks,
-    cracked_deepslate_tiles,
-    cut_copper,
-    cut_copper_slab,
-    cut_copper_stairs,
-    cyan_candle,
-    cyan_candle_cake,
-    deepslate,
-    deepslate_brick_slab,
-    deepslate_brick_stairs,
-    deepslate_brick_wall,
-    deepslate_bricks,
-    deepslate_coal_ore,
-    deepslate_copper_ore,
-    deepslate_diamond_ore,
-    deepslate_emerald_ore,
-    deepslate_gold_ore,
-    deepslate_iron_ore,
-    deepslate_lapis_ore,
-    deepslate_redstone_ore,
-    deepslate_tile_slab,
-    deepslate_tile_stairs,
-    deepslate_tile_wall,
-    deepslate_tiles,
-    dirt_path,
-    dripstone_block,
-    exposed_copper,
-    exposed_cut_copper,
-    exposed_cut_copper_slab,
-    exposed_cut_copper_stairs,
-    flowering_azalea,
-    flowering_azalea_leaves,
-    glow_lichen,
-    gray_candle,
-    gray_candle_cake,
-    green_candle,
-    green_candle_cake,
-    hanging_roots,
-    infested_deepslate,
-    large_amethyst_bud,
-    lava_cauldron,
-    light,
-    light_blue_candle,
-    light_blue_candle_cake,
-    light_gray_candle,
-    light_gray_candle_cake,
-    lightning_rod,
-    lime_candle,
-    lime_candle_cake,
-    magenta_candle,
-    magenta_candle_cake,
-    medium_amethyst_bud,
-    moss_block,
-    moss_carpet,
-    orange_candle,
-    orange_candle_cake,
-    oxidized_copper,
-    oxidized_cut_copper,
-    oxidized_cut_copper_slab,
-    oxidized_cut_copper_stairs,
-    pink_candle,
-    pink_candle_cake,
-    pointed_dripstone,
-    polished_deepslate,
-    polished_deepslate_slab,
-    polished_deepslate_stairs,
-    polished_deepslate_wall,
-    potted_azalea_bush,
-    potted_flowering_azalea_bush,
-    powder_snow,
-    powder_snow_cauldron,
-    purple_candle,
-    purple_candle_cake,
-    raw_copper_block,
-    raw_gold_block,
-    raw_iron_block,
-    red_candle,
-    red_candle_cake,
-    rooted_dirt,
-    sculk_sensor,
-    small_amethyst_bud,
-    small_dripleaf,
-    smooth_basalt,
-    spore_blossom,
-    tinted_glass,
-    tuff,
     water_cauldron,
     waxed_copper_block,
     waxed_cut_copper,
@@ -902,11 +863,48 @@ class Blocks {
     weathered_cut_copper,
     weathered_cut_copper_slab,
     weathered_cut_copper_stairs,
+    weeping_vines,
+    weeping_vines_plant,
+    wet_sponge,
+    wheat,
+    white_banner,
+    white_bed,
     white_candle,
     white_candle_cake,
+    white_carpet,
+    white_concrete,
+    white_concrete_powder,
+    white_glazed_terracotta,
+    white_shulker_box,
+    white_stained_glass,
+    white_stained_glass_pane,
+    white_terracotta,
+    white_tulip,
+    white_wall_banner,
+    white_wool,
+    wither_rose,
+    wither_skeleton_skull,
+    wither_skeleton_wall_skull,
+    yellow_banner,
+    yellow_bed,
     yellow_candle,
-    yellow_candle_cake
+    yellow_candle_cake,
+    yellow_carpet,
+    yellow_concrete,
+    yellow_concrete_powder,
+    yellow_glazed_terracotta,
+    yellow_shulker_box,
+    yellow_stained_glass,
+    yellow_stained_glass_pane,
+    yellow_terracotta,
+    yellow_wall_banner,
+    yellow_wool,
+    zombie_head,
+    zombie_wall_head
   ];
+
+  /// A List of newer experimental blocks introduced in the next minecraft version
+  static const List<Block> snapshot = [];
 
   /// [Acacia Button](https://minecraft.gamepedia.com/acacia_button)
   ///
@@ -999,6 +997,16 @@ class Blocks {
   /// _(minecraft:allium)_
   static const Block allium = Block('minecraft:allium');
 
+  /// [Amethyst Block](https://minecraft.gamepedia.com/amethyst_block)
+  ///
+  /// _(minecraft:amethyst_block)_
+  static const Block amethyst_block = Block('minecraft:amethyst_block');
+
+  /// [Amethyst Cluster](https://minecraft.gamepedia.com/amethyst_cluster)
+  ///
+  /// _(minecraft:amethyst_cluster)_
+  static const Block amethyst_cluster = Block('minecraft:amethyst_cluster');
+
   /// [Ancient Debris](https://minecraft.gamepedia.com/ancient_debris)
   ///
   /// _(minecraft:ancient_debris)_
@@ -1040,6 +1048,16 @@ class Blocks {
   /// _(minecraft:attached_pumpkin_stem)_
   static const Block attached_pumpkin_stem =
       Block('minecraft:attached_pumpkin_stem');
+
+  /// [Azalea](https://minecraft.gamepedia.com/azalea)
+  ///
+  /// _(minecraft:azalea)_
+  static const Block azalea = Block('minecraft:azalea');
+
+  /// [Azalea Leaves](https://minecraft.gamepedia.com/azalea_leaves)
+  ///
+  /// _(minecraft:azalea_leaves)_
+  static const Block azalea_leaves = Block('minecraft:azalea_leaves');
 
   /// [Azure Bluet](https://minecraft.gamepedia.com/azure_bluet)
   ///
@@ -1100,6 +1118,16 @@ class Blocks {
   ///
   /// _(minecraft:bell)_
   static const Block bell = Block('minecraft:bell');
+
+  /// [Big Dripleaf](https://minecraft.gamepedia.com/big_dripleaf)
+  ///
+  /// _(minecraft:big_dripleaf)_
+  static const Block big_dripleaf = Block('minecraft:big_dripleaf');
+
+  /// [Big Dripleaf Stem](https://minecraft.gamepedia.com/big_dripleaf_stem)
+  ///
+  /// _(minecraft:big_dripleaf_stem)_
+  static const Block big_dripleaf_stem = Block('minecraft:big_dripleaf_stem');
 
   /// [Birch Button](https://minecraft.gamepedia.com/birch_button)
   ///
@@ -1186,6 +1214,16 @@ class Blocks {
   ///
   /// _(minecraft:black_bed)_
   static const Block black_bed = Block('minecraft:black_bed');
+
+  /// [Black Candle](https://minecraft.gamepedia.com/black_candle)
+  ///
+  /// _(minecraft:black_candle)_
+  static const Block black_candle = Block('minecraft:black_candle');
+
+  /// [Black Candle Cake](https://minecraft.gamepedia.com/black_candle_cake)
+  ///
+  /// _(minecraft:black_candle_cake)_
+  static const Block black_candle_cake = Block('minecraft:black_candle_cake');
 
   /// [Black Carpet](https://minecraft.gamepedia.com/black_carpet)
   ///
@@ -1275,6 +1313,16 @@ class Blocks {
   ///
   /// _(minecraft:blue_bed)_
   static const Block blue_bed = Block('minecraft:blue_bed');
+
+  /// [Blue Candle](https://minecraft.gamepedia.com/blue_candle)
+  ///
+  /// _(minecraft:blue_candle)_
+  static const Block blue_candle = Block('minecraft:blue_candle');
+
+  /// [Blue Candle Cake](https://minecraft.gamepedia.com/blue_candle_cake)
+  ///
+  /// _(minecraft:blue_candle_cake)_
+  static const Block blue_candle_cake = Block('minecraft:blue_candle_cake');
 
   /// [Blue Carpet](https://minecraft.gamepedia.com/blue_carpet)
   ///
@@ -1405,6 +1453,16 @@ class Blocks {
   /// _(minecraft:brown_bed)_
   static const Block brown_bed = Block('minecraft:brown_bed');
 
+  /// [Brown Candle](https://minecraft.gamepedia.com/brown_candle)
+  ///
+  /// _(minecraft:brown_candle)_
+  static const Block brown_candle = Block('minecraft:brown_candle');
+
+  /// [Brown Candle Cake](https://minecraft.gamepedia.com/brown_candle_cake)
+  ///
+  /// _(minecraft:brown_candle_cake)_
+  static const Block brown_candle_cake = Block('minecraft:brown_candle_cake');
+
   /// [Brown Carpet](https://minecraft.gamepedia.com/brown_carpet)
   ///
   /// _(minecraft:brown_carpet)_
@@ -1496,6 +1554,11 @@ class Blocks {
   static const Block bubble_coral_wall_fan =
       Block('minecraft:bubble_coral_wall_fan');
 
+  /// [Budding Amethyst](https://minecraft.gamepedia.com/budding_amethyst)
+  ///
+  /// _(minecraft:budding_amethyst)_
+  static const Block budding_amethyst = Block('minecraft:budding_amethyst');
+
   /// [Cactus](https://minecraft.gamepedia.com/cactus)
   ///
   /// _(minecraft:cactus)_
@@ -1506,10 +1569,25 @@ class Blocks {
   /// _(minecraft:cake)_
   static const Block cake = Block('minecraft:cake');
 
+  /// [Calcite](https://minecraft.gamepedia.com/calcite)
+  ///
+  /// _(minecraft:calcite)_
+  static const Block calcite = Block('minecraft:calcite');
+
   /// [Campfire](https://minecraft.gamepedia.com/campfire)
   ///
   /// _(minecraft:campfire)_
   static const Block campfire = Block('minecraft:campfire');
+
+  /// [Candle](https://minecraft.gamepedia.com/candle)
+  ///
+  /// _(minecraft:candle)_
+  static const Block candle = Block('minecraft:candle');
+
+  /// [Candle Cake](https://minecraft.gamepedia.com/candle_cake)
+  ///
+  /// _(minecraft:candle_cake)_
+  static const Block candle_cake = Block('minecraft:candle_cake');
 
   /// [Carrots](https://minecraft.gamepedia.com/carrots)
   ///
@@ -1536,6 +1614,16 @@ class Blocks {
   /// _(minecraft:cave_air)_
   static const Block cave_air = Block('minecraft:cave_air');
 
+  /// [Cave Vines](https://minecraft.gamepedia.com/cave_vines)
+  ///
+  /// _(minecraft:cave_vines)_
+  static const Block cave_vines = Block('minecraft:cave_vines');
+
+  /// [Cave Vines Plant](https://minecraft.gamepedia.com/cave_vines_plant)
+  ///
+  /// _(minecraft:cave_vines_plant)_
+  static const Block cave_vines_plant = Block('minecraft:cave_vines_plant');
+
   /// [Chain](https://minecraft.gamepedia.com/chain)
   ///
   /// _(minecraft:chain)_
@@ -1556,6 +1644,11 @@ class Blocks {
   ///
   /// _(minecraft:chipped_anvil)_
   static const Block chipped_anvil = Block('minecraft:chipped_anvil');
+
+  /// [Chiseled Deepslate](https://minecraft.gamepedia.com/chiseled_deepslate)
+  ///
+  /// _(minecraft:chiseled_deepslate)_
+  static const Block chiseled_deepslate = Block('minecraft:chiseled_deepslate');
 
   /// [Chiseled Nether Bricks](https://minecraft.gamepedia.com/chiseled_nether_bricks)
   ///
@@ -1622,6 +1715,29 @@ class Blocks {
   /// _(minecraft:coarse_dirt)_
   static const Block coarse_dirt = Block('minecraft:coarse_dirt');
 
+  /// [Cobbled Deepslate](https://minecraft.gamepedia.com/cobbled_deepslate)
+  ///
+  /// _(minecraft:cobbled_deepslate)_
+  static const Block cobbled_deepslate = Block('minecraft:cobbled_deepslate');
+
+  /// [Cobbled Deepslate Slab](https://minecraft.gamepedia.com/cobbled_deepslate_slab)
+  ///
+  /// _(minecraft:cobbled_deepslate_slab)_
+  static const Block cobbled_deepslate_slab =
+      Block('minecraft:cobbled_deepslate_slab');
+
+  /// [Cobbled Deepslate Stairs](https://minecraft.gamepedia.com/cobbled_deepslate_stairs)
+  ///
+  /// _(minecraft:cobbled_deepslate_stairs)_
+  static const Block cobbled_deepslate_stairs =
+      Block('minecraft:cobbled_deepslate_stairs');
+
+  /// [Cobbled Deepslate Wall](https://minecraft.gamepedia.com/cobbled_deepslate_wall)
+  ///
+  /// _(minecraft:cobbled_deepslate_wall)_
+  static const Block cobbled_deepslate_wall =
+      Block('minecraft:cobbled_deepslate_wall');
+
   /// [Cobblestone](https://minecraft.gamepedia.com/cobblestone)
   ///
   /// _(minecraft:cobblestone)_
@@ -1672,10 +1788,32 @@ class Blocks {
   /// _(minecraft:conduit)_
   static const Block conduit = Block('minecraft:conduit');
 
+  /// [Copper Block](https://minecraft.gamepedia.com/copper_block)
+  ///
+  /// _(minecraft:copper_block)_
+  static const Block copper_block = Block('minecraft:copper_block');
+
+  /// [Copper Ore](https://minecraft.gamepedia.com/copper_ore)
+  ///
+  /// _(minecraft:copper_ore)_
+  static const Block copper_ore = Block('minecraft:copper_ore');
+
   /// [Cornflower](https://minecraft.gamepedia.com/cornflower)
   ///
   /// _(minecraft:cornflower)_
   static const Block cornflower = Block('minecraft:cornflower');
+
+  /// [Cracked Deepslate Bricks](https://minecraft.gamepedia.com/cracked_deepslate_bricks)
+  ///
+  /// _(minecraft:cracked_deepslate_bricks)_
+  static const Block cracked_deepslate_bricks =
+      Block('minecraft:cracked_deepslate_bricks');
+
+  /// [Cracked Deepslate Tiles](https://minecraft.gamepedia.com/cracked_deepslate_tiles)
+  ///
+  /// _(minecraft:cracked_deepslate_tiles)_
+  static const Block cracked_deepslate_tiles =
+      Block('minecraft:cracked_deepslate_tiles');
 
   /// [Cracked Nether Bricks](https://minecraft.gamepedia.com/cracked_nether_bricks)
   ///
@@ -1796,6 +1934,21 @@ class Blocks {
   /// _(minecraft:crying_obsidian)_
   static const Block crying_obsidian = Block('minecraft:crying_obsidian');
 
+  /// [Cut Copper](https://minecraft.gamepedia.com/cut_copper)
+  ///
+  /// _(minecraft:cut_copper)_
+  static const Block cut_copper = Block('minecraft:cut_copper');
+
+  /// [Cut Copper Slab](https://minecraft.gamepedia.com/cut_copper_slab)
+  ///
+  /// _(minecraft:cut_copper_slab)_
+  static const Block cut_copper_slab = Block('minecraft:cut_copper_slab');
+
+  /// [Cut Copper Stairs](https://minecraft.gamepedia.com/cut_copper_stairs)
+  ///
+  /// _(minecraft:cut_copper_stairs)_
+  static const Block cut_copper_stairs = Block('minecraft:cut_copper_stairs');
+
   /// [Cut Red Sandstone](https://minecraft.gamepedia.com/cut_red_sandstone)
   ///
   /// _(minecraft:cut_red_sandstone)_
@@ -1826,6 +1979,16 @@ class Blocks {
   ///
   /// _(minecraft:cyan_bed)_
   static const Block cyan_bed = Block('minecraft:cyan_bed');
+
+  /// [Cyan Candle](https://minecraft.gamepedia.com/cyan_candle)
+  ///
+  /// _(minecraft:cyan_candle)_
+  static const Block cyan_candle = Block('minecraft:cyan_candle');
+
+  /// [Cyan Candle Cake](https://minecraft.gamepedia.com/cyan_candle_cake)
+  ///
+  /// _(minecraft:cyan_candle_cake)_
+  static const Block cyan_candle_cake = Block('minecraft:cyan_candle_cake');
 
   /// [Cyan Carpet](https://minecraft.gamepedia.com/cyan_carpet)
   ///
@@ -2109,6 +2272,102 @@ class Blocks {
   static const Block dead_tube_coral_wall_fan =
       Block('minecraft:dead_tube_coral_wall_fan');
 
+  /// [Deepslate](https://minecraft.gamepedia.com/deepslate)
+  ///
+  /// _(minecraft:deepslate)_
+  static const Block deepslate = Block('minecraft:deepslate');
+
+  /// [Deepslate Brick Slab](https://minecraft.gamepedia.com/deepslate_brick_slab)
+  ///
+  /// _(minecraft:deepslate_brick_slab)_
+  static const Block deepslate_brick_slab =
+      Block('minecraft:deepslate_brick_slab');
+
+  /// [Deepslate Brick Stairs](https://minecraft.gamepedia.com/deepslate_brick_stairs)
+  ///
+  /// _(minecraft:deepslate_brick_stairs)_
+  static const Block deepslate_brick_stairs =
+      Block('minecraft:deepslate_brick_stairs');
+
+  /// [Deepslate Brick Wall](https://minecraft.gamepedia.com/deepslate_brick_wall)
+  ///
+  /// _(minecraft:deepslate_brick_wall)_
+  static const Block deepslate_brick_wall =
+      Block('minecraft:deepslate_brick_wall');
+
+  /// [Deepslate Bricks](https://minecraft.gamepedia.com/deepslate_bricks)
+  ///
+  /// _(minecraft:deepslate_bricks)_
+  static const Block deepslate_bricks = Block('minecraft:deepslate_bricks');
+
+  /// [Deepslate Coal Ore](https://minecraft.gamepedia.com/deepslate_coal_ore)
+  ///
+  /// _(minecraft:deepslate_coal_ore)_
+  static const Block deepslate_coal_ore = Block('minecraft:deepslate_coal_ore');
+
+  /// [Deepslate Copper Ore](https://minecraft.gamepedia.com/deepslate_copper_ore)
+  ///
+  /// _(minecraft:deepslate_copper_ore)_
+  static const Block deepslate_copper_ore =
+      Block('minecraft:deepslate_copper_ore');
+
+  /// [Deepslate Diamond Ore](https://minecraft.gamepedia.com/deepslate_diamond_ore)
+  ///
+  /// _(minecraft:deepslate_diamond_ore)_
+  static const Block deepslate_diamond_ore =
+      Block('minecraft:deepslate_diamond_ore');
+
+  /// [Deepslate Emerald Ore](https://minecraft.gamepedia.com/deepslate_emerald_ore)
+  ///
+  /// _(minecraft:deepslate_emerald_ore)_
+  static const Block deepslate_emerald_ore =
+      Block('minecraft:deepslate_emerald_ore');
+
+  /// [Deepslate Gold Ore](https://minecraft.gamepedia.com/deepslate_gold_ore)
+  ///
+  /// _(minecraft:deepslate_gold_ore)_
+  static const Block deepslate_gold_ore = Block('minecraft:deepslate_gold_ore');
+
+  /// [Deepslate Iron Ore](https://minecraft.gamepedia.com/deepslate_iron_ore)
+  ///
+  /// _(minecraft:deepslate_iron_ore)_
+  static const Block deepslate_iron_ore = Block('minecraft:deepslate_iron_ore');
+
+  /// [Deepslate Lapis Ore](https://minecraft.gamepedia.com/deepslate_lapis_ore)
+  ///
+  /// _(minecraft:deepslate_lapis_ore)_
+  static const Block deepslate_lapis_ore =
+      Block('minecraft:deepslate_lapis_ore');
+
+  /// [Deepslate Redstone Ore](https://minecraft.gamepedia.com/deepslate_redstone_ore)
+  ///
+  /// _(minecraft:deepslate_redstone_ore)_
+  static const Block deepslate_redstone_ore =
+      Block('minecraft:deepslate_redstone_ore');
+
+  /// [Deepslate Tile Slab](https://minecraft.gamepedia.com/deepslate_tile_slab)
+  ///
+  /// _(minecraft:deepslate_tile_slab)_
+  static const Block deepslate_tile_slab =
+      Block('minecraft:deepslate_tile_slab');
+
+  /// [Deepslate Tile Stairs](https://minecraft.gamepedia.com/deepslate_tile_stairs)
+  ///
+  /// _(minecraft:deepslate_tile_stairs)_
+  static const Block deepslate_tile_stairs =
+      Block('minecraft:deepslate_tile_stairs');
+
+  /// [Deepslate Tile Wall](https://minecraft.gamepedia.com/deepslate_tile_wall)
+  ///
+  /// _(minecraft:deepslate_tile_wall)_
+  static const Block deepslate_tile_wall =
+      Block('minecraft:deepslate_tile_wall');
+
+  /// [Deepslate Tiles](https://minecraft.gamepedia.com/deepslate_tiles)
+  ///
+  /// _(minecraft:deepslate_tiles)_
+  static const Block deepslate_tiles = Block('minecraft:deepslate_tiles');
+
   /// [Detector Rail](https://minecraft.gamepedia.com/detector_rail)
   ///
   /// _(minecraft:detector_rail)_
@@ -2149,6 +2408,11 @@ class Blocks {
   /// _(minecraft:dirt)_
   static const Block dirt = Block('minecraft:dirt');
 
+  /// [Dirt Path](https://minecraft.gamepedia.com/dirt_path)
+  ///
+  /// _(minecraft:dirt_path)_
+  static const Block dirt_path = Block('minecraft:dirt_path');
+
   /// [Dispenser](https://minecraft.gamepedia.com/dispenser)
   ///
   /// _(minecraft:dispenser)_
@@ -2173,6 +2437,11 @@ class Blocks {
   ///
   /// _(minecraft:dried_kelp_block)_
   static const Block dried_kelp_block = Block('minecraft:dried_kelp_block');
+
+  /// [Dripstone Block](https://minecraft.gamepedia.com/dripstone_block)
+  ///
+  /// _(minecraft:dripstone_block)_
+  static const Block dripstone_block = Block('minecraft:dripstone_block');
 
   /// [Dropper](https://minecraft.gamepedia.com/dropper)
   ///
@@ -2247,6 +2516,28 @@ class Blocks {
   /// _(minecraft:ender_chest)_
   static const Block ender_chest = Block('minecraft:ender_chest');
 
+  /// [Exposed Copper](https://minecraft.gamepedia.com/exposed_copper)
+  ///
+  /// _(minecraft:exposed_copper)_
+  static const Block exposed_copper = Block('minecraft:exposed_copper');
+
+  /// [Exposed Cut Copper](https://minecraft.gamepedia.com/exposed_cut_copper)
+  ///
+  /// _(minecraft:exposed_cut_copper)_
+  static const Block exposed_cut_copper = Block('minecraft:exposed_cut_copper');
+
+  /// [Exposed Cut Copper Slab](https://minecraft.gamepedia.com/exposed_cut_copper_slab)
+  ///
+  /// _(minecraft:exposed_cut_copper_slab)_
+  static const Block exposed_cut_copper_slab =
+      Block('minecraft:exposed_cut_copper_slab');
+
+  /// [Exposed Cut Copper Stairs](https://minecraft.gamepedia.com/exposed_cut_copper_stairs)
+  ///
+  /// _(minecraft:exposed_cut_copper_stairs)_
+  static const Block exposed_cut_copper_stairs =
+      Block('minecraft:exposed_cut_copper_stairs');
+
   /// [Farmland](https://minecraft.gamepedia.com/farmland)
   ///
   /// _(minecraft:farmland)_
@@ -2293,6 +2584,17 @@ class Blocks {
   /// _(minecraft:flower_pot)_
   static const Block flower_pot = Block('minecraft:flower_pot');
 
+  /// [Flowering Azalea](https://minecraft.gamepedia.com/flowering_azalea)
+  ///
+  /// _(minecraft:flowering_azalea)_
+  static const Block flowering_azalea = Block('minecraft:flowering_azalea');
+
+  /// [Flowering Azalea Leaves](https://minecraft.gamepedia.com/flowering_azalea_leaves)
+  ///
+  /// _(minecraft:flowering_azalea_leaves)_
+  static const Block flowering_azalea_leaves =
+      Block('minecraft:flowering_azalea_leaves');
+
   /// [Frosted Ice](https://minecraft.gamepedia.com/frosted_ice)
   ///
   /// _(minecraft:frosted_ice)_
@@ -2317,6 +2619,11 @@ class Blocks {
   ///
   /// _(minecraft:glass_pane)_
   static const Block glass_pane = Block('minecraft:glass_pane');
+
+  /// [Glow Lichen](https://minecraft.gamepedia.com/glow_lichen)
+  ///
+  /// _(minecraft:glow_lichen)_
+  static const Block glow_lichen = Block('minecraft:glow_lichen');
 
   /// [Glowstone](https://minecraft.gamepedia.com/glowstone)
   ///
@@ -2363,11 +2670,6 @@ class Blocks {
   /// _(minecraft:grass_block)_
   static const Block grass_block = Block('minecraft:grass_block');
 
-  /// [Grass Path](https://minecraft.gamepedia.com/grass_path)
-  ///
-  /// _(minecraft:grass_path)_
-  static const Block grass_path = Block('minecraft:grass_path');
-
   /// [Gravel](https://minecraft.gamepedia.com/gravel)
   ///
   /// _(minecraft:gravel)_
@@ -2382,6 +2684,16 @@ class Blocks {
   ///
   /// _(minecraft:gray_bed)_
   static const Block gray_bed = Block('minecraft:gray_bed');
+
+  /// [Gray Candle](https://minecraft.gamepedia.com/gray_candle)
+  ///
+  /// _(minecraft:gray_candle)_
+  static const Block gray_candle = Block('minecraft:gray_candle');
+
+  /// [Gray Candle Cake](https://minecraft.gamepedia.com/gray_candle_cake)
+  ///
+  /// _(minecraft:gray_candle_cake)_
+  static const Block gray_candle_cake = Block('minecraft:gray_candle_cake');
 
   /// [Gray Carpet](https://minecraft.gamepedia.com/gray_carpet)
   ///
@@ -2446,6 +2758,16 @@ class Blocks {
   /// _(minecraft:green_bed)_
   static const Block green_bed = Block('minecraft:green_bed');
 
+  /// [Green Candle](https://minecraft.gamepedia.com/green_candle)
+  ///
+  /// _(minecraft:green_candle)_
+  static const Block green_candle = Block('minecraft:green_candle');
+
+  /// [Green Candle Cake](https://minecraft.gamepedia.com/green_candle_cake)
+  ///
+  /// _(minecraft:green_candle_cake)_
+  static const Block green_candle_cake = Block('minecraft:green_candle_cake');
+
   /// [Green Carpet](https://minecraft.gamepedia.com/green_carpet)
   ///
   /// _(minecraft:green_carpet)_
@@ -2504,6 +2826,11 @@ class Blocks {
   ///
   /// _(minecraft:grindstone)_
   static const Block grindstone = Block('minecraft:grindstone');
+
+  /// [Hanging Roots](https://minecraft.gamepedia.com/hanging_roots)
+  ///
+  /// _(minecraft:hanging_roots)_
+  static const Block hanging_roots = Block('minecraft:hanging_roots');
 
   /// [Hay Block](https://minecraft.gamepedia.com/hay_block)
   ///
@@ -2574,6 +2901,11 @@ class Blocks {
   /// _(minecraft:infested_cracked_stone_bricks)_
   static const Block infested_cracked_stone_bricks =
       Block('minecraft:infested_cracked_stone_bricks');
+
+  /// [Infested Deepslate](https://minecraft.gamepedia.com/infested_deepslate)
+  ///
+  /// _(minecraft:infested_deepslate)_
+  static const Block infested_deepslate = Block('minecraft:infested_deepslate');
 
   /// [Infested Mossy Stone Bricks](https://minecraft.gamepedia.com/infested_mossy_stone_bricks)
   ///
@@ -2738,6 +3070,11 @@ class Blocks {
   /// _(minecraft:lapis_ore)_
   static const Block lapis_ore = Block('minecraft:lapis_ore');
 
+  /// [Large Amethyst Bud](https://minecraft.gamepedia.com/large_amethyst_bud)
+  ///
+  /// _(minecraft:large_amethyst_bud)_
+  static const Block large_amethyst_bud = Block('minecraft:large_amethyst_bud');
+
   /// [Large Fern](https://minecraft.gamepedia.com/large_fern)
   ///
   /// _(minecraft:large_fern)_
@@ -2747,6 +3084,11 @@ class Blocks {
   ///
   /// _(minecraft:lava)_
   static const Block lava = Block('minecraft:lava');
+
+  /// [Lava Cauldron](https://minecraft.gamepedia.com/lava_cauldron)
+  ///
+  /// _(minecraft:lava_cauldron)_
+  static const Block lava_cauldron = Block('minecraft:lava_cauldron');
 
   /// [Lectern](https://minecraft.gamepedia.com/lectern)
   ///
@@ -2758,6 +3100,11 @@ class Blocks {
   /// _(minecraft:lever)_
   static const Block lever = Block('minecraft:lever');
 
+  /// [Light](https://minecraft.gamepedia.com/light)
+  ///
+  /// _(minecraft:light)_
+  static const Block light = Block('minecraft:light');
+
   /// [Light Blue Banner](https://minecraft.gamepedia.com/light_blue_banner)
   ///
   /// _(minecraft:light_blue_banner)_
@@ -2767,6 +3114,17 @@ class Blocks {
   ///
   /// _(minecraft:light_blue_bed)_
   static const Block light_blue_bed = Block('minecraft:light_blue_bed');
+
+  /// [Light Blue Candle](https://minecraft.gamepedia.com/light_blue_candle)
+  ///
+  /// _(minecraft:light_blue_candle)_
+  static const Block light_blue_candle = Block('minecraft:light_blue_candle');
+
+  /// [Light Blue Candle Cake](https://minecraft.gamepedia.com/light_blue_candle_cake)
+  ///
+  /// _(minecraft:light_blue_candle_cake)_
+  static const Block light_blue_candle_cake =
+      Block('minecraft:light_blue_candle_cake');
 
   /// [Light Blue Carpet](https://minecraft.gamepedia.com/light_blue_carpet)
   ///
@@ -2836,6 +3194,17 @@ class Blocks {
   /// _(minecraft:light_gray_bed)_
   static const Block light_gray_bed = Block('minecraft:light_gray_bed');
 
+  /// [Light Gray Candle](https://minecraft.gamepedia.com/light_gray_candle)
+  ///
+  /// _(minecraft:light_gray_candle)_
+  static const Block light_gray_candle = Block('minecraft:light_gray_candle');
+
+  /// [Light Gray Candle Cake](https://minecraft.gamepedia.com/light_gray_candle_cake)
+  ///
+  /// _(minecraft:light_gray_candle_cake)_
+  static const Block light_gray_candle_cake =
+      Block('minecraft:light_gray_candle_cake');
+
   /// [Light Gray Carpet](https://minecraft.gamepedia.com/light_gray_carpet)
   ///
   /// _(minecraft:light_gray_carpet)_
@@ -2900,6 +3269,11 @@ class Blocks {
   static const Block light_weighted_pressure_plate =
       Block('minecraft:light_weighted_pressure_plate');
 
+  /// [Lightning Rod](https://minecraft.gamepedia.com/lightning_rod)
+  ///
+  /// _(minecraft:lightning_rod)_
+  static const Block lightning_rod = Block('minecraft:lightning_rod');
+
   /// [Lilac](https://minecraft.gamepedia.com/lilac)
   ///
   /// _(minecraft:lilac)_
@@ -2924,6 +3298,16 @@ class Blocks {
   ///
   /// _(minecraft:lime_bed)_
   static const Block lime_bed = Block('minecraft:lime_bed');
+
+  /// [Lime Candle](https://minecraft.gamepedia.com/lime_candle)
+  ///
+  /// _(minecraft:lime_candle)_
+  static const Block lime_candle = Block('minecraft:lime_candle');
+
+  /// [Lime Candle Cake](https://minecraft.gamepedia.com/lime_candle_cake)
+  ///
+  /// _(minecraft:lime_candle_cake)_
+  static const Block lime_candle_cake = Block('minecraft:lime_candle_cake');
 
   /// [Lime Carpet](https://minecraft.gamepedia.com/lime_carpet)
   ///
@@ -2998,6 +3382,17 @@ class Blocks {
   /// _(minecraft:magenta_bed)_
   static const Block magenta_bed = Block('minecraft:magenta_bed');
 
+  /// [Magenta Candle](https://minecraft.gamepedia.com/magenta_candle)
+  ///
+  /// _(minecraft:magenta_candle)_
+  static const Block magenta_candle = Block('minecraft:magenta_candle');
+
+  /// [Magenta Candle Cake](https://minecraft.gamepedia.com/magenta_candle_cake)
+  ///
+  /// _(minecraft:magenta_candle_cake)_
+  static const Block magenta_candle_cake =
+      Block('minecraft:magenta_candle_cake');
+
   /// [Magenta Carpet](https://minecraft.gamepedia.com/magenta_carpet)
   ///
   /// _(minecraft:magenta_carpet)_
@@ -3059,6 +3454,12 @@ class Blocks {
   /// _(minecraft:magma_block)_
   static const Block magma_block = Block('minecraft:magma_block');
 
+  /// [Medium Amethyst Bud](https://minecraft.gamepedia.com/medium_amethyst_bud)
+  ///
+  /// _(minecraft:medium_amethyst_bud)_
+  static const Block medium_amethyst_bud =
+      Block('minecraft:medium_amethyst_bud');
+
   /// [Melon](https://minecraft.gamepedia.com/melon)
   ///
   /// _(minecraft:melon)_
@@ -3068,6 +3469,16 @@ class Blocks {
   ///
   /// _(minecraft:melon_stem)_
   static const Block melon_stem = Block('minecraft:melon_stem');
+
+  /// [Moss Block](https://minecraft.gamepedia.com/moss_block)
+  ///
+  /// _(minecraft:moss_block)_
+  static const Block moss_block = Block('minecraft:moss_block');
+
+  /// [Moss Carpet](https://minecraft.gamepedia.com/moss_carpet)
+  ///
+  /// _(minecraft:moss_carpet)_
+  static const Block moss_carpet = Block('minecraft:moss_carpet');
 
   /// [Mossy Cobblestone](https://minecraft.gamepedia.com/mossy_cobblestone)
   ///
@@ -3296,6 +3707,16 @@ class Blocks {
   /// _(minecraft:orange_bed)_
   static const Block orange_bed = Block('minecraft:orange_bed');
 
+  /// [Orange Candle](https://minecraft.gamepedia.com/orange_candle)
+  ///
+  /// _(minecraft:orange_candle)_
+  static const Block orange_candle = Block('minecraft:orange_candle');
+
+  /// [Orange Candle Cake](https://minecraft.gamepedia.com/orange_candle_cake)
+  ///
+  /// _(minecraft:orange_candle_cake)_
+  static const Block orange_candle_cake = Block('minecraft:orange_candle_cake');
+
   /// [Orange Carpet](https://minecraft.gamepedia.com/orange_carpet)
   ///
   /// _(minecraft:orange_carpet)_
@@ -3360,6 +3781,29 @@ class Blocks {
   /// _(minecraft:oxeye_daisy)_
   static const Block oxeye_daisy = Block('minecraft:oxeye_daisy');
 
+  /// [Oxidized Copper](https://minecraft.gamepedia.com/oxidized_copper)
+  ///
+  /// _(minecraft:oxidized_copper)_
+  static const Block oxidized_copper = Block('minecraft:oxidized_copper');
+
+  /// [Oxidized Cut Copper](https://minecraft.gamepedia.com/oxidized_cut_copper)
+  ///
+  /// _(minecraft:oxidized_cut_copper)_
+  static const Block oxidized_cut_copper =
+      Block('minecraft:oxidized_cut_copper');
+
+  /// [Oxidized Cut Copper Slab](https://minecraft.gamepedia.com/oxidized_cut_copper_slab)
+  ///
+  /// _(minecraft:oxidized_cut_copper_slab)_
+  static const Block oxidized_cut_copper_slab =
+      Block('minecraft:oxidized_cut_copper_slab');
+
+  /// [Oxidized Cut Copper Stairs](https://minecraft.gamepedia.com/oxidized_cut_copper_stairs)
+  ///
+  /// _(minecraft:oxidized_cut_copper_stairs)_
+  static const Block oxidized_cut_copper_stairs =
+      Block('minecraft:oxidized_cut_copper_stairs');
+
   /// [Packed Ice](https://minecraft.gamepedia.com/packed_ice)
   ///
   /// _(minecraft:packed_ice)_
@@ -3384,6 +3828,16 @@ class Blocks {
   ///
   /// _(minecraft:pink_bed)_
   static const Block pink_bed = Block('minecraft:pink_bed');
+
+  /// [Pink Candle](https://minecraft.gamepedia.com/pink_candle)
+  ///
+  /// _(minecraft:pink_candle)_
+  static const Block pink_candle = Block('minecraft:pink_candle');
+
+  /// [Pink Candle Cake](https://minecraft.gamepedia.com/pink_candle_cake)
+  ///
+  /// _(minecraft:pink_candle_cake)_
+  static const Block pink_candle_cake = Block('minecraft:pink_candle_cake');
 
   /// [Pink Carpet](https://minecraft.gamepedia.com/pink_carpet)
   ///
@@ -3468,6 +3922,11 @@ class Blocks {
   /// _(minecraft:podzol)_
   static const Block podzol = Block('minecraft:podzol');
 
+  /// [Pointed Dripstone](https://minecraft.gamepedia.com/pointed_dripstone)
+  ///
+  /// _(minecraft:pointed_dripstone)_
+  static const Block pointed_dripstone = Block('minecraft:pointed_dripstone');
+
   /// [Polished Andesite](https://minecraft.gamepedia.com/polished_andesite)
   ///
   /// _(minecraft:polished_andesite)_
@@ -3550,6 +4009,29 @@ class Blocks {
   static const Block polished_blackstone_wall =
       Block('minecraft:polished_blackstone_wall');
 
+  /// [Polished Deepslate](https://minecraft.gamepedia.com/polished_deepslate)
+  ///
+  /// _(minecraft:polished_deepslate)_
+  static const Block polished_deepslate = Block('minecraft:polished_deepslate');
+
+  /// [Polished Deepslate Slab](https://minecraft.gamepedia.com/polished_deepslate_slab)
+  ///
+  /// _(minecraft:polished_deepslate_slab)_
+  static const Block polished_deepslate_slab =
+      Block('minecraft:polished_deepslate_slab');
+
+  /// [Polished Deepslate Stairs](https://minecraft.gamepedia.com/polished_deepslate_stairs)
+  ///
+  /// _(minecraft:polished_deepslate_stairs)_
+  static const Block polished_deepslate_stairs =
+      Block('minecraft:polished_deepslate_stairs');
+
+  /// [Polished Deepslate Wall](https://minecraft.gamepedia.com/polished_deepslate_wall)
+  ///
+  /// _(minecraft:polished_deepslate_wall)_
+  static const Block polished_deepslate_wall =
+      Block('minecraft:polished_deepslate_wall');
+
   /// [Polished Diorite](https://minecraft.gamepedia.com/polished_diorite)
   ///
   /// _(minecraft:polished_diorite)_
@@ -3604,6 +4086,11 @@ class Blocks {
   ///
   /// _(minecraft:potted_allium)_
   static const Block potted_allium = Block('minecraft:potted_allium');
+
+  /// [Potted Azalea Bush](https://minecraft.gamepedia.com/potted_azalea_bush)
+  ///
+  /// _(minecraft:potted_azalea_bush)_
+  static const Block potted_azalea_bush = Block('minecraft:potted_azalea_bush');
 
   /// [Potted Azure Bluet](https://minecraft.gamepedia.com/potted_azure_bluet)
   ///
@@ -3674,6 +4161,12 @@ class Blocks {
   ///
   /// _(minecraft:potted_fern)_
   static const Block potted_fern = Block('minecraft:potted_fern');
+
+  /// [Potted Flowering Azalea Bush](https://minecraft.gamepedia.com/potted_flowering_azalea_bush)
+  ///
+  /// _(minecraft:potted_flowering_azalea_bush)_
+  static const Block potted_flowering_azalea_bush =
+      Block('minecraft:potted_flowering_azalea_bush');
 
   /// [Potted Jungle Sapling](https://minecraft.gamepedia.com/potted_jungle_sapling)
   ///
@@ -3752,6 +4245,17 @@ class Blocks {
   /// _(minecraft:potted_wither_rose)_
   static const Block potted_wither_rose = Block('minecraft:potted_wither_rose');
 
+  /// [Powder Snow](https://minecraft.gamepedia.com/powder_snow)
+  ///
+  /// _(minecraft:powder_snow)_
+  static const Block powder_snow = Block('minecraft:powder_snow');
+
+  /// [Powder Snow Cauldron](https://minecraft.gamepedia.com/powder_snow_cauldron)
+  ///
+  /// _(minecraft:powder_snow_cauldron)_
+  static const Block powder_snow_cauldron =
+      Block('minecraft:powder_snow_cauldron');
+
   /// [Powered Rail](https://minecraft.gamepedia.com/powered_rail)
   ///
   /// _(minecraft:powered_rail)_
@@ -3813,6 +4317,16 @@ class Blocks {
   ///
   /// _(minecraft:purple_bed)_
   static const Block purple_bed = Block('minecraft:purple_bed');
+
+  /// [Purple Candle](https://minecraft.gamepedia.com/purple_candle)
+  ///
+  /// _(minecraft:purple_candle)_
+  static const Block purple_candle = Block('minecraft:purple_candle');
+
+  /// [Purple Candle Cake](https://minecraft.gamepedia.com/purple_candle_cake)
+  ///
+  /// _(minecraft:purple_candle_cake)_
+  static const Block purple_candle_cake = Block('minecraft:purple_candle_cake');
 
   /// [Purple Carpet](https://minecraft.gamepedia.com/purple_carpet)
   ///
@@ -3918,6 +4432,21 @@ class Blocks {
   /// _(minecraft:rail)_
   static const Block rail = Block('minecraft:rail');
 
+  /// [Raw Copper Block](https://minecraft.gamepedia.com/raw_copper_block)
+  ///
+  /// _(minecraft:raw_copper_block)_
+  static const Block raw_copper_block = Block('minecraft:raw_copper_block');
+
+  /// [Raw Gold Block](https://minecraft.gamepedia.com/raw_gold_block)
+  ///
+  /// _(minecraft:raw_gold_block)_
+  static const Block raw_gold_block = Block('minecraft:raw_gold_block');
+
+  /// [Raw Iron Block](https://minecraft.gamepedia.com/raw_iron_block)
+  ///
+  /// _(minecraft:raw_iron_block)_
+  static const Block raw_iron_block = Block('minecraft:raw_iron_block');
+
   /// [Red Banner](https://minecraft.gamepedia.com/red_banner)
   ///
   /// _(minecraft:red_banner)_
@@ -3927,6 +4456,16 @@ class Blocks {
   ///
   /// _(minecraft:red_bed)_
   static const Block red_bed = Block('minecraft:red_bed');
+
+  /// [Red Candle](https://minecraft.gamepedia.com/red_candle)
+  ///
+  /// _(minecraft:red_candle)_
+  static const Block red_candle = Block('minecraft:red_candle');
+
+  /// [Red Candle Cake](https://minecraft.gamepedia.com/red_candle_cake)
+  ///
+  /// _(minecraft:red_candle_cake)_
+  static const Block red_candle_cake = Block('minecraft:red_candle_cake');
 
   /// [Red Carpet](https://minecraft.gamepedia.com/red_carpet)
   ///
@@ -4092,6 +4631,11 @@ class Blocks {
   /// _(minecraft:respawn_anchor)_
   static const Block respawn_anchor = Block('minecraft:respawn_anchor');
 
+  /// [Rooted Dirt](https://minecraft.gamepedia.com/rooted_dirt)
+  ///
+  /// _(minecraft:rooted_dirt)_
+  static const Block rooted_dirt = Block('minecraft:rooted_dirt');
+
   /// [Rose Bush](https://minecraft.gamepedia.com/rose_bush)
   ///
   /// _(minecraft:rose_bush)_
@@ -4126,6 +4670,11 @@ class Blocks {
   ///
   /// _(minecraft:scaffolding)_
   static const Block scaffolding = Block('minecraft:scaffolding');
+
+  /// [Sculk Sensor](https://minecraft.gamepedia.com/sculk_sensor)
+  ///
+  /// _(minecraft:sculk_sensor)_
+  static const Block sculk_sensor = Block('minecraft:sculk_sensor');
 
   /// [Sea Lantern](https://minecraft.gamepedia.com/sea_lantern)
   ///
@@ -4168,6 +4717,16 @@ class Blocks {
   /// _(minecraft:slime_block)_
   static const Block slime_block = Block('minecraft:slime_block');
 
+  /// [Small Amethyst Bud](https://minecraft.gamepedia.com/small_amethyst_bud)
+  ///
+  /// _(minecraft:small_amethyst_bud)_
+  static const Block small_amethyst_bud = Block('minecraft:small_amethyst_bud');
+
+  /// [Small Dripleaf](https://minecraft.gamepedia.com/small_dripleaf)
+  ///
+  /// _(minecraft:small_dripleaf)_
+  static const Block small_dripleaf = Block('minecraft:small_dripleaf');
+
   /// [Smithing Table](https://minecraft.gamepedia.com/smithing_table)
   ///
   /// _(minecraft:smithing_table)_
@@ -4177,6 +4736,11 @@ class Blocks {
   ///
   /// _(minecraft:smoker)_
   static const Block smoker = Block('minecraft:smoker');
+
+  /// [Smooth Basalt](https://minecraft.gamepedia.com/smooth_basalt)
+  ///
+  /// _(minecraft:smooth_basalt)_
+  static const Block smooth_basalt = Block('minecraft:smooth_basalt');
 
   /// [Smooth Quartz](https://minecraft.gamepedia.com/smooth_quartz)
   ///
@@ -4293,6 +4857,11 @@ class Blocks {
   ///
   /// _(minecraft:sponge)_
   static const Block sponge = Block('minecraft:sponge');
+
+  /// [Spore Blossom](https://minecraft.gamepedia.com/spore_blossom)
+  ///
+  /// _(minecraft:spore_blossom)_
+  static const Block spore_blossom = Block('minecraft:spore_blossom');
 
   /// [Spruce Button](https://minecraft.gamepedia.com/spruce_button)
   ///
@@ -4564,6 +5133,11 @@ class Blocks {
   /// _(minecraft:terracotta)_
   static const Block terracotta = Block('minecraft:terracotta');
 
+  /// [Tinted Glass](https://minecraft.gamepedia.com/tinted_glass)
+  ///
+  /// _(minecraft:tinted_glass)_
+  static const Block tinted_glass = Block('minecraft:tinted_glass');
+
   /// [Tnt](https://minecraft.gamepedia.com/tnt)
   ///
   /// _(minecraft:tnt)_
@@ -4609,6 +5183,11 @@ class Blocks {
   /// _(minecraft:tube_coral_wall_fan)_
   static const Block tube_coral_wall_fan =
       Block('minecraft:tube_coral_wall_fan');
+
+  /// [Tuff](https://minecraft.gamepedia.com/tuff)
+  ///
+  /// _(minecraft:tuff)_
+  static const Block tuff = Block('minecraft:tuff');
 
   /// [Turtle Egg](https://minecraft.gamepedia.com/turtle_egg)
   ///
@@ -4732,773 +5311,6 @@ class Blocks {
   /// _(minecraft:water)_
   static const Block water = Block('minecraft:water');
 
-  /// [Weeping Vines](https://minecraft.gamepedia.com/weeping_vines)
-  ///
-  /// _(minecraft:weeping_vines)_
-  static const Block weeping_vines = Block('minecraft:weeping_vines');
-
-  /// [Weeping Vines Plant](https://minecraft.gamepedia.com/weeping_vines_plant)
-  ///
-  /// _(minecraft:weeping_vines_plant)_
-  static const Block weeping_vines_plant =
-      Block('minecraft:weeping_vines_plant');
-
-  /// [Wet Sponge](https://minecraft.gamepedia.com/wet_sponge)
-  ///
-  /// _(minecraft:wet_sponge)_
-  static const Block wet_sponge = Block('minecraft:wet_sponge');
-
-  /// [Wheat](https://minecraft.gamepedia.com/wheat)
-  ///
-  /// _(minecraft:wheat)_
-  static const Block wheat = Block('minecraft:wheat');
-
-  /// [White Banner](https://minecraft.gamepedia.com/white_banner)
-  ///
-  /// _(minecraft:white_banner)_
-  static const Block white_banner = Block('minecraft:white_banner');
-
-  /// [White Bed](https://minecraft.gamepedia.com/white_bed)
-  ///
-  /// _(minecraft:white_bed)_
-  static const Block white_bed = Block('minecraft:white_bed');
-
-  /// [White Carpet](https://minecraft.gamepedia.com/white_carpet)
-  ///
-  /// _(minecraft:white_carpet)_
-  static const Block white_carpet = Block('minecraft:white_carpet');
-
-  /// [White Concrete](https://minecraft.gamepedia.com/white_concrete)
-  ///
-  /// _(minecraft:white_concrete)_
-  static const Block white_concrete = Block('minecraft:white_concrete');
-
-  /// [White Concrete Powder](https://minecraft.gamepedia.com/white_concrete_powder)
-  ///
-  /// _(minecraft:white_concrete_powder)_
-  static const Block white_concrete_powder =
-      Block('minecraft:white_concrete_powder');
-
-  /// [White Glazed Terracotta](https://minecraft.gamepedia.com/white_glazed_terracotta)
-  ///
-  /// _(minecraft:white_glazed_terracotta)_
-  static const Block white_glazed_terracotta =
-      Block('minecraft:white_glazed_terracotta');
-
-  /// [White Shulker Box](https://minecraft.gamepedia.com/white_shulker_box)
-  ///
-  /// _(minecraft:white_shulker_box)_
-  static const Block white_shulker_box = Block('minecraft:white_shulker_box');
-
-  /// [White Stained Glass](https://minecraft.gamepedia.com/white_stained_glass)
-  ///
-  /// _(minecraft:white_stained_glass)_
-  static const Block white_stained_glass =
-      Block('minecraft:white_stained_glass');
-
-  /// [White Stained Glass Pane](https://minecraft.gamepedia.com/white_stained_glass_pane)
-  ///
-  /// _(minecraft:white_stained_glass_pane)_
-  static const Block white_stained_glass_pane =
-      Block('minecraft:white_stained_glass_pane');
-
-  /// [White Terracotta](https://minecraft.gamepedia.com/white_terracotta)
-  ///
-  /// _(minecraft:white_terracotta)_
-  static const Block white_terracotta = Block('minecraft:white_terracotta');
-
-  /// [White Tulip](https://minecraft.gamepedia.com/white_tulip)
-  ///
-  /// _(minecraft:white_tulip)_
-  static const Block white_tulip = Block('minecraft:white_tulip');
-
-  /// [White Wall Banner](https://minecraft.gamepedia.com/white_wall_banner)
-  ///
-  /// _(minecraft:white_wall_banner)_
-  static const Block white_wall_banner = Block('minecraft:white_wall_banner');
-
-  /// [White Wool](https://minecraft.gamepedia.com/white_wool)
-  ///
-  /// _(minecraft:white_wool)_
-  static const Block white_wool = Block('minecraft:white_wool');
-
-  /// [Wither Rose](https://minecraft.gamepedia.com/wither_rose)
-  ///
-  /// _(minecraft:wither_rose)_
-  static const Block wither_rose = Block('minecraft:wither_rose');
-
-  /// [Wither Skeleton Skull](https://minecraft.gamepedia.com/wither_skeleton_skull)
-  ///
-  /// _(minecraft:wither_skeleton_skull)_
-  static const Block wither_skeleton_skull =
-      Block('minecraft:wither_skeleton_skull');
-
-  /// [Wither Skeleton Wall Skull](https://minecraft.gamepedia.com/wither_skeleton_wall_skull)
-  ///
-  /// _(minecraft:wither_skeleton_wall_skull)_
-  static const Block wither_skeleton_wall_skull =
-      Block('minecraft:wither_skeleton_wall_skull');
-
-  /// [Yellow Banner](https://minecraft.gamepedia.com/yellow_banner)
-  ///
-  /// _(minecraft:yellow_banner)_
-  static const Block yellow_banner = Block('minecraft:yellow_banner');
-
-  /// [Yellow Bed](https://minecraft.gamepedia.com/yellow_bed)
-  ///
-  /// _(minecraft:yellow_bed)_
-  static const Block yellow_bed = Block('minecraft:yellow_bed');
-
-  /// [Yellow Carpet](https://minecraft.gamepedia.com/yellow_carpet)
-  ///
-  /// _(minecraft:yellow_carpet)_
-  static const Block yellow_carpet = Block('minecraft:yellow_carpet');
-
-  /// [Yellow Concrete](https://minecraft.gamepedia.com/yellow_concrete)
-  ///
-  /// _(minecraft:yellow_concrete)_
-  static const Block yellow_concrete = Block('minecraft:yellow_concrete');
-
-  /// [Yellow Concrete Powder](https://minecraft.gamepedia.com/yellow_concrete_powder)
-  ///
-  /// _(minecraft:yellow_concrete_powder)_
-  static const Block yellow_concrete_powder =
-      Block('minecraft:yellow_concrete_powder');
-
-  /// [Yellow Glazed Terracotta](https://minecraft.gamepedia.com/yellow_glazed_terracotta)
-  ///
-  /// _(minecraft:yellow_glazed_terracotta)_
-  static const Block yellow_glazed_terracotta =
-      Block('minecraft:yellow_glazed_terracotta');
-
-  /// [Yellow Shulker Box](https://minecraft.gamepedia.com/yellow_shulker_box)
-  ///
-  /// _(minecraft:yellow_shulker_box)_
-  static const Block yellow_shulker_box = Block('minecraft:yellow_shulker_box');
-
-  /// [Yellow Stained Glass](https://minecraft.gamepedia.com/yellow_stained_glass)
-  ///
-  /// _(minecraft:yellow_stained_glass)_
-  static const Block yellow_stained_glass =
-      Block('minecraft:yellow_stained_glass');
-
-  /// [Yellow Stained Glass Pane](https://minecraft.gamepedia.com/yellow_stained_glass_pane)
-  ///
-  /// _(minecraft:yellow_stained_glass_pane)_
-  static const Block yellow_stained_glass_pane =
-      Block('minecraft:yellow_stained_glass_pane');
-
-  /// [Yellow Terracotta](https://minecraft.gamepedia.com/yellow_terracotta)
-  ///
-  /// _(minecraft:yellow_terracotta)_
-  static const Block yellow_terracotta = Block('minecraft:yellow_terracotta');
-
-  /// [Yellow Wall Banner](https://minecraft.gamepedia.com/yellow_wall_banner)
-  ///
-  /// _(minecraft:yellow_wall_banner)_
-  static const Block yellow_wall_banner = Block('minecraft:yellow_wall_banner');
-
-  /// [Yellow Wool](https://minecraft.gamepedia.com/yellow_wool)
-  ///
-  /// _(minecraft:yellow_wool)_
-  static const Block yellow_wool = Block('minecraft:yellow_wool');
-
-  /// [Zombie Head](https://minecraft.gamepedia.com/zombie_head)
-  ///
-  /// _(minecraft:zombie_head)_
-  static const Block zombie_head = Block('minecraft:zombie_head');
-
-  /// [Zombie Wall Head](https://minecraft.gamepedia.com/zombie_wall_head)
-  ///
-  /// _(minecraft:zombie_wall_head)_
-  static const Block zombie_wall_head = Block('minecraft:zombie_wall_head');
-
-  /// [Amethyst Block](https://minecraft.gamepedia.com/amethyst_block)
-  ///
-  /// _(minecraft:amethyst_block)_
-  static const Block amethyst_block = Block('minecraft:amethyst_block');
-
-  /// [Amethyst Cluster](https://minecraft.gamepedia.com/amethyst_cluster)
-  ///
-  /// _(minecraft:amethyst_cluster)_
-  static const Block amethyst_cluster = Block('minecraft:amethyst_cluster');
-
-  /// [Azalea](https://minecraft.gamepedia.com/azalea)
-  ///
-  /// _(minecraft:azalea)_
-  static const Block azalea = Block('minecraft:azalea');
-
-  /// [Azalea Leaves](https://minecraft.gamepedia.com/azalea_leaves)
-  ///
-  /// _(minecraft:azalea_leaves)_
-  static const Block azalea_leaves = Block('minecraft:azalea_leaves');
-
-  /// [Big Dripleaf](https://minecraft.gamepedia.com/big_dripleaf)
-  ///
-  /// _(minecraft:big_dripleaf)_
-  static const Block big_dripleaf = Block('minecraft:big_dripleaf');
-
-  /// [Big Dripleaf Stem](https://minecraft.gamepedia.com/big_dripleaf_stem)
-  ///
-  /// _(minecraft:big_dripleaf_stem)_
-  static const Block big_dripleaf_stem = Block('minecraft:big_dripleaf_stem');
-
-  /// [Black Candle](https://minecraft.gamepedia.com/black_candle)
-  ///
-  /// _(minecraft:black_candle)_
-  static const Block black_candle = Block('minecraft:black_candle');
-
-  /// [Black Candle Cake](https://minecraft.gamepedia.com/black_candle_cake)
-  ///
-  /// _(minecraft:black_candle_cake)_
-  static const Block black_candle_cake = Block('minecraft:black_candle_cake');
-
-  /// [Blue Candle](https://minecraft.gamepedia.com/blue_candle)
-  ///
-  /// _(minecraft:blue_candle)_
-  static const Block blue_candle = Block('minecraft:blue_candle');
-
-  /// [Blue Candle Cake](https://minecraft.gamepedia.com/blue_candle_cake)
-  ///
-  /// _(minecraft:blue_candle_cake)_
-  static const Block blue_candle_cake = Block('minecraft:blue_candle_cake');
-
-  /// [Brown Candle](https://minecraft.gamepedia.com/brown_candle)
-  ///
-  /// _(minecraft:brown_candle)_
-  static const Block brown_candle = Block('minecraft:brown_candle');
-
-  /// [Brown Candle Cake](https://minecraft.gamepedia.com/brown_candle_cake)
-  ///
-  /// _(minecraft:brown_candle_cake)_
-  static const Block brown_candle_cake = Block('minecraft:brown_candle_cake');
-
-  /// [Budding Amethyst](https://minecraft.gamepedia.com/budding_amethyst)
-  ///
-  /// _(minecraft:budding_amethyst)_
-  static const Block budding_amethyst = Block('minecraft:budding_amethyst');
-
-  /// [Calcite](https://minecraft.gamepedia.com/calcite)
-  ///
-  /// _(minecraft:calcite)_
-  static const Block calcite = Block('minecraft:calcite');
-
-  /// [Candle](https://minecraft.gamepedia.com/candle)
-  ///
-  /// _(minecraft:candle)_
-  static const Block candle = Block('minecraft:candle');
-
-  /// [Candle Cake](https://minecraft.gamepedia.com/candle_cake)
-  ///
-  /// _(minecraft:candle_cake)_
-  static const Block candle_cake = Block('minecraft:candle_cake');
-
-  /// [Cave Vines](https://minecraft.gamepedia.com/cave_vines)
-  ///
-  /// _(minecraft:cave_vines)_
-  static const Block cave_vines = Block('minecraft:cave_vines');
-
-  /// [Cave Vines Plant](https://minecraft.gamepedia.com/cave_vines_plant)
-  ///
-  /// _(minecraft:cave_vines_plant)_
-  static const Block cave_vines_plant = Block('minecraft:cave_vines_plant');
-
-  /// [Chiseled Deepslate](https://minecraft.gamepedia.com/chiseled_deepslate)
-  ///
-  /// _(minecraft:chiseled_deepslate)_
-  static const Block chiseled_deepslate = Block('minecraft:chiseled_deepslate');
-
-  /// [Cobbled Deepslate](https://minecraft.gamepedia.com/cobbled_deepslate)
-  ///
-  /// _(minecraft:cobbled_deepslate)_
-  static const Block cobbled_deepslate = Block('minecraft:cobbled_deepslate');
-
-  /// [Cobbled Deepslate Slab](https://minecraft.gamepedia.com/cobbled_deepslate_slab)
-  ///
-  /// _(minecraft:cobbled_deepslate_slab)_
-  static const Block cobbled_deepslate_slab =
-      Block('minecraft:cobbled_deepslate_slab');
-
-  /// [Cobbled Deepslate Stairs](https://minecraft.gamepedia.com/cobbled_deepslate_stairs)
-  ///
-  /// _(minecraft:cobbled_deepslate_stairs)_
-  static const Block cobbled_deepslate_stairs =
-      Block('minecraft:cobbled_deepslate_stairs');
-
-  /// [Cobbled Deepslate Wall](https://minecraft.gamepedia.com/cobbled_deepslate_wall)
-  ///
-  /// _(minecraft:cobbled_deepslate_wall)_
-  static const Block cobbled_deepslate_wall =
-      Block('minecraft:cobbled_deepslate_wall');
-
-  /// [Copper Block](https://minecraft.gamepedia.com/copper_block)
-  ///
-  /// _(minecraft:copper_block)_
-  static const Block copper_block = Block('minecraft:copper_block');
-
-  /// [Copper Ore](https://minecraft.gamepedia.com/copper_ore)
-  ///
-  /// _(minecraft:copper_ore)_
-  static const Block copper_ore = Block('minecraft:copper_ore');
-
-  /// [Cracked Deepslate Bricks](https://minecraft.gamepedia.com/cracked_deepslate_bricks)
-  ///
-  /// _(minecraft:cracked_deepslate_bricks)_
-  static const Block cracked_deepslate_bricks =
-      Block('minecraft:cracked_deepslate_bricks');
-
-  /// [Cracked Deepslate Tiles](https://minecraft.gamepedia.com/cracked_deepslate_tiles)
-  ///
-  /// _(minecraft:cracked_deepslate_tiles)_
-  static const Block cracked_deepslate_tiles =
-      Block('minecraft:cracked_deepslate_tiles');
-
-  /// [Cut Copper](https://minecraft.gamepedia.com/cut_copper)
-  ///
-  /// _(minecraft:cut_copper)_
-  static const Block cut_copper = Block('minecraft:cut_copper');
-
-  /// [Cut Copper Slab](https://minecraft.gamepedia.com/cut_copper_slab)
-  ///
-  /// _(minecraft:cut_copper_slab)_
-  static const Block cut_copper_slab = Block('minecraft:cut_copper_slab');
-
-  /// [Cut Copper Stairs](https://minecraft.gamepedia.com/cut_copper_stairs)
-  ///
-  /// _(minecraft:cut_copper_stairs)_
-  static const Block cut_copper_stairs = Block('minecraft:cut_copper_stairs');
-
-  /// [Cyan Candle](https://minecraft.gamepedia.com/cyan_candle)
-  ///
-  /// _(minecraft:cyan_candle)_
-  static const Block cyan_candle = Block('minecraft:cyan_candle');
-
-  /// [Cyan Candle Cake](https://minecraft.gamepedia.com/cyan_candle_cake)
-  ///
-  /// _(minecraft:cyan_candle_cake)_
-  static const Block cyan_candle_cake = Block('minecraft:cyan_candle_cake');
-
-  /// [Deepslate](https://minecraft.gamepedia.com/deepslate)
-  ///
-  /// _(minecraft:deepslate)_
-  static const Block deepslate = Block('minecraft:deepslate');
-
-  /// [Deepslate Brick Slab](https://minecraft.gamepedia.com/deepslate_brick_slab)
-  ///
-  /// _(minecraft:deepslate_brick_slab)_
-  static const Block deepslate_brick_slab =
-      Block('minecraft:deepslate_brick_slab');
-
-  /// [Deepslate Brick Stairs](https://minecraft.gamepedia.com/deepslate_brick_stairs)
-  ///
-  /// _(minecraft:deepslate_brick_stairs)_
-  static const Block deepslate_brick_stairs =
-      Block('minecraft:deepslate_brick_stairs');
-
-  /// [Deepslate Brick Wall](https://minecraft.gamepedia.com/deepslate_brick_wall)
-  ///
-  /// _(minecraft:deepslate_brick_wall)_
-  static const Block deepslate_brick_wall =
-      Block('minecraft:deepslate_brick_wall');
-
-  /// [Deepslate Bricks](https://minecraft.gamepedia.com/deepslate_bricks)
-  ///
-  /// _(minecraft:deepslate_bricks)_
-  static const Block deepslate_bricks = Block('minecraft:deepslate_bricks');
-
-  /// [Deepslate Coal Ore](https://minecraft.gamepedia.com/deepslate_coal_ore)
-  ///
-  /// _(minecraft:deepslate_coal_ore)_
-  static const Block deepslate_coal_ore = Block('minecraft:deepslate_coal_ore');
-
-  /// [Deepslate Copper Ore](https://minecraft.gamepedia.com/deepslate_copper_ore)
-  ///
-  /// _(minecraft:deepslate_copper_ore)_
-  static const Block deepslate_copper_ore =
-      Block('minecraft:deepslate_copper_ore');
-
-  /// [Deepslate Diamond Ore](https://minecraft.gamepedia.com/deepslate_diamond_ore)
-  ///
-  /// _(minecraft:deepslate_diamond_ore)_
-  static const Block deepslate_diamond_ore =
-      Block('minecraft:deepslate_diamond_ore');
-
-  /// [Deepslate Emerald Ore](https://minecraft.gamepedia.com/deepslate_emerald_ore)
-  ///
-  /// _(minecraft:deepslate_emerald_ore)_
-  static const Block deepslate_emerald_ore =
-      Block('minecraft:deepslate_emerald_ore');
-
-  /// [Deepslate Gold Ore](https://minecraft.gamepedia.com/deepslate_gold_ore)
-  ///
-  /// _(minecraft:deepslate_gold_ore)_
-  static const Block deepslate_gold_ore = Block('minecraft:deepslate_gold_ore');
-
-  /// [Deepslate Iron Ore](https://minecraft.gamepedia.com/deepslate_iron_ore)
-  ///
-  /// _(minecraft:deepslate_iron_ore)_
-  static const Block deepslate_iron_ore = Block('minecraft:deepslate_iron_ore');
-
-  /// [Deepslate Lapis Ore](https://minecraft.gamepedia.com/deepslate_lapis_ore)
-  ///
-  /// _(minecraft:deepslate_lapis_ore)_
-  static const Block deepslate_lapis_ore =
-      Block('minecraft:deepslate_lapis_ore');
-
-  /// [Deepslate Redstone Ore](https://minecraft.gamepedia.com/deepslate_redstone_ore)
-  ///
-  /// _(minecraft:deepslate_redstone_ore)_
-  static const Block deepslate_redstone_ore =
-      Block('minecraft:deepslate_redstone_ore');
-
-  /// [Deepslate Tile Slab](https://minecraft.gamepedia.com/deepslate_tile_slab)
-  ///
-  /// _(minecraft:deepslate_tile_slab)_
-  static const Block deepslate_tile_slab =
-      Block('minecraft:deepslate_tile_slab');
-
-  /// [Deepslate Tile Stairs](https://minecraft.gamepedia.com/deepslate_tile_stairs)
-  ///
-  /// _(minecraft:deepslate_tile_stairs)_
-  static const Block deepslate_tile_stairs =
-      Block('minecraft:deepslate_tile_stairs');
-
-  /// [Deepslate Tile Wall](https://minecraft.gamepedia.com/deepslate_tile_wall)
-  ///
-  /// _(minecraft:deepslate_tile_wall)_
-  static const Block deepslate_tile_wall =
-      Block('minecraft:deepslate_tile_wall');
-
-  /// [Deepslate Tiles](https://minecraft.gamepedia.com/deepslate_tiles)
-  ///
-  /// _(minecraft:deepslate_tiles)_
-  static const Block deepslate_tiles = Block('minecraft:deepslate_tiles');
-
-  /// [Dirt Path](https://minecraft.gamepedia.com/dirt_path)
-  ///
-  /// _(minecraft:dirt_path)_
-  static const Block dirt_path = Block('minecraft:dirt_path');
-
-  /// [Dripstone Block](https://minecraft.gamepedia.com/dripstone_block)
-  ///
-  /// _(minecraft:dripstone_block)_
-  static const Block dripstone_block = Block('minecraft:dripstone_block');
-
-  /// [Exposed Copper](https://minecraft.gamepedia.com/exposed_copper)
-  ///
-  /// _(minecraft:exposed_copper)_
-  static const Block exposed_copper = Block('minecraft:exposed_copper');
-
-  /// [Exposed Cut Copper](https://minecraft.gamepedia.com/exposed_cut_copper)
-  ///
-  /// _(minecraft:exposed_cut_copper)_
-  static const Block exposed_cut_copper = Block('minecraft:exposed_cut_copper');
-
-  /// [Exposed Cut Copper Slab](https://minecraft.gamepedia.com/exposed_cut_copper_slab)
-  ///
-  /// _(minecraft:exposed_cut_copper_slab)_
-  static const Block exposed_cut_copper_slab =
-      Block('minecraft:exposed_cut_copper_slab');
-
-  /// [Exposed Cut Copper Stairs](https://minecraft.gamepedia.com/exposed_cut_copper_stairs)
-  ///
-  /// _(minecraft:exposed_cut_copper_stairs)_
-  static const Block exposed_cut_copper_stairs =
-      Block('minecraft:exposed_cut_copper_stairs');
-
-  /// [Flowering Azalea](https://minecraft.gamepedia.com/flowering_azalea)
-  ///
-  /// _(minecraft:flowering_azalea)_
-  static const Block flowering_azalea = Block('minecraft:flowering_azalea');
-
-  /// [Flowering Azalea Leaves](https://minecraft.gamepedia.com/flowering_azalea_leaves)
-  ///
-  /// _(minecraft:flowering_azalea_leaves)_
-  static const Block flowering_azalea_leaves =
-      Block('minecraft:flowering_azalea_leaves');
-
-  /// [Glow Lichen](https://minecraft.gamepedia.com/glow_lichen)
-  ///
-  /// _(minecraft:glow_lichen)_
-  static const Block glow_lichen = Block('minecraft:glow_lichen');
-
-  /// [Gray Candle](https://minecraft.gamepedia.com/gray_candle)
-  ///
-  /// _(minecraft:gray_candle)_
-  static const Block gray_candle = Block('minecraft:gray_candle');
-
-  /// [Gray Candle Cake](https://minecraft.gamepedia.com/gray_candle_cake)
-  ///
-  /// _(minecraft:gray_candle_cake)_
-  static const Block gray_candle_cake = Block('minecraft:gray_candle_cake');
-
-  /// [Green Candle](https://minecraft.gamepedia.com/green_candle)
-  ///
-  /// _(minecraft:green_candle)_
-  static const Block green_candle = Block('minecraft:green_candle');
-
-  /// [Green Candle Cake](https://minecraft.gamepedia.com/green_candle_cake)
-  ///
-  /// _(minecraft:green_candle_cake)_
-  static const Block green_candle_cake = Block('minecraft:green_candle_cake');
-
-  /// [Hanging Roots](https://minecraft.gamepedia.com/hanging_roots)
-  ///
-  /// _(minecraft:hanging_roots)_
-  static const Block hanging_roots = Block('minecraft:hanging_roots');
-
-  /// [Infested Deepslate](https://minecraft.gamepedia.com/infested_deepslate)
-  ///
-  /// _(minecraft:infested_deepslate)_
-  static const Block infested_deepslate = Block('minecraft:infested_deepslate');
-
-  /// [Large Amethyst Bud](https://minecraft.gamepedia.com/large_amethyst_bud)
-  ///
-  /// _(minecraft:large_amethyst_bud)_
-  static const Block large_amethyst_bud = Block('minecraft:large_amethyst_bud');
-
-  /// [Lava Cauldron](https://minecraft.gamepedia.com/lava_cauldron)
-  ///
-  /// _(minecraft:lava_cauldron)_
-  static const Block lava_cauldron = Block('minecraft:lava_cauldron');
-
-  /// [Light](https://minecraft.gamepedia.com/light)
-  ///
-  /// _(minecraft:light)_
-  static const Block light = Block('minecraft:light');
-
-  /// [Light Blue Candle](https://minecraft.gamepedia.com/light_blue_candle)
-  ///
-  /// _(minecraft:light_blue_candle)_
-  static const Block light_blue_candle = Block('minecraft:light_blue_candle');
-
-  /// [Light Blue Candle Cake](https://minecraft.gamepedia.com/light_blue_candle_cake)
-  ///
-  /// _(minecraft:light_blue_candle_cake)_
-  static const Block light_blue_candle_cake =
-      Block('minecraft:light_blue_candle_cake');
-
-  /// [Light Gray Candle](https://minecraft.gamepedia.com/light_gray_candle)
-  ///
-  /// _(minecraft:light_gray_candle)_
-  static const Block light_gray_candle = Block('minecraft:light_gray_candle');
-
-  /// [Light Gray Candle Cake](https://minecraft.gamepedia.com/light_gray_candle_cake)
-  ///
-  /// _(minecraft:light_gray_candle_cake)_
-  static const Block light_gray_candle_cake =
-      Block('minecraft:light_gray_candle_cake');
-
-  /// [Lightning Rod](https://minecraft.gamepedia.com/lightning_rod)
-  ///
-  /// _(minecraft:lightning_rod)_
-  static const Block lightning_rod = Block('minecraft:lightning_rod');
-
-  /// [Lime Candle](https://minecraft.gamepedia.com/lime_candle)
-  ///
-  /// _(minecraft:lime_candle)_
-  static const Block lime_candle = Block('minecraft:lime_candle');
-
-  /// [Lime Candle Cake](https://minecraft.gamepedia.com/lime_candle_cake)
-  ///
-  /// _(minecraft:lime_candle_cake)_
-  static const Block lime_candle_cake = Block('minecraft:lime_candle_cake');
-
-  /// [Magenta Candle](https://minecraft.gamepedia.com/magenta_candle)
-  ///
-  /// _(minecraft:magenta_candle)_
-  static const Block magenta_candle = Block('minecraft:magenta_candle');
-
-  /// [Magenta Candle Cake](https://minecraft.gamepedia.com/magenta_candle_cake)
-  ///
-  /// _(minecraft:magenta_candle_cake)_
-  static const Block magenta_candle_cake =
-      Block('minecraft:magenta_candle_cake');
-
-  /// [Medium Amethyst Bud](https://minecraft.gamepedia.com/medium_amethyst_bud)
-  ///
-  /// _(minecraft:medium_amethyst_bud)_
-  static const Block medium_amethyst_bud =
-      Block('minecraft:medium_amethyst_bud');
-
-  /// [Moss Block](https://minecraft.gamepedia.com/moss_block)
-  ///
-  /// _(minecraft:moss_block)_
-  static const Block moss_block = Block('minecraft:moss_block');
-
-  /// [Moss Carpet](https://minecraft.gamepedia.com/moss_carpet)
-  ///
-  /// _(minecraft:moss_carpet)_
-  static const Block moss_carpet = Block('minecraft:moss_carpet');
-
-  /// [Orange Candle](https://minecraft.gamepedia.com/orange_candle)
-  ///
-  /// _(minecraft:orange_candle)_
-  static const Block orange_candle = Block('minecraft:orange_candle');
-
-  /// [Orange Candle Cake](https://minecraft.gamepedia.com/orange_candle_cake)
-  ///
-  /// _(minecraft:orange_candle_cake)_
-  static const Block orange_candle_cake = Block('minecraft:orange_candle_cake');
-
-  /// [Oxidized Copper](https://minecraft.gamepedia.com/oxidized_copper)
-  ///
-  /// _(minecraft:oxidized_copper)_
-  static const Block oxidized_copper = Block('minecraft:oxidized_copper');
-
-  /// [Oxidized Cut Copper](https://minecraft.gamepedia.com/oxidized_cut_copper)
-  ///
-  /// _(minecraft:oxidized_cut_copper)_
-  static const Block oxidized_cut_copper =
-      Block('minecraft:oxidized_cut_copper');
-
-  /// [Oxidized Cut Copper Slab](https://minecraft.gamepedia.com/oxidized_cut_copper_slab)
-  ///
-  /// _(minecraft:oxidized_cut_copper_slab)_
-  static const Block oxidized_cut_copper_slab =
-      Block('minecraft:oxidized_cut_copper_slab');
-
-  /// [Oxidized Cut Copper Stairs](https://minecraft.gamepedia.com/oxidized_cut_copper_stairs)
-  ///
-  /// _(minecraft:oxidized_cut_copper_stairs)_
-  static const Block oxidized_cut_copper_stairs =
-      Block('minecraft:oxidized_cut_copper_stairs');
-
-  /// [Pink Candle](https://minecraft.gamepedia.com/pink_candle)
-  ///
-  /// _(minecraft:pink_candle)_
-  static const Block pink_candle = Block('minecraft:pink_candle');
-
-  /// [Pink Candle Cake](https://minecraft.gamepedia.com/pink_candle_cake)
-  ///
-  /// _(minecraft:pink_candle_cake)_
-  static const Block pink_candle_cake = Block('minecraft:pink_candle_cake');
-
-  /// [Pointed Dripstone](https://minecraft.gamepedia.com/pointed_dripstone)
-  ///
-  /// _(minecraft:pointed_dripstone)_
-  static const Block pointed_dripstone = Block('minecraft:pointed_dripstone');
-
-  /// [Polished Deepslate](https://minecraft.gamepedia.com/polished_deepslate)
-  ///
-  /// _(minecraft:polished_deepslate)_
-  static const Block polished_deepslate = Block('minecraft:polished_deepslate');
-
-  /// [Polished Deepslate Slab](https://minecraft.gamepedia.com/polished_deepslate_slab)
-  ///
-  /// _(minecraft:polished_deepslate_slab)_
-  static const Block polished_deepslate_slab =
-      Block('minecraft:polished_deepslate_slab');
-
-  /// [Polished Deepslate Stairs](https://minecraft.gamepedia.com/polished_deepslate_stairs)
-  ///
-  /// _(minecraft:polished_deepslate_stairs)_
-  static const Block polished_deepslate_stairs =
-      Block('minecraft:polished_deepslate_stairs');
-
-  /// [Polished Deepslate Wall](https://minecraft.gamepedia.com/polished_deepslate_wall)
-  ///
-  /// _(minecraft:polished_deepslate_wall)_
-  static const Block polished_deepslate_wall =
-      Block('minecraft:polished_deepslate_wall');
-
-  /// [Potted Azalea Bush](https://minecraft.gamepedia.com/potted_azalea_bush)
-  ///
-  /// _(minecraft:potted_azalea_bush)_
-  static const Block potted_azalea_bush = Block('minecraft:potted_azalea_bush');
-
-  /// [Potted Flowering Azalea Bush](https://minecraft.gamepedia.com/potted_flowering_azalea_bush)
-  ///
-  /// _(minecraft:potted_flowering_azalea_bush)_
-  static const Block potted_flowering_azalea_bush =
-      Block('minecraft:potted_flowering_azalea_bush');
-
-  /// [Powder Snow](https://minecraft.gamepedia.com/powder_snow)
-  ///
-  /// _(minecraft:powder_snow)_
-  static const Block powder_snow = Block('minecraft:powder_snow');
-
-  /// [Powder Snow Cauldron](https://minecraft.gamepedia.com/powder_snow_cauldron)
-  ///
-  /// _(minecraft:powder_snow_cauldron)_
-  static const Block powder_snow_cauldron =
-      Block('minecraft:powder_snow_cauldron');
-
-  /// [Purple Candle](https://minecraft.gamepedia.com/purple_candle)
-  ///
-  /// _(minecraft:purple_candle)_
-  static const Block purple_candle = Block('minecraft:purple_candle');
-
-  /// [Purple Candle Cake](https://minecraft.gamepedia.com/purple_candle_cake)
-  ///
-  /// _(minecraft:purple_candle_cake)_
-  static const Block purple_candle_cake = Block('minecraft:purple_candle_cake');
-
-  /// [Raw Copper Block](https://minecraft.gamepedia.com/raw_copper_block)
-  ///
-  /// _(minecraft:raw_copper_block)_
-  static const Block raw_copper_block = Block('minecraft:raw_copper_block');
-
-  /// [Raw Gold Block](https://minecraft.gamepedia.com/raw_gold_block)
-  ///
-  /// _(minecraft:raw_gold_block)_
-  static const Block raw_gold_block = Block('minecraft:raw_gold_block');
-
-  /// [Raw Iron Block](https://minecraft.gamepedia.com/raw_iron_block)
-  ///
-  /// _(minecraft:raw_iron_block)_
-  static const Block raw_iron_block = Block('minecraft:raw_iron_block');
-
-  /// [Red Candle](https://minecraft.gamepedia.com/red_candle)
-  ///
-  /// _(minecraft:red_candle)_
-  static const Block red_candle = Block('minecraft:red_candle');
-
-  /// [Red Candle Cake](https://minecraft.gamepedia.com/red_candle_cake)
-  ///
-  /// _(minecraft:red_candle_cake)_
-  static const Block red_candle_cake = Block('minecraft:red_candle_cake');
-
-  /// [Rooted Dirt](https://minecraft.gamepedia.com/rooted_dirt)
-  ///
-  /// _(minecraft:rooted_dirt)_
-  static const Block rooted_dirt = Block('minecraft:rooted_dirt');
-
-  /// [Sculk Sensor](https://minecraft.gamepedia.com/sculk_sensor)
-  ///
-  /// _(minecraft:sculk_sensor)_
-  static const Block sculk_sensor = Block('minecraft:sculk_sensor');
-
-  /// [Small Amethyst Bud](https://minecraft.gamepedia.com/small_amethyst_bud)
-  ///
-  /// _(minecraft:small_amethyst_bud)_
-  static const Block small_amethyst_bud = Block('minecraft:small_amethyst_bud');
-
-  /// [Small Dripleaf](https://minecraft.gamepedia.com/small_dripleaf)
-  ///
-  /// _(minecraft:small_dripleaf)_
-  static const Block small_dripleaf = Block('minecraft:small_dripleaf');
-
-  /// [Smooth Basalt](https://minecraft.gamepedia.com/smooth_basalt)
-  ///
-  /// _(minecraft:smooth_basalt)_
-  static const Block smooth_basalt = Block('minecraft:smooth_basalt');
-
-  /// [Spore Blossom](https://minecraft.gamepedia.com/spore_blossom)
-  ///
-  /// _(minecraft:spore_blossom)_
-  static const Block spore_blossom = Block('minecraft:spore_blossom');
-
-  /// [Tinted Glass](https://minecraft.gamepedia.com/tinted_glass)
-  ///
-  /// _(minecraft:tinted_glass)_
-  static const Block tinted_glass = Block('minecraft:tinted_glass');
-
-  /// [Tuff](https://minecraft.gamepedia.com/tuff)
-  ///
-  /// _(minecraft:tuff)_
-  static const Block tuff = Block('minecraft:tuff');
-
   /// [Water Cauldron](https://minecraft.gamepedia.com/water_cauldron)
   ///
   /// _(minecraft:water_cauldron)_
@@ -5621,6 +5433,37 @@ class Blocks {
   static const Block weathered_cut_copper_stairs =
       Block('minecraft:weathered_cut_copper_stairs');
 
+  /// [Weeping Vines](https://minecraft.gamepedia.com/weeping_vines)
+  ///
+  /// _(minecraft:weeping_vines)_
+  static const Block weeping_vines = Block('minecraft:weeping_vines');
+
+  /// [Weeping Vines Plant](https://minecraft.gamepedia.com/weeping_vines_plant)
+  ///
+  /// _(minecraft:weeping_vines_plant)_
+  static const Block weeping_vines_plant =
+      Block('minecraft:weeping_vines_plant');
+
+  /// [Wet Sponge](https://minecraft.gamepedia.com/wet_sponge)
+  ///
+  /// _(minecraft:wet_sponge)_
+  static const Block wet_sponge = Block('minecraft:wet_sponge');
+
+  /// [Wheat](https://minecraft.gamepedia.com/wheat)
+  ///
+  /// _(minecraft:wheat)_
+  static const Block wheat = Block('minecraft:wheat');
+
+  /// [White Banner](https://minecraft.gamepedia.com/white_banner)
+  ///
+  /// _(minecraft:white_banner)_
+  static const Block white_banner = Block('minecraft:white_banner');
+
+  /// [White Bed](https://minecraft.gamepedia.com/white_bed)
+  ///
+  /// _(minecraft:white_bed)_
+  static const Block white_bed = Block('minecraft:white_bed');
+
   /// [White Candle](https://minecraft.gamepedia.com/white_candle)
   ///
   /// _(minecraft:white_candle)_
@@ -5631,6 +5474,92 @@ class Blocks {
   /// _(minecraft:white_candle_cake)_
   static const Block white_candle_cake = Block('minecraft:white_candle_cake');
 
+  /// [White Carpet](https://minecraft.gamepedia.com/white_carpet)
+  ///
+  /// _(minecraft:white_carpet)_
+  static const Block white_carpet = Block('minecraft:white_carpet');
+
+  /// [White Concrete](https://minecraft.gamepedia.com/white_concrete)
+  ///
+  /// _(minecraft:white_concrete)_
+  static const Block white_concrete = Block('minecraft:white_concrete');
+
+  /// [White Concrete Powder](https://minecraft.gamepedia.com/white_concrete_powder)
+  ///
+  /// _(minecraft:white_concrete_powder)_
+  static const Block white_concrete_powder =
+      Block('minecraft:white_concrete_powder');
+
+  /// [White Glazed Terracotta](https://minecraft.gamepedia.com/white_glazed_terracotta)
+  ///
+  /// _(minecraft:white_glazed_terracotta)_
+  static const Block white_glazed_terracotta =
+      Block('minecraft:white_glazed_terracotta');
+
+  /// [White Shulker Box](https://minecraft.gamepedia.com/white_shulker_box)
+  ///
+  /// _(minecraft:white_shulker_box)_
+  static const Block white_shulker_box = Block('minecraft:white_shulker_box');
+
+  /// [White Stained Glass](https://minecraft.gamepedia.com/white_stained_glass)
+  ///
+  /// _(minecraft:white_stained_glass)_
+  static const Block white_stained_glass =
+      Block('minecraft:white_stained_glass');
+
+  /// [White Stained Glass Pane](https://minecraft.gamepedia.com/white_stained_glass_pane)
+  ///
+  /// _(minecraft:white_stained_glass_pane)_
+  static const Block white_stained_glass_pane =
+      Block('minecraft:white_stained_glass_pane');
+
+  /// [White Terracotta](https://minecraft.gamepedia.com/white_terracotta)
+  ///
+  /// _(minecraft:white_terracotta)_
+  static const Block white_terracotta = Block('minecraft:white_terracotta');
+
+  /// [White Tulip](https://minecraft.gamepedia.com/white_tulip)
+  ///
+  /// _(minecraft:white_tulip)_
+  static const Block white_tulip = Block('minecraft:white_tulip');
+
+  /// [White Wall Banner](https://minecraft.gamepedia.com/white_wall_banner)
+  ///
+  /// _(minecraft:white_wall_banner)_
+  static const Block white_wall_banner = Block('minecraft:white_wall_banner');
+
+  /// [White Wool](https://minecraft.gamepedia.com/white_wool)
+  ///
+  /// _(minecraft:white_wool)_
+  static const Block white_wool = Block('minecraft:white_wool');
+
+  /// [Wither Rose](https://minecraft.gamepedia.com/wither_rose)
+  ///
+  /// _(minecraft:wither_rose)_
+  static const Block wither_rose = Block('minecraft:wither_rose');
+
+  /// [Wither Skeleton Skull](https://minecraft.gamepedia.com/wither_skeleton_skull)
+  ///
+  /// _(minecraft:wither_skeleton_skull)_
+  static const Block wither_skeleton_skull =
+      Block('minecraft:wither_skeleton_skull');
+
+  /// [Wither Skeleton Wall Skull](https://minecraft.gamepedia.com/wither_skeleton_wall_skull)
+  ///
+  /// _(minecraft:wither_skeleton_wall_skull)_
+  static const Block wither_skeleton_wall_skull =
+      Block('minecraft:wither_skeleton_wall_skull');
+
+  /// [Yellow Banner](https://minecraft.gamepedia.com/yellow_banner)
+  ///
+  /// _(minecraft:yellow_banner)_
+  static const Block yellow_banner = Block('minecraft:yellow_banner');
+
+  /// [Yellow Bed](https://minecraft.gamepedia.com/yellow_bed)
+  ///
+  /// _(minecraft:yellow_bed)_
+  static const Block yellow_bed = Block('minecraft:yellow_bed');
+
   /// [Yellow Candle](https://minecraft.gamepedia.com/yellow_candle)
   ///
   /// _(minecraft:yellow_candle)_
@@ -5640,4 +5569,68 @@ class Blocks {
   ///
   /// _(minecraft:yellow_candle_cake)_
   static const Block yellow_candle_cake = Block('minecraft:yellow_candle_cake');
+
+  /// [Yellow Carpet](https://minecraft.gamepedia.com/yellow_carpet)
+  ///
+  /// _(minecraft:yellow_carpet)_
+  static const Block yellow_carpet = Block('minecraft:yellow_carpet');
+
+  /// [Yellow Concrete](https://minecraft.gamepedia.com/yellow_concrete)
+  ///
+  /// _(minecraft:yellow_concrete)_
+  static const Block yellow_concrete = Block('minecraft:yellow_concrete');
+
+  /// [Yellow Concrete Powder](https://minecraft.gamepedia.com/yellow_concrete_powder)
+  ///
+  /// _(minecraft:yellow_concrete_powder)_
+  static const Block yellow_concrete_powder =
+      Block('minecraft:yellow_concrete_powder');
+
+  /// [Yellow Glazed Terracotta](https://minecraft.gamepedia.com/yellow_glazed_terracotta)
+  ///
+  /// _(minecraft:yellow_glazed_terracotta)_
+  static const Block yellow_glazed_terracotta =
+      Block('minecraft:yellow_glazed_terracotta');
+
+  /// [Yellow Shulker Box](https://minecraft.gamepedia.com/yellow_shulker_box)
+  ///
+  /// _(minecraft:yellow_shulker_box)_
+  static const Block yellow_shulker_box = Block('minecraft:yellow_shulker_box');
+
+  /// [Yellow Stained Glass](https://minecraft.gamepedia.com/yellow_stained_glass)
+  ///
+  /// _(minecraft:yellow_stained_glass)_
+  static const Block yellow_stained_glass =
+      Block('minecraft:yellow_stained_glass');
+
+  /// [Yellow Stained Glass Pane](https://minecraft.gamepedia.com/yellow_stained_glass_pane)
+  ///
+  /// _(minecraft:yellow_stained_glass_pane)_
+  static const Block yellow_stained_glass_pane =
+      Block('minecraft:yellow_stained_glass_pane');
+
+  /// [Yellow Terracotta](https://minecraft.gamepedia.com/yellow_terracotta)
+  ///
+  /// _(minecraft:yellow_terracotta)_
+  static const Block yellow_terracotta = Block('minecraft:yellow_terracotta');
+
+  /// [Yellow Wall Banner](https://minecraft.gamepedia.com/yellow_wall_banner)
+  ///
+  /// _(minecraft:yellow_wall_banner)_
+  static const Block yellow_wall_banner = Block('minecraft:yellow_wall_banner');
+
+  /// [Yellow Wool](https://minecraft.gamepedia.com/yellow_wool)
+  ///
+  /// _(minecraft:yellow_wool)_
+  static const Block yellow_wool = Block('minecraft:yellow_wool');
+
+  /// [Zombie Head](https://minecraft.gamepedia.com/zombie_head)
+  ///
+  /// _(minecraft:zombie_head)_
+  static const Block zombie_head = Block('minecraft:zombie_head');
+
+  /// [Zombie Wall Head](https://minecraft.gamepedia.com/zombie_wall_head)
+  ///
+  /// _(minecraft:zombie_wall_head)_
+  static const Block zombie_wall_head = Block('minecraft:zombie_wall_head');
 }
