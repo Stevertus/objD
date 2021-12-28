@@ -8,10 +8,19 @@ Future<List> generateIO(
   Map<String, String> files,
   String path, {
   bool useIsolates = false,
+  bool clean = false,
 }) async {
   var futures = <Future>[];
 
-  if (useIsolates) {
+  if (clean) {
+    // sort names by length to mostlikly get deepest nesting first
+    var names = files.keys.toList();
+    names.sort((a, b) => b.length.compareTo(a.length));
+    for (final name in names) {
+      await _removeFile(path + name);
+    }
+    return [];
+  } else if (useIsolates) {
     for (final name in files.keys) {
       final port = ReceivePort();
       await Isolate.spawn(
@@ -22,7 +31,6 @@ Future<List> generateIO(
     }
   } else {
     files.forEach((name, content) {
-      print(name);
       futures.add(_createFile(path + name, content));
     });
   }
@@ -45,14 +53,41 @@ void _ensureDirExists(String path) {
   }
 }
 
+Future<void> _removeFile(String name) async {
+  dynamic path = name.split('/');
+  path = path.sublist(0, path.length - 1).join('/');
+  final file = File(name);
+  var dir = Directory(path as String);
+  if (!dir.existsSync()) return;
+
+  final yellow = AnsiPen()..yellow();
+  final children =
+      dir.listSync().map((e) => e.path.replaceAll("\\", "/")).toList();
+  if (children.isEmpty ||
+      children.length == 1 && children.first == name.replaceAll("\\", "/")) {
+    do {
+      await dir.delete(recursive: true);
+      print(yellow('Removed: ${dir.path}'));
+      dir = dir.parent;
+    } while (dir.listSync().isEmpty);
+  } else if (file.existsSync()) {
+    await file.delete();
+    // print debug message
+    print(yellow('Removed: $name'));
+  }
+
+  return;
+}
+
 Future<void> _createFile(String name, String content) async {
   dynamic path = name.split('/');
   path = path.sublist(0, path.length - 1).join('/');
+
   _ensureDirExists(path as String);
   await saveBytes(utf8.encode(content), name);
   // print debug message
   final yellow = AnsiPen()..yellow();
-  print(yellow('Generated: ' + name));
+  print(yellow('Generated: $name'));
   return;
 }
 

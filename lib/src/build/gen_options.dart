@@ -5,6 +5,7 @@ class GenOptions {
   bool hotreload = false;
   bool generateZip = false;
   bool useIsolates = false;
+  bool clean = false;
   String? output;
 
   GenOptions(List<String> args) {
@@ -21,6 +22,9 @@ class GenOptions {
     }
     if (args.contains('--debug') || args.contains('-d')) {
       debugFile = true;
+    }
+    if (args.contains('--clean') || args.contains('-c')) {
+      clean = true;
     }
     if (args.contains('--useIsolates')) {
       useIsolates = true;

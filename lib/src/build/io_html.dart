@@ -6,6 +6,7 @@ Future<List> generateIO(
   Map<String, String> files,
   String path, {
   bool useIsolates = false,
+  bool clean = false,
 }) =>
     throw UnsupportedError('objd web mode');
 

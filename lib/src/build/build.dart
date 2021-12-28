@@ -51,6 +51,7 @@ Future<void> createProject(Project prj, [List<String> args = const []]) async {
       _getFiles(bPrj, opt),
       path,
       useIsolates: opt.useIsolates,
+      clean: opt.clean,
     );
     print(
       'Finished saving ${saved.length} files in ${stopwatchFiles.elapsedMilliseconds}ms',
@@ -137,7 +138,7 @@ Map<String, String> _getFiles(BuildProject prj, GenOptions options) {
   }
 
   // add objd.json
-  if (options.debugFile) {
+  if (options.debugFile || options.clean) {
     files['objd.json'] = json.encode(prj.toMap());
   }
 
