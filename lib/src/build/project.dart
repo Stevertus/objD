@@ -42,7 +42,8 @@ class Project {
       };
 
   int getPackFormat() {
-    if (version >= 17) return 7;
+    if (version >= 18) return 8;
+    if (version == 17) return 7;
     if (version == 16) return 6;
     if (version == 15) return 5;
     return 4;
