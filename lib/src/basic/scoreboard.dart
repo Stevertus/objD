@@ -5,6 +5,7 @@ import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/basic/command.dart';
 import 'package:objd/src/basic/text_components.dart';
 import 'package:objd/src/basic/extend.dart';
+import 'package:objd/src/basic/for_list.dart';
 import 'package:objd/src/build/build.dart';
 import 'package:objd/src/wrappers/comment.dart';
 
@@ -16,6 +17,7 @@ class Scoreboard extends RestActionAble {
   late String subcommand;
   String name;
   late String type;
+  bool? removeOld;
   bool? useHearts;
 
   /// A scoreboard objective holds values, kind a like a Variable inside Minecraft.
@@ -28,9 +30,8 @@ class Scoreboard extends RestActionAble {
     this.type = 'dummy',
     TextComponent? display,
     bool addIntoLoad = true,
+    bool removeOld = false,
   }) {
-    print("scoreboard (constructor): name: $name, type: $type");
-    print(StackTrace.current);
     subcommand = addIntoLoad ? 'add' : 'addHere';
     if (display != null) type += ' ' + display.toJson()!;
     prefixName();
@@ -41,6 +42,7 @@ class Scoreboard extends RestActionAble {
     this.name, {
     TextComponent? display,
     bool addIntoLoad = true,
+    bool removeOld = false,
   }) {
     type = 'minecraft.used:minecraft.carrot_on_a_stick';
     subcommand = addIntoLoad ? 'add' : 'addHere';
@@ -53,6 +55,7 @@ class Scoreboard extends RestActionAble {
     this.name, {
     TextComponent? display,
     bool addIntoLoad = true,
+    bool removeOld = false,
   }) {
     type = 'minecraft.custom:minecraft.talked_to_villager';
     subcommand = addIntoLoad ? 'add' : 'addHere';
@@ -65,6 +68,7 @@ class Scoreboard extends RestActionAble {
     this.name, {
     TextComponent? display,
     bool addIntoLoad = true,
+    bool removeOld = false,
   }) {
     type = 'trigger';
     subcommand = addIntoLoad ? 'add' : 'addHere';
@@ -114,16 +118,23 @@ class Scoreboard extends RestActionAble {
         'A scoreboard can not be longer than 16 characters',
       );
     }
+
+    List<Command> commands = [];
+    if (removeOld != null && removeOld!) {
+      commands.add(Command('scoreboard objectives remove $name'));
+    }
+
     switch (subcommand) {
       case 'add':
-        print("scoreboard (generate): name: $name, type: $type");
+        commands.add(Command('scoreboard objectives add $name $type'));
         return Extend(
           context.loadFile ?? 'load',
-          child: Command('scoreboard objectives add $name $type'),
+          child: CommandList(commands),
           first: true,
         );
       case 'addHere':
-        return Command('scoreboard objectives add $name $type');
+        commands.add(Command('scoreboard objectives add $name $type'));
+        return CommandList(commands);
       case 'remove':
         return Command('scoreboard objectives remove $name');
       case 'modify':
@@ -138,19 +149,20 @@ class Scoreboard extends RestActionAble {
   }
 
   Score operator [](dynamic target) {
-    if (target is Entity) return Score(target, name);
-    if (target is String) return Score(Entity.PlayerName(target), name);
+    if (target is Entity) return Score(target, name, addNew: false);
+    if (target is String)
+      return Score(Entity.PlayerName(target), name, addNew: false);
     throw ('The operator [] just accepts Entity or String!');
   }
 
   /// Scoreboard.self is a shortcut for Scoreboard[Entity.Self()]
-  Score get self => Score(Entity.Self(), name);
+  Score get self => Score(Entity.Self(), name, addNew: false);
 
   /// Scoreboard.all is a shortcut for Scoreboard[Entity.All()]
-  Score get all => Score(Entity.All(), name);
+  Score get all => Score(Entity.All(), name, addNew: false);
 
   /// Scoreboard.player is a shortcut for Scoreboard[Entity.Player()]
-  Score get player => Score(Entity.Player(), name);
+  Score get player => Score(Entity.Player(), name, addNew: false);
 
   @override
   Map toMap() {
