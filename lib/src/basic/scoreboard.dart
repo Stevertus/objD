@@ -30,6 +30,7 @@ class Scoreboard extends RestActionAble {
     bool addIntoLoad = true,
   }) {
     print("scoreboard (constructor): name: $name, type: $type");
+    print(StackTrace.current);
     subcommand = addIntoLoad ? 'add' : 'addHere';
     if (display != null) type += ' ' + display.toJson()!;
     prefixName();
@@ -113,10 +114,9 @@ class Scoreboard extends RestActionAble {
         'A scoreboard can not be longer than 16 characters',
       );
     }
-    print(
-        "scoreboard (generate): name: $name, type: $type, subcommand: $subcommand");
     switch (subcommand) {
       case 'add':
+        print("scoreboard (generate): name: $name, type: $type");
         return Extend(
           context.loadFile ?? 'load',
           child: Command('scoreboard objectives add $name $type'),
