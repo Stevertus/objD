@@ -42,9 +42,11 @@ class PlayerJoin extends Widget {
 
   @override
   Widget generate(Context context) {
+    final type = _isInitial ? 'dummy' : 'minecraft.custom:minecraft.leave_game';
+    print("player_join: _isInitial: $_isInitial, type: $type");
     final s = Scoreboard(
       score,
-      type: _isInitial ? 'dummy' : 'minecraft.custom:minecraft.leave_game',
+      type: type,
     );
     final current = s[Entity.PlayerName('#current')];
     final self = s[Entity.Self()];

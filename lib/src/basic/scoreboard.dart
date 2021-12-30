@@ -29,6 +29,7 @@ class Scoreboard extends RestActionAble {
     TextComponent? display,
     bool addIntoLoad = true,
   }) {
+    print("scoreboard (constructor): name: $name, type: $type");
     subcommand = addIntoLoad ? 'add' : 'addHere';
     if (display != null) type += ' ' + display.toJson()!;
     prefixName();
@@ -112,6 +113,8 @@ class Scoreboard extends RestActionAble {
         'A scoreboard can not be longer than 16 characters',
       );
     }
+    print(
+        "scoreboard (generate): name: $name, type: $type, subcommand: $subcommand");
     switch (subcommand) {
       case 'add':
         return Extend(
