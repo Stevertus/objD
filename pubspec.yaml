@@ -10,7 +10,7 @@ environment:
   sdk: ">=2.15.0 <3.0.0"
 dependencies:
   ansicolor: ^2.0.1
-  archive:
+  archive: ^3.1.6
   gson: ^0.1.6-dev
 dev_dependencies:
   lints: ^1.0.1
