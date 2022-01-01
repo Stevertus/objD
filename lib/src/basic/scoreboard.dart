@@ -5,7 +5,6 @@ import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/basic/command.dart';
 import 'package:objd/src/basic/text_components.dart';
 import 'package:objd/src/basic/extend.dart';
-import 'package:objd/src/basic/for_list.dart';
 import 'package:objd/src/build/build.dart';
 import 'package:objd/src/wrappers/comment.dart';
 
@@ -14,10 +13,9 @@ class Scoreboard extends RestActionAble {
 
   static String? prefix;
 
-  late String subcommand;
+  final String subcommand;
   String name;
   late String type;
-  bool? removeOld;
   bool? useHearts;
 
   /// A scoreboard objective holds values, kind a like a Variable inside Minecraft.
@@ -30,62 +28,62 @@ class Scoreboard extends RestActionAble {
     this.type = 'dummy',
     TextComponent? display,
     bool addIntoLoad = true,
-    bool removeOld = false,
-  }) {
-    subcommand = addIntoLoad ? 'add' : 'addHere';
+  }) : subcommand = addIntoLoad ? 'add' : 'addHere' {
     if (display != null) type += ' ' + display.toJson()!;
     prefixName();
   }
 
   /// The `Scoreboard.click` constructor adds a carrot on a stick click event objective
-  Scoreboard.click(
-    this.name, {
+  factory Scoreboard.click(
+    String name, {
     TextComponent? display,
     bool addIntoLoad = true,
     bool removeOld = false,
-  }) {
-    type = 'minecraft.used:minecraft.carrot_on_a_stick';
-    subcommand = addIntoLoad ? 'add' : 'addHere';
-    if (display != null) type += ' ' + display.toJson()!;
-    prefixName();
-  }
+  }) =>
+      Scoreboard(
+        name,
+        type: 'minecraft.used:minecraft.carrot_on_a_stick',
+        display: display,
+        addIntoLoad: addIntoLoad,
+      );
 
   /// The `Scoreboard.click` constructor adds a carrot on a stick click event objective
-  Scoreboard.villager(
-    this.name, {
+  factory Scoreboard.villager(
+    String name, {
     TextComponent? display,
     bool addIntoLoad = true,
     bool removeOld = false,
-  }) {
-    type = 'minecraft.custom:minecraft.talked_to_villager';
-    subcommand = addIntoLoad ? 'add' : 'addHere';
-    if (display != null) type += ' ' + display.toJson()!;
-    prefixName();
-  }
+  }) =>
+      Scoreboard(
+        name,
+        type: 'minecraft.custom:minecraft.talked_to_villager',
+        display: display,
+        addIntoLoad: addIntoLoad,
+      );
 
   /// The `Scoreboard.trigger` constructor adds a trigger objective
-  Scoreboard.trigger(
-    this.name, {
+  factory Scoreboard.trigger(
+    String name, {
     TextComponent? display,
     bool addIntoLoad = true,
     bool removeOld = false,
-  }) {
-    type = 'trigger';
-    subcommand = addIntoLoad ? 'add' : 'addHere';
-    if (display != null) type += ' ' + display.toJson()!;
-    prefixName();
-  }
+  }) =>
+      Scoreboard(
+        name,
+        type: 'trigger',
+        display: display,
+        addIntoLoad: addIntoLoad,
+      );
 
   /// The `Scoreboard.add` constructor does exactly the same as Scoreboard but puts the result without checking in the current file.
-  Scoreboard.add(this.name, {this.type = 'dummy', TextComponent? display}) {
-    subcommand = 'addHere';
+  Scoreboard.add(this.name, {this.type = 'dummy', TextComponent? display})
+      : subcommand = 'addHere' {
     if (display != null) type += ' ' + display.toJson()!;
     prefixName();
   }
 
   /// `Scoreboard.remove` removes an objective by its name again.
-  Scoreboard.remove(this.name) {
-    subcommand = 'remove';
+  Scoreboard.remove(this.name) : subcommand = 'remove' {
     prefixName();
   }
 
@@ -96,9 +94,9 @@ class Scoreboard extends RestActionAble {
   /// |String|name of the objective(required)|
   /// |display|String for display location (default = sidebar)|
 
-  Scoreboard.setdisplay(this.name, {String display = 'sidebar'}) {
-    subcommand = 'setdisplay';
-    type = display;
+  Scoreboard.setdisplay(this.name, {String display = 'sidebar'})
+      : subcommand = 'setdisplay',
+        type = display {
     prefixName();
   }
   Scoreboard.modify(
@@ -119,22 +117,15 @@ class Scoreboard extends RestActionAble {
       );
     }
 
-    List<Command> commands = [];
-    if (removeOld != null && removeOld!) {
-      commands.add(Command('scoreboard objectives remove $name'));
-    }
-
     switch (subcommand) {
       case 'add':
-        commands.add(Command('scoreboard objectives add $name $type'));
         return Extend(
           context.loadFile ?? 'load',
-          child: CommandList(commands),
+          child: Command('scoreboard objectives add $name $type'),
           first: true,
         );
       case 'addHere':
-        commands.add(Command('scoreboard objectives add $name $type'));
-        return CommandList(commands);
+        return Command('scoreboard objectives add $name $type');
       case 'remove':
         return Command('scoreboard objectives remove $name');
       case 'modify':
@@ -157,13 +148,13 @@ class Scoreboard extends RestActionAble {
   }
 
   /// Scoreboard.self is a shortcut for Scoreboard[Entity.Self()]
-  Score get self => Score(Entity.Self(), name, addNew: false);
+  Score get self => Score(Entity.Self(), name);
 
   /// Scoreboard.all is a shortcut for Scoreboard[Entity.All()]
-  Score get all => Score(Entity.All(), name, addNew: false);
+  Score get all => Score(Entity.All(), name);
 
   /// Scoreboard.player is a shortcut for Scoreboard[Entity.Player()]
-  Score get player => Score(Entity.Player(), name, addNew: false);
+  Score get player => Score(Entity.Player(), name);
 
   @override
   Map toMap() {

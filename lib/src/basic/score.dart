@@ -33,8 +33,13 @@ class Score extends RestActionAble {
   /// Score(Entity.Selected(),'score',addNew: true)
   ///```
 
-  Score(this.entity, this.score,
-      {bool addNew = true, List<Widget>? commands, this.type = 'dummy'}) {
+  Score(
+    this.entity,
+    this.score, {
+    bool addNew = true,
+    List<Widget>? commands,
+    this.type = 'dummy',
+  }) {
     if (commands != null) _commands = commands;
     if (addNew) {
       _commands.add(
@@ -51,8 +56,11 @@ class Score extends RestActionAble {
   /// Score.fromSelected('objective').set(3)
   /// ⇒ scoreboard players set @s objective 3
   /// ```
-  Score.fromSelected(this.score, {bool addNew = true, this.type = 'dummy'})
-      : entity = Entity.Self() {
+  Score.fromSelected(
+    this.score, {
+    bool addNew = true,
+    this.type = 'dummy',
+  }) : entity = Entity.Self() {
     if (addNew) {
       _commands.add(
         Scoreboard(score, type: type),
@@ -82,8 +90,11 @@ class Score extends RestActionAble {
   /// Score.con(5)
   /// ⇒ scoreboard players set #5 objd_consts 5
   /// ```
-  Score.con(int number, {bool addNew = true, this.type = 'dummy'})
-      : score = 'objd_consts',
+  Score.con(
+    int number, {
+    bool addNew = true,
+    this.type = 'dummy',
+  })  : score = 'objd_consts',
         entity = Entity.PlayerName(
           '#' + number.toString(),
         ) {

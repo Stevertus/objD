@@ -86,17 +86,19 @@ class PlayerJoin extends Widget {
         return For.of([
           s,
           // This will only pass if the player doesn't have the score (the score cannot be below 0), therefore triggering on first join
-          Execute.as(t, children: [
-            If.not(Condition.score(self >= 0), then: [
-              then!,
-              self >> 0,
-            ])
-          ]),
           Execute.as(
-            t.copyWith(scores: [self > 0]),
+            t,
             children: [
-              then!,
-              self >> 0,
+              If(
+                Condition.or([
+                  Condition.not(self >= 0),
+                  self > 0,
+                ]),
+                then: [
+                  then!,
+                  self >> 0,
+                ],
+              )
             ],
           )
         ]);

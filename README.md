@@ -33,7 +33,7 @@ name: [unique_namespace]
 environment:
   sdk: ">=2.15.0 <3.0.0"
 dependencies:
-  objd: ^0.4.3
+  objd: ^0.4.4
 ```
 
 Also remember to replace the `[unique_namespace]` with your own project name.
