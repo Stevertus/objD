@@ -17,6 +17,7 @@ class Score extends RestActionAble {
   List<Widget> get commands => _commands;
   final Entity entity;
   String score;
+  String type;
   String _strGen = '';
 
   /// The [Score] class is the basis for setting values, calculating with scores and checking the values.
@@ -32,11 +33,12 @@ class Score extends RestActionAble {
   /// Score(Entity.Selected(),'score',addNew: true)
   ///```
 
-  Score(this.entity, this.score, {bool addNew = true, List<Widget>? commands}) {
+  Score(this.entity, this.score,
+      {bool addNew = true, List<Widget>? commands, this.type = 'dummy'}) {
     if (commands != null) _commands = commands;
     if (addNew) {
       _commands.add(
-        Scoreboard(score),
+        Scoreboard(score, type: type),
       );
     }
     if (Scoreboard.prefix != null && !score.contains(Scoreboard.prefix!)) {
@@ -49,18 +51,19 @@ class Score extends RestActionAble {
   /// Score.fromSelected('objective').set(3)
   /// ⇒ scoreboard players set @s objective 3
   /// ```
-  Score.fromSelected(this.score, {bool addNew = true})
+  Score.fromSelected(this.score, {bool addNew = true, this.type = 'dummy'})
       : entity = Entity.Self() {
     if (addNew) {
       _commands.add(
-        Scoreboard(score),
+        Scoreboard(score, type: type),
       );
     }
     if (Scoreboard.prefix != null && !score.contains(Scoreboard.prefix!)) {
       score = Scoreboard.prefix! + score;
     }
   }
-  Score.str(this._strGen, {this.score = '', String match = '0'})
+  Score.str(this._strGen,
+      {this.score = '', String match = '0', this.type = 'dummy'})
       : entity = Entity.Self() {
     _match = match;
   }
@@ -79,7 +82,7 @@ class Score extends RestActionAble {
   /// Score.con(5)
   /// ⇒ scoreboard players set #5 objd_consts 5
   /// ```
-  Score.con(int number, {bool addNew = true})
+  Score.con(int number, {bool addNew = true, this.type = 'dummy'})
       : score = 'objd_consts',
         entity = Entity.PlayerName(
           '#' + number.toString(),
@@ -90,7 +93,7 @@ class Score extends RestActionAble {
 
     if (addNew) {
       _commands.add(
-        Scoreboard(score),
+        Scoreboard(score, type: type),
       );
     }
     _commands.add(
@@ -107,7 +110,7 @@ class Score extends RestActionAble {
   Score addCommandRet(Command command) {
     var commands = List<Widget>.from(_commands);
     commands.add(command);
-    return Score(entity, score, addNew: false, commands: commands);
+    return Score(entity, score, addNew: false, commands: commands, type: type);
   }
 
   /// add

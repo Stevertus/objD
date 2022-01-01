@@ -149,9 +149,10 @@ class Scoreboard extends RestActionAble {
   }
 
   Score operator [](dynamic target) {
-    if (target is Entity) return Score(target, name, addNew: false);
-    if (target is String)
-      return Score(Entity.PlayerName(target), name, addNew: false);
+    if (target is Entity) return Score(target, name, type: type);
+    if (target is String) {
+      return Score(Entity.PlayerName(target), name, type: type);
+    }
     throw ('The operator [] just accepts Entity or String!');
   }
 
