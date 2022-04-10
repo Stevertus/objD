@@ -2,166 +2,72 @@
 
 ### **O**bjective **B**uilder **J**ust for **D**atapacks
 
-objD is a framework for developing Datapacks for Minecraft. It uses the [Dart](https://www.dartlang.org/guides/language/language-tour) programming language.
+[objD](https://objd.stevertus.com) is an object oriented toolkit for building/generating Datapacks for Minecraft. It uses the [Dart](https://www.dartlang.org/guides/language/language-tour) programming language and thus integrates into popular editors like [Visual Studio Code](https://code.visualstudio.com) or [IntelliJ](https://www.jetbrains.com/idea/).
 
-## Why a framework?
+You are able to write **modular** Datapacks, get suggestions with **linting**, **auto completion**, extensive [documentation](https://objd.stevertus.com) and **syntax highlighting**.
 
-A framework is a set of utilities to reduce the amount of repetitive work.
-I've tried many ways in the past to achieve a quick and easy way to generate Datapacks for Minecraft: A own programming language [mcscript](https://mcscript.stevertus.com), several graphical online generators at [stevertus.com](https://stevertus.com) or premade utilities.
+No need to remember which parameters commands take, automatic checking of your code and a ton of [utility widgets](https://objd.stevertus.com/utils/) help you to get more efficient creating Datapacks.
 
-Instead of developing a language, why not using the tools and parser an other language gives you?
-By building a custom frame around it you get the **reliability** and the **extensive** debugging tools in Editors.
+## Resources
 
-The generation of Datapacks is **easy**,**fast** and aims to be **less repetitive** and **modular** by utilizing the concept of Widgets as one of the main features.
+Learning objD is hard. But there are a few things that can accelerate your start.
+
+- [Introductory Video](https://youtu.be/0GfuCUNI1pw) showing everything from project structure, editor setup to installation.
+- [Officical Documentation](https://objd.stevertus.com)
+- YouTube [Playlist](https://www.youtube.com/playlist?list=PL5AxRIlgrL5GnKz69w4AUyqpZC35BlxdD) containing over 40 videos on best practices, widgets, generators and more.
+- Starter Guide as written form: https://objd.stevertus.com/guide/
+- [Discord Server](https://discord.gg/mKFrqfA) for general questions and interaction
+- GitHub [Discussions](https://github.com/Stevertus/objD/discussions) for ideas, issues and questions
 
 ## Installation
 
-[Temporary]
+You need the Dart SDK for this library. Download and install it from https://www.dartlang.org/tools/sdk
 
-You need the Dart SDK for this framework. Download and install it from https://www.dartlang.org/tools/sdk
+I would also recommend Visual Studio Code along with the [dart plugin](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code) to edit dart files very conveniently.
 
-I would also recommend Visual Studio Code along with the dart plugin to edit dart files very conveniently.
+To get started, it is the easiest to use the _objD CLI_ for generating a sample project, make small changes and let it run with hot reload.
 
-Make a new folder that will house your project wherever you want(I would recommend datapacks folder).
+Install it using
 
-And inside of that create a file named `pubspec.yaml` and another folder called `lib`.
-
-Open the pubspec.yaml file and add
-
-```yaml
-name: [unique_namespace]
-environment:
-  sdk: ">=2.15.0 <3.0.0"
-dependencies:
-  objd: ^0.4.4
+```bash
+dart pub global activate objd_cli
 ```
 
-Also remember to replace the `[unique_namespace]` with your own project name.
-And run
+You can then invoke the new command to create your project, follow the instructions:
 
+```bash
+dart pub global run objd_cli new <project_name>
 ```
-$  pub get
-```
 
-with the console in the new folder(VS code does this automatically)
+For further explanations, refer to the [Intro Video](https://youtu.be/0GfuCUNI1pw), where this is presented in depth.
 
-> Tip: You can also generate a full project with a console command. [read more](https://objd.stevertus.com/cli/)
+## Example
 
-## Getting started
-
-Let's get started and create our first dart file with `lib/main.dart` file.
-
-Then we import the framework with:
+objD is all about nesting, abstracting the sequential nature of commands into so called [Widgets](https://objd.stevertus.com/basics/#widget) and allowing powerful combinations.
 
 ```dart
-import 'package:objd/core.dart';
+For(
+  from: 0,
+  to: n,
+  create: (i) => ArmorStand(
+    Location.rel(x: i.toDouble()),
+    name: TextComponent("Number $i"),
+    nameVisible: true,
+    pose: Pose(
+      head: [360 * i / n - 180],
+    ),
+  ),
+),
 ```
 
-Then we need to create a new datapack project:
+This simple example creates n armor stands(depending on a variable) each with custom names and pose.
 
-```dart
-void main(List<String> args){
-	createProject(
-		Project(
-			name:"This is going to be the generated folder name",
-			target:"./", // path for where to generate the project
-			generate: CustomWidget() // The starting point of generation
-		),
-		args
-	);
-}
-```
+Where in vanilla commands you would have to change multiple commands, this approach is **flexible** and can easily controlled by parameters.
 
-Next of we need to build this custom Widget:
+## Contributing & Bugs
 
-```dart
-class CustomWidget extends Widget {
-	@override
-	Widget generate(Context context){
+New and fresh ideas are always welcome and greatly appreciated. Please create a [pull request](https://github.com/Stevertus/objD/pulls)to organize new additions.
 
-	}
-}
-```
+Bugs can be reported using [GitHub Issues](https://github.com/Stevertus/objD/issues).
 
-To get more details on why we build it like that, check out the [Widget](https://objd.stevertus.com/basics/#widget) documentation.
-
-Like we can see the generate method, which is called on build, has to return another Widget, in our case an instance of the Pack class.
-
-```dart
-Widget generate(Context context){
-	return Pack(
-		name:"mypack",
-		main: File( // optional
-			'main'
-		)
-	)
-}
-```
-
-What we are doing right now is to generate a new subpack with a name(This will be the namespace of your functions later) and a main file(runs every tick) with the name "main.mcfunction".
-
-You can run the project already and the result should be a pack with an empty main.mcfunction file.
-
-So lets add some functionality to our project in our main file.
-We can use the Log Widget to display a message to the player.
-
-```dart
-main: File(
-	'main',
-	child: Log('Hello World')
-)
-```
-
-But how to add a list of Actions then? Well there's also an Widget for that:
-`For.of`
-
-```dart
-child: For.of([
-	Log('Hello World'),
-	Command('setblock 0 0 0 air')
-])
-```
-
-So now we have a [List](https://www.dartlang.org/guides/language/language-tour#lists) of Widget, so we can use as many as we want
-
-Whole code:
-
-```dart
-import 'package:objd/core.dart';
-
-void main(List<String> args){
-    createProject(
-        Project(
-            name:"This is going to be the generated folder name",
-            target:"./",
-            generate: CustomWidget()
-        ),
-        args
-    );
-}
-
-class CustomWidget extends Widget {
-    @override
-    Widget generate(Context context){
-        return Pack(
-            name:"mypack",
-            main: File( // optional
-                'main',
-                child: For.of([
-			Log('Hello World'),
-			Command('setblock 0 0 0 air')
-		])
-            )
-        );
-    }
-}
-```
-
-## Documentation and Examples
-
-The example folder contains a boilerplate to start off.
-
-There are many more widgets for objD including basic Widgeds, Command Wrappers, Text and Util Widgets.
-So check out the documentation at https://objd.stevertus.com
-or my youtube channel https://www.youtube.com/stevertus.
-In this video playlist are all objD related videos: https://www.youtube.com/playlist?list=PL5AxRIlgrL5GnKz69w4AUyqpZC35BlxdD
+Huge thanks to everyone who participated and made objD a better tool ❤.
