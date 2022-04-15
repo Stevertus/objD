@@ -904,7 +904,43 @@ class Blocks {
   ];
 
   /// A List of newer experimental blocks introduced in the next minecraft version
-  static const List<Block> snapshot = [];
+  static const List<Block> snapshot = [
+    frogspawn,
+    mangrove_button,
+    mangrove_door,
+    mangrove_fence,
+    mangrove_fence_gate,
+    mangrove_leaves,
+    mangrove_log,
+    mangrove_planks,
+    mangrove_pressure_plate,
+    mangrove_propagule,
+    mangrove_roots,
+    mangrove_sign,
+    mangrove_slab,
+    mangrove_stairs,
+    mangrove_trapdoor,
+    mangrove_wall_sign,
+    mangrove_wood,
+    mud,
+    mud_brick_slab,
+    mud_brick_stairs,
+    mud_brick_wall,
+    mud_bricks,
+    muddy_mangrove_roots,
+    ochre_froglight,
+    packed_mud,
+    pearlescent_froglight,
+    potted_mangrove_propagule,
+    reinforced_deepslate,
+    sculk,
+    sculk_catalyst,
+    sculk_shrieker,
+    sculk_vein,
+    stripped_mangrove_log,
+    stripped_mangrove_wood,
+    verdant_froglight
+  ];
 
   /// [Acacia Button](https://minecraft.gamepedia.com/acacia_button)
   ///
@@ -5633,4 +5669,187 @@ class Blocks {
   ///
   /// _(minecraft:zombie_wall_head)_
   static const Block zombie_wall_head = Block('minecraft:zombie_wall_head');
+
+  /// [Frogspawn](https://minecraft.gamepedia.com/frogspawn)
+  ///
+  /// _(minecraft:frogspawn)_
+  static const Block frogspawn = Block('minecraft:frogspawn');
+
+  /// [Mangrove Button](https://minecraft.gamepedia.com/mangrove_button)
+  ///
+  /// _(minecraft:mangrove_button)_
+  static const Block mangrove_button = Block('minecraft:mangrove_button');
+
+  /// [Mangrove Door](https://minecraft.gamepedia.com/mangrove_door)
+  ///
+  /// _(minecraft:mangrove_door)_
+  static const Block mangrove_door = Block('minecraft:mangrove_door');
+
+  /// [Mangrove Fence](https://minecraft.gamepedia.com/mangrove_fence)
+  ///
+  /// _(minecraft:mangrove_fence)_
+  static const Block mangrove_fence = Block('minecraft:mangrove_fence');
+
+  /// [Mangrove Fence Gate](https://minecraft.gamepedia.com/mangrove_fence_gate)
+  ///
+  /// _(minecraft:mangrove_fence_gate)_
+  static const Block mangrove_fence_gate =
+      Block('minecraft:mangrove_fence_gate');
+
+  /// [Mangrove Leaves](https://minecraft.gamepedia.com/mangrove_leaves)
+  ///
+  /// _(minecraft:mangrove_leaves)_
+  static const Block mangrove_leaves = Block('minecraft:mangrove_leaves');
+
+  /// [Mangrove Log](https://minecraft.gamepedia.com/mangrove_log)
+  ///
+  /// _(minecraft:mangrove_log)_
+  static const Block mangrove_log = Block('minecraft:mangrove_log');
+
+  /// [Mangrove Planks](https://minecraft.gamepedia.com/mangrove_planks)
+  ///
+  /// _(minecraft:mangrove_planks)_
+  static const Block mangrove_planks = Block('minecraft:mangrove_planks');
+
+  /// [Mangrove Pressure Plate](https://minecraft.gamepedia.com/mangrove_pressure_plate)
+  ///
+  /// _(minecraft:mangrove_pressure_plate)_
+  static const Block mangrove_pressure_plate =
+      Block('minecraft:mangrove_pressure_plate');
+
+  /// [Mangrove Propagule](https://minecraft.gamepedia.com/mangrove_propagule)
+  ///
+  /// _(minecraft:mangrove_propagule)_
+  static const Block mangrove_propagule = Block('minecraft:mangrove_propagule');
+
+  /// [Mangrove Roots](https://minecraft.gamepedia.com/mangrove_roots)
+  ///
+  /// _(minecraft:mangrove_roots)_
+  static const Block mangrove_roots = Block('minecraft:mangrove_roots');
+
+  /// [Mangrove Sign](https://minecraft.gamepedia.com/mangrove_sign)
+  ///
+  /// _(minecraft:mangrove_sign)_
+  static const Block mangrove_sign = Block('minecraft:mangrove_sign');
+
+  /// [Mangrove Slab](https://minecraft.gamepedia.com/mangrove_slab)
+  ///
+  /// _(minecraft:mangrove_slab)_
+  static const Block mangrove_slab = Block('minecraft:mangrove_slab');
+
+  /// [Mangrove Stairs](https://minecraft.gamepedia.com/mangrove_stairs)
+  ///
+  /// _(minecraft:mangrove_stairs)_
+  static const Block mangrove_stairs = Block('minecraft:mangrove_stairs');
+
+  /// [Mangrove Trapdoor](https://minecraft.gamepedia.com/mangrove_trapdoor)
+  ///
+  /// _(minecraft:mangrove_trapdoor)_
+  static const Block mangrove_trapdoor = Block('minecraft:mangrove_trapdoor');
+
+  /// [Mangrove Wall Sign](https://minecraft.gamepedia.com/mangrove_wall_sign)
+  ///
+  /// _(minecraft:mangrove_wall_sign)_
+  static const Block mangrove_wall_sign = Block('minecraft:mangrove_wall_sign');
+
+  /// [Mangrove Wood](https://minecraft.gamepedia.com/mangrove_wood)
+  ///
+  /// _(minecraft:mangrove_wood)_
+  static const Block mangrove_wood = Block('minecraft:mangrove_wood');
+
+  /// [Mud](https://minecraft.gamepedia.com/mud)
+  ///
+  /// _(minecraft:mud)_
+  static const Block mud = Block('minecraft:mud');
+
+  /// [Mud Brick Slab](https://minecraft.gamepedia.com/mud_brick_slab)
+  ///
+  /// _(minecraft:mud_brick_slab)_
+  static const Block mud_brick_slab = Block('minecraft:mud_brick_slab');
+
+  /// [Mud Brick Stairs](https://minecraft.gamepedia.com/mud_brick_stairs)
+  ///
+  /// _(minecraft:mud_brick_stairs)_
+  static const Block mud_brick_stairs = Block('minecraft:mud_brick_stairs');
+
+  /// [Mud Brick Wall](https://minecraft.gamepedia.com/mud_brick_wall)
+  ///
+  /// _(minecraft:mud_brick_wall)_
+  static const Block mud_brick_wall = Block('minecraft:mud_brick_wall');
+
+  /// [Mud Bricks](https://minecraft.gamepedia.com/mud_bricks)
+  ///
+  /// _(minecraft:mud_bricks)_
+  static const Block mud_bricks = Block('minecraft:mud_bricks');
+
+  /// [Muddy Mangrove Roots](https://minecraft.gamepedia.com/muddy_mangrove_roots)
+  ///
+  /// _(minecraft:muddy_mangrove_roots)_
+  static const Block muddy_mangrove_roots =
+      Block('minecraft:muddy_mangrove_roots');
+
+  /// [Ochre Froglight](https://minecraft.gamepedia.com/ochre_froglight)
+  ///
+  /// _(minecraft:ochre_froglight)_
+  static const Block ochre_froglight = Block('minecraft:ochre_froglight');
+
+  /// [Packed Mud](https://minecraft.gamepedia.com/packed_mud)
+  ///
+  /// _(minecraft:packed_mud)_
+  static const Block packed_mud = Block('minecraft:packed_mud');
+
+  /// [Pearlescent Froglight](https://minecraft.gamepedia.com/pearlescent_froglight)
+  ///
+  /// _(minecraft:pearlescent_froglight)_
+  static const Block pearlescent_froglight =
+      Block('minecraft:pearlescent_froglight');
+
+  /// [Potted Mangrove Propagule](https://minecraft.gamepedia.com/potted_mangrove_propagule)
+  ///
+  /// _(minecraft:potted_mangrove_propagule)_
+  static const Block potted_mangrove_propagule =
+      Block('minecraft:potted_mangrove_propagule');
+
+  /// [Reinforced Deepslate](https://minecraft.gamepedia.com/reinforced_deepslate)
+  ///
+  /// _(minecraft:reinforced_deepslate)_
+  static const Block reinforced_deepslate =
+      Block('minecraft:reinforced_deepslate');
+
+  /// [Sculk](https://minecraft.gamepedia.com/sculk)
+  ///
+  /// _(minecraft:sculk)_
+  static const Block sculk = Block('minecraft:sculk');
+
+  /// [Sculk Catalyst](https://minecraft.gamepedia.com/sculk_catalyst)
+  ///
+  /// _(minecraft:sculk_catalyst)_
+  static const Block sculk_catalyst = Block('minecraft:sculk_catalyst');
+
+  /// [Sculk Shrieker](https://minecraft.gamepedia.com/sculk_shrieker)
+  ///
+  /// _(minecraft:sculk_shrieker)_
+  static const Block sculk_shrieker = Block('minecraft:sculk_shrieker');
+
+  /// [Sculk Vein](https://minecraft.gamepedia.com/sculk_vein)
+  ///
+  /// _(minecraft:sculk_vein)_
+  static const Block sculk_vein = Block('minecraft:sculk_vein');
+
+  /// [Stripped Mangrove Log](https://minecraft.gamepedia.com/stripped_mangrove_log)
+  ///
+  /// _(minecraft:stripped_mangrove_log)_
+  static const Block stripped_mangrove_log =
+      Block('minecraft:stripped_mangrove_log');
+
+  /// [Stripped Mangrove Wood](https://minecraft.gamepedia.com/stripped_mangrove_wood)
+  ///
+  /// _(minecraft:stripped_mangrove_wood)_
+  static const Block stripped_mangrove_wood =
+      Block('minecraft:stripped_mangrove_wood');
+
+  /// [Verdant Froglight](https://minecraft.gamepedia.com/verdant_froglight)
+  ///
+  /// _(minecraft:verdant_froglight)_
+  static const Block verdant_froglight = Block('minecraft:verdant_froglight');
 }

@@ -99,6 +99,9 @@ class Particles {
   /// _(minecraft:light)_
   static const ParticleType light = ParticleType('minecraft:light');
 
+  /// _(minecraft:allay_dust)_
+  static const ParticleType allay_dust = ParticleType('minecraft:allay_dust');
+
   /// _(minecraft:ambient_entity_effect)_
   static const ParticleType ambient_entity_effect =
       ParticleType('minecraft:ambient_entity_effect');
@@ -345,6 +348,20 @@ class Particles {
   /// _(minecraft:scrape)_
   static const ParticleType scrape = ParticleType('minecraft:scrape');
 
+  /// _(minecraft:sculk_charge)_
+  static const ParticleType sculk_charge =
+      ParticleType('minecraft:sculk_charge');
+
+  /// _(minecraft:sculk_charge_pop)_
+  static const ParticleType sculk_charge_pop =
+      ParticleType('minecraft:sculk_charge_pop');
+
+  /// _(minecraft:sculk_soul)_
+  static const ParticleType sculk_soul = ParticleType('minecraft:sculk_soul');
+
+  /// _(minecraft:shriek)_
+  static const ParticleType shriek = ParticleType('minecraft:shriek');
+
   /// _(minecraft:small_flame)_
   static const ParticleType small_flame = ParticleType('minecraft:small_flame');
 
@@ -356,6 +373,9 @@ class Particles {
 
   /// _(minecraft:snowflake)_
   static const ParticleType snowflake = ParticleType('minecraft:snowflake');
+
+  /// _(minecraft:sonic_boom)_
+  static const ParticleType sonic_boom = ParticleType('minecraft:sonic_boom');
 
   /// _(minecraft:soul)_
   static const ParticleType soul = ParticleType('minecraft:soul');

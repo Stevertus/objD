@@ -3,6 +3,7 @@ import 'entity.dart';
 class Entities {
   /// A List of all Minecraft entities
   static const List<EntityType> all = [
+    allay,
     area_effect_cloud,
     armor_stand,
     arrow,
@@ -13,6 +14,7 @@ class Entities {
     boat,
     cat,
     cave_spider,
+    chest_boat,
     chest_minecart,
     chicken,
     cod,
@@ -40,6 +42,7 @@ class Entities {
     firework_rocket,
     fishing_bobber,
     fox,
+    frog,
     furnace_minecart,
     ghast,
     giant,
@@ -96,6 +99,7 @@ class Entities {
     squid,
     stray,
     strider,
+    tadpole,
     tnt,
     tnt_minecart,
     trader_llama,
@@ -106,6 +110,7 @@ class Entities {
     villager,
     vindicator,
     wandering_trader,
+    warden,
     witch,
     wither,
     wither_skeleton,
@@ -117,6 +122,11 @@ class Entities {
     zombie_villager,
     zombified_piglin
   ];
+
+  /// [Allay](https://minecraft.gamepedia.com/allay)
+  ///
+  /// _(minecraft:allay)_
+  static const EntityType allay = EntityType('minecraft:allay');
 
   /// [Area Effect Cloud](https://minecraft.gamepedia.com/area_effect_cloud)
   ///
@@ -168,6 +178,11 @@ class Entities {
   ///
   /// _(minecraft:cave_spider)_
   static const EntityType cave_spider = EntityType('minecraft:cave_spider');
+
+  /// [Chest Boat](https://minecraft.gamepedia.com/chest_boat)
+  ///
+  /// _(minecraft:chest_boat)_
+  static const EntityType chest_boat = EntityType('minecraft:chest_boat');
 
   /// [Chest Minecart](https://minecraft.gamepedia.com/chest_minecart)
   ///
@@ -311,6 +326,11 @@ class Entities {
   ///
   /// _(minecraft:fox)_
   static const EntityType fox = EntityType('minecraft:fox');
+
+  /// [Frog](https://minecraft.gamepedia.com/frog)
+  ///
+  /// _(minecraft:frog)_
+  static const EntityType frog = EntityType('minecraft:frog');
 
   /// [Furnace Minecart](https://minecraft.gamepedia.com/furnace_minecart)
   ///
@@ -601,6 +621,11 @@ class Entities {
   /// _(minecraft:strider)_
   static const EntityType strider = EntityType('minecraft:strider');
 
+  /// [Tadpole](https://minecraft.gamepedia.com/tadpole)
+  ///
+  /// _(minecraft:tadpole)_
+  static const EntityType tadpole = EntityType('minecraft:tadpole');
+
   /// [Tnt](https://minecraft.gamepedia.com/tnt)
   ///
   /// _(minecraft:tnt)_
@@ -651,6 +676,11 @@ class Entities {
   /// _(minecraft:wandering_trader)_
   static const EntityType wandering_trader =
       EntityType('minecraft:wandering_trader');
+
+  /// [Warden](https://minecraft.gamepedia.com/warden)
+  ///
+  /// _(minecraft:warden)_
+  static const EntityType warden = EntityType('minecraft:warden');
 
   /// [Witch](https://minecraft.gamepedia.com/witch)
   ///
