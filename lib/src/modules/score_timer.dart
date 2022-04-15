@@ -53,7 +53,7 @@ class ScoreTimerModule extends Module {
   Widget generate(Context context) {
     return For.of([
       if (steps >= 0) _score.add(steps),
-      if (steps < 0) _score.subtract(steps),
+      if (steps < 0) _score.subtract(-steps),
       If(_score.matches(ticks), then: [
         File(path + name, execute: true, create: false),
       ]),

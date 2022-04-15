@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.5
+
+- updated blocks, items, particles and entities to include content from 22w15a
+- updated dependencies
+- fixed #25 ScoreTimerModule returning incorrect command with negative value
+- fixed Storage.getData not generating namespace properly
+- moved Builder Widget to basic
+
 ## 0.4.4
 
 - added PlayerJoin.rejoin to only detect once joined players

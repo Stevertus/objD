@@ -158,7 +158,7 @@ class Storage extends Widget {
           datatype: datatype,
           score: score);
 
-  Data? toData([DataStorage? target]) {
+  Data toData([DataStorage? target]) {
     target ??= DataStorage(name);
 
     if (_type == _StorageType.merge) return Data.merge(target, nbt: nbt);
@@ -189,21 +189,11 @@ class Storage extends Widget {
         datatype: datatype,
       );
     }
-    return null;
+    throw ("You have to invoke some action on Storage when using toData!");
   }
 
   @override
-  Widget generate(Context context) {
-    var target = DataStorage(autoNamespace ? context.packId + ':$name' : name);
-
-    var data = toData(target);
-
-    if (data != null) {
-      return data;
-    } else {
-      return Comment.Null();
-    }
-  }
+  Widget generate(Context context) => toData();
 }
 
 enum _StorageType {

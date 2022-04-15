@@ -109,17 +109,20 @@ class Data extends RestActionAble {
     }
   }
 
-  String getTarget() {
-    return _type + ' ' + _typeValue;
+  String getTarget([Context? c]) {
+    if (target is DataStorage) {
+      return 'storage ${(target as DataStorage).toString(c)}';
+    }
+    return '$_type $_typeValue';
   }
 
   @override
-  Widget generate(Context context) {
+  Widget generate(Context c) {
     switch (_subcommand) {
       case 'merge':
-        return Command('data merge ' + getTarget() + ' ' + _getNbt());
+        return Command('data merge ' + getTarget(c) + ' ' + _getNbt());
       case 'get':
-        final cmd = ['data get', getTarget(), path];
+        final cmd = ['data get', getTarget(c), path];
 
         if (scale != null) {
           cmd.add(
@@ -129,13 +132,13 @@ class Data extends RestActionAble {
 
         return Command(cmd.join(' '));
       case 'remove':
-        return Command('data remove ' + getTarget() + ' ' + path);
+        return Command('data remove ' + getTarget(c) + ' ' + path);
       case 'modify':
-        return Command('data modify ' + getTarget() + ' $path $modify');
+        return Command('data modify ' + getTarget(c) + ' $path $modify');
       case 'score':
         return Command(
           'execute store result ' +
-              getTarget() +
+              getTarget(c) +
               ' $path $datatype $scale run scoreboard players get ${score?.entity.toString()} ${score?.score}',
         );
     }
@@ -206,11 +209,12 @@ class DataModify {
 
 class DataStorage {
   final String name;
+  final bool autoNamespace;
 
-  const DataStorage(this.name);
+  const DataStorage(this.name, {this.autoNamespace = true});
 
   @override
-  String toString() {
-    return name;
+  String toString([Context? context]) {
+    return context != null && autoNamespace ? '${context.packId}:$name' : name;
   }
 }

@@ -158,8 +158,11 @@ class Condition {
     }
 
     if (cond is Data) {
-      _generated = _ConditionUtil('data ' + cond.getTarget() + ' ' + cond.path,
-          invert: invert);
+      // still bug here when using storage
+      _generated = _ConditionUtil(
+        'data ' + cond.getTarget() + ' ' + cond.path,
+        invert: invert,
+      );
       return;
     }
 

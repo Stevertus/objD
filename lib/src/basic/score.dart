@@ -10,6 +10,8 @@ import 'package:objd/src/basic/scoreboard.dart';
 import 'package:objd/src/build/build.dart';
 import 'package:objd/src/wrappers/if.dart';
 
+import 'builder.dart';
+
 class Score extends RestActionAble {
   List<Widget> _commands = [];
 
@@ -118,7 +120,7 @@ class Score extends RestActionAble {
     return entity.toString() + ' ' + score;
   }
 
-  Score addCommandRet(Command command) {
+  Score addCommandRet(Widget command) {
     var commands = List<Widget>.from(_commands);
     commands.add(command);
     return Score(entity, score, addNew: false, commands: commands, type: type);
@@ -384,15 +386,17 @@ class Score extends RestActionAble {
       throw ('Please set a score to Data.get and not Data.' + data.subcommand);
     }
     return addCommandRet(
-      Command(
-        'execute store result score ' +
-            _getESStr() +
-            ' run data get ' +
-            data.getTarget() +
-            ' ' +
-            data.path +
-            ' ' +
-            (data.scale ?? 1).toString(),
+      Builder(
+        (c) => Command(
+          'execute store result score ' +
+              _getESStr() +
+              ' run data get ' +
+              data.getTarget(c) +
+              ' ' +
+              data.path +
+              ' ' +
+              (data.scale ?? 1).toString(),
+        ),
       ),
     );
   }
