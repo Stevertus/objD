@@ -19,6 +19,6 @@ class Say extends RestActionAble {
 
   @override
   Widget generate(Context context) {
-    return Command('say ' + message);
+    return Command('say $message');
   }
 }

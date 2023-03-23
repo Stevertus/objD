@@ -8,7 +8,7 @@ class Teleport extends RestActionAble {
   /// Sets the location of an Entity to a new Location and Rotation(optional).
   Teleport(this.entity, {required Location to, dynamic facing, Rotation? rot}) {
     this.to = to.toString();
-    if (rot != null) this.to += ' ' + rot.toString();
+    if (rot != null) this.to += ' $rot';
     _setFacing(facing);
   }
 
@@ -19,9 +19,9 @@ class Teleport extends RestActionAble {
   void _setFacing(facing) {
     if (facing != null) {
       if (facing is Location) {
-        to += ' facing ' + facing.toString();
+        to += ' facing $facing';
       } else if (facing is Entity) {
-        to += ' facing entity ' + facing.toString();
+        to += ' facing entity $facing';
       } else {
         throw ('Please set the facing part either to a entity or location');
       }
@@ -30,6 +30,6 @@ class Teleport extends RestActionAble {
 
   @override
   Widget generate(Context context) {
-    return Command('tp ' + entity.toString() + ' ' + to);
+    return Command('tp $entity $to');
   }
 }

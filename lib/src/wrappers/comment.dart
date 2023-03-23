@@ -11,7 +11,7 @@ class Comment extends RestActionAble {
 
   /// The Comment widget generates a simple line with some annotations(# ...).
   Comment(String text, {this.force = false})
-      : _text = text.startsWith('#') ? text : '# ' + text;
+      : _text = text.startsWith('#') ? text : '# $text';
 
   /// The Comment features a simple line break.
   Comment.LineBreak() : _text = '';
@@ -25,26 +25,24 @@ class Comment extends RestActionAble {
     String? author,
     String? calledFrom,
     String? context,
-  }) : _text = _separate() +
-            '''
-\n#
+  }) : _text = '''${_separate()}\n#
 # Author:
 #  ${author ?? Author}
 #
 # Description:    
 ''' {
-    _text += desc.split('\n').map((s) => '#  ' + s).join('\n');
+    _text += desc.split('\n').map((s) => '#  $s').join('\n');
 
     if (calledFrom != null) {
       _text += '\n#\n# Called in:';
-      _text += '\n#  ' + calledFrom;
+      _text += '\n#  $calledFrom';
     }
     if (context != null) {
       _text += '\n#\n# Context:';
-      _text += '\n#  ' + context;
+      _text += '\n#  $context';
     }
 
-    _text += '\n#\n' + _separate();
+    _text += '\n#\n${_separate()}';
   }
 
   Comment.Null() : _text = '[null]';

@@ -28,3 +28,4 @@ export 'spawnpoint.dart';
 export 'spreadplayers.dart';
 export 'attribute.dart';
 export 'enchant.dart';
+export 'fillbiome.dart';

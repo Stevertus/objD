@@ -64,12 +64,12 @@ class Raycast extends RestActionAble {
 
   @override
   Widget generate(Context context) {
-    Score? _maxScore;
+    Score? maxScore;
     int? maxStep;
     id = IndexedFile.getIndexed('ray') + 1;
 
     if (max != null && max! > 0) {
-      _maxScore = Score(Entity.Self(), scoreName);
+      maxScore = Score(Entity.Self(), scoreName);
       maxStep = max! ~/ step;
     }
 
@@ -81,9 +81,9 @@ class Raycast extends RestActionAble {
     /// all and conditions
     var conds = <Condition>[Condition.not(_isHit)];
     if (_useStop) conds.add(Condition.not(_isStopped));
-    if (_maxScore != null) {
-      children.add(_maxScore.add());
-      conds.add(Condition(_maxScore.matchesRange(Range.to(maxStep))));
+    if (maxScore != null) {
+      children.add(maxScore.add());
+      conds.add(Condition(maxScore.matchesRange(Range.to(maxStep))));
     }
 
     children.add(
@@ -122,7 +122,7 @@ class Raycast extends RestActionAble {
         .positioned(Location.local())
         .anchored(Facing.feet);
 
-    if (_maxScore != null) return For.of([_maxScore.set(0), ex]);
+    if (maxScore != null) return For.of([maxScore.set(0), ex]);
     return ex;
   }
 }

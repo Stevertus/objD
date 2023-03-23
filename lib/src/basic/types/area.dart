@@ -80,7 +80,7 @@ class Area {
   }
 
   String getCoordinates() {
-    return loc1.toString() + ' ' + loc2.toString();
+    return '$loc1 $loc2';
   }
 }
 

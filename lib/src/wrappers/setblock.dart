@@ -17,11 +17,7 @@ class SetBlock extends RestActionAble {
   @override
   Widget generate(Context context) {
     return Command(
-      'setblock ' +
-          location.toString() +
-          ' ' +
-          block.toString() +
-          (nbt == null ? '' : gson.encode(nbt)),
+      'setblock $location $block${nbt == null ? '' : gson.encode(nbt)}',
     );
   }
 }

@@ -50,14 +50,14 @@ class AreaEffectCloud extends Summon {
   Map<String, dynamic> getNbt([bool useId = true]) {
     final nbt = super.getNbt(useId);
 
-    void _addIfExist(dynamic val, String tag) {
+    void addIfExist(dynamic val, String tag) {
       if (val != null) nbt[tag] = val;
     }
 
-    _addIfExist(radius, 'Radius');
-    _addIfExist(applicationDelay, 'ReapplicationDelay');
-    _addIfExist(duration, 'Duration');
-    _addIfExist(waitTime, 'WaitTime');
+    addIfExist(radius, 'Radius');
+    addIfExist(applicationDelay, 'ReapplicationDelay');
+    addIfExist(duration, 'Duration');
+    addIfExist(waitTime, 'WaitTime');
     return nbt;
   }
 }

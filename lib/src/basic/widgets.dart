@@ -29,3 +29,4 @@ export 'types/slot.dart';
 export 'types/particles.dart';
 export 'types/attribute.dart';
 export 'types/pose.dart';
+export 'types/biomes.dart';

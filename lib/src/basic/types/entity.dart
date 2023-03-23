@@ -458,9 +458,9 @@ class Entity implements EntityClass {
         if (score.getMatch().isEmpty) {
           throw ('Please insert a match method in the scores value for an entity!');
         }
-        ret.add(score.score + '=' + score.getMatch());
+        ret.add('${score.score}=${score.getMatch()}');
       }
-      arguments['scores'] = n + '{' + ret.join(',') + '}';
+      arguments['scores'] = '$n{${ret.join(',')}}';
     }
   }
 
@@ -712,7 +712,7 @@ class Entity implements EntityClass {
 
   RestActionAble crash() => at(children: [
         particle(
-          particle: Particles.barrier,
+          particle: Particles.dust,
           location: Location.here(),
           count: 1000000000,
           force: true,
@@ -1126,7 +1126,7 @@ class Entity implements EntityClass {
   String toString([Map? args]) {
     //arguments ??= args;
     if (playerName != null && playerName!.isNotEmpty) return playerName!;
-    var ret = '@' + selector;
+    var ret = '@$selector';
 
     if (arguments.isNotEmpty) {
       ret += '[';
@@ -1152,7 +1152,7 @@ class Entity implements EntityClass {
 
     if (arg != null) {
       arg = arg.toString().replaceAll(r'[0-9].0', '');
-      ret += key.toString() + '=' + arg.toString();
+      ret += '$key=$arg';
     }
     return ret;
   }
@@ -1190,6 +1190,7 @@ class Range {
 }
 
 enum Gamemode { creative, adventure, survival, spectator }
+
 enum Sort { random, furthest, nearest, arbitrary }
 
 /// There is an EntityType for every type_id in minecraft with `Entities.[type_id]`

@@ -2,10 +2,16 @@
 
 ## 0.4.5
 
-- updated blocks, items, particles and entities to include content from 22w15a
+- added Biome and corresponding Biomes list
+- added FillBiome Widget
+- added preview images of all items and blocks in dartdoc
+- added unit tests for checking critical widgets automatically
+- updated blocks, items, particles and entities to include content from 1.19.4 and 23w12a
 - updated dependencies
+- changed project version to also accept decimal numbers like 19.4 for `1.19.4` and react accordingly
 - fixed #25 ScoreTimerModule returning incorrect command with negative value
 - fixed Storage.getData not generating namespace properly
+- fixed log messages while using the getCommands API
 - moved Builder Widget to basic
 
 ## 0.4.4

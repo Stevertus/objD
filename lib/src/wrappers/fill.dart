@@ -27,13 +27,12 @@ class Fill extends RestActionAble {
     type = 'keep';
   }
   Fill.replace(this.block, {required this.area, Block? replace}) {
-    if (replace != null) type = 'replace ' + replace.toString();
+    if (replace != null) type = 'replace $replace';
   }
 
   @override
   Widget generate(Context context) {
-    if (type.isNotEmpty) type = ' ' + type;
-    return Command(
-        'fill ' + area.getCoordinates() + ' ' + block.toString() + type);
+    if (type.isNotEmpty) type = ' $type';
+    return Command('fill ${area.getCoordinates()} $block$type');
   }
 }

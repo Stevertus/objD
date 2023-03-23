@@ -43,7 +43,7 @@ class JsonFile extends Widget {
   @override
   Widget generate(Context context) {
     return RawFile(
-      path + '.json',
+      '$path.json',
       useGson
           ? gsonEncode(contents ?? contentsList)
           : jsonEncode(contents ?? contentsList),

@@ -40,11 +40,7 @@ class Title extends RestActionAble {
     int fadeout = 20,
   })  : type = 'times',
         entity = selector.toString(),
-        jsonText = fadein.toString() +
-            ' ' +
-            display.toString() +
-            ' ' +
-            fadeout.toString();
+        jsonText = '$fadein $display $fadeout';
 
   /// resets times for one selector
   Title.resetTimes(Entity selector)
@@ -55,6 +51,6 @@ class Title extends RestActionAble {
   @override
   Widget generate(Context context) {
     jsonText = jsonText.replaceAll('\\[repl]\\', '\\');
-    return Command('title ' + entity + ' ' + type + ' ' + jsonText);
+    return Command('title $entity $type $jsonText');
   }
 }

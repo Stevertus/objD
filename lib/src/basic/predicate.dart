@@ -12,7 +12,7 @@ class Predicate extends Widget {
   @override
   Widget generate(Context context) {
     return JsonFile(
-      'predicates/' + name,
+      'predicates/$name',
       contents?.getJson() ?? {},
     );
   }

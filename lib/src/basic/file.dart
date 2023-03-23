@@ -108,7 +108,7 @@ class File extends Widget {
     if (isRecursive != null && isRecursive!) path = context.file;
 
     pack ??= context.packId;
-    return Command('function $pack:' + path);
+    return Command('function $pack:$path');
   }
 
   @override

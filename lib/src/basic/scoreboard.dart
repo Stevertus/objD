@@ -29,7 +29,7 @@ class Scoreboard extends RestActionAble {
     TextComponent? display,
     bool addIntoLoad = true,
   }) : subcommand = addIntoLoad ? 'add' : 'addHere' {
-    if (display != null) type += ' ' + display.toJson()!;
+    if (display != null) type += ' ${display.toJson()!}';
     prefixName();
   }
 
@@ -78,7 +78,7 @@ class Scoreboard extends RestActionAble {
   /// The `Scoreboard.add` constructor does exactly the same as Scoreboard but puts the result without checking in the current file.
   Scoreboard.add(this.name, {this.type = 'dummy', TextComponent? display})
       : subcommand = 'addHere' {
-    if (display != null) type += ' ' + display.toJson()!;
+    if (display != null) type += ' ${display.toJson()!}';
     prefixName();
   }
 
@@ -130,8 +130,7 @@ class Scoreboard extends RestActionAble {
         return Command('scoreboard objectives remove $name');
       case 'modify':
         return Command(
-          'scoreboard objectives modify $name rendertype ' +
-              (useHearts! ? 'hearts' : 'integer'),
+          'scoreboard objectives modify $name rendertype ${useHearts! ? 'hearts' : 'integer'}',
         );
       case 'setdisplay':
         return Command('scoreboard objectives setdisplay $type $name');

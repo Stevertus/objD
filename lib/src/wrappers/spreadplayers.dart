@@ -25,7 +25,7 @@ class SpreadPlayers extends RestActionAble {
     locations.removeAt(1);
 
     return Command(
-      'spreadplayers ${locations.join(' ')} $distance $maxRange ${maximumHeight == null ? '' : 'under ' + maximumHeight.toString()} $respectTeams $target',
+      'spreadplayers ${locations.join(' ')} $distance $maxRange ${maximumHeight == null ? '' : 'under $maximumHeight'} $respectTeams $target',
     );
   }
 }

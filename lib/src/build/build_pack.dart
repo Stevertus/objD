@@ -22,9 +22,10 @@ class BuildPack {
   BuildPack(
     Pack pack, {
     Context? c,
+    bool logging = true,
   })  : name = pack.name,
         scoreboards = [] {
-    var stopwatch = Stopwatch()..start();
+    var stopwatch = logging ? (Stopwatch()..start()) : null;
 
     context = Context.clone(c ?? Context())
       ..packId = name
@@ -46,8 +47,11 @@ class BuildPack {
         files[file.fullPath(context.path)] = BuildFile(file);
       }
     }
-    print('Compiled Pack $name in ${stopwatch.elapsedMilliseconds}ms');
-    stopwatch.stop();
+
+    if (stopwatch != null) {
+      print('Compiled Pack $name in ${stopwatch.elapsedMilliseconds}ms');
+      stopwatch.stop();
+    }
   }
 
   bool addScoreboard(String name) {

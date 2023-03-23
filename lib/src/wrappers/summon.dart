@@ -68,19 +68,19 @@ class Summon extends RestActionAble {
   Map<String, dynamic> getNbt([bool useId = true]) {
     var nbt = Map<String, dynamic>.from(this.nbt ?? {});
 
-    void _addBoolNbt(bool? value, String path) {
+    void addBoolNbt(bool? value, String path) {
       if (value != null) nbt[path] = value ? 1 : 0;
     }
 
     if (name != null) nbt['CustomName'] = name!.toJson();
-    _addBoolNbt(invulnerable, 'Invulnerable');
-    _addBoolNbt(silent, 'Silent');
-    _addBoolNbt(small, 'Small');
-    _addBoolNbt(glowing, 'Glowing');
-    _addBoolNbt(nameVisible, 'CustomNameVisible');
-    _addBoolNbt(persistent, 'PersistenceRequired');
-    _addBoolNbt(noAI, 'NoAI');
-    if (gravity != null) _addBoolNbt(!gravity!, 'NoGravity');
+    addBoolNbt(invulnerable, 'Invulnerable');
+    addBoolNbt(silent, 'Silent');
+    addBoolNbt(small, 'Small');
+    addBoolNbt(glowing, 'Glowing');
+    addBoolNbt(nameVisible, 'CustomNameVisible');
+    addBoolNbt(persistent, 'PersistenceRequired');
+    addBoolNbt(noAI, 'NoAI');
+    if (gravity != null) addBoolNbt(!gravity!, 'NoGravity');
     if (tags != null && tags!.isNotEmpty) {
       nbt['Tags'] = Tag.prefix != null
           ? tags!
@@ -107,14 +107,9 @@ class Summon extends RestActionAble {
   @override
   Widget generate(Context context) {
     return Command(
-      'summon ' +
-          type.toString() +
-          ' ' +
-          location.toString() +
-          ' ' +
-          gson.encode(
-            getNbt(false),
-          ),
+      'summon $type $location ${gson.encode(
+        getNbt(false),
+      )}',
     );
   }
 }

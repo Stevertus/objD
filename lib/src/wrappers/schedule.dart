@@ -41,22 +41,15 @@ class Schedule extends RestActionAble {
       return Group(
         prefix: 'schedule',
         children: [_file!],
-        suffix: ' ' + ticks.toString() + 't' + getMode(),
+        suffix: ' ${ticks}t${getMode()}',
       );
     }
     if (mode == ScheduleMode.clear) {
-      return Command('schedule clear ' + context.packId + ':' + _name);
+      return Command('schedule clear ${context.packId}:$_name');
     }
 
     return Command(
-      'schedule function ' +
-          context.packId +
-          ':' +
-          _name +
-          ' ' +
-          ticks.toString() +
-          't' +
-          getMode(),
+      'schedule function ${context.packId}:$_name ${ticks}t${getMode()}',
     );
   }
 }

@@ -15,13 +15,11 @@ class Trigger extends RestActionAble {
 
   @override
   Widget generate(Context context) {
-    var command = Command('trigger $objective ' + _mode);
+    var command = Command('trigger $objective $_mode');
 
     if (enableScore != null && _mode == 'enable') {
-      command = Command('scoreboard players enable ' +
-          enableScore!.entity.toString() +
-          ' ' +
-          enableScore!.score);
+      command = Command(
+          'scoreboard players enable ${enableScore!.entity} ${enableScore!.score}');
     }
 
     if (addNew) {

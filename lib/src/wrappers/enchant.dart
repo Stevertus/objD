@@ -13,7 +13,7 @@ class Enchant extends RestActionAble {
   @override
   Widget generate(Context context) {
     var cmd = 'enchant ';
-    cmd += target.toString() + ' $enchantment';
+    cmd += '$target $enchantment';
     if (level != null) cmd += ' $level';
 
     return Command(cmd);

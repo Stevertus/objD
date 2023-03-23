@@ -10,6 +10,6 @@ class Give extends RestActionAble {
 
   @override
   Widget generate(Context context) {
-    return Command('give ' + entity.toString() + ' ' + item.getGiveNotation());
+    return Command('give $entity ${item.getGiveNotation()}');
   }
 }

@@ -11,6 +11,6 @@ class Spectate extends RestActionAble {
 
   @override
   Command generate(Context context) {
-    return Command('spectate ' + target.toString());
+    return Command('spectate $target');
   }
 }

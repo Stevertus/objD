@@ -8,7 +8,7 @@ void reloadProject(BuildProject prj) {
   final color = AnsiPen()..cyan();
   print(color('Doing Hotreload...'));
 
-  final file = readFile(prj.path + '/${prj.name}/objd.json');
+  final file = readFile('${prj.path}/${prj.name}/objd.json');
   if (file == null) return;
 
   final newPrj = prj.toMap();

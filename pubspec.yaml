@@ -13,4 +13,5 @@ dependencies:
   archive: ^3.3.0
   gson: ^0.1.6-dev
 dev_dependencies:
-  lints: ^1.0.1
+  lints: ^2.0.1
+  test: 

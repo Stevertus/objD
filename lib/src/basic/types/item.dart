@@ -210,7 +210,7 @@ class Item {
     }
     result += ' ';
     if (count != null) result += count.toString();
-    if (damage != null && withDamage) result += ' ' + damage.toString();
+    if (damage != null && withDamage) result += ' $damage';
     return result;
   }
 
@@ -219,7 +219,7 @@ class Item {
   Map<String, dynamic> getMap([bool useId = true]) {
     final map = <String, dynamic>{};
     final id = useId ? 'id' : 'item';
-    map[id] = 'minecraft:' + getId();
+    map[id] = 'minecraft:${getId()}';
     if (tag != null && tag!.isNotEmpty) map['tag'] = tag;
     if (count != null) map['Count'] = Byte(count!);
     if (slot != null) {

@@ -1,107 +1,20 @@
 class Particles {
-  /// A List of all Particles
-  static const List<ParticleType> all = [
-    barrier,
-    light,
-    ambient_entity_effect,
-    angry_villager,
-    ash,
-    block,
-    block_marker,
-    bubble,
-    bubble_column_up,
-    bubble_pop,
-    campfire_cosy_smoke,
-    campfire_signal_smoke,
-    cloud,
-    composter,
-    crimson_spore,
-    crit,
-    current_down,
-    damage_indicator,
-    dolphin,
-    dragon_breath,
-    dripping_dripstone_lava,
-    dripping_dripstone_water,
-    dripping_honey,
-    dripping_lava,
-    dripping_obsidian_tear,
-    dripping_water,
-    dust,
-    dust_color_transition,
-    effect,
-    elder_guardian,
-    electric_spark,
-    enchant,
-    enchanted_hit,
-    end_rod,
-    entity_effect,
-    explosion,
-    explosion_emitter,
-    falling_dripstone_lava,
-    falling_dripstone_water,
-    falling_dust,
-    falling_honey,
-    falling_lava,
-    falling_nectar,
-    falling_obsidian_tear,
-    falling_spore_blossom,
-    falling_water,
-    firework,
-    fishing,
-    flame,
-    flash,
-    glow,
-    glow_squid_ink,
-    happy_villager,
-    heart,
-    instant_effect,
-    item,
-    item_slime,
-    item_snowball,
-    landing_honey,
-    landing_lava,
-    landing_obsidian_tear,
-    large_smoke,
-    lava,
-    mycelium,
-    nautilus,
-    note,
-    poof,
-    portal,
-    rain,
-    reverse_portal,
-    scrape,
-    small_flame,
-    smoke,
-    sneeze,
-    snowflake,
-    soul,
-    soul_fire_flame,
-    spit,
-    splash,
-    spore_blossom_air,
-    squid_ink,
-    sweep_attack,
-    totem_of_undying,
-    underwater,
-    vibration,
-    warped_spore,
-    wax_off,
-    wax_on,
-    white_ash,
-    witch
-  ];
+  // using cog generation tool to fetch blocks
+  /*[[[cog
+  import cog
+  import requests
 
-  /// _(minecraft:barrier)_
-  static const ParticleType barrier = ParticleType('minecraft:barrier');
+  version = '1.20/snapshots/23w12a'
 
-  /// _(minecraft:light)_
-  static const ParticleType light = ParticleType('minecraft:light');
-
-  /// _(minecraft:allay_dust)_
-  static const ParticleType allay_dust = ParticleType('minecraft:allay_dust');
-
+  res = requests.get(f'https://raw.githubusercontent.com/PixiGeko/Minecraft-generated-data/master/{version}/custom-generated/registries/particle_type.txt')
+  blocks = []
+  for l in res.iter_lines():
+      full = l.decode('UTF-8')
+      id = full.split(':')[1]
+      blocks.append(id)
+      cog.outl(f'/// _({full})_')
+      cog.outl(f"static const ParticleType {id} = ParticleType('{full}');\n")
+  ]]]*/
   /// _(minecraft:ambient_entity_effect)_
   static const ParticleType ambient_entity_effect =
       ParticleType('minecraft:ambient_entity_effect');
@@ -137,6 +50,10 @@ class Particles {
   /// _(minecraft:campfire_signal_smoke)_
   static const ParticleType campfire_signal_smoke =
       ParticleType('minecraft:campfire_signal_smoke');
+
+  /// _(minecraft:cherry_leaves)_
+  static const ParticleType cherry_leaves =
+      ParticleType('minecraft:cherry_leaves');
 
   /// _(minecraft:cloud)_
   static const ParticleType cloud = ParticleType('minecraft:cloud');
@@ -199,6 +116,9 @@ class Particles {
 
   /// _(minecraft:effect)_
   static const ParticleType effect = ParticleType('minecraft:effect');
+
+  /// _(minecraft:egg_crack)_
+  static const ParticleType egg_crack = ParticleType('minecraft:egg_crack');
 
   /// _(minecraft:elder_guardian)_
   static const ParticleType elder_guardian =
@@ -426,6 +346,112 @@ class Particles {
 
   /// _(minecraft:witch)_
   static const ParticleType witch = ParticleType('minecraft:witch');
+
+  //[[[end]]]
+
+  /// A List of all Minecraft particles
+  static List<ParticleType> get all => const [
+        /*[[[cog
+    for b in blocks:
+      cog.outl(f'{b},')
+    ]]]*/
+        ambient_entity_effect,
+        angry_villager,
+        ash,
+        block,
+        block_marker,
+        bubble,
+        bubble_column_up,
+        bubble_pop,
+        campfire_cosy_smoke,
+        campfire_signal_smoke,
+        cherry_leaves,
+        cloud,
+        composter,
+        crimson_spore,
+        crit,
+        current_down,
+        damage_indicator,
+        dolphin,
+        dragon_breath,
+        dripping_dripstone_lava,
+        dripping_dripstone_water,
+        dripping_honey,
+        dripping_lava,
+        dripping_obsidian_tear,
+        dripping_water,
+        dust,
+        dust_color_transition,
+        effect,
+        egg_crack,
+        elder_guardian,
+        electric_spark,
+        enchant,
+        enchanted_hit,
+        end_rod,
+        entity_effect,
+        explosion,
+        explosion_emitter,
+        falling_dripstone_lava,
+        falling_dripstone_water,
+        falling_dust,
+        falling_honey,
+        falling_lava,
+        falling_nectar,
+        falling_obsidian_tear,
+        falling_spore_blossom,
+        falling_water,
+        firework,
+        fishing,
+        flame,
+        flash,
+        glow,
+        glow_squid_ink,
+        happy_villager,
+        heart,
+        instant_effect,
+        item,
+        item_slime,
+        item_snowball,
+        landing_honey,
+        landing_lava,
+        landing_obsidian_tear,
+        large_smoke,
+        lava,
+        mycelium,
+        nautilus,
+        note,
+        poof,
+        portal,
+        rain,
+        reverse_portal,
+        scrape,
+        sculk_charge,
+        sculk_charge_pop,
+        sculk_soul,
+        shriek,
+        small_flame,
+        smoke,
+        sneeze,
+        snowflake,
+        sonic_boom,
+        soul,
+        soul_fire_flame,
+        spit,
+        splash,
+        spore_blossom_air,
+        squid_ink,
+        sweep_attack,
+        totem_of_undying,
+        underwater,
+        vibration,
+        warped_spore,
+        wax_off,
+        wax_on,
+        white_ash,
+        witch,
+        //[[[end]]]
+      ];
 }
 
 class ParticleType {

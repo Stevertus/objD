@@ -51,14 +51,11 @@ class Effect extends RestActionAble {
   Widget generate(Context context) {
     if (_type == 'clear') {
       return Command(
-        'effect clear $entity' +
-            (effect != null ? ' minecraft:' + effect!.name : ''),
+        'effect clear $entity${effect != null ? " minecraft:${effect!.name}" : ""}',
       );
     } else {
       return Command(
-        'effect give $entity minecraft:' +
-            effect!.name +
-            ' $duration $amplifier ${!showParticles!}',
+        'effect give $entity minecraft:${effect!.name} $duration $amplifier ${!showParticles!}',
       );
     }
   }

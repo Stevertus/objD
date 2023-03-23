@@ -59,7 +59,7 @@ class Location {
 
   @override
   String toString() {
-    return (location + ' ')
+    return ('$location ')
         .replaceAll('.0 ', ' ')
         .replaceAll('~0', '~')
         .replaceAll('^0', '^')

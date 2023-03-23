@@ -27,8 +27,8 @@ class Spawnpoint extends RestActionAble {
   Widget generate(Context context) {
     var cmd = 'spawnpoint';
     if (entity != null) {
-      cmd += ' ' + entity.toString();
-      if (position != null) cmd += ' ' + position.toString();
+      cmd += ' $entity';
+      if (position != null) cmd += ' $position';
     }
 
     return Command(cmd);

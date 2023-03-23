@@ -117,23 +117,23 @@ class Particle extends RestActionAble {
 
   @override
   Widget generate(Context context) {
-    var _gen = particle.toString();
+    var gen = particle.toString();
 
     if (context.version >= 18 &&
         ["minecraft:barrier", "minecraft:light"].contains(particle.type)) {
-      _gen = "${Particles.block_marker} ${particle.type}";
+      gen = "${Particles.block_marker} ${particle.type}";
     }
 
-    if (texture != null) _gen += ' $texture';
-    if (location != null) _gen += ' $location';
+    if (texture != null) gen += ' $texture';
+    if (location != null) gen += ' $location';
     if (delta != null) {
       if (location == null) {
         throw ('If you decide to use the full particle command add a delta, location, speed and count property!');
       }
-      _gen += ' $delta $speed $count ';
-      _gen += force ? 'force' : 'normal';
-      if (player != null) _gen += ' $player';
+      gen += ' $delta $speed $count ';
+      gen += force ? 'force' : 'normal';
+      if (player != null) gen += ' $player';
     }
-    return Command('particle ' + _gen);
+    return Command('particle $gen');
   }
 }

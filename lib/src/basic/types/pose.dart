@@ -76,16 +76,16 @@ class Pose {
 
   factory Pose.fromMap(Map<String, dynamic> map) {
     /// gets double values from Float list
-    List<double> _fromFloats(v) =>
+    List<double> fromFloats(v) =>
         (v as List<Float>).map((f) => f.value).toList();
 
     return Pose(
-      head: map.containsKey('Head') ? _fromFloats(map['Head']) : [],
-      body: map.containsKey('Body') ? _fromFloats(map['Body']) : [],
-      lleg: map.containsKey('LeftLeg') ? _fromFloats(map['LeftLeg']) : [],
-      rleg: map.containsKey('RightLeg') ? _fromFloats(map['RightLeg']) : [],
-      larm: map.containsKey('LeftArm') ? _fromFloats(map['LeftArm']) : [],
-      rarm: map.containsKey('RightArm') ? _fromFloats(map['RightArm']) : [],
+      head: map.containsKey('Head') ? fromFloats(map['Head']) : [],
+      body: map.containsKey('Body') ? fromFloats(map['Body']) : [],
+      lleg: map.containsKey('LeftLeg') ? fromFloats(map['LeftLeg']) : [],
+      rleg: map.containsKey('RightLeg') ? fromFloats(map['RightLeg']) : [],
+      larm: map.containsKey('LeftArm') ? fromFloats(map['LeftArm']) : [],
+      rarm: map.containsKey('RightArm') ? fromFloats(map['RightArm']) : [],
     );
   }
 }

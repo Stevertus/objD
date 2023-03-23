@@ -251,7 +251,7 @@ class Recipe extends Widget {
     if (n == '0') n = '';
     if (!name.contains('.json')) n += '.json';
     return JsonFile(
-      'recipes/' + name + n,
+      'recipes/$name$n',
       toJson(),
     );
   }
@@ -342,11 +342,11 @@ class Recipe extends Widget {
         {
           dat['type'] = type.name;
           dat['ingredient'] = ingredients.values.first.getMap(false);
-          dat['result'] = 'minecraft:' + result.getId();
+          dat['result'] = 'minecraft:${result.getId()}';
         }
     }
 
-    dat['type'] = 'minecraft:' + dat['type'].toString();
+    dat['type'] = 'minecraft:${dat['type']}';
 
     return dat;
   }

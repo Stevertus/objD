@@ -5,7 +5,7 @@ class Project {
   String target = './';
   final String name;
   final String description;
-  final int version;
+  final double version;
   Widget generate;
 
   /// The project is a special Widget which is just defined once.
@@ -35,17 +35,27 @@ class Project {
           'name': name,
           'version': version,
           'generate': generate
-              .generate(Context(
-                  prefixes: [], suffixes: [], packId: '', version: version))
+              .generate(
+                Context(
+                  prefixes: [],
+                  suffixes: [],
+                  packId: '',
+                  version: version,
+                ),
+              )
               .toMap()
         }
       };
 
   int getPackFormat() {
+    if (version >= 19.4) return 12;
+    if (version > 19.3) return 11;
+    if (version >= 19) return 10;
+    if (version >= 18.2) return 9;
     if (version >= 18) return 8;
-    if (version == 17) return 7;
-    if (version == 16) return 6;
-    if (version == 15) return 5;
+    if (version >= 17) return 7;
+    if (version >= 16) return 6;
+    if (version >= 15) return 5;
     return 4;
   }
 }

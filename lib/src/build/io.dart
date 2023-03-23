@@ -42,7 +42,7 @@ String getPath(String path, String name) {
   if (!Directory(path).existsSync()) {
     throw ('Please ensure that the project path is an existing directory!');
   }
-  var ppath = path + name + '/';
+  var ppath = '$path$name/';
   _ensureDirExists(ppath);
   return ppath;
 }

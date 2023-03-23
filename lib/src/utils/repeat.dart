@@ -22,7 +22,7 @@ class Repeat extends RestActionAble {
   @override
   Widget generate(Context context) {
     var score = Score(Entity.PlayerName(name), counter);
-    var filePath = path + '/' + name;
+    var filePath = '$path/$name';
     return For.of([
       score.set(0),
       File.execute(filePath,

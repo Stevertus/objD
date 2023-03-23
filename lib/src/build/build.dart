@@ -39,7 +39,7 @@ Future<void> createProject(Project prj, [List<String> args = const []]) async {
   if (opt.generateZip) {
     saveAsZip(
       _getFiles(bPrj, opt),
-      opt.output ?? bPrj.path + bPrj.name + '.zip',
+      opt.output ?? '${bPrj.path}${bPrj.name}.zip',
     );
   } else if (bPrj.isGen) {
     var path = opt.output != null
@@ -66,13 +66,24 @@ Future<void> createProject(Project prj, [List<String> args = const []]) async {
 /// This function gets a json representation(Map) of the tree structure before generating the files. This is the same that is used as the `objd.json` output in debug mode.
 Map getJsonMap(Project prj, [List<String> args = const []]) {
   var opt = GenOptions(args);
-  return BuildProject(prj, prod: opt.prod).toMap();
+  return BuildProject(
+    prj,
+    prod: opt.prod,
+    logging: false,
+  ).toMap();
 }
 
 /// `getAllFiles` accepts, just like createProject, your Project and optionally arguments. It then generates the widget tree and builds the files, but instead of saving them to your machine, returns them as a Dart Map(filename-content).
 Map<String, String> getAllFiles(Project prj, [List<String> args = const []]) {
   var opt = GenOptions(args);
-  return _getFiles(BuildProject(prj, prod: opt.prod), opt);
+  return _getFiles(
+    BuildProject(
+      prj,
+      prod: opt.prod,
+      logging: false,
+    ),
+    opt,
+  );
 }
 
 Map<String, String> _getFiles(BuildProject prj, GenOptions options) {
@@ -96,12 +107,12 @@ Map<String, String> _getFiles(BuildProject prj, GenOptions options) {
           // add load and main
           if (pack.load != null && pack.load!.isNotEmpty && pack.isGenLoad) {
             loadJson['values'].add(
-              pack.name + ':' + pack.load!.toString(false),
+              '${pack.name}:${pack.load!}',
             );
           }
           if (pack.main != null && pack.main!.isNotEmpty && pack.isGenMain) {
             tickJson['values'].add(
-              pack.name + ':' + pack.main!.toString(false),
+              '${pack.name}:${pack.main!}',
             );
           }
         }
@@ -152,9 +163,16 @@ List<String> getCommands(Widget w, {Context? context}) {
   final file = BuildFile.fromWidget(w);
   file.generate(
     context: context,
-    pack: BuildPack(Pack(name: context.packId)),
+    pack: BuildPack(
+      Pack(name: context.packId),
+      logging: false,
+    ),
   );
-  return file.commands.toString().split('\n');
+  return file.commands
+      .toString()
+      .split('\n')
+      .takeWhile((l) => l != '')
+      .toList();
 }
 
 /// When you want to save it as any other Archive or want to implement own generation, you can get the Archive instance with all files added by calling getArchive with the files Map.

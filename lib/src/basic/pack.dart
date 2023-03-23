@@ -28,8 +28,7 @@ class Pack extends Widget {
   /// ```
   Pack({required this.name, this.main, this.load, this.files, this.modules}) {
     if (name != name.toLowerCase()) {
-      throw ('Please not that the name of a pack must be lowercase! for pack:' +
-          name);
+      throw ('Please not that the name of a pack must be lowercase! for pack:$name');
     }
     if (modules != null) {
       if (main == null) {

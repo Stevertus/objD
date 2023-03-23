@@ -58,7 +58,7 @@ class Bossbar extends RestActionAble {
   Widget? generate(Context context) {
     switch (type) {
       case BossbarType.add:
-        return Command('bossbar add $id {"text":"$name}"');
+        return Command('bossbar add $id {"text":"$name"}');
       case BossbarType.remove:
         return Command('bossbar remove $id');
       case BossbarType.get:
@@ -121,4 +121,5 @@ class Bossbar extends RestActionAble {
 }
 
 enum BossbarOption { max, players, value, visible }
+
 enum BossbarType { add, set, get, remove }

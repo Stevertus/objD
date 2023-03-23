@@ -117,12 +117,12 @@ class Data extends RestActionAble {
   }
 
   @override
-  Widget generate(Context c) {
+  Widget generate(Context context) {
     switch (_subcommand) {
       case 'merge':
-        return Command('data merge ' + getTarget(c) + ' ' + _getNbt());
+        return Command('data merge ${getTarget(context)} ${_getNbt()}');
       case 'get':
-        final cmd = ['data get', getTarget(c), path];
+        final cmd = ['data get', getTarget(context), path];
 
         if (scale != null) {
           cmd.add(
@@ -132,14 +132,12 @@ class Data extends RestActionAble {
 
         return Command(cmd.join(' '));
       case 'remove':
-        return Command('data remove ' + getTarget(c) + ' ' + path);
+        return Command('data remove ${getTarget(context)} $path');
       case 'modify':
-        return Command('data modify ' + getTarget(c) + ' $path $modify');
+        return Command('data modify ${getTarget(context)} $path $modify');
       case 'score':
         return Command(
-          'execute store result ' +
-              getTarget(c) +
-              ' $path $datatype $scale run scoreboard players get ${score?.entity.toString()} ${score?.score}',
+          'execute store result ${getTarget(context)} $path $datatype $scale run scoreboard players get ${score?.entity.toString()} ${score?.score}',
         );
     }
     throw ('Invalid subcommand!');
@@ -196,12 +194,12 @@ class DataModify {
   @override
   String toString() {
     var str = type;
-    if (index != null) str += ' ' + index.toString();
+    if (index != null) str += ' $index';
     if (fromType != null) {
       str += ' from ';
-      str += fromType! + ' ' + fromSource + ' ' + fromPath;
+      str += '${fromType!} $fromSource $fromPath';
     } else {
-      str += ' value ' + value;
+      str += ' value $value';
     }
     return str;
   }

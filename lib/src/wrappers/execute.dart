@@ -224,7 +224,7 @@ class Execute extends RestActionAble {
     List<Widget> res = _args
         .map((subargs) => Group(
               children: children,
-              prefix: 'execute ' + subargs.join(' ') + ' run',
+              prefix: 'execute ${subargs.join(' ')} run',
               groupMin: encapsulate ? 3 : -1,
               generateIDs: targetFileName == null,
               path: targetFilePath,
@@ -249,10 +249,10 @@ class Execute extends RestActionAble {
   }
 
   // the entity from which the children should run
-  Execute as(Entity entity) => _addArgumentRet('as ' + entity.toString());
+  Execute as(Entity entity) => _addArgumentRet('as $entity');
 
   // the entity from where the children should run
-  Execute at(Entity entity) => _addArgumentRet('at ' + entity.toString());
+  Execute at(Entity entity) => _addArgumentRet('at $entity');
 
   /// Asat combines as and at to just one entity.
   /// ```dart
@@ -265,8 +265,7 @@ class Execute extends RestActionAble {
   ///
   /// ⇒ execute as @p at @s run say I get executed
   /// ```
-  Execute asat(Entity entity) =>
-      _addArgumentRet('as ' + entity.toString() + ' at @s');
+  Execute asat(Entity entity) => _addArgumentRet('as $entity at @s');
 
   /// Positioned sets the execution point of the command to a new Location or Entity.
   /// ```dart
@@ -283,14 +282,13 @@ class Execute extends RestActionAble {
     if (!(loc is Location || loc is Entity)) {
       throw ('Please insert either a Location or an Entity into Execute.positioned');
     }
-    return _addArgumentRet(
-        'positioned ' + (loc is Entity ? 'as ' : '') + loc.toString());
+    return _addArgumentRet('positioned ${loc is Entity ? 'as ' : ''}$loc');
   }
 
   /// Aligns the position to the corners of the block grid.
   Execute align(String axis) {
     assert(axis.isNotEmpty);
-    return _addArgumentRet('align ' + axis);
+    return _addArgumentRet('align $axis');
   }
 
   // Centers the alignment(middle of the block)
@@ -301,7 +299,7 @@ class Execute extends RestActionAble {
 
   /// Sets the execution position(^ ^ ^) to the eyes or the feet.
   Execute anchored(Facing anchor) {
-    return _addArgumentRet('anchored ' + anchor.name);
+    return _addArgumentRet('anchored ${anchor.name}');
   }
 
   ///Sets the execution rotation so that it faces a location or an entity's feet or eyes.
@@ -318,11 +316,10 @@ class Execute extends RestActionAble {
   /// ```
   Execute facing(dynamic target, {Facing facing = Facing.eyes}) {
     if (target is Location) {
-      return _addArgumentRet('facing ' + target.toString());
+      return _addArgumentRet('facing $target');
     }
     if (target is Entity) {
-      return _addArgumentRet(
-          'facing entity ' + target.toString() + ' ' + facing.name);
+      return _addArgumentRet('facing entity $target ${facing.name}');
     }
     throw ('Please insert either a Location or an Entity into Execute.facing');
   }
@@ -347,10 +344,7 @@ class Execute extends RestActionAble {
   /// just for internal use
   static Group internal_store_command(String type, Widget w, bool useSuccess) =>
       Group(
-        prefix: 'execute store ' +
-            (useSuccess ? 'success ' : 'result ') +
-            type +
-            ' run',
+        prefix: 'execute store ${useSuccess ? 'success ' : 'result '}$type run',
         groupMin: 1000,
         children: [w],
       );
@@ -379,28 +373,15 @@ class Execute extends RestActionAble {
     int scale = 1,
     ExecuteStoreVarType varType = ExecuteStoreVarType.int,
   }) =>
-      _addArgumentRet('store ' +
-          result.name +
-          ' entity ' +
-          entity.toString() +
-          ' ' +
-          path +
-          ' ' +
-          varType.name +
-          ' ' +
-          scale.toString());
+      _addArgumentRet(
+          'store ${result.name} entity $entity $path ${varType.name} $scale');
 
   Execute storeScore({
     ExecuteStoreResultType result = ExecuteStoreResultType.result,
     required Score score,
   }) =>
       _addArgumentRet(
-        'store ' +
-            result.name +
-            ' score ' +
-            score.entity.toString() +
-            ' ' +
-            score.score,
+        'store ${result.name} score ${score.entity} ${score.score}',
       );
 
   Execute storeBossbar({
@@ -408,18 +389,17 @@ class Execute extends RestActionAble {
     required String name,
     BossbarOption setting = BossbarOption.value,
   }) =>
-      _addArgumentRet(
-          'store ' + result.name + ' score ' + name + ' ' + setting.name);
+      _addArgumentRet('store ${result.name} score $name ${setting.name}');
 
   Execute unless(Condition c) => If(Condition.not(c));
 
   ///Sets the execution rotation to the given rotation.
   Execute rotated(dynamic rot) {
     if (rot is Rotation) {
-      return _addArgumentRet('rotated ' + rot.toString());
+      return _addArgumentRet('rotated $rot');
     }
     if (rot is Entity) {
-      return _addArgumentRet('rotated as ' + rot.toString());
+      return _addArgumentRet('rotated as $rot');
     }
     throw ('Please insert either a Rotation or an Entity into Execute.rotated');
   }
@@ -430,7 +410,7 @@ class Execute extends RestActionAble {
     if (dimension is Dimension) {
       d = d.split('.')[1];
     }
-    return _addArgumentRet('in ' + d);
+    return _addArgumentRet('in $d');
   }
 
   Execute In(dynamic d) => dimension(d);
@@ -455,7 +435,9 @@ class Execute extends RestActionAble {
 }
 
 enum Facing { eyes, feet }
+
 enum Dimension { overworld, the_end, the_nether }
 
 enum ExecuteStoreResultType { result, success }
+
 enum ExecuteStoreVarType { byte, short, int, long, float, double }

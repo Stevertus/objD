@@ -146,7 +146,6 @@ class TextComponent {
   // translates from a key in the translations
   TextComponent.translate(
     String key, {
-
     /// a List containing a String, TextComponent or another List of TextComponents that replace placeholder values(e.g $s)
     List<dynamic>? conversionFlags,
     this.color,
@@ -351,7 +350,7 @@ class TextClickEvent {
   /// runs given command
   TextClickEvent.run_command(Command command)
       : action = 'run_command',
-        value = '/' + (command.toMap()['command'] ?? '');
+        value = '/${command.toMap()['command'] ?? ''}';
 
   /// copies command in chat
   TextClickEvent.suggest(String text)
@@ -415,7 +414,7 @@ class Color {
   const Color(this._color);
 
   static Color fromInt(int color) =>
-      Color('#' + color.toRadixString(16).padLeft(4, '0'));
+      Color('#${color.toRadixString(16).padLeft(4, '0')}');
   static Color fromRGB(int r, int g, int b) {
     r = (r < 0) ? -r : r;
     g = (g < 0) ? -g : g;

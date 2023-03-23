@@ -85,11 +85,11 @@ class If extends RestActionAble {
     if (orElse != null || prefixes.length >= 2 || assignTag != null) {
       assignTag ??= Entity.Self();
       if (then.length > 2 && context.file.isNotEmpty) {
-        then.insert(0, Comment('If statement from file: ' + context.file));
+        then.insert(0, Comment('If statement from file: ${context.file}'));
       }
 
       if (orElse != null && orElse!.length > 2 && context.file.isNotEmpty) {
-        orElse!.insert(0, Comment('Else statement from file: ' + context.file));
+        orElse!.insert(0, Comment('Else statement from file: ${context.file}'));
       }
 
       children = _getTagVersion(prefixes);
@@ -97,7 +97,7 @@ class If extends RestActionAble {
       // insert Then inline
       for (var prefix in prefixes) {
         children.add(Group(
-          prefix: 'execute ' + prefix + ' run',
+          prefix: 'execute $prefix run',
           path: targetFilePath,
           generateIDs: targetFileName == null,
           filename: targetFileName ?? 'if',
@@ -122,16 +122,14 @@ class If extends RestActionAble {
     for (var prefix in prefixes) {
       children.add(
         Group(
-          prefix: 'execute ' + prefix + ' run',
+          prefix: 'execute $prefix run',
           children: [assignTag!.addTag(tag)],
           groupMin: encapsulate ? 3 : -1,
         ),
       );
     }
-    final prefix = 'execute' +
-        (assignTag == null || assignTag!.selector == 's'
-            ? ''
-            : ' as $assignTag');
+    final prefix =
+        'execute${assignTag == null || assignTag!.selector == 's' ? '' : ' as $assignTag'}';
 
     children.add(Group(
       prefix: '$prefix if entity @s[tag=$tag] run',

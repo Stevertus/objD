@@ -47,16 +47,16 @@ class IndexedFile extends Widget {
 
   @override
   Widget generate(Context context) {
-    String _name;
+    String? name;
     if (custom != null) {
-      _name = custom!;
+      name = custom!;
     } else {
-      IndexedFile._indexed[name] = getId() + 1;
-      _name = name + getId().toString();
+      IndexedFile._indexed[this.name] = getId() + 1;
+      name = this.name + getId().toString();
     }
-    if (path != null) _name = path!.trim() + '/' + _name;
+    if (path != null) name = '${path!.trim()}/$name';
     return File(
-      _name,
+      name,
       child: child,
       execute: execute,
       pack: pack,

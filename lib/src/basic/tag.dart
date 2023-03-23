@@ -92,8 +92,8 @@ class Tag extends RestActionAble {
 
   Command getCommand() {
     return value
-        ? Command('tag ' + entity.toString() + ' add ' + tag)
-        : Command('tag ' + entity.toString() + ' remove ' + tag);
+        ? Command('tag $entity add $tag')
+        : Command('tag $entity remove $tag');
   }
 
   @override

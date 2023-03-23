@@ -14,8 +14,11 @@ class BuildProject {
   bool isGenMeta = true;
   Context context;
 
-  BuildProject(Project prj, {this.prod = false})
-      : path = prj.target,
+  BuildProject(
+    Project prj, {
+    this.prod = false,
+    bool logging = true,
+  })  : path = prj.target,
         name = prj.name,
         description = prj.description,
         pack_format = prj.getPackFormat(),
@@ -25,6 +28,7 @@ class BuildProject {
           (pack) => BuildPack(
             pack,
             c: context,
+            logging: logging,
           ),
         )
         .toList();

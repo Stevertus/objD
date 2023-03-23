@@ -68,7 +68,7 @@ void scan(
     }
     return;
   }
-  throw 'Cannot build Widget: ' + wid.toString();
+  throw 'Cannot build Widget: $wid';
 }
 
 String _findText(Text wid, Context context) {
@@ -76,10 +76,10 @@ String _findText(Text wid, Context context) {
   var prefixes = '';
   if (context.prefixes.isNotEmpty) {
     // join all prefixes and remove run execute
-    prefixes = context.prefixes.join(' ').replaceAll('run execute ', '') + ' ';
+    prefixes = '${context.prefixes.join(' ').replaceAll('run execute ', '')} ';
   }
   if (context.suffixes.isNotEmpty) {
-    suffixes = context.suffixes.join(' ') + ' ';
+    suffixes = '${context.suffixes.join(' ')} ';
   }
   return prefixes + wid.generate(context) + suffixes;
 }

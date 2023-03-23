@@ -25,7 +25,7 @@ class Context {
   String file;
   String? loadFile;
   String? mainFile;
-  int version;
+  double version;
   Path path;
   final Map<Type, dynamic> _heredityTraits;
 
@@ -160,6 +160,6 @@ class Path {
   String toString([bool withExtension = true]) => [
         ...segments,
         if (filename != null)
-          filename! + (withExtension ? '.' + (filetype ?? 'json') : ''),
+          filename! + (withExtension ? '.${filetype ?? 'json'}' : ''),
       ].join('/');
 }

@@ -98,7 +98,7 @@ class Score extends RestActionAble {
     this.type = 'dummy',
   })  : score = 'objd_consts',
         entity = Entity.PlayerName(
-          '#' + number.toString(),
+          '#$number',
         ) {
     if (Scoreboard.prefix != null && !score.contains(Scoreboard.prefix!)) {
       score = Scoreboard.prefix! + score;
@@ -117,7 +117,7 @@ class Score extends RestActionAble {
   String _getESStr({Entity? entity, String? score}) {
     entity ??= this.entity;
     score ??= this.score;
-    return entity.toString() + ' ' + score;
+    return '$entity $score';
   }
 
   Score addCommandRet(Widget command) {
@@ -239,7 +239,7 @@ class Score extends RestActionAble {
   Score set(int val) {
     return addCommandRet(
       Command(
-        'scoreboard players set ' + _getESStr() + ' ' + val.toString(),
+        'scoreboard players set ${_getESStr()} $val',
       ),
     );
   }
@@ -248,7 +248,7 @@ class Score extends RestActionAble {
   Score reset() {
     return addCommandRet(
       Command(
-        'scoreboard players reset ' + _getESStr(),
+        'scoreboard players reset ${_getESStr()}',
       ),
     );
   }
@@ -257,7 +257,7 @@ class Score extends RestActionAble {
   Score add([int val = 1]) {
     return addCommandRet(
       Command(
-        'scoreboard players add ' + _getESStr() + ' ' + val.toString(),
+        'scoreboard players add ${_getESStr()} $val',
       ),
     );
   }
@@ -266,7 +266,7 @@ class Score extends RestActionAble {
   Score subtract([int val = 1]) {
     return addCommandRet(
       Command(
-        'scoreboard players remove ' + _getESStr() + ' ' + val.toString(),
+        'scoreboard players remove ${_getESStr()} $val',
       ),
     );
   }
@@ -275,7 +275,7 @@ class Score extends RestActionAble {
   Score get() {
     return addCommandRet(
       Command(
-        'scoreboard players get ' + _getESStr(),
+        'scoreboard players get ${_getESStr()}',
       ),
     );
   }
@@ -285,7 +285,7 @@ class Score extends RestActionAble {
   Score setEqual(Score score) {
     return addCommandRet(
       Command(
-        'scoreboard players operation ' + isEqual(score).getString(),
+        'scoreboard players operation ${isEqual(score).getString()}',
       ),
     );
   }
@@ -294,10 +294,7 @@ class Score extends RestActionAble {
   Score swapWith(Score score) {
     return addCommandRet(
       Command(
-        'scoreboard players operation ' +
-            _getESStr() +
-            ' >< ' +
-            _getESStr(entity: score.entity, score: score.score),
+        'scoreboard players operation ${_getESStr()} >< ${_getESStr(entity: score.entity, score: score.score)}',
       ),
     );
   }
@@ -306,7 +303,7 @@ class Score extends RestActionAble {
   Score setToSmallest(Score score) {
     return addCommandRet(
       Command(
-        'scoreboard players operation ' + isSmaller(score).getString(),
+        'scoreboard players operation ${isSmaller(score).getString()}',
       ),
     );
   }
@@ -315,7 +312,7 @@ class Score extends RestActionAble {
   Score setToBiggest(Score score) {
     return addCommandRet(
       Command(
-        'scoreboard players operation ' + isBigger(score).getString(),
+        'scoreboard players operation ${isBigger(score).getString()}',
       ),
     );
   }
@@ -324,10 +321,7 @@ class Score extends RestActionAble {
   Score addScore(Score score) {
     return addCommandRet(
       Command(
-        'scoreboard players operation ' +
-            _getESStr() +
-            ' += ' +
-            _getESStr(entity: score.entity, score: score.score),
+        'scoreboard players operation ${_getESStr()} += ${_getESStr(entity: score.entity, score: score.score)}',
       ),
     );
   }
@@ -336,10 +330,7 @@ class Score extends RestActionAble {
   Score subtractScore(Score score) {
     return addCommandRet(
       Command(
-        'scoreboard players operation ' +
-            _getESStr() +
-            ' -= ' +
-            _getESStr(entity: score.entity, score: score.score),
+        'scoreboard players operation ${_getESStr()} -= ${_getESStr(entity: score.entity, score: score.score)}',
       ),
     );
   }
@@ -348,10 +339,7 @@ class Score extends RestActionAble {
   Score multiplyByScore(Score score) {
     return addCommandRet(
       Command(
-        'scoreboard players operation ' +
-            _getESStr() +
-            ' *= ' +
-            _getESStr(entity: score.entity, score: score.score),
+        'scoreboard players operation ${_getESStr()} *= ${_getESStr(entity: score.entity, score: score.score)}',
       ),
     );
   }
@@ -360,10 +348,7 @@ class Score extends RestActionAble {
   Score divideByScore(Score score) {
     return addCommandRet(
       Command(
-        'scoreboard players operation ' +
-            _getESStr() +
-            ' /= ' +
-            _getESStr(entity: score.entity, score: score.score),
+        'scoreboard players operation ${_getESStr()} /= ${_getESStr(entity: score.entity, score: score.score)}',
       ),
     );
   }
@@ -372,10 +357,7 @@ class Score extends RestActionAble {
   Score modulo(Score score) {
     return addCommandRet(
       Command(
-        'scoreboard players operation ' +
-            _getESStr() +
-            ' %= ' +
-            _getESStr(entity: score.entity, score: score.score),
+        'scoreboard players operation ${_getESStr()} %= ${_getESStr(entity: score.entity, score: score.score)}',
       ),
     );
   }
@@ -383,19 +365,12 @@ class Score extends RestActionAble {
   /// sets the score to an nbt value
   Score setToData(Data data) {
     if (!data.isGetting) {
-      throw ('Please set a score to Data.get and not Data.' + data.subcommand);
+      throw ('Please set a score to Data.get and not Data.${data.subcommand}');
     }
     return addCommandRet(
       Builder(
         (c) => Command(
-          'execute store result score ' +
-              _getESStr() +
-              ' run data get ' +
-              data.getTarget(c) +
-              ' ' +
-              data.path +
-              ' ' +
-              (data.scale ?? 1).toString(),
+          'execute store result score ${_getESStr()} run data get ${data.getTarget(c)} ${data.path} ${data.scale ?? 1}',
         ),
       ),
     );
@@ -405,11 +380,7 @@ class Score extends RestActionAble {
   Score setToResult(Command commmand, {bool useSuccess = false}) {
     return addCommandRet(
       Command(
-        'execute store ' +
-            (useSuccess ? 'success' : 'result') +
-            ' score ' +
-            _getESStr() +
-            ' run $commmand',
+        'execute store ${useSuccess ? 'success' : 'result'} score ${_getESStr()} run $commmand',
       ),
     );
   }
@@ -418,11 +389,8 @@ class Score extends RestActionAble {
   /// JUST one Command should be the input
   Group setToWidget(Widget widget, {bool useSuccess = false}) {
     return Group(
-      prefix: 'execute store ' +
-          (useSuccess ? 'success' : 'result') +
-          ' score ' +
-          _getESStr() +
-          ' run',
+      prefix:
+          'execute store ${useSuccess ? 'success' : 'result'} score ${_getESStr()} run',
       children: [widget],
     );
   }
@@ -431,12 +399,7 @@ class Score extends RestActionAble {
   Score setToCondition(Condition cond, {bool useSuccess = false}) {
     return addCommandRet(
       Command(
-        'execute store ' +
-            (useSuccess ? 'success' : 'result') +
-            ' score ' +
-            _getESStr() +
-            ' ' +
-            Condition.getPrefixes(cond.getList())[0],
+        'execute store ${useSuccess ? 'success' : 'result'} score ${_getESStr()} ${Condition.getPrefixes(cond.getList())[0]}',
       ),
     );
   }
@@ -481,35 +444,31 @@ class Score extends RestActionAble {
 
   Score isEqual(Score score) {
     return Score.str(
-      _getESStr() + ' = ' + _getESStr(entity: score.entity, score: score.score),
+      '${_getESStr()} = ${_getESStr(entity: score.entity, score: score.score)}',
     );
   }
 
   Score isSmaller(Score score) {
     return Score.str(
-      _getESStr() + ' < ' + _getESStr(entity: score.entity, score: score.score),
+      '${_getESStr()} < ${_getESStr(entity: score.entity, score: score.score)}',
     );
   }
 
   Score isSmallerOrEqual(Score score) {
     return Score.str(
-      _getESStr() +
-          ' <= ' +
-          _getESStr(entity: score.entity, score: score.score),
+      '${_getESStr()} <= ${_getESStr(entity: score.entity, score: score.score)}',
     );
   }
 
   Score isBiggerOrEqual(Score score) {
     return Score.str(
-      _getESStr() +
-          ' >= ' +
-          _getESStr(entity: score.entity, score: score.score),
+      '${_getESStr()} >= ${_getESStr(entity: score.entity, score: score.score)}',
     );
   }
 
   Score isBigger(Score score) {
     return Score.str(
-      _getESStr() + ' > ' + _getESStr(entity: score.entity, score: score.score),
+      '${_getESStr()} > ${_getESStr(entity: score.entity, score: score.score)}',
     );
   }
 
@@ -517,13 +476,13 @@ class Score extends RestActionAble {
   String getMatch() => _match;
   Score matches(int value) {
     _match = value.toString();
-    return Score.str(_getESStr() + ' matches ' + _match,
+    return Score.str('${_getESStr()} matches $_match',
         score: score, match: _match);
   }
 
   Score matchesRange(Range range) {
     _match = range.toString();
-    return Score.str(_getESStr() + ' matches ' + _match,
+    return Score.str('${_getESStr()} matches $_match',
         score: score, match: _match);
   }
 

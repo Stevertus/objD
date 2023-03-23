@@ -1,15 +1,11 @@
-import 'package:objd/src/basic/command.dart';
-import 'package:objd/src/basic/types/location.dart';
-import 'package:objd/src/basic/rest_action.dart';
-import 'package:objd/src/basic/widget.dart';
-import 'package:objd/src/basic/types/block.dart';
-import 'package:objd/src/basic/types/area.dart';
-import 'package:objd/src/build/build.dart';
+import 'package:objd/core.dart';
 
 class Clone extends RestActionAble {
-  Area area;
-  Location to;
-  String type = '';
+  final Area area;
+  final Location to;
+  final Dimension? from;
+  final Dimension? into;
+  late final String type;
 
   /// The clone command clones an Area to another Location with different modes.
   /// **Example:**
@@ -20,38 +16,48 @@ class Clone extends RestActionAble {
   /// )
   /// ⇒ clone 0 0 0 10 10 10 ~ ~ ~
   /// ```
-  Clone(this.area, {required this.to});
+  Clone(
+    this.area, {
+    required this.to,
+    this.from,
+    this.into,
+  });
 
   Clone.filtered(
     this.area, {
     required this.to,
     Block block = Blocks.air,
     String? mode,
+    this.from,
+    this.into,
   }) {
-    type = 'filtered ' + block.toString();
-    if (mode != null && mode.isNotEmpty) type += ' ' + mode;
+    type = 'filtered $block';
+    if (mode != null && mode.isNotEmpty) type += ' $mode';
   }
   Clone.masked(
     this.area, {
     required this.to,
     String? mode,
+    this.from,
+    this.into,
   }) {
     type = 'masked';
-    if (mode != null && mode.isNotEmpty) type += ' ' + mode;
+    if (mode != null && mode.isNotEmpty) type += ' $mode';
   }
   Clone.replace(
     this.area, {
     required this.to,
     String? mode,
+    this.from,
+    this.into,
   }) {
     type = 'replace';
-    if (mode != null && mode.isNotEmpty) type += ' ' + mode;
+    if (mode != null && mode.isNotEmpty) type += ' $mode';
   }
 
   @override
   Widget generate(Context context) {
-    if (type.isNotEmpty) type = ' ' + type;
-    return Command(
-        'clone ' + area.getCoordinates() + ' ' + to.toString() + type);
+    if (type.isNotEmpty) type = ' $type';
+    return Command('clone ${area.getCoordinates()} $to$type');
   }
 }

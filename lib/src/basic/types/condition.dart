@@ -10,7 +10,7 @@ import 'package:objd/src/wrappers/data.dart';
 /// The Condition class defines conditions for the if widget and more. It can also combines conditions and generates an argument list.
 class Condition {
   final List<Condition> _children = [];
-  _ConditionType? type;
+  _ConditionType? _type;
   _ConditionUtil? _generated;
 
   /// The Condition class defines conditions for the if widget and more. It can also combines conditions and generates an argument list.
@@ -53,7 +53,7 @@ class Condition {
 
   /// checks for a predicate
   Condition.predicate(Predicate cond) {
-    _generated = _ConditionUtil('predicate ' + cond.name);
+    _generated = _ConditionUtil('predicate ${cond.name}');
   }
   // checks if the tag exists
   Condition.tag(Tag cond) {
@@ -72,14 +72,14 @@ class Condition {
     if (cond is Tag) {
       _setCond(cond.not());
     } else {
-      type = _ConditionType.invert;
+      _type = _ConditionType.invert;
       _setCond(cond, invert: true);
     }
   }
 
   /// accepts a list of dynamic condition types, that all have to be true to trigger
   Condition.and(List<dynamic> conds) {
-    type = _ConditionType.and;
+    _type = _ConditionType.and;
     for (var cond in conds) {
       if (cond is Condition) {
         _children.add(cond);
@@ -91,7 +91,7 @@ class Condition {
 
   /// accepts a list of dynamic condition types, but just one has to be true to trigger
   Condition.or(List<dynamic> conds) {
-    type = _ConditionType.or;
+    _type = _ConditionType.or;
     for (var cond in conds) {
       if (cond is Condition) {
         _children.add(cond);
@@ -119,13 +119,12 @@ class Condition {
       return;
     }
     if (cond is Entity) {
-      _generated = _ConditionUtil('entity ' + cond.toString(), invert: invert);
+      _generated = _ConditionUtil('entity $cond', invert: invert);
       return;
     }
 
     if (cond is Block) {
-      _generated =
-          _ConditionUtil('block ~ ~ ~ ' + cond.toString(), invert: invert);
+      _generated = _ConditionUtil('block ~ ~ ~ $cond', invert: invert);
       return;
     }
 
@@ -133,24 +132,24 @@ class Condition {
       if (cond.getString().isEmpty) {
         throw ('Please insert a score condition method into a condition!');
       }
-      _generated = _ConditionUtil('score ' + cond.getString(), invert: invert);
+      _generated = _ConditionUtil('score ${cond.getString()}', invert: invert);
       return;
     }
 
     if (cond is Tag) {
-      _generated = _ConditionUtil('entity ' + cond.getEntity(), invert: invert);
+      _generated = _ConditionUtil('entity ${cond.getEntity()}', invert: invert);
       return;
     }
 
     if (cond is Location) {
       if (block == null) {
         _generated = _ConditionUtil(
-          'block ' + cond.toString() + ' minecraft:air',
+          'block $cond minecraft:air',
           invert: !invert,
         );
       } else {
         _generated = _ConditionUtil(
-          'block ' + cond.toString() + ' ' + block.toString(),
+          'block $cond $block',
           invert: invert,
         );
       }
@@ -160,7 +159,7 @@ class Condition {
     if (cond is Data) {
       // still bug here when using storage
       _generated = _ConditionUtil(
-        'data ' + cond.getTarget() + ' ' + cond.path,
+        'data ${cond.getTarget()} ${cond.path}',
         invert: invert,
       );
       return;
@@ -171,18 +170,14 @@ class Condition {
         throw ('Please use Condition.blocks to test for an area of blocks!');
       }
       _generated = _ConditionUtil(
-        'blocks ' +
-            cond.getCoordinates() +
-            ' ' +
-            target.toString() +
-            (parameter ?? false ? ' masked' : ' all'),
+        'blocks ${cond.getCoordinates()} $target${parameter ?? false ? ' masked' : ' all'}',
         invert: invert,
       );
       return;
     }
 
     if (cond is Predicate) {
-      _generated = _ConditionUtil('predicate ' + cond.name);
+      _generated = _ConditionUtil('predicate ${cond.name}');
       return;
     }
 
@@ -203,7 +198,7 @@ class Condition {
         list = child.getList();
       }
       // is and
-      else if (type != null && type == _ConditionType.and) {
+      else if (_type != null && _type == _ConditionType.and) {
         list = child.getList().map((inner) {
           for (var inner2 in list) {
             inner.insertAll(0, inner2);
@@ -234,7 +229,7 @@ class Condition {
               if (invert ^ inner.invert) {
                 key = 'unless';
               }
-              if (inner.str.isNotEmpty) return key + ' ' + inner.str;
+              if (inner.str.isNotEmpty) return '$key ${inner.str}';
             }
             return '';
           })
@@ -251,7 +246,7 @@ class _ConditionUtil {
 
   @override
   String toString() {
-    return 'Condition: ' + str + ', Not: ' + invert.toString();
+    return 'Condition: $str, Not: $invert';
   }
 }
 
