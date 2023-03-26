@@ -1,4 +1,5 @@
 import 'package:objd/src/basic/types/area.dart';
+import 'package:objd/src/basic/types/biomes.dart';
 import 'package:objd/src/basic/types/block.dart';
 import 'package:objd/src/basic/types/entity.dart';
 import 'package:objd/src/basic/types/location.dart';
@@ -6,6 +7,7 @@ import 'package:objd/src/basic/predicate.dart';
 import 'package:objd/src/basic/score.dart';
 import 'package:objd/src/basic/tag.dart';
 import 'package:objd/src/wrappers/data.dart';
+import 'package:objd/src/wrappers/execute.dart';
 
 /// The Condition class defines conditions for the if widget and more. It can also combines conditions and generates an argument list.
 class Condition {
@@ -49,6 +51,21 @@ class Condition {
   /// checks if the entity exists
   Condition.entity(Entity cond) {
     _setCond(cond);
+  }
+
+  /// checks if the execution is in a matching dimension
+  Condition.dimension(Dimension cond) {
+    _setCond(cond);
+  }
+
+  /// checks if the execution is in a matching dimension
+  Condition.loaded(Location cond) {
+    _setCond(cond, loaded: true);
+  }
+
+  /// checks if the execution is in a matching biome
+  Condition.biome(Biome cond) {
+    _setCond(cond, loaded: true);
   }
 
   /// checks for a predicate
@@ -107,6 +124,8 @@ class Condition {
     Block? block,
     Location? target,
     bool? parameter,
+    // keeping track if location condition means loaded or check air
+    bool loaded = false,
   }) {
     if (cond == null) return;
     if (cond is Condition) {
@@ -127,6 +146,14 @@ class Condition {
       _generated = _ConditionUtil('block ~ ~ ~ $cond', invert: invert);
       return;
     }
+    if (cond is Dimension) {
+      _generated = _ConditionUtil('dimension $cond', invert: invert);
+      return;
+    }
+    if (cond is Biome) {
+      _generated = _ConditionUtil('biome $cond', invert: invert);
+      return;
+    }
 
     if (cond is Score) {
       if (cond.getString().isEmpty) {
@@ -143,10 +170,17 @@ class Condition {
 
     if (cond is Location) {
       if (block == null) {
-        _generated = _ConditionUtil(
-          'block $cond minecraft:air',
-          invert: !invert,
-        );
+        if (loaded) {
+          _generated = _ConditionUtil(
+            'loaded $cond',
+            invert: !invert,
+          );
+        } else {
+          _generated = _ConditionUtil(
+            'block $cond minecraft:air',
+            invert: !invert,
+          );
+        }
       } else {
         _generated = _ConditionUtil(
           'block $cond $block',
@@ -219,8 +253,10 @@ class Condition {
     return list;
   }
 
-  static List<String> getPrefixes(List<List<dynamic>> conds,
-      [bool invert = false]) {
+  static List<String> getPrefixes(
+    List<List<dynamic>> conds, [
+    bool invert = false,
+  ]) {
     return conds.map((outer) {
       return outer
           .map((inner) {

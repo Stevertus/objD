@@ -1,6 +1,7 @@
 export 'widget.dart';
 export 'module.dart';
 export 'command.dart';
+export 'command_builder.dart';
 export 'pack.dart';
 export 'group.dart';
 export 'scoreboard.dart';

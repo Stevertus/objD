@@ -14,6 +14,8 @@
 - fixed log messages while using the getCommands API
 - moved Builder Widget to basic
 
+Breaking: Execute Dimension, Clone Dimension
+
 ## 0.4.4
 
 - added PlayerJoin.rejoin to only detect once joined players

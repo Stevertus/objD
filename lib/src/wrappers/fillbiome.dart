@@ -1,3 +1,4 @@
+import 'package:objd/core.dart';
 import 'package:objd/src/basic/command.dart';
 
 import 'package:objd/src/basic/rest_action.dart';
@@ -17,8 +18,9 @@ class FillBiome extends RestActionAble {
 
   @override
   Widget generate(Context context) {
-    var suffix = biome.toString();
-    if (replace != null) suffix += ' replace $replace';
-    return Command('fillbiome ${area.getCoordinates()} $suffix');
+    return CommandBuilder('fillbiome')
+        .string(area.getCoordinates())
+        .string(biome.toString())
+        .string(replace?.toString(), prefix: 'replace ');
   }
 }

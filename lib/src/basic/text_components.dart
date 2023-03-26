@@ -157,8 +157,10 @@ class TextComponent {
     this.clickEvent,
     this.hoverEvent,
     this.insertion,
+    String? fallback,
   }) {
     value = {'translate': key};
+    if (fallback != null) value['fallback'] = fallback;
     if (conversionFlags != null && conversionFlags.isNotEmpty) {
       value['with'] = [];
       for (var c in conversionFlags) {

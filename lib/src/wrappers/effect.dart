@@ -3,6 +3,8 @@ import 'package:objd/core.dart';
 class Effect extends RestActionAble {
   EffectType? effect;
   Entity? entity;
+
+  /// Duration of the effect in seconds, set to a negative value to get an infinite effect
   int? duration;
   int? amplifier;
   bool? showParticles;
@@ -47,16 +49,32 @@ class Effect extends RestActionAble {
     return ret;
   }
 
+  String get _strDuration =>
+      duration == null || duration! < 0 || duration! > double.maxFinite.toInt()
+          ? 'infinite'
+          : duration.toString();
+
   @override
   Widget generate(Context context) {
     if (_type == 'clear') {
-      return Command(
-        'effect clear $entity${effect != null ? " minecraft:${effect!.name}" : ""}',
+      return CommandBuilder('effect clear $entity').string(
+        effect?.name,
+        prefix: 'minecraft:',
       );
     } else {
-      return Command(
-        'effect give $entity minecraft:${effect!.name} $duration $amplifier ${!showParticles!}',
-      );
+      return CommandBuilder('effect give $entity')
+          .string(
+            effect!.name,
+            prefix: 'minecraft:',
+          )
+          .when(
+            duration == null ||
+                duration! < 0 ||
+                duration! > double.maxFinite.toInt(),
+            then: 'infinite',
+            otherwise: duration.toString(),
+          )
+          .string('$amplifier ${!showParticles!}');
     }
   }
 }

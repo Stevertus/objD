@@ -35,7 +35,7 @@ class Execute extends RestActionAble {
     Condition? unless,
     dynamic facing,
     Rotation? rotation,
-    dynamic dimension,
+    Dimension? dimension,
     this.encapsulate = true,
     List<List<String>>? args,
     List<Widget>? writable,
@@ -69,7 +69,7 @@ class Execute extends RestActionAble {
     Condition? unless,
     dynamic facing,
     Rotation? rotation,
-    dynamic dimension,
+    Dimension? dimension,
     bool encapsulate = true,
     List<List<String>>? args,
     List<Widget>? writable,
@@ -187,7 +187,7 @@ class Execute extends RestActionAble {
 
   ///Sets the execution dimension(execute in) to either `Dimension.overworld`, `Dimension.the_end` or `Dimension.the_nether`.
   Execute.dimension(
-    dynamic dimension, {
+    Dimension dimension, {
     required this.children,
     this.encapsulate = true,
     this.targetFilePath = 'objd',
@@ -405,15 +405,11 @@ class Execute extends RestActionAble {
   }
 
   ///Sets the execution dimension(execute in) to either `Dimension.overworld`, `Dimension.the_end` or `Dimension.the_nether`.
-  Execute dimension(dynamic dimension) {
-    var d = dimension.toString();
-    if (dimension is Dimension) {
-      d = d.split('.')[1];
-    }
-    return _addArgumentRet('in $d');
+  Execute dimension(Dimension dimension) {
+    return _addArgumentRet('in $dimension');
   }
 
-  Execute In(dynamic d) => dimension(d);
+  Execute In(Dimension d) => dimension(d);
 
   Execute run(Widget w) {
     var children = List<Widget>.from(this.children);
@@ -436,7 +432,17 @@ class Execute extends RestActionAble {
 
 enum Facing { eyes, feet }
 
-enum Dimension { overworld, the_end, the_nether }
+class Dimension {
+  static final overworld = Dimension("minecraft:overworld");
+  static final the_end = Dimension("minecraft:the_end");
+  static final the_nether = Dimension("minecraft:the_nether");
+
+  final String name;
+  const Dimension(this.name);
+
+  @override
+  String toString() => name;
+}
 
 enum ExecuteStoreResultType { result, success }
 

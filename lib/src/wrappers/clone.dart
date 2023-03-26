@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:objd/core.dart';
 
 class Clone extends RestActionAble {
@@ -5,7 +7,8 @@ class Clone extends RestActionAble {
   final Location to;
   final Dimension? from;
   final Dimension? into;
-  late final String type;
+  final String type;
+  final CloneMode? mode;
 
   /// The clone command clones an Area to another Location with different modes.
   /// **Example:**
@@ -21,43 +24,44 @@ class Clone extends RestActionAble {
     required this.to,
     this.from,
     this.into,
-  });
+  })  : type = '',
+        mode = null;
 
   Clone.filtered(
     this.area, {
     required this.to,
     Block block = Blocks.air,
-    String? mode,
+    this.mode,
     this.from,
     this.into,
-  }) {
-    type = 'filtered $block';
-    if (mode != null && mode.isNotEmpty) type += ' $mode';
-  }
+  }) : type = 'filtered $block';
+
   Clone.masked(
     this.area, {
     required this.to,
-    String? mode,
+    this.mode,
     this.from,
     this.into,
-  }) {
-    type = 'masked';
-    if (mode != null && mode.isNotEmpty) type += ' $mode';
-  }
+  }) : type = 'masked';
+
   Clone.replace(
     this.area, {
     required this.to,
-    String? mode,
+    this.mode,
     this.from,
     this.into,
-  }) {
-    type = 'replace';
-    if (mode != null && mode.isNotEmpty) type += ' $mode';
-  }
+  }) : type = 'replace';
 
   @override
   Widget generate(Context context) {
-    if (type.isNotEmpty) type = ' $type';
-    return Command('clone ${area.getCoordinates()} $to$type');
+    return CommandBuilder('clone')
+        .string(from?.name, prefix: 'from ')
+        .string(area.getCoordinates())
+        .string(into?.name, prefix: 'to ')
+        .location(to)
+        .string(type)
+        .string(mode?.name);
   }
 }
+
+enum CloneMode { force, move, normal }

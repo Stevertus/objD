@@ -293,6 +293,8 @@ int HideFlags({
   bool canDestroy = false,
   bool canPlaceOn = false,
   bool others = false,
+  bool dye = false,
+  bool armorTrims = false,
 }) {
   var res = 0;
   if (enchantments) res += 1;
@@ -301,6 +303,8 @@ int HideFlags({
   if (canDestroy) res += 8;
   if (canPlaceOn) res += 16;
   if (others) res += 32;
+  if (dye) res += 64;
+  if (armorTrims) res += 128;
   return res;
 }
 
