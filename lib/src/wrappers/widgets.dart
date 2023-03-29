@@ -30,3 +30,4 @@ export 'attribute.dart';
 export 'enchant.dart';
 export 'fillbiome.dart';
 export 'ride.dart';
+export 'damage.dart';

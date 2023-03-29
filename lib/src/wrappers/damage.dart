@@ -8,8 +8,7 @@ class Damage extends Widget {
   final Entity? by;
   final String? cause;
 
-  Damage({
-    required this.target,
+  Damage(this.target,{
     required this.amount,
     this.damageType,
     this.location,
@@ -39,7 +38,7 @@ class Damage extends Widget {
         .when(
           location != null,
           then: 'at $location',
-          otherwise: 'by $by',
+          otherwise: by != null ? 'by $by' : null,
         )
         .string(cause, prefix: 'from ');
   }

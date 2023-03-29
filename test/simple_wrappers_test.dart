@@ -43,4 +43,35 @@ void main() {
       "effect give $e minecraft:absorption infinite 2 true",
     );
   });
+
+  group('Damage', () {
+    final e = Entity.All();
+    command('simple', Damage(e, amount: 30), "damage $e 30.0");
+    command(
+      'by',
+      Damage.by(
+        e,
+        target: e,
+        amount: 10,
+        cause: 'test',
+      ),
+      "damage $e 30.0 by $e from test",
+    );
+    command('at', Damage.at(Location.here(), target: e, amount: 50),
+        "damage $e 50.0 at ~ ~ ~");
+    test('failure', () {
+      expect(
+        () => Damage(
+          e,
+          location: Location.here(),
+          by: e,
+          amount: 50,
+          cause: 'test',
+        ),
+        throwsA(
+          isA<AssertionError>(),
+        ),
+      );
+    });
+  });
 }
