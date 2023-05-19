@@ -7,7 +7,7 @@ class Timeout extends RestActionAble {
   String name;
   String path;
   List<Widget> children;
-  int ticks;
+  Time ticks;
 
   Timeout(
     this.name, {
@@ -31,7 +31,7 @@ class Timer extends RestActionAble {
   String name;
   String path;
   List<Widget> children;
-  int ticks;
+  Time ticks;
   bool infinite;
 
   Timer(
@@ -45,7 +45,7 @@ class Timer extends RestActionAble {
   Timer.stop(this.name)
       : _stop = true,
         path = 'timers',
-        ticks = 0,
+        ticks = const Time(0),
         infinite = true,
         children = const [];
 

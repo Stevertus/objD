@@ -6,7 +6,7 @@ class Schedule extends RestActionAble {
   File? _file;
   ScheduleMode? mode;
 
-  int ticks;
+  Time ticks;
 
   Schedule(this._name, {required this.ticks, this.mode});
   Schedule.file(this._file, {required this.ticks, this.mode})
@@ -20,7 +20,7 @@ class Schedule extends RestActionAble {
       : mode = ScheduleMode.append;
 
   Schedule.clear(this._name)
-      : ticks = 0,
+      : ticks = const Time(0),
         mode = ScheduleMode.clear;
 
   /// Appends a Scheduled File to the current Schedule.
@@ -41,7 +41,7 @@ class Schedule extends RestActionAble {
       return Group(
         prefix: 'schedule',
         children: [_file!],
-        suffix: ' ${ticks}t${getMode()}',
+        suffix: ' $ticks${getMode()}',
       );
     }
     if (mode == ScheduleMode.clear) {
@@ -49,7 +49,7 @@ class Schedule extends RestActionAble {
     }
 
     return Command(
-      'schedule function ${context.packId}:$_name ${ticks}t${getMode()}',
+      'schedule function ${context.packId}:$_name $ticks${getMode()}',
     );
   }
 }

@@ -35,7 +35,7 @@ void main() {
       'give complex',
       Effect(
         EffectType.absorption,
-        duration: -1,
+        duration: Time.infinite(),
         entity: e,
         amplifier: 2,
         showParticles: false,

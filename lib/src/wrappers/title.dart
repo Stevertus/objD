@@ -35,9 +35,9 @@ class Title extends RestActionAble {
   /// Title.times sets the timings
   Title.times(
     Entity selector, {
-    int fadein = 20,
-    int display = 60,
-    int fadeout = 20,
+    Time fadein = const Time(20),
+    Time display = const Time(60),
+    Time fadeout = const Time(20),
   })  : type = 'times',
         entity = selector.toString(),
         jsonText = '$fadein $display $fadeout';

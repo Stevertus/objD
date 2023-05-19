@@ -7,7 +7,7 @@ class Repeat extends RestActionAble {
   Widget child;
   String counter;
   int to;
-  int ticks;
+  Time ticks;
 
   /// The Repeat Widget repeats a given action multiple times with a tick delay.
   Repeat(
@@ -16,7 +16,7 @@ class Repeat extends RestActionAble {
     required this.to,
     this.counter = 'objd_repeat',
     this.path = 'timers',
-    this.ticks = 1,
+    this.ticks = const Time(0),
   });
 
   @override

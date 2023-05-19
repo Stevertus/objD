@@ -190,7 +190,7 @@ class CustomBlock extends Module {
               fireTimer: Timer(
                 'fire_timer',
                 path: path,
-                ticks: 1200,
+                ticks: 10.minutes,
                 children: [
                   Data.merge(
                     Entity.Self(),

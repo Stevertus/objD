@@ -4,6 +4,9 @@
 
 - added Biome and corresponding Biomes list
 - added FillBiome Widget
+- added Damage Widget 
+- added new Time object for dealing with ticks, seconds, days and infinite Duration
+- added Display Widget for spawing display objects
 - added preview images of all items and blocks in dartdoc
 - added unit tests for checking critical widgets automatically
 - updated blocks, items, particles and entities to include content from 1.19.4 and 23w12a
@@ -14,7 +17,9 @@
 - fixed log messages while using the getCommands API
 - moved Builder Widget to basic
 
-Breaking: Execute Dimension, Clone Dimension
+Breaking: Execute Dimension, Clone Dimension, Time 
+
+- Effect, Schedule, Title, Repeat, Timer, ScoreTimer use the new Time object instead of an integer for representing time  
 
 ## 0.4.4
 

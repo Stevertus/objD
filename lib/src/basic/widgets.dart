@@ -18,6 +18,7 @@ export 'parsable.dart';
 export 'indexed_file.dart';
 export 'raw_file.dart';
 export 'predicate.dart';
+export 'time.dart';
 export 'types/entity.dart';
 export 'types/selector.dart';
 export 'types/item.dart';

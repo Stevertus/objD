@@ -8,7 +8,7 @@ class ScoreTimerModule extends Module {
   Widget? child;
   Entity? selector;
   int steps;
-  int ticks;
+  Time ticks;
   int start;
 
   /// The ScoreTimerModule implements a continuous timer with a delay of a number of ticks. It therefore uses a Score to count up or down in steps and resets to the start value afterwards.
@@ -18,7 +18,7 @@ class ScoreTimerModule extends Module {
   /// | constructor |  |
   /// |--|--|
   /// |String| the name of the Timer and the Scoreboard |
-  /// |ticks| the delay in ticks between each execution(required) |
+  /// |ticks| the delay(as time object) between each execution(required) |
   /// |child| a Widget that is executed after the delay |
   /// |steps| the number that it counts up every time(default = 1) |
   /// |start| a number that is used to reset the timer after the delay(default = 0) |
@@ -54,7 +54,7 @@ class ScoreTimerModule extends Module {
     return For.of([
       if (steps >= 0) _score.add(steps),
       if (steps < 0) _score.subtract(-steps),
-      If(_score.matches(ticks), then: [
+      If(_score.matches(ticks.ticks), then: [
         File(path + name, execute: true, create: false),
       ]),
     ]);

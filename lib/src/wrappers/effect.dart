@@ -5,7 +5,7 @@ class Effect extends RestActionAble {
   Entity? entity;
 
   /// Duration of the effect in seconds, set to a negative value to get an infinite effect
-  int? duration;
+  Time? duration;
   int? amplifier;
   bool? showParticles;
   final String _type;
@@ -24,7 +24,7 @@ class Effect extends RestActionAble {
   Effect(
     this.effect, {
     this.entity,
-    this.duration = 30,
+    this.duration = const Time.seconds(30),
     this.amplifier = 1,
     this.showParticles = true,
   }) : _type = 'give' {
@@ -42,17 +42,12 @@ class Effect extends RestActionAble {
     var ret = {};
     if (effect != null) ret['Id'] = EffectType.values.indexOf(effect!) + 1;
     ret['Amplifier'] = Byte(amplifier != null ? amplifier! - 1 : 0);
-    ret['Duration'] = duration != null ? duration! * 20 : 0;
+    ret['Duration'] = duration != null ? duration!.ticks : 0;
     ret['ShowParticles'] = Byte(
       showParticles != null && showParticles! ? 1 : 0,
     );
     return ret;
   }
-
-  String get _strDuration =>
-      duration == null || duration! < 0 || duration! > double.maxFinite.toInt()
-          ? 'infinite'
-          : duration.toString();
 
   @override
   Widget generate(Context context) {
@@ -68,9 +63,7 @@ class Effect extends RestActionAble {
             prefix: 'minecraft:',
           )
           .when(
-            duration == null ||
-                duration! < 0 ||
-                duration! > double.maxFinite.toInt(),
+            duration == null || duration!.isInfinite,
             then: 'infinite',
             otherwise: duration.toString(),
           )
