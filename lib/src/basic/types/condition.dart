@@ -173,7 +173,7 @@ class Condition {
         if (loaded) {
           _generated = _ConditionUtil(
             'loaded $cond',
-            invert: !invert,
+            invert: invert,
           );
         } else {
           _generated = _ConditionUtil(

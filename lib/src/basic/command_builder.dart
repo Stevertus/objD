@@ -25,6 +25,14 @@ class CommandBuilder extends Widget {
     );
   }
 
+  CommandBuilder number(
+    num? val, {
+    List<String>? also,
+    String? prefix,
+    String? suffix,
+  }) =>
+      string(val?.toString(), also: also, prefix: prefix, suffix: suffix);
+
   CommandBuilder string(
     String? str, {
     List<String>? also,

@@ -5,7 +5,7 @@ class Biomes {
   import cog
   import requests
 
-  version = '1.20/snapshots/23w12a'
+  version = '1.20/releases-candidate/1.20.1-rc1'
 
   res = requests.get(f'https://raw.githubusercontent.com/PixiGeko/Minecraft-generated-data/master/{version}/custom-generated/lists/worldgen/biome.txt')
   blocks = []
@@ -53,7 +53,8 @@ class Biomes {
   static const Biome deep_frozen_ocean = Biome('minecraft:deep_frozen_ocean');
 
   /// _minecraft:deep_lukewarm_ocean_
-  static const Biome deep_lukewarm_ocean = Biome('minecraft:deep_lukewarm_ocean');
+  static const Biome deep_lukewarm_ocean =
+      Biome('minecraft:deep_lukewarm_ocean');
 
   /// _minecraft:deep_ocean_
   static const Biome deep_ocean = Biome('minecraft:deep_ocean');
@@ -125,13 +126,16 @@ class Biomes {
   static const Biome ocean = Biome('minecraft:ocean');
 
   /// _minecraft:old_growth_birch_forest_
-  static const Biome old_growth_birch_forest = Biome('minecraft:old_growth_birch_forest');
+  static const Biome old_growth_birch_forest =
+      Biome('minecraft:old_growth_birch_forest');
 
   /// _minecraft:old_growth_pine_taiga_
-  static const Biome old_growth_pine_taiga = Biome('minecraft:old_growth_pine_taiga');
+  static const Biome old_growth_pine_taiga =
+      Biome('minecraft:old_growth_pine_taiga');
 
   /// _minecraft:old_growth_spruce_taiga_
-  static const Biome old_growth_spruce_taiga = Biome('minecraft:old_growth_spruce_taiga');
+  static const Biome old_growth_spruce_taiga =
+      Biome('minecraft:old_growth_spruce_taiga');
 
   /// _minecraft:plains_
   static const Biome plains = Biome('minecraft:plains');
@@ -197,7 +201,8 @@ class Biomes {
   static const Biome windswept_forest = Biome('minecraft:windswept_forest');
 
   /// _minecraft:windswept_gravelly_hills_
-  static const Biome windswept_gravelly_hills = Biome('minecraft:windswept_gravelly_hills');
+  static const Biome windswept_gravelly_hills =
+      Biome('minecraft:windswept_gravelly_hills');
 
   /// _minecraft:windswept_hills_
   static const Biome windswept_hills = Biome('minecraft:windswept_hills');
@@ -216,70 +221,70 @@ class Biomes {
     for b in blocks:
       cog.outl(f'{b},')
     ]]]*/
-    badlands,
-    bamboo_jungle,
-    basalt_deltas,
-    beach,
-    birch_forest,
-    cherry_grove,
-    cold_ocean,
-    crimson_forest,
-    dark_forest,
-    deep_cold_ocean,
-    deep_dark,
-    deep_frozen_ocean,
-    deep_lukewarm_ocean,
-    deep_ocean,
-    desert,
-    dripstone_caves,
-    end_barrens,
-    end_highlands,
-    end_midlands,
-    eroded_badlands,
-    flower_forest,
-    forest,
-    frozen_ocean,
-    frozen_peaks,
-    frozen_river,
-    grove,
-    ice_spikes,
-    jagged_peaks,
-    jungle,
-    lukewarm_ocean,
-    lush_caves,
-    mangrove_swamp,
-    meadow,
-    mushroom_fields,
-    nether_wastes,
-    ocean,
-    old_growth_birch_forest,
-    old_growth_pine_taiga,
-    old_growth_spruce_taiga,
-    plains,
-    river,
-    savanna,
-    savanna_plateau,
-    small_end_islands,
-    snowy_beach,
-    snowy_plains,
-    snowy_slopes,
-    snowy_taiga,
-    soul_sand_valley,
-    sparse_jungle,
-    stony_peaks,
-    stony_shore,
-    sunflower_plains,
-    swamp,
-    taiga,
-    the_end,
-    the_void,
-    warm_ocean,
-    warped_forest,
-    windswept_forest,
-    windswept_gravelly_hills,
-    windswept_hills,
-    windswept_savanna,
-    wooded_badlands,
+        badlands,
+        bamboo_jungle,
+        basalt_deltas,
+        beach,
+        birch_forest,
+        cherry_grove,
+        cold_ocean,
+        crimson_forest,
+        dark_forest,
+        deep_cold_ocean,
+        deep_dark,
+        deep_frozen_ocean,
+        deep_lukewarm_ocean,
+        deep_ocean,
+        desert,
+        dripstone_caves,
+        end_barrens,
+        end_highlands,
+        end_midlands,
+        eroded_badlands,
+        flower_forest,
+        forest,
+        frozen_ocean,
+        frozen_peaks,
+        frozen_river,
+        grove,
+        ice_spikes,
+        jagged_peaks,
+        jungle,
+        lukewarm_ocean,
+        lush_caves,
+        mangrove_swamp,
+        meadow,
+        mushroom_fields,
+        nether_wastes,
+        ocean,
+        old_growth_birch_forest,
+        old_growth_pine_taiga,
+        old_growth_spruce_taiga,
+        plains,
+        river,
+        savanna,
+        savanna_plateau,
+        small_end_islands,
+        snowy_beach,
+        snowy_plains,
+        snowy_slopes,
+        snowy_taiga,
+        soul_sand_valley,
+        sparse_jungle,
+        stony_peaks,
+        stony_shore,
+        sunflower_plains,
+        swamp,
+        taiga,
+        the_end,
+        the_void,
+        warm_ocean,
+        warped_forest,
+        windswept_forest,
+        windswept_gravelly_hills,
+        windswept_hills,
+        windswept_savanna,
+        wooded_badlands,
         //[[[end]]]
       ];
 }

@@ -1,3 +1,4 @@
+import 'package:objd/src/basic/file.dart';
 import 'package:objd/src/basic/group.dart';
 import 'package:objd/src/basic/rest_action.dart';
 import 'package:objd/src/basic/widget.dart';
@@ -226,14 +227,19 @@ class Score extends RestActionAble {
   }
 
   /// assign value(int, Score, Data or Condition)
-  Score operator >>(dynamic other) {
+  Widget setTo(dynamic other) {
     if (other is int) return set(other);
     if (other is Score) return setEqual(other);
     if (other is Data) return setToData(other);
     if (other is Condition) return setToCondition(other);
     if (other is Command) return setToResult(other);
+    if (other is File) return setToFunction(other);
+    if (other is Widget) return setToWidget(other);
     throw ('Please use either a Score, Data, Condition, Command or an Int in the operator >>');
   }
+
+  Widget operator >>(dynamic other) => setTo(other);
+  Widget operator <<(dynamic other) => setTo(other);
 
   /// sets the score to a given value of int
   Score set(int val) {
@@ -375,6 +381,9 @@ class Score extends RestActionAble {
       ),
     );
   }
+
+  /// set to functions return value(or number of commands)
+  Group setToFunction(File file) => setToWidget(file.run(create: true));
 
   /// sets the score to the success of the given Command
   Score setToResult(Command commmand, {bool useSuccess = false}) {

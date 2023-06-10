@@ -65,7 +65,7 @@ class Effect extends RestActionAble {
           .when(
             duration == null || duration!.isInfinite,
             then: 'infinite',
-            otherwise: duration.toString(),
+            otherwise: duration?.seconds.toStringAsFixed(0),
           )
           .string('$amplifier ${!showParticles!}');
     }

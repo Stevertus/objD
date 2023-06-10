@@ -96,8 +96,12 @@ class File extends Widget {
         header: header,
       );
 
-  File run({bool create = false}) =>
-      File.execute(path, pack: pack, create: create);
+  File run({bool create = false}) => File.execute(
+        path,
+        pack: pack,
+        create: create,
+        child: child,
+      );
 
   Path fullPath([Path? p]) => inheritFolder && p != null
       ? p.append(path, type: 'mcfunction')

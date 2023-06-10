@@ -4,13 +4,21 @@
 
 - added Biome and corresponding Biomes list
 - added FillBiome Widget
-- added Damage Widget 
+- added Execute.on, Execute.summon and Heightmap
+- added Damage Widget
+- added Return Widget and Score.setToFunction tranfering the return value to a score
 - added new Time object for dealing with ticks, seconds, days and infinite Duration
-- added Display Widget for spawing display objects
+- added time extensions to number allowing to write `10.seconds`, `2.ticks`, `2.4.minutes` etc. to generate time objects 
+- added Display Widget for spawing display objects and animate them
+- added Interaction Widget for spawing interaction entities
 - added preview images of all items and blocks in dartdoc
 - added unit tests for checking critical widgets automatically
+- added DataModify string operations
+- added CommandBuilder widget providing a abstract api to build commands with optional and varying components (mainly used internally)
+- added << Score operator as an additional "set to" operator(same as >>)
 - updated blocks, items, particles and entities to include content from 1.19.4 and 23w12a
 - updated dependencies
+- changed Score >> operator to also accept Widgets and Files
 - changed project version to also accept decimal numbers like 19.4 for `1.19.4` and react accordingly
 - fixed #25 ScoreTimerModule returning incorrect command with negative value
 - fixed Storage.getData not generating namespace properly

@@ -1,7 +1,7 @@
+import 'package:objd/src/basic/types/transformation.dart';
 import 'package:objd/src/basic/widgets.dart';
+import 'package:objd/src/wrappers/data.dart';
 import 'package:objd/src/wrappers/summon.dart';
-
-const inf = -2147483648;
 
 /// An AreaEffectCloud can be created with the Summon Widget, but there is also a specific Widget with special properties for an AreaEffectCloud.
 class Display extends Summon {
@@ -13,7 +13,8 @@ class Display extends Summon {
   final double? shadowRadius;
   final double? shadowStrength;
   final double? viewRange;
-  final BillbordType? billbordType;
+  final BillboardType? billboardType;
+  final Transformation? transformation;
   final ItemDisplay? itemDisplay;
 
   final TextAlignment? alignment;
@@ -33,7 +34,8 @@ class Display extends Summon {
     this.shadowRadius,
     this.shadowStrength,
     this.viewRange,
-    this.billbordType,
+    this.billboardType,
+    this.transformation,
     this.itemDisplay,
   })  : block = null,
         text = null,
@@ -61,7 +63,8 @@ class Display extends Summon {
     this.shadowRadius,
     this.shadowStrength,
     this.viewRange,
-    this.billbordType,
+    this.billboardType,
+    this.transformation,
   })  : item = null,
         text = null,
         itemDisplay = null,
@@ -90,22 +93,64 @@ class Display extends Summon {
     this.shadowRadius,
     this.shadowStrength,
     this.viewRange,
-    this.billbordType,
+    this.billboardType,
     this.alignment,
     this.textOpacity,
     this.seeThrough,
     this.lineWidth,
+    this.transformation,
   })  : item = null,
         block = null,
         itemDisplay = null,
         super(
-          Entities.block_display,
+          Entities.text_display,
           location: location,
           name: name,
           nbt: nbt,
           age: age,
           tags: tags,
         );
+
+  static Data animate(
+    Entity entity,
+    Time duration, {
+    Time start = const Time(0),
+    double? shadowStrength,
+    Transformation? transformation,
+    double? shadowRadius,
+    int? textOpacity,
+  }) =>
+      set(
+        entity,
+        duration: duration,
+        start: start,
+        shadowRadius: shadowRadius,
+        shadowStrength: shadowStrength,
+        textOpacity: textOpacity,
+        transformation: transformation,
+      );
+  static Data set(
+    Entity entity, {
+    Time? duration,
+    Time? start,
+    double? shadowStrength,
+    Transformation? transformation,
+    double? shadowRadius,
+    int? textOpacity,
+  }) {
+    final data = Display.text(
+      Location.here(),
+      TextComponent.none(),
+      shadowRadius: shadowRadius,
+      shadowStrength: shadowStrength,
+      transformation: transformation,
+      textOpacity: textOpacity,
+      interpolationDuration: duration,
+      startInterpolation: start,
+    ).getNbt(false);
+    data.remove('text');
+    return Data.merge(entity, nbt: data);
+  }
 
   @override
   Map<String, dynamic> getNbt([bool useId = true]) {
@@ -115,7 +160,8 @@ class Display extends Summon {
       if (val != null) nbt[tag] = val;
     }
 
-    addIfExist(billbordType?.name, 'billbord');
+    addIfExist(billboardType?.name, 'billboard');
+    addIfExist(itemDisplay?.name, 'display');
     addIfExist(shadowRadius, 'shadow_radius');
     addIfExist(shadowStrength, 'shadow_strength');
     addIfExist(viewRange, 'view_range');
@@ -124,15 +170,16 @@ class Display extends Summon {
     addIfExist(alignment?.name, 'alignment');
     addIfExist(textOpacity, 'textOpacity');
     addIfExist(seeThrough, 'see_through');
-    addIfExist(item, 'item');
-    addIfExist(block, 'block_state');
-    addIfExist(text, 'text');
-    addIfExist(lineWidth, 'lineWidth');
+    addIfExist(item?.getMap(), 'item');
+    addIfExist(block?.getBlockState(), 'block_state');
+    addIfExist(text?.toJson(), 'text');
+    addIfExist(lineWidth, 'line_width');
+    addIfExist(transformation?.toMap(), 'transformation');
     return nbt;
   }
 }
 
-enum BillbordType { fixed, horizontal, center }
+enum BillboardType { fixed, horizontal, center }
 
 enum ItemDisplay {
   none,

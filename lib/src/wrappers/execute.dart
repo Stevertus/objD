@@ -26,6 +26,7 @@ class Execute extends RestActionAble {
     this.children = const [],
     Entity? as,
     Entity? at,
+    Relation? on,
     dynamic location,
     String? align,
     this.targetFilePath = 'objd',
@@ -42,6 +43,7 @@ class Execute extends RestActionAble {
   }) {
     if (args != null) _args = args;
 
+    if (on != null) _args = this.on(on).args;
     if (as != null) _args = this.as(as).args;
     if (at != null) _args = this.at(at).args;
     if (location != null) _args = positioned(location).args;
@@ -60,6 +62,7 @@ class Execute extends RestActionAble {
     required Function(List<Widget>) run,
     Entity? as,
     Entity? at,
+    Relation? on,
     dynamic location,
     String? align,
     String targetFilePath = 'objd',
@@ -77,6 +80,7 @@ class Execute extends RestActionAble {
           children: [StraitWidget(run)],
           as: as,
           at: at,
+          on: on,
           location: location,
           align: align,
           targetFilePath: targetFilePath,
@@ -91,6 +95,34 @@ class Execute extends RestActionAble {
           writable: writable,
         );
 
+  Execute.on(
+    Relation relation, {
+    required this.children,
+    this.encapsulate = true,
+    this.targetFilePath = 'objd',
+    this.targetFileName,
+  }) {
+    _args = on(relation).args;
+  }
+
+  /// Summons a new entity at execution position and changes the executor to this summoned entity.
+  /// ```dart
+  ///  Execute.summon(
+  ///   Entities.sheep,
+  ///   children: [
+  ///     Tag('Test').add()
+  ///   ]
+  ///  )
+  /// ```
+  Execute.summon(
+    EntityType entity, {
+    required this.children,
+    this.encapsulate = true,
+    this.targetFilePath = 'objd',
+    this.targetFileName,
+  }) {
+    _args = summon(entity).args;
+  }
   Execute.as(
     Entity entity, {
     required this.children,
@@ -248,6 +280,14 @@ class Execute extends RestActionAble {
     );
   }
 
+  Execute summon(EntityType entity) => _addArgumentRet('summon $entity');
+
+  /// Updates the executor, selecting entities based on relation to the current executor entity (changing the original executor),
+  /// without changing execution position, rotation, dimension, and anchor.
+  ///
+  /// Terminates if the executor is not an entity, the relation is not applicable to the current executor entity or there are no entities matching it.
+  Execute on(Relation relation) => _addArgumentRet('on ${relation.name}');
+
   // the entity from which the children should run
   Execute as(Entity entity) => _addArgumentRet('as $entity');
 
@@ -267,7 +307,7 @@ class Execute extends RestActionAble {
   /// ```
   Execute asat(Entity entity) => _addArgumentRet('as $entity at @s');
 
-  /// Positioned sets the execution point of the command to a new Location or Entity.
+  /// Positioned sets the execution point of the command to a new Location, Heightmap or Entity.
   /// ```dart
   /// Execute.positioned(
   /// 	Entity.player(), // Location...
@@ -279,10 +319,17 @@ class Execute extends RestActionAble {
   /// ⇒ execute positioned as @p run say I get executed
   /// ```
   Execute positioned(dynamic loc) {
+    if (loc is Heightmap) return over(loc);
+
     if (!(loc is Location || loc is Entity)) {
       throw ('Please insert either a Location or an Entity into Execute.positioned');
     }
     return _addArgumentRet('positioned ${loc is Entity ? 'as ' : ''}$loc');
+  }
+
+  /// Positioned at the Y-coordinate of a specific heightmap
+  Execute over(Heightmap height) {
+    return _addArgumentRet('positioned over ${height.name}');
   }
 
   /// Aligns the position to the corners of the block grid.
@@ -447,3 +494,43 @@ class Dimension {
 enum ExecuteStoreResultType { result, success }
 
 enum ExecuteStoreVarType { byte, short, int, long, float, double }
+
+enum Relation {
+  /// the last entity that damaged the current executor entity in the previous 5 second
+  attacker,
+
+  /// the entity that is riding and controlling the current executor entity
+  controller,
+
+  /// the entity leading the current executor entity with a leash.
+  leasher,
+
+  /// the entity that cause the summon of the current executor entity. For example, the shooter of an arrow, the primer of a primed TNT entity.
+  origin,
+
+  /// the owner of the current executor entity if it is a tameable animal.
+  owner,
+
+  /// all entities that are directly riding the current executor entity, no sub-passengers.
+  passengers,
+
+  /// the attack target of the current executor entity.
+  target,
+
+  /// the entity ridden by the current executor entity.
+  vehicle
+}
+
+enum Heightmap {
+  /// Y-level of the highest non-air block.
+  world_suface,
+
+  /// Y-level of the highest block whose material blocks motion or blocks that contains a fluid.
+  motion_blocking,
+
+  /// Y-level of the highest block whose material blocks motion or blocks that contains a fluid except leaves.
+  motion_blocking_no_leaves,
+
+  /// Y-level of the highest block whose material blocks motion
+  ocean_floor
+}

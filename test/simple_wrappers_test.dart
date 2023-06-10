@@ -32,6 +32,24 @@ void main() {
       "effect give $e minecraft:absorption 30 1 false",
     );
     command(
+      'give time',
+      Effect(
+        EffectType.saturation,
+        duration: Time.seconds(15),
+        entity: e,
+      ),
+      "effect give $e minecraft:saturation 15 1 false",
+    );
+    command(
+      'give fraction time',
+      Effect(
+        EffectType.saturation,
+        duration: 2.ticks,
+        entity: e,
+      ),
+      "effect give $e minecraft:saturation 0 1 false",
+    );
+    command(
       'give complex',
       Effect(
         EffectType.absorption,
@@ -44,6 +62,14 @@ void main() {
     );
   });
 
+  command('Return', Return(30), "return 30");
+
+  command(
+    'Schedule',
+    Schedule('function', ticks: 2.minutes),
+    "schedule function :function 120s",
+  );
+
   group('Damage', () {
     final e = Entity.All();
     command('simple', Damage(e, amount: 30), "damage $e 30.0");
@@ -55,7 +81,7 @@ void main() {
         amount: 10,
         cause: 'test',
       ),
-      "damage $e 30.0 by $e from test",
+      "damage $e 10.0 by $e from test",
     );
     command('at', Damage.at(Location.here(), target: e, amount: 50),
         "damage $e 50.0 at ~ ~ ~");

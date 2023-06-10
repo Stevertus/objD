@@ -33,8 +33,12 @@ class Time {
 
   @override
   String toString() {
-    if (ticks % _TICKSINDAY == 0) return '${ticks / _TICKSINDAY}d';
-    if (ticks % _TICKSINSECOND == 0) return '${ticks / _TICKSINSECOND}d';
+    if (ticks % (_TICKSINDAY / 2) == 0) {
+      return '${ticks / _TICKSINDAY}d'.replaceFirst('.0d', 'd');
+    }
+    if (ticks % (_TICKSINSECOND / 4) == 0) {
+      return '${ticks / _TICKSINSECOND}s'.replaceFirst('.0s', 's');
+    }
     return ticks.toString();
   }
 

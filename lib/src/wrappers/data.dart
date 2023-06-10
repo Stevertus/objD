@@ -156,6 +156,8 @@ class DataModify {
   late String fromSource;
   String? fromType;
   String fromPath;
+  int? start;
+  int? end;
   int? index;
   DataModify.set(dynamic value, {this.fromPath = ''}) : type = 'set' {
     _checkValue(value);
@@ -173,9 +175,57 @@ class DataModify {
       : type = 'insert' {
     _checkValue(value);
   }
+  DataModify.setString(
+    dynamic value, {
+    this.fromPath = '',
+    this.start,
+    this.end,
+  }) : type = 'set string' {
+    _checkValue(value);
+    assert(fromType != null, 'string cannot get a value');
+  }
+  DataModify.mergeString(
+    dynamic value, {
+    this.fromPath = '',
+    this.start,
+    this.end,
+  }) : type = 'merge string' {
+    _checkValue(value);
+    assert(fromType != null, 'string cannot get a value');
+  }
+  DataModify.prependString(
+    dynamic value, {
+    this.fromPath = '',
+    this.start,
+    this.end,
+  }) : type = 'prepend string' {
+    _checkValue(value);
+    assert(fromType != null, 'string cannot get a value');
+  }
+  DataModify.appendString(
+    dynamic value, {
+    this.fromPath = '',
+    this.start,
+    this.end,
+  }) : type = 'append string' {
+    _checkValue(value);
+    assert(fromType != null, 'string cannot get a value');
+  }
+  DataModify.insertString(
+    dynamic value, {
+    this.fromPath = '',
+    this.start,
+    this.end,
+    this.index = 0,
+  }) : type = 'insert string' {
+    _checkValue(value);
+    assert(fromType != null, 'string cannot get a value');
+  }
   String _checkValue(dynamic value) {
+    fromSource = '';
     if (value is Map || value is List) return this.value = gson.encode(value);
     if (value is num || value is String) return this.value = value.toString();
+    this.value = '';
     if (value is DataStorage) {
       fromType = 'storage';
       return fromSource = value.name;
@@ -193,15 +243,22 @@ class DataModify {
 
   @override
   String toString() {
-    var str = type;
-    if (index != null) str += ' $index';
-    if (fromType != null) {
-      str += ' from ';
-      str += '${fromType!} $fromSource $fromPath';
-    } else {
-      str += ' value $value';
+    if (end != null) {
+      assert(start != null && start! <= end!, 'start must be less than end!');
     }
-    return str;
+
+    final b = CommandBuilder(type)
+        .number(index)
+        .when(
+          fromType != null,
+          then: '$fromType $fromSource $fromPath',
+          prefix: type.contains('string') || fromType == null ? null : 'from ',
+          otherwise: 'value $value',
+        )
+        .number(start)
+        .number(end);
+
+    return b.command;
   }
 }
 

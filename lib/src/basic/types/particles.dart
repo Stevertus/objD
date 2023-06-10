@@ -4,7 +4,7 @@ class Particles {
   import cog
   import requests
 
-  version = '1.20/snapshots/23w12a'
+  version = '1.20/releases-candidate/1.20.1-rc1'
 
   res = requests.get(f'https://raw.githubusercontent.com/PixiGeko/Minecraft-generated-data/master/{version}/custom-generated/registries/particle_type.txt')
   blocks = []

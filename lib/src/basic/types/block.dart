@@ -32,6 +32,11 @@ class Block {
     return id + strState + strnbt;
   }
 
+  Map<String, dynamic> getBlockState() => {
+        "Name": id,
+        if (states != null) "properties": states,
+      };
+
   /// **Usage:**
   /// ```dart
   /// Block([minecraft_block_id]) // as string or
