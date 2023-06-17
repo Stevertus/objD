@@ -1,16 +1,17 @@
-import 'package:objd/core.dart';
 import 'package:objd/src/basic/widgets.dart';
+import 'package:objd/src/wrappers/data.dart';
+import 'package:objd/src/wrappers/execute.dart';
 import 'package:objd/src/wrappers/summon.dart';
 
-/// An AreaEffectCloud can be created with the Summon Widget, but there is also a specific Widget with special properties for an AreaEffectCloud.
+/// Spawns an interaction entity. Can be used to detect player left/right clicks efficiently.
 class Interaction extends Summon {
   final double? width;
   final double? height;
   final bool? response;
 
+  /// Spawns an interaction entity. Can be used to detect player left/right clicks efficiently.
   Interaction(
     Location location, {
-    TextComponent? name,
     Map<String, dynamic>? nbt,
     int? age,
     List<String>? tags,
@@ -20,17 +21,21 @@ class Interaction extends Summon {
   }) : super(
           Entities.interaction,
           location: location,
-          name: name,
           nbt: nbt,
           age: age,
           tags: tags,
         );
 
+  /// In your tick function, you can use `.onInteract()`  to detect the interaction.
+  /// This uses the execute on command, and removes the interaction nbt data if present:
   Execute onInteract({Entity? select, required List<Widget> run}) =>
       Execute(as: select ?? this.select(), children: [
         Execute.on(Relation.target, children: run),
         Data.remove(Entity.Self(), path: "interaction"),
       ]).If(Condition.data(Data.get(Entity.Self(), path: "interaction")));
+
+  /// In your tick function, you can use `.onAttack()`  to detect the interaction.
+  /// This uses the execute on command, and removes the interaction nbt data if present:
   Execute onAttack({Entity? select, required List<Widget> run}) =>
       Execute(as: select ?? this.select(), children: [
         Execute.on(Relation.attacker, children: run),

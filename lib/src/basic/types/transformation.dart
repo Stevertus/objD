@@ -10,9 +10,10 @@ class Transformation {
   /// scaling(1 being the default size)
   final Vec3 scale;
 
-  /// translation
+  /// translation, shifting the display
   final Vec3 translation;
 
+  /// An object describing the scale, rotation and translation
   Transformation({
     this.right_rotation = (0, 0, 0),
     this.left_rotation = (0, 0, 0),
@@ -20,6 +21,19 @@ class Transformation {
     this.translation = (0, 0, 0),
   });
 
+  /// scales display entity
+  factory Transformation.scale(double x, double y, double z) =>
+      Transformation(scale: (x, y, z));
+
+  /// shifts display entity
+  factory Transformation.translate(double x, double y, double z) =>
+      Transformation(translation: (x, y, z));
+
+  /// rotates display entity
+  factory Transformation.rotate(double x, double y, double z) =>
+      Transformation(right_rotation: (x, y, z));
+
+  /// scales all axies uniformly
   factory Transformation.scaleAll(double scale) =>
       Transformation(scale: (scale, scale, scale));
 

@@ -79,9 +79,9 @@ void main() {
         e,
         target: e,
         amount: 10,
-        cause: 'test',
+        cause: Entity.Self(),
       ),
-      "damage $e 10.0 by $e from test",
+      "damage $e 10.0 by $e from @s",
     );
     command('at', Damage.at(Location.here(), target: e, amount: 50),
         "damage $e 50.0 at ~ ~ ~");
@@ -92,7 +92,7 @@ void main() {
           location: Location.here(),
           by: e,
           amount: 50,
-          cause: 'test',
+          cause: Entity.All(),
         ),
         throwsA(
           isA<AssertionError>(),

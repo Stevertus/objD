@@ -10,7 +10,7 @@ No need to remember which parameters commands take, automatic checking of your c
 
 ## Resources
 
-Learning objD is hard. But there are a few things that can accelerate your start.
+objD has many components. But there are a few things that can accelerate your start.
 
 - [Introductory Video](https://youtu.be/0GfuCUNI1pw) showing everything from project structure, editor setup to installation.
 - [Officical Documentation](https://objd.stevertus.com)
@@ -39,6 +39,12 @@ You can then invoke the new command to create your project, follow the instructi
 dart pub global run objd_cli new <project_name>
 ```
 
+Go into the created directory `cd <project_name>` and to install all dependencies run 
+
+```bash
+dart pub get
+```
+
 For further explanations, refer to the [Intro Video](https://youtu.be/0GfuCUNI1pw), where this is presented in depth.
 
 ## Example
@@ -63,6 +69,27 @@ For(
 This simple example creates n armor stands(depending on a variable) each with custom names and pose.
 
 Where in vanilla commands you would have to change multiple commands, this approach is **flexible** and can easily controlled by parameters.
+
+
+## Updating 
+
+When updating to a new version, change the version tag of objD in the `pubspec.yaml` file.
+> *Note:* also make sure the dart version requirements match the version requirements of objD. For 0.4.5 onwards, Dart `3.0.0` is required.
+
+```yaml
+name: <project_name>
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  objd: ^0.4.5
+
+dev_dependencies:
+  build_runner:
+  objd_gen: ^0.0.3
+
+```
 
 ## Contributing & Bugs
 

@@ -1,9 +1,8 @@
-import 'package:objd/src/basic/types/transformation.dart';
 import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/wrappers/data.dart';
 import 'package:objd/src/wrappers/summon.dart';
 
-/// An AreaEffectCloud can be created with the Summon Widget, but there is also a specific Widget with special properties for an AreaEffectCloud.
+/// Spawns an diplay entity used to display and animate text, items and blocks in the world, having the following common fields.
 class Display extends Summon {
   final Block? block;
   final Item? item;
@@ -22,10 +21,11 @@ class Display extends Summon {
   final bool? seeThrough;
   final int? lineWidth;
 
+  /// Spawns an diplay entity used to display and animate items in the world.
+
   Display.item(
     Location location,
     Item this.item, {
-    TextComponent? name,
     Map<String, dynamic>? nbt,
     int? age,
     List<String>? tags,
@@ -46,15 +46,16 @@ class Display extends Summon {
         super(
           Entities.item_display,
           location: location,
-          name: name,
           nbt: nbt,
           age: age,
           tags: tags,
         );
+
+  /// Spawns an diplay entity used to display and animate blocks in the world.
+
   Display.block(
     Location location,
     Block this.block, {
-    TextComponent? name,
     Map<String, dynamic>? nbt,
     int? age,
     List<String>? tags,
@@ -75,16 +76,15 @@ class Display extends Summon {
         super(
           Entities.block_display,
           location: location,
-          name: name,
           nbt: nbt,
           age: age,
           tags: tags,
         );
 
+  /// Spawns an diplay entity used to display and animate text in the world.
   Display.text(
     Location location,
     this.text, {
-    TextComponent? name,
     Map<String, dynamic>? nbt,
     int? age,
     List<String>? tags,
@@ -105,11 +105,21 @@ class Display extends Summon {
         super(
           Entities.text_display,
           location: location,
-          name: name,
           nbt: nbt,
           age: age,
           tags: tags,
         );
+
+  /// Given the entity to animate, duration, start time, and animatable fields, this constructs a data command.
+  /// | Display.animate |                                                                                                  |
+  /// | --------------- | ------------------------------------------------------------------------------------------------ |
+  /// | Entity          | Display entity to animate                                                                        |
+  /// | Time            | duration of the animation                                                                        |
+  /// | start           | time to wait until animation starts(default=0t)                                                  |
+  /// | shadowRadius    | double size of the shadow (optional)                                                             |
+  /// | shadowStrength  | double strength of the shadow (optional)                                                         |
+  /// | transformation  | a Transformation object describing the scale, rotation and translation of the display (optional) |
+  /// | textOpacity     | Alpha value of rendered text. Alpha value is from 0 to 255. (optional)                           |
 
   static Data animate(
     Entity entity,
@@ -129,6 +139,8 @@ class Display extends Summon {
         textOpacity: textOpacity,
         transformation: transformation,
       );
+
+  /// Given the entity and display fields, this constructs a data command setting the values.
   static Data set(
     Entity entity, {
     Time? duration,

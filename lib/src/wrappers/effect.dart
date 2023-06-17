@@ -4,7 +4,6 @@ class Effect extends RestActionAble {
   EffectType? effect;
   Entity? entity;
 
-  /// Duration of the effect in seconds, set to a negative value to get an infinite effect
   Time? duration;
   int? amplifier;
   bool? showParticles;
@@ -15,12 +14,13 @@ class Effect extends RestActionAble {
   /// Effect(
   /// 	EffectType.jump_boost,
   /// 	entity: Entity.Player(),
-  /// 	duration: 20,
+  /// 	duration: 20.seconds,
   /// 	amplifier: 3,
   /// 	showParticles: false
   /// )
   /// ⇒ effect give @p minecraft:jump_boost 20 3 true
   /// ```
+  /// From version 19.4 you can use Time.infinite() as duration to make the effect last forever
   Effect(
     this.effect, {
     this.entity,

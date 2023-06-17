@@ -95,6 +95,9 @@ class Execute extends RestActionAble {
           writable: writable,
         );
 
+  /// Changes the executor to a related entity, but keeps the position the same
+  ///
+  /// takes in a relation type which is either `Relation.attacker, Relation.controller, Relation.leasher, Relation.origin, Relation.owner, Relation.passengers, Relation.target, Relation.vehicle`
   Execute.on(
     Relation relation, {
     required this.children,
@@ -173,6 +176,17 @@ class Execute extends RestActionAble {
   /// ),
   ///
   /// ⇒ execute positioned as @p run say I get executed
+  /// ```
+  /// When given a Heightmap, sets the y-coordinate to the current positions heightmap(world_suface, motion_blocking, motion_blocking_no_leaves, ocean_floor) by generating the over subcommand:
+  ///
+  /// ```dart
+  /// Execute.positioned(
+  /// 	Heighmap.motion_blocking, // Location...
+  /// 	children: List<Widget> [
+  /// 		Command("/say I get executed")
+  /// 	]
+  /// ),
+  /// ⇒ execute positioned over motion_blocking run say I get executed
   /// ```
   Execute.positioned(
     dynamic loc, {
@@ -521,6 +535,7 @@ enum Relation {
   vehicle
 }
 
+/// Heightmaps to be used in Execute.positioned
 enum Heightmap {
   /// Y-level of the highest non-air block.
   world_suface,

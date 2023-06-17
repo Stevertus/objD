@@ -286,14 +286,49 @@ class Item {
   }
 }
 
+/// HideFlags method. It translates the human readable boolean values into an int.
+///
+///| HideFlags   | bools                                 |
+///| ----------- | ------------------------------------- |
+///| enchant     | whether to show the enchantments      |
+///| attributes  | whether to show the attributes        |
+///| unbreakable | whether to show the unbreakable tag   |
+///| canDestroy  | whether to show the canDestroy tag    |
+///| canPlaceOn  | whether to show the canPlaceOn tag    |
+///| others      | whether to show other nbt information |
+///| dye      | whether to show Dyed on leather armor |
+///| armorTrims      | whether to show Upgrade on armors |
+///
+///**Example:**
+///
+///```dart
+///var flags = HideFlags(attributes:true, unbreakable: true, others: true); // = 38
+///...
+///Item(Items.apple,hideFlags: flags)
+///```
 int HideFlags({
+  /// whether to show the enchantments
   bool enchantments = false,
+
+  /// whether to show the attributes
   bool attributes = false,
+
+  /// whether to show the unbreakable tag
   bool unbreakable = false,
+
+  ///  whether to show the canDestroy tag
   bool canDestroy = false,
+
+  /// whether to show the canPlaceOn tag
   bool canPlaceOn = false,
+
+  /// whether to show other nbt information
   bool others = false,
+
+  /// whether to show Dyed on leather armor
   bool dye = false,
+
+  /// whether to show Upgrade on armors
   bool armorTrims = false,
 }) {
   var res = 0;

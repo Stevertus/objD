@@ -2,13 +2,13 @@
 
 ## 0.4.5
 
-- added Biome and corresponding Biomes list
+- added new Time object for dealing with ticks, seconds, days and infinite Duration
+- added time extensions to number allowing to write `10.seconds`, `2.ticks`, `2.4.minutes` etc. to generate time objects 
 - added FillBiome Widget
 - added Execute.on, Execute.summon and Heightmap
 - added Damage Widget
 - added Return Widget and Score.setToFunction tranfering the return value to a score
-- added new Time object for dealing with ticks, seconds, days and infinite Duration
-- added time extensions to number allowing to write `10.seconds`, `2.ticks`, `2.4.minutes` etc. to generate time objects 
+- added Biome and corresponding Biomes list
 - added Display Widget for spawing display objects and animate them
 - added Interaction Widget for spawing interaction entities
 - added preview images of all items and blocks in dartdoc
@@ -18,17 +18,20 @@
 - added << Score operator as an additional "set to" operator(same as >>)
 - updated blocks, items, particles and entities to include content from 1.19.4 and 23w12a
 - updated dependencies
+- updated project to Dart 3
 - changed Score >> operator to also accept Widgets and Files
 - changed project version to also accept decimal numbers like 19.4 for `1.19.4` and react accordingly
 - fixed #25 ScoreTimerModule returning incorrect command with negative value
 - fixed Storage.getData not generating namespace properly
 - fixed log messages while using the getCommands API
+- fixed Bossbar.add generating wrong quotation #26
 - moved Builder Widget to basic
 
-Breaking: Execute Dimension, Clone Dimension, Time 
+**Breaking**: 
 
-- Effect, Schedule, Title, Repeat, Timer, ScoreTimer use the new Time object instead of an integer for representing time  
-
+- Effect, Schedule, Title, Repeat, Timer, ScoreTimer use the new Time object instead of an integer for representing time, you can just append a `.ticks` to the old integer: `ticks: 10 => ticks: 10.ticks` 
+- objD now requires Dart 3, please check if you have the newest version of dart and run `dart fix`  
+- Dimension is no longer an Enum. `Execute.dimension` no longer accepts strings, when using a custom dimension use `Dimension(<name>)`
 ## 0.4.4
 
 - added PlayerJoin.rejoin to only detect once joined players

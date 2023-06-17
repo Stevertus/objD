@@ -6,8 +6,6 @@ class LoadFile extends Widget {
 
   @override
   Widget generate(Context context) {
-    return For.of([
-      // put your load widgets here
-    ]);
+    return For.of([]);
   }
 }

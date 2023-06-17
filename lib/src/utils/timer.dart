@@ -9,6 +9,7 @@ class Timeout extends RestActionAble {
   List<Widget> children;
   Time ticks;
 
+  /// A Timeout is a simple delay in your code. It is done with the Schedule Command and generates a File under the hood.
   Timeout(
     this.name, {
     required this.children,
@@ -34,6 +35,8 @@ class Timer extends RestActionAble {
   Time ticks;
   bool infinite;
 
+  /// A Timer is very similar to a Timeout, but instead of delaying the code it is run over and over again always delayed by the ticks. \
+  /// In the end it creates a loop with slower tick speed as 20t/s to perform some operations more performant.
   Timer(
     this.name, {
     required this.children,

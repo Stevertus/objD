@@ -9,7 +9,7 @@ class Repeat extends RestActionAble {
   int to;
   Time ticks;
 
-  /// The Repeat Widget repeats a given action multiple times with a tick delay.
+  /// The Repeat Widget repeats a given action multiple times with a time delay.
   Repeat(
     this.name, {
     required this.child,

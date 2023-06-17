@@ -8,7 +8,11 @@ class Schedule extends RestActionAble {
 
   Time ticks;
 
+  /// Schedule schedules a file for the future. It delays its execution by the given time.
   Schedule(this._name, {required this.ticks, this.mode});
+
+  /// You can use Schedule.file that requires a file instead to define both in one statement.
+
   Schedule.file(this._file, {required this.ticks, this.mode})
       : assert(_file != null),
         _name = _file!.path {
@@ -37,11 +41,13 @@ class Schedule extends RestActionAble {
       return ' replace';
     }
 
+    final time = ticks.toString(reduce: context.version > 19.4);
+
     if (_file != null) {
       return Group(
         prefix: 'schedule',
         children: [_file!],
-        suffix: ' $ticks${getMode()}',
+        suffix: ' $time${getMode()}',
       );
     }
     if (mode == ScheduleMode.clear) {
@@ -49,7 +55,7 @@ class Schedule extends RestActionAble {
     }
 
     return Command(
-      'schedule function ${context.packId}:$_name $ticks${getMode()}',
+      'schedule function ${context.packId}:$_name $time${getMode()}',
     );
   }
 }

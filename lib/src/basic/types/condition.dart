@@ -58,14 +58,14 @@ class Condition {
     _setCond(cond);
   }
 
-  /// checks if the execution is in a matching dimension
+  /// checks if the chunk of the location is loaded:
   Condition.loaded(Location cond) {
     _setCond(cond, loaded: true);
   }
 
   /// checks if the execution is in a matching biome
   Condition.biome(Biome cond) {
-    _setCond(cond, loaded: true);
+    _setCond(cond);
   }
 
   /// checks for a predicate
@@ -225,6 +225,7 @@ class Condition {
     }
   }
 
+  // ignore: library_private_types_in_public_api
   List<List<_ConditionUtil>> getList() {
     var list = <List<_ConditionUtil>>[[]];
     for (var child in _children) {
