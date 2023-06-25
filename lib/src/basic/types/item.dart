@@ -206,7 +206,8 @@ class Item {
   String getGiveNotation({bool withDamage = true}) {
     var result = type;
     if (tag != null && tag!.isNotEmpty) {
-      result += gson.encode(tag);
+      final nbt = gson.encode(tag);
+      result += _fixUuidArray(nbt); 
     }
     result += ' ';
     if (count != null) result += count.toString();
@@ -235,7 +236,20 @@ class Item {
   }
 
   String getNbt() {
-    return gson.encode(getMap());
+    final nbt = gson.encode(getMap());
+    return _fixUuidArray(nbt);
+  }
+
+  /// Fixes the int array representation of UUIDs
+  /// to be recognized by Minecraft.
+  /// 
+  /// [1,2,3,4] -> [I;1,2,3,4]
+  /// 
+  /// The resulting nbt is not a valid json anymore! 
+  String _fixUuidArray(String nbt) {
+    // Matches 'UUID:[w,v,x,y]' occurances
+    var regex = RegExp(r'(?<=UUID\s*:\s*)\[(\d+,\d+,\d+,\d+)\]');
+    return nbt.replaceAllMapped(regex, (match) => "[I;${match[1]}]");
   }
 
   Item copyWith({
