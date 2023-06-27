@@ -13,13 +13,13 @@ jobs:
   build:
     # use ubuntu's latest OS
     runs-on: ubuntu-latest
-    # use the google/dart container (this makes `dart` available to use)
+    # use the _/dart container for version 3+ (this makes `dart` available to use)
     container:
-      image: google/dart:latest
+      image: dart:latest
 
     # checkout the code, run pub get and finally run tests
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install dependencies
         run: dart pub get
       - name: Run tests
