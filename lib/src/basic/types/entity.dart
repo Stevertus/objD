@@ -9,7 +9,7 @@ abstract class EntityClass {
   String toString();
 }
 
-class Entity implements EntityClass {
+class Entity extends GsonValue implements EntityClass {
   @override
   String selector;
   Map arguments = {};
@@ -1156,6 +1156,9 @@ class Entity implements EntityClass {
     }
     return ret;
   }
+
+  @override
+  String toSimple() => toString();
 }
 
 class Range {

@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, constant_identifier_names
 
+import 'package:objd/core.dart';
 import 'package:objd/src/basic/command.dart';
 import 'package:objd/src/basic/types/entity.dart';
 import 'dart:convert';
@@ -8,7 +9,7 @@ import 'package:objd/src/basic/types/item.dart';
 import 'package:objd/src/basic/types/location.dart';
 import 'package:objd/src/basic/score.dart';
 
-class TextComponent {
+class TextComponent extends GsonValue {
   late Map<String, dynamic> value;
   Color? color;
   bool? bold, underlined, strikethrough, obfuscated, italic;
@@ -310,10 +311,10 @@ class TextComponent {
     value = {'selector': entity.toString()};
   }
 
-  Map? toMap() {
+  Map<String, dynamic>? toMap() {
     if (value.containsKey('text') && value['text'] == null) return null;
 
-    var ret = {};
+    var ret = <String, dynamic>{};
     ret.addAll(value);
     if (color != null) ret['color'] = color.toString();
     if (bold != null) ret['bold'] = bold;
@@ -331,6 +332,12 @@ class TextComponent {
     final m = toMap();
     return m != null ? json.encode(m).replaceAll('\\[repl]\\', '\\') : null;
   }
+
+  @override
+  String toString() => toJson() ?? '';
+
+  @override
+  Map<String, dynamic>? toSimple() => toMap();
 }
 
 /// Fires on left click, Part of TextComponent.

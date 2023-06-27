@@ -157,7 +157,7 @@ class Path {
   }
 
   @override
-  String toString([bool withExtension = true]) => [
+  String toString({bool withExtension = true}) => [
         ...segments,
         if (filename != null)
           filename! + (withExtension ? '.${filetype ?? 'json'}' : ''),

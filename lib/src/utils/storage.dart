@@ -155,6 +155,7 @@ class Storage extends Widget {
       Storage.copyScore(name,
           autoNamespace: autoNamespace,
           key: key,
+          scale: scale,
           datatype: datatype,
           score: score);
 
@@ -185,7 +186,7 @@ class Storage extends Widget {
         target,
         path: key!,
         score: score,
-        scale: 1,
+        scale: scale,
         datatype: datatype,
       );
     }

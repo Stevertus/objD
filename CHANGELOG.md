@@ -2,6 +2,14 @@
 
 ## 0.4.5
 
+- added UUID object to represent uuids consisting out of 4 integers
+- changed TextComponent & Entity to be gson serializable, so you don't have to call toMap manually
+- fixed function tags load/tick generating with paths with `.mcfunction`
+- fixed Storage.copyScore ignoring the scale parameter 
+- fixed Github testing workflows to run with Dart 3
+
+## 0.4.5
+
 - added new Time object for dealing with ticks, seconds, days and infinite Duration
 - added time extensions to number allowing to write `10.seconds`, `2.ticks`, `2.4.minutes` etc. to generate time objects 
 - added FillBiome Widget

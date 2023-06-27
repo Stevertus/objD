@@ -6,6 +6,11 @@ class LoadFile extends Widget {
 
   @override
   Widget generate(Context context) {
-    return For.of([]);
+    return For.of([
+      Data.merge(Entity.All(), nbt: {
+        "uuid": UUID(1, 2, 3, 4),
+        'name': TextComponent('name'),
+      })
+    ]);
   }
 }
