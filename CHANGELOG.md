@@ -1,9 +1,10 @@
 # Changelog
 
-## 0.4.5
+## 0.4.6
 
 - added UUID object to represent uuids consisting out of 4 integers
 - changed TextComponent & Entity to be gson serializable, so you don't have to call toMap manually
+- refactored Title widget
 - fixed function tags load/tick generating with paths with `.mcfunction`
 - fixed Storage.copyScore ignoring the scale parameter 
 - fixed Github testing workflows to run with Dart 3

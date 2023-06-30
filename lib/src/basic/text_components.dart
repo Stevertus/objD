@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, constant_identifier_names
 
-import 'package:objd/core.dart';
+import 'package:gson/values.dart';
 import 'package:objd/src/basic/command.dart';
 import 'package:objd/src/basic/types/entity.dart';
 import 'dart:convert';
