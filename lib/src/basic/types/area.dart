@@ -67,7 +67,7 @@ class Area {
     dz = (loc2.z - loc1.z).abs();
   }
 
-  Map getRanges() {
+  Map<String, double> getRanges() {
     var ret = <String, double>{};
     ret['x'] = loc1.x;
     ret['y'] = loc1.y;
