@@ -1,10 +1,10 @@
+import 'package:objd/src/basic/score/score_export.dart';
 import 'package:objd/src/basic/types/area.dart';
 import 'package:objd/src/basic/types/biomes.dart';
 import 'package:objd/src/basic/types/block.dart';
 import 'package:objd/src/basic/types/entity.dart';
 import 'package:objd/src/basic/types/location.dart';
 import 'package:objd/src/basic/predicate.dart';
-import 'package:objd/src/basic/score.dart';
 import 'package:objd/src/basic/tag.dart';
 import 'package:objd/src/wrappers/data.dart';
 import 'package:objd/src/wrappers/execute.dart';
@@ -156,10 +156,10 @@ class Condition {
     }
 
     if (cond is Score) {
-      if (cond.getString().isEmpty) {
+      if (cond.toString().isEmpty) {
         throw ('Please insert a score condition method into a condition!');
       }
-      _generated = _ConditionUtil('score ${cond.getString()}', invert: invert);
+      _generated = _ConditionUtil('score ${cond.toString()}', invert: invert);
       return;
     }
 

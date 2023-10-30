@@ -1,6 +1,8 @@
+import 'dart:math';
+
+import 'package:objd/src/basic/score/score.dart';
 import 'package:objd/src/basic/types/entity.dart';
 import 'package:objd/src/basic/rest_action.dart';
-import 'package:objd/src/basic/score.dart';
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/basic/command.dart';
 import 'package:objd/src/basic/text_components.dart';
@@ -12,6 +14,22 @@ class Scoreboard extends RestActionAble {
   /// Often you find yourself giving all scoreboards a prefix especially for your project. This can get very repetitive and annoying, so objD has this prefix built in.
 
   static String? prefix;
+
+  static final Set _tempScores = {};
+
+  static String generateNewTempPlayerName({int len = 10}) {
+    var r = Random();
+    String name = '';
+
+    do {
+      name = String.fromCharCodes(
+        List.generate(len, (index) => r.nextInt(33) + 89),
+      );
+    } while (_tempScores.contains(name));
+
+    _tempScores.add(name);
+    return name;
+  }
 
   final String subcommand;
   String name;

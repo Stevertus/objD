@@ -36,13 +36,14 @@ class RandomScore extends RestActionAble {
         children: [
           Comment('Random UUID Generator from ${context.file}'),
           AreaEffectCloud(Location.here(), tags: ['objd_random']),
-          s[entity].setToWidget(
-            Data.get(
-              Entity(tags: ['objd_random'], limit: 1).sort(Sort.nearest),
-              path: context.version > 15 ? 'UUID[0]' : 'UUIDMost',
-              scale: (context.version > 15 ? 1000 : 1) * 0.0000000001,
-            ),
-          ),
+          // TODO: Add back in
+          // s[entity].setToWidget(
+          //   Data.get(
+          //     Entity(tags: ['objd_random'], limit: 1).sort(Sort.nearest),
+          //     path: context.version > 15 ? 'UUID[0]' : 'UUIDMost',
+          //     scale: (context.version > 15 ? 1000 : 1) * 0.0000000001,
+          //   ),
+          // ),
           s[entity].modulo(
             s['#max'],
           ),

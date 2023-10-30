@@ -1,30 +1,423 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 library score;
 
-import 'package:objd/src/basic/file.dart';
-import 'package:objd/src/basic/group.dart';
-import 'package:objd/src/basic/rest_action.dart';
-import 'package:objd/src/basic/score/score_operation.dart';
-import 'package:objd/src/basic/widget.dart';
-import 'package:objd/src/wrappers/data.dart';
+import 'package:objd/core.dart';
 import 'package:objd/src/basic/command.dart';
-import 'package:objd/src/basic/for_list.dart';
-import 'package:objd/src/basic/types/entity.dart';
-import 'package:objd/src/basic/types/condition.dart';
+import 'package:objd/src/basic/score/score.dart';
+import 'package:objd/src/basic/score/score_builder.dart';
+import 'package:objd/src/basic/score/score_condition.dart';
+import 'package:objd/src/basic/score/score_export.dart';
 import 'package:objd/src/basic/scoreboard.dart';
-import 'package:objd/src/build/build.dart';
-import 'package:objd/src/wrappers/if.dart';
+import 'package:objd/src/basic/types/entity.dart';
+import 'package:objd/src/basic/widget.dart';
+import 'package:objd/src/build/context.dart';
 
-import '../builder.dart';
+abstract interface class ScoreAssignable {
+  // block, bossbar, entity, score, storage
+  String get_assignable_right();
+}
 
-class Score extends ScoreOperation {
-  List<Widget> _commands = [];
+abstract interface class ScoreStoreable extends ScoreAssignable {
+  // block, bossbar, entity, score, storage
+  String get_assignable_left();
+}
 
-  /// Get commands
-  List<Widget> get commands => _commands;
+sealed class ScoreOperation extends Widget implements ScoreAssignable {
+  /// add
+  BinaryScoreOperation operator +(dynamic other) {
+    if (other is int) return add(other);
+    if (other is ScoreOperation) return addScore(other);
+    throw ('Please use either a Score or an Int in the operator +');
+  }
+
+  /// subtract
+  BinaryScoreOperation operator -(dynamic other) {
+    if (other is int) return subtract(other);
+    if (other is ScoreOperation) return subtractScore(other);
+    throw ('Please use either a Score or an Int in the operator -');
+  }
+
+  /// modulo by
+  BinaryScoreOperation operator %(dynamic other) {
+    if (other is int) {
+      return modulo(
+        Score.con(other),
+      );
+    }
+    if (other is ScoreOperation) return modulo(other);
+    throw ('Please use either a Score or an Int in the operator %');
+  }
+
+  /// divide by
+  BinaryScoreOperation operator /(dynamic other) {
+    if (other is int) {
+      return divideByScore(
+        Score.con(other),
+      );
+    }
+    if (other is ScoreOperation) return divideByScore(other);
+    throw ('Please use either a Score or an Int in the operator /');
+  }
+
+  /// multiply by
+  BinaryScoreOperation operator *(dynamic other) {
+    if (other is int) {
+      return multiplyByScore(
+        Score.con(other),
+      );
+    }
+    if (other is ScoreOperation) return multiplyByScore(other);
+    throw ('Please use either a Score or an Int in the operator /');
+  }
+
+  /// greater than
+  ScoreCondition operator >(dynamic other) {
+    if (other is int) {
+      return matchesRange(
+        Range.from(other + 1),
+      );
+    }
+    if (other is ScoreOperation) return isBigger(other);
+    throw ('Please use either a Score or an Int in the operator >');
+  }
+
+  /// less than
+  ScoreCondition operator <(dynamic other) {
+    if (other is int) {
+      return matchesRange(
+        Range.to(other + -1),
+      );
+    }
+    if (other is ScoreOperation) return isSmaller(other);
+    throw ('Please use either a Score or an Int in the operator >');
+  }
+
+  /// bigger or equal
+  ScoreCondition operator >=(dynamic other) {
+    if (other is int) {
+      return matchesRange(
+        Range.from(other),
+      );
+    }
+    if (other is ScoreOperation) return isBiggerOrEqual(other);
+    throw ('Please use either a Score or an Int in the operator >=');
+  }
+
+  /// less or equal
+  ScoreCondition operator <=(dynamic other) {
+    if (other is int) {
+      return matchesRange(
+        Range.to(other),
+      );
+    }
+    if (other is ScoreOperation) return isSmallerOrEqual(other);
+    throw ('Please use either a Score or an Int in the operator <=');
+  }
+
+  /// matches
+  ScoreCondition operator &(dynamic other) {
+    if (other is int) return matches(other);
+    if (other is Range) return matchesRange(other);
+    if (other is ScoreOperation) return isEqual(other);
+    throw ('Please use either a Score, Range or an Int in the operator &');
+  }
+
+  /// adds a value to the score
+  BinaryScoreOperation add([int val = 1]) => BinaryScoreOperation(
+        this,
+        val >= 0 ? ScoreOperator.Addition : ScoreOperator.Subtraction,
+        Score.con(val.abs()),
+      );
+
+  /// subtracts a value from the score
+  BinaryScoreOperation subtract([int val = 1]) => BinaryScoreOperation(
+        this,
+        val >= 0 ? ScoreOperator.Subtraction : ScoreOperator.Addition,
+        Score.con(val.abs()),
+      );
+
+  /// gets the value of the score to work with it further
+  // TODO
+  // Score get() {
+  //   return addCommandRet(
+  //     Command(
+  //       'scoreboard players get ${_getESStr()}',
+  //     ),
+  //   );
+  // }
+
+  // binary operations
+
+  /// adds another score to this one
+  BinaryScoreOperation addScore(ScoreOperation score) =>
+      BinaryScoreOperation(this, ScoreOperator.Addition, score);
+
+  /// subtracts another score from this one
+  BinaryScoreOperation subtractScore(ScoreOperation score) =>
+      BinaryScoreOperation(this, ScoreOperator.Subtraction, score);
+
+  /// sets this score to the result of the multiplication
+  BinaryScoreOperation multiplyByScore(ScoreOperation score) =>
+      BinaryScoreOperation(this, ScoreOperator.Multiplication, score);
+
+  /// sets this score to the result of the division
+  BinaryScoreOperation divideByScore(ScoreOperation score) =>
+      BinaryScoreOperation(this, ScoreOperator.Division, score);
+
+  /// sets this score to the remainder of the division
+  BinaryScoreOperation modulo(ScoreOperation score) =>
+      BinaryScoreOperation(this, ScoreOperator.Modulo, score);
+
+  /// sets the score to an nbt value
+  // Score setToData(Data data) {
+  //   if (!data.isGetting) {
+  //     throw ('Please set a score to Data.get and not Data.${data.subcommand}');
+  //   }
+  //   return addCommandRet(
+  //     Builder(
+  //       (c) => Command(
+  //         'execute store result score ${_getESStr()} run data get ${data.getTarget(c)} ${data.path} ${data.scale ?? 1}',
+  //       ),
+  //     ),
+  //   );
+  // }
+
+  // /// set to functions return value(or number of commands)
+  // Group setToFunction(File file) => setToWidget(file.run(create: true));
+
+  // /// sets the score to the success of the given Command
+  // Score setToResult(Command commmand, {bool useSuccess = false}) {
+  //   return addCommandRet(
+  //     Command(
+  //       'execute store ${useSuccess ? 'success' : 'result'} score ${_getESStr()} run $commmand',
+  //     ),
+  //   );
+  // }
+
+  // /// sets the score to the result of the given Widget
+  // /// JUST one Command should be the input
+  // Group setToWidget(Widget widget, {bool useSuccess = false}) {
+  //   return Group(
+  //     prefix:
+  //         'execute store ${useSuccess ? 'success' : 'result'} score ${_getESStr()} run',
+  //     children: [widget],
+  //   );
+  // }
+
+  // /// sets the score to the success of the given condition result
+  // Score setToCondition(Condition cond, {bool useSuccess = false}) {
+  //   return addCommandRet(
+  //     Command(
+  //       'execute store ${useSuccess ? 'success' : 'result'} score ${_getESStr()} ${Condition.getPrefixes(cond.getList())[0]}',
+  //     ),
+  //   );
+  // }
+
+  /// tests
+
+  BinaryScoreCondition isEqual(ScoreOperation score) =>
+      BinaryScoreCondition(this, ConditionalOperator.Equal, score);
+  BinaryScoreCondition isSmaller(ScoreOperation score) =>
+      BinaryScoreCondition(this, ConditionalOperator.Less, score);
+  BinaryScoreCondition isSmallerOrEqual(ScoreOperation score) =>
+      BinaryScoreCondition(this, ConditionalOperator.LessEqual, score);
+  BinaryScoreCondition isBiggerOrEqual(ScoreOperation score) =>
+      BinaryScoreCondition(this, ConditionalOperator.BiggerEqual, score);
+  BinaryScoreCondition isBigger(ScoreOperation score) =>
+      BinaryScoreCondition(this, ConditionalOperator.Bigger, score);
+
+  MatchesScoreCondition matches(int value) =>
+      MatchesScoreCondition(this, Range.exact(value));
+  MatchesScoreCondition matchesRange(Range range) =>
+      MatchesScoreCondition(this, range);
+
+  void build() {
+    print('test');
+  }
+
+  (Score, List<ElementaryScoreOperation>) copy({
+    Score? out,
+    ScoreBuilder? builder,
+    bool compact = false,
+  }) {
+    out ??= Score(
+      Entity.PlayerName('#${Scoreboard.generateNewTempPlayerName()}'),
+      'objd_temp',
+    );
+
+    builder ??= ScoreBuilder();
+
+    return (out, builder.compile(this, out: out));
+  }
+
+  @override
+  String get_assignable_right() {
+    throw UnimplementedError();
+  }
+}
+
+sealed class ElementaryScoreOperation extends ScoreOperation {}
+
+final class IncrementScoreOperation extends ElementaryScoreOperation {
+  final Score score;
+  final int increment;
+
+  IncrementScoreOperation(this.score, this.increment);
+
+  @override
+  generate(Context context) => Command(
+        increment > 0
+            ? 'scoreboard players add $score $increment'
+            : 'scoreboard players remove $score ${-increment}',
+      );
+
+  @override
+  String toString() => '$score += $increment';
+}
+
+final class SetScoreOperation extends ElementaryScoreOperation {
+  final Score score;
+  final int value;
+
+  SetScoreOperation(this.score, this.value);
+
+  @override
+  generate(Context context) => Command('scoreboard players set $score $value');
+
+  @override
+  String toString() => 'set $score = $value';
+}
+
+final class ResetScoreOperation extends ElementaryScoreOperation {
+  final Score score;
+
+  ResetScoreOperation(this.score);
+
+  @override
+  generate(Context context) => Command('scoreboard players reset $score');
+
+  @override
+  String toString() => 'reset $score';
+}
+
+final class StoreScoreOperation extends ElementaryScoreOperation {
+  final ScoreStoreable left;
+  final ScoreAssignable right;
+
+  StoreScoreOperation(this.left, this.right);
+
+  @override
+  generate(Context context) => Command('execute store result ' // TODO:
+      );
+
+  @override
+  String toString() => [
+        '  | ${left.get_assignable_left()}',
+        '<<',
+        '  | ${right.get_assignable_right()}',
+      ].join('\n');
+}
+
+final class ElementaryBinaryScoreOperation extends ElementaryScoreOperation {
+  final Score left;
+  final Score right;
+
+  final ScoreOperator operation;
+
+  ElementaryBinaryScoreOperation({
+    required this.left,
+    required this.right,
+    required this.operation,
+  });
+
+  @override
+  Widget generate(Context context) =>
+      Command('scoreboard players operation $left ${operation.op} $right');
+
+  @override
+  String toString() => '$left ${operation.op} $right';
+}
+
+final class AssignScoreOperation extends ElementaryScoreOperation {
+  final Score left;
+  final ScoreAssignable right;
+
+  AssignScoreOperation(this.left, this.right);
+
+  @override
+  Widget generate(Context context) => Command(
+        'scoreboard players operation $left = ${right.get_assignable_right()}',
+      );
+
+  @override
+  String toString() => [
+        '  | $left',
+        '<<',
+        '  | ${right.get_assignable_right()}',
+      ].join('\n');
+}
+
+class BinaryScoreOperation extends ScoreOperation {
+  final ScoreOperation left;
+  final ScoreOperation right;
+
+  final ScoreOperator operation;
+
+  BinaryScoreOperation(this.left, this.operation, this.right);
+
+  @override
+  generate(Context context) {
+    // TODO: implement generate
+    throw UnimplementedError();
+  }
+
+  @override
+  String toString() {
+    final lStr = left.toString().splitMapJoin('\n', onNonMatch: (s) => ' | $s');
+    final rStr =
+        right.toString().splitMapJoin('\n', onNonMatch: (s) => ' | $s');
+
+    return [lStr, operation.op, rStr].join('\n');
+  }
+}
+
+enum ScoreOperator {
+  Addition("+="),
+  Subtraction("-="),
+  Multiplication("*="),
+  Division("/="),
+  Modulo("%="),
+  Assign("="),
+  Min("<"),
+  Max(">"),
+  Swap("><");
+
+  final String op;
+  const ScoreOperator(this.op);
+}
+
+class ConstScore extends Score {
+  final int value;
+
+  ConstScore(
+    this.value, {
+    bool addNew = true,
+    String type = 'dummy',
+  }) : super(
+          Entity.PlayerName(
+            '#$value',
+          ),
+          'objd_consts',
+          addNew: addNew,
+          type: type,
+        );
+}
+
+class Score extends ElementaryScoreOperation implements ScoreStoreable {
   final Entity entity;
   String score;
-  String type;
-  String _strGen = '';
+  final String type;
+  final bool addNew;
 
   /// The [Score] class is the basis for setting values, calculating with scores and checking the values.
   ///It implements one base class with no functionality and several methods to do actions:
@@ -42,16 +435,9 @@ class Score extends ScoreOperation {
   Score(
     this.entity,
     this.score, {
-    bool addNew = true,
-    List<Widget>? commands,
+    this.addNew = true,
     this.type = 'dummy',
   }) {
-    if (commands != null) _commands = commands;
-    if (addNew) {
-      _commands.add(
-        Scoreboard(score, type: type),
-      );
-    }
     if (Scoreboard.prefix != null && !score.contains(Scoreboard.prefix!)) {
       score = Scoreboard.prefix! + score;
     }
@@ -62,25 +448,24 @@ class Score extends ScoreOperation {
   /// Score.fromSelected('objective').set(3)
   /// ⇒ scoreboard players set @s objective 3
   /// ```
-  Score.fromSelected(
-    this.score, {
+  factory Score.fromSelected(
+    String score, {
     bool addNew = true,
-    this.type = 'dummy',
-  }) : entity = Entity.Self() {
-    if (addNew) {
-      _commands.add(
-        Scoreboard(score, type: type),
-      );
-    }
-    if (Scoreboard.prefix != null && !score.contains(Scoreboard.prefix!)) {
-      score = Scoreboard.prefix! + score;
-    }
-  }
-  Score.str(this._strGen,
-      {this.score = '', String match = '0', this.type = 'dummy'})
-      : entity = Entity.Self() {
-    _match = match;
-  }
+    String type = 'dummy',
+  }) =>
+      Score(Entity.Self(), score, addNew: addNew, type: type);
+
+  /// same as Score() but with a predefined entity(Entity.Selected(),)
+  /// ```dart
+  /// Score.fromSelected('objective').set(3)
+  /// ⇒ scoreboard players set @s objective 3
+  /// ```
+  factory Score.Self(
+    String score, {
+    bool addNew = true,
+    String type = 'dummy',
+  }) =>
+      Score(Entity.Self(), score, addNew: addNew, type: type);
 
   /// Do you need constant values with scores? objD got you covered with `Score.con`:
   ///
@@ -96,33 +481,12 @@ class Score extends ScoreOperation {
   /// Score.con(5)
   /// ⇒ scoreboard players set #5 objd_consts 5
   /// ```
-  Score.con(
+  static ConstScore con(
     int number, {
     bool addNew = true,
-    this.type = 'dummy',
-  })  : score = 'objd_consts',
-        entity = Entity.PlayerName(
-          '#$number',
-        ) {
-    if (Scoreboard.prefix != null && !score.contains(Scoreboard.prefix!)) {
-      score = Scoreboard.prefix! + score;
-    }
-
-    if (addNew) {
-      _commands.add(
-        Scoreboard(score, type: type),
-      );
-    }
-    _commands.add(
-      set(number),
-    );
-  }
-
-  String _getESStr({Entity? entity, String? score}) {
-    entity ??= this.entity;
-    score ??= this.score;
-    return '$entity $score';
-  }
+    String type = 'dummy',
+  }) =>
+      ConstScore(number, addNew: addNew, type: type);
 
   String toString({Entity? entity, String? score}) {
     entity ??= this.entity;
@@ -130,120 +494,31 @@ class Score extends ScoreOperation {
     return '$entity $score';
   }
 
-  Score addCommandRet(Widget command) {
-    var commands = List<Widget>.from(_commands);
-    commands.add(command);
-    return Score(entity, score, addNew: false, commands: commands, type: type);
-  }
-
-  /// add
-  Score operator +(dynamic other) {
-    if (other is int) return add(other);
-    if (other is Score) return addScore(other);
-    throw ('Please use either a Score or an Int in the operator +');
-  }
-
-  /// subtract
-  Score operator -(dynamic other) {
-    if (other is int) return subtract(other);
-    if (other is Score) return subtractScore(other);
-    throw ('Please use either a Score or an Int in the operator -');
-  }
-
-  /// modulo by
-  Score operator %(dynamic other) {
-    if (other is int) {
-      return modulo(
-        Score.con(other),
-      );
-    }
-    if (other is Score) return modulo(other);
-    throw ('Please use either a Score or an Int in the operator %');
-  }
-
-  /// divide by
-  Score operator /(dynamic other) {
-    if (other is int) {
-      return divideByScore(
-        Score.con(other),
-      );
-    }
-    if (other is Score) return divideByScore(other);
-    throw ('Please use either a Score or an Int in the operator /');
-  }
-
-  /// multiply by
-  Score operator *(dynamic other) {
-    if (other is int) {
-      return multiplyByScore(
-        Score.con(other),
-      );
-    }
-    if (other is Score) return multiplyByScore(other);
-    throw ('Please use either a Score or an Int in the operator /');
-  }
-
-  /// greater than
-  Score operator >(dynamic other) {
-    if (other is int) {
-      return matchesRange(
-        Range.from(other + 1),
-      );
-    }
-    if (other is Score) return isBigger(other);
-    throw ('Please use either a Score or an Int in the operator >');
-  }
-
-  /// less than
-  Score operator <(dynamic other) {
-    if (other is int) {
-      return matchesRange(
-        Range.to(other + -1),
-      );
-    }
-    if (other is Score) return isSmaller(other);
-    throw ('Please use either a Score or an Int in the operator >');
-  }
-
-  /// bigger or equal
-  Score operator >=(dynamic other) {
-    if (other is int) {
-      return matchesRange(
-        Range.from(other),
-      );
-    }
-    if (other is Score) return isBiggerOrEqual(other);
-    throw ('Please use either a Score or an Int in the operator >=');
-  }
-
-  /// less or equal
-  Score operator <=(dynamic other) {
-    if (other is int) {
-      return matchesRange(
-        Range.to(other),
-      );
-    }
-    if (other is Score) return isSmallerOrEqual(other);
-    throw ('Please use either a Score or an Int in the operator <=');
-  }
-
-  /// matches
-  Score operator &(dynamic other) {
-    if (other is int) return matches(other);
-    if (other is Range) return matchesRange(other);
-    if (other is Score) return isEqual(other);
-    throw ('Please use either a Score, Range or an Int in the operator &');
+  (Score, List<ElementaryScoreOperation>) copy({
+    Score? out,
+    ScoreBuilder? builder,
+    bool compact = false,
+  }) {
+    print("Score!");
+    if (compact && out == null) return (this, []);
+    if (out != null) return (out, [AssignScoreOperation(out, this)]);
+    return super.copy(out: out, builder: builder, compact: false);
   }
 
   /// assign value(int, Score, Data or Condition)
-  Widget setTo(dynamic other) {
+  ScoreOperation setTo(dynamic other) {
+    if (this is! ScoreStoreable) {
+      throw Exception('$other can not be assigned to left Hand Side $this');
+    }
+
     if (other is int) return set(other);
     if (other is Score) return setEqual(other);
-    if (other is Data) return setToData(other);
-    if (other is Condition) return setToCondition(other);
-    if (other is Command) return setToResult(other);
-    if (other is File) return setToFunction(other);
-    if (other is Widget) return setToWidget(other);
+
+    ///if (other is Data) return setToData(other);
+    // if (other is Condition) return setToCondition(other);
+    // if (other is Command) return setToResult(other);
+    // if (other is File) return setToFunction(other);
+    // if (other is Widget) return setToWidget(other);
     throw ('Please use either a Score, Data, Condition, Command or an Int in the operator >>');
   }
 
@@ -251,176 +526,31 @@ class Score extends ScoreOperation {
   Widget operator <<(dynamic other) => setTo(other);
 
   /// sets the score to a given value of int
-  Score set(int val) {
-    return addCommandRet(
-      Command(
-        'scoreboard players set ${_getESStr()} $val',
-      ),
-    );
+  BinaryScoreOperation set(int val) {
+    if (this is! ScoreStoreable) {
+      throw Exception('$val can not be assigned to left Hand Side $this');
+    }
+
+    return BinaryScoreOperation(this, ScoreOperator.Assign, Score.con(val));
   }
 
-  /// resets the value of a score
-  Score reset() {
-    return addCommandRet(
-      Command(
-        'scoreboard players reset ${_getESStr()}',
-      ),
-    );
-  }
+  ResetScoreOperation reset() => ResetScoreOperation(this);
 
-  /// adds a value to the score
-  Score add([int val = 1]) {
-    return addCommandRet(
-      Command(
-        'scoreboard players add ${_getESStr()} $val',
-      ),
-    );
-  }
-
-  /// subtracts a value from the score
-  Score subtract([int val = 1]) {
-    return addCommandRet(
-      Command(
-        'scoreboard players remove ${_getESStr()} $val',
-      ),
-    );
-  }
-
-  /// gets the value of the score to work with it further
-  Score get() {
-    return addCommandRet(
-      Command(
-        'scoreboard players get ${_getESStr()}',
-      ),
-    );
-  }
-
-  // all operations
   /// sets this score equal to another
-  Score setEqual(Score score) {
-    return addCommandRet(
-      Command(
-        'scoreboard players operation ${isEqual(score).getString()}',
-      ),
-    );
-  }
+  BinaryScoreOperation setEqual(ScoreOperation score) =>
+      BinaryScoreOperation(this, ScoreOperator.Assign, score);
 
   /// swaps two scores
-  Score swapWith(Score score) {
-    return addCommandRet(
-      Command(
-        'scoreboard players operation ${_getESStr()} >< ${_getESStr(entity: score.entity, score: score.score)}',
-      ),
-    );
-  }
+  BinaryScoreOperation swapWith(ScoreOperation score) =>
+      BinaryScoreOperation(this, ScoreOperator.Swap, score);
 
   /// compares two scores and sets the smallest to this one
-  Score setToSmallest(Score score) {
-    return addCommandRet(
-      Command(
-        'scoreboard players operation ${isSmaller(score).getString()}',
-      ),
-    );
-  }
+  BinaryScoreOperation setToSmallest(ScoreOperation score) =>
+      BinaryScoreOperation(this, ScoreOperator.Min, score);
 
   /// compares two scores and sets the biggest to this one
-  Score setToBiggest(Score score) {
-    return addCommandRet(
-      Command(
-        'scoreboard players operation ${isBigger(score).getString()}',
-      ),
-    );
-  }
-
-  /// adds another score to this one
-  Score addScore(Score score) {
-    return addCommandRet(
-      Command(
-        'scoreboard players operation ${_getESStr()} += ${_getESStr(entity: score.entity, score: score.score)}',
-      ),
-    );
-  }
-
-  /// subtracts another score from this one
-  Score subtractScore(Score score) {
-    return addCommandRet(
-      Command(
-        'scoreboard players operation ${_getESStr()} -= ${_getESStr(entity: score.entity, score: score.score)}',
-      ),
-    );
-  }
-
-  /// sets this score to the result of the multiplication
-  Score multiplyByScore(Score score) {
-    return addCommandRet(
-      Command(
-        'scoreboard players operation ${_getESStr()} *= ${_getESStr(entity: score.entity, score: score.score)}',
-      ),
-    );
-  }
-
-  /// sets this score to the result of the division
-  Score divideByScore(Score score) {
-    return addCommandRet(
-      Command(
-        'scoreboard players operation ${_getESStr()} /= ${_getESStr(entity: score.entity, score: score.score)}',
-      ),
-    );
-  }
-
-  /// sets this score to the remainder of the division
-  Score modulo(Score score) {
-    return addCommandRet(
-      Command(
-        'scoreboard players operation ${_getESStr()} %= ${_getESStr(entity: score.entity, score: score.score)}',
-      ),
-    );
-  }
-
-  /// sets the score to an nbt value
-  Score setToData(Data data) {
-    if (!data.isGetting) {
-      throw ('Please set a score to Data.get and not Data.${data.subcommand}');
-    }
-    return addCommandRet(
-      Builder(
-        (c) => Command(
-          'execute store result score ${_getESStr()} run data get ${data.getTarget(c)} ${data.path} ${data.scale ?? 1}',
-        ),
-      ),
-    );
-  }
-
-  /// set to functions return value(or number of commands)
-  Group setToFunction(File file) => setToWidget(file.run(create: true));
-
-  /// sets the score to the success of the given Command
-  Score setToResult(Command commmand, {bool useSuccess = false}) {
-    return addCommandRet(
-      Command(
-        'execute store ${useSuccess ? 'success' : 'result'} score ${_getESStr()} run $commmand',
-      ),
-    );
-  }
-
-  /// sets the score to the result of the given Widget
-  /// JUST one Command should be the input
-  Group setToWidget(Widget widget, {bool useSuccess = false}) {
-    return Group(
-      prefix:
-          'execute store ${useSuccess ? 'success' : 'result'} score ${_getESStr()} run',
-      children: [widget],
-    );
-  }
-
-  /// sets the score to the success of the given condition result
-  Score setToCondition(Condition cond, {bool useSuccess = false}) {
-    return addCommandRet(
-      Command(
-        'execute store ${useSuccess ? 'success' : 'result'} score ${_getESStr()} ${Condition.getPrefixes(cond.getList())[0]}',
-      ),
-    );
-  }
+  BinaryScoreOperation setToBiggest(ScoreOperation score) =>
+      BinaryScoreOperation(this, ScoreOperator.Max, score);
 
   /// finds the smallest value in a list of scores
   Widget findSmallest(List<Score> scores, {int? min}) {
@@ -458,63 +588,17 @@ class Score extends ScoreOperation {
         });
   }
 
-  /// tests
-
-  Score isEqual(Score score) {
-    return Score.str(
-      '${_getESStr()} = ${_getESStr(entity: score.entity, score: score.score)}',
-    );
-  }
-
-  Score isSmaller(Score score) {
-    return Score.str(
-      '${_getESStr()} < ${_getESStr(entity: score.entity, score: score.score)}',
-    );
-  }
-
-  Score isSmallerOrEqual(Score score) {
-    return Score.str(
-      '${_getESStr()} <= ${_getESStr(entity: score.entity, score: score.score)}',
-    );
-  }
-
-  Score isBiggerOrEqual(Score score) {
-    return Score.str(
-      '${_getESStr()} >= ${_getESStr(entity: score.entity, score: score.score)}',
-    );
-  }
-
-  Score isBigger(Score score) {
-    return Score.str(
-      '${_getESStr()} > ${_getESStr(entity: score.entity, score: score.score)}',
-    );
-  }
-
-  String _match = '0';
-  String getMatch() => _match;
-  Score matches(int value) {
-    _match = value.toString();
-    return Score.str('${_getESStr()} matches $_match',
-        score: score, match: _match);
-  }
-
-  Score matchesRange(Range range) {
-    _match = range.toString();
-    return Score.str('${_getESStr()} matches $_match',
-        score: score, match: _match);
-  }
-
   @override
   Widget generate(Context context) {
-    return For.of(_commands);
+    return addNew ? Scoreboard.add(score, type: type) : Comment.Null();
   }
 
   @override
-  Map toMap() {
-    return {'Score': For.of(_commands).toMap()};
+  String get_assignable_left() {
+    // TODO: implement get_assignable_left
+    throw UnimplementedError();
   }
 
-  String getString() {
-    return _strGen;
-  }
+  @override
+  String get_assignable_right() => 'scoreboard players get $this';
 }

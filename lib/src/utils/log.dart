@@ -1,6 +1,6 @@
+import 'package:objd/src/basic/score/score.dart';
 import 'package:objd/src/basic/types/entity.dart';
 import 'package:objd/src/basic/rest_action.dart';
-import 'package:objd/src/basic/score.dart';
 import 'package:objd/src/basic/text_components.dart';
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/build/context.dart';
