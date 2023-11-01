@@ -8,5 +8,5 @@ void main(List<String> args) {
   print(t);
 
   final (_, ops) = t.copy();
-  print(ops.join('\n\n'));
+  print(getCommands(For.of(ops)).join('\n'));
 }

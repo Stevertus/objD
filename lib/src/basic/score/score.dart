@@ -12,17 +12,20 @@ import 'package:objd/src/basic/types/entity.dart';
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/build/context.dart';
 
-abstract interface class ScoreAssignable {
+abstract interface class ScoreStoreable {
   // block, bossbar, entity, score, storage
   String get_assignable_right();
 }
 
-abstract interface class ScoreStoreable extends ScoreAssignable {
+abstract interface class ScoreAssignable extends ScoreStoreable {
   // block, bossbar, entity, score, storage
   String get_assignable_left();
+
+  Widget operator >>(dynamic other);
+  Widget operator <<(dynamic other);
 }
 
-sealed class ScoreOperation extends Widget implements ScoreAssignable {
+sealed class ScoreOperation extends Widget implements ScoreStoreable {
   /// add
   BinaryScoreOperation operator +(dynamic other) {
     if (other is int) return add(other);
@@ -301,8 +304,8 @@ final class ResetScoreOperation extends ElementaryScoreOperation {
 }
 
 final class StoreScoreOperation extends ElementaryScoreOperation {
-  final ScoreStoreable left;
-  final ScoreAssignable right;
+  final ScoreAssignable left;
+  final ScoreStoreable right;
 
   StoreScoreOperation(this.left, this.right);
 
@@ -330,6 +333,9 @@ final class ElementaryBinaryScoreOperation extends ElementaryScoreOperation {
     required this.operation,
   });
 
+  ElementaryBinaryScoreOperation.assign(this.left, this.right)
+      : operation = ScoreOperator.Assign;
+
   @override
   Widget generate(Context context) =>
       Command('scoreboard players operation $left ${operation.op} $right');
@@ -338,24 +344,24 @@ final class ElementaryBinaryScoreOperation extends ElementaryScoreOperation {
   String toString() => '$left ${operation.op} $right';
 }
 
-final class AssignScoreOperation extends ElementaryScoreOperation {
-  final Score left;
-  final ScoreAssignable right;
+// final class AssignScoreOperation extends ElementaryScoreOperation {
+//   final Score left;
+//   final ScoreAssignable right;
 
-  AssignScoreOperation(this.left, this.right);
+//   AssignScoreOperation(this.left, this.right);
 
-  @override
-  Widget generate(Context context) => Command(
-        'scoreboard players operation $left = ${right.get_assignable_right()}',
-      );
+//   @override
+//   Widget generate(Context context) => Command(
+//         'scoreboard players operation $left = ${right.get_assignable_right()}',
+//       );
 
-  @override
-  String toString() => [
-        '  | $left',
-        '<<',
-        '  | ${right.get_assignable_right()}',
-      ].join('\n');
-}
+//   @override
+//   String toString() => [
+//         '  | $left',
+//         '<<',
+//         '  | ${right.get_assignable_right()}',
+//       ].join('\n');
+// }
 
 class BinaryScoreOperation extends ScoreOperation {
   final ScoreOperation left;
@@ -364,6 +370,9 @@ class BinaryScoreOperation extends ScoreOperation {
   final ScoreOperator operation;
 
   BinaryScoreOperation(this.left, this.operation, this.right);
+
+  BinaryScoreOperation.assign(this.left, this.right)
+      : this.operation = ScoreOperator.Assign;
 
   @override
   generate(Context context) {
@@ -413,7 +422,7 @@ class ConstScore extends Score {
         );
 }
 
-class Score extends ElementaryScoreOperation implements ScoreStoreable {
+class Score extends ElementaryScoreOperation implements ScoreAssignable {
   final Entity entity;
   String score;
   final String type;
@@ -499,18 +508,14 @@ class Score extends ElementaryScoreOperation implements ScoreStoreable {
     ScoreBuilder? builder,
     bool compact = false,
   }) {
-    print("Score!");
     if (compact && out == null) return (this, []);
-    if (out != null) return (out, [AssignScoreOperation(out, this)]);
+    if (out != null)
+      return (out, [ElementaryBinaryScoreOperation.assign(out, this)]);
     return super.copy(out: out, builder: builder, compact: false);
   }
 
   /// assign value(int, Score, Data or Condition)
   ScoreOperation setTo(dynamic other) {
-    if (this is! ScoreStoreable) {
-      throw Exception('$other can not be assigned to left Hand Side $this');
-    }
-
     if (other is int) return set(other);
     if (other is Score) return setEqual(other);
 
@@ -527,7 +532,7 @@ class Score extends ElementaryScoreOperation implements ScoreStoreable {
 
   /// sets the score to a given value of int
   BinaryScoreOperation set(int val) {
-    if (this is! ScoreStoreable) {
+    if (this is! ScoreAssignable) {
       throw Exception('$val can not be assigned to left Hand Side $this');
     }
 
@@ -590,14 +595,11 @@ class Score extends ElementaryScoreOperation implements ScoreStoreable {
 
   @override
   Widget generate(Context context) {
-    return addNew ? Scoreboard.add(score, type: type) : Comment.Null();
+    return addNew ? Scoreboard(score, type: type) : Comment.Null();
   }
 
   @override
-  String get_assignable_left() {
-    // TODO: implement get_assignable_left
-    throw UnimplementedError();
-  }
+  String get_assignable_left() => 'score $this';
 
   @override
   String get_assignable_right() => 'scoreboard players get $this';

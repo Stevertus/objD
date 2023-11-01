@@ -10,6 +10,9 @@ import 'package:objd/src/basic/extend.dart';
 import 'package:objd/src/build/build.dart';
 import 'package:objd/src/wrappers/comment.dart';
 
+const _SCORE_PLAYERNAME_ALPHABET =
+    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_';
+
 class Scoreboard extends RestActionAble {
   /// Often you find yourself giving all scoreboards a prefix especially for your project. This can get very repetitive and annoying, so objD has this prefix built in.
 
@@ -17,14 +20,16 @@ class Scoreboard extends RestActionAble {
 
   static final Set _tempScores = {};
 
-  static String generateNewTempPlayerName({int len = 10}) {
+  static String generateNewTempPlayerName({int len = 8}) {
     var r = Random();
     String name = '';
 
     do {
-      name = String.fromCharCodes(
-        List.generate(len, (index) => r.nextInt(33) + 89),
-      );
+      name = List.generate(
+        len,
+        (index) => _SCORE_PLAYERNAME_ALPHABET[
+            r.nextInt(_SCORE_PLAYERNAME_ALPHABET.length)],
+      ).join();
     } while (_tempScores.contains(name));
 
     _tempScores.add(name);

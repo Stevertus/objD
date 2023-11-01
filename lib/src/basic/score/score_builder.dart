@@ -11,15 +11,15 @@ class ScoreBuilder {
         compileBinary(left, operation, right, out: out),
       IncrementScoreOperation(score: final score) => [
           input,
-          if (out != null) AssignScoreOperation(out, score),
+          if (out != null) ElementaryBinaryScoreOperation.assign(out, score),
         ],
       SetScoreOperation(score: final score) => [
           input,
-          if (out != null) AssignScoreOperation(out, score),
+          if (out != null) ElementaryBinaryScoreOperation.assign(out, score),
         ],
       ResetScoreOperation(score: final score) => [
           input,
-          if (out != null) AssignScoreOperation(out, score),
+          if (out != null) ElementaryBinaryScoreOperation.assign(out, score),
         ],
       StoreScoreOperation(left: final left) => [
           input,
@@ -27,15 +27,11 @@ class ScoreBuilder {
         ],
       ElementaryBinaryScoreOperation(left: final left) => [
           input,
-          if (out != null) AssignScoreOperation(out, left)
-        ],
-      AssignScoreOperation(left: final left) => [
-          input,
-          if (out != null) AssignScoreOperation(out, left),
+          if (out != null) ElementaryBinaryScoreOperation.assign(out, left)
         ],
       Score score => [
           score,
-          if (out != null) AssignScoreOperation(out, score),
+          if (out != null) ElementaryBinaryScoreOperation.assign(out, score),
         ],
     };
   }
@@ -44,7 +40,7 @@ class ScoreBuilder {
       ScoreOperation left, ScoreOperator operator, ScoreOperation right,
       {Score? out}) {
     if (operator == ScoreOperator.Assign) {
-      assert(left is ScoreStoreable, "Tried to assign $right to $left");
+      assert(left is ScoreAssignable, "Tried to assign $right to $left");
       final (tmpRight, prevactions) = right.copy(compact: true);
 
       if (left is Score) {
@@ -52,11 +48,14 @@ class ScoreBuilder {
           return [SetScoreOperation(left, right.value)];
         }
 
-        return [...prevactions, AssignScoreOperation(left, tmpRight)];
+        return [
+          ...prevactions,
+          ElementaryBinaryScoreOperation.assign(left, tmpRight)
+        ];
       }
       return [
         ...prevactions,
-        StoreScoreOperation(left as ScoreStoreable, tmpRight)
+        StoreScoreOperation(left as ScoreAssignable, tmpRight)
       ];
     }
 
@@ -66,6 +65,19 @@ class ScoreBuilder {
         out ??= left;
       } else {
         (out, leftActions) = left.copy();
+      }
+    }
+
+    if (right is ConstScore) {
+      switch (operator) {
+        case ScoreOperator.Assign:
+          return [...leftActions, SetScoreOperation(out, right.value)];
+
+        case ScoreOperator.Addition:
+          return [...leftActions, IncrementScoreOperation(out, right.value)];
+        case ScoreOperator.Subtraction:
+          return [...leftActions, IncrementScoreOperation(out, -right.value)];
+        default:
       }
     }
 
