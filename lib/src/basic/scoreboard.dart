@@ -20,7 +20,10 @@ class Scoreboard extends RestActionAble {
 
   static final Set _tempScores = {};
 
-  static String generateNewTempPlayerName({int len = 8}) {
+  static String generateNewTempPlayerName({
+    int len = 8,
+    String alphabet = _SCORE_PLAYERNAME_ALPHABET,
+  }) {
     var r = Random();
     String name = '';
 

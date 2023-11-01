@@ -23,7 +23,7 @@ class ScoreBuilder {
         ],
       StoreScoreOperation(left: final left) => [
           input,
-          if (out != null) StoreScoreOperation(out, left)
+          if (out != null) StoreScoreOperation(out, left.toStorable())
         ],
       ElementaryBinaryScoreOperation(left: final left) => [
           input,

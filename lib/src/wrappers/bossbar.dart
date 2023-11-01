@@ -4,7 +4,7 @@ import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/build/context.dart';
 import 'package:objd/src/wrappers/execute.dart';
 
-class Bossbar extends RestActionAble {
+class Bossbar extends RestActionAble with ScoreAssignable, ScoreStoreable {
   final BossbarType type;
   final String id;
 
@@ -16,6 +16,14 @@ class Bossbar extends RestActionAble {
   Bossbar(this.id, {this.name, this.type = BossbarType.add}) {
     name ??= id;
   }
+  Bossbar._(
+    this.id, {
+    this.name,
+    this.type = BossbarType.add,
+    this.nameTexts,
+    this.option,
+    this.modifiers = const {},
+  });
 
   Bossbar remove() => copyWith(type: BossbarType.remove);
 
@@ -110,14 +118,42 @@ class Bossbar extends RestActionAble {
 
   Bossbar copyWith({
     BossbarType? type,
+    BossbarOption? option,
     String? id,
   }) {
-    return Bossbar(
+    return Bossbar._(
       id ?? this.id,
       name: name,
       type: type ?? this.type,
+      option: option,
     );
   }
+
+  Widget setTo(dynamic other, {BossbarOption option = BossbarOption.value}) {
+    print(other);
+    if (other is int) return set(value: other);
+    if (other is ScoreStoreable) {
+      return StoreScoreOperation(this.copyWith(option: option), other);
+    }
+
+    throw UnimplementedError("setTo is not implemented for $other");
+  }
+
+  @override
+  String get_assignable_left() =>
+      'bossbar $id ${(option ?? BossbarOption.value).name}';
+
+  @override
+  String get_assignable_right() {
+    assert(
+      type == BossbarType.get,
+      "You can only assign Bossbar.get to something else",
+    );
+    return 'bossbar get $id ${option!.name}';
+  }
+
+  @override
+  ScoreStoreable toStorable() => get(BossbarOption.value);
 }
 
 enum BossbarOption { max, players, value, visible }

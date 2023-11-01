@@ -12,118 +12,123 @@ import 'package:objd/src/basic/types/entity.dart';
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/build/context.dart';
 
-abstract interface class ScoreStoreable {
+abstract mixin class ScoreStoreable {
   // block, bossbar, entity, score, storage
   String get_assignable_right();
+
+  ScoreOperation asScore() => StoreScoreOperation(Score.tmp(), this);
+
+  BinaryScoreOperation operator +(dynamic other) => asScore() + other;
+  BinaryScoreOperation operator -(dynamic other) => asScore() - other;
+  BinaryScoreOperation operator %(dynamic other) => asScore() % other;
+  BinaryScoreOperation operator /(dynamic other) => asScore() / other;
+  BinaryScoreOperation operator *(dynamic other) => asScore() * other;
+  ScoreCondition operator >(dynamic other) => asScore() > other;
+  ScoreCondition operator >=(dynamic other) => asScore() >= other;
+  ScoreCondition operator <=(dynamic other) => asScore() <= other;
+  ScoreCondition operator <(dynamic other) => asScore() < other;
+  ScoreCondition operator &(dynamic other) => asScore() & other;
 }
 
-abstract interface class ScoreAssignable extends ScoreStoreable {
+abstract mixin class ScoreAssignable {
   // block, bossbar, entity, score, storage
   String get_assignable_left();
 
-  Widget operator >>(dynamic other);
-  Widget operator <<(dynamic other);
+  ScoreStoreable toStorable();
+
+  Widget setTo(dynamic other);
+  Widget operator >>(dynamic other) => setTo(other);
+  Widget operator <<(dynamic other) => setTo(other);
 }
 
 sealed class ScoreOperation extends Widget implements ScoreStoreable {
   /// add
-  BinaryScoreOperation operator +(dynamic other) {
-    if (other is int) return add(other);
-    if (other is ScoreOperation) return addScore(other);
-    throw ('Please use either a Score or an Int in the operator +');
-  }
+  BinaryScoreOperation operator +(dynamic other) => switch (other) {
+        int val => add(val),
+        ScoreOperation s => addScore(s),
+        ScoreStoreable s => addScore(s.asScore()),
+        _ => throw ('Please use either a Score or an Int in the operator +')
+      };
 
   /// subtract
-  BinaryScoreOperation operator -(dynamic other) {
-    if (other is int) return subtract(other);
-    if (other is ScoreOperation) return subtractScore(other);
-    throw ('Please use either a Score or an Int in the operator -');
-  }
+  BinaryScoreOperation operator -(dynamic other) => switch (other) {
+        int val => subtract(val),
+        ScoreOperation s => subtractScore(s),
+        ScoreStoreable s => subtractScore(s.asScore()),
+        _ => throw ('Please use either a Score or an Int in the operator -')
+      };
 
   /// modulo by
-  BinaryScoreOperation operator %(dynamic other) {
-    if (other is int) {
-      return modulo(
-        Score.con(other),
-      );
-    }
-    if (other is ScoreOperation) return modulo(other);
-    throw ('Please use either a Score or an Int in the operator %');
-  }
+  BinaryScoreOperation operator %(dynamic other) => switch (other) {
+        int val => modulo(Score.con(val)),
+        ScoreOperation s => modulo(s),
+        ScoreStoreable s => modulo(s.asScore()),
+        _ => throw ('Please use either a Score or an Int in the operator %')
+      };
 
   /// divide by
-  BinaryScoreOperation operator /(dynamic other) {
-    if (other is int) {
-      return divideByScore(
-        Score.con(other),
-      );
-    }
-    if (other is ScoreOperation) return divideByScore(other);
-    throw ('Please use either a Score or an Int in the operator /');
-  }
+  BinaryScoreOperation operator /(dynamic other) => switch (other) {
+        int val => divideByScore(Score.con(val)),
+        ScoreOperation s => divideByScore(s),
+        ScoreStoreable s => divideByScore(s.asScore()),
+        _ => throw ('Please use either a Score or an Int in the operator /')
+      };
 
   /// multiply by
-  BinaryScoreOperation operator *(dynamic other) {
-    if (other is int) {
-      return multiplyByScore(
-        Score.con(other),
-      );
-    }
-    if (other is ScoreOperation) return multiplyByScore(other);
-    throw ('Please use either a Score or an Int in the operator /');
-  }
+  BinaryScoreOperation operator *(dynamic other) => switch (other) {
+        int val => multiplyByScore(Score.con(val)),
+        ScoreOperation s => multiplyByScore(s),
+        ScoreStoreable s => multiplyByScore(s.asScore()),
+        _ => throw ('Please use either a Score or an Int in the operator *')
+      };
 
   /// greater than
-  ScoreCondition operator >(dynamic other) {
-    if (other is int) {
-      return matchesRange(
-        Range.from(other + 1),
-      );
-    }
-    if (other is ScoreOperation) return isBigger(other);
-    throw ('Please use either a Score or an Int in the operator >');
-  }
+  ScoreCondition operator >(dynamic other) => switch (other) {
+        int val => matchesRange(Range.from(val + 1)),
+        ScoreOperation s => isBigger(s),
+        ScoreStoreable s => isBigger(s.asScore()),
+        _ => throw ('Please use either a Score or an Int in the operator >')
+      };
 
   /// less than
-  ScoreCondition operator <(dynamic other) {
-    if (other is int) {
-      return matchesRange(
-        Range.to(other + -1),
-      );
-    }
-    if (other is ScoreOperation) return isSmaller(other);
-    throw ('Please use either a Score or an Int in the operator >');
-  }
+  ScoreCondition operator <(dynamic other) => switch (other) {
+        int val => matchesRange(Range.to(val - 1)),
+        ScoreOperation s => isSmaller(s),
+        ScoreStoreable s => isSmaller(s.asScore()),
+        _ => throw ('Please use either a Score or an Int in the operator <')
+      };
 
   /// bigger or equal
-  ScoreCondition operator >=(dynamic other) {
-    if (other is int) {
-      return matchesRange(
-        Range.from(other),
-      );
-    }
-    if (other is ScoreOperation) return isBiggerOrEqual(other);
-    throw ('Please use either a Score or an Int in the operator >=');
-  }
+  ScoreCondition operator >=(dynamic other) => switch (other) {
+        int val => matchesRange(Range.from(val)),
+        ScoreOperation s => isBiggerOrEqual(s),
+        ScoreStoreable s => isBiggerOrEqual(
+            s.asScore(),
+          ),
+        _ => throw ('Please use either a Score or an Int in the operator >=')
+      };
 
   /// less or equal
-  ScoreCondition operator <=(dynamic other) {
-    if (other is int) {
-      return matchesRange(
-        Range.to(other),
-      );
-    }
-    if (other is ScoreOperation) return isSmallerOrEqual(other);
-    throw ('Please use either a Score or an Int in the operator <=');
-  }
+  ScoreCondition operator <=(dynamic other) => switch (other) {
+        int val => matchesRange(Range.to(val)),
+        ScoreOperation s => isSmallerOrEqual(s),
+        ScoreStoreable s => isSmallerOrEqual(
+            s.asScore(),
+          ),
+        _ => throw ('Please use either a Score or an Int in the operator <=')
+      };
 
   /// matches
-  ScoreCondition operator &(dynamic other) {
-    if (other is int) return matches(other);
-    if (other is Range) return matchesRange(other);
-    if (other is ScoreOperation) return isEqual(other);
-    throw ('Please use either a Score, Range or an Int in the operator &');
-  }
+  ScoreCondition operator &(dynamic other) => switch (other) {
+        int val => matches(val),
+        Range r => matchesRange(r),
+        ScoreOperation s => isEqual(s),
+        ScoreStoreable s => isEqual(
+            s.asScore(),
+          ),
+        _ =>
+          throw ('Please use either a Score, Range or an Int in the operator &')
+      };
 
   /// adds a value to the score
   BinaryScoreOperation add([int val = 1]) => BinaryScoreOperation(
@@ -243,20 +248,20 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
     ScoreBuilder? builder,
     bool compact = false,
   }) {
-    out ??= Score(
-      Entity.PlayerName('#${Scoreboard.generateNewTempPlayerName()}'),
-      'objd_temp',
-    );
+    out ??= Score.tmp();
 
     builder ??= ScoreBuilder();
 
-    return (out, builder.compile(this, out: out));
+    return (out, [out, ...builder.compile(this, out: out)]);
   }
 
   @override
   String get_assignable_right() {
     throw UnimplementedError();
   }
+
+  @override
+  ScoreOperation asScore() => this;
 }
 
 sealed class ElementaryScoreOperation extends ScoreOperation {}
@@ -306,19 +311,32 @@ final class ResetScoreOperation extends ElementaryScoreOperation {
 final class StoreScoreOperation extends ElementaryScoreOperation {
   final ScoreAssignable left;
   final ScoreStoreable right;
+  final bool storeResult;
 
-  StoreScoreOperation(this.left, this.right);
+  StoreScoreOperation(this.left, this.right, {this.storeResult = true});
 
   @override
-  generate(Context context) => Command('execute store result ' // TODO:
+  generate(Context context) => Command(
+      'execute store ${storeResult ? "result" : "success"} ${left.get_assignable_left()} run ${right.get_assignable_right()}' // TODO: right operation?
       );
 
   @override
   String toString() => [
-        '  | ${left.get_assignable_left()}',
+        '  | store ${left.get_assignable_left()}',
         '<<',
         '  | ${right.get_assignable_right()}',
       ].join('\n');
+
+  @override
+  (Score, List<ElementaryScoreOperation>) copy({
+    Score? out,
+    ScoreBuilder? builder,
+    bool compact = false,
+  }) =>
+      switch ((left, compact)) {
+        (Score s, true) => s.copy(out: out, builder: builder, compact: compact),
+        _ => super.copy(out: out, builder: builder, compact: compact)
+      };
 }
 
 final class ElementaryBinaryScoreOperation extends ElementaryScoreOperation {
@@ -422,7 +440,8 @@ class ConstScore extends Score {
         );
 }
 
-class Score extends ElementaryScoreOperation implements ScoreAssignable {
+class Score extends ElementaryScoreOperation
+    with ScoreAssignable, ScoreStoreable {
   final Entity entity;
   String score;
   final String type;
@@ -497,6 +516,32 @@ class Score extends ElementaryScoreOperation implements ScoreAssignable {
   }) =>
       ConstScore(number, addNew: addNew, type: type);
 
+  factory Score.PlayerName(
+    String name,
+    String score, {
+    bool addNew = true,
+    String type = 'dummy',
+  }) =>
+      Score(
+        Entity.PlayerName(name),
+        score,
+        addNew: addNew,
+        type: type,
+      );
+
+  factory Score.tmp({
+    int len = 8,
+    String score = "objd_temp",
+    String alphabet =
+        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_',
+  }) =>
+      Score(
+        Entity.PlayerName(
+          '#${Scoreboard.generateNewTempPlayerName(len: len, alphabet: alphabet)}',
+        ),
+        score,
+      );
+
   String toString({Entity? entity, String? score}) {
     entity ??= this.entity;
     score ??= this.score;
@@ -509,9 +554,10 @@ class Score extends ElementaryScoreOperation implements ScoreAssignable {
     bool compact = false,
   }) {
     if (compact && out == null) return (this, []);
-    if (out != null)
-      return (out, [ElementaryBinaryScoreOperation.assign(out, this)]);
-    return super.copy(out: out, builder: builder, compact: false);
+    if (out != null) {
+      return (out, [out, ElementaryBinaryScoreOperation.assign(out, this)]);
+    }
+    return super.copy(out: out, builder: builder, compact: compact);
   }
 
   /// assign value(int, Score, Data or Condition)
@@ -603,4 +649,7 @@ class Score extends ElementaryScoreOperation implements ScoreAssignable {
 
   @override
   String get_assignable_right() => 'scoreboard players get $this';
+
+  @override
+  ScoreStoreable toStorable() => this;
 }
