@@ -88,9 +88,9 @@ class ScoreBuilder {
       ...leftActions,
       ...rightActions,
       ElementaryBinaryScoreOperation(
-        left: out,
-        right: tmpRight,
-        operation: operator,
+        out,
+        operator,
+        tmpRight,
       )
     ];
   }

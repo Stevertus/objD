@@ -16,18 +16,21 @@ abstract mixin class ScoreStoreable {
   // block, bossbar, entity, score, storage
   String get_assignable_right();
 
-  ScoreOperation asScore() => StoreScoreOperation(Score.tmp(), this);
+  ScoreOperation toScore({Score? out}) => StoreScoreOperation(
+        out ?? Score.tmp(),
+        this,
+      );
 
-  BinaryScoreOperation operator +(dynamic other) => asScore() + other;
-  BinaryScoreOperation operator -(dynamic other) => asScore() - other;
-  BinaryScoreOperation operator %(dynamic other) => asScore() % other;
-  BinaryScoreOperation operator /(dynamic other) => asScore() / other;
-  BinaryScoreOperation operator *(dynamic other) => asScore() * other;
-  ScoreCondition operator >(dynamic other) => asScore() > other;
-  ScoreCondition operator >=(dynamic other) => asScore() >= other;
-  ScoreCondition operator <=(dynamic other) => asScore() <= other;
-  ScoreCondition operator <(dynamic other) => asScore() < other;
-  ScoreCondition operator &(dynamic other) => asScore() & other;
+  BinaryScoreOperation operator +(dynamic other) => toScore() + other;
+  BinaryScoreOperation operator -(dynamic other) => toScore() - other;
+  BinaryScoreOperation operator %(dynamic other) => toScore() % other;
+  BinaryScoreOperation operator /(dynamic other) => toScore() / other;
+  BinaryScoreOperation operator *(dynamic other) => toScore() * other;
+  ScoreCondition operator >(dynamic other) => toScore() > other;
+  ScoreCondition operator >=(dynamic other) => toScore() >= other;
+  ScoreCondition operator <=(dynamic other) => toScore() <= other;
+  ScoreCondition operator <(dynamic other) => toScore() < other;
+  ScoreCondition operator &(dynamic other) => toScore() & other;
 }
 
 abstract mixin class ScoreAssignable {
@@ -43,10 +46,11 @@ abstract mixin class ScoreAssignable {
 
 sealed class ScoreOperation extends Widget implements ScoreStoreable {
   /// add
+  @override
   BinaryScoreOperation operator +(dynamic other) => switch (other) {
         int val => add(val),
         ScoreOperation s => addScore(s),
-        ScoreStoreable s => addScore(s.asScore()),
+        ScoreStoreable s => addScore(s.toScore()),
         _ => throw ('Please use either a Score or an Int in the operator +')
       };
 
@@ -54,7 +58,7 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
   BinaryScoreOperation operator -(dynamic other) => switch (other) {
         int val => subtract(val),
         ScoreOperation s => subtractScore(s),
-        ScoreStoreable s => subtractScore(s.asScore()),
+        ScoreStoreable s => subtractScore(s.toScore()),
         _ => throw ('Please use either a Score or an Int in the operator -')
       };
 
@@ -62,7 +66,7 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
   BinaryScoreOperation operator %(dynamic other) => switch (other) {
         int val => modulo(Score.con(val)),
         ScoreOperation s => modulo(s),
-        ScoreStoreable s => modulo(s.asScore()),
+        ScoreStoreable s => modulo(s.toScore()),
         _ => throw ('Please use either a Score or an Int in the operator %')
       };
 
@@ -70,7 +74,7 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
   BinaryScoreOperation operator /(dynamic other) => switch (other) {
         int val => divideByScore(Score.con(val)),
         ScoreOperation s => divideByScore(s),
-        ScoreStoreable s => divideByScore(s.asScore()),
+        ScoreStoreable s => divideByScore(s.toScore()),
         _ => throw ('Please use either a Score or an Int in the operator /')
       };
 
@@ -78,7 +82,7 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
   BinaryScoreOperation operator *(dynamic other) => switch (other) {
         int val => multiplyByScore(Score.con(val)),
         ScoreOperation s => multiplyByScore(s),
-        ScoreStoreable s => multiplyByScore(s.asScore()),
+        ScoreStoreable s => multiplyByScore(s.toScore()),
         _ => throw ('Please use either a Score or an Int in the operator *')
       };
 
@@ -86,7 +90,7 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
   ScoreCondition operator >(dynamic other) => switch (other) {
         int val => matchesRange(Range.from(val + 1)),
         ScoreOperation s => isBigger(s),
-        ScoreStoreable s => isBigger(s.asScore()),
+        ScoreStoreable s => isBigger(s.toScore()),
         _ => throw ('Please use either a Score or an Int in the operator >')
       };
 
@@ -94,7 +98,7 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
   ScoreCondition operator <(dynamic other) => switch (other) {
         int val => matchesRange(Range.to(val - 1)),
         ScoreOperation s => isSmaller(s),
-        ScoreStoreable s => isSmaller(s.asScore()),
+        ScoreStoreable s => isSmaller(s.toScore()),
         _ => throw ('Please use either a Score or an Int in the operator <')
       };
 
@@ -103,7 +107,7 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
         int val => matchesRange(Range.from(val)),
         ScoreOperation s => isBiggerOrEqual(s),
         ScoreStoreable s => isBiggerOrEqual(
-            s.asScore(),
+            s.toScore(),
           ),
         _ => throw ('Please use either a Score or an Int in the operator >=')
       };
@@ -113,7 +117,7 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
         int val => matchesRange(Range.to(val)),
         ScoreOperation s => isSmallerOrEqual(s),
         ScoreStoreable s => isSmallerOrEqual(
-            s.asScore(),
+            s.toScore(),
           ),
         _ => throw ('Please use either a Score or an Int in the operator <=')
       };
@@ -124,7 +128,7 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
         Range r => matchesRange(r),
         ScoreOperation s => isEqual(s),
         ScoreStoreable s => isEqual(
-            s.asScore(),
+            s.toScore(),
           ),
         _ =>
           throw ('Please use either a Score, Range or an Int in the operator &')
@@ -261,7 +265,8 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
   }
 
   @override
-  ScoreOperation asScore() => this;
+  ScoreOperation toScore({Score? out}) =>
+      out == null ? this : BinaryScoreOperation.assign(out, this);
 }
 
 sealed class ElementaryScoreOperation extends ScoreOperation {}
@@ -302,7 +307,10 @@ final class ResetScoreOperation extends ElementaryScoreOperation {
   ResetScoreOperation(this.score);
 
   @override
-  generate(Context context) => Command('scoreboard players reset $score');
+  generate(Context context) => For.of([
+        score,
+        Command('scoreboard players reset $score'),
+      ]);
 
   @override
   String toString() => 'reset $score';
@@ -345,11 +353,11 @@ final class ElementaryBinaryScoreOperation extends ElementaryScoreOperation {
 
   final ScoreOperator operation;
 
-  ElementaryBinaryScoreOperation({
-    required this.left,
-    required this.right,
-    required this.operation,
-  });
+  ElementaryBinaryScoreOperation(
+    this.left,
+    this.operation,
+    this.right,
+  );
 
   ElementaryBinaryScoreOperation.assign(this.left, this.right)
       : operation = ScoreOperator.Assign;
@@ -390,12 +398,41 @@ class BinaryScoreOperation extends ScoreOperation {
   BinaryScoreOperation(this.left, this.operation, this.right);
 
   BinaryScoreOperation.assign(this.left, this.right)
-      : this.operation = ScoreOperator.Assign;
+      : operation = ScoreOperator.Assign;
 
   @override
-  generate(Context context) {
-    // TODO: implement generate
-    throw UnimplementedError();
+  Widget generate(Context context) {
+    final ScoreBuilder builder = ScoreBuilder();
+
+    final (rScore, rActions) = right.copy(compact: true, builder: builder);
+
+    print(left);
+
+    if (left is Score) {
+      return For.of([
+        left,
+        ...rActions,
+        ...builder.compileBinary(left, operation, rScore),
+      ]);
+    }
+
+    if (left case StoreScoreOperation(right: ScoreAssignable store)) {
+      final (lScore, lActions) = left.copy(compact: true, builder: builder);
+      return For.of([
+        ...lActions,
+        ...rActions,
+        ...builder.compileBinary(lScore, operation, rScore),
+        store << lScore
+      ]);
+    }
+
+    final (lScore, lActions) = left.copy(builder: builder);
+
+    return For.of([
+      ...lActions,
+      ...rActions,
+      ...builder.compileBinary(lScore, operation, rScore),
+    ]);
   }
 
   @override
@@ -441,7 +478,7 @@ class ConstScore extends Score {
 }
 
 class Score extends ElementaryScoreOperation
-    with ScoreAssignable, ScoreStoreable {
+    implements ScoreAssignable, ScoreStoreable {
   final Entity entity;
   String score;
   final String type;
@@ -563,7 +600,7 @@ class Score extends ElementaryScoreOperation
   /// assign value(int, Score, Data or Condition)
   ScoreOperation setTo(dynamic other) {
     if (other is int) return set(other);
-    if (other is Score) return setEqual(other);
+    if (other is ScoreOperation) return setEqual(other);
 
     ///if (other is Data) return setToData(other);
     // if (other is Condition) return setToCondition(other);

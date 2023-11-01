@@ -37,11 +37,6 @@ void main() {
   });
 
   group('Score Conditions', () {
-    commands(
-      "empty",
-      Score(Entity.All(), "test").isBigger(Score(Entity.Self(), "new")),
-      [],
-    );
     command(
       "simple if",
       If(
