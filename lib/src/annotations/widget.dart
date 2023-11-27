@@ -6,7 +6,6 @@
 ///  Log('Hello $name $lastname!'),
 ///]);
 ///```
-
 // ignore: constant_identifier_names
 const Wdg = WidgetAnnotation();
 

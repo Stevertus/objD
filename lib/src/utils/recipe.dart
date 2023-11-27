@@ -262,7 +262,7 @@ class Recipe extends Widget {
 
     ingredients.forEach((k, item) {
       // If the item is not known
-      if (!items.containsValue(item)) {
+      if (!items.containsKey(item)) {
         // choose a new key from _CHARS
         items[item] = _CHARS[items.length];
       }
