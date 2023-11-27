@@ -25,11 +25,9 @@ jobs:
       - name: Lint Code
         run: dart analyze lib/
       - name: Run tests
-        run: dart run test --coverage="coverage"
-      - name: Convert coverage to ICOV
-        run: dart run coverage:format_coverage --packages=.dart_tool/package_config.json --lcov -i coverage/coverage.json -o coverage/coverage.lcov
+        run: dart run coverage:test_with_coverage
       - name: Upload coverage to Codecov  
         uses: codecov/codecov-action@v1.0.2
         with:
           token: ${{secrets.CODECOV_TOKEN}}
-          file: coverage/coverage.lcov
+          file: coverage/lcov.info
