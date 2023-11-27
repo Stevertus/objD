@@ -405,7 +405,7 @@ class Execute extends RestActionAble {
   /// just for internal use
   static Group internal_store_command(String type, Widget w, bool useSuccess) =>
       Group(
-        prefix: 'execute store ${useSuccess ? 'success ' : 'result '}$type run',
+        prefix: 'execute store ${useSuccess ? 'success' : 'result'} $type run',
         groupMin: 1000,
         children: [w],
       );

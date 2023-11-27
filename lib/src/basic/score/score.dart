@@ -12,9 +12,9 @@ import 'package:objd/src/basic/types/entity.dart';
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/build/context.dart';
 
-abstract mixin class ScoreStoreable {
+abstract mixin class ScoreStoreable implements Widget {
   // block, bossbar, entity, score, storage
-  String get_assignable_right();
+  Widget get_assignable_right(Context context) => generate(context);
 
   ScoreOperation toScore({Score? out}) => StoreScoreOperation(
         out ?? Score.tmp(),
@@ -47,6 +47,7 @@ abstract mixin class ScoreAssignable {
 sealed class ScoreOperation extends Widget implements ScoreStoreable {
   /// add
   @override
+  @override
   BinaryScoreOperation operator +(dynamic other) => switch (other) {
         int val => add(val),
         ScoreOperation s => addScore(s),
@@ -55,6 +56,7 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
       };
 
   /// subtract
+  @override
   BinaryScoreOperation operator -(dynamic other) => switch (other) {
         int val => subtract(val),
         ScoreOperation s => subtractScore(s),
@@ -63,6 +65,7 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
       };
 
   /// modulo by
+  @override
   BinaryScoreOperation operator %(dynamic other) => switch (other) {
         int val => modulo(Score.con(val)),
         ScoreOperation s => modulo(s),
@@ -71,6 +74,7 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
       };
 
   /// divide by
+  @override
   BinaryScoreOperation operator /(dynamic other) => switch (other) {
         int val => divideByScore(Score.con(val)),
         ScoreOperation s => divideByScore(s),
@@ -79,6 +83,7 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
       };
 
   /// multiply by
+  @override
   BinaryScoreOperation operator *(dynamic other) => switch (other) {
         int val => multiplyByScore(Score.con(val)),
         ScoreOperation s => multiplyByScore(s),
@@ -87,6 +92,7 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
       };
 
   /// greater than
+  @override
   ScoreCondition operator >(dynamic other) => switch (other) {
         int val => matchesRange(Range.from(val + 1)),
         ScoreOperation s => isBigger(s),
@@ -95,6 +101,7 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
       };
 
   /// less than
+  @override
   ScoreCondition operator <(dynamic other) => switch (other) {
         int val => matchesRange(Range.to(val - 1)),
         ScoreOperation s => isSmaller(s),
@@ -103,6 +110,7 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
       };
 
   /// bigger or equal
+  @override
   ScoreCondition operator >=(dynamic other) => switch (other) {
         int val => matchesRange(Range.from(val)),
         ScoreOperation s => isBiggerOrEqual(s),
@@ -113,6 +121,7 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
       };
 
   /// less or equal
+  @override
   ScoreCondition operator <=(dynamic other) => switch (other) {
         int val => matchesRange(Range.to(val)),
         ScoreOperation s => isSmallerOrEqual(s),
@@ -123,6 +132,7 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
       };
 
   /// matches
+  @override
   ScoreCondition operator &(dynamic other) => switch (other) {
         int val => matches(val),
         Range r => matchesRange(r),
@@ -150,13 +160,7 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
 
   /// gets the value of the score to work with it further
   // TODO
-  // Score get() {
-  //   return addCommandRet(
-  //     Command(
-  //       'scoreboard players get ${_getESStr()}',
-  //     ),
-  //   );
-  // }
+  Command get() => Command('scoreboard players get $this');
 
   // binary operations
 
@@ -179,51 +183,6 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
   /// sets this score to the remainder of the division
   BinaryScoreOperation modulo(ScoreOperation score) =>
       BinaryScoreOperation(this, ScoreOperator.Modulo, score);
-
-  /// sets the score to an nbt value
-  // Score setToData(Data data) {
-  //   if (!data.isGetting) {
-  //     throw ('Please set a score to Data.get and not Data.${data.subcommand}');
-  //   }
-  //   return addCommandRet(
-  //     Builder(
-  //       (c) => Command(
-  //         'execute store result score ${_getESStr()} run data get ${data.getTarget(c)} ${data.path} ${data.scale ?? 1}',
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  // /// set to functions return value(or number of commands)
-  // Group setToFunction(File file) => setToWidget(file.run(create: true));
-
-  // /// sets the score to the success of the given Command
-  // Score setToResult(Command commmand, {bool useSuccess = false}) {
-  //   return addCommandRet(
-  //     Command(
-  //       'execute store ${useSuccess ? 'success' : 'result'} score ${_getESStr()} run $commmand',
-  //     ),
-  //   );
-  // }
-
-  // /// sets the score to the result of the given Widget
-  // /// JUST one Command should be the input
-  // Group setToWidget(Widget widget, {bool useSuccess = false}) {
-  //   return Group(
-  //     prefix:
-  //         'execute store ${useSuccess ? 'success' : 'result'} score ${_getESStr()} run',
-  //     children: [widget],
-  //   );
-  // }
-
-  // /// sets the score to the success of the given condition result
-  // Score setToCondition(Condition cond, {bool useSuccess = false}) {
-  //   return addCommandRet(
-  //     Command(
-  //       'execute store ${useSuccess ? 'success' : 'result'} score ${_getESStr()} ${Condition.getPrefixes(cond.getList())[0]}',
-  //     ),
-  //   );
-  // }
 
   /// tests
 
@@ -260,13 +219,12 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
   }
 
   @override
-  String get_assignable_right() {
-    throw UnimplementedError();
-  }
-
-  @override
   ScoreOperation toScore({Score? out}) =>
       out == null ? this : BinaryScoreOperation.assign(out, this);
+
+  //TODO: Multistep
+  @override
+  Widget get_assignable_right(Context context) => generate(context);
 }
 
 sealed class ElementaryScoreOperation extends ScoreOperation {}
@@ -319,20 +277,22 @@ final class ResetScoreOperation extends ElementaryScoreOperation {
 final class StoreScoreOperation extends ElementaryScoreOperation {
   final ScoreAssignable left;
   final ScoreStoreable right;
-  final bool storeResult;
+  final bool useSuccess;
 
-  StoreScoreOperation(this.left, this.right, {this.storeResult = true});
+  StoreScoreOperation(this.left, this.right, {this.useSuccess = false});
 
   @override
-  generate(Context context) => Command(
-      'execute store ${storeResult ? "result" : "success"} ${left.get_assignable_left()} run ${right.get_assignable_right()}' // TODO: right operation?
+  Group generate(Context context) => Execute.internal_store_command(
+        left.get_assignable_left(),
+        right.get_assignable_right(context),
+        useSuccess,
       );
 
   @override
   String toString() => [
         '  | store ${left.get_assignable_left()}',
         '<<',
-        '  | ${right.get_assignable_right()}',
+        '  | $right',
       ].join('\n');
 
   @override
@@ -340,11 +300,13 @@ final class StoreScoreOperation extends ElementaryScoreOperation {
     Score? out,
     ScoreBuilder? builder,
     bool compact = false,
-  }) =>
-      switch ((left, compact)) {
-        (Score s, true) => s.copy(out: out, builder: builder, compact: compact),
-        _ => super.copy(out: out, builder: builder, compact: compact)
-      };
+  }) {
+    final (copyScore, ops) = switch ((left, compact)) {
+      (Score s, true) => s.copy(out: out, builder: builder, compact: compact),
+      _ => super.copy(out: out, builder: builder, compact: compact)
+    };
+    return (copyScore, [StoreScoreOperation(copyScore, right), ...ops]);
+  }
 }
 
 final class ElementaryBinaryScoreOperation extends ElementaryScoreOperation {
@@ -579,12 +541,14 @@ class Score extends ElementaryScoreOperation
         score,
       );
 
+  @override
   String toString({Entity? entity, String? score}) {
     entity ??= this.entity;
     score ??= this.score;
     return '$entity $score';
   }
 
+  @override
   (Score, List<ElementaryScoreOperation>) copy({
     Score? out,
     ScoreBuilder? builder,
@@ -597,21 +561,56 @@ class Score extends ElementaryScoreOperation
     return super.copy(out: out, builder: builder, compact: compact);
   }
 
+  /// sets the score to an nbt value
+  StoreScoreOperation setToData(DataGet data) =>
+      StoreScoreOperation(this, data);
+
+  // /// set to functions return value(or number of commands)
+  // Group setToFunction(File file) => setToWidget(file.run(create: true));
+
+  // /// sets the score to the success of the given Command
+  // Score setToResult(Command commmand, {bool useSuccess = false}) {
+  //   return addCommandRet(
+  //     Command(
+  //       'execute store ${useSuccess ? 'success' : 'result'} score ${_getESStr()} run $commmand',
+  //     ),
+  //   );
+  // }
+
+  // /// sets the score to the result of the given Widget
+  // /// JUST one Command should be the input
+  // Group setToWidget(Widget widget, {bool useSuccess = false}) {
+  //   return Group(
+  //     prefix:
+  //         'execute store ${useSuccess ? 'success' : 'result'} score ${_getESStr()} run',
+  //     children: [widget],
+  //   );
+  // }
+
+  // /// sets the score to the success of the given condition result
+  // Score setToCondition(Condition cond, {bool useSuccess = false}) {
+  //   return addCommandRet(
+  //     Command(
+  //       'execute store ${useSuccess ? 'success' : 'result'} score ${_getESStr()} ${Condition.getPrefixes(cond.getList())[0]}',
+  //     ),
+  //   );
+  // }
+
   /// assign value(int, Score, Data or Condition)
-  ScoreOperation setTo(dynamic other) {
-    if (other is int) return set(other);
-    if (other is ScoreOperation) return setEqual(other);
+  @override
+  ScoreOperation setTo(dynamic other) => switch (other) {
+        int val => set(val),
+        ScoreOperation s => setEqual(s),
+        DataGet s => setToData(s),
+        ScoreStoreable s => StoreScoreOperation(this, s),
+        _ =>
+          throw ('Please use either a Score, Data, Condition, Command or an Int in the operator >>'),
+      };
 
-    ///if (other is Data) return setToData(other);
-    // if (other is Condition) return setToCondition(other);
-    // if (other is Command) return setToResult(other);
-    // if (other is File) return setToFunction(other);
-    // if (other is Widget) return setToWidget(other);
-    throw ('Please use either a Score, Data, Condition, Command or an Int in the operator >>');
-  }
-
-  Widget operator >>(dynamic other) => setTo(other);
-  Widget operator <<(dynamic other) => setTo(other);
+  @override
+  ScoreOperation operator >>(dynamic other) => setTo(other);
+  @override
+  ScoreOperation operator <<(dynamic other) => setTo(other);
 
   /// sets the score to a given value of int
   BinaryScoreOperation set(int val) {
@@ -685,7 +684,7 @@ class Score extends ElementaryScoreOperation
   String get_assignable_left() => 'score $this';
 
   @override
-  String get_assignable_right() => 'scoreboard players get $this';
+  Widget get_assignable_right(Context _) => get();
 
   @override
   ScoreStoreable toStorable() => this;

@@ -5,6 +5,20 @@ import 'test_widget.dart';
 
 void main() {
   group('Score', () {
+    test('constant', () {
+      expect(
+        Score.con(5).toString(),
+        "#5 objd_consts",
+      );
+    });
+    test('temp', () {
+      // mock temp name generation
+      Scoreboard.overrideTempPlayerNames(["mock1"]);
+      expect(
+        Score.tmp().toString(),
+        "#mock1 objd_temp",
+      );
+    });
     command(
       'register',
       Score(Entity.All(), "test"),
@@ -33,6 +47,16 @@ void main() {
         'sum', Score(Entity.All(), "test") + Score(Entity.Self(), "test"), [
       "scoreboard objectives add test dummy",
       "scoreboard players operation @a test += @s test"
+    ]);
+  });
+
+  group("Score Bossbar", () {
+    Scoreboard.overrideTempPlayerNames(["mock1"]);
+    commands('add', Bossbar("test").get(BossbarOption.value) + 1, [
+      "execute store result score #mock1 objd_temp run bossbar get test value",
+      "scoreboard objectives add objd_temp dummy",
+      "scoreboard players add #mock1 objd_temp 1",
+      "execute store result bossbar test value run scoreboard players get #mock1 objd_temp"
     ]);
   });
 

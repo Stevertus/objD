@@ -18,7 +18,13 @@ class Scoreboard extends RestActionAble {
 
   static String? prefix;
 
-  static final Set _tempScores = {};
+  static Set _tempScores = {};
+  static List<String>? _override_playernames;
+
+  static void overrideTempPlayerNames(List<String> names) {
+    _override_playernames = names;
+    _tempScores = {};
+  }
 
   static String generateNewTempPlayerName({
     int len = 8,
@@ -26,15 +32,19 @@ class Scoreboard extends RestActionAble {
   }) {
     var r = Random();
     String name = '';
-
-    do {
-      name = List.generate(
-        len,
-        (index) => _SCORE_PLAYERNAME_ALPHABET[
-            r.nextInt(_SCORE_PLAYERNAME_ALPHABET.length)],
-      ).join();
-    } while (_tempScores.contains(name));
-
+    if (_override_playernames != null) {
+      assert(_override_playernames!.length > _tempScores.length,
+          "No more overrides left");
+      name = _override_playernames![_tempScores.length];
+    } else {
+      do {
+        name = List.generate(
+          len,
+          (index) => _SCORE_PLAYERNAME_ALPHABET[
+              r.nextInt(_SCORE_PLAYERNAME_ALPHABET.length)],
+        ).join();
+      } while (_tempScores.contains(name));
+    }
     _tempScores.add(name);
     return name;
   }

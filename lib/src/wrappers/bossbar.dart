@@ -20,10 +20,10 @@ class Bossbar extends RestActionAble with ScoreAssignable, ScoreStoreable {
     this.id, {
     this.name,
     this.type = BossbarType.add,
-    this.nameTexts,
+    //this.nameTexts,
     this.option,
-    this.modifiers = const {},
-  });
+    //this.modifiers = const {},
+  }) : modifiers = const {};
 
   Bossbar remove() => copyWith(type: BossbarType.remove);
 
@@ -63,7 +63,7 @@ class Bossbar extends RestActionAble with ScoreAssignable, ScoreStoreable {
   }
 
   @override
-  Widget? generate(Context context) {
+  Widget generate(Context context) {
     switch (type) {
       case BossbarType.add:
         return Command('bossbar add $id {"text":"$name"}');
@@ -82,8 +82,6 @@ class Bossbar extends RestActionAble with ScoreAssignable, ScoreStoreable {
           });
           return For.of(widgets);
         }
-      default:
-        return null;
     }
   }
 
@@ -129,11 +127,12 @@ class Bossbar extends RestActionAble with ScoreAssignable, ScoreStoreable {
     );
   }
 
+  @override
   Widget setTo(dynamic other, {BossbarOption option = BossbarOption.value}) {
     print(other);
     if (other is int) return set(value: other);
     if (other is ScoreStoreable) {
-      return StoreScoreOperation(this.copyWith(option: option), other);
+      return StoreScoreOperation(copyWith(option: option), other);
     }
 
     throw UnimplementedError("setTo is not implemented for $other");
@@ -144,12 +143,12 @@ class Bossbar extends RestActionAble with ScoreAssignable, ScoreStoreable {
       'bossbar $id ${(option ?? BossbarOption.value).name}';
 
   @override
-  String get_assignable_right() {
+  Widget get_assignable_right(Context context) {
     assert(
       type == BossbarType.get,
       "You can only assign Bossbar.get to something else",
     );
-    return 'bossbar get $id ${option!.name}';
+    return generate(context);
   }
 
   @override

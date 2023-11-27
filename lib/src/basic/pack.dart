@@ -57,9 +57,8 @@ class Pack extends Widget {
         'name': name,
         'main': main?.toMap(),
         'load': load?.toMap(),
-        'modules':
-            modules == null ? null : modules!.map((x) => x.toMap()).toList(),
-        'files': files == null ? null : files!.map((x) => x.toMap()).toList(),
+        'modules': modules?.map((x) => x.toMap()).toList(),
+        'files': files?.map((x) => x.toMap()).toList(),
       }
     };
   }
