@@ -23,4 +23,11 @@ jobs:
       - name: Install dependencies
         run: dart pub get
       - name: Run tests
-        run: dart run test
+        run: pub run test --coverage="coverage"
+      - name: Convert coverage to ICOV
+        run: pub run coverage:format_coverage --lcov --in=coverage --out=coverage.lcov --packages=.packages --report-on=lib
+      - name: Upload coverage to Codecov  
+        uses: codecov/codecov-action@v1.0.2
+        with:
+          token: ${{secrets.CODECOV_TOKEN}}
+          file: coverage.lcov
