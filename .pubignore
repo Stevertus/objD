@@ -5,3 +5,4 @@
 web_example
 pubspec.lock
 generators/
+coverage/
