@@ -409,7 +409,7 @@ class TextHoverEvent {
   }
 }
 
-/// See all available colors: https://minecraft.gamepedia.com/Formatting_codes#Color_codes
+/// See all available colors: https://minecraft.wiki/w/Formatting_codes#Color_codes
 class Color {
   final String _color;
 
