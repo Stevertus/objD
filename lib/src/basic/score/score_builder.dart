@@ -21,6 +21,10 @@ class ScoreBuilder {
           input,
           if (out != null) ElementaryBinaryScoreOperation.assign(out, score),
         ],
+      StoreConditionScoreOperation(left: final left) => [
+          input,
+          if (out != null) StoreScoreOperation(out, left.toStorable())
+        ],
       StoreScoreOperation(left: final left) => [
           input,
           if (out != null) StoreScoreOperation(out, left.toStorable())
@@ -45,10 +49,11 @@ class ScoreBuilder {
 
       if (left is Score) {
         if (right is ConstScore) {
-          return [SetScoreOperation(left, right.value)];
+          return [left, SetScoreOperation(left, right.value)];
         }
 
         return [
+          left,
           ...prevactions,
           ElementaryBinaryScoreOperation.assign(left, tmpRight)
         ];

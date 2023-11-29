@@ -15,6 +15,15 @@ class Condition {
   _ConditionType? _type;
   _ConditionUtil? _generated;
 
+  // ignore: library_private_types_in_public_api
+
+  @Deprecated("Will be removed with Conditon refactor, not for public use")
+  Condition.raw(String generated, {bool invert = false})
+      : _generated = _ConditionUtil(
+          generated,
+          invert: invert,
+        );
+
   /// The Condition class defines conditions for the if widget and more. It can also combines conditions and generates an argument list.
   ///  A condition can accept many values and this makes the Condition very complex.
   ///

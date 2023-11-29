@@ -26,11 +26,12 @@ abstract mixin class ScoreStoreable implements Widget {
   BinaryScoreOperation operator %(dynamic other) => toScore() % other;
   BinaryScoreOperation operator /(dynamic other) => toScore() / other;
   BinaryScoreOperation operator *(dynamic other) => toScore() * other;
-  ScoreCondition operator >(dynamic other) => toScore() > other;
-  ScoreCondition operator >=(dynamic other) => toScore() >= other;
-  ScoreCondition operator <=(dynamic other) => toScore() <= other;
-  ScoreCondition operator <(dynamic other) => toScore() < other;
-  ScoreCondition operator &(dynamic other) => toScore() & other;
+  // TODO: Not finished, refactor of If needed
+  // ScoreCondition operator >(dynamic other) => toScore() > other;
+  // ScoreCondition operator >=(dynamic other) => toScore() >= other;
+  // ScoreCondition operator <=(dynamic other) => toScore() <= other;
+  // ScoreCondition operator <(dynamic other) => toScore() < other;
+  // ScoreCondition operator &(dynamic other) => toScore() & other;
 }
 
 abstract mixin class ScoreAssignable {
@@ -91,59 +92,6 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
         _ => throw ('Please use either a Score or an Int in the operator *')
       };
 
-  /// greater than
-  @override
-  ScoreCondition operator >(dynamic other) => switch (other) {
-        int val => matchesRange(Range.from(val + 1)),
-        ScoreOperation s => isBigger(s),
-        ScoreStoreable s => isBigger(s.toScore()),
-        _ => throw ('Please use either a Score or an Int in the operator >')
-      };
-
-  /// less than
-  @override
-  ScoreCondition operator <(dynamic other) => switch (other) {
-        int val => matchesRange(Range.to(val - 1)),
-        ScoreOperation s => isSmaller(s),
-        ScoreStoreable s => isSmaller(s.toScore()),
-        _ => throw ('Please use either a Score or an Int in the operator <')
-      };
-
-  /// bigger or equal
-  @override
-  ScoreCondition operator >=(dynamic other) => switch (other) {
-        int val => matchesRange(Range.from(val)),
-        ScoreOperation s => isBiggerOrEqual(s),
-        ScoreStoreable s => isBiggerOrEqual(
-            s.toScore(),
-          ),
-        _ => throw ('Please use either a Score or an Int in the operator >=')
-      };
-
-  /// less or equal
-  @override
-  ScoreCondition operator <=(dynamic other) => switch (other) {
-        int val => matchesRange(Range.to(val)),
-        ScoreOperation s => isSmallerOrEqual(s),
-        ScoreStoreable s => isSmallerOrEqual(
-            s.toScore(),
-          ),
-        _ => throw ('Please use either a Score or an Int in the operator <=')
-      };
-
-  /// matches
-  @override
-  ScoreCondition operator &(dynamic other) => switch (other) {
-        int val => matches(val),
-        Range r => matchesRange(r),
-        ScoreOperation s => isEqual(s),
-        ScoreStoreable s => isEqual(
-            s.toScore(),
-          ),
-        _ =>
-          throw ('Please use either a Score, Range or an Int in the operator &')
-      };
-
   /// adds a value to the score
   BinaryScoreOperation add([int val = 1]) => BinaryScoreOperation(
         this,
@@ -160,7 +108,7 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
 
   /// gets the value of the score to work with it further
   // TODO
-  Command get() => Command('scoreboard players get $this');
+  Widget get() => For.of([this, Command('scoreboard players get $this')]);
 
   // binary operations
 
@@ -184,23 +132,7 @@ sealed class ScoreOperation extends Widget implements ScoreStoreable {
   BinaryScoreOperation modulo(ScoreOperation score) =>
       BinaryScoreOperation(this, ScoreOperator.Modulo, score);
 
-  /// tests
-
-  BinaryScoreCondition isEqual(ScoreOperation score) =>
-      BinaryScoreCondition(this, ConditionalOperator.Equal, score);
-  BinaryScoreCondition isSmaller(ScoreOperation score) =>
-      BinaryScoreCondition(this, ConditionalOperator.Less, score);
-  BinaryScoreCondition isSmallerOrEqual(ScoreOperation score) =>
-      BinaryScoreCondition(this, ConditionalOperator.LessEqual, score);
-  BinaryScoreCondition isBiggerOrEqual(ScoreOperation score) =>
-      BinaryScoreCondition(this, ConditionalOperator.BiggerEqual, score);
-  BinaryScoreCondition isBigger(ScoreOperation score) =>
-      BinaryScoreCondition(this, ConditionalOperator.Bigger, score);
-
-  MatchesScoreCondition matches(int value) =>
-      MatchesScoreCondition(this, Range.exact(value));
-  MatchesScoreCondition matchesRange(Range range) =>
-      MatchesScoreCondition(this, range);
+  //TODO: Move Condition Operators here
 
   void build() {
     print('test');
@@ -276,17 +208,22 @@ final class ResetScoreOperation extends ElementaryScoreOperation {
 
 final class StoreScoreOperation extends ElementaryScoreOperation {
   final ScoreAssignable left;
-  final ScoreStoreable right;
+  final Widget right;
   final bool useSuccess;
 
   StoreScoreOperation(this.left, this.right, {this.useSuccess = false});
 
   @override
-  Group generate(Context context) => Execute.internal_store_command(
-        left.get_assignable_left(),
-        right.get_assignable_right(context),
-        useSuccess,
-      );
+  Widget generate(Context context) => For.of([
+        if (left is Score) left as Score,
+        Execute.internal_store_command(
+          left.get_assignable_left(),
+          right is ScoreStoreable
+              ? (right as ScoreStoreable).get_assignable_right(context)
+              : right.generate(context),
+          useSuccess,
+        )
+      ]);
 
   @override
   String toString() => [
@@ -306,6 +243,46 @@ final class StoreScoreOperation extends ElementaryScoreOperation {
       _ => super.copy(out: out, builder: builder, compact: compact)
     };
     return (copyScore, [StoreScoreOperation(copyScore, right), ...ops]);
+  }
+}
+
+final class StoreConditionScoreOperation extends ElementaryScoreOperation {
+  final ScoreAssignable left;
+  final Condition right;
+  final bool useSuccess;
+
+  StoreConditionScoreOperation(this.left, this.right,
+      {this.useSuccess = false});
+
+  @override
+  Widget generate(Context context) => For.of([
+        if (left is Score) left as Score,
+        Command(
+          'execute store ${useSuccess ? 'success' : 'result'} ${left.get_assignable_left()} ${Condition.getPrefixes(right.getList())[0]}',
+        )
+      ]);
+
+  @override
+  String toString() => [
+        '  | store ${left.get_assignable_left()}',
+        '<<',
+        '  | $right',
+      ].join('\n');
+
+  @override
+  (Score, List<ElementaryScoreOperation>) copy({
+    Score? out,
+    ScoreBuilder? builder,
+    bool compact = false,
+  }) {
+    final (copyScore, ops) = switch ((left, compact)) {
+      (Score s, true) => s.copy(out: out, builder: builder, compact: compact),
+      _ => super.copy(out: out, builder: builder, compact: compact)
+    };
+    return (
+      copyScore,
+      [StoreConditionScoreOperation(copyScore, right), ...ops]
+    );
   }
 }
 
@@ -562,49 +539,41 @@ class Score extends ElementaryScoreOperation
   }
 
   /// sets the score to an nbt value
-  StoreScoreOperation setToData(DataGet data) =>
-      StoreScoreOperation(this, data);
+  StoreScoreOperation setToData(DataGet data, {bool useSuccess = false}) =>
+      StoreScoreOperation(this, data, useSuccess: useSuccess);
 
-  // /// set to functions return value(or number of commands)
-  // Group setToFunction(File file) => setToWidget(file.run(create: true));
+  /// set to functions return value(or number of commands)
+  StoreScoreOperation setToFunction(File file, {bool useSuccess = false}) =>
+      setToWidget(file.run(create: true));
 
-  // /// sets the score to the success of the given Command
-  // Score setToResult(Command commmand, {bool useSuccess = false}) {
-  //   return addCommandRet(
-  //     Command(
-  //       'execute store ${useSuccess ? 'success' : 'result'} score ${_getESStr()} run $commmand',
-  //     ),
-  //   );
-  // }
+  /// sets the score to the success of the given Command
+  StoreScoreOperation setToResult(Command commmand,
+          {bool useSuccess = false}) =>
+      setToWidget(commmand, useSuccess: useSuccess);
 
-  // /// sets the score to the result of the given Widget
-  // /// JUST one Command should be the input
-  // Group setToWidget(Widget widget, {bool useSuccess = false}) {
-  //   return Group(
-  //     prefix:
-  //         'execute store ${useSuccess ? 'success' : 'result'} score ${_getESStr()} run',
-  //     children: [widget],
-  //   );
-  // }
+  /// sets the score to the result of the given Widget
+  /// JUST one Command should be the input
+  StoreScoreOperation setToWidget(Widget widget, {bool useSuccess = false}) =>
+      StoreScoreOperation(this, widget, useSuccess: useSuccess);
 
-  // /// sets the score to the success of the given condition result
-  // Score setToCondition(Condition cond, {bool useSuccess = false}) {
-  //   return addCommandRet(
-  //     Command(
-  //       'execute store ${useSuccess ? 'success' : 'result'} score ${_getESStr()} ${Condition.getPrefixes(cond.getList())[0]}',
-  //     ),
-  //   );
-  // }
+  /// sets the score to the success of the given condition result
+  StoreConditionScoreOperation setToCondition(Condition cond,
+          {bool useSuccess = false}) =>
+      StoreConditionScoreOperation(this, cond, useSuccess: useSuccess);
 
   /// assign value(int, Score, Data or Condition)
   @override
-  ScoreOperation setTo(dynamic other) => switch (other) {
+  ScoreOperation setTo(dynamic other, {bool useSuccess = false}) =>
+      switch (other) {
         int val => set(val),
         ScoreOperation s => setEqual(s),
-        DataGet s => setToData(s),
-        ScoreStoreable s => StoreScoreOperation(this, s),
+        DataGet s => setToData(s, useSuccess: useSuccess),
+        ScoreStoreable s =>
+          StoreScoreOperation(this, s, useSuccess: useSuccess),
+        Condition c => setToCondition(c, useSuccess: useSuccess),
+        Widget w => setToWidget(w, useSuccess: useSuccess),
         _ =>
-          throw ('Please use either a Score, Data, Condition, Command or an Int in the operator >>'),
+          throw ('Please use either a Score, Data, Condition, Command or an Int in the operator >>, got $other'),
       };
 
   @override
@@ -638,6 +607,71 @@ class Score extends ElementaryScoreOperation
   /// compares two scores and sets the biggest to this one
   BinaryScoreOperation setToBiggest(ScoreOperation score) =>
       BinaryScoreOperation(this, ScoreOperator.Max, score);
+
+  /// tests
+
+  /// greater than
+  @override
+  ScoreCondition operator >(dynamic other) => switch (other) {
+        int val => matchesRange(Range.from(val + 1)),
+        Score s => isBigger(s),
+        // ScoreStoreable s => isBigger(s.toScore()),
+        _ => throw ('Please use either a Score or an Int in the operator >')
+      };
+
+  /// less than
+  @override
+  ScoreCondition operator <(dynamic other) => switch (other) {
+        int val => matchesRange(Range.to(val - 1)),
+        Score s => isSmaller(s),
+        //ScoreStoreable s => isSmaller(s.toScore()),
+        _ => throw ('Please use either a Score or an Int in the operator <')
+      };
+
+  /// bigger or equal
+  @override
+  ScoreCondition operator >=(dynamic other) => switch (other) {
+        int val => matchesRange(Range.from(val)),
+        Score s => isBiggerOrEqual(s),
+        //ScoreStoreable s => isBiggerOrEqual(s.toScore()),
+        _ => throw ('Please use either a Score or an Int in the operator >=')
+      };
+
+  /// less or equal
+  @override
+  ScoreCondition operator <=(dynamic other) => switch (other) {
+        int val => matchesRange(Range.to(val)),
+        Score s => isSmallerOrEqual(s),
+        //ScoreStoreable s => isSmallerOrEqual(s.toScore()),
+        _ => throw ('Please use either a Score or an Int in the operator <=')
+      };
+
+  /// matches
+  @override
+  ScoreCondition operator &(dynamic other) => switch (other) {
+        int val => matches(val),
+        Range r => matchesRange(r),
+        Score s => isEqual(s),
+        //ScoreStoreable s => isEqual(s.toScore()),
+        _ =>
+          throw ('Please use either a Score, Range or an Int in the operator &')
+      };
+
+  BinaryScoreCondition isEqual(Score score) =>
+      BinaryScoreCondition(this, ConditionalOperator.Equal, score);
+  BinaryScoreCondition isSmaller(Score score) =>
+      BinaryScoreCondition(this, ConditionalOperator.Less, score);
+  BinaryScoreCondition isSmallerOrEqual(Score score) =>
+      BinaryScoreCondition(this, ConditionalOperator.LessEqual, score);
+  BinaryScoreCondition isBiggerOrEqual(Score score) =>
+      BinaryScoreCondition(this, ConditionalOperator.BiggerEqual, score);
+  BinaryScoreCondition isBigger(Score score) =>
+      BinaryScoreCondition(this, ConditionalOperator.Bigger, score);
+
+  MatchesScoreCondition matches(int value) =>
+      MatchesScoreCondition(this, Range.exact(value));
+  MatchesScoreCondition matchesRange(Range range) =>
+      MatchesScoreCondition(this, range);
 
   /// finds the smallest value in a list of scores
   Widget findSmallest(List<Score> scores, {int? min}) {

@@ -4,17 +4,20 @@ import 'package:objd/src/basic/types/condition.dart';
 import 'package:objd/src/basic/types/entity.dart';
 
 sealed class ScoreCondition extends Condition {
-  ScoreCondition() : super(null);
+  final bool invert;
+  //TODO: refactor
+  ScoreCondition._(String generated, {this.invert = false})
+      // ignore: deprecated_member_use_from_same_package
+      : super.raw(generated, invert: invert);
 }
 
 class MatchesScoreCondition extends ScoreCondition {
-  final ScoreOperation score;
+  // TODO: Implement for general ScoreOperations, refactor of If necessary
+  final Score score;
   final Range range;
 
-  MatchesScoreCondition(
-    this.score,
-    this.range,
-  );
+  MatchesScoreCondition(this.score, this.range, {super.invert = false})
+      : super._('score $score matches $range');
 
   String getMatch() => range.toString();
 
@@ -29,11 +32,13 @@ class MatchesScoreCondition extends ScoreCondition {
 }
 
 class BinaryScoreCondition extends ScoreCondition {
-  final ScoreOperation left;
+  // TODO: Implement for general ScoreOperations, refactor of If necessary
+  final Score left;
   final ConditionalOperator operation;
-  final ScoreOperation right;
+  final Score right;
 
-  BinaryScoreCondition(this.left, this.operation, this.right);
+  BinaryScoreCondition(this.left, this.operation, this.right)
+      : super._('score $left ${operation.op} $right');
 
   @override
   String toString() {

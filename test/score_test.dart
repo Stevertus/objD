@@ -132,7 +132,7 @@ void main() {
     ]);
     commands('setTo Data', s1 << Data.get(Entity.Self(), path: "test"), [
       "scoreboard objectives add test dummy",
-      "execute store result score @a test run data get entity @s test 1"
+      "execute store result score @a test run data get entity @s test"
     ]);
     commands(
       'setTo File',
@@ -165,11 +165,11 @@ void main() {
   });
 
   group('Score Conditions', () {
-    commands(
-      "empty",
-      s1.isBigger(Score(Entity.Self(), "new")),
-      [],
-    );
+    // commands(
+    //   "empty",
+    //   s1.isBigger(Score(Entity.Self(), "new")),
+    //   [],
+    // );
     command(
       "simple if",
       If(
