@@ -216,7 +216,7 @@ class Storage extends Widget with ScoreAssignable, ScoreStoreable {
   }
 
   @override
-  Data get_assignable_right(Context _) {
+  Data get_assignable_right(Context context) {
     assert(
       _type == _StorageType.get,
       "Only Storage.get is allowed",

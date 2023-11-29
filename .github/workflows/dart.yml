@@ -22,8 +22,6 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install dependencies
         run: dart pub get
-      - name: Lint Code
-        run: dart analyze lib/
       - name: Run tests
         run: dart run coverage:test_with_coverage
       - name: Upload coverage to Codecov  
@@ -31,3 +29,5 @@ jobs:
         with:
           token: ${{secrets.CODECOV_TOKEN}}
           file: coverage/lcov.info
+      - name: Lint Code
+        run: dart analyze lib/

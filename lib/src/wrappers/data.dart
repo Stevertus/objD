@@ -40,9 +40,6 @@ class Data extends RestActionAble {
       : _subcommand = 'merge' {
     handleTarget(target);
   }
-  Data._(this.target, {required this.path, this.scale}) : _subcommand = 'get' {
-    handleTarget(target);
-  }
   Data.remove(this.target, {required this.path}) : _subcommand = 'remove' {
     handleTarget(target);
   }

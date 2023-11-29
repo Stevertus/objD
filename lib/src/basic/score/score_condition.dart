@@ -6,6 +6,7 @@ import 'package:objd/src/basic/types/entity.dart';
 sealed class ScoreCondition extends Condition {
   final bool invert;
   //TODO: refactor
+  // ignore: use_super_parameters
   ScoreCondition._(String generated, {this.invert = false})
       // ignore: deprecated_member_use_from_same_package
       : super.raw(generated, invert: invert);

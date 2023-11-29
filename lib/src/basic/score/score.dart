@@ -1,16 +1,21 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 library score;
 
-import 'package:objd/core.dart';
 import 'package:objd/src/basic/command.dart';
-import 'package:objd/src/basic/score/score.dart';
+import 'package:objd/src/basic/file.dart';
+import 'package:objd/src/basic/for_list.dart';
 import 'package:objd/src/basic/score/score_builder.dart';
 import 'package:objd/src/basic/score/score_condition.dart';
 import 'package:objd/src/basic/score/score_export.dart';
 import 'package:objd/src/basic/scoreboard.dart';
+import 'package:objd/src/basic/types/condition.dart';
 import 'package:objd/src/basic/types/entity.dart';
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/build/context.dart';
+import 'package:objd/src/wrappers/comment.dart';
+import 'package:objd/src/wrappers/data.dart';
+import 'package:objd/src/wrappers/execute.dart';
+import 'package:objd/src/wrappers/if.dart';
 
 abstract mixin class ScoreStoreable implements Widget {
   // block, bossbar, entity, score, storage
@@ -583,9 +588,10 @@ class Score extends ElementaryScoreOperation
 
   /// sets the score to a given value of int
   BinaryScoreOperation set(int val) {
-    if (this is! ScoreAssignable) {
-      throw Exception('$val can not be assigned to left Hand Side $this');
-    }
+    // TODO: Remove, only necessary if used outside score
+    // if (this is! ScoreAssignable) {
+    //   throw Exception('$val can not be assigned to left Hand Side $this');
+    // }
 
     return BinaryScoreOperation(this, ScoreOperator.Assign, Score.con(val));
   }
@@ -611,7 +617,7 @@ class Score extends ElementaryScoreOperation
   /// tests
 
   /// greater than
-  @override
+  //@override
   ScoreCondition operator >(dynamic other) => switch (other) {
         int val => matchesRange(Range.from(val + 1)),
         Score s => isBigger(s),
@@ -620,7 +626,7 @@ class Score extends ElementaryScoreOperation
       };
 
   /// less than
-  @override
+  //@override
   ScoreCondition operator <(dynamic other) => switch (other) {
         int val => matchesRange(Range.to(val - 1)),
         Score s => isSmaller(s),
@@ -629,7 +635,7 @@ class Score extends ElementaryScoreOperation
       };
 
   /// bigger or equal
-  @override
+  //@override
   ScoreCondition operator >=(dynamic other) => switch (other) {
         int val => matchesRange(Range.from(val)),
         Score s => isBiggerOrEqual(s),
@@ -638,7 +644,7 @@ class Score extends ElementaryScoreOperation
       };
 
   /// less or equal
-  @override
+  //@override
   ScoreCondition operator <=(dynamic other) => switch (other) {
         int val => matchesRange(Range.to(val)),
         Score s => isSmallerOrEqual(s),
@@ -647,7 +653,7 @@ class Score extends ElementaryScoreOperation
       };
 
   /// matches
-  @override
+  //@override
   ScoreCondition operator &(dynamic other) => switch (other) {
         int val => matches(val),
         Range r => matchesRange(r),
@@ -718,7 +724,7 @@ class Score extends ElementaryScoreOperation
   String get_assignable_left() => 'score $this';
 
   @override
-  Widget get_assignable_right(Context _) => get();
+  Widget get_assignable_right(Context context) => get();
 
   @override
   ScoreStoreable toStorable() => this;
