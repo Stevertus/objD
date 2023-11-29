@@ -137,12 +137,18 @@ void main() {
     commands(
       'setTo File',
       s1 << File("test"),
-      ["execute store result score @a test run function :test"],
+      [
+        "scoreboard objectives add test dummy",
+        "execute store result score @a test run function :test"
+      ],
     );
     commands(
       'setTo Widget',
       s1 << Say("mock"),
-      ["execute store result score @a test run say mock"],
+      [
+        "scoreboard objectives add test dummy",
+        "execute store result score @a test run say mock"
+      ],
     );
     commands(
       'setTo Condition',
@@ -157,8 +163,8 @@ void main() {
   group("Score Bossbar", () {
     Scoreboard.overrideTempPlayerNames(["mock1"]);
     commands('add', Bossbar("test").get(BossbarOption.value) + 1, [
-      "execute store result score #mock1 objd_temp run bossbar get test value",
       "scoreboard objectives add objd_temp dummy",
+      "execute store result score #mock1 objd_temp run bossbar get test value",
       "scoreboard players add #mock1 objd_temp 1",
       "execute store result bossbar test value run scoreboard players get #mock1 objd_temp"
     ]);

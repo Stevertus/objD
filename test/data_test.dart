@@ -10,10 +10,13 @@ void main() {
       Data.get(Location.here(), path: "test"),
       "data get block ~ ~ ~ test",
     );
-    command(
+    commands(
       'assign to score',
       Score(Entity.All(), "test") << Data.get(Location.here(), path: "test"),
-      "execute store result score @a test run data get block ~ ~ ~ test",
+      [
+        'scoreboard objectives add test dummy',
+        "execute store result score @a test run data get block ~ ~ ~ test"
+      ],
     );
 
     command(
