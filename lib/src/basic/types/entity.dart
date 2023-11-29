@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:objd/core.dart';
+import 'package:deep_collection/deep_collection.dart';
 export 'entities.dart';
 
 abstract class EntityClass {
@@ -287,7 +288,7 @@ class Entity extends GsonValue implements EntityClass {
   Entity.clone(Entity ent)
       : selector = ent.selector,
         playerName = ent.playerName,
-        arguments = Map.from(ent.arguments);
+        arguments = ent.arguments.deepCopy();
 
   /// Entity is an util class to convert an argument list into the Minecraft Entity format(@p...)
   Entity({
