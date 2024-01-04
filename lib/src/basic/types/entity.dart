@@ -1133,10 +1133,11 @@ class Entity extends GsonValue implements EntityClass {
       ret += '[';
       for (var key in arguments.keys) {
         if (arguments[key] is List) {
-          arguments[key].forEach((item) {
-            ret += _addArg(item, key);
-            if (item != arguments[key].last) ret += ',';
-          });
+          final list = arguments[key] as List;
+          if (list.isEmpty) continue;
+
+          ret += list.map((item) => _addArg(item, key)).join(',');
+
           if (key != arguments.keys.last) ret += ',';
         } else {
           ret += _addArg(arguments[key], key);

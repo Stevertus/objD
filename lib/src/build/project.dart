@@ -6,6 +6,7 @@ class Project {
   final String name;
   final String description;
   final double version;
+  final int? packFormat;
   Widget generate;
 
   /// The project is a special Widget which is just defined once.
@@ -25,8 +26,9 @@ class Project {
   Project({
     required this.name,
     required this.generate,
-    this.version = 16,
+    this.version = 20.4,
     this.target = './',
+    this.packFormat,
     this.description = 'This is a datapack generated with objd by Stevertus',
   });
 
@@ -48,6 +50,10 @@ class Project {
       };
 
   int getPackFormat() {
+    if (packFormat != null) return packFormat!;
+    if (version >= 20.3) return 26;
+    if (version >= 20.2) return 18;
+    if (version >= 20) return 15;
     if (version >= 19.4) return 12;
     if (version > 19.3) return 11;
     if (version >= 19) return 10;
