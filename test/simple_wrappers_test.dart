@@ -62,7 +62,15 @@ void main() {
     );
   });
 
-  command('Return', Return(30), "return 30");
+  group('Return', () {
+    command('integer', Return(30), "return 30");
+    command('fail', Return.fail(), "return fail");
+    command(
+      'run',
+      Return.run(Data.get(Entity.All(), path: 'path')),
+      "return run data get entity @a path",
+    );
+  });
 
   group('Damage', () {
     final e = Entity.All();

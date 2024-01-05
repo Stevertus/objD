@@ -9,6 +9,7 @@ class BuildProject {
   String name;
   String description;
   int pack_format;
+  List<int>? supportedFormats;
   bool prod;
   bool isGen = true;
   bool isGenMeta = true;
@@ -22,6 +23,7 @@ class BuildProject {
         name = prj.name,
         description = prj.description,
         pack_format = prj.getPackFormat(),
+        supportedFormats = prj.supportedFormats,
         context = Context(prod: false, version: prj.version) {
     packs = findPacks(prj.generate, context: context)
         .map(

@@ -7,6 +7,7 @@ class Project {
   final String description;
   final double version;
   final int? packFormat;
+  final List<int>? supportedFormats;
   Widget generate;
 
   /// The project is a special Widget which is just defined once.
@@ -29,6 +30,7 @@ class Project {
     this.version = 20.4,
     this.target = './',
     this.packFormat,
+    this.supportedFormats,
     this.description = 'This is a datapack generated with objd by Stevertus',
   });
 
