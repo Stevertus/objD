@@ -3,10 +3,13 @@
 ## 0.4.6
 
 - added UUID object to represent uuids consisting out of 4 integers
+- added Random Widget
+- updated blocks, items, particles and entities to include content from 1.20.4 and 23w51b
 - changed TextComponent & Entity to be gson serializable, so you don't have to call toMap manually
 - refactored Title widget
 - fixed function tags load/tick generating with paths with `.mcfunction`
 - fixed Storage.copyScore ignoring the scale parameter 
+- fixed Entity to introduce a trailing comma when given empty tags
 - fixed Github testing workflows to run with Dart 3
 
 ## 0.4.5

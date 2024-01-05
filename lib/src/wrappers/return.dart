@@ -14,8 +14,8 @@ class Return extends Widget {
 
   @override
   Widget generate(Context context) {
-    if (context.version < 19.4) {
-      throw "FillBiome requires at least version 19.4";
+    if (context.version < 20) {
+      throw "Return requires at least version 20";
     }
     return Command('return $val');
   }
