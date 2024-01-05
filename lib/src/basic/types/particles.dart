@@ -1,5 +1,3 @@
-import 'entity.dart';
-
 class Particles {
   // using cog generation tool to fetch blocks
   /*[[[cog

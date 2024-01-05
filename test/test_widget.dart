@@ -6,7 +6,7 @@ import 'package:meta/meta.dart' show isTest;
 void command(String name, Widget w, String command) {
   test(name, () {
     expect(
-      getCommands(w),
+      getCommands(w, context: Context(packId: 'test', version: 20.4)),
       [command],
     );
   });

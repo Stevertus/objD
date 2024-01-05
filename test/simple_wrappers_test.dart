@@ -64,12 +64,6 @@ void main() {
 
   command('Return', Return(30), "return 30");
 
-  command(
-    'Schedule',
-    Schedule('function', ticks: 2.minutes),
-    "schedule function :function 120s",
-  );
-
   group('Damage', () {
     final e = Entity.All();
     command('simple', Damage(e, amount: 30), "damage $e 30.0");

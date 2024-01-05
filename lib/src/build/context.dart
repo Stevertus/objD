@@ -48,7 +48,7 @@ class Context {
     this.file = '',
     this.loadFile = 'load',
     this.mainFile = 'main',
-    this.version = 20,
+    this.version = 20.4,
     this.path = const Path([]),
     Map<Type, dynamic>? traits,
   }) : _heredityTraits = traits ?? {};

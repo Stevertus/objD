@@ -5,8 +5,27 @@ class Random extends RestActionAble {
   final bool roll;
   final String? sequence;
 
+  /// generate a random value from a given Range.
+  ///
+  /// | constructor |                                                      |
+  /// | ----------- | ---------------------------------------------------- |
+  /// | Range       | the range to take values from                        |
+  /// | roll        | if true announces the value in the chat(random roll) |
+  /// | sequence    | sequence to pull deterministic values from(optional) |
+  ///
+  /// ```dart
+  /// Random(Range(from: 1, to: 5), roll: false, sequence: 'my_sequence')
+  /// ⇒ random value 1..5 my_sequence
+  /// ```
   Random(this.range, {this.roll = false, this.sequence});
 
+  /// Using Random.reset, you can reset a particular sequence. You can specify a seed value and whether to include the sequence name and world in the generation of numbers.
+  /// | Random.reset      |                                                                                           |
+  /// | ----------------- | ----------------------------------------------------------------------------------------- |
+  /// | String            | sequence id                                                                               |
+  /// | seed              | integer seed value(optional)                                                              |
+  /// | includeWorldSeed  | set to false if sequence should be independent of your world (optional, seed is required) |
+  /// | includeSequenceId | set to false to make sequence independent of the id (optional, seed is required)          |
   static reset(
     String sequence, {
     int? seed,
