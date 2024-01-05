@@ -1,10 +1,12 @@
+import 'entity.dart';
+
 class Particles {
   // using cog generation tool to fetch blocks
   /*[[[cog
   import cog
   import requests
 
-  version = '1.20/releases-candidate/1.20.1-rc1'
+  version = '1.20/snapshots/23w51b'
 
   res = requests.get(f'https://raw.githubusercontent.com/PixiGeko/Minecraft-generated-data/master/{version}/custom-generated/registries/particle_type.txt')
   blocks = []
@@ -114,6 +116,9 @@ class Particles {
   static const ParticleType dust_color_transition =
       ParticleType('minecraft:dust_color_transition');
 
+  /// _(minecraft:dust_plume)_
+  static const ParticleType dust_plume = ParticleType('minecraft:dust_plume');
+
   /// _(minecraft:effect)_
   static const ParticleType effect = ParticleType('minecraft:effect');
 
@@ -203,6 +208,16 @@ class Particles {
   /// _(minecraft:glow_squid_ink)_
   static const ParticleType glow_squid_ink =
       ParticleType('minecraft:glow_squid_ink');
+
+  /// _(minecraft:gust)_
+  static const ParticleType gust = ParticleType('minecraft:gust');
+
+  /// _(minecraft:gust_dust)_
+  static const ParticleType gust_dust = ParticleType('minecraft:gust_dust');
+
+  /// _(minecraft:gust_emitter)_
+  static const ParticleType gust_emitter =
+      ParticleType('minecraft:gust_emitter');
 
   /// _(minecraft:happy_villager)_
   static const ParticleType happy_villager =
@@ -325,6 +340,10 @@ class Particles {
   static const ParticleType totem_of_undying =
       ParticleType('minecraft:totem_of_undying');
 
+  /// _(minecraft:trial_spawner_detection)_
+  static const ParticleType trial_spawner_detection =
+      ParticleType('minecraft:trial_spawner_detection');
+
   /// _(minecraft:underwater)_
   static const ParticleType underwater = ParticleType('minecraft:underwater');
 
@@ -343,6 +362,9 @@ class Particles {
 
   /// _(minecraft:white_ash)_
   static const ParticleType white_ash = ParticleType('minecraft:white_ash');
+
+  /// _(minecraft:white_smoke)_
+  static const ParticleType white_smoke = ParticleType('minecraft:white_smoke');
 
   /// _(minecraft:witch)_
   static const ParticleType witch = ParticleType('minecraft:witch');
@@ -382,6 +404,7 @@ class Particles {
         dripping_water,
         dust,
         dust_color_transition,
+        dust_plume,
         effect,
         egg_crack,
         elder_guardian,
@@ -407,6 +430,9 @@ class Particles {
         flash,
         glow,
         glow_squid_ink,
+        gust,
+        gust_dust,
+        gust_emitter,
         happy_villager,
         heart,
         instant_effect,
@@ -443,12 +469,14 @@ class Particles {
         squid_ink,
         sweep_attack,
         totem_of_undying,
+        trial_spawner_detection,
         underwater,
         vibration,
         warped_spore,
         wax_off,
         wax_on,
         white_ash,
+        white_smoke,
         witch,
         //[[[end]]]
       ];

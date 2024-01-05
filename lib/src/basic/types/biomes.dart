@@ -5,7 +5,7 @@ class Biomes {
   import cog
   import requests
 
-  version = '1.20/releases-candidate/1.20.1-rc1'
+  version = '1.20/snapshots/23w51b'
 
   res = requests.get(f'https://raw.githubusercontent.com/PixiGeko/Minecraft-generated-data/master/{version}/custom-generated/lists/worldgen/biome.txt')
   blocks = []
