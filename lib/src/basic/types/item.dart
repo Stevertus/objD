@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:gson/gson.dart';
 import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/wrappers/summon.dart';
+import 'package:deep_collection/deep_collection.dart';
 
 export 'items.dart';
 
@@ -249,7 +250,9 @@ class Item {
     List<TextComponent>? lore,
     Map<String, dynamic>? nbt,
   }) {
-    final t = tag != null ? _copyDeepMap(tag) : <String, dynamic>{};
+    final t = tag != null
+        ? tag!.deepCopy().cast<String, dynamic>()
+        : <String, dynamic>{};
     _checkTags(model, type, hideFlags, name, lore, nbt, t);
 
     return Item(
@@ -354,17 +357,6 @@ class BookPage {
   BookPage.customFont(String char) {
     list = [TextComponent.customFont(char)];
   }
-}
-
-Map<String, dynamic> _copyDeepMap(Map<String, dynamic>? map) {
-  final newMap = <String, dynamic>{};
-
-  map?.forEach((key, value) {
-    newMap[key] =
-        (value is Map) ? _copyDeepMap(value.cast<String, dynamic>()) : value;
-  });
-
-  return newMap;
 }
 
 class UUID extends GsonValue {

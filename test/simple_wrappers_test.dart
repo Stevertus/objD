@@ -62,13 +62,15 @@ void main() {
     );
   });
 
-  command('Return', Return(30), "return 30");
-
-  command(
-    'Schedule',
-    Schedule('function', ticks: 2.minutes),
-    "schedule function :function 120s",
-  );
+  group('Return', () {
+    command('integer', Return(30), "return 30");
+    command('fail', Return.fail(), "return fail");
+    command(
+      'run',
+      Return.run(Data.get(Entity.All(), path: 'path')),
+      "return run data get entity @a path",
+    );
+  });
 
   group('Damage', () {
     final e = Entity.All();
@@ -83,8 +85,11 @@ void main() {
       ),
       "damage $e 10.0 by $e from @s",
     );
-    command('at', Damage.at(Location.here(), target: e, amount: 50),
-        "damage $e 50.0 at ~ ~ ~");
+    command(
+      'at',
+      Damage.at(Location.here(), target: e, amount: 50),
+      "damage $e 50.0 at ~ ~ ~",
+    );
     test('failure', () {
       expect(
         () => Damage(
@@ -94,6 +99,46 @@ void main() {
           amount: 50,
           cause: Entity.All(),
         ),
+        throwsA(
+          isA<AssertionError>(),
+        ),
+      );
+    });
+  });
+
+  group('Random', () {
+    command(
+      'simple',
+      Random(Range(1, 10)),
+      "random value 1..10",
+    );
+    command(
+      'roll',
+      Random(Range(1, 10), roll: true),
+      "random roll 1..10",
+    );
+    command(
+      'sequence',
+      Random(Range(1, 10), sequence: 'test'),
+      "random value 1..10 test",
+    );
+    command('reset simple', Random.reset('test'), "random reset test");
+    command(
+      'reset complex',
+      Random.reset(
+        'test',
+        seed: 1234,
+        includeWorldSeed: false,
+        includeSequenceId: true,
+      ),
+      "random reset test 1234 false true",
+    );
+    test('reset failure', () {
+      expect(
+        () => Random.reset(
+          'test',
+          includeWorldSeed: false,
+        ).generate(Context(version: 20.1)),
         throwsA(
           isA<AssertionError>(),
         ),

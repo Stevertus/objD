@@ -6,14 +6,21 @@ class Items {
   import cog
   import requests
 
-  version = '1.20/releases-candidate/1.20.1-rc1'
+  version = '1.20/releases/1.20.4'
+  snapshot = '1.20/snapshots/23w51b'
 
-  res = requests.get(f'https://raw.githubusercontent.com/PixiGeko/Minecraft-generated-data/master/{version}/custom-generated/registries/item.txt')
+  res = requests.get(f'https://raw.githubusercontent.com/PixiGeko/Minecraft-generated-data/master/{snapshot}/custom-generated/registries/item.txt')
+  res_release = requests.get(f'https://raw.githubusercontent.com/PixiGeko/Minecraft-generated-data/master/{version}/custom-generated/registries/item.txt')
+  release_lines = set(res_release.iter_lines())
   blocks = []
+  next_blocks = []
   for l in res.iter_lines():
       full = l.decode('UTF-8')
       id = full.split(':')[1]
-      blocks.append(id)
+      if l in release_lines:
+        blocks.append(id)
+      else:
+        next_blocks.append(id)
       cog.outl(f'/// ![{id}](https://minecraftitemids.com/item/32/{id}.png) \ ')
       cog.outl(f"/// [{' '.join(s.capitalize() for s in id.split('_'))}](https://minecraft.wiki/w/{id}) \ ")
       cog.outl(f'/// _{full}_')
@@ -189,6 +196,17 @@ class Items {
   /// _minecraft:archer_pottery_sherd_
   static const Item archer_pottery_sherd =
       Item.type('minecraft:archer_pottery_sherd');
+
+  /// ![armadillo_scute](https://minecraftitemids.com/item/32/armadillo_scute.png) \
+  /// [Armadillo Scute](https://minecraft.wiki/w/armadillo_scute) \
+  /// _minecraft:armadillo_scute_
+  static const Item armadillo_scute = Item.type('minecraft:armadillo_scute');
+
+  /// ![armadillo_spawn_egg](https://minecraftitemids.com/item/32/armadillo_spawn_egg.png) \
+  /// [Armadillo Spawn Egg](https://minecraft.wiki/w/armadillo_spawn_egg) \
+  /// _minecraft:armadillo_spawn_egg_
+  static const Item armadillo_spawn_egg =
+      Item.type('minecraft:armadillo_spawn_egg');
 
   /// ![armor_stand](https://minecraftitemids.com/item/32/armor_stand.png) \
   /// [Armor Stand](https://minecraft.wiki/w/armor_stand) \
@@ -747,6 +765,11 @@ class Items {
   /// _minecraft:bread_
   static const Item bread = Item.type('minecraft:bread');
 
+  /// ![breeze_spawn_egg](https://minecraftitemids.com/item/32/breeze_spawn_egg.png) \
+  /// [Breeze Spawn Egg](https://minecraft.wiki/w/breeze_spawn_egg) \
+  /// _minecraft:breeze_spawn_egg_
+  static const Item breeze_spawn_egg = Item.type('minecraft:breeze_spawn_egg');
+
   /// ![brewer_pottery_sherd](https://minecraftitemids.com/item/32/brewer_pottery_sherd.png) \
   /// [Brewer Pottery Sherd](https://minecraft.wiki/w/brewer_pottery_sherd) \
   /// _minecraft:brewer_pottery_sherd_
@@ -1139,6 +1162,11 @@ class Items {
   static const Item chiseled_bookshelf =
       Item.type('minecraft:chiseled_bookshelf');
 
+  /// ![chiseled_copper](https://minecraftitemids.com/item/32/chiseled_copper.png) \
+  /// [Chiseled Copper](https://minecraft.wiki/w/chiseled_copper) \
+  /// _minecraft:chiseled_copper_
+  static const Item chiseled_copper = Item.type('minecraft:chiseled_copper');
+
   /// ![chiseled_deepslate](https://minecraftitemids.com/item/32/chiseled_deepslate.png) \
   /// [Chiseled Deepslate](https://minecraft.wiki/w/chiseled_deepslate) \
   /// _minecraft:chiseled_deepslate_
@@ -1180,6 +1208,17 @@ class Items {
   /// _minecraft:chiseled_stone_bricks_
   static const Item chiseled_stone_bricks =
       Item.type('minecraft:chiseled_stone_bricks');
+
+  /// ![chiseled_tuff](https://minecraftitemids.com/item/32/chiseled_tuff.png) \
+  /// [Chiseled Tuff](https://minecraft.wiki/w/chiseled_tuff) \
+  /// _minecraft:chiseled_tuff_
+  static const Item chiseled_tuff = Item.type('minecraft:chiseled_tuff');
+
+  /// ![chiseled_tuff_bricks](https://minecraftitemids.com/item/32/chiseled_tuff_bricks.png) \
+  /// [Chiseled Tuff Bricks](https://minecraft.wiki/w/chiseled_tuff_bricks) \
+  /// _minecraft:chiseled_tuff_bricks_
+  static const Item chiseled_tuff_bricks =
+      Item.type('minecraft:chiseled_tuff_bricks');
 
   /// ![chorus_flower](https://minecraftitemids.com/item/32/chorus_flower.png) \
   /// [Chorus Flower](https://minecraft.wiki/w/chorus_flower) \
@@ -1383,6 +1422,21 @@ class Items {
   /// _minecraft:copper_block_
   static const Item copper_block = Item.type('minecraft:copper_block');
 
+  /// ![copper_bulb](https://minecraftitemids.com/item/32/copper_bulb.png) \
+  /// [Copper Bulb](https://minecraft.wiki/w/copper_bulb) \
+  /// _minecraft:copper_bulb_
+  static const Item copper_bulb = Item.type('minecraft:copper_bulb');
+
+  /// ![copper_door](https://minecraftitemids.com/item/32/copper_door.png) \
+  /// [Copper Door](https://minecraft.wiki/w/copper_door) \
+  /// _minecraft:copper_door_
+  static const Item copper_door = Item.type('minecraft:copper_door');
+
+  /// ![copper_grate](https://minecraftitemids.com/item/32/copper_grate.png) \
+  /// [Copper Grate](https://minecraft.wiki/w/copper_grate) \
+  /// _minecraft:copper_grate_
+  static const Item copper_grate = Item.type('minecraft:copper_grate');
+
   /// ![copper_ingot](https://minecraftitemids.com/item/32/copper_ingot.png) \
   /// [Copper Ingot](https://minecraft.wiki/w/copper_ingot) \
   /// _minecraft:copper_ingot_
@@ -1392,6 +1446,11 @@ class Items {
   /// [Copper Ore](https://minecraft.wiki/w/copper_ore) \
   /// _minecraft:copper_ore_
   static const Item copper_ore = Item.type('minecraft:copper_ore');
+
+  /// ![copper_trapdoor](https://minecraftitemids.com/item/32/copper_trapdoor.png) \
+  /// [Copper Trapdoor](https://minecraft.wiki/w/copper_trapdoor) \
+  /// _minecraft:copper_trapdoor_
+  static const Item copper_trapdoor = Item.type('minecraft:copper_trapdoor');
 
   /// ![cornflower](https://minecraftitemids.com/item/32/cornflower.png) \
   /// [Cornflower](https://minecraft.wiki/w/cornflower) \
@@ -1432,6 +1491,11 @@ class Items {
   /// _minecraft:cracked_stone_bricks_
   static const Item cracked_stone_bricks =
       Item.type('minecraft:cracked_stone_bricks');
+
+  /// ![crafter](https://minecraftitemids.com/item/32/crafter.png) \
+  /// [Crafter](https://minecraft.wiki/w/crafter) \
+  /// _minecraft:crafter_
+  static const Item crafter = Item.type('minecraft:crafter');
 
   /// ![crafting_table](https://minecraftitemids.com/item/32/crafting_table.png) \
   /// [Crafting Table](https://minecraft.wiki/w/crafting_table) \
@@ -2300,10 +2364,40 @@ class Items {
   static const Item explorer_pottery_sherd =
       Item.type('minecraft:explorer_pottery_sherd');
 
+  /// ![exposed_chiseled_copper](https://minecraftitemids.com/item/32/exposed_chiseled_copper.png) \
+  /// [Exposed Chiseled Copper](https://minecraft.wiki/w/exposed_chiseled_copper) \
+  /// _minecraft:exposed_chiseled_copper_
+  static const Item exposed_chiseled_copper =
+      Item.type('minecraft:exposed_chiseled_copper');
+
   /// ![exposed_copper](https://minecraftitemids.com/item/32/exposed_copper.png) \
   /// [Exposed Copper](https://minecraft.wiki/w/exposed_copper) \
   /// _minecraft:exposed_copper_
   static const Item exposed_copper = Item.type('minecraft:exposed_copper');
+
+  /// ![exposed_copper_bulb](https://minecraftitemids.com/item/32/exposed_copper_bulb.png) \
+  /// [Exposed Copper Bulb](https://minecraft.wiki/w/exposed_copper_bulb) \
+  /// _minecraft:exposed_copper_bulb_
+  static const Item exposed_copper_bulb =
+      Item.type('minecraft:exposed_copper_bulb');
+
+  /// ![exposed_copper_door](https://minecraftitemids.com/item/32/exposed_copper_door.png) \
+  /// [Exposed Copper Door](https://minecraft.wiki/w/exposed_copper_door) \
+  /// _minecraft:exposed_copper_door_
+  static const Item exposed_copper_door =
+      Item.type('minecraft:exposed_copper_door');
+
+  /// ![exposed_copper_grate](https://minecraftitemids.com/item/32/exposed_copper_grate.png) \
+  /// [Exposed Copper Grate](https://minecraft.wiki/w/exposed_copper_grate) \
+  /// _minecraft:exposed_copper_grate_
+  static const Item exposed_copper_grate =
+      Item.type('minecraft:exposed_copper_grate');
+
+  /// ![exposed_copper_trapdoor](https://minecraftitemids.com/item/32/exposed_copper_trapdoor.png) \
+  /// [Exposed Copper Trapdoor](https://minecraft.wiki/w/exposed_copper_trapdoor) \
+  /// _minecraft:exposed_copper_trapdoor_
+  static const Item exposed_copper_trapdoor =
+      Item.type('minecraft:exposed_copper_trapdoor');
 
   /// ![exposed_cut_copper](https://minecraftitemids.com/item/32/exposed_cut_copper.png) \
   /// [Exposed Cut Copper](https://minecraft.wiki/w/exposed_cut_copper) \
@@ -2648,11 +2742,6 @@ class Items {
   /// [Granite Wall](https://minecraft.wiki/w/granite_wall) \
   /// _minecraft:granite_wall_
   static const Item granite_wall = Item.type('minecraft:granite_wall');
-
-  /// ![grass](https://minecraftitemids.com/item/32/grass.png) \
-  /// [Grass](https://minecraft.wiki/w/grass) \
-  /// _minecraft:grass_
-  static const Item grass = Item.type('minecraft:grass');
 
   /// ![grass_block](https://minecraftitemids.com/item/32/grass_block.png) \
   /// [Grass Block](https://minecraft.wiki/w/grass_block) \
@@ -4327,10 +4416,40 @@ class Items {
   /// _minecraft:oxeye_daisy_
   static const Item oxeye_daisy = Item.type('minecraft:oxeye_daisy');
 
+  /// ![oxidized_chiseled_copper](https://minecraftitemids.com/item/32/oxidized_chiseled_copper.png) \
+  /// [Oxidized Chiseled Copper](https://minecraft.wiki/w/oxidized_chiseled_copper) \
+  /// _minecraft:oxidized_chiseled_copper_
+  static const Item oxidized_chiseled_copper =
+      Item.type('minecraft:oxidized_chiseled_copper');
+
   /// ![oxidized_copper](https://minecraftitemids.com/item/32/oxidized_copper.png) \
   /// [Oxidized Copper](https://minecraft.wiki/w/oxidized_copper) \
   /// _minecraft:oxidized_copper_
   static const Item oxidized_copper = Item.type('minecraft:oxidized_copper');
+
+  /// ![oxidized_copper_bulb](https://minecraftitemids.com/item/32/oxidized_copper_bulb.png) \
+  /// [Oxidized Copper Bulb](https://minecraft.wiki/w/oxidized_copper_bulb) \
+  /// _minecraft:oxidized_copper_bulb_
+  static const Item oxidized_copper_bulb =
+      Item.type('minecraft:oxidized_copper_bulb');
+
+  /// ![oxidized_copper_door](https://minecraftitemids.com/item/32/oxidized_copper_door.png) \
+  /// [Oxidized Copper Door](https://minecraft.wiki/w/oxidized_copper_door) \
+  /// _minecraft:oxidized_copper_door_
+  static const Item oxidized_copper_door =
+      Item.type('minecraft:oxidized_copper_door');
+
+  /// ![oxidized_copper_grate](https://minecraftitemids.com/item/32/oxidized_copper_grate.png) \
+  /// [Oxidized Copper Grate](https://minecraft.wiki/w/oxidized_copper_grate) \
+  /// _minecraft:oxidized_copper_grate_
+  static const Item oxidized_copper_grate =
+      Item.type('minecraft:oxidized_copper_grate');
+
+  /// ![oxidized_copper_trapdoor](https://minecraftitemids.com/item/32/oxidized_copper_trapdoor.png) \
+  /// [Oxidized Copper Trapdoor](https://minecraft.wiki/w/oxidized_copper_trapdoor) \
+  /// _minecraft:oxidized_copper_trapdoor_
+  static const Item oxidized_copper_trapdoor =
+      Item.type('minecraft:oxidized_copper_trapdoor');
 
   /// ![oxidized_cut_copper](https://minecraftitemids.com/item/32/oxidized_cut_copper.png) \
   /// [Oxidized Cut Copper](https://minecraft.wiki/w/oxidized_cut_copper) \
@@ -4708,6 +4827,29 @@ class Items {
   /// _minecraft:polished_granite_stairs_
   static const Item polished_granite_stairs =
       Item.type('minecraft:polished_granite_stairs');
+
+  /// ![polished_tuff](https://minecraftitemids.com/item/32/polished_tuff.png) \
+  /// [Polished Tuff](https://minecraft.wiki/w/polished_tuff) \
+  /// _minecraft:polished_tuff_
+  static const Item polished_tuff = Item.type('minecraft:polished_tuff');
+
+  /// ![polished_tuff_slab](https://minecraftitemids.com/item/32/polished_tuff_slab.png) \
+  /// [Polished Tuff Slab](https://minecraft.wiki/w/polished_tuff_slab) \
+  /// _minecraft:polished_tuff_slab_
+  static const Item polished_tuff_slab =
+      Item.type('minecraft:polished_tuff_slab');
+
+  /// ![polished_tuff_stairs](https://minecraftitemids.com/item/32/polished_tuff_stairs.png) \
+  /// [Polished Tuff Stairs](https://minecraft.wiki/w/polished_tuff_stairs) \
+  /// _minecraft:polished_tuff_stairs_
+  static const Item polished_tuff_stairs =
+      Item.type('minecraft:polished_tuff_stairs');
+
+  /// ![polished_tuff_wall](https://minecraftitemids.com/item/32/polished_tuff_wall.png) \
+  /// [Polished Tuff Wall](https://minecraft.wiki/w/polished_tuff_wall) \
+  /// _minecraft:polished_tuff_wall_
+  static const Item polished_tuff_wall =
+      Item.type('minecraft:polished_tuff_wall');
 
   /// ![popped_chorus_fruit](https://minecraftitemids.com/item/32/popped_chorus_fruit.png) \
   /// [Popped Chorus Fruit](https://minecraft.wiki/w/popped_chorus_fruit) \
@@ -5312,11 +5454,6 @@ class Items {
   /// _minecraft:sculk_vein_
   static const Item sculk_vein = Item.type('minecraft:sculk_vein');
 
-  /// ![scute](https://minecraftitemids.com/item/32/scute.png) \
-  /// [Scute](https://minecraft.wiki/w/scute) \
-  /// _minecraft:scute_
-  static const Item scute = Item.type('minecraft:scute');
-
   /// ![sea_lantern](https://minecraftitemids.com/item/32/sea_lantern.png) \
   /// [Sea Lantern](https://minecraft.wiki/w/sea_lantern) \
   /// _minecraft:sea_lantern_
@@ -5370,6 +5507,11 @@ class Items {
   /// [Shield](https://minecraft.wiki/w/shield) \
   /// _minecraft:shield_
   static const Item shield = Item.type('minecraft:shield');
+
+  /// ![short_grass](https://minecraftitemids.com/item/32/short_grass.png) \
+  /// [Short Grass](https://minecraft.wiki/w/short_grass) \
+  /// _minecraft:short_grass_
+  static const Item short_grass = Item.type('minecraft:short_grass');
 
   /// ![shroomlight](https://minecraftitemids.com/item/32/shroomlight.png) \
   /// [Shroomlight](https://minecraft.wiki/w/shroomlight) \
@@ -6104,6 +6246,16 @@ class Items {
   /// _minecraft:trapped_chest_
   static const Item trapped_chest = Item.type('minecraft:trapped_chest');
 
+  /// ![trial_key](https://minecraftitemids.com/item/32/trial_key.png) \
+  /// [Trial Key](https://minecraft.wiki/w/trial_key) \
+  /// _minecraft:trial_key_
+  static const Item trial_key = Item.type('minecraft:trial_key');
+
+  /// ![trial_spawner](https://minecraftitemids.com/item/32/trial_spawner.png) \
+  /// [Trial Spawner](https://minecraft.wiki/w/trial_spawner) \
+  /// _minecraft:trial_spawner_
+  static const Item trial_spawner = Item.type('minecraft:trial_spawner');
+
   /// ![trident](https://minecraftitemids.com/item/32/trident.png) \
   /// [Trident](https://minecraft.wiki/w/trident) \
   /// _minecraft:trident_
@@ -6151,6 +6303,42 @@ class Items {
   /// _minecraft:tuff_
   static const Item tuff = Item.type('minecraft:tuff');
 
+  /// ![tuff_brick_slab](https://minecraftitemids.com/item/32/tuff_brick_slab.png) \
+  /// [Tuff Brick Slab](https://minecraft.wiki/w/tuff_brick_slab) \
+  /// _minecraft:tuff_brick_slab_
+  static const Item tuff_brick_slab = Item.type('minecraft:tuff_brick_slab');
+
+  /// ![tuff_brick_stairs](https://minecraftitemids.com/item/32/tuff_brick_stairs.png) \
+  /// [Tuff Brick Stairs](https://minecraft.wiki/w/tuff_brick_stairs) \
+  /// _minecraft:tuff_brick_stairs_
+  static const Item tuff_brick_stairs =
+      Item.type('minecraft:tuff_brick_stairs');
+
+  /// ![tuff_brick_wall](https://minecraftitemids.com/item/32/tuff_brick_wall.png) \
+  /// [Tuff Brick Wall](https://minecraft.wiki/w/tuff_brick_wall) \
+  /// _minecraft:tuff_brick_wall_
+  static const Item tuff_brick_wall = Item.type('minecraft:tuff_brick_wall');
+
+  /// ![tuff_bricks](https://minecraftitemids.com/item/32/tuff_bricks.png) \
+  /// [Tuff Bricks](https://minecraft.wiki/w/tuff_bricks) \
+  /// _minecraft:tuff_bricks_
+  static const Item tuff_bricks = Item.type('minecraft:tuff_bricks');
+
+  /// ![tuff_slab](https://minecraftitemids.com/item/32/tuff_slab.png) \
+  /// [Tuff Slab](https://minecraft.wiki/w/tuff_slab) \
+  /// _minecraft:tuff_slab_
+  static const Item tuff_slab = Item.type('minecraft:tuff_slab');
+
+  /// ![tuff_stairs](https://minecraftitemids.com/item/32/tuff_stairs.png) \
+  /// [Tuff Stairs](https://minecraft.wiki/w/tuff_stairs) \
+  /// _minecraft:tuff_stairs_
+  static const Item tuff_stairs = Item.type('minecraft:tuff_stairs');
+
+  /// ![tuff_wall](https://minecraftitemids.com/item/32/tuff_wall.png) \
+  /// [Tuff Wall](https://minecraft.wiki/w/tuff_wall) \
+  /// _minecraft:tuff_wall_
+  static const Item tuff_wall = Item.type('minecraft:tuff_wall');
+
   /// ![turtle_egg](https://minecraftitemids.com/item/32/turtle_egg.png) \
   /// [Turtle Egg](https://minecraft.wiki/w/turtle_egg) \
   /// _minecraft:turtle_egg_
@@ -6160,6 +6348,11 @@ class Items {
   /// [Turtle Helmet](https://minecraft.wiki/w/turtle_helmet) \
   /// _minecraft:turtle_helmet_
   static const Item turtle_helmet = Item.type('minecraft:turtle_helmet');
+
+  /// ![turtle_scute](https://minecraftitemids.com/item/32/turtle_scute.png) \
+  /// [Turtle Scute](https://minecraft.wiki/w/turtle_scute) \
+  /// _minecraft:turtle_scute_
+  static const Item turtle_scute = Item.type('minecraft:turtle_scute');
 
   /// ![turtle_spawn_egg](https://minecraftitemids.com/item/32/turtle_spawn_egg.png) \
   /// [Turtle Spawn Egg](https://minecraft.wiki/w/turtle_spawn_egg) \
@@ -6322,11 +6515,41 @@ class Items {
   /// _minecraft:water_bucket_
   static const Item water_bucket = Item.type('minecraft:water_bucket');
 
+  /// ![waxed_chiseled_copper](https://minecraftitemids.com/item/32/waxed_chiseled_copper.png) \
+  /// [Waxed Chiseled Copper](https://minecraft.wiki/w/waxed_chiseled_copper) \
+  /// _minecraft:waxed_chiseled_copper_
+  static const Item waxed_chiseled_copper =
+      Item.type('minecraft:waxed_chiseled_copper');
+
   /// ![waxed_copper_block](https://minecraftitemids.com/item/32/waxed_copper_block.png) \
   /// [Waxed Copper Block](https://minecraft.wiki/w/waxed_copper_block) \
   /// _minecraft:waxed_copper_block_
   static const Item waxed_copper_block =
       Item.type('minecraft:waxed_copper_block');
+
+  /// ![waxed_copper_bulb](https://minecraftitemids.com/item/32/waxed_copper_bulb.png) \
+  /// [Waxed Copper Bulb](https://minecraft.wiki/w/waxed_copper_bulb) \
+  /// _minecraft:waxed_copper_bulb_
+  static const Item waxed_copper_bulb =
+      Item.type('minecraft:waxed_copper_bulb');
+
+  /// ![waxed_copper_door](https://minecraftitemids.com/item/32/waxed_copper_door.png) \
+  /// [Waxed Copper Door](https://minecraft.wiki/w/waxed_copper_door) \
+  /// _minecraft:waxed_copper_door_
+  static const Item waxed_copper_door =
+      Item.type('minecraft:waxed_copper_door');
+
+  /// ![waxed_copper_grate](https://minecraftitemids.com/item/32/waxed_copper_grate.png) \
+  /// [Waxed Copper Grate](https://minecraft.wiki/w/waxed_copper_grate) \
+  /// _minecraft:waxed_copper_grate_
+  static const Item waxed_copper_grate =
+      Item.type('minecraft:waxed_copper_grate');
+
+  /// ![waxed_copper_trapdoor](https://minecraftitemids.com/item/32/waxed_copper_trapdoor.png) \
+  /// [Waxed Copper Trapdoor](https://minecraft.wiki/w/waxed_copper_trapdoor) \
+  /// _minecraft:waxed_copper_trapdoor_
+  static const Item waxed_copper_trapdoor =
+      Item.type('minecraft:waxed_copper_trapdoor');
 
   /// ![waxed_cut_copper](https://minecraftitemids.com/item/32/waxed_cut_copper.png) \
   /// [Waxed Cut Copper](https://minecraft.wiki/w/waxed_cut_copper) \
@@ -6345,11 +6568,41 @@ class Items {
   static const Item waxed_cut_copper_stairs =
       Item.type('minecraft:waxed_cut_copper_stairs');
 
+  /// ![waxed_exposed_chiseled_copper](https://minecraftitemids.com/item/32/waxed_exposed_chiseled_copper.png) \
+  /// [Waxed Exposed Chiseled Copper](https://minecraft.wiki/w/waxed_exposed_chiseled_copper) \
+  /// _minecraft:waxed_exposed_chiseled_copper_
+  static const Item waxed_exposed_chiseled_copper =
+      Item.type('minecraft:waxed_exposed_chiseled_copper');
+
   /// ![waxed_exposed_copper](https://minecraftitemids.com/item/32/waxed_exposed_copper.png) \
   /// [Waxed Exposed Copper](https://minecraft.wiki/w/waxed_exposed_copper) \
   /// _minecraft:waxed_exposed_copper_
   static const Item waxed_exposed_copper =
       Item.type('minecraft:waxed_exposed_copper');
+
+  /// ![waxed_exposed_copper_bulb](https://minecraftitemids.com/item/32/waxed_exposed_copper_bulb.png) \
+  /// [Waxed Exposed Copper Bulb](https://minecraft.wiki/w/waxed_exposed_copper_bulb) \
+  /// _minecraft:waxed_exposed_copper_bulb_
+  static const Item waxed_exposed_copper_bulb =
+      Item.type('minecraft:waxed_exposed_copper_bulb');
+
+  /// ![waxed_exposed_copper_door](https://minecraftitemids.com/item/32/waxed_exposed_copper_door.png) \
+  /// [Waxed Exposed Copper Door](https://minecraft.wiki/w/waxed_exposed_copper_door) \
+  /// _minecraft:waxed_exposed_copper_door_
+  static const Item waxed_exposed_copper_door =
+      Item.type('minecraft:waxed_exposed_copper_door');
+
+  /// ![waxed_exposed_copper_grate](https://minecraftitemids.com/item/32/waxed_exposed_copper_grate.png) \
+  /// [Waxed Exposed Copper Grate](https://minecraft.wiki/w/waxed_exposed_copper_grate) \
+  /// _minecraft:waxed_exposed_copper_grate_
+  static const Item waxed_exposed_copper_grate =
+      Item.type('minecraft:waxed_exposed_copper_grate');
+
+  /// ![waxed_exposed_copper_trapdoor](https://minecraftitemids.com/item/32/waxed_exposed_copper_trapdoor.png) \
+  /// [Waxed Exposed Copper Trapdoor](https://minecraft.wiki/w/waxed_exposed_copper_trapdoor) \
+  /// _minecraft:waxed_exposed_copper_trapdoor_
+  static const Item waxed_exposed_copper_trapdoor =
+      Item.type('minecraft:waxed_exposed_copper_trapdoor');
 
   /// ![waxed_exposed_cut_copper](https://minecraftitemids.com/item/32/waxed_exposed_cut_copper.png) \
   /// [Waxed Exposed Cut Copper](https://minecraft.wiki/w/waxed_exposed_cut_copper) \
@@ -6369,11 +6622,41 @@ class Items {
   static const Item waxed_exposed_cut_copper_stairs =
       Item.type('minecraft:waxed_exposed_cut_copper_stairs');
 
+  /// ![waxed_oxidized_chiseled_copper](https://minecraftitemids.com/item/32/waxed_oxidized_chiseled_copper.png) \
+  /// [Waxed Oxidized Chiseled Copper](https://minecraft.wiki/w/waxed_oxidized_chiseled_copper) \
+  /// _minecraft:waxed_oxidized_chiseled_copper_
+  static const Item waxed_oxidized_chiseled_copper =
+      Item.type('minecraft:waxed_oxidized_chiseled_copper');
+
   /// ![waxed_oxidized_copper](https://minecraftitemids.com/item/32/waxed_oxidized_copper.png) \
   /// [Waxed Oxidized Copper](https://minecraft.wiki/w/waxed_oxidized_copper) \
   /// _minecraft:waxed_oxidized_copper_
   static const Item waxed_oxidized_copper =
       Item.type('minecraft:waxed_oxidized_copper');
+
+  /// ![waxed_oxidized_copper_bulb](https://minecraftitemids.com/item/32/waxed_oxidized_copper_bulb.png) \
+  /// [Waxed Oxidized Copper Bulb](https://minecraft.wiki/w/waxed_oxidized_copper_bulb) \
+  /// _minecraft:waxed_oxidized_copper_bulb_
+  static const Item waxed_oxidized_copper_bulb =
+      Item.type('minecraft:waxed_oxidized_copper_bulb');
+
+  /// ![waxed_oxidized_copper_door](https://minecraftitemids.com/item/32/waxed_oxidized_copper_door.png) \
+  /// [Waxed Oxidized Copper Door](https://minecraft.wiki/w/waxed_oxidized_copper_door) \
+  /// _minecraft:waxed_oxidized_copper_door_
+  static const Item waxed_oxidized_copper_door =
+      Item.type('minecraft:waxed_oxidized_copper_door');
+
+  /// ![waxed_oxidized_copper_grate](https://minecraftitemids.com/item/32/waxed_oxidized_copper_grate.png) \
+  /// [Waxed Oxidized Copper Grate](https://minecraft.wiki/w/waxed_oxidized_copper_grate) \
+  /// _minecraft:waxed_oxidized_copper_grate_
+  static const Item waxed_oxidized_copper_grate =
+      Item.type('minecraft:waxed_oxidized_copper_grate');
+
+  /// ![waxed_oxidized_copper_trapdoor](https://minecraftitemids.com/item/32/waxed_oxidized_copper_trapdoor.png) \
+  /// [Waxed Oxidized Copper Trapdoor](https://minecraft.wiki/w/waxed_oxidized_copper_trapdoor) \
+  /// _minecraft:waxed_oxidized_copper_trapdoor_
+  static const Item waxed_oxidized_copper_trapdoor =
+      Item.type('minecraft:waxed_oxidized_copper_trapdoor');
 
   /// ![waxed_oxidized_cut_copper](https://minecraftitemids.com/item/32/waxed_oxidized_cut_copper.png) \
   /// [Waxed Oxidized Cut Copper](https://minecraft.wiki/w/waxed_oxidized_cut_copper) \
@@ -6393,11 +6676,41 @@ class Items {
   static const Item waxed_oxidized_cut_copper_stairs =
       Item.type('minecraft:waxed_oxidized_cut_copper_stairs');
 
+  /// ![waxed_weathered_chiseled_copper](https://minecraftitemids.com/item/32/waxed_weathered_chiseled_copper.png) \
+  /// [Waxed Weathered Chiseled Copper](https://minecraft.wiki/w/waxed_weathered_chiseled_copper) \
+  /// _minecraft:waxed_weathered_chiseled_copper_
+  static const Item waxed_weathered_chiseled_copper =
+      Item.type('minecraft:waxed_weathered_chiseled_copper');
+
   /// ![waxed_weathered_copper](https://minecraftitemids.com/item/32/waxed_weathered_copper.png) \
   /// [Waxed Weathered Copper](https://minecraft.wiki/w/waxed_weathered_copper) \
   /// _minecraft:waxed_weathered_copper_
   static const Item waxed_weathered_copper =
       Item.type('minecraft:waxed_weathered_copper');
+
+  /// ![waxed_weathered_copper_bulb](https://minecraftitemids.com/item/32/waxed_weathered_copper_bulb.png) \
+  /// [Waxed Weathered Copper Bulb](https://minecraft.wiki/w/waxed_weathered_copper_bulb) \
+  /// _minecraft:waxed_weathered_copper_bulb_
+  static const Item waxed_weathered_copper_bulb =
+      Item.type('minecraft:waxed_weathered_copper_bulb');
+
+  /// ![waxed_weathered_copper_door](https://minecraftitemids.com/item/32/waxed_weathered_copper_door.png) \
+  /// [Waxed Weathered Copper Door](https://minecraft.wiki/w/waxed_weathered_copper_door) \
+  /// _minecraft:waxed_weathered_copper_door_
+  static const Item waxed_weathered_copper_door =
+      Item.type('minecraft:waxed_weathered_copper_door');
+
+  /// ![waxed_weathered_copper_grate](https://minecraftitemids.com/item/32/waxed_weathered_copper_grate.png) \
+  /// [Waxed Weathered Copper Grate](https://minecraft.wiki/w/waxed_weathered_copper_grate) \
+  /// _minecraft:waxed_weathered_copper_grate_
+  static const Item waxed_weathered_copper_grate =
+      Item.type('minecraft:waxed_weathered_copper_grate');
+
+  /// ![waxed_weathered_copper_trapdoor](https://minecraftitemids.com/item/32/waxed_weathered_copper_trapdoor.png) \
+  /// [Waxed Weathered Copper Trapdoor](https://minecraft.wiki/w/waxed_weathered_copper_trapdoor) \
+  /// _minecraft:waxed_weathered_copper_trapdoor_
+  static const Item waxed_weathered_copper_trapdoor =
+      Item.type('minecraft:waxed_weathered_copper_trapdoor');
 
   /// ![waxed_weathered_cut_copper](https://minecraftitemids.com/item/32/waxed_weathered_cut_copper.png) \
   /// [Waxed Weathered Cut Copper](https://minecraft.wiki/w/waxed_weathered_cut_copper) \
@@ -6423,10 +6736,40 @@ class Items {
   static const Item wayfinder_armor_trim_smithing_template =
       Item.type('minecraft:wayfinder_armor_trim_smithing_template');
 
+  /// ![weathered_chiseled_copper](https://minecraftitemids.com/item/32/weathered_chiseled_copper.png) \
+  /// [Weathered Chiseled Copper](https://minecraft.wiki/w/weathered_chiseled_copper) \
+  /// _minecraft:weathered_chiseled_copper_
+  static const Item weathered_chiseled_copper =
+      Item.type('minecraft:weathered_chiseled_copper');
+
   /// ![weathered_copper](https://minecraftitemids.com/item/32/weathered_copper.png) \
   /// [Weathered Copper](https://minecraft.wiki/w/weathered_copper) \
   /// _minecraft:weathered_copper_
   static const Item weathered_copper = Item.type('minecraft:weathered_copper');
+
+  /// ![weathered_copper_bulb](https://minecraftitemids.com/item/32/weathered_copper_bulb.png) \
+  /// [Weathered Copper Bulb](https://minecraft.wiki/w/weathered_copper_bulb) \
+  /// _minecraft:weathered_copper_bulb_
+  static const Item weathered_copper_bulb =
+      Item.type('minecraft:weathered_copper_bulb');
+
+  /// ![weathered_copper_door](https://minecraftitemids.com/item/32/weathered_copper_door.png) \
+  /// [Weathered Copper Door](https://minecraft.wiki/w/weathered_copper_door) \
+  /// _minecraft:weathered_copper_door_
+  static const Item weathered_copper_door =
+      Item.type('minecraft:weathered_copper_door');
+
+  /// ![weathered_copper_grate](https://minecraftitemids.com/item/32/weathered_copper_grate.png) \
+  /// [Weathered Copper Grate](https://minecraft.wiki/w/weathered_copper_grate) \
+  /// _minecraft:weathered_copper_grate_
+  static const Item weathered_copper_grate =
+      Item.type('minecraft:weathered_copper_grate');
+
+  /// ![weathered_copper_trapdoor](https://minecraftitemids.com/item/32/weathered_copper_trapdoor.png) \
+  /// [Weathered Copper Trapdoor](https://minecraft.wiki/w/weathered_copper_trapdoor) \
+  /// _minecraft:weathered_copper_trapdoor_
+  static const Item weathered_copper_trapdoor =
+      Item.type('minecraft:weathered_copper_trapdoor');
 
   /// ![weathered_cut_copper](https://minecraftitemids.com/item/32/weathered_cut_copper.png) \
   /// [Weathered Cut Copper](https://minecraft.wiki/w/weathered_cut_copper) \
@@ -6573,6 +6916,11 @@ class Items {
   /// [Wither Spawn Egg](https://minecraft.wiki/w/wither_spawn_egg) \
   /// _minecraft:wither_spawn_egg_
   static const Item wither_spawn_egg = Item.type('minecraft:wither_spawn_egg');
+
+  /// ![wolf_armor](https://minecraftitemids.com/item/32/wolf_armor.png) \
+  /// [Wolf Armor](https://minecraft.wiki/w/wolf_armor) \
+  /// _minecraft:wolf_armor_
+  static const Item wolf_armor = Item.type('minecraft:wolf_armor');
 
   /// ![wolf_spawn_egg](https://minecraftitemids.com/item/32/wolf_spawn_egg.png) \
   /// [Wolf Spawn Egg](https://minecraft.wiki/w/wolf_spawn_egg) \
@@ -6866,6 +7214,7 @@ class Items {
         brain_coral_block,
         brain_coral_fan,
         bread,
+        breeze_spawn_egg,
         brewer_pottery_sherd,
         brewing_stand,
         brick,
@@ -6940,6 +7289,7 @@ class Items {
         chicken_spawn_egg,
         chipped_anvil,
         chiseled_bookshelf,
+        chiseled_copper,
         chiseled_deepslate,
         chiseled_nether_bricks,
         chiseled_polished_blackstone,
@@ -6947,6 +7297,8 @@ class Items {
         chiseled_red_sandstone,
         chiseled_sandstone,
         chiseled_stone_bricks,
+        chiseled_tuff,
+        chiseled_tuff_bricks,
         chorus_flower,
         chorus_fruit,
         chorus_plant,
@@ -6986,8 +7338,12 @@ class Items {
         cooked_salmon,
         cookie,
         copper_block,
+        copper_bulb,
+        copper_door,
+        copper_grate,
         copper_ingot,
         copper_ore,
+        copper_trapdoor,
         cornflower,
         cow_spawn_egg,
         cracked_deepslate_bricks,
@@ -6995,6 +7351,7 @@ class Items {
         cracked_nether_bricks,
         cracked_polished_blackstone_bricks,
         cracked_stone_bricks,
+        crafter,
         crafting_table,
         creeper_banner_pattern,
         creeper_head,
@@ -7156,7 +7513,12 @@ class Items {
         evoker_spawn_egg,
         experience_bottle,
         explorer_pottery_sherd,
+        exposed_chiseled_copper,
         exposed_copper,
+        exposed_copper_bulb,
+        exposed_copper_door,
+        exposed_copper_grate,
+        exposed_copper_trapdoor,
         exposed_cut_copper,
         exposed_cut_copper_slab,
         exposed_cut_copper_stairs,
@@ -7223,7 +7585,6 @@ class Items {
         granite_slab,
         granite_stairs,
         granite_wall,
-        grass,
         grass_block,
         gravel,
         gray_banner,
@@ -7538,7 +7899,12 @@ class Items {
         orange_tulip,
         orange_wool,
         oxeye_daisy,
+        oxidized_chiseled_copper,
         oxidized_copper,
+        oxidized_copper_bulb,
+        oxidized_copper_door,
+        oxidized_copper_grate,
+        oxidized_copper_trapdoor,
         oxidized_cut_copper,
         oxidized_cut_copper_slab,
         oxidized_cut_copper_stairs,
@@ -7607,6 +7973,10 @@ class Items {
         polished_granite,
         polished_granite_slab,
         polished_granite_stairs,
+        polished_tuff,
+        polished_tuff_slab,
+        polished_tuff_stairs,
+        polished_tuff_wall,
         popped_chorus_fruit,
         poppy,
         porkchop,
@@ -7721,7 +8091,6 @@ class Items {
         sculk_sensor,
         sculk_shrieker,
         sculk_vein,
-        scute,
         sea_lantern,
         sea_pickle,
         seagrass,
@@ -7732,6 +8101,7 @@ class Items {
         sheep_spawn_egg,
         shelter_pottery_sherd,
         shield,
+        short_grass,
         shroomlight,
         shulker_box,
         shulker_shell,
@@ -7868,6 +8238,8 @@ class Items {
         totem_of_undying,
         trader_llama_spawn_egg,
         trapped_chest,
+        trial_key,
+        trial_spawner,
         trident,
         tripwire_hook,
         tropical_fish,
@@ -7877,6 +8249,13 @@ class Items {
         tube_coral_block,
         tube_coral_fan,
         tuff,
+        tuff_brick_slab,
+        tuff_brick_stairs,
+        tuff_brick_wall,
+        tuff_bricks,
+        tuff_slab,
+        tuff_stairs,
+        tuff_wall,
         turtle_egg,
         turtle_helmet,
         turtle_spawn_egg,
@@ -7909,24 +8288,49 @@ class Items {
         warped_trapdoor,
         warped_wart_block,
         water_bucket,
+        waxed_chiseled_copper,
         waxed_copper_block,
+        waxed_copper_bulb,
+        waxed_copper_door,
+        waxed_copper_grate,
+        waxed_copper_trapdoor,
         waxed_cut_copper,
         waxed_cut_copper_slab,
         waxed_cut_copper_stairs,
+        waxed_exposed_chiseled_copper,
         waxed_exposed_copper,
+        waxed_exposed_copper_bulb,
+        waxed_exposed_copper_door,
+        waxed_exposed_copper_grate,
+        waxed_exposed_copper_trapdoor,
         waxed_exposed_cut_copper,
         waxed_exposed_cut_copper_slab,
         waxed_exposed_cut_copper_stairs,
+        waxed_oxidized_chiseled_copper,
         waxed_oxidized_copper,
+        waxed_oxidized_copper_bulb,
+        waxed_oxidized_copper_door,
+        waxed_oxidized_copper_grate,
+        waxed_oxidized_copper_trapdoor,
         waxed_oxidized_cut_copper,
         waxed_oxidized_cut_copper_slab,
         waxed_oxidized_cut_copper_stairs,
+        waxed_weathered_chiseled_copper,
         waxed_weathered_copper,
+        waxed_weathered_copper_bulb,
+        waxed_weathered_copper_door,
+        waxed_weathered_copper_grate,
+        waxed_weathered_copper_trapdoor,
         waxed_weathered_cut_copper,
         waxed_weathered_cut_copper_slab,
         waxed_weathered_cut_copper_stairs,
         wayfinder_armor_trim_smithing_template,
+        weathered_chiseled_copper,
         weathered_copper,
+        weathered_copper_bulb,
+        weathered_copper_door,
+        weathered_copper_grate,
+        weathered_copper_trapdoor,
         weathered_cut_copper,
         weathered_cut_copper_slab,
         weathered_cut_copper_stairs,
@@ -7985,5 +8389,15 @@ class Items {
       ];
 
   /// A List of newer experimental items being introduced in the next minecraft version
-  static List<Item> get snapshot => const [];
+  static List<Item> get snapshot => const [
+        /*[[[cog
+    for b in next_blocks:
+      cog.outl(f'{b},')
+    ]]]*/
+        armadillo_scute,
+        armadillo_spawn_egg,
+        turtle_scute,
+        wolf_armor,
+        //[[[end]]]
+      ];
 }

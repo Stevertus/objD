@@ -4,6 +4,19 @@ import 'package:test/test.dart';
 import 'test_widget.dart';
 
 void main() {
+  group('Entity', () {
+    test('Self', () {
+      expect(Entity.Self().toString(), "@s");
+    });
+    test('Score', () {
+      expect(
+          Entity.Random(
+            scores: [Score(Entity(), 'test') > 5],
+            limit: 1,
+          ).toString(),
+          "@r[limit=1,scores={test=6..}]");
+    });
+  });
   group('Entity Clone', () {
     Entity newEntity = Entity(tags: ['test']);
     Entity clonedEntity = newEntity.copyWith(tags: ['testCloned']);

@@ -1,6 +1,6 @@
 import 'package:objd/core.dart';
 
-class Effect extends RestActionAble {
+class Effect extends RestActionAble implements GsonValue {
   EffectType? effect;
   Entity? entity;
 
@@ -40,14 +40,17 @@ class Effect extends RestActionAble {
 
   Map getMap() {
     var ret = {};
-    if (effect != null) ret['Id'] = EffectType.values.indexOf(effect!) + 1;
-    ret['Amplifier'] = Byte(amplifier != null ? amplifier! - 1 : 0);
-    ret['Duration'] = duration != null ? duration!.ticks : 0;
-    ret['ShowParticles'] = Byte(
+    if (effect != null) ret['id'] = EffectType.values.indexOf(effect!) + 1;
+    ret['amplifier'] = Byte(amplifier != null ? amplifier! - 1 : 0);
+    ret['duration'] = duration != null ? duration!.ticks : 0;
+    ret['show_particles'] = Byte(
       showParticles != null && showParticles! ? 1 : 0,
     );
     return ret;
   }
+
+  @override
+  String toSimple() => gson.encode(getMap());
 
   @override
   Widget generate(Context context) {

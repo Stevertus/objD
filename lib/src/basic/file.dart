@@ -1,7 +1,10 @@
+import 'package:gson/gson.dart';
 import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/build/build.dart';
+import 'package:objd/src/utils/storage.dart';
 
 import 'package:objd/src/wrappers/comment.dart';
+import 'package:objd/src/wrappers/data.dart';
 
 class File extends Widget {
   Widget? child;
@@ -12,6 +15,7 @@ class File extends Widget {
   bool? isRecursive;
   Comment? header;
   bool inheritFolder;
+  Object? arguments;
 
   /// The file class simply generates a new mcfunction file with content and a path.
   ///
@@ -46,7 +50,13 @@ class File extends Widget {
     this.create = true,
     this.header,
     this.inheritFolder = true,
+    this.arguments,
   }) : execute = true {
+    assert(arguments == null ||
+        arguments is Map ||
+        arguments is Storage ||
+        arguments is Entity ||
+        arguments is Location);
     path.replaceAll('.mcfunction', '');
     if (path.substring(0, 1) == '/') path = path.substring(1);
   }
@@ -86,21 +96,22 @@ class File extends Widget {
     String? pack,
     bool create = true,
     Comment? header,
+    Object? arguments,
   }) =>
-      File(
+      File.execute(
         path,
         child: StraitWidget(child),
-        execute: true,
         pack: pack,
         create: create,
         header: header,
       );
 
-  File run({bool create = false}) => File.execute(
+  File run({bool create = false, Object? arguments}) => File.execute(
         path,
         pack: pack,
         create: create,
         child: child,
+        arguments: arguments,
       );
 
   Path fullPath([Path? p]) => inheritFolder && p != null
@@ -108,11 +119,21 @@ class File extends Widget {
       : Path.from(path, type: 'mcfunction');
 
   @override
-  Widget generate(Context context) {
+  Command generate(Context context) {
     if (isRecursive != null && isRecursive!) path = context.file;
 
     pack ??= context.packId;
-    return Command('function $pack:$path');
+
+    final argString = switch (arguments) {
+      Map _ => ' ${gson.encode(arguments)}',
+      Entity e => ' with entity $e',
+      Block b => ' with block $b',
+      Storage(name: final name, key: final String key) =>
+        ' with storage ${DataStorage(name).toString(context)} $key',
+      _ => ''
+    };
+
+    return Command('function $pack:$path$argString');
   }
 
   @override

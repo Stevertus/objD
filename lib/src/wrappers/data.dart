@@ -270,6 +270,8 @@ class DataStorage {
 
   @override
   String toString([Context? context]) {
-    return context != null && autoNamespace ? '${context.packId}:$name' : name;
+    return context != null && autoNamespace && !name.contains(':')
+        ? '${context.packId}:$name'
+        : name;
   }
 }
