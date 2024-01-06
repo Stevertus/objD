@@ -129,7 +129,7 @@ void main() {
     commands(
       'setTo File',
       s1 << File("test"),
-      ["execute store result score @a test run function :test"],
+      ["execute store result score @a test run function test:test"],
     );
     commands(
       'setTo Widget',

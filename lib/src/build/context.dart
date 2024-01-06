@@ -1,3 +1,10 @@
+import 'dart:math';
+
+import 'package:gson/values.dart';
+import 'package:objd/src/basic/score.dart';
+import 'package:objd/src/basic/types/entity.dart';
+import 'package:objd/src/basic/types/location.dart';
+
 /// Maybe you already wondered what this context argument here is.
 ///
 /// The Context is a way to get certain important information from the parents.
@@ -27,6 +34,7 @@ class Context {
   double version;
   Path path;
   final Map<Type, dynamic> _heredityTraits;
+  final Map<String, String?> macros;
 
   /// Maybe you already wondered what this context argument here is
   /// The Context is a way to get certain important information from the parents.
@@ -50,8 +58,10 @@ class Context {
     this.mainFile = 'main',
     this.version = 20.4,
     this.path = const Path([]),
+    Map<String, String?>? macros,
     Map<Type, dynamic>? traits,
-  }) : _heredityTraits = traits ?? {};
+  })  : _heredityTraits = traits ?? {},
+        macros = macros ?? {};
 
   Context.clone(Context context)
       : this(
@@ -63,6 +73,7 @@ class Context {
           loadFile: context.loadFile,
           mainFile: context.mainFile,
           traits: context._heredityTraits,
+          macros: Map.of(context.macros),
           version: context.version,
           path: context.path.copyWith(),
         );
@@ -91,6 +102,84 @@ class Context {
   T traitOf<T>() {
     return (_heredityTraits[T] as T);
   }
+
+  String stringArgument(String name) {
+    macros['\${$name}'] = name;
+    return '\${$name}';
+  }
+
+  int intArgument(String name) {
+    int i = 0;
+    const limit = 0x3FFFFFFF;
+    do {
+      i = Random().nextInt(limit) + limit;
+    } while (macros.containsKey(i.toString()));
+    macros[i.toString()] = name;
+    return i;
+  }
+
+  double doubleArgument(String name) {
+    return buildArgument(
+      name,
+      (d) => (d, Double(d).toString()),
+      replaceDouble: true,
+    );
+  }
+
+  Entity entityArgument(String name) {
+    return buildArgument(
+      name,
+      (d) => (Entity(level: Range.exact(d)), null),
+    );
+  }
+
+  Score scoreArgument(String name) {
+    return buildArgument(
+      name,
+      (d) {
+        return (
+          Score(Entity(level: Range.to(d)), d.toString(), addNew: false),
+          null
+        );
+      },
+    );
+  }
+
+  Location locationArgument(String name) {
+    return buildArgument(
+      name,
+      (d) => (Location.local(x: d, y: d, z: d), null),
+    );
+  }
+
+  T buildArgument<T>(
+    String name,
+    (T, String?) Function(double) builder, {
+    bool replaceDouble = false,
+  }) {
+    double num = 0;
+    late T t;
+    String? str;
+    do {
+      num = (Random().nextDouble() * 2 - 1) * double.maxFinite / 2;
+      (t, str) = builder(num);
+    } while (macros.containsKey(str ?? t.toString()) ||
+        macros.containsKey(num.toString()));
+
+    macros[str ?? t.toString()] = name;
+    macros[num.toString()] = replaceDouble ? name : null;
+    return t;
+  }
+
+  T argument<T>(String name) => switch (T) {
+        const (String) => stringArgument(name) as T,
+        const (int) => intArgument(name) as T,
+        const (double) => doubleArgument(name) as T,
+        const (Score) => scoreArgument(name) as T,
+        const (Entity) => entityArgument(name) as T,
+        const (Location) => locationArgument(name) as T,
+        _ => throw ArgumentError('Unsupported argument type $T'),
+      };
 }
 
 // A simple utility to collect path segments and generate a String

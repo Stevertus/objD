@@ -63,6 +63,15 @@ class Command extends RestActionAble {
   }
   @override
   Widget generate(Context context) {
+    if (context.macros.isNotEmpty &&
+        context.macros.entries
+            .any((element) => _command.contains(element.key))) {
+      _command = '\$${context.macros.entries.where((e) => e.value != null).fold(
+            _command,
+            (command, entry) =>
+                command.replaceAll(entry.key, '\${${entry.value}}'),
+          )}';
+    }
     return Text(_command);
   }
 
