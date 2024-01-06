@@ -83,7 +83,7 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  objd: ^0.4.6
+  objd: ^0.4.7
 
 dev_dependencies:
   build_runner:
