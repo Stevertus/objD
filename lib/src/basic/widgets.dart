@@ -5,7 +5,7 @@ export 'command_builder.dart';
 export 'pack.dart';
 export 'group.dart';
 export 'scoreboard.dart';
-export 'score.dart';
+export 'score/score_export.dart';
 export 'tag.dart';
 export 'text_components.dart';
 export 'file.dart';

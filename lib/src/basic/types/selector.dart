@@ -1,6 +1,6 @@
 import 'package:gson/gson.dart';
 import 'package:objd/src/basic/parsable.dart';
-import 'package:objd/src/basic/score.dart';
+import 'package:objd/src/basic/score/score_export.dart';
 import 'package:objd/src/basic/types/area.dart';
 import 'package:objd/src/basic/types/entity.dart';
 import 'package:objd/src/basic/types/rotation.dart';
@@ -12,7 +12,7 @@ class Selector {
   int? limit;
   List<dynamic>? tags;
   Team? team;
-  List<Score>? scores;
+  List<MatchesScoreCondition>? scores;
   Map<String, dynamic>? nbt;
   String? strNbt;
   EntityType? type;
@@ -151,13 +151,12 @@ class Selector {
 
   /// Copy a selector
   Selector.clone(Selector s) {
-    List<Score>? scores;
+    List<MatchesScoreCondition>? scores;
     if (s.scores != null) {
       scores = [];
-      for (var score in s.scores!) {
+      for (var cond in s.scores!) {
         scores.add(
-          Score(score.entity, score.score,
-              addNew: false, commands: score.commands),
+          MatchesScoreCondition(cond.score, cond.range),
         );
       }
     }

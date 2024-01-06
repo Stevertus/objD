@@ -1,10 +1,10 @@
+import 'package:objd/src/basic/score/score_export.dart';
 import 'package:objd/src/basic/types/area.dart';
 import 'package:objd/src/basic/types/biomes.dart';
 import 'package:objd/src/basic/types/block.dart';
 import 'package:objd/src/basic/types/entity.dart';
 import 'package:objd/src/basic/types/location.dart';
 import 'package:objd/src/basic/predicate.dart';
-import 'package:objd/src/basic/score.dart';
 import 'package:objd/src/basic/tag.dart';
 import 'package:objd/src/wrappers/data.dart';
 import 'package:objd/src/wrappers/execute.dart';
@@ -14,6 +14,15 @@ class Condition {
   final List<Condition> _children = [];
   _ConditionType? _type;
   _ConditionUtil? _generated;
+
+  // ignore: library_private_types_in_public_api
+
+  @Deprecated("Will be removed with Conditon refactor, not for public use")
+  Condition.raw(String generated, {bool invert = false})
+      : _generated = _ConditionUtil(
+          generated,
+          invert: invert,
+        );
 
   /// The Condition class defines conditions for the if widget and more. It can also combines conditions and generates an argument list.
   ///  A condition can accept many values and this makes the Condition very complex.
@@ -156,10 +165,10 @@ class Condition {
     }
 
     if (cond is Score) {
-      if (cond.getString().isEmpty) {
+      if (cond.toString().isEmpty) {
         throw ('Please insert a score condition method into a condition!');
       }
-      _generated = _ConditionUtil('score ${cond.getString()}', invert: invert);
+      _generated = _ConditionUtil('score ${cond.toString()}', invert: invert);
       return;
     }
 

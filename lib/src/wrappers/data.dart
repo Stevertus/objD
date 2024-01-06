@@ -19,7 +19,6 @@ class Data extends RestActionAble {
 
   String get type => _type;
   String get typeValue => _typeValue;
-  bool get isGetting => subcommand == 'get';
 
   /// The Data Widgets allows you to edit nbt data of Entities or Blocks.
   /// ```dart
@@ -32,7 +31,8 @@ class Data extends RestActionAble {
   /// )
   /// ⇒ data merge entity @s {'Invisible':1,'NoGravity':1}
   /// ```
-  Data(this.target, {this.nbt = const {}, String type = 'merge'})
+  Data(this.target,
+      {this.nbt = const {}, String type = 'merge', this.path = '', this.scale})
       : _subcommand = type {
     handleTarget(target);
   }
@@ -40,13 +40,16 @@ class Data extends RestActionAble {
       : _subcommand = 'merge' {
     handleTarget(target);
   }
-  Data.get(this.target, {required this.path, this.scale})
-      : _subcommand = 'get' {
-    handleTarget(target);
-  }
   Data.remove(this.target, {required this.path}) : _subcommand = 'remove' {
     handleTarget(target);
   }
+
+  static DataGet get(dynamic target, {required String path, num? scale}) =>
+      DataGet(
+        target,
+        path: path,
+        scale: scale,
+      );
 
   /// You can also convert a score directly to a nbt field with Data.fromScore:
   ///
@@ -122,15 +125,7 @@ class Data extends RestActionAble {
       case 'merge':
         return Command('data merge ${getTarget(context)} ${_getNbt()}');
       case 'get':
-        final cmd = ['data get', getTarget(context), path];
-
-        if (scale != null) {
-          cmd.add(
-            scale! < 0.000001 ? scale!.toStringAsFixed(10) : scale.toString(),
-          );
-        }
-
-        return Command(cmd.join(' '));
+        throw Deprecated("Moved to DataGet");
       case 'remove':
         return Command('data remove ${getTarget(context)} $path');
       case 'modify':
@@ -146,6 +141,23 @@ class Data extends RestActionAble {
   String _getNbt() {
     if (strNbt != null && strNbt!.isNotEmpty) return strNbt!;
     return gson.encode(nbt);
+  }
+}
+
+class DataGet extends Data with ScoreStoreable {
+  DataGet(super.target, {required super.path, super.scale});
+
+  @override
+  Command generate(Context context) {
+    final cmd = ['data get', getTarget(context), path];
+
+    if (scale != null) {
+      cmd.add(
+        scale! < 0.000001 ? scale!.toStringAsFixed(10) : scale.toString(),
+      );
+    }
+
+    return Command(cmd.join(' '));
   }
 }
 

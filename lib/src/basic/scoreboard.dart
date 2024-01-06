@@ -1,6 +1,8 @@
+import 'dart:math';
+
+import 'package:objd/src/basic/score/score.dart';
 import 'package:objd/src/basic/types/entity.dart';
 import 'package:objd/src/basic/rest_action.dart';
-import 'package:objd/src/basic/score.dart';
 import 'package:objd/src/basic/widget.dart';
 import 'package:objd/src/basic/command.dart';
 import 'package:objd/src/basic/text_components.dart';
@@ -8,10 +10,44 @@ import 'package:objd/src/basic/extend.dart';
 import 'package:objd/src/build/build.dart';
 import 'package:objd/src/wrappers/comment.dart';
 
+const _SCORE_PLAYERNAME_ALPHABET =
+    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_';
+
 class Scoreboard extends RestActionAble {
   /// Often you find yourself giving all scoreboards a prefix especially for your project. This can get very repetitive and annoying, so objD has this prefix built in.
 
   static String? prefix;
+
+  static Set _tempScores = {};
+  static List<String>? _override_playernames;
+
+  static void overrideTempPlayerNames(List<String> names) {
+    _override_playernames = names;
+    _tempScores = {};
+  }
+
+  static String generateNewTempPlayerName({
+    int len = 8,
+    String alphabet = _SCORE_PLAYERNAME_ALPHABET,
+  }) {
+    var r = Random();
+    String name = '';
+    if (_override_playernames != null) {
+      assert(_override_playernames!.length > _tempScores.length,
+          "No more overrides left");
+      name = _override_playernames![_tempScores.length];
+    } else {
+      do {
+        name = List.generate(
+          len,
+          (index) => _SCORE_PLAYERNAME_ALPHABET[
+              r.nextInt(_SCORE_PLAYERNAME_ALPHABET.length)],
+        ).join();
+      } while (_tempScores.contains(name));
+    }
+    _tempScores.add(name);
+    return name;
+  }
 
   final String subcommand;
   String name;

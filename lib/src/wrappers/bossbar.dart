@@ -4,7 +4,7 @@ import 'package:objd/src/basic/widgets.dart';
 import 'package:objd/src/build/context.dart';
 import 'package:objd/src/wrappers/execute.dart';
 
-class Bossbar extends RestActionAble {
+class Bossbar extends RestActionAble with ScoreAssignable, ScoreStoreable {
   final BossbarType type;
   final String id;
 
@@ -16,6 +16,14 @@ class Bossbar extends RestActionAble {
   Bossbar(this.id, {this.name, this.type = BossbarType.add}) {
     name ??= id;
   }
+  Bossbar._(
+    this.id, {
+    this.name,
+    this.type = BossbarType.add,
+    //this.nameTexts,
+    this.option,
+    //this.modifiers = const {},
+  }) : modifiers = const {};
 
   Bossbar remove() => copyWith(type: BossbarType.remove);
 
@@ -55,7 +63,7 @@ class Bossbar extends RestActionAble {
   }
 
   @override
-  Widget? generate(Context context) {
+  Widget generate(Context context) {
     switch (type) {
       case BossbarType.add:
         return Command('bossbar add $id {"text":"$name"}');
@@ -74,8 +82,6 @@ class Bossbar extends RestActionAble {
           });
           return For.of(widgets);
         }
-      default:
-        return null;
     }
   }
 
@@ -110,14 +116,43 @@ class Bossbar extends RestActionAble {
 
   Bossbar copyWith({
     BossbarType? type,
+    BossbarOption? option,
     String? id,
   }) {
-    return Bossbar(
+    return Bossbar._(
       id ?? this.id,
       name: name,
       type: type ?? this.type,
+      option: option,
     );
   }
+
+  @override
+  Widget setTo(dynamic other, {BossbarOption option = BossbarOption.value}) {
+    print(other);
+    if (other is int) return set(value: other);
+    if (other is ScoreStoreable) {
+      return StoreScoreOperation(copyWith(option: option), other);
+    }
+
+    throw UnimplementedError("setTo is not implemented for $other");
+  }
+
+  @override
+  String get_assignable_left() =>
+      'bossbar $id ${(option ?? BossbarOption.value).name}';
+
+  @override
+  Widget get_assignable_right(Context context) {
+    assert(
+      type == BossbarType.get,
+      "You can only assign Bossbar.get to something else",
+    );
+    return generate(context);
+  }
+
+  @override
+  ScoreStoreable toStorable() => get(BossbarOption.value);
 }
 
 enum BossbarOption { max, players, value, visible }

@@ -10,6 +10,14 @@ void main() {
       Data.get(Location.here(), path: "test"),
       "data get block ~ ~ ~ test",
     );
+    commands(
+      'assign to score',
+      Score(Entity.All(), "test") << Data.get(Location.here(), path: "test"),
+      [
+        'scoreboard objectives add test dummy',
+        "execute store result score @a test run data get block ~ ~ ~ test"
+      ],
+    );
 
     command(
       'simple merge',

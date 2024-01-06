@@ -10,7 +10,8 @@ class LoadFile extends Widget {
       Data.merge(Entity.All(), nbt: {
         "uuid": UUID(1, 2, 3, 4),
         'name': TextComponent('name'),
-      })
+      }),
+      Bossbar("test").get(BossbarOption.value) + 1
     ]);
   }
 }

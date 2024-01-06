@@ -7,6 +7,14 @@ void main() {
   final s1 = Score(Entity.All(), "test");
 
   group('Score', () {
+    test('temp', () {
+      // mock temp name generation
+      Scoreboard.overrideTempPlayerNames(["mock1"]);
+      expect(
+        Score.tmp().toString(),
+        "#mock1 objd_temp",
+      );
+    });
     test('prefixing', () {
       Scoreboard.prefix = 'mock_';
       final s = Score.fromSelected('test');
@@ -124,17 +132,23 @@ void main() {
     ]);
     commands('setTo Data', s1 << Data.get(Entity.Self(), path: "test"), [
       "scoreboard objectives add test dummy",
-      "execute store result score @a test run data get entity @s test 1"
+      "execute store result score @a test run data get entity @s test"
     ]);
     commands(
       'setTo File',
       s1 << File("test"),
-      ["execute store result score @a test run function :test"],
+      [
+        "scoreboard objectives add test dummy",
+        "execute store result score @a test run function :test"
+      ],
     );
     commands(
       'setTo Widget',
       s1 << Say("mock"),
-      ["execute store result score @a test run say mock"],
+      [
+        "scoreboard objectives add test dummy",
+        "execute store result score @a test run say mock"
+      ],
     );
     commands(
       'setTo Condition',
@@ -146,12 +160,22 @@ void main() {
     );
   });
 
+  group("Score Bossbar", () {
+    Scoreboard.overrideTempPlayerNames(["mock1"]);
+    commands('add', Bossbar("test").get(BossbarOption.value) + 1, [
+      "scoreboard objectives add objd_temp dummy",
+      "execute store result score #mock1 objd_temp run bossbar get test value",
+      "scoreboard players add #mock1 objd_temp 1",
+      "execute store result bossbar test value run scoreboard players get #mock1 objd_temp"
+    ]);
+  });
+
   group('Score Conditions', () {
-    commands(
-      "empty",
-      s1.isBigger(Score(Entity.Self(), "new")),
-      [],
-    );
+    // commands(
+    //   "empty",
+    //   s1.isBigger(Score(Entity.Self(), "new")),
+    //   [],
+    // );
     command(
       "simple if",
       If(

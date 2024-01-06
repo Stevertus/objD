@@ -2,12 +2,12 @@
 
 import 'package:gson/values.dart';
 import 'package:objd/src/basic/command.dart';
+import 'package:objd/src/basic/score/score.dart';
 import 'package:objd/src/basic/types/entity.dart';
 import 'dart:convert';
 
 import 'package:objd/src/basic/types/item.dart';
 import 'package:objd/src/basic/types/location.dart';
-import 'package:objd/src/basic/score.dart';
 
 class TextComponent extends GsonValue {
   late Map<String, dynamic> value;

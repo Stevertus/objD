@@ -1,14 +1,14 @@
 import 'package:objd/core.dart';
 
 //// The Storage Widget gives you easy tools to store and receive nbt data globally.
-class Storage extends Widget {
+class Storage extends Widget with ScoreAssignable, ScoreStoreable {
   _StorageType? _type;
   final String name;
   final bool autoNamespace;
   Map<String, dynamic>? nbt;
   String? key;
   DataModify? _modify;
-  Data? data;
+  DataGet? data;
   Score? score;
   double? scale;
   String? datatype;
@@ -23,6 +23,9 @@ class Storage extends Widget {
   Storage(
     this.name, {
     this.autoNamespace = true,
+    this.key,
+    this.datatype,
+    this.scale,
   });
 
   /// Here you can set one key to a specific value.
@@ -76,10 +79,8 @@ class Storage extends Widget {
     this.name, {
     this.autoNamespace = true,
     required this.key,
-    required Data data,
+    required DataGet data,
   })  : assert(key != null),
-        assert(data.subcommand == 'get',
-            'You have to insert a Data.get into copyData!'),
         // ignore: prefer_initializing_formals
         data = data,
         _type = _StorageType.data;
@@ -136,7 +137,7 @@ class Storage extends Widget {
   ///Copies Nbt Data from a **Data.get** Widget.
   Storage copyData(
     String key, {
-    required Data data,
+    required DataGet data,
   }) =>
       Storage.copyData(
         name,
@@ -195,6 +196,42 @@ class Storage extends Widget {
 
   @override
   Widget generate(Context context) => toData();
+
+  @override
+  Widget setTo(dynamic other, {BossbarOption option = BossbarOption.value}) {
+    if (other is ScoreStoreable) {
+      return StoreScoreOperation(this, other);
+    }
+
+    return set(name, other);
+  }
+
+  @override
+  String get_assignable_left() {
+    assert(
+      key != null,
+      "You must to provide a key to assign to storage",
+    );
+    return 'storage $name $key ${datatype ?? "byte"} ${scale ?? 1}';
+  }
+
+  @override
+  Data get_assignable_right(Context context) {
+    assert(
+      _type == _StorageType.get,
+      "Only Storage.get is allowed",
+    );
+    return toData();
+  }
+
+  @override
+  ScoreStoreable toStorable() {
+    assert(
+      key != null,
+      "You must to provide a key to retrieve data from storage",
+    );
+    return get(key!);
+  }
 }
 
 enum _StorageType {
