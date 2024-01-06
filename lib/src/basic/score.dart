@@ -115,6 +115,7 @@ class Score extends RestActionAble {
     );
   }
 
+  @override
   String toString({Entity? entity, String? score}) {
     entity ??= this.entity;
     score ??= this.score;

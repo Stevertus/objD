@@ -3,17 +3,19 @@
 ## 0.4.6
 
 - added arguments methods on context to generate macro commands introduced in 1.20.2
-- added serializable UUID object to represent uuids consisting out of 4 integers
+- added serializable UUID object to represent uuids consisting out of 4 integers (thanks @Globbi)
 - added Random Widget
 - added Return.run and Return.fail subcommands
 - added arguments field for File.execute to run functions with arguments
 - updated blocks, items, particles and entities to include content from 1.20.4 and 23w51b
-- changed TextComponent & Entity to be gson serializable, so you don't have to call toMap manually
+- updated documentation links to the new minecraft wiki https://minecraft.wiki (thanks @Spongecade)
+- changed TextComponent, Effect & Entity to be gson serializable, so you don't have to call toMap manually
 - refactored Title widget
-- fixed function tags load/tick generating with paths with `.mcfunction`
+- fixed function tags load/tick generating with paths with `.mcfunction` (thanks @FlafyDev)
 - fixed Storage.copyScore ignoring the scale parameter 
 - fixed Entity to introduce a trailing comma when given empty tags
-- fixed Github testing workflows to run with Dart 3 and provide Code Coverage
+- fixed Entity.Clone to deep copy, instead of shallow copy (thanks @CCpcalvin)  
+- fixed Github testing workflows to run with Dart 3 and provide Code Coverage (thanks @Globbi)
 
 ## 0.4.5
 
